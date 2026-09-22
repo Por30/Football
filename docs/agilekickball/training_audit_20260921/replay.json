@@ -1,0 +1,674 @@
+{
+  "checkpoint": "logs/rsl_rl/agilekickball_v0/2026-09-20_18-02-42_learning_fix/model_25200.pt",
+  "checkpoint_exposure": 145932.28125,
+  "num_envs": 16,
+  "steps_per_condition": 1000,
+  "conditions": {
+    "training_course": {
+      "serve_speed_range": [
+        0.4,
+        1.52966140625
+      ],
+      "serve_distance_range": [
+        1.3,
+        2.0
+      ],
+      "metrics": {
+        "all": {
+          "count": 16000,
+          "fraction": 1.0,
+          "position_rmse_cm": 100.48933410644531,
+          "velocity_rmse": 0.7283745408058167,
+          "velocity_p95": 1.6914033889770508,
+          "speed_mae": 0.3769803047180176,
+          "speed_rmse": 0.624711811542511,
+          "true_speed_mean": 1.3610115051269531,
+          "predicted_speed_mean": 1.0889705419540405,
+          "shuffled_velocity_rmse": 1.9424413442611694,
+          "current_visible_fraction": 0.7213125228881836,
+          "history_visible_fraction": 0.7673125267028809,
+          "foot_speed_mean": 0.2956690192222595,
+          "foot_speed_p95": 1.9692919254302979,
+          "joint_velocity_rms_mean": 0.5125828385353088,
+          "root_speed_mean": 0.1214810386300087,
+          "depth_action_delta_rad_mean": 0.025720372796058655
+        },
+        "active_visible": {
+          "count": 11508,
+          "fraction": 0.7192500233650208,
+          "position_rmse_cm": 12.650789260864258,
+          "velocity_rmse": 0.3720756769180298,
+          "velocity_p95": 0.710624635219574,
+          "speed_mae": 0.19370517134666443,
+          "speed_rmse": 0.2936863899230957,
+          "true_speed_mean": 1.357846975326538,
+          "predicted_speed_mean": 1.2920750379562378,
+          "shuffled_velocity_rmse": 1.9761261940002441,
+          "current_visible_fraction": 1.0,
+          "history_visible_fraction": 1.0,
+          "foot_speed_mean": 0.367841899394989,
+          "foot_speed_p95": 2.319125175476074,
+          "joint_velocity_rms_mean": 0.617878794670105,
+          "root_speed_mean": 0.13621468842029572,
+          "depth_action_delta_rad_mean": 0.03057519532740116
+        },
+        "incoming": {
+          "count": 6968,
+          "fraction": 0.43549999594688416,
+          "position_rmse_cm": 29.27315330505371,
+          "velocity_rmse": 0.3934948742389679,
+          "velocity_p95": 0.950904130935669,
+          "speed_mae": 0.16847960650920868,
+          "speed_rmse": 0.24136167764663696,
+          "true_speed_mean": 0.854802668094635,
+          "predicted_speed_mean": 0.8078245520591736,
+          "shuffled_velocity_rmse": 1.6913045644760132,
+          "current_visible_fraction": 0.9147531390190125,
+          "history_visible_fraction": 0.9288174510002136,
+          "foot_speed_mean": 0.2512090504169464,
+          "foot_speed_p95": 2.761056423187256,
+          "joint_velocity_rms_mean": 0.3839153051376343,
+          "root_speed_mean": 0.06868575513362885,
+          "depth_action_delta_rad_mean": 0.03488152101635933
+        },
+        "near_foot": {
+          "count": 1057,
+          "fraction": 0.06606250256299973,
+          "position_rmse_cm": 90.57095336914062,
+          "velocity_rmse": 0.8564292788505554,
+          "velocity_p95": 1.6173349618911743,
+          "speed_mae": 0.3197675943374634,
+          "speed_rmse": 0.5155740976333618,
+          "true_speed_mean": 1.408990502357483,
+          "predicted_speed_mean": 1.1591663360595703,
+          "shuffled_velocity_rmse": 2.1410624980926514,
+          "current_visible_fraction": 0.47871333360671997,
+          "history_visible_fraction": 0.48060548305511475,
+          "foot_speed_mean": 0.9646691083908081,
+          "foot_speed_p95": 3.332285165786743,
+          "joint_velocity_rms_mean": 0.9593644738197327,
+          "root_speed_mean": 0.20124033093452454,
+          "depth_action_delta_rad_mean": 0.01861754059791565
+        },
+        "near_foot_visible": {
+          "count": 506,
+          "fraction": 0.03162499889731407,
+          "position_rmse_cm": 9.922877311706543,
+          "velocity_rmse": 0.8270792365074158,
+          "velocity_p95": 1.7601860761642456,
+          "speed_mae": 0.42407798767089844,
+          "speed_rmse": 0.6573055386543274,
+          "true_speed_mean": 2.327894449234009,
+          "predicted_speed_mean": 2.0051791667938232,
+          "shuffled_velocity_rmse": 2.7089791297912598,
+          "current_visible_fraction": 1.0,
+          "history_visible_fraction": 1.0,
+          "foot_speed_mean": 2.0087175369262695,
+          "foot_speed_p95": 3.489995002746582,
+          "joint_velocity_rms_mean": 1.964776635169983,
+          "root_speed_mean": 0.4072748124599457,
+          "depth_action_delta_rad_mean": 0.02842118963599205
+        },
+        "near_foot_no_history": {
+          "count": 549,
+          "fraction": 0.034312501549720764,
+          "position_rmse_cm": 125.308349609375,
+          "velocity_rmse": 0.8835055232048035,
+          "velocity_p95": 1.5512994527816772,
+          "speed_mae": 0.2227911651134491,
+          "speed_rmse": 0.33536863327026367,
+          "true_speed_mean": 0.562203586101532,
+          "predicted_speed_mean": 0.38065245747566223,
+          "shuffled_velocity_rmse": 1.4272922277450562,
+          "current_visible_fraction": 0.0,
+          "history_visible_fraction": 0.0,
+          "foot_speed_mean": 0.005885253194719553,
+          "foot_speed_p95": 0.011657391674816608,
+          "joint_velocity_rms_mean": 0.03592940792441368,
+          "root_speed_mean": 0.012028530240058899,
+          "depth_action_delta_rad_mean": 0.009607979096472263
+        }
+      },
+      "delta_counters_excluding_initial16": {
+        "AgileKickball/serves": 94,
+        "AgileKickball/initial_serves": 0,
+        "AgileKickball/recovered_serves": 94,
+        "AgileKickball/incoming_steps_per_env": 428.875,
+        "AgileKickball/near_steps_per_env": 66.3125,
+        "AgileKickball/kick_proxy_successes": 92
+      },
+      "episode_resets": 0,
+      "reward_weighted_per_second": {
+        "kickball_tick": 0.0,
+        "stand_task": 0.8677424192428589,
+        "face_ball_task": 0.27953866124153137,
+        "kick_approach_task": 0.060880523175001144,
+        "kick_return_task": 0.5923039317131042,
+        "kick_bonus": 0.3449999690055847,
+        "miss_penalty": -0.006562499329447746,
+        "dof_acc": -0.005153398960828781,
+        "action_rate_l2": -0.009460990317165852,
+        "joint_torques_l2": -0.1601017862558365,
+        "dof_vel": -0.003639268223196268,
+        "dof_pos_limits": -0.0008437818032689393,
+        "dof_vel_limits": 0.0,
+        "torque_limits": -0.0012858782429248095
+      },
+      "kick_proxy_events": 92,
+      "proxy_foot_speed_mean": 2.2308456897735596,
+      "proxy_fraction_foot_below_0p2_m_s": 0.0,
+      "event_examples": [
+        {
+          "step": 32,
+          "env": 13,
+          "foot_distance": 0.1930767297744751,
+          "foot_speed": 2.643956184387207,
+          "return_speed": 1.23391592502594
+        },
+        {
+          "step": 37,
+          "env": 6,
+          "foot_distance": 0.239722341299057,
+          "foot_speed": 2.3752858638763428,
+          "return_speed": 2.5310769081115723
+        },
+        {
+          "step": 47,
+          "env": 10,
+          "foot_distance": 0.25258538126945496,
+          "foot_speed": 2.0923683643341064,
+          "return_speed": 2.9855995178222656
+        },
+        {
+          "step": 49,
+          "env": 5,
+          "foot_distance": 0.24209390580654144,
+          "foot_speed": 2.5437278747558594,
+          "return_speed": 2.5289080142974854
+        },
+        {
+          "step": 52,
+          "env": 3,
+          "foot_distance": 0.24217191338539124,
+          "foot_speed": 2.1715078353881836,
+          "return_speed": 3.249338388442993
+        },
+        {
+          "step": 58,
+          "env": 11,
+          "foot_distance": 0.2502738833427429,
+          "foot_speed": 2.0897269248962402,
+          "return_speed": 3.0066187381744385
+        },
+        {
+          "step": 59,
+          "env": 1,
+          "foot_distance": 0.18499985337257385,
+          "foot_speed": 2.640944004058838,
+          "return_speed": 1.0911140441894531
+        },
+        {
+          "step": 64,
+          "env": 14,
+          "foot_distance": 0.2124895304441452,
+          "foot_speed": 2.3249192237854004,
+          "return_speed": 2.487429141998291
+        },
+        {
+          "step": 68,
+          "env": 7,
+          "foot_distance": 0.25561586022377014,
+          "foot_speed": 1.9683009386062622,
+          "return_speed": 3.293560028076172
+        },
+        {
+          "step": 77,
+          "env": 15,
+          "foot_distance": 0.2500747740268707,
+          "foot_speed": 1.8906053304672241,
+          "return_speed": 2.9796056747436523
+        },
+        {
+          "step": 81,
+          "env": 4,
+          "foot_distance": 0.24020041525363922,
+          "foot_speed": 2.000418186187744,
+          "return_speed": 3.3591504096984863
+        },
+        {
+          "step": 87,
+          "env": 8,
+          "foot_distance": 0.2430870085954666,
+          "foot_speed": 2.1383135318756104,
+          "return_speed": 3.2449541091918945
+        },
+        {
+          "step": 106,
+          "env": 2,
+          "foot_distance": 0.2674129009246826,
+          "foot_speed": 1.7445639371871948,
+          "return_speed": 3.3113300800323486
+        },
+        {
+          "step": 113,
+          "env": 0,
+          "foot_distance": 0.25012657046318054,
+          "foot_speed": 2.043280601501465,
+          "return_speed": 3.347959518432617
+        },
+        {
+          "step": 131,
+          "env": 12,
+          "foot_distance": 0.2284669280052185,
+          "foot_speed": 2.2782094478607178,
+          "return_speed": 2.566335916519165
+        },
+        {
+          "step": 150,
+          "env": 9,
+          "foot_distance": 0.26191216707229614,
+          "foot_speed": 1.740860939025879,
+          "return_speed": 3.196619987487793
+        },
+        {
+          "step": 153,
+          "env": 3,
+          "foot_distance": 0.22599653899669647,
+          "foot_speed": 2.3587870597839355,
+          "return_speed": 2.333052635192871
+        },
+        {
+          "step": 180,
+          "env": 6,
+          "foot_distance": 0.19886456429958344,
+          "foot_speed": 2.4208266735076904,
+          "return_speed": 2.0094008445739746
+        },
+        {
+          "step": 184,
+          "env": 11,
+          "foot_distance": 0.21541918814182281,
+          "foot_speed": 2.3702821731567383,
+          "return_speed": 2.516948699951172
+        },
+        {
+          "step": 190,
+          "env": 4,
+          "foot_distance": 0.2308868020772934,
+          "foot_speed": 2.412287473678589,
+          "return_speed": 2.707078456878662
+        },
+        {
+          "step": 200,
+          "env": 10,
+          "foot_distance": 0.224969282746315,
+          "foot_speed": 2.3962395191192627,
+          "return_speed": 3.1253461837768555
+        },
+        {
+          "step": 203,
+          "env": 13,
+          "foot_distance": 0.25746259093284607,
+          "foot_speed": 2.2664806842803955,
+          "return_speed": 2.819988250732422
+        },
+        {
+          "step": 209,
+          "env": 15,
+          "foot_distance": 0.2443278282880783,
+          "foot_speed": 2.464002847671509,
+          "return_speed": 2.44238018989563
+        },
+        {
+          "step": 213,
+          "env": 8,
+          "foot_distance": 0.2130226492881775,
+          "foot_speed": 2.4315781593322754,
+          "return_speed": 2.1879091262817383
+        },
+        {
+          "step": 220,
+          "env": 0,
+          "foot_distance": 0.21288326382637024,
+          "foot_speed": 2.723743438720703,
+          "return_speed": 2.2119927406311035
+        },
+        {
+          "step": 224,
+          "env": 1,
+          "foot_distance": 0.2507021427154541,
+          "foot_speed": 1.4427800178527832,
+          "return_speed": 2.7137796878814697
+        },
+        {
+          "step": 232,
+          "env": 7,
+          "foot_distance": 0.23765046894550323,
+          "foot_speed": 2.3536391258239746,
+          "return_speed": 3.4740772247314453
+        },
+        {
+          "step": 238,
+          "env": 2,
+          "foot_distance": 0.24460826814174652,
+          "foot_speed": 1.6586365699768066,
+          "return_speed": 2.7360775470733643
+        },
+        {
+          "step": 242,
+          "env": 14,
+          "foot_distance": 0.2617562413215637,
+          "foot_speed": 1.6631883382797241,
+          "return_speed": 3.178001880645752
+        },
+        {
+          "step": 258,
+          "env": 5,
+          "foot_distance": 0.26192405819892883,
+          "foot_speed": 1.230843424797058,
+          "return_speed": 2.450108289718628
+        },
+        {
+          "step": 269,
+          "env": 9,
+          "foot_distance": 0.21883465349674225,
+          "foot_speed": 2.4034111499786377,
+          "return_speed": 2.4092161655426025
+        },
+        {
+          "step": 269,
+          "env": 12,
+          "foot_distance": 0.23231850564479828,
+          "foot_speed": 2.1746811866760254,
+          "return_speed": 2.9072186946868896
+        },
+        {
+          "step": 305,
+          "env": 11,
+          "foot_distance": 0.230758398771286,
+          "foot_speed": 2.675950288772583,
+          "return_speed": 2.5025930404663086
+        },
+        {
+          "step": 311,
+          "env": 3,
+          "foot_distance": 0.2595106363296509,
+          "foot_speed": 2.110975503921509,
+          "return_speed": 2.6255953311920166
+        },
+        {
+          "step": 312,
+          "env": 4,
+          "foot_distance": 0.2198350876569748,
+          "foot_speed": 1.8103305101394653,
+          "return_speed": 1.0583837032318115
+        },
+        {
+          "step": 320,
+          "env": 6,
+          "foot_distance": 0.2611221373081207,
+          "foot_speed": 2.2220418453216553,
+          "return_speed": 2.891585350036621
+        },
+        {
+          "step": 328,
+          "env": 10,
+          "foot_distance": 0.21713599562644958,
+          "foot_speed": 2.4853789806365967,
+          "return_speed": 2.7333426475524902
+        },
+        {
+          "step": 348,
+          "env": 7,
+          "foot_distance": 0.24628911912441254,
+          "foot_speed": 2.0991737842559814,
+          "return_speed": 2.581109046936035
+        },
+        {
+          "step": 357,
+          "env": 1,
+          "foot_distance": 0.20183242857456207,
+          "foot_speed": 2.4513626098632812,
+          "return_speed": 2.4506704807281494
+        },
+        {
+          "step": 360,
+          "env": 13,
+          "foot_distance": 0.2175845503807068,
+          "foot_speed": 2.7102596759796143,
+          "return_speed": 2.5417075157165527
+        }
+      ]
+    },
+    "default_play_course": {
+      "serve_speed_range": [
+        0.4,
+        0.8
+      ],
+      "serve_distance_range": [
+        0.5,
+        0.7
+      ],
+      "metrics": {
+        "all": {
+          "count": 16000,
+          "fraction": 1.0,
+          "position_rmse_cm": 130.13186645507812,
+          "velocity_rmse": 0.5404946208000183,
+          "velocity_p95": 0.9478498697280884,
+          "speed_mae": 0.1537465751171112,
+          "speed_rmse": 0.22540432214736938,
+          "true_speed_mean": 0.4396994709968567,
+          "predicted_speed_mean": 0.4688870310783386,
+          "shuffled_velocity_rmse": 0.7336352467536926,
+          "current_visible_fraction": 0.44493749737739563,
+          "history_visible_fraction": 0.4855625033378601,
+          "foot_speed_mean": 0.038490839302539825,
+          "foot_speed_p95": 0.034804899245500565,
+          "joint_velocity_rms_mean": 0.1167253851890564,
+          "root_speed_mean": 0.02098013088107109,
+          "depth_action_delta_rad_mean": 0.009827731177210808
+        },
+        "active_visible": {
+          "count": 7015,
+          "fraction": 0.43843749165534973,
+          "position_rmse_cm": 17.15279197692871,
+          "velocity_rmse": 0.43972885608673096,
+          "velocity_p95": 0.972534716129303,
+          "speed_mae": 0.1842677891254425,
+          "speed_rmse": 0.25824517011642456,
+          "true_speed_mean": 0.4726840853691101,
+          "predicted_speed_mean": 0.5618189573287964,
+          "shuffled_velocity_rmse": 0.7482894062995911,
+          "current_visible_fraction": 1.0,
+          "history_visible_fraction": 1.0,
+          "foot_speed_mean": 0.0758073553442955,
+          "foot_speed_p95": 0.2807914912700653,
+          "joint_velocity_rms_mean": 0.20478519797325134,
+          "root_speed_mean": 0.035500627011060715,
+          "depth_action_delta_rad_mean": 0.014496619813144207
+        },
+        "incoming": {
+          "count": 3243,
+          "fraction": 0.20268750190734863,
+          "position_rmse_cm": 58.885623931884766,
+          "velocity_rmse": 0.7405277490615845,
+          "velocity_p95": 1.202706217765808,
+          "speed_mae": 0.24312709271907806,
+          "speed_rmse": 0.31438276171684265,
+          "true_speed_mean": 0.5758014917373657,
+          "predicted_speed_mean": 0.6189732551574707,
+          "shuffled_velocity_rmse": 0.9407294392585754,
+          "current_visible_fraction": 0.6053037047386169,
+          "history_visible_fraction": 0.7628738880157471,
+          "foot_speed_mean": 0.08517435938119888,
+          "foot_speed_p95": 0.2983793318271637,
+          "joint_velocity_rms_mean": 0.25577861070632935,
+          "root_speed_mean": 0.0350172184407711,
+          "depth_action_delta_rad_mean": 0.016680147498846054
+        },
+        "near_foot": {
+          "count": 3278,
+          "fraction": 0.20487500727176666,
+          "position_rmse_cm": 107.92393493652344,
+          "velocity_rmse": 0.6719406247138977,
+          "velocity_p95": 1.047999620437622,
+          "speed_mae": 0.1555011123418808,
+          "speed_rmse": 0.20497730374336243,
+          "true_speed_mean": 0.4574653208255768,
+          "predicted_speed_mean": 0.4366927146911621,
+          "shuffled_velocity_rmse": 0.8728975653648376,
+          "current_visible_fraction": 0.08145210146903992,
+          "history_visible_fraction": 0.2175106704235077,
+          "foot_speed_mean": 0.04064156115055084,
+          "foot_speed_p95": 0.01673765480518341,
+          "joint_velocity_rms_mean": 0.09779506921768188,
+          "root_speed_mean": 0.020694736391305923,
+          "depth_action_delta_rad_mean": 0.007893985137343407
+        },
+        "near_foot_visible": {
+          "count": 267,
+          "fraction": 0.01668749935925007,
+          "position_rmse_cm": 16.664247512817383,
+          "velocity_rmse": 0.7349932193756104,
+          "velocity_p95": 1.3666208982467651,
+          "speed_mae": 0.2809722125530243,
+          "speed_rmse": 0.41467520594596863,
+          "true_speed_mean": 0.6776066422462463,
+          "predicted_speed_mean": 0.7782353162765503,
+          "shuffled_velocity_rmse": 1.3698296546936035,
+          "current_visible_fraction": 1.0,
+          "history_visible_fraction": 1.0,
+          "foot_speed_mean": 0.4230058789253235,
+          "foot_speed_p95": 2.6264700889587402,
+          "joint_velocity_rms_mean": 0.6556442379951477,
+          "root_speed_mean": 0.0984237939119339,
+          "depth_action_delta_rad_mean": 0.016520347446203232
+        },
+        "near_foot_no_history": {
+          "count": 2565,
+          "fraction": 0.1603125035762787,
+          "position_rmse_cm": 121.5761489868164,
+          "velocity_rmse": 0.6864185333251953,
+          "velocity_p95": 1.0354235172271729,
+          "speed_mae": 0.1369149386882782,
+          "speed_rmse": 0.16469167172908783,
+          "true_speed_mean": 0.4094582498073578,
+          "predicted_speed_mean": 0.38065242767333984,
+          "shuffled_velocity_rmse": 0.7703183889389038,
+          "current_visible_fraction": 0.0,
+          "history_visible_fraction": 0.0,
+          "foot_speed_mean": 0.006605475675314665,
+          "foot_speed_p95": 0.012359497137367725,
+          "joint_velocity_rms_mean": 0.04295627400279045,
+          "root_speed_mean": 0.012349729426205158,
+          "depth_action_delta_rad_mean": 0.00594296446070075
+        }
+      },
+      "delta_counters_excluding_initial16": {
+        "AgileKickball/serves": 72,
+        "AgileKickball/initial_serves": 0,
+        "AgileKickball/recovered_serves": 72,
+        "AgileKickball/incoming_steps_per_env": 197.5625,
+        "AgileKickball/near_steps_per_env": 207.0,
+        "AgileKickball/kick_proxy_successes": 9
+      },
+      "episode_resets": 0,
+      "reward_weighted_per_second": {
+        "kickball_tick": 0.0,
+        "stand_task": 0.9503520727157593,
+        "face_ball_task": 0.2229975014925003,
+        "kick_approach_task": 0.2199462503194809,
+        "kick_return_task": 0.26546090841293335,
+        "kick_bonus": 0.03374999761581421,
+        "miss_penalty": -0.059062495827674866,
+        "dof_acc": -0.0012994285207241774,
+        "action_rate_l2": -0.002712834859266877,
+        "joint_torques_l2": -0.05812902748584747,
+        "dof_vel": -0.0006502530886791646,
+        "dof_pos_limits": -0.0002958701516035944,
+        "dof_vel_limits": 0.0,
+        "torque_limits": -0.00017934184870682657
+      },
+      "kick_proxy_events": 9,
+      "proxy_foot_speed_mean": 1.3593319654464722,
+      "proxy_fraction_foot_below_0p2_m_s": 0.1111111119389534,
+      "event_examples": [
+        {
+          "step": 15,
+          "env": 5,
+          "foot_distance": 0.22673532366752625,
+          "foot_speed": 0.4018263816833496,
+          "return_speed": 0.4135650396347046
+        },
+        {
+          "step": 16,
+          "env": 1,
+          "foot_distance": 0.2318422645330429,
+          "foot_speed": 2.2007431983947754,
+          "return_speed": 2.777160882949829
+        },
+        {
+          "step": 16,
+          "env": 15,
+          "foot_distance": 0.24192285537719727,
+          "foot_speed": 1.2114551067352295,
+          "return_speed": 1.2758238315582275
+        },
+        {
+          "step": 17,
+          "env": 0,
+          "foot_distance": 0.2367912232875824,
+          "foot_speed": 1.4194823503494263,
+          "return_speed": 1.0771067142486572
+        },
+        {
+          "step": 17,
+          "env": 8,
+          "foot_distance": 0.24293716251850128,
+          "foot_speed": 1.5262356996536255,
+          "return_speed": 1.694022536277771
+        },
+        {
+          "step": 18,
+          "env": 2,
+          "foot_distance": 0.25891637802124023,
+          "foot_speed": 1.0009084939956665,
+          "return_speed": 2.0375149250030518
+        },
+        {
+          "step": 82,
+          "env": 12,
+          "foot_distance": 0.21781057119369507,
+          "foot_speed": 2.0919103622436523,
+          "return_speed": 2.069978952407837
+        },
+        {
+          "step": 98,
+          "env": 11,
+          "foot_distance": 0.19498945772647858,
+          "foot_speed": 0.0024248932022601366,
+          "return_speed": 0.6344866752624512
+        },
+        {
+          "step": 169,
+          "env": 15,
+          "foot_distance": 0.21915772557258606,
+          "foot_speed": 2.3790009021759033,
+          "return_speed": 2.070988178253174
+        }
+      ]
+    }
+  },
+  "corrected_play_load": {
+    "exposure": 145932.28125,
+    "first_ball_distance_min_m": 1.3235397338867188,
+    "first_ball_distance_max_m": 1.9725452661514282,
+    "serve_speed_range": [
+      0.4,
+      1.52966140625
+    ],
+    "production_runner_load_optimizer_false": true,
+    "policy_unchanged": true
+  }
+}

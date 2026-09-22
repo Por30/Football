@@ -1,0 +1,3 @@
+工程验证首次在IsaacLab观测维度探测期间失败：startup事件尚未创建_kickball。增加仅初始化阶段零形状返回，真实obs仍取状态。
+第二次已完成1536个真实留出样本：active 1468，visible 972，incoming 1130，near-foot 661；之后验证脚本在inference rollout后于普通上下文reset，IsaacLab缓存joint_acc为inference tensor导致inplace异常。修复验证脚本使所有后续环境reset/step一致处于inference上下文。未放宽物理覆盖或误差改善断言。
+CPU边界测试23项均通过。按冻结合同最多两次根因修复，进行最后验证。

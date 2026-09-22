@@ -13,6 +13,31 @@ if TYPE_CHECKING:
     from isaaclab_rl.rsl_rl import RslRlBaseRunnerCfg
 
 
+class BallSpeedRangeAction(argparse.Action):
+    """Validate both speed bounds before Isaac Sim is launched."""
+    def __call__(self, parser, namespace, values, option_string=None):
+        import math
+        low, high = values
+        if not all(math.isfinite(v) for v in values) or not 0 < low <= high:
+            raise argparse.ArgumentError(self, "require finite speeds with 0 < MIN <= MAX (m/s)")
+        setattr(namespace, self.dest, tuple(values))
+
+
+def add_ball_speed_arg(parser: argparse.ArgumentParser):
+    parser.add_argument(
+        "--ballspeed", nargs=2, type=float, action=BallSpeedRangeAction, default=None,
+        metavar=("MIN", "MAX"),
+        help="Override incoming serve speed in m/s for play; use equal bounds for a fixed speed.",
+    )
+
+
+def add_visray_arg(parser: argparse.ArgumentParser):
+    parser.add_argument(
+        "--visray", action="store_true", default=False,
+        help="Show synthetic depth FOV rays and depth sample points in green during play.",
+    )
+
+
 def add_rsl_rl_args(parser: argparse.ArgumentParser):
     """Add RSL-RL arguments to the parser.
 

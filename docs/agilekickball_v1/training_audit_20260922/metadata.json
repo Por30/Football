@@ -1,0 +1,58 @@
+{
+  "run": "logs/rsl_rl/agilekickball_v1/2026-09-21_12-52-45_success_curriculum_scratch",
+  "snapshot_utc": "2026-09-22T03:04:39.882074+00:00",
+  "checkpoint": "logs/rsl_rl/agilekickball_v1/2026-09-21_12-52-45_success_curriculum_scratch/model_30600.pt",
+  "checkpoint_iteration": 30600,
+  "curriculum": {
+    "schema": 1,
+    "config": {
+      "success_threshold": 0.8,
+      "window_size": 4096,
+      "min_challenge_count": 1024,
+      "required_windows": 2,
+      "min_stage_steps": 1000,
+      "stage_uppers": [
+        0.8,
+        1.2,
+        1.6,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0
+      ],
+      "min_speed": 0.4,
+      "challenge_probability": 0.5,
+      "distance_range": [
+        1.3,
+        2.0
+      ],
+      "return_progress": 0.5,
+      "active_foot_speed": 0.5
+    },
+    "stage": 0,
+    "stage_steps": 734424,
+    "passing_windows": 0,
+    "window": {
+      "total": 2782,
+      "successes": 0,
+      "challenge": 2782,
+      "challenge_successes": 0
+    },
+    "last_window": {
+      "total": 4098,
+      "successes": 0,
+      "challenge": 4098,
+      "challenge_successes": 0
+    },
+    "open_at_save": 4096
+  },
+  "transitions": [
+    {
+      "step": 0,
+      "stage_logged": 0.0
+    }
+  ]
+}

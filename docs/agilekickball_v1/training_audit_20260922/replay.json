@@ -1,0 +1,116 @@
+{
+  "v1_deterministic": {
+    "checkpoint": "logs/rsl_rl/agilekickball_v1/2026-09-21_12-52-45_success_curriculum_scratch/model_30600.pt",
+    "stochastic": false,
+    "num_envs": 16,
+    "steps": 1000,
+    "speed_range": [
+      0.4,
+      0.8
+    ],
+    "distance_range": [
+      1.3,
+      2.0
+    ],
+    "episode_terminations": 0,
+    "delta_counters_excluding_initial16": {
+      "AgileKickball/serves": 47,
+      "AgileKickball/recovered_serves": 47,
+      "AgileV1/settled_rounds": 47,
+      "AgileV1/curriculum_proxy_successes": 0
+    },
+    "raw_kick_proxy_pulses": 0,
+    "candidate_rising_edges": 0,
+    "return_progress_rising_edges": 0,
+    "waiting_samples": 965,
+    "waiting_gate_pass_fraction": {
+      "upright_xy": 1.0,
+      "upright_z": 1.0,
+      "root_speed": 1.0,
+      "angular_speed": 0.9979274611398964,
+      "height": 1.0,
+      "joint_speed": 1.0,
+      "feet_height": 1.0,
+      "all": 0.9979274611398964
+    },
+    "max_stable_interval_s": 0.3800000250339508,
+    "waiting_mean_height": 0.7900897860527039,
+    "waiting_mean_joint_velocity_rms": 0.08753626048564911
+  },
+  "v1_stochastic": {
+    "checkpoint": "logs/rsl_rl/agilekickball_v1/2026-09-21_12-52-45_success_curriculum_scratch/model_30600.pt",
+    "stochastic": true,
+    "num_envs": 16,
+    "steps": 1000,
+    "speed_range": [
+      0.4,
+      0.8
+    ],
+    "distance_range": [
+      1.3,
+      2.0
+    ],
+    "episode_terminations": 24,
+    "delta_counters_excluding_initial16": {
+      "AgileKickball/serves": 24,
+      "AgileKickball/recovered_serves": 0,
+      "AgileV1/settled_rounds": 24,
+      "AgileV1/curriculum_proxy_successes": 0
+    },
+    "raw_kick_proxy_pulses": 0,
+    "candidate_rising_edges": 0,
+    "return_progress_rising_edges": 0,
+    "waiting_samples": 6375,
+    "waiting_gate_pass_fraction": {
+      "upright_xy": 1.0,
+      "upright_z": 1.0,
+      "root_speed": 1.0,
+      "angular_speed": 0.9411764705882353,
+      "height": 1.0,
+      "joint_speed": 0.3132549019607843,
+      "feet_height": 1.0,
+      "all": 0.2981960784313725
+    },
+    "max_stable_interval_s": 0.15999998152256012,
+    "waiting_mean_height": 0.7903289198875427,
+    "waiting_mean_joint_velocity_rms": 1.7357665300369263
+  },
+  "v0_deterministic": {
+    "checkpoint": "logs/rsl_rl/agilekickball_v0/2026-09-20_18-02-42_learning_fix/model_25200.pt",
+    "stochastic": false,
+    "num_envs": 16,
+    "steps": 1000,
+    "speed_range": [
+      0.4,
+      0.8
+    ],
+    "distance_range": [
+      1.3,
+      2.0
+    ],
+    "episode_terminations": 0,
+    "delta_counters_excluding_initial16": {
+      "AgileKickball/serves": 85,
+      "AgileKickball/recovered_serves": 85,
+      "AgileV1/settled_rounds": 85,
+      "AgileV1/curriculum_proxy_successes": 72
+    },
+    "raw_kick_proxy_pulses": 81,
+    "candidate_rising_edges": 77,
+    "return_progress_rising_edges": 76,
+    "waiting_samples": 2140,
+    "waiting_gate_pass_fraction": {
+      "upright_xy": 1.0,
+      "upright_z": 1.0,
+      "root_speed": 0.9934579439252337,
+      "angular_speed": 0.8556074766355141,
+      "height": 1.0,
+      "joint_speed": 1.0,
+      "feet_height": 1.0,
+      "all": 0.8542056074766355
+    },
+    "max_stable_interval_s": 0.3800000250339508,
+    "waiting_mean_height": 0.7859686613082886,
+    "waiting_mean_joint_velocity_rms": 0.3436509668827057
+  }
+}

@@ -1,0 +1,6 @@
+conda activate ball
+cd /home/cao/perceptual_ball
+python scripts/rsl_rl/play.py \
+  --task Template-Perceptual-Ball-v0 \
+  --num_envs 4 \
+  --checkpoint /home/cao/perceptual_ball/logs/rsl_rl/g1_soccer_kick/2026-09-17_12-57-02/model_1200.pt

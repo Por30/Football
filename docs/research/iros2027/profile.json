@@ -1,0 +1,20 @@
+{
+  "project_id": "agile-return-iros2027",
+  "status": "PROVISIONAL_NOT_CLAIM_LOCKED",
+  "target_venue": "IROS",
+  "target_year": 2027,
+  "contribution_center": "learning",
+  "topic_tags": ["humanoid", "contact", "vision", "uncertainty", "control", "stability", "RL", "real time"],
+  "submanifold_axes": {"E": 2, "P": 3, "C": 3, "L": 3, "D": 1, "H": 0, "A": 1, "S": 2},
+  "axis_basis": "Proposed research emphasis, not measured maturity. User confirmed G1 on 2026-09-19; X2 handoff is historical reference only. No hardware result verified.",
+  "claim_shape": {"embodied_system": true, "learning": true, "mechanism": true, "human": false, "soft_material": false, "practice": false, "cross_context": false},
+  "resources": {"available": ["G1 Isaac Lab task", "depth CNN + PPO/AMP", "two retargeted kick clips", "local checkpoints"], "unknown": ["GPU budget", "hardware availability", "camera timing", "deployment compute"]},
+  "official_scope_snapshot": {
+    "checked_on": "2026-09-19",
+    "source": "https://2027.ieee-iros.org/",
+    "deadline_source": "https://www.ieee-ras.org/event/2027-ieee-rsj-international-conference-on-intelligent-robots-and-systems-iros-70525/",
+    "paper_deadline_listed": "2027-03-01",
+    "conference_dates": "2027-09-26/2027-10-01",
+    "pending": ["Detailed call for papers and topic fit", "Submission timezone", "Final submission rules and deadline reconfirmation"]
+  }
+}

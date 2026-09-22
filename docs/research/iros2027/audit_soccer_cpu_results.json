@@ -1,0 +1,75 @@
+{
+  "scope": "CPU source/data probes, not physics or policy-performance evaluation",
+  "amp_height": {
+    "kick_left.pt": {
+      "frames": 498,
+      "policy_range_m": [
+        -0.27981340885162354,
+        -0.01079779863357544
+      ],
+      "expert_range_m": [
+        0.6403895616531372,
+        0.7409624457359314
+      ]
+    },
+    "kick_right.pt": {
+      "frames": 589,
+      "policy_range_m": [
+        -0.27981245517730713,
+        -0.009043455123901367
+      ],
+      "expert_range_m": [
+        0.6492927670478821,
+        0.740930438041687
+      ]
+    }
+  },
+  "state_machine": {
+    "no_foot_nearby": {
+      "success": false,
+      "rewarded_return_speed_mps": 1.0
+    },
+    "foot_0_89m_above_ball": {
+      "success": true,
+      "horizontal_distance_m": 0.0
+    },
+    "skill_memory_survives_episode_reset": true,
+    "scope": "Constructed state tensors; no simulated collision or measured false-positive rate."
+  },
+  "checkpoint_export": {
+    "checkpoint_keys": [
+      "model_state_dict",
+      "optimizer_state_dict",
+      "iter",
+      "infos"
+    ],
+    "strict_model_load": true,
+    "amp_and_aux_optimizer_saved": false,
+    "export_has_depth_encoder": false,
+    "export_input_dim": 992,
+    "raw_observation_dim": 11232,
+    "raw_input_error": "mat1 and mat2 shapes cannot be multiplied (2x11232 and 992x512)"
+  },
+  "terminal_transition": {
+    "env_returns_post_reset_observation": true,
+    "done_amp_reward_uses_reset_observation": true,
+    "constructed_amp_reward": 0.12000000476837158,
+    "terminal_feature_unused": 0.2
+  },
+  "source_sha256": {
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/amp.py": "a38247103b77056abf0ef5a63d3477b01f7f84388500648b6c3087d9d7b56223",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/kick/kick_left.pt": "29906388f4192273b07277464ec01cae17c72ac2e3130382bc9265b1ac45aa78",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/kick/kick_right.pt": "175c2e410f48af72322b6702e3bb73259eadcdc876d0e0ad594bd67861b27a64",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/kickball_state.py": "1ec50e11267e37399e549d63e5b2cdeca245ba0869b4f125ed82759acf1873d4",
+    "/home/cao/perceptual_ball/logs/rsl_rl/g1_soccer_v2/2026-09-18_18-50-26/model_2.pt": "e7d17b4b8afa87dfaea47fd4b61cf99ee983ce527719e0cd52343bcc8726e503",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/modules.py": "fe405ee2782eb433ae2e7b0e76468c7038c86ae80c6ce139e1b426ff0044014c",
+    "/home/cao/IsaacLab/source/isaaclab_rl/isaaclab_rl/rsl_rl/exporter.py": "d8e44dc5fda3fb6b135a7cf56c76338678103aac314851d59ad5399975a00e04",
+    "/home/cao/ENTER/envs/ball/lib/python3.10/site-packages/rsl_rl/algorithms/ppo.py": "deafc8c947eba4df3e91b393869426cdab8d7b71e05974c3734125d2331d7d1c",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/algorithm.py": "0d5a22276f859e266aa0d3dc0fa55820125fa2ad84404cff4aef50add3ad2f39",
+    "/home/cao/IsaacLab/source/isaaclab/isaaclab/envs/manager_based_rl_env.py": "8ec2759541c8320ed725411d49564f5617b3ab6b9d340c860bededee13d557d4",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/runner.py": "6675d32743f59e94f68dfd3b0b8daee17bfdfec25e9af17a29659498134348e1",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/amp.py": "630ea503cf19b591ac0c2a02c866cff67efc40d32eb8805d2bdaab8c82305b91",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/perceptual_ball_env_cfg.py": "6151691184f4cc2ce1fea0b9515067878415582b06b19bf9ce3ef27297432b83",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/soccer_v2_env_cfg.py": "2f35104bd487606cf044f8158f1daba42dc3b52f7c637e41e954e81e6867082a"
+  }
+}

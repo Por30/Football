@@ -34,6 +34,8 @@ parser.add_argument(
     help="Use the pre-trained checkpoint from Nucleus.",
 )
 parser.add_argument("--real-time", action="store_true", default=False, help="Run in real-time, if possible.")
+cli_args.add_ball_speed_arg(parser)
+cli_args.add_visray_arg(parser)
 # append RSL-RL cli arguments
 cli_args.add_rsl_rl_args(parser)
 # append AppLauncher cli args
@@ -78,6 +80,7 @@ from isaaclab_tasks.utils import get_checkpoint_path
 from isaaclab_tasks.utils.hydra import hydra_task_config
 
 import perceptual_ball.tasks  # noqa: F401
+from perceptual_ball.rsl_rl_extensions import BallRegressionOnPolicyRunner
 
 
 @hydra_task_config(args_cli.task, args_cli.agent)
@@ -143,9 +146,30 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     elif agent_cfg.class_name == "DistillationRunner":
         runner = DistillationRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
+    elif agent_cfg.class_name == "BallRegressionOnPolicyRunner":
+        runner = BallRegressionOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     else:
         raise ValueError(f"Unsupported runner class: {agent_cfg.class_name}")
-    runner.load(resume_path)
+    runner.load(resume_path, load_optimizer=False)
+    kb = getattr(env.unwrapped, "_kickball", None)
+    if args_cli.ballspeed is not None:
+        if kb is None or not hasattr(kb, "serve_speed_override"):
+            raise ValueError("--ballspeed requires a kickball task with configurable serve speed")
+        # Apply AFTER checkpoint load; the sampler honors this on every future serve,
+        # even when reset-time curriculum code updates its normal speed range.
+        kb.serve_speed_override = args_cli.ballspeed
+        kb.serve_speed_range = args_cli.ballspeed
+        if hasattr(kb, "curriculum_training"):
+            kb.curriculum_training = False
+        print(f"[INFO]: Incoming ball speed override: {args_cli.ballspeed} m/s")
+    if hasattr(kb, "exposure_steps") or args_cli.ballspeed is not None:
+        # Wrapper initialization served at the default course before checkpoint load.
+        # Reset once so the first displayed ball uses the restored course or explicit override.
+        with torch.inference_mode():
+            env.reset()
+        kb = env.unwrapped._kickball
+        print(f"[INFO]: Agile checkpoint course: speed={kb.serve_speed_range} m/s, "
+              f"distance={kb.serve_distance_range} m, exposure={getattr(kb, 'exposure_steps', 0.):.1f}")
 
     # obtain the trained policy for inference
     policy = runner.get_inference_policy(device=env.unwrapped.device)
@@ -169,36 +193,59 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
 
     # export policy to onnx/jit
     export_model_dir = os.path.join(os.path.dirname(resume_path), "exported")
-    export_policy_as_jit(policy_nn, normalizer=normalizer, path=export_model_dir, filename="policy.pt")
-    export_policy_as_onnx(policy_nn, normalizer=normalizer, path=export_model_dir, filename="policy.onnx")
+    if hasattr(policy_nn, "perception_encoder"):
+        from perceptual_ball.rsl_rl_extensions.export import export_depth_policy
+        robot = env.unwrapped.scene["robot"]
+        term = env.unwrapped.action_manager.get_term("joint_pos")
+        export_depth_policy(policy_nn, env.get_observations(), export_model_dir, {
+            "joint_names": robot.joint_names, "control_dt": env.unwrapped.step_dt,
+            "action_scale": 0.25, "clip_actions": agent_cfg.clip_actions,
+            "default_joint_positions": robot.data.default_joint_pos[0].cpu().tolist(),
+            "action_offset": term._offset[0].cpu().tolist(),
+        })
+    else:
+        export_policy_as_jit(policy_nn, normalizer=normalizer, path=export_model_dir, filename="policy.pt")
+        export_policy_as_onnx(policy_nn, normalizer=normalizer, path=export_model_dir, filename="policy.onnx")
 
     dt = env.unwrapped.step_dt
 
     # reset environment
     obs = env.get_observations()
+    ray_visualizer = None
+    if args_cli.visray:
+        from depth_ray_visualizer import DepthRayVisualizer
+        ray_visualizer = DepthRayVisualizer(env.unwrapped)
+        ray_visualizer.update(obs)
+        print("[INFO]: --visray enabled: green synthetic-depth rays and pixel endpoints; "
+              "background points mark the maximum range, not scene surfaces.")
     timestep = 0
-    # simulate environment
-    while simulation_app.is_running():
-        start_time = time.time()
-        # run everything in inference mode
-        with torch.inference_mode():
-            # agent stepping
-            actions = policy(obs)
-            # env stepping
-            obs, _, _, _ = env.step(actions)
-        if args_cli.video:
-            timestep += 1
-            # Exit the play loop after recording one video
-            if timestep == args_cli.video_length:
-                break
+    try:
+        # simulate environment
+        while simulation_app.is_running():
+            start_time = time.time()
+            # run everything in inference mode
+            with torch.inference_mode():
+                # agent stepping
+                actions = policy(obs)
+                # env stepping
+                obs, _, _, _ = env.step(actions)
+                if ray_visualizer is not None:
+                    ray_visualizer.update(obs)
+            if args_cli.video:
+                timestep += 1
+                # Exit the play loop after recording one video
+                if timestep == args_cli.video_length:
+                    break
 
-        # time delay for real-time evaluation
-        sleep_time = dt - (time.time() - start_time)
-        if args_cli.real_time and sleep_time > 0:
-            time.sleep(sleep_time)
+            # time delay for real-time evaluation
+            sleep_time = dt - (time.time() - start_time)
+            if args_cli.real_time and sleep_time > 0:
+                time.sleep(sleep_time)
 
-    # close the simulator
-    env.close()
+    finally:
+        if ray_visualizer is not None:
+            ray_visualizer.close()
+        env.close()
 
 
 if __name__ == "__main__":

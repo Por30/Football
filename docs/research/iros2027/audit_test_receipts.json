@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/research/iros2027/audit_soccer_cpu.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "dd37e26e91a5a0ae35e5816ab279e2562f725d923264ee71413cf2264ffdec4c",
+      "stdout_sha256": "1bc1ee0ecc7a9515dfd4424174ed12089194234f1d6fa9a1f09cc73ef9f075cc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

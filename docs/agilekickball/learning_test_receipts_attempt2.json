@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_agilekickball_learning.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "8fb13d8d12f713345c0df3400afa386d2033a028bc1e4ba6731740b52dd216d4",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "dbbfc306fd37d20657c38c85a7c699d9f25ea965e551dac9918ef99edd7a1cac",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash scripts/rsl_rl/validate_agilekickball_learning.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "82c58af9a31e6203c84924236b31c0d52964ee68e85f88b224ca79411966cd70",
+      "stdout_sha256": "6d9f55954e6a8c119c84dc56fb79bfff3c8cd7e260d18f0d9b1f6fe2e368cf67",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

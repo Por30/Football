@@ -1,0 +1,14 @@
+{
+  "training_course": {
+    "near_incoming_count": 373,
+    "no_history_fraction": 0.6085790991783142,
+    "velocity_rmse": 0.9236149191856384,
+    "position_rmse_cm": 89.89574432373047
+  },
+  "default_play_course": {
+    "near_incoming_count": 1369,
+    "no_history_fraction": 0.5617238879203796,
+    "velocity_rmse": 0.7921546697616577,
+    "position_rmse_cm": 89.09676361083984
+  }
+}

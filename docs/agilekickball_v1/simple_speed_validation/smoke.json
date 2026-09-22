@@ -1,0 +1,141 @@
+{
+  "task": "Template-Perceptual-Ball-AgileKickball-v1",
+  "num_envs": 16,
+  "constructed_exposure_sampling": {
+    "0": {
+      "min": 0.4607742726802826,
+      "max": 0.7893186807632446,
+      "distance_range": [
+        0.5,
+        0.7
+      ]
+    },
+    "60000": {
+      "min": 0.4394473731517792,
+      "max": 1.0280917882919312,
+      "distance_range": [
+        1.3,
+        2.0
+      ]
+    },
+    "240000": {
+      "min": 0.6159941554069519,
+      "max": 1.9741408824920654,
+      "distance_range": [
+        1.3,
+        2.0
+      ]
+    },
+    "360000": {
+      "min": 0.7876964211463928,
+      "max": 3.187408924102783,
+      "distance_range": [
+        1.3,
+        2.0
+      ]
+    },
+    "480000": {
+      "min": 0.980286717414856,
+      "max": 4.9235358238220215,
+      "distance_range": [
+        1.3,
+        2.0
+      ]
+    }
+  },
+  "scratch_ppo_updates": 1,
+  "scratch_losses": {
+    "value_function": 0.01968349516391754,
+    "surrogate": -2.868473529815674e-07,
+    "entropy": 41.14921951293945,
+    "ball_regression": 0.19165317714214325,
+    "aux_action_kl": 8.647704817121848e-05,
+    "ball/mse": 0.19165317714214325,
+    "ball/all/count": 64,
+    "ball/all/fraction": 1.0,
+    "ball/all/position_cm_rmse": 83.22520446777344,
+    "ball/all/position_cm_p95": 88.69988250732422,
+    "ball/all/velocity_m_s_rmse": 0.6762215495109558,
+    "ball/all/velocity_m_s_p95": 0.8517811298370361,
+    "ball/active/count": 64,
+    "ball/active/fraction": 1.0,
+    "ball/active/position_cm_rmse": 83.22520446777344,
+    "ball/active/position_cm_p95": 88.69988250732422,
+    "ball/active/velocity_m_s_rmse": 0.6762215495109558,
+    "ball/active/velocity_m_s_p95": 0.8517811298370361,
+    "ball/visible/count": 64,
+    "ball/visible/fraction": 1.0,
+    "ball/visible/position_cm_rmse": 83.22520446777344,
+    "ball/visible/position_cm_p95": 88.69988250732422,
+    "ball/visible/velocity_m_s_rmse": 0.6762215495109558,
+    "ball/visible/velocity_m_s_p95": 0.8517811298370361,
+    "ball/active_visible/count": 64,
+    "ball/active_visible/fraction": 1.0,
+    "ball/active_visible/position_cm_rmse": 83.22520446777344,
+    "ball/active_visible/position_cm_p95": 88.69988250732422,
+    "ball/active_visible/velocity_m_s_rmse": 0.6762215495109558,
+    "ball/active_visible/velocity_m_s_p95": 0.8517811298370361,
+    "ball/incoming/count": 64,
+    "ball/incoming/fraction": 1.0,
+    "ball/incoming/position_cm_rmse": 83.22520446777344,
+    "ball/incoming/position_cm_p95": 88.69988250732422,
+    "ball/incoming/velocity_m_s_rmse": 0.6762215495109558,
+    "ball/incoming/velocity_m_s_p95": 0.8517811298370361,
+    "ball/near_foot/count": 0,
+    "ball/near_foot/fraction": 0.0,
+    "aux/attempted_batches": 1,
+    "aux/encoder_updates": 1,
+    "aux/rejected_trials": 0,
+    "aux/head_only_batches": 0,
+    "aux/trial_max_kl": 8.647704817121848e-05,
+    "aux/stage_monitor_kl": 8.647714275866747e-05,
+    "aux/monitor_count": 64,
+    "aux/base_lr": 0.001,
+    "amp": 2.206322431564331
+  },
+  "checkpoint_and_play_freeze": true,
+  "fixed_speed_override": true,
+  "v0_observations_rewards_terminations_actions_policy_algorithm_unchanged": true,
+  "stochastic_recovery_replay": {
+    "old_joint_gate": {
+      "checkpoint_policy_only": "logs/rsl_rl/agilekickball_v1/2026-09-21_12-52-45_success_curriculum_scratch/model_30600.pt",
+      "steps": 1000,
+      "num_envs": 16,
+      "speed_range": [
+        0.4,
+        0.8
+      ],
+      "distance_range": [
+        1.3,
+        2.0
+      ],
+      "recovered_serves": 0,
+      "episode_terminations": 24,
+      "waiting_samples": 6828,
+      "joint_rms_mean": 1.7314187951460176,
+      "joint_gate_pass_fraction": 0.31253661394258936,
+      "body_gate_pass_fraction": 0.9357059168131224,
+      "max_stable_interval_s": 0.15999998152256012
+    },
+    "new_body_gate": {
+      "checkpoint_policy_only": "logs/rsl_rl/agilekickball_v1/2026-09-21_12-52-45_success_curriculum_scratch/model_30600.pt",
+      "steps": 1000,
+      "num_envs": 16,
+      "speed_range": [
+        0.4,
+        0.8
+      ],
+      "distance_range": [
+        1.3,
+        2.0
+      ],
+      "recovered_serves": 39,
+      "episode_terminations": 0,
+      "waiting_samples": 1604,
+      "joint_rms_mean": 1.7058209884270765,
+      "joint_gate_pass_fraction": 0.3273067331670823,
+      "body_gate_pass_fraction": 0.9239401496259352,
+      "max_stable_interval_s": 0.3800000250339508
+    }
+  }
+}

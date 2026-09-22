@@ -1,0 +1,405 @@
+**# x2\_kickball\_depth\_v3 训练工作流**
+
+本文用于在另一套环境中复现当前 \`x2\_kickball\_depth\_v3\`。目标是：X2 通过头部深度图观察
+
+滚来的足球，在保持躯干平衡和位置稳定的前提下将球踢开。
+
+参考训练产物：
+
+\`\`\`text
+
+logs/TASK\_KickBallDepthV3\_x2\_flat/2026-09-11\_11-54-30/
+
+  params/env.yaml
+
+  params/agent.yaml
+
+  model\_49200.pt
+
+  events.out.tfevents.\*
+
+\`\`\`
+
+交付时请同时带上本文、\`params/\*.yaml\`、AMP 数据和 checkpoint。YAML 是实际训练的冻结配置。
+
+**## 1. 任务入口与实现关系**
+
+注册入口在 \`legged\_lab/envs/\_\_init\_\_.py\`：
+
+\`\`\`python
+
+task\_registry.register(
+
+    "x2\_kickball\_depth\_v3",
+
+    TASK\_KickBallDepthV2\_X2\_29DOF\_Env,
+
+    TASK\_KickBallDepthV3\_X2FlatEnvCfg(),
+
+    TASK\_KickBallDepthV3\_X2FlatAgentCfg(),
+
+)
+
+\`\`\`
+
+v3 没有独立环境类，实际继承关系为：
+
+\`\`\`text
+
+TASK\_KickBallDepthV2\_X2\_29DOF\_Env
+
+  └─ TASK\_KickBallDepth\_X2\_29DOF\_Env
+
+TASK\_KickBallDepthV3\_X2FlatEnvCfg
+
+  └─ V2 EnvCfg → 基础 KickBall EnvCfg
+
+\`\`\`
+
+主要文件：
+
+\`\`\`text
+
+kickball\_depth/x2\_env.py       基础环境、球状态机、观测、奖励、reset
+
+kickball\_depth/x2\_config.py    场景、AMP、网络和 PPO 参数
+
+kickball\_depth\_v2/x2\_env.py    速度突变判定“踢中球”
+
+kickball\_depth\_v3/x2\_config.py v3 发球参数和奖励权重
+
+agibot\_fix.py                  X2 URDF、初始姿态、PD/力矩参数
+
+scene.py                       地面、球和机器人自遮挡的深度 ray-caster
+
+motionlib\_carrybox.py          AMP 数据读取和 expert observation
+
+train.py                       训练入口
+
+\`\`\`
+
+**## 2. 训练环境**
+
+\| 项目 | 配置 |
+
+\| --- | --- |
+
+\| 机器人 | 29-DoF X2，\`assets/agibot/x2/urdf/x2\_t2.urdf\` |
+
+\| 控制 | 关节位置目标：\`default\_joint\_pos + 0.25 \* clip(action, -100, 100)\` |
+
+\| 物理 | 0.005 s，4 个 substeps/action，即 50 Hz |
+
+\| episode | 12 s，最多 600 个控制步 |
+
+\| 并行环境 | 4096 |
+
+\| 地形 | 平面，\`env\_spacing=12 m\` |
+
+\| 足球 | 半径 0.11 m，质量 0.43 kg，线/角阻尼 0.02，静/动摩擦 0.6/0.5，恢复系数 0.5 |
+
+\| action delay | 默认关闭 |
+
+X2 的 actuator 配置直接使用 \`X2\_CYLINDER\_CFG\`，不要以其他 humanoid 的 PD 参数代替。
+
+**## 3. reset 与发球**
+
+每个 episode reset 后，当前机器人 root 的 xy 和 yaw 被记录为 \`stand\_anchor\_xy/yaw\`。之后：
+
+\* 80% 环境从 AMP motion 随机时刻初始化，20% 从默认站姿初始化；
+
+\* AMP RSI 内部按 \`kick: 0.85\`、\`carryWith: 0.15\` 选择 motion；
+
+\* 每次 reset 都施加随机全局 yaw；
+
+\* reset 后立刻发一球。
+
+球相对 anchor 的生成方式：
+
+\`\`\`text
+
+distance \~ U(1.3, 2.0) m
+
+bearing  \~ U(-0.35, 0.35) rad
+
+ball\_xy  = anchor\_xy + distance \* [cos(anchor\_yaw + bearing), sin(anchor\_yaw + bearing)]
+
+aim\_xy   = anchor\_xy + perpendicular(unit(anchor\_xy - ball\_xy)) \* U(-0.25, 0.25) m
+
+v\_dir    = unit(aim\_xy - ball\_xy)
+
+speed    \~ U(0.4, 0.8) m/s
+
+\`\`\`
+
+写入球速度：
+
+\`\`\`text
+
+linear\_velocity  = [speed \* v\_dir, 0]
+
+angular\_velocity = [-v\_y / 0.11, v\_x / 0.11, 0]
+
+\`\`\`
+
+球满足任一条件即结束本次发球：离 anchor 超过 3.0 m、沿 anchor 朝向投影小于 -0.3 m、或 xy
+
+速度小于 0.15 m/s。结束后等待 20 个控制步，再发下一球。
+
+机器人在以下情况 reset：
+
+\`\`\`text
+
+abs(roll) > 0.5 rad
+
+abs(pitch) > 0.7 rad
+
+root link z < 0.4 m
+
+root xy 离 anchor 超过 0.6 m
+
+episode 超过 600 steps
+
+\`\`\`
+
+**## 4. v2 踢球识别与 v3 成功条件**
+
+v3 复用 v2 的接触无关判定，避免球自然从机器人身边滚过时被误判成踢球：
+
+\`\`\`text
+
+impulse = ||ball\_velocity\_xy(t) - ball\_velocity\_xy(t-1)||
+
+struck\_this\_step = impulse > 0.15 m/s
+
+outward\_dir = unit(ball\_xy - anchor\_xy)
+
+ball\_return\_speed = dot(ball\_velocity\_xy, outward\_dir)
+
+\`\`\`
+
+只有检测到 \`struck\_this\_step\` 或已经锁存 \`ball\_kicked=True\` 时，\`ball\_return\_speed\` 才有效。
+
+首次满足以下条件时设置一次性 \`kick\_success\_flag\`，并将 \`ball\_kicked\` 锁存到下一球：
+
+\`\`\`text
+
+ball\_active
+
+not ball\_kicked
+
+robot-ball xy 距离 < 2.0 m
+
+ball\_return\_speed > 0.4 m/s
+
+\`\`\`
+
+**## 5. 单步训练数据流**
+
+\`\`\`text
+
+actor observation → policy action
+
+  → 4 个 physics substeps
+
+  → 更新机器人/球 state
+
+  → 更新成功、漏球、重发状态机
+
+  → 计算终止和 raw task reward
+
+  → 对终止环境 reset，同时保存 terminal critic observation
+
+  → 生成下一 actor/critic/AMP observation
+
+  → AMPPPO 混合 task reward 与 AMP reward
+
+  → 写入 rollout buffer，PPO update
+
+\`\`\`
+
+奖励必须在 reset 前、使用当前物理状态计算；terminal critic observation 必须保存，供 GAE 使用。
+
+**## 6. 观测与辅助监督**
+
+actor 只能读取 proprio 和深度图：
+
+\`\`\`text
+
+current proprio (108) =
+
+  root\_ang\_vel\_body(3), projected\_gravity\_body(3),
+
+  joint\_pos-default(29), joint\_vel-default(29),
+
+  5 个末端相对 root 位置(15), previous\_action(29)
+
+actor\_obs = [8 帧 proprio (864), 8 帧 depth (8×27×48=10368)]
+
+总维度 = 11232
+
+\`\`\`
+
+深度相机位于 \`head\_pitch\_link\`，分辨率 48×27、垂直 FOV 58°、更新周期 0.02 s、距离裁剪
+
+\`[0.1, 3.0] m\`、不归一化、无深度噪声。ray-cast 目标必须包含地面、动态足球和机器人自身。
+
+critic 仅使用当前帧：
+
+\`\`\`text
+
+critic\_obs (117) = [proprio(108), root\_lin\_vel\_body(3),
+
+                    ball\_pos\_local(3), ball\_vel\_local(3)]
+
+\`\`\`
+
+最后 6 维是辅助监督标签：球在机器人坐标系下的相对位置 xyz 和线速度 xyz。网络设置
+
+\`aux\_target\_dim=6\`，训练时使用：
+
+\`\`\`text
+
+MSE(aux\_head(depth\_latent), critic\_obs[:, -6:])
+
+\`\`\`
+
+不得将球位置、球速度或其他球真值加入 actor observation。
+
+**## 7. 原始任务奖励**
+
+每个 reward term 都乘 \`step\_dt=0.02\`。v3 最终权重：
+
+\| term | 条件/公式 | weight |
+
+\| --- | --- | ---: |
+
+\| \`stand\_task\` | anchor、xy 速度、直立、基础高度四项指数奖励的平均 | 1.0 |
+
+\| \`face\_ball\_task\` | \`exp(-abs(yaw\_error)) \* ball\_active\` | 0.5 |
+
+\| \`kick\_approach\_task\` | \`exp(-4\*min\_foot\_ball\_dist)\`；未踢中且球距 <1.6 m | 1.2 |
+
+\| \`kick\_return\_task\` | \`clamp(ball\_return\_speed, 0, 3)/3\`；球距 <2.0 m | 4.0 |
+
+\| \`kick\_bonus\` | \`kick\_success\_flag\`，一次性 | 60.0 |
+
+\| \`miss\_penalty\` | 未踢中球从身后越过时，一次性 | -15.0 |
+
+故一次成功事件为 \`+1.2\`，一次漏球事件为 \`-0.3\`。同时保留关节加速度、action rate、力矩、
+
+关节速度、位置/速度/力矩限位的 L2 或限位正则项，权重以 \`kickball\_depth/x2\_config.py\` 为准。
+
+**## 8. AMP、网络和 PPO**
+
+AMP 使用一个 discriminator，不使用左右脚分支。每个 AMP frame 60 维：
+
+\`\`\`text
+
+base\_height(1) + joint\_pos(29) + five EE positions(15) +
+
+base\_lin\_vel(3) + base\_ang\_vel(3) + root\_rot\_6d(6) + object\_pos(3)
+
+\`\`\`
+
+10 帧拼成 600 维。AMP 数据：
+
+\`\`\`text
+
+assets/agibot/datasets/config/kickball\_rebuild.yaml
+
+assets/agibot/datasets/dataset/dataset\_kickball\_rebuild/kick/\*.pkl  # 37 条
+
+assets/agibot/datasets/dataset/dataset\_findboxstill/carryWith/stand100.pkl
+
+\`\`\`
+
+原始 mocap 无球轨迹，所以 AMP 的 object 三维在 expert 和 policy 两侧都用
+
+\`thresh\_robot2object=0.0\` 清零。
+
+actor 是 \`ActorCriticDepthAux\`：8 张 depth frame 作为 CNN channel 输入，经
+
+\`8→16→32→64\` 三个 stride-2 卷积、max pool、256 维 head 后得到 128 维 latent；再与 864 维
+
+proprio 拼接，经过 \`512→256→256→29\` MLP。critic 是 \`117→512→256→256→1\`。
+
+训练使用 \`AMPPPO\` + Adam：
+
+\| 项目 | 值 |
+
+\| --- | --- |
+
+\| seed / rollout | 42 / 24 steps/env/iteration |
+
+\| 最大 iteration | 50000 |
+
+\| PPO epochs × mini-batches | 5 × 4 |
+
+\| learning rate | \`1e-3\`，adaptive KL，target KL=0.01 |
+
+\| gamma / lambda / clip | 0.99 / 0.95 / 0.2 |
+
+\| value / entropy 系数 | 1.0 / 0.01 |
+
+\| AMP coefficient | 0.25 |
+
+\| auxiliary MSE 系数 | 1.0 |
+
+runner 的实际 reward 混合为：
+
+\`\`\`text
+
+reward\_to\_PPO = 0.75 \* raw\_task\_reward + 0.25 \* (0.5 \* amp\_reward)
+
+\`\`\`
+
+**## 9. 启动、验证和边界**
+
+安装 Isaac Lab 后，在仓库根目录执行：
+
+\`\`\`bash
+
+pip install -e .
+
+pip uninstall rsl-rl-lib  # 使用仓库内的 rsl\_rl
+
+python legged\_lab/scripts/train.py \\
+
+  \--task x2\_kickball\_depth\_v3 --headless --logger tensorboard
+
+\`\`\`
+
+最小 smoke test：
+
+\`\`\`bash
+
+python legged\_lab/scripts/train.py \\
+
+  \--task x2\_kickball\_depth\_v3 --headless --num\_envs 4 \\
+
+  \--max\_iterations 1 --logger tensorboard
+
+\`\`\`
+
+检查以下日志/不变量：
+
+\`\`\`text
+
+Task/kick\_success, Task/ball\_missed, Task/ball\_active
+
+Termination/tipped, Termination/fell, Termination/walked\_away
+
+Reward/\*, Loss/aux\_box\_pose
+
+actor=(N,11232), critic=(N,117), AMP=(N,600)
+
+球速始终在 [0.4,0.8] m/s
+
+critic 末六维=[ball\_pos\_local, ball\_vel\_local]
+
+\`\`\`
+
+v3 是固定低速任务：不要加入 v4 的 speed-level/EMA 课程、\`kick\_bonus\_scaled\`、回球权重 10
+
+或漏球 -20；不要加入 v5+ 的多 critic、左右脚路由、深度噪声、摔倒惩罚、curated AMP 数据。

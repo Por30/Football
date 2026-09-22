@@ -1,0 +1,22 @@
+{
+  "checkpoint": "logs/rsl_rl/agilekickball_v0/2026-09-20_18-02-42_learning_fix/model_25000.pt",
+  "task": "Template-Perceptual-Ball-AgileKickball-v0",
+  "num_envs": 4,
+  "steps": 20,
+  "points": 5184,
+  "lines": 288,
+  "image_shape": [
+    720,
+    1280,
+    3
+  ],
+  "green_pixels": 10018,
+  "depth_history_unchanged": true,
+  "rng_unchanged": true,
+  "cleanup": true,
+  "ballspeed": [
+    0.4,
+    3.0
+  ],
+  "screenshot": "docs/play_visray/visray.png"
+}

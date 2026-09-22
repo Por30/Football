@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_play_ballspeed.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "706000957b18913f54c8db837ba8dd5bceada41f373d56fb7ec984b52ac133e8",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d9e3175f4f1574345dc92cbe4f2800dde6dba95439b66a48e1f9dd57dc845be6",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

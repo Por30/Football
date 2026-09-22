@@ -1,0 +1,168 @@
+{
+  "task": "Template-Perceptual-Ball-AgileKickball-v1",
+  "num_envs": 16,
+  "sampling_constructed_stages": {
+    "0": {
+      "min": 0.4633578360080719,
+      "max": 0.7939119338989258,
+      "challenge": 16
+    },
+    "1": {
+      "min": 0.4358871281147003,
+      "max": 1.1984676122665405,
+      "challenge": 11
+    },
+    "2": {
+      "min": 0.5226300954818726,
+      "max": 1.5902379751205444,
+      "challenge": 9
+    },
+    "3": {
+      "min": 0.41419127583503723,
+      "max": 1.974867820739746,
+      "challenge": 9
+    },
+    "4": {
+      "min": 0.6152218580245972,
+      "max": 2.497075080871582,
+      "challenge": 8
+    },
+    "5": {
+      "min": 1.2570909261703491,
+      "max": 2.974060297012329,
+      "challenge": 6
+    },
+    "6": {
+      "min": 0.4357272684574127,
+      "max": 3.3881754875183105,
+      "challenge": 10
+    },
+    "7": {
+      "min": 0.5900070071220398,
+      "max": 3.995469331741333,
+      "challenge": 9
+    },
+    "8": {
+      "min": 1.4632587432861328,
+      "max": 4.499706745147705,
+      "challenge": 10
+    },
+    "9": {
+      "min": 0.6219282150268555,
+      "max": 4.884646892547607,
+      "challenge": 6
+    }
+  },
+  "five_m_s_stage_initial_velocities": [
+    3.0147125720977783,
+    4.674869537353516,
+    0.6955068111419678,
+    2.6202971935272217,
+    4.417168140411377,
+    3.114619016647339,
+    4.606024265289307,
+    1.295620322227478,
+    4.884646892547607,
+    4.7454328536987305,
+    4.802440643310547,
+    0.6219282150268555,
+    1.982401728630066,
+    3.411586046218872,
+    4.544095039367676,
+    1.2739320993423462
+  ],
+  "fast_stage_counters_not_performance_claim": {
+    "AgileKickball/serves": 179,
+    "AgileKickball/initial_serves": 176,
+    "AgileKickball/recovered_serves": 3,
+    "AgileKickball/incoming_steps_per_env": 31.25,
+    "AgileKickball/near_steps_per_env": 15.1875,
+    "AgileKickball/kick_proxy_successes": 15,
+    "AgileKickball/waiting_fraction": 0.0625,
+    "AgileV1/stage": 9,
+    "AgileV1/speed_upper_m_s": 5.0,
+    "AgileV1/stage_steps": 64,
+    "AgileV1/passing_windows": 0,
+    "AgileV1/settled_rounds": 3,
+    "AgileV1/curriculum_proxy_successes": 0,
+    "AgileV1/open_rounds": 16,
+    "AgileV1/truncated_on_load": 16,
+    "AgileV1/updates_enabled": 1,
+    "AgileV1/window_total": 3,
+    "AgileV1/window_successes": 0,
+    "AgileV1/window_challenge": 2,
+    "AgileV1/window_challenge_successes": 0,
+    "AgileV1/window_success_rate": 0.0,
+    "AgileV1/window_challenge_success_rate": 0.0,
+    "AgileV1/last_window_total": 0,
+    "AgileV1/last_window_successes": 0,
+    "AgileV1/last_window_challenge": 0,
+    "AgileV1/last_window_challenge_successes": 0
+  },
+  "natural_stage0_with_v0_policy": {
+    "settled": 30,
+    "strict_proxy_successes": 29,
+    "success_rate": 0.9666666666666667,
+    "episode_resets": 0,
+    "stage": 0,
+    "window": {
+      "total": 30,
+      "successes": 29,
+      "challenge": 30,
+      "challenge_successes": 29
+    }
+  },
+  "v0_checkpoint": "logs/rsl_rl/agilekickball_v0/2026-09-20_18-02-42_learning_fix/model_25200.pt",
+  "checkpoint_and_play_freeze": true,
+  "v0_observations_rewards_terminations_actions_unchanged": true,
+  "ppo_updates": 1,
+  "losses": {
+    "value_function": 0.007691453211009502,
+    "surrogate": -5.923211574554443e-07,
+    "entropy": -22.897554397583008,
+    "ball_regression": 0.3740011751651764,
+    "aux_action_kl": 0.0066044991835951805,
+    "ball/mse": 0.3740011751651764,
+    "ball/all/count": 64,
+    "ball/all/fraction": 1.0,
+    "ball/all/position_cm_rmse": 33.968814849853516,
+    "ball/all/position_cm_p95": 51.27877426147461,
+    "ball/all/velocity_m_s_rmse": 1.4589787721633911,
+    "ball/all/velocity_m_s_p95": 1.7562353610992432,
+    "ball/active/count": 64,
+    "ball/active/fraction": 1.0,
+    "ball/active/position_cm_rmse": 33.968814849853516,
+    "ball/active/position_cm_p95": 51.27877426147461,
+    "ball/active/velocity_m_s_rmse": 1.4589787721633911,
+    "ball/active/velocity_m_s_p95": 1.7562353610992432,
+    "ball/visible/count": 64,
+    "ball/visible/fraction": 1.0,
+    "ball/visible/position_cm_rmse": 33.968814849853516,
+    "ball/visible/position_cm_p95": 51.27877426147461,
+    "ball/visible/velocity_m_s_rmse": 1.4589787721633911,
+    "ball/visible/velocity_m_s_p95": 1.7562353610992432,
+    "ball/active_visible/count": 64,
+    "ball/active_visible/fraction": 1.0,
+    "ball/active_visible/position_cm_rmse": 33.968814849853516,
+    "ball/active_visible/position_cm_p95": 51.27877426147461,
+    "ball/active_visible/velocity_m_s_rmse": 1.4589787721633911,
+    "ball/active_visible/velocity_m_s_p95": 1.7562353610992432,
+    "ball/incoming/count": 64,
+    "ball/incoming/fraction": 1.0,
+    "ball/incoming/position_cm_rmse": 33.968814849853516,
+    "ball/incoming/position_cm_p95": 51.27877426147461,
+    "ball/incoming/velocity_m_s_rmse": 1.4589787721633911,
+    "ball/incoming/velocity_m_s_p95": 1.7562353610992432,
+    "ball/near_foot/count": 0,
+    "ball/near_foot/fraction": 0.0,
+    "aux/attempted_batches": 1,
+    "aux/encoder_updates": 1,
+    "aux/rejected_trials": 3,
+    "aux/head_only_batches": 0,
+    "aux/trial_max_kl": 4.455440521240234,
+    "aux/stage_monitor_kl": 0.0066045173443853855,
+    "aux/monitor_count": 64,
+    "aux/base_lr": 0.001,
+    "amp": 0.6931211352348328
+  }
+}

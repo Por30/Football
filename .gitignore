@@ -64,8 +64,30 @@ _build
 # Teleop Recorded Dataset
 /datasets/
 
-# Tests
-tests/
+# Tests are source-controlled; generated caches remain ignored above.
 
 # Docker history
 .isaac-lab-docker-history
+
+# Required project assets (managed by Git LFS)
+!source/perceptual_ball/perceptual_ball/assets/robots/**/*.usd
+!source/perceptual_ball/perceptual_ball/assets/robots/**/*.usda
+!source/perceptual_ball/perceptual_ball/assets/robots/**/*.usdc
+
+# Local validation checkpoints/exports; retain reports and screenshots
+/docs/**/*.pt
+/docs/**/*.pth
+/docs/**/*.onnx
+/docs/**/*.jit
+/docs/**/exported/
+
+# Local credentials and machine-specific settings
+.env
+.env.*
+!.env.example
+/.claude/
+
+# Empty files accidentally created by pasted shell arguments
+/--checkpoint
+/--num_envs
+/--task

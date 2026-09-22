@@ -1,0 +1,1 @@
+首次CPU测试通过；仿真采样、自然回合与保存恢复完成，PPO更新前验证脚本在inference_mode内重载Adam状态，导致optimizer的step计数为inference tensor。将最后一次训练恢复移至普通上下文；环境reset/rollout仍在inference上下文。未更改生产算法或验收断言。

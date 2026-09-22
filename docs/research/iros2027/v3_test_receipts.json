@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_soccer_v3.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "f98b3af5225002c9dd389df5ac57b81c02d4b856396f68badf45b7ba77926690",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "a5dadddf7c0febaea6683fb845c678d4e172fcf93b2c6f1f0dfce5345b6aba9d",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash scripts/rsl_rl/smoke_soccer_v3.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "e5018c6b950808f9f13d89dc5e7827c003bc2eff50c0878a7f724fda5f087353",
+      "stdout_sha256": "2415a7848c8cc96e66d273c28ea355bad3225cc03cae74a1682feb2cc85fd5d9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

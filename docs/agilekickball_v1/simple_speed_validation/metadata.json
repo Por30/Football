@@ -1,0 +1,16 @@
+{
+  "v0_unchanged_sha256": {
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/agilekickball_env_cfg.py": "69e8b23ce028e1cf047608c348a6a4490bcffcb917d40a8644d0ba22a4f90c6a",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/agilekickball.py": "f1bf017d80503827ca1942f714f1b6056804407381820906dbe1ebaf3656e3a8"
+  },
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/agilekickball_v1.py": "5f9669e595c3fc72c9e6f0d237ba9bbe6a47bd89ff2413e139b0cdeed52dab95",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/agilekickball_v1_env_cfg.py": "f5941f2d1912e5b0abddd2cd9dcf123ef21849eb83fc9f37aa7977a63fb92f6b",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/runner.py": "f548ebe5155560c994325c2e398b6b143120f43c8ad9d3f051d13a29193c0441",
+    "tests/test_agilekickball_v1.py": "05d95afd200c3c2f2c6a1a1620a9ed19f8860a27675153bfaea13d03d0507ba2",
+    "tests/test_play_ballspeed.py": "256566201ba2f31c2fd03b395b00a35e7026b38329f69dbfcb0b03fae103884e",
+    "scripts/rsl_rl/smoke_agilekickball_v1.py": "04b4e79f923bd468d790a7cbe14d6621e9a972e72ea1e1be35f8d41e08ba8c34",
+    "scripts/rsl_rl/smoke_agilekickball_v1.sh": "d7a8feab53563fa4589f43f720818206cddc0898042f0bab3bc2b79dd53c2e5d"
+  },
+  "scratch_training_command": "python scripts/rsl_rl/train.py --task Template-Perceptual-Ball-AgileKickball-v1 --num_envs 4096 --device cuda:0 --headless --max_iterations 50000 --seed 42 --run_name v0_gradual_speed_scratch"
+}

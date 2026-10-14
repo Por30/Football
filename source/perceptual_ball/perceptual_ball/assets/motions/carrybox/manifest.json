@@ -1,0 +1,28 @@
+{
+  "source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox",
+  "usage": "Reference archive only. Not policy input, reset or AMP training data.",
+  "source_quaternion_order": "xyzw",
+  "clips": [
+    {
+      "path": "pickUp/pickup1.pt",
+      "sha256": "6a44d35afc4912781505615576e7a5ba141ffe3c756db652968c5bb0af31d17a",
+      "frames": 192,
+      "contact_index": 107,
+      "joint_count": 29
+    },
+    {
+      "path": "pickUp/pickup2.pt",
+      "sha256": "429cb67521975946fcf930fb5a430bbae9c7495e6d4db1ba2d4b330cdfbf023d",
+      "frames": 178,
+      "contact_index": 100,
+      "joint_count": 29
+    },
+    {
+      "path": "pickUp/pickup3.pt",
+      "sha256": "cd54f21376d77ea7d6cccb662b5ea2ae53b68ca7a61528742e40ef0c2cdf30f5",
+      "frames": 129,
+      "contact_index": 42,
+      "joint_count": 29
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+# 找箱与搬箱子项目 · findbox
+
+2026-10-14 16:01 JST：Warp迁移完成，正式训练PID2348537已核验到iteration18；4096环境×24步、PPO 4 epochs×4 minibatches及完整AMP保持，热身后平均4.023秒、最慢4.078秒，达到6秒目标。新model_0.pt为schema2/revision5/warp，策略和AMP参数有限。尚未完成长训或证明拾箱收敛。[迁移与日志](../../docs/carrybox/warp_20261014/README.md)。下方为历史快照。
+
+2026-10-14 15:12 JST：[G1/X2深度后端与分项耗时核对](../../docs/carrybox/depth_timing_20261014/README.md)：当前G1仍为RTX，X2的Warp多网格后端尚未迁移；复读同源码实测render调用占81.4%，正式最近10轮17.255秒。训练保持运行，未改teacher/critic/相机频率。
+
+2026-10-14 15:09 JST：正式wall4 4096环境已从原正式model_0.pt恢复，PID2341959，检查到iteration2；后两轮17.62/17.42秒，schema2/revision4、策略与AMP有限值检查通过。6秒目标未达，训练尚未完成或证明收敛。[性能记录与日志](../../docs/carrybox/render6s_20261014/README.md)。下方状态为历史快照。
+
+2026-10-14 14:41 JST：4096环境wall4相机位姿读取优化通过22项CPU、4环境运动/reset/遮挡及4096同规模速度和2+2 PPO/AMP恢复检查；原进程停止后从原正式model_0.pt恢复，新PID2336376。已检查到iteration2，正式后两轮21.16/20.90秒（此前约25.63秒）；同动作环境步耗时减少23.2%。保持4096、48×27/50Hz RTX遮挡、奖励、控制和AMP数据，尚未证明任务收敛。[性能记录与最新日志](../../docs/carrybox/performance_20261014/README.md)。下面4096旧run及128run均为历史。
+
+2026-10-14 14:18 JST：按用户要求停止128环境训练（最后日志1798轮，model_1600.pt保留），4096环境wall4于14:06从头启动，PID2330803。实际环境配置4096已核对，检查到18/40000轮；平均回合37.23步，AMP有效比例76.86%，model_0.pt有限值及schema2/revision4、根findbox数据身份验收通过。尚未完成训练或证明收敛；动作目标范围问题仍未调整。[新日志与验收](../../docs/carrybox/scale4096_20261014/README.md)。下文128环境运行记录为历史。
+
+2026-10-14 12:55 JST：用户重新授权后，修正跌倒奖励的wall4已从头启动，PID2322385；128环境、seed42、40000轮，AMP/RSI使用根findbox。检查到iteration24，平均回合32.92步、AMP有效比例77.47%，model_0.pt的schema2/revision4及有限值已核验。拾取动作目标范围问题未调整，未证明收敛。详见[本次启动与日志](../../docs/carrybox/restart_20261014/README.md)。下文停止/旧训练记录保留为历史。
+
+2026-10-14此前停止记录：用户要求停止后，正式wall4及等待器均已停止，最后日志14695，模型保留至model_14600.pt。已确认跨回合跌倒惩罚泄漏导致早死/AMP窗口消失，并完成wall3/wall4专属修复（revision=4）；21项CPU和16环境纯推理回放通过。拾取参考与动作目标范围仍有不匹配，未重新训练，未证明收敛。详见[不收敛排查与当前设计](../../docs/carrybox/convergence_20261014/README.md)。下列运行/排队描述均为日期注明的历史快照。
+
+2026-10-14 11:39 JST检查：正式wall4已于00:52启动，PID2307414，128环境、seed42、40000轮；当前约14632/40000，最新model_14600.pt。队列2300674状态RUNNING；run为`logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_00-52-12_wall4_afterfootball_20261013/`，终端日志为`logs/rsl_rl/g1_carrybox_depth/walled4/after_football_20261013/train.log`。football最终模型和退出检查、第二次128环境预检已通过。此为运行快照，未完成正式长训或独立成功率评估；下文10月13日等待状态为历史。
+
+当前主线：`Template-Perceptual-Ball-CarryBox-v0`，checkpoint schema=2（含AMP）。流程是**深度找箱 → 双手接触 → 抬起并持续保持**。项目待办见[总看板](../README.md)。
+
+## 项目归属
+
+本目录是`findbox`项目的统一入口，与[football](../football/README.md)并列。已有`CarryBox` Gym ID、`carrybox_*`源码和`carrybox-*`工程记录属于本项目，保留原名称与路径。旧入口`projects/carrybox/`兼容指向本目录。
+
+根目录[`findbox/`](../../findbox/)是原始动作数据；[`docs/carrybox/`](../../docs/carrybox/)保存本项目设计与验证；[`scripts/rsl_rl/`](../../scripts/rsl_rl/)中的`*carrybox*`为本项目脚本。G1资产和通用train/play由两个项目共享。
+
+## Walled迁移（2026-10-13）
+
+已新增G1 `CarryBox-Walled3-v0`、`CarryBox-Walled4-v0`，按walled3→walled4继承，保留无特权actor/critic与FindBox AMP。2026-10-13运行故障修复后，两变体均通过4环境几何验收、20轮PPO/AMP及恢复后2轮训练。128环境正式规模50＋恢复2轮验收也通过，共5147次reset；19项CPU合同通过。详见[运行修复与回执](../../docs/carrybox/wall4_repair/README.md)和[任务设计、完整观测与命令](../../docs/carrybox/walled/README.md)。
+
+## 深度管线核对（2026-10-13）
+
+[相机位姿、内参与遮挡审计](../../docs/carrybox/depth_audit/README.md)已通过：基线/wall3/wall4的CUDA/RTX相机与当前G1模型的D435名义安装一致，实测墙和圆柱遮挡后不泄漏后方箱子深度；策略最新深度帧与渲染归一化逐像素一致。实机标定/预处理配置尚未提供，不能宣称实机完全一致。后续运行修复另行验证了RTX位置与实际碰撞位置一致，训练状态以最新运行记录为准。
+
+## Football结束后的wall4安排（2026-10-13）
+
+用户已授权football完成后串行启动wall4。2026-10-13 23:54 JST已用有效验收替换旧阻塞登记：新等待器PID2300674，READY / WAITING_FOOTBALL；足球约48693/50000，正式wall4尚未启动。正式配方为128环境、seed42、40000轮、从头初始化；不使用docs中的验证模型。队列检查足球最终模型/日志/进程身份，确认资源释放后重复128环境预检并只启动一次。状态见[运行修复记录](../../docs/carrybox/wall4_repair/README.md)。walled迁移契约revision=3、checkpoint schema=2；原CarryBox-v0及football接口未改。
+
+## 当前状态与下一步
+
+2026-10-13检查：深度环境、无特权actor/critic、位姿辅助头和FindBox AMP已经实现；9项CPU测试及4个真实RTX环境的2次PPO/AMP更新、12个timeout、checkpoint恢复和JIT/ONNX导出通过。尚无正式长训run，也未测量拾箱成功率。
+
+当前按用户最新指令使用奖励修复版从头训练；RSI/动作目标范围一致性与基础技能验证仍待处理。旧队列保持停止，新训练独立运行。`docs/carrybox/smoke_model.pt`是验证模型。
+
+## 配置与代码地图
+
+源码均在`source/perceptual_ball/perceptual_ball/`下：
+
+| 模块 | 路径 |
+|---|---|
+| 环境、观测、奖励、PPO/AMP参数 | `tasks/manager_based/perceptual_ball/carrybox_env_cfg.py` |
+| 深度、标签、奖励和terminal历史 | `tasks/manager_based/perceptual_ball/mdp/carrybox.py` |
+| wall3/wall4继承配置 | `tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py` |
+| wall场景、参考初始化、奖励和深度扰动 | `tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py` |
+| yaw课程、帧/标签配对缓存 | `carrybox_walled.py` |
+| 抬起保持判据 | `tasks/manager_based/perceptual_ball/mdp/carrybox_state.py` |
+| FindBox加载与AMP特征schema | `carrybox_amp.py` |
+| actor/critic、位姿头、PPO/AMP及checkpoint | `rsl_rl_extensions/carrybox.py` |
+
+actor/critic只读取深度与本体观测。箱子真值仅用于监督、奖励及成功判定；AMP也是纯本体运动输入，不读取箱子真值。持箱参考动作只提供动作先验，不增加搬运目标点或放下阶段。
+
+## 数据与产物
+
+| 路径（仓库根目录起） | 用途 |
+|---|---|
+| `findbox/` | 当前实际使用的17段AMP数据：行走11、拾起3、持箱3 |
+| `findbox/amp_manifest.json` | 60Hz/xyzw/29关节顺序、采样权重、片段hash |
+| `source/perceptual_ball/perceptual_ball/assets/motions/carrybox/pickUp/` | 最初移植的参考归档，当前AMP不读取 |
+| `logs/rsl_rl/g1_carrybox_depth/` | 正式训练输出；首次训练时创建 |
+| `docs/carrybox/` | 设计与验证记录、临时smoke产物 |
+| `docs/carrybox/amp/test_receipts.json` | 当前AMP接入的测试回执 |
+
+数据重采样60→50Hz，行走/拾起/持箱采样概率40/40/20%。修改manifest或训练奖励契约需记录新版本；恢复训练检查数据身份。CarryBox-v0基线播放及策略导出不加载动作数据集；walled变体仿真播放的参考初始化需要findbox数据。
+
+## 命令
+
+在已配置Isaac Lab的环境、仓库根目录运行：
+
+```bash
+python scripts/rsl_rl/train.py \
+  --task Template-Perceptual-Ball-CarryBox-v0 \
+  --num_envs 128 --device cuda:0 --headless --enable_cameras \
+  --max_iterations 30000 --seed 42 --run_name depth_pose_amp_scratch
+```
+
+相机参数`--enable_cameras`必须保留。基线128环境是初始配方；wall4规模验收见最新运行修复记录。足球当前也使用cuda:0，启动时需结合实际显存和运行状态安排资源。
+
+恢复训练：在相同任务命令中增加`--resume --checkpoint /path/to/schema2/model.pt`。播放：
+
+```bash
+python scripts/rsl_rl/play.py \
+  --task Template-Perceptual-Ball-CarryBox-v0 \
+  --num_envs 4 --enable_cameras --checkpoint /path/to/schema2/model.pt
+```
+
+验证：
+
+```bash
+python -m unittest discover -s tests -p 'test_carrybox*.py' -v
+bash scripts/rsl_rl/smoke_carrybox.sh
+```
+
+smoke脚本使用当前开发机Isaac安装路径，可通过`ISAAC_SIM_PATH`、`ISAAC_LAB_PATH`和`BALL_PYTHON`覆盖。
+
+## 设计、验证与交接
+
+- [任务完整说明](../../docs/carrybox/README.md)
+- [AMP接入说明](../../docs/carrybox/amp/README.md)
+- [最新验证结果](../../docs/carrybox/smoke.json)
+- [当前AMP交接](../../agent/handoff/carrybox-findbox-amp.md)
+- [初次无AMP移植交接（历史）](../../agent/handoff/carrybox-depth-v0.md)
+
+schema=1无AMP模型属于历史实现，不能直接恢复为当前完整AMP训练状态；足球checkpoint也不适用于本任务。
+
+## 数据集可视化
+
+2026-10-14后续：[逐PT直接独立录制17段60fps视频](../../outputs/carrybox/findbox_individual/README.md)，画面标注源帧号/时间，同名MP4、PNG和JSON便于数据调整。全4628源帧解码及hash校验通过；原数据未修改。此前30fps合辑及切片继续保留。
+
+2026-10-14复核当前全部源数据和manifest与录像hash一致，并新增[17段独立MP4索引](../../outputs/carrybox/findbox_dataset/clips/README.md)：拾箱3、持箱3、行走11；全2318帧解码及与原录像对应检查通过。本次仅CPU视频处理，未调整训练。
+
+2026-10-13已录制全部17段FindBox参考动作：[MP4视频](../../outputs/carrybox/findbox_dataset/findbox_dataset.mp4)，77.27秒、960×720、30fps，完整解码2318帧验证通过。片段时间索引和录制方法见[可视化说明](../../docs/carrybox/dataset_visualization/README.md)。这是数据集运动学回放，箱体yaw和支撑台为辅助示意。

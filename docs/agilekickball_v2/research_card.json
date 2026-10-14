@@ -1,0 +1,170 @@
+{
+  "schema_version": "robotics-research-card.v2",
+  "card_id": "AGILE-V2-RECOVERY",
+  "candidate_id": "RECOVERY-ENVELOPE-V1",
+  "mode": "EXPLORE_NEW",
+  "status": "CANDIDATE_UNVALIDATED",
+  "change_envelope": {
+    "allowed": [
+      "claim_narrowing"
+    ],
+    "forbidden": [
+      "unsupported_claim_expansion"
+    ],
+    "reason": "新项目仍需通过反证审计"
+  },
+  "claim_shape": {
+    "embodied_system": true,
+    "learning": true,
+    "mechanism": true,
+    "human": false,
+    "soft_material": false,
+    "practice": false,
+    "cross_context": false
+  },
+  "claim_contract": {
+    "claim_id": "C001",
+    "task": "连续来球主动回踢并恢复平衡",
+    "system_boundary": "G1 仿真，沿用 v1 合成深度策略",
+    "core_claim": "待检验：扰动自适应恢复窗口与恢复感知采样可改善高速连续回球的稳定性/吞吐量权衡。",
+    "claim_boundary": "不是已证实创新；不声称 6 m/s 已学会、接触真值、实机有效或 IROS 接收。"
+  },
+  "mechanism_contract": {
+    "mechanism_id": "MECH-001",
+    "mechanism": "回球期间并行监测恢复；根据身体扰动峰值设定连续稳定驻留时间；分开探索上限与联合成功掌握前沿。",
+    "load_bearing_variable_id": "V001",
+    "load_bearing_variable": "速度条件下 P(主动回程>=0.5m 且在 tau 秒内恢复、并在发球时仍稳定)，tau=0.5/1/2/5s",
+    "retained_invariant": "不稳定不再发，5s硬截止；奖励、网络、深度监督沿用v1。"
+  },
+  "falsification_contract": {
+    "decisive_test_id": "X001",
+    "falsification_target": "固定训练预算与来球分布下，自适应恢复相对固定0.3s未提高连续成功率/吞吐量，或跌倒率变差。",
+    "stop_state_if_failed": "ABANDON"
+  },
+  "evidence_obligations": {
+    "multi_condition": {
+      "required": true,
+      "reason": null,
+      "decisive_test_ids": [
+        "X001"
+      ],
+      "claim_boundary": null
+    },
+    "mechanism_boundary": {
+      "required": true,
+      "reason": null,
+      "decisive_test_ids": [
+        "X001"
+      ],
+      "claim_boundary": null
+    },
+    "generalization": {
+      "required": false,
+      "reason": null,
+      "decisive_test_ids": [],
+      "claim_boundary": null
+    },
+    "deployment_practice": {
+      "required": false,
+      "reason": null,
+      "decisive_test_ids": [],
+      "claim_boundary": null
+    },
+    "independent_convergence": {
+      "required": false,
+      "reason": null,
+      "decisive_test_ids": [],
+      "claim_boundary": null
+    }
+  },
+  "evidence_requirements": [],
+  "deferred_evidence": [
+    "全文级新颖性审计",
+    "至少3个独立训练种子对照",
+    "统一固定速度和恢复预算测试",
+    "真实接触标注校准及实机实验"
+  ],
+  "collision_audit": {
+    "candidate_sha256": null,
+    "queries": [],
+    "sources": [
+      {
+        "id": "RoboNaldo",
+        "url": "https://arxiv.org/abs/2606.11092",
+        "overlap": "移动球射门、稳定性、分阶段课程"
+      },
+      {
+        "id": "AgileStriker",
+        "url": "https://arxiv.org/abs/2512.06571",
+        "overlap": "连续踢球、噪声感知、稳定性"
+      },
+      {
+        "id": "ALP-GMM",
+        "url": "https://arxiv.org/abs/1910.07224",
+        "overlap": "按学习表现调节连续参数任务采样"
+      }
+    ],
+    "comparison_axes": {
+      "problem_framing": {
+        "closest_overlap": null,
+        "candidate_delta": null,
+        "source_ids": [],
+        "threat_level": "HIGH"
+      },
+      "core_mechanism": {
+        "closest_overlap": null,
+        "candidate_delta": null,
+        "source_ids": [],
+        "threat_level": "HIGH"
+      },
+      "key_insight": {
+        "closest_overlap": null,
+        "candidate_delta": null,
+        "source_ids": [],
+        "threat_level": "HIGH"
+      },
+      "application_or_evaluation": {
+        "closest_overlap": null,
+        "candidate_delta": null,
+        "source_ids": [],
+        "threat_level": "HIGH"
+      }
+    },
+    "closest_threat_id": null,
+    "uncovered_delta": "候选差异是以速度-恢复时间联合能力包络连接连续击球评价与课程采样；摘要级检索不足以证明首创。",
+    "verdict": "INSUFFICIENT_EVIDENCE"
+  },
+  "adoption_provenance": {
+    "source_document_ids": [],
+    "adopted_claim_digest": null,
+    "adoption_authority": null,
+    "allowed_change_envelope": [],
+    "unresolved_evidence": []
+  },
+  "migration_provenance": {
+    "legacy_artifact_paths": [],
+    "migration_snapshot": null,
+    "retrospective_prospective_boundary": null,
+    "existing_results_provenance": [],
+    "unresolved_lock_ambiguities": []
+  },
+  "domain_packs": [],
+  "resources": {
+    "available": [
+      "已有v0/v1代码及日志",
+      "Isaac Sim CPU冒烟",
+      "用户后续4096环境训练"
+    ],
+    "hard_limits": [
+      "本次不启动长训练",
+      "不调用真实机器人"
+    ]
+  },
+  "safety_ethics": {
+    "hazards": [],
+    "required_controls": [],
+    "approval_state": "not_applicable"
+  },
+  "diagnostic_dashboard": null,
+  "claim_digest": null
+}

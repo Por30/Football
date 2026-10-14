@@ -1,0 +1,1046 @@
+{
+  "run": "logs/rsl_rl/agilekickball_v2/2026-09-24_15-01-01_stability_fix_scratch",
+  "last_iteration": 40982,
+  "last_time": 1790341125.629902,
+  "window": 1000,
+  "metrics": {
+    "Loss/ball/visible/velocity_m_s_rmse": {
+      "mean": 0.7604060815572738,
+      "last": 0.7514383792877197,
+      "count": 1000,
+      "delta": -0.008111536502838135
+    },
+    "Loss/ball/visible/velocity_m_s_p95": {
+      "mean": 1.564422758579254,
+      "last": 1.544509768486023,
+      "count": 1000,
+      "delta": 0.0029311180114746094
+    },
+    "Loss/ball/active_visible/count": {
+      "mean": 97483.125,
+      "last": 97367.0,
+      "count": 1000,
+      "delta": 297.0
+    },
+    "Loss/ball/active_visible/fraction": {
+      "mean": 0.9916496268510818,
+      "last": 0.9904683232307434,
+      "count": 1000,
+      "delta": 0.003021240234375
+    },
+    "Loss/ball/active_visible/position_cm_rmse": {
+      "mean": 25.33871987915039,
+      "last": 25.31169319152832,
+      "count": 1000,
+      "delta": 0.2998046875
+    },
+    "Loss/ball/active_visible/position_cm_p95": {
+      "mean": 48.26338534164429,
+      "last": 48.502098083496094,
+      "count": 1000,
+      "delta": 0.6317367553710938
+    },
+    "Loss/ball/active_visible/velocity_m_s_rmse": {
+      "mean": 0.7603099111914635,
+      "last": 0.7514225244522095,
+      "count": 1000,
+      "delta": -0.008127391338348389
+    },
+    "Loss/ball/active_visible/velocity_m_s_p95": {
+      "mean": 1.564202709197998,
+      "last": 1.5444501638412476,
+      "count": 1000,
+      "delta": 0.0028715133666992188
+    },
+    "Loss/ball/incoming/count": {
+      "mean": 67410.312,
+      "last": 66944.0,
+      "count": 1000,
+      "delta": -569.0
+    },
+    "Loss/ball/incoming/fraction": {
+      "mean": 0.6857331542372703,
+      "last": 0.6809895634651184,
+      "count": 1000,
+      "delta": -0.005788207054138184
+    },
+    "Loss/ball/incoming/position_cm_rmse": {
+      "mean": 25.285801074981688,
+      "last": 25.569957733154297,
+      "count": 1000,
+      "delta": 0.9574165344238281
+    },
+    "Loss/ball/incoming/position_cm_p95": {
+      "mean": 47.72778706359863,
+      "last": 48.61174774169922,
+      "count": 1000,
+      "delta": 2.1438980102539062
+    },
+    "Loss/ball/incoming/velocity_m_s_rmse": {
+      "mean": 0.6728852371573448,
+      "last": 0.6754757761955261,
+      "count": 1000,
+      "delta": 0.004390299320220947
+    },
+    "Loss/ball/incoming/velocity_m_s_p95": {
+      "mean": 1.4942228174209595,
+      "last": 1.5048364400863647,
+      "count": 1000,
+      "delta": 0.05756986141204834
+    },
+    "Loss/ball/near_foot/count": {
+      "mean": 6811.523,
+      "last": 7063.0,
+      "count": 1000,
+      "delta": 286.0
+    },
+    "Loss/ball/near_foot/fraction": {
+      "mean": 0.06929039507731795,
+      "last": 0.0718485489487648,
+      "count": 1000,
+      "delta": 0.002909339964389801
+    },
+    "Loss/ball/near_foot/position_cm_rmse": {
+      "mean": 11.819592269897461,
+      "last": 11.343027114868164,
+      "count": 1000,
+      "delta": -0.03569316864013672
+    },
+    "Loss/ball/near_foot/position_cm_p95": {
+      "mean": 20.253785491943358,
+      "last": 19.590599060058594,
+      "count": 1000,
+      "delta": 0.2358417510986328
+    },
+    "Loss/ball/near_foot/velocity_m_s_rmse": {
+      "mean": 1.2885528036355973,
+      "last": 1.2684669494628906,
+      "count": 1000,
+      "delta": -0.005788564682006836
+    },
+    "Loss/ball/near_foot/velocity_m_s_p95": {
+      "mean": 2.7232191586494445,
+      "last": 2.6672468185424805,
+      "count": 1000,
+      "delta": 0.031037092208862305
+    },
+    "Loss/aux/attempted_batches": {
+      "mean": 4.0,
+      "last": 4.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Loss/aux/encoder_updates": {
+      "mean": 3.999,
+      "last": 4.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Loss/aux/rejected_trials": {
+      "mean": 4.777,
+      "last": 7.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Loss/aux/head_only_batches": {
+      "mean": 0.001,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Loss/aux/trial_max_kl": {
+      "mean": 0.36752803418179975,
+      "last": 0.9793869853019714,
+      "count": 1000,
+      "delta": -0.4002463221549988
+    },
+    "Loss/aux/stage_monitor_kl": {
+      "mean": 0.006873155610868707,
+      "last": 0.008678928017616272,
+      "count": 1000,
+      "delta": 0.002217091154307127
+    },
+    "Loss/aux/monitor_count": {
+      "mean": 512.0,
+      "last": 512.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Loss/aux/base_lr": {
+      "mean": 0.0010000000474974513,
+      "last": 0.0010000000474974513,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Loss/amp": {
+      "mean": 0.024370767153799534,
+      "last": 0.027635442093014717,
+      "count": 1000,
+      "delta": 0.0037038885056972504
+    },
+    "Loss/learning_rate": {
+      "mean": 6.836781468518893e-05,
+      "last": 3.3749998692655936e-05,
+      "count": 1000,
+      "delta": -1.687500116531737e-05
+    },
+    "Policy/mean_noise_std": {
+      "mean": 0.837244466483593,
+      "last": 0.8325819373130798,
+      "count": 1000,
+      "delta": -0.006498456001281738
+    },
+    "Perf/total_fps": {
+      "mean": 36569.788,
+      "last": 35156.0,
+      "count": 1000,
+      "delta": -555.0
+    },
+    "Perf/collection time": {
+      "mean": 1.4433974905014038,
+      "last": 1.4681463241577148,
+      "count": 1000,
+      "delta": 0.034656524658203125
+    },
+    "Perf/learning_time": {
+      "mean": 1.2458122403621674,
+      "last": 1.3280324935913086,
+      "count": 1000,
+      "delta": 0.008767127990722656
+    },
+    "Train/mean_reward": {
+      "mean": 4.012331783771515,
+      "last": 4.178757190704346,
+      "count": 1000,
+      "delta": 0.29731178283691406
+    },
+    "Train/mean_episode_length": {
+      "mean": 67.42576003265381,
+      "last": 67.81999969482422,
+      "count": 1000,
+      "delta": 3.2399978637695312
+    },
+    "Episode_Reward/kickball_tick": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Episode_Reward/stand_task": {
+      "mean": 0.005161757506430149,
+      "last": 0.005171081051230431,
+      "count": 1000,
+      "delta": 2.5525689125061035e-05
+    },
+    "Episode_Reward/face_ball_task": {
+      "mean": 0.003322197255212814,
+      "last": 0.003398375352844596,
+      "count": 1000,
+      "delta": 0.00019416282884776592
+    },
+    "Episode_Reward/kick_approach_task": {
+      "mean": 0.0007111457053106278,
+      "last": 0.0006775354268029332,
+      "count": 1000,
+      "delta": -4.7203036956489086e-05
+    },
+    "Episode_Reward/kick_return_task": {
+      "mean": 0.052747249454259876,
+      "last": 0.05323958024382591,
+      "count": 1000,
+      "delta": 0.00025856494903564453
+    },
+    "Episode_Reward/kick_bonus": {
+      "mean": 0.0860375153273344,
+      "last": 0.08691515028476715,
+      "count": 1000,
+      "delta": 0.0017970353364944458
+    },
+    "Episode_Reward/miss_penalty": {
+      "mean": -1.1855466193082975e-05,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Episode_Reward/dof_acc": {
+      "mean": -0.007883213812485338,
+      "last": -0.00778066273778677,
+      "count": 1000,
+      "delta": -1.6427598893642426e-05
+    },
+    "Episode_Reward/action_rate_l2": {
+      "mean": -0.027097018802538515,
+      "last": -0.02676480822265148,
+      "count": 1000,
+      "delta": 0.00038290582597255707
+    },
+    "Episode_Reward/joint_torques_l2": {
+      "mean": -0.0202737112659961,
+      "last": -0.019945619627833366,
+      "count": 1000,
+      "delta": 0.000392252579331398
+    },
+    "Episode_Reward/dof_vel": {
+      "mean": -0.005180835185106844,
+      "last": -0.0051442524418234825,
+      "count": 1000,
+      "delta": 1.1091120541095734e-05
+    },
+    "Episode_Reward/dof_pos_limits": {
+      "mean": -0.003776277288328856,
+      "last": -0.0037671751342713833,
+      "count": 1000,
+      "delta": -4.581548273563385e-05
+    },
+    "Episode_Reward/dof_vel_limits": {
+      "mean": -1.2857360946472162e-09,
+      "last": -1.2860374987155865e-09,
+      "count": 1000,
+      "delta": -4.549070009574052e-10
+    },
+    "Episode_Reward/torque_limits": {
+      "mean": -0.01675056827068329,
+      "last": -0.01663728803396225,
+      "count": 1000,
+      "delta": -8.437782526016235e-06
+    },
+    "Curriculum/incoming_ball_speed": {
+      "mean": 6.0,
+      "last": 6.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Episode_Termination/time_out": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Episode_Termination/non_finite": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Episode_Termination/tipped": {
+      "mean": 0.2355014305114746,
+      "last": 0.230712890625,
+      "count": 1000,
+      "delta": 0.012603759765625
+    },
+    "Episode_Termination/fell": {
+      "mean": 0.3019064325392246,
+      "last": 0.3187968134880066,
+      "count": 1000,
+      "delta": 0.014485687017440796
+    },
+    "Episode_Termination/walked_away": {
+      "mean": 0.45748758932948114,
+      "last": 0.4484354853630066,
+      "count": 1000,
+      "delta": -0.024943023920059204
+    },
+    "Episode_Termination/self_collision": {
+      "mean": 0.0051045737079912215,
+      "last": 0.0020548503380268812,
+      "count": 1000,
+      "delta": -0.0021464030724018812
+    },
+    "Episode_Termination/recovery_timeout": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileKickball/serves": {
+      "mean": 77409264.912,
+      "last": 78136912.0,
+      "count": 1000,
+      "delta": 1458880.0
+    },
+    "AgileKickball/initial_serves": {
+      "mean": 77409264.912,
+      "last": 78136912.0,
+      "count": 1000,
+      "delta": 1458880.0
+    },
+    "AgileKickball/recovered_serves": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileKickball/incoming_steps_per_env": {
+      "mean": 577948.038375,
+      "last": 585993.125,
+      "count": 1000,
+      "delta": 16101.625
+    },
+    "AgileKickball/near_steps_per_env": {
+      "mean": 79120.31778125,
+      "last": 79949.8671875,
+      "count": 1000,
+      "delta": 1663.171875
+    },
+    "AgileKickball/kick_proxy_successes": {
+      "mean": 63827890.472,
+      "last": 64454608.0,
+      "count": 1000,
+      "delta": 1255192.0
+    },
+    "AgileKickball/waiting_fraction": {
+      "mean": 0.0001766459198188386,
+      "last": 9.1552734375e-05,
+      "count": 1000,
+      "delta": 9.1552734375e-05
+    },
+    "AgileV2/bin0/served": {
+      "mean": 57327140.48,
+      "last": 57743096.0,
+      "count": 1000,
+      "delta": 833948.0
+    },
+    "AgileV2/bin0/closed": {
+      "mean": 57324475.86,
+      "last": 57740448.0,
+      "count": 1000,
+      "delta": 833972.0
+    },
+    "AgileV2/bin0/joint_success": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin0/failure": {
+      "mean": 57324475.86,
+      "last": 57740448.0,
+      "count": 1000,
+      "delta": 833972.0
+    },
+    "AgileV2/bin0/censored": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin0/joint_rate": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin0/training_ema": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin0/successful_recovery_mean_s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin0/joint_within_0.5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin0/joint_within_1s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin0/joint_within_2s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin0/joint_within_5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/served": {
+      "mean": 6664011.3185,
+      "last": 6690009.5,
+      "count": 1000,
+      "delta": 52245.5
+    },
+    "AgileV2/bin1/closed": {
+      "mean": 6663869.6745,
+      "last": 6689862.0,
+      "count": 1000,
+      "delta": 52236.0
+    },
+    "AgileV2/bin1/joint_success": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/failure": {
+      "mean": 6663869.6745,
+      "last": 6689862.0,
+      "count": 1000,
+      "delta": 52236.0
+    },
+    "AgileV2/bin1/censored": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/joint_rate": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/training_ema": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/successful_recovery_mean_s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/joint_within_0.5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/joint_within_1s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/joint_within_2s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin1/joint_within_5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/served": {
+      "mean": 4094679.19225,
+      "last": 4120443.0,
+      "count": 1000,
+      "delta": 51716.25
+    },
+    "AgileV2/bin2/closed": {
+      "mean": 4094547.162,
+      "last": 4120308.75,
+      "count": 1000,
+      "delta": 51697.25
+    },
+    "AgileV2/bin2/joint_success": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/failure": {
+      "mean": 4094547.162,
+      "last": 4120308.75,
+      "count": 1000,
+      "delta": 51697.25
+    },
+    "AgileV2/bin2/censored": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/joint_rate": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/training_ema": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/successful_recovery_mean_s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/joint_within_0.5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/joint_within_1s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/joint_within_2s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin2/joint_within_5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/served": {
+      "mean": 3296651.40125,
+      "last": 3322667.5,
+      "count": 1000,
+      "delta": 52178.75
+    },
+    "AgileV2/bin3/closed": {
+      "mean": 3296526.119,
+      "last": 3322535.5,
+      "count": 1000,
+      "delta": 52178.0
+    },
+    "AgileV2/bin3/joint_success": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/failure": {
+      "mean": 3296526.119,
+      "last": 3322535.5,
+      "count": 1000,
+      "delta": 52178.0
+    },
+    "AgileV2/bin3/censored": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/joint_rate": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/training_ema": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/successful_recovery_mean_s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/joint_within_0.5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/joint_within_1s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/joint_within_2s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin3/joint_within_5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/served": {
+      "mean": 2700289.9365,
+      "last": 2726242.75,
+      "count": 1000,
+      "delta": 52057.75
+    },
+    "AgileV2/bin4/closed": {
+      "mean": 2700170.85575,
+      "last": 2726134.75,
+      "count": 1000,
+      "delta": 52054.0
+    },
+    "AgileV2/bin4/joint_success": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/failure": {
+      "mean": 2700170.85575,
+      "last": 2726134.75,
+      "count": 1000,
+      "delta": 52054.0
+    },
+    "AgileV2/bin4/censored": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/joint_rate": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/training_ema": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/successful_recovery_mean_s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/joint_within_0.5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/joint_within_1s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/joint_within_2s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin4/joint_within_5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/served": {
+      "mean": 3326491.74425,
+      "last": 3534452.5,
+      "count": 1000,
+      "delta": 416734.5
+    },
+    "AgileV2/bin5/closed": {
+      "mean": 3325578.4835,
+      "last": 3533521.5,
+      "count": 1000,
+      "delta": 416738.0
+    },
+    "AgileV2/bin5/joint_success": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/failure": {
+      "mean": 3325578.4835,
+      "last": 3533521.5,
+      "count": 1000,
+      "delta": 416738.0
+    },
+    "AgileV2/bin5/censored": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/joint_rate": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/training_ema": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/successful_recovery_mean_s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/joint_within_0.5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/joint_within_1s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/joint_within_2s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/bin5/joint_within_5s": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/speed_upper_m_s": {
+      "mean": 6.0,
+      "last": 6.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/control_steps": {
+      "mean": 971592.5,
+      "last": 983580.5,
+      "count": 1000,
+      "delta": 24000.0
+    },
+    "AgileV2/empirical_mastered_upper_m_s": {
+      "mean": 0.40000003576278687,
+      "last": 0.40000003576278687,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/challenge_probability": {
+      "mean": 0.25,
+      "last": 0.25,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/above_5m_s_serves": {
+      "mean": 3326487.74425,
+      "last": 3534448.5,
+      "count": 1000,
+      "delta": 416734.5
+    },
+    "AgileV2/challenge_serves": {
+      "mean": 19352703.374,
+      "last": 19534806.0,
+      "count": 1000,
+      "delta": 364838.0
+    },
+    "AgileV2/open_rounds": {
+      "mean": 4096.0,
+      "last": 4096.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/max_joint_streak": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/current_joint_streak_mean": {
+      "mean": 0.0,
+      "last": 0.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "AgileV2/required_hold_mean_s": {
+      "mean": 0.3967669851481915,
+      "last": 0.39682257175445557,
+      "count": 1000,
+      "delta": 5.40614128112793e-05
+    },
+    "AgileV2/peak_normalized_disturbance_mean": {
+      "mean": 16.04082215118408,
+      "last": 15.843634605407715,
+      "count": 1000,
+      "delta": -0.20090579986572266
+    },
+    "AgileV2/anchor_drift_mean_m": {
+      "mean": 0.2545099252462387,
+      "last": 0.25076374411582947,
+      "count": 1000,
+      "delta": -0.005453139543533325
+    },
+    "AMP/reward_mean": {
+      "mean": 0.026085003826709,
+      "last": 0.021292712539434433,
+      "count": 1000,
+      "delta": 0.017831543926149607
+    },
+    "AMP/reward_zero_fraction": {
+      "mean": 0.4431158763579906,
+      "last": 0.2695516049861908,
+      "count": 1000,
+      "delta": -0.6064046323299408
+    },
+    "Loss/value_function": {
+      "mean": 0.1308626389205456,
+      "last": 0.12316503375768661,
+      "count": 1000,
+      "delta": -0.009207822382450104
+    },
+    "Loss/surrogate": {
+      "mean": -0.016229785837698726,
+      "last": -0.012532904744148254,
+      "count": 1000,
+      "delta": 0.0053006988018751144
+    },
+    "Loss/entropy": {
+      "mean": 33.049909652709964,
+      "last": 32.90913391113281,
+      "count": 1000,
+      "delta": -0.18909072875976562
+    },
+    "Loss/ball_regression": {
+      "mean": 0.10884149639308452,
+      "last": 0.10634072870016098,
+      "count": 1000,
+      "delta": -0.002391830086708069
+    },
+    "Loss/aux_action_kl": {
+      "mean": 0.003686538366950117,
+      "last": 0.0026779845356941223,
+      "count": 1000,
+      "delta": -0.0009157429449260235
+    },
+    "Loss/ball/mse": {
+      "mean": 0.10884149639308452,
+      "last": 0.10634072870016098,
+      "count": 1000,
+      "delta": -0.002391830086708069
+    },
+    "Loss/ball/all/count": {
+      "mean": 98304.0,
+      "last": 98304.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Loss/ball/all/fraction": {
+      "mean": 1.0,
+      "last": 1.0,
+      "count": 1000,
+      "delta": 0.0
+    },
+    "Loss/ball/all/position_cm_rmse": {
+      "mean": 25.65607479476929,
+      "last": 25.62010955810547,
+      "count": 1000,
+      "delta": 0.29778289794921875
+    },
+    "Loss/ball/all/position_cm_p95": {
+      "mean": 48.73052826690674,
+      "last": 49.041114807128906,
+      "count": 1000,
+      "delta": 0.5085487365722656
+    },
+    "Loss/ball/all/velocity_m_s_rmse": {
+      "mean": 0.7662058376073837,
+      "last": 0.7565747499465942,
+      "count": 1000,
+      "delta": -0.010415077209472656
+    },
+    "Loss/ball/all/velocity_m_s_p95": {
+      "mean": 1.5755375801324845,
+      "last": 1.5560901165008545,
+      "count": 1000,
+      "delta": 0.0005339384078979492
+    },
+    "Loss/ball/active/count": {
+      "mean": 98286.636,
+      "last": 98296.0,
+      "count": 1000,
+      "delta": -8.0
+    },
+    "Loss/ball/active/fraction": {
+      "mean": 0.9998233641982078,
+      "last": 0.9999186396598816,
+      "count": 1000,
+      "delta": -8.13603401184082e-05
+    },
+    "Loss/ball/active/position_cm_rmse": {
+      "mean": 25.635862993240355,
+      "last": 25.620962142944336,
+      "count": 1000,
+      "delta": 0.29863548278808594
+    },
+    "Loss/ball/active/position_cm_p95": {
+      "mean": 48.72491345596313,
+      "last": 49.041683197021484,
+      "count": 1000,
+      "delta": 0.5091171264648438
+    },
+    "Loss/ball/active/velocity_m_s_rmse": {
+      "mean": 0.7659047101140022,
+      "last": 0.7565596103668213,
+      "count": 1000,
+      "delta": -0.010430216789245605
+    },
+    "Loss/ball/active/velocity_m_s_p95": {
+      "mean": 1.5751346775293351,
+      "last": 1.556051254272461,
+      "count": 1000,
+      "delta": 0.0004950761795043945
+    },
+    "Loss/ball/visible/count": {
+      "mean": 97497.841,
+      "last": 97375.0,
+      "count": 1000,
+      "delta": 305.0
+    },
+    "Loss/ball/visible/fraction": {
+      "mean": 0.9917993269562722,
+      "last": 0.9905497431755066,
+      "count": 1000,
+      "delta": 0.0031026601791381836
+    },
+    "Loss/ball/visible/position_cm_rmse": {
+      "mean": 25.339638833999633,
+      "last": 25.310850143432617,
+      "count": 1000,
+      "delta": 0.2989616394042969
+    },
+    "Loss/ball/visible/position_cm_p95": {
+      "mean": 48.26476699447632,
+      "last": 48.50145721435547,
+      "count": 1000,
+      "delta": 0.6310958862304688
+    }
+  }
+}

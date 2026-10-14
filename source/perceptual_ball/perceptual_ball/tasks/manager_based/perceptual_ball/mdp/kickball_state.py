@@ -204,7 +204,7 @@ class KickballState:
         to_anchor = anchor_xy - ball_xy
         to_anchor_unit = to_anchor / to_anchor.norm(dim=-1, keepdim=True).clamp(min=1.0e-6)
         perp = torch.stack([-to_anchor_unit[:, 1], to_anchor_unit[:, 0]], dim=-1)
-        aim_offset = _rand_range(*SERVE_AIM_OFFSET_RANGE, (n,), device)
+        aim_offset = _rand_range(*getattr(self, "serve_aim_offset_range", SERVE_AIM_OFFSET_RANGE), (n,), device)
         aim_xy = anchor_xy + perp * aim_offset.unsqueeze(-1)
 
         v_dir = aim_xy - ball_xy
@@ -303,7 +303,7 @@ class KickballState:
         forward_projection = ((ball_xy - self.anchor_xy) * forward).sum(dim=-1)
         ball_speed = ball_vel_xy.norm(dim=-1)
         should_end = self.ball_active & (
-            (dist_from_anchor > BALL_END_MAX_DIST_FROM_ANCHOR)
+            (dist_from_anchor > getattr(self, "ball_end_max_distance", BALL_END_MAX_DIST_FROM_ANCHOR))
             | (forward_projection < BALL_END_MIN_FORWARD_PROJECTION)
             | (ball_speed < BALL_END_MIN_SPEED)
         )

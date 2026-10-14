@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python scripts/visualize_findbox.py --verify-only --output outputs/carrybox/findbox_dataset",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "de8cea9f0ee2d7ba99116767bd99ad3787211ddaad32d282c94fd7b991ba1690",
+      "stdout_sha256": "f1e09266ecc9ae8f11f4627bf55d8e4d6af1f0591fc51a4374a68fc30eeeebe5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

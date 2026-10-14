@@ -1,0 +1,66 @@
+{
+  "checkpoint": "logs/rsl_rl/agilekickball_v2/2026-09-24_15-01-01_stability_fix_scratch/model_40800.pt",
+  "iter": 40800,
+  "curriculum": {
+    "schema": 3,
+    "config": {
+      "kind": "recovery_envelope_v1",
+      "control_knots": [
+        0,
+        120000,
+        360000,
+        720000,
+        840000
+      ],
+      "speed_knots": [
+        0.8,
+        0.8,
+        2.0,
+        5.0,
+        6.0
+      ],
+      "bin_edges": [
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0
+      ],
+      "ema_samples": 512.0,
+      "mastery_min_closed": 128,
+      "mastery_rate": 0.65,
+      "challenge_probability": [
+        0.25,
+        0.5
+      ],
+      "coverage_probability": 0.2,
+      "hold_bounds_s": [
+        0.2,
+        0.4
+      ],
+      "timeout_s": 5.0,
+      "anchor_radius_m": 0.6,
+      "return_distance_m": 0.5,
+      "foot_distance_m": 0.3,
+      "foot_outward_speed_m_s": 0.5
+    },
+    "control_steps": 979224,
+    "exposure_steps": 583069.75,
+    "train_closed": [
+      57589522,
+      6680458,
+      4110944,
+      3313034,
+      2716748,
+      3458264
+    ],
+    "train_ema": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+}

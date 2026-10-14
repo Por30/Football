@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "model_mounts": [
+    {
+      "path": "/home/cao/PhysHSI/legged_gym/resources/robots/g1/urdf/g1_29dof.urdf",
+      "sha256": "427c3b69c2f3f3bfb16e1bfdecd564326a505642efba33198c8d33db44ac974e",
+      "parent": "torso_link",
+      "child": "d435_link",
+      "xyz": [
+        0.0576235,
+        0.01753,
+        0.42987
+      ],
+      "rpy": [
+        0.0,
+        0.8307767239493009,
+        0.0
+      ]
+    },
+    {
+      "path": "/home/cao/unitree_rl_lab/unitree_ros/robots/g1_description/g1_29dof_rev_1_0.urdf",
+      "sha256": "7e397611652000262b03fe060096f77418b7df5c53edf2c7d0bda18758ca19db",
+      "parent": "torso_link",
+      "child": "d435_link",
+      "xyz": [
+        0.0576235,
+        0.01753,
+        0.42987
+      ],
+      "rpy": [
+        0.0,
+        0.8307767239493009,
+        0.0
+      ]
+    },
+    {
+      "path": "/home/cao/unitree_rl_lab/unitree_ros/robots/g1_description/g1_29dof.urdf",
+      "sha256": "e1dc89366bf96aa33ba4ef211884f6d81320ddd2ac6f8b1ad82986e64008be31",
+      "parent": "torso_link",
+      "child": "d435_link",
+      "xyz": [
+        0.0576235,
+        0.01753,
+        0.41987
+      ],
+      "rpy": [
+        0.0,
+        0.8307767239493009,
+        0.0
+      ]
+    }
+  ],
+  "findbox_offset": {
+    "pos": [
+      0.0576235,
+      0.01753,
+      0.42987
+    ],
+    "rot": [
+      0.91495,
+      0.0,
+      0.40355,
+      0.0
+    ],
+    "convention": "world"
+  },
+  "findbox_model_angle_error_deg": 0.0009402375137473177,
+  "football_optical_forward": [
+    0.6742525051744898,
+    0.0,
+    -0.7385008864354362
+  ],
+  "findbox_forward": [
+    0.6742902692632915,
+    0.0,
+    -0.7384664059907112
+  ],
+  "football_mount_position_matches": true,
+  "hardware_calibration_verified": false,
+  "hardware_gap": "Actual robot revision, optical-frame calibration, CameraInfo, stream/crop/resize and depth-unit preprocessing not provided",
+  "football_pipeline": "analytic sphere-only; ray range; no scene or self occlusion",
+  "findbox_pipeline": "RTX distance_to_image_plane; optical Z; /3 normalization"
+}

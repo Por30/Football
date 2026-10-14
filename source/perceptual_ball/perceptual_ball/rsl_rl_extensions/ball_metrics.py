@@ -18,8 +18,11 @@ def ball_prediction_metrics(policy, observations, chunk_size=2048):
     groups = {'all': torch.ones(n, dtype=torch.bool, device=err.device)}
     if statuses:
         status, visible = torch.cat(statuses), torch.cat(visibility)
-        groups.update(active=status[:, 0], visible=visible, active_visible=status[:, 0] & visible,
-                      incoming=status[:, 1], near_foot=status[:, 2])
+        groups.update(active=status[:, 0], incoming=status[:, 1], near_foot=status[:, 2])
+        # Only the old sphere-only observation supports the visibility interpretation.
+        name = 'valid_depth' if getattr(policy, 'feedback_scene_depth', False) else 'visible'
+        groups[name] = visible
+        groups['active_'+name] = status[:, 0] & visible
     result = {'mse': err.square().mean().item()}
     for name, mask in groups.items():
         count = int(mask.sum())

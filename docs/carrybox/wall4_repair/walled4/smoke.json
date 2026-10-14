@@ -1,0 +1,41 @@
+{
+  "variant": 4,
+  "rsi": {},
+  "depth_changes": {},
+  "num_envs": 4,
+  "scale_preflight": false,
+  "geometry_only": false,
+  "trained_success_rate": "not_evaluated",
+  "iterations": 20,
+  "resumed_iterations": 2,
+  "resets": 106,
+  "max_box_speed_m_s": 3.645137071609497,
+  "checkpoint": true,
+  "environment_contract": {
+    "variant": "walled4",
+    "migration_revision": 3,
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "convex_hull_32",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.8,
+      0.15,
+      0.05
+    ],
+    "search_prob": 0.02,
+    "noise": 0.01,
+    "delay": 2,
+    "freeze": 0.01,
+    "freeze_steps": 3,
+    "mount_pos": 0.005,
+    "mount_rot": 2.0,
+    "curriculum": "process_anchor",
+    "reward_parent": "g1_carrybox_v0"
+  },
+  "status": "PASS"
+}

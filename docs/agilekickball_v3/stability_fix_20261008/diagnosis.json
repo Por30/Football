@@ -1,0 +1,75 @@
+{
+  "confirmed_failure": "No recovered serves over 50000 iterations; task geometry/recovery configuration matches v2.",
+  "confirmed_mechanisms": [
+    "Failed mean policy leaves anchor after a kick; disabling residual does not restore control.",
+    "Actual rollout position logstd raw outputs are below hard clamp; NLL has strong precision weighting.",
+    "Old NLL updates shared main encoder despite a bounded residual.",
+    "Fresh PPO optimizer at scratch learning rate destroys transferred control in small physics smoke; 1e-5 passes the same recovery assertions."
+  ],
+  "causal_limit": "Replay and gradient probes do not isolate every mechanism; no claim of one proven sole cause or long-term convergence.",
+  "fix": {
+    "nll_updates_encoder": false,
+    "normalized_logstd_bounds": [
+      -2,
+      1
+    ],
+    "smooth_std": true,
+    "ball_aux_lr": 0.0001,
+    "ball_aux_max_kl": 0.001,
+    "residual_limit_raw": 0.1,
+    "ppo_initial_lr": 1e-05,
+    "initial_exposure_steps": 60000,
+    "initialization": "v2 weights only; fresh optimizers and iteration"
+  },
+  "diagnostic_recovery_counts": {
+    "v2_mean": 855,
+    "v3_mean": 0,
+    "v3_without_residual_mean": 0,
+    "v2_sampled": 567,
+    "v3_sampled": 0
+  },
+  "diagnostic_encoder_grad_ratio": 1368.5609008345552,
+  "unchanged": [
+    "v2 files",
+    "serve geometry at equal exposure",
+    "reward",
+    "recovery/termination thresholds",
+    "control frequency",
+    "PPO algorithm and other hyperparameters",
+    "AMP weighting",
+    "curriculum gates"
+  ],
+  "pending": "Implementation, validation and formal launch complete. Long-term convergence remains unestablished.",
+  "postfix_matched_replay": {
+    "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3_smoke/2026-10-08_11-41-58_feedback_stable_scale_smoke/model_99.pt",
+    "sampled": false,
+    "residual_disabled": false,
+    "episode_terminations": 12,
+    "completed_episode_mean_s": 25.893333333333334,
+    "right_censored_episodes": 64,
+    "fresh_termination_counts": {
+      "time_out": 0,
+      "non_finite": 0,
+      "tipped": 0,
+      "fell": 0,
+      "walked_away": 12,
+      "self_collision": 0,
+      "recovery_timeout": 0
+    },
+    "new_serves": 912,
+    "recovered_serves": 900,
+    "kick_proxies": 888,
+    "observed_nonterminal_kick_pulses": 888,
+    "observed_pulses_with_foot_distance_lt_03": 888,
+    "balanced_frame_fraction": 0.5651041666666666,
+    "task_reward_per_step": 0.09418258485361003,
+    "action_abs_mean_raw": 0.7067329487601915,
+    "residual_abs_mean_raw": 0.00018209812557324766
+  },
+  "verified_start": {
+    "pid": 1776883,
+    "latest_iteration_at_check": 67,
+    "run_dir": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3/2026-10-08_11-48-24_feedback_stable_20261008_v2init",
+    "log": "/home/cao/perceptual_ball/logs/background/agilekickball_v3_feedback_stable_20261008_114819.log"
+  }
+}

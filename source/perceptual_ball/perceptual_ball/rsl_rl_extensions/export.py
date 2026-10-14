@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import torch
 from torch import nn
+from .state_feedback import append_ball_feedback, bounded_ball_distribution
 
 
 class DepthPolicyExport(nn.Module):
@@ -11,13 +12,23 @@ class DepthPolicyExport(nn.Module):
         super().__init__()
         self.encoder = copy.deepcopy(policy.perception_encoder)
         self.actor = copy.deepcopy(policy.actor)
+        self.uses_ball_feedback = getattr(policy, 'uses_ball_feedback', False)
+        self.ball_head = copy.deepcopy(policy.ball_head) if self.uses_ball_feedback else nn.Identity()
+        self.feedback_logstd_min = getattr(policy, 'feedback_logstd_min', -4.)
+        self.feedback_logstd_max = getattr(policy, 'feedback_logstd_max', 1.)
+        self.feedback_smooth_std = getattr(policy, 'feedback_smooth_std', False)
         groups = policy.obs_groups["policy"]
         index = groups.index(policy.perception_group)
         self.before_dim = sum(observation_example[g].shape[-1] for g in groups[:index])
 
     def forward(self, flat, depth):
-        return self.actor(torch.cat((flat[:, :self.before_dim], self.encoder(depth),
-                                     flat[:, self.before_dim:]), dim=-1))
+        features = torch.cat((flat[:, :self.before_dim], self.encoder(depth),
+                              flat[:, self.before_dim:]), dim=-1)
+        if self.uses_ball_feedback:
+            distribution = bounded_ball_distribution(self.ball_head(features), self.feedback_logstd_min,
+                                                     self.feedback_logstd_max, self.feedback_smooth_std)
+            features = append_ball_feedback(features, depth, distribution)
+        return self.actor(features)
 
 
 def export_depth_policy(policy, obs, path, metadata=None):
@@ -38,6 +49,7 @@ def export_depth_policy(policy, obs, path, metadata=None):
                 "depth_shape": list(depth.shape[1:]), "depth_order": "oldest_to_newest",
                 "proprio_history_order": "term_major_then_oldest_to_newest",
                 "output": "raw joint action; apply external clip, scale and offset",
+                "includes_ball_state_feedback": getattr(policy, 'uses_ball_feedback', False),
                 "metadata": metadata or {}}
     (path / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     return wrapper

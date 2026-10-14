@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checked_local": "2026-10-14T14:18:22.381967+09:00",
+  "pid": 2330803,
+  "num_envs": 4096,
+  "run_directory": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_14-06-14_wall4_4096_20261014_140607",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_14-06-14_wall4_4096_20261014_140607/model_0.pt",
+  "checkpoint_finite": true,
+  "last_complete_iteration": 18,
+  "latest_metrics": {
+    "iteration": 18,
+    "Mean episode length": 37.23,
+    "Mean reward": -0.31,
+    "Mean amp_valid_samples loss": 75560.0,
+    "AMP/valid_fraction": 0.7686,
+    "Episode_Reward/fall": -0.01,
+    "Metrics/episode_lift_success": 0.0
+  },
+  "conclusion": "Startup and initial training updates verified; convergence not established"
+}

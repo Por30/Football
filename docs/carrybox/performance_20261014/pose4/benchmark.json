@@ -1,0 +1,8 @@
+{
+  "num_envs": 4,
+  "max_position_error_m": 0.0,
+  "max_rotation_matrix_error": 0.0,
+  "moving_and_partial_reset": true,
+  "paired_cache": true,
+  "status": "PASS"
+}

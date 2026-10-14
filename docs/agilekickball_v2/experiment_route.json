@@ -1,0 +1,2951 @@
+{
+  "schema_version": "robotics-research-context.v1",
+  "stage": "experiment",
+  "first_core_reference": {
+    "status": "RUNTIME_LOADED_NO_RAW_CORPUS",
+    "runtime_schema": "robotics-research-runtime.v1",
+    "runtime_source_record_count": 100,
+    "raw_corpus_loaded": false,
+    "calibration_schema": "robotics-submanifold-calibration.v1",
+    "contract": "Normal routing reads the compact derived runtime artifact; the full paper corpus is local-only and offline."
+  },
+  "project_vector": {
+    "vector": {
+      "E": 1,
+      "P": 1,
+      "C": 2,
+      "L": 3,
+      "D": 2,
+      "H": 0,
+      "A": 0,
+      "S": 1
+    },
+    "matched_indicators": {},
+    "input_tags": [],
+    "active_axes": [
+      "C",
+      "L",
+      "D"
+    ],
+    "explicit_axes": {
+      "E": 1,
+      "P": 1,
+      "C": 2,
+      "L": 3,
+      "D": 2,
+      "H": 0,
+      "A": 0,
+      "S": 1
+    }
+  },
+  "research_intensity": {
+    "level": "INTEGRATED_SYSTEM",
+    "active_axes": [
+      "C",
+      "L",
+      "D"
+    ],
+    "maximum_axis_loading": 3,
+    "axis_breadth": 3,
+    "proposed_evidence_pressures": [
+      "data_lineage_and_split",
+      "dynamics_or_control_baseline",
+      "held_out_generalization",
+      "identifiable_planning_or_coordination_contrast",
+      "learned_engineered_boundary",
+      "long_horizon_or_failure_case",
+      "seed_and_checkpoint_discipline",
+      "stability_or_safety_boundary",
+      "team_size_or_budget_control",
+      "timing_and_recovery"
+    ],
+    "claim_altitude_status": "PROPOSED_FOR_EXPLICIT_REVIEW",
+    "rule": "Use this summary to propose evidence obligations and claim boundaries; never silently rewrite Claim Lock or Design Lock."
+  },
+  "paper_reference_bundle": {
+    "active_axes": [
+      "C",
+      "L",
+      "D"
+    ],
+    "paper_exemplars_by_axis": {
+      "C": [
+        {
+          "paper_id": "C-C01",
+          "title": "Control Design along Trajectories with Closed-Loop Inverse Dynamics",
+          "year": 2013,
+          "venue": "ICRA",
+          "venue_kind": "conference",
+          "primary_axis": "C",
+          "submanifold_axes": {
+            "E": 0,
+            "P": 0,
+            "C": 3,
+            "L": 0,
+            "D": 2,
+            "H": 0,
+            "A": 0,
+            "S": 0
+          },
+          "pattern_tags": [
+            "inverse_dynamics",
+            "trajectory_control",
+            "closed_loop_control"
+          ],
+          "preprint_url": "https://arxiv.org/abs/1210.0888",
+          "final_publication_url": "https://groups.csail.mit.edu/robotics-center/public_papers/Majumdar13.pdf",
+          "award_status": "finalist"
+        },
+        {
+          "paper_id": "C-C02",
+          "title": "Distributed Data-Driven Predictive Control for Networked Systems",
+          "year": 2023,
+          "venue": "ICRA",
+          "venue_kind": "conference",
+          "primary_axis": "C",
+          "submanifold_axes": {
+            "E": 0,
+            "P": 0,
+            "C": 3,
+            "L": 0,
+            "D": 0,
+            "H": 0,
+            "A": 2,
+            "S": 2
+          },
+          "pattern_tags": [
+            "data_driven_control",
+            "distributed_control",
+            "predictive_control"
+          ],
+          "preprint_url": "https://arxiv.org/abs/2211.06917",
+          "final_publication_url": "https://doi.org/10.1109/ICRA48891.2023.10160914",
+          "award_status": "finalist"
+        },
+        {
+          "paper_id": "C-C03",
+          "title": "Reinforcement Learning for Safe Robot Control using Control Lyapunov Barrier Functions",
+          "year": 2023,
+          "venue": "ICRA",
+          "venue_kind": "conference",
+          "primary_axis": "C",
+          "submanifold_axes": {
+            "E": 0,
+            "P": 0,
+            "C": 3,
+            "L": 2,
+            "D": 0,
+            "H": 0,
+            "A": 2,
+            "S": 0
+          },
+          "pattern_tags": [
+            "safe_rl",
+            "control_lyapunov_barrier",
+            "robot_control"
+          ],
+          "preprint_url": "https://arxiv.org/abs/2305.09793",
+          "final_publication_url": "https://doi.org/10.1109/ICRA48891.2023.10160991",
+          "award_status": null
+        },
+        {
+          "paper_id": "C-C04",
+          "title": "Safe Control using Vision-based Control Barrier Function",
+          "year": 2023,
+          "venue": "ICRA",
+          "venue_kind": "conference",
+          "primary_axis": "C",
+          "submanifold_axes": {
+            "E": 0,
+            "P": 2,
+            "C": 3,
+            "L": 0,
+            "D": 0,
+            "H": 0,
+            "A": 2,
+            "S": 0
+          },
+          "pattern_tags": [
+            "vision_cbf",
+            "safe_control",
+            "visual_navigation"
+          ],
+          "preprint_url": "https://researchportal.tuni.fi/en/publications/safe-control-using-vision-based-control-barrier-function-v-cbf/",
+          "final_publication_url": "https://doi.org/10.1109/ICRA48891.2023.10160805",
+          "award_status": null
+        }
+      ],
+      "L": [
+        {
+          "paper_id": "C-L06",
+          "title": "Open X-Embodiment: Robotic Learning Datasets and RT-X Models",
+          "year": 2024,
+          "venue": "ICRA",
+          "venue_kind": "conference",
+          "primary_axis": "L",
+          "submanifold_axes": {
+            "E": 2,
+            "P": 2,
+            "C": 0,
+            "L": 3,
+            "D": 0,
+            "H": 0,
+            "A": 0,
+            "S": 2
+          },
+          "pattern_tags": [
+            "embodied_dataset",
+            "cross_robot_learning",
+            "foundation_policy"
+          ],
+          "preprint_url": "https://arxiv.org/abs/2310.08864",
+          "final_publication_url": "https://doi.org/10.1109/ICRA57147.2024.10611477",
+          "award_status": "winner"
+        },
+        {
+          "paper_id": "J-L01",
+          "title": "Self-Supervised Correspondence in Visuomotor Policy Learning",
+          "year": 2020,
+          "venue": "IEEE Robotics and Automation Letters",
+          "venue_kind": "journal",
+          "primary_axis": "L",
+          "submanifold_axes": {
+            "E": 2,
+            "P": 2,
+            "C": 0,
+            "L": 3,
+            "D": 0,
+            "H": 0,
+            "A": 0,
+            "S": 0
+          },
+          "pattern_tags": [
+            "visuomotor_learning",
+            "self_supervision",
+            "correspondence"
+          ],
+          "preprint_url": "https://arxiv.org/abs/1909.06933",
+          "final_publication_url": "https://doi.org/10.1109/LRA.2019.2956365",
+          "award_status": "winner"
+        },
+        {
+          "paper_id": "J-L02",
+          "title": "CALVIN: A Benchmark for Language-Conditioned Policy Learning for Long-Horizon Robot Manipulation Tasks",
+          "year": 2022,
+          "venue": "IEEE Robotics and Automation Letters",
+          "venue_kind": "journal",
+          "primary_axis": "L",
+          "submanifold_axes": {
+            "E": 2,
+            "P": 0,
+            "C": 0,
+            "L": 3,
+            "D": 2,
+            "H": 0,
+            "A": 0,
+            "S": 0
+          },
+          "pattern_tags": [
+            "language_conditioned_policy",
+            "benchmark",
+            "long_horizon_manipulation"
+          ],
+          "preprint_url": "https://arxiv.org/abs/2112.03227",
+          "final_publication_url": "https://doi.org/10.1109/LRA.2022.3180108",
+          "award_status": "winner"
+        },
+        {
+          "paper_id": "J-L03",
+          "title": "Geometric Fabrics: Generalizing Classical Mechanics to Capture the Physics of Behavior",
+          "year": 2022,
+          "venue": "IEEE Robotics and Automation Letters",
+          "venue_kind": "journal",
+          "primary_axis": "L",
+          "submanifold_axes": {
+            "E": 0,
+            "P": 0,
+            "C": 2,
+            "L": 3,
+            "D": 2,
+            "H": 0,
+            "A": 0,
+            "S": 0
+          },
+          "pattern_tags": [
+            "geometric_fabrics",
+            "behavior_generation",
+            "mechanics_inspired_learning"
+          ],
+          "preprint_url": "https://arxiv.org/abs/2109.10443",
+          "final_publication_url": "https://doi.org/10.1109/LRA.2022.3143311",
+          "award_status": "winner"
+        }
+      ],
+      "D": [
+        {
+          "paper_id": "C-D03",
+          "title": "Semantic Linking Maps for Active Visual Object Search",
+          "year": 2020,
+          "venue": "ICRA",
+          "venue_kind": "conference",
+          "primary_axis": "D",
+          "submanifold_axes": {
+            "E": 0,
+            "P": 2,
+            "C": 0,
+            "L": 0,
+            "D": 3,
+            "H": 0,
+            "A": 2,
+            "S": 0
+          },
+          "pattern_tags": [
+            "active_visual_search",
+            "semantic_map",
+            "task_planning"
+          ],
+          "preprint_url": "https://arxiv.org/abs/2006.10807",
+          "final_publication_url": "https://doi.org/10.1109/ICRA40945.2020.9196830",
+          "award_status": "winner"
+        },
+        {
+          "paper_id": "J-D01",
+          "title": "Sampling-based Algorithms for Optimal Motion Planning",
+          "year": 2011,
+          "venue": "The International Journal of Robotics Research",
+          "venue_kind": "journal",
+          "primary_axis": "D",
+          "submanifold_axes": {
+            "E": 0,
+            "P": 0,
+            "C": 2,
+            "L": 0,
+            "D": 3,
+            "H": 0,
+            "A": 0,
+            "S": 0
+          },
+          "pattern_tags": [
+            "motion_planning",
+            "sampling",
+            "optimality"
+          ],
+          "preprint_url": "https://arxiv.org/abs/1105.1186",
+          "final_publication_url": "https://doi.org/10.1177/0278364911406761",
+          "award_status": null
+        },
+        {
+          "paper_id": "J-D02",
+          "title": "Motion planning with sequential convex optimization and convex collision checking",
+          "year": 2014,
+          "venue": "The International Journal of Robotics Research",
+          "venue_kind": "journal",
+          "primary_axis": "D",
+          "submanifold_axes": {
+            "E": 2,
+            "P": 0,
+            "C": 2,
+            "L": 0,
+            "D": 3,
+            "H": 0,
+            "A": 0,
+            "S": 0
+          },
+          "pattern_tags": [
+            "sequential_convex_optimization",
+            "collision_checking",
+            "manipulation_planning"
+          ],
+          "preprint_url": "https://escholarship.org/uc/item/6km506db",
+          "final_publication_url": "https://doi.org/10.1177/0278364914528132",
+          "award_status": null
+        },
+        {
+          "paper_id": "J-D03",
+          "title": "Manipulation Planning for Deformable Linear Objects",
+          "year": 2007,
+          "venue": "IEEE Transactions on Robotics",
+          "venue_kind": "journal",
+          "primary_axis": "D",
+          "submanifold_axes": {
+            "E": 2,
+            "P": 0,
+            "C": 0,
+            "L": 0,
+            "D": 3,
+            "H": 0,
+            "A": 0,
+            "S": 0
+          },
+          "pattern_tags": [
+            "deformable_linear_object",
+            "manipulation_planning",
+            "configuration_space"
+          ],
+          "preprint_url": "https://www.researchgate.net/publication/3450528_Manipulation_Planning_for_Deformable_Linear_Objects",
+          "final_publication_url": "https://doi.org/10.1109/TRO.2007.907486",
+          "award_status": "winner"
+        }
+      ]
+    },
+    "axis_pattern_summary": {
+      "C": {
+        "extract_patterns": [
+          "dynamics or controller mechanism",
+          "stability/safety condition",
+          "stress or disturbance test"
+        ],
+        "do_not_infer_boundaries": [
+          "stability or performance is conditional on stated dynamics and disturbances"
+        ]
+      },
+      "L": {
+        "extract_patterns": [
+          "data/representation dependency",
+          "held-out or transfer test",
+          "training or adaptation loop"
+        ],
+        "do_not_infer_boundaries": [
+          "training success does not prove out-of-distribution generalization"
+        ]
+      },
+      "D": {
+        "extract_patterns": [
+          "long-horizon failure case",
+          "planning/decision decomposition",
+          "task or coordination constraint"
+        ],
+        "do_not_infer_boundaries": [
+          "one task plan does not prove arbitrary long-horizon competence"
+        ]
+      }
+    },
+    "sampling_note": "Exemplars are selected from a balanced infrastructure corpus; they are pattern references, not prevalence or quality estimates."
+  },
+  "stage_adapter": {
+    "first_action": "convert axis_pattern_summary into candidate conditions, contrasts, metrics, and failure logs",
+    "use": "evidence obligation and negative-control planning",
+    "must_not": "replace the project Design Lock with a corpus average"
+  },
+  "factor_fit_ranking": [
+    {
+      "venue_id": "conf-rss",
+      "name": "RSS",
+      "kind": "conference",
+      "layer": "direct_robotics",
+      "directness_weight": 1.0,
+      "factor_overlap": 0.8571,
+      "weighted_fit": 0.8571,
+      "supported_active_axes": 3,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "robotics_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 2,
+          "shared": 2,
+          "relation": "partial"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "PRIMARY_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-aaai",
+      "name": "AAAI",
+      "kind": "conference",
+      "layer": "robotics_strong_related",
+      "directness_weight": 0.65,
+      "factor_overlap": 0.7143,
+      "weighted_fit": 0.4643,
+      "supported_active_axes": 2,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "ai_core",
+          "learning_core",
+          "multi_agent_core",
+          "planning_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 3,
+          "shared": 3,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "PRIMARY_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-aamas",
+      "name": "AAMAS",
+      "kind": "conference",
+      "layer": "robotics_strong_related",
+      "directness_weight": 0.65,
+      "factor_overlap": 0.7143,
+      "weighted_fit": 0.4643,
+      "supported_active_axes": 2,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "learning_core",
+          "multi_agent_core",
+          "planning_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 3,
+          "shared": 3,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "PRIMARY_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-ecai",
+      "name": "ECAI",
+      "kind": "conference",
+      "layer": "robotics_strong_related",
+      "directness_weight": 0.65,
+      "factor_overlap": 0.7143,
+      "weighted_fit": 0.4643,
+      "supported_active_axes": 2,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "ai_core",
+          "learning_core",
+          "planning_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 3,
+          "shared": 3,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "PRIMARY_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-ijcai",
+      "name": "IJCAI",
+      "kind": "conference",
+      "layer": "robotics_strong_related",
+      "directness_weight": 0.65,
+      "factor_overlap": 0.7143,
+      "weighted_fit": 0.4643,
+      "supported_active_axes": 2,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "ai_core",
+          "learning_core",
+          "multi_agent_core",
+          "planning_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 3,
+          "shared": 3,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "PRIMARY_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-uai",
+      "name": "UAI",
+      "kind": "conference",
+      "layer": "robotics_strong_related",
+      "directness_weight": 0.65,
+      "factor_overlap": 0.7143,
+      "weighted_fit": 0.4643,
+      "supported_active_axes": 2,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "ai_core",
+          "control_core",
+          "learning_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 3,
+          "shared": 3,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 2,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "PRIMARY_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-icra",
+      "name": "ICRA",
+      "kind": "conference",
+      "layer": "direct_robotics",
+      "directness_weight": 1.0,
+      "factor_overlap": 0.5714,
+      "weighted_fit": 0.5714,
+      "supported_active_axes": 2,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "robotics_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 2,
+          "shared": 2,
+          "relation": "partial"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "CONDITIONAL_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-iros",
+      "name": "IROS",
+      "kind": "conference",
+      "layer": "direct_robotics",
+      "directness_weight": 1.0,
+      "factor_overlap": 0.5714,
+      "weighted_fit": 0.5714,
+      "supported_active_axes": 2,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "robotics_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 2,
+          "shared": 2,
+          "relation": "partial"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "CONDITIONAL_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-aim",
+      "name": "AIM",
+      "kind": "conference",
+      "layer": "direct_robotics",
+      "directness_weight": 1.0,
+      "factor_overlap": 0.2857,
+      "weighted_fit": 0.2857,
+      "supported_active_axes": 1,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "control_core",
+          "robotics_core",
+          "systems_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        }
+      ],
+      "route": "CONDITIONAL_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-humanoids",
+      "name": "Humanoids",
+      "kind": "conference",
+      "layer": "direct_robotics",
+      "directness_weight": 1.0,
+      "factor_overlap": 0.2857,
+      "weighted_fit": 0.2857,
+      "supported_active_axes": 1,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "robotics_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 2,
+          "shared": 2,
+          "relation": "partial"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "CONDITIONAL_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-icarcv",
+      "name": "ICARCV",
+      "kind": "conference",
+      "layer": "direct_robotics",
+      "directness_weight": 1.0,
+      "factor_overlap": 0.2857,
+      "weighted_fit": 0.2857,
+      "supported_active_axes": 1,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "control_core",
+          "robotics_core",
+          "vision_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        }
+      ],
+      "route": "CONDITIONAL_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    },
+    {
+      "venue_id": "conf-icuasac",
+      "name": "ICUASAC",
+      "kind": "conference",
+      "layer": "direct_robotics",
+      "directness_weight": 1.0,
+      "factor_overlap": 0.2857,
+      "weighted_fit": 0.2857,
+      "supported_active_axes": 1,
+      "active_project_axes": 3,
+      "contribution_gate": {
+        "status": "UNKNOWN",
+        "project_center": null,
+        "venue_centers": [
+          "autonomy_core",
+          "control_core",
+          "robotics_core"
+        ]
+      },
+      "axis_comparison": [
+        {
+          "axis_id": "E",
+          "project": 1,
+          "venue": 3,
+          "shared": 1,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "P",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "C",
+          "project": 2,
+          "venue": 3,
+          "shared": 2,
+          "relation": "supported"
+        },
+        {
+          "axis_id": "L",
+          "project": 3,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "D",
+          "project": 2,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        },
+        {
+          "axis_id": "H",
+          "project": 0,
+          "venue": 0,
+          "shared": 0,
+          "relation": "inactive"
+        },
+        {
+          "axis_id": "A",
+          "project": 0,
+          "venue": 3,
+          "shared": 0,
+          "relation": "venue_specialty"
+        },
+        {
+          "axis_id": "S",
+          "project": 1,
+          "venue": 0,
+          "shared": 0,
+          "relation": "venue_gap"
+        }
+      ],
+      "route": "CONDITIONAL_CANDIDATE",
+      "evidence_status": "REQUIRES_PROJECT_EVIDENCE_PROFILE",
+      "note": "This is a factor-fit candidate, not an acceptance probability or a final submission decision."
+    }
+  ],
+  "fixed_venue_fit": null,
+  "venue_scope_status": "REFRESH_REQUIRED",
+  "acceptance_probability": {
+    "status": "NOT_ESTIMABLE"
+  },
+  "limitations": [
+    "Paper exemplars are pattern references, not a statistical prevalence model.",
+    "Corpus award status is recognition metadata, not evidence sufficiency.",
+    "Venue fit is a routing proxy and requires current official-scope verification."
+  ],
+  "researchstudio_strategy_context": {
+    "schema_version": "researchstudio-robotics-strategy-context.v1",
+    "active_axes": [
+      "C",
+      "L",
+      "D"
+    ],
+    "axis_strategy_patterns": {
+      "C": {
+        "axis_id": "C",
+        "axis_name": "control_dynamics",
+        "axis_name_zh": "控制、动力学与安全",
+        "corpus_sample_count": 47,
+        "signature_fidelity_counts": {
+          "FULLTEXT_EXTRACTED": 38,
+          "FULLTEXT_WEB_VERIFIED": 9
+        },
+        "best_posting_strategy": {
+          "anchor_pattern": {
+            "pattern_id": "P01",
+            "name": "Audit and Pivot an Assumption",
+            "structural_prior": 1.0,
+            "corpus_coverage": {
+              "matched": 13,
+              "total": 13,
+              "rate": 1.0
+            },
+            "mean_signal_density": 0.2991,
+            "venue_diversity": {
+              "count": 5,
+              "names": [
+                "ICRA",
+                "IEEE CASE",
+                "IEEE Control and Decision Conference",
+                "IEEE Robotics and Automation Letters",
+                "IEEE Transactions on Robotics"
+              ]
+            },
+            "directness_weighted_support": 0.9731,
+            "fit_score": 90.7543,
+            "evidence_paper_ids": [
+              "J-C01",
+              "J-C02",
+              "J-C03",
+              "J-C04",
+              "J-C05",
+              "J-C06",
+              "C-C01",
+              "C-C02"
+            ],
+            "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+          },
+          "supporting_patterns": [
+            {
+              "pattern_id": "P14",
+              "name": "Characterize a Limit, Then Surpass It",
+              "structural_prior": 0.95,
+              "corpus_coverage": {
+                "matched": 13,
+                "total": 13,
+                "rate": 1.0
+              },
+              "mean_signal_density": 0.4327,
+              "venue_diversity": {
+                "count": 5,
+                "names": [
+                  "ICRA",
+                  "IEEE CASE",
+                  "IEEE Control and Decision Conference",
+                  "IEEE Robotics and Automation Letters",
+                  "IEEE Transactions on Robotics"
+                ]
+              },
+              "directness_weighted_support": 0.9731,
+              "fit_score": 90.0904,
+              "evidence_paper_ids": [
+                "J-C01",
+                "J-C02",
+                "J-C03",
+                "J-C04",
+                "J-C05",
+                "J-C06",
+                "C-C01",
+                "C-C02"
+              ],
+              "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+            },
+            {
+              "pattern_id": "P04",
+              "name": "Design a Confound-Isolating Diagnostic",
+              "structural_prior": 0.84,
+              "corpus_coverage": {
+                "matched": 13,
+                "total": 13,
+                "rate": 1.0
+              },
+              "mean_signal_density": 0.4462,
+              "venue_diversity": {
+                "count": 5,
+                "names": [
+                  "ICRA",
+                  "IEEE CASE",
+                  "IEEE Control and Decision Conference",
+                  "IEEE Robotics and Automation Letters",
+                  "IEEE Transactions on Robotics"
+                ]
+              },
+              "directness_weighted_support": 0.9731,
+              "fit_score": 84.9854,
+              "evidence_paper_ids": [
+                "J-C01",
+                "J-C02",
+                "J-C03",
+                "J-C04",
+                "J-C05",
+                "J-C06",
+                "C-C01",
+                "C-C02"
+              ],
+              "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+            }
+          ],
+          "composition_default": [
+            "P01",
+            "P14"
+          ],
+          "tactical_subpatterns": [
+            {
+              "subpattern_id": "R02",
+              "parent_pattern_id": "P01",
+              "name": "Remove a fixed model assumption",
+              "when_to_apply": "Use when the robot must operate under unknown contact, friction, terrain or dynamics."
+            },
+            {
+              "subpattern_id": "R30",
+              "parent_pattern_id": "P14",
+              "name": "Limit characterization and strict surpass",
+              "when_to_apply": "Use when a matched baseline has a sharp and reproducible boundary."
+            },
+            {
+              "subpattern_id": "R14",
+              "parent_pattern_id": "P04",
+              "name": "Controlled diagnostic construction",
+              "when_to_apply": "Use when a robot claim can be explained by hardware, data, tuning or human adaptation confounds."
+            }
+          ],
+          "strategy_signature": "Audit the inherited model, stability or safety assumption, characterize its boundary, and show a matched mechanism-level improvement under disturbance.",
+          "evidence_recipe": [
+            "assumption-to-equation map",
+            "stability/safety proof or certificate",
+            "matched disturbance and uncertainty sweep",
+            "semantic negative control on the load-bearing variable"
+          ],
+          "failure_guard": "Do not call a controller safe or robust from nominal trajectories; identify the boundary and test the intervention on downstream failure.",
+          "claim_altitude": "dynamical mechanism, stability/safety certificate or control law",
+          "model_simulated_capability_route": {
+            "cluster_id": "C02",
+            "runtime_question_id": "Q2",
+            "runtime_question": "Which dynamics, feedback, or safety boundary makes the closed-loop intervention testable?",
+            "contribution_center": "control, dynamics, and safety mechanism",
+            "preferred_parent_pattern_ids": [
+              "P01",
+              "P14",
+              "P04"
+            ],
+            "preferred_subpattern_ids": [
+              "R02",
+              "R30",
+              "R14"
+            ],
+            "workflow_translation": "Use the runtime question to choose a contribution center; translate it into claim, trigger, matched contrast, metric, failure boundary, and artifact; then apply the stage-specific Skill contract."
+          }
+        },
+        "source_paper_ids": [
+          "J-E01",
+          "J-E02",
+          "J-E03",
+          "J-E04",
+          "J-E05",
+          "J-E06",
+          "J-P06",
+          "J-C01",
+          "J-C02",
+          "J-C03",
+          "J-C04",
+          "J-C05",
+          "J-C06",
+          "J-L03",
+          "J-L06",
+          "J-D01",
+          "J-D02",
+          "J-D04",
+          "J-H01",
+          "J-H03",
+          "J-H04",
+          "J-H05",
+          "J-A02",
+          "J-A03",
+          "J-A06",
+          "C-E02",
+          "C-E03",
+          "C-E05",
+          "C-P02",
+          "C-C01",
+          "C-C02",
+          "C-C03",
+          "C-C04",
+          "C-C05",
+          "C-C06",
+          "C-C07",
+          "C-D01",
+          "C-D04",
+          "C-H01",
+          "C-H03",
+          "C-H04",
+          "C-H05",
+          "C-H06",
+          "C-A06",
+          "C-S02",
+          "C-S04",
+          "C-S06"
+        ],
+        "venue_scope_candidates": [
+          {
+            "venue_id": "conf-acc",
+            "name": "ACC",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "control",
+              "dynamics",
+              "optimization",
+              "stability"
+            ],
+            "scope_fit": 0.5911,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-ieee-cdc",
+            "name": "IEEE CDC",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "control",
+              "dynamics",
+              "optimization",
+              "stability"
+            ],
+            "scope_fit": 0.5911,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-ecc",
+            "name": "ECC",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "control",
+              "dynamics",
+              "optimization"
+            ],
+            "scope_fit": 0.4839,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-aiaa-gnc",
+            "name": "AIAA GNC",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "control",
+              "guidance navigation control"
+            ],
+            "scope_fit": 0.3768,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-esa-cgncs",
+            "name": "ESA-CGNCS",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "control",
+              "guidance navigation control"
+            ],
+            "scope_fit": 0.3768,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-eurog n c",
+            "name": "EuroGNC",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "control",
+              "guidance navigation control"
+            ],
+            "scope_fit": 0.3768,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-icgnc",
+            "name": "ICGNC",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "control",
+              "guidance navigation control"
+            ],
+            "scope_fit": 0.3768,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-ieee-ccta",
+            "name": "IEEE CCTA",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "control",
+              "optimization"
+            ],
+            "scope_fit": 0.3768,
+            "official_scope_status": "REFRESH_REQUIRED"
+          }
+        ],
+        "official_scope_status": "REFRESH_REQUIRED"
+      },
+      "L": {
+        "axis_id": "L",
+        "axis_name": "learning_adaptation",
+        "axis_name_zh": "学习、表示与适应",
+        "corpus_sample_count": 35,
+        "signature_fidelity_counts": {
+          "FULLTEXT_EXTRACTED": 32,
+          "FULLTEXT_WEB_VERIFIED": 3
+        },
+        "best_posting_strategy": {
+          "anchor_pattern": {
+            "pattern_id": "P07",
+            "name": "Manufacture the Supervisory Signal",
+            "structural_prior": 1.0,
+            "corpus_coverage": {
+              "matched": 13,
+              "total": 13,
+              "rate": 1.0
+            },
+            "mean_signal_density": 0.375,
+            "venue_diversity": {
+              "count": 5,
+              "names": [
+                "CoRL",
+                "ICRA",
+                "IEEE Robotics and Automation Letters",
+                "IEEE Transactions on Robotics",
+                "Robotics: Science and Systems"
+              ]
+            },
+            "directness_weighted_support": 0.8385,
+            "fit_score": 91.0673,
+            "evidence_paper_ids": [
+              "J-L01",
+              "J-L02",
+              "J-L03",
+              "J-L04",
+              "J-L05",
+              "J-L06",
+              "C-L01",
+              "C-L02"
+            ],
+            "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+          },
+          "supporting_patterns": [
+            {
+              "pattern_id": "P03",
+              "name": "Liberate a Fixed Generative Component",
+              "structural_prior": 0.92,
+              "corpus_coverage": {
+                "matched": 13,
+                "total": 13,
+                "rate": 1.0
+              },
+              "mean_signal_density": 0.2179,
+              "venue_diversity": {
+                "count": 5,
+                "names": [
+                  "CoRL",
+                  "ICRA",
+                  "IEEE Robotics and Automation Letters",
+                  "IEEE Transactions on Robotics",
+                  "Robotics: Science and Systems"
+                ]
+              },
+              "directness_weighted_support": 0.8385,
+              "fit_score": 85.1856,
+              "evidence_paper_ids": [
+                "J-L01",
+                "J-L02",
+                "J-L03",
+                "J-L04",
+                "J-L05",
+                "J-L06",
+                "C-L01",
+                "C-L02"
+              ],
+              "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+            },
+            {
+              "pattern_id": "P05",
+              "name": "Unify Heterogeneous Inputs into One Space",
+              "structural_prior": 0.9,
+              "corpus_coverage": {
+                "matched": 13,
+                "total": 13,
+                "rate": 1.0
+              },
+              "mean_signal_density": 0.2198,
+              "venue_diversity": {
+                "count": 5,
+                "names": [
+                  "CoRL",
+                  "ICRA",
+                  "IEEE Robotics and Automation Letters",
+                  "IEEE Transactions on Robotics",
+                  "Robotics: Science and Systems"
+                ]
+              },
+              "directness_weighted_support": 0.8385,
+              "fit_score": 84.2495,
+              "evidence_paper_ids": [
+                "J-L01",
+                "J-L02",
+                "J-L03",
+                "J-L04",
+                "J-L05",
+                "J-L06",
+                "C-L01",
+                "C-L02"
+              ],
+              "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+            }
+          ],
+          "composition_default": [
+            "P07",
+            "P03"
+          ],
+          "tactical_subpatterns": [
+            {
+              "subpattern_id": "R19",
+              "parent_pattern_id": "P07",
+              "name": "Self-supervised signal engineering",
+              "when_to_apply": "Use when robot labels are expensive but structure is observable."
+            },
+            {
+              "subpattern_id": "R12",
+              "parent_pattern_id": "P03",
+              "name": "Residual mechanism liberation",
+              "when_to_apply": "Use when sim-to-real, friction, contact or dynamics residuals dominate the error."
+            },
+            {
+              "subpattern_id": "R15",
+              "parent_pattern_id": "P05",
+              "name": "Cross-modal shared representation",
+              "when_to_apply": "Use when modalities are complementary but not jointly actionable."
+            }
+          ],
+          "strategy_signature": "Manufacture a task-relevant supervisory signal or redesign the policy-generation substrate, then prove transfer with signal-removal and held-out embodiment or task tests.",
+          "evidence_recipe": [
+            "signal provenance and mechanism map",
+            "signal-removal or shuffled-signal control",
+            "same-data/compute baseline",
+            "held-out task, embodiment or environment transfer"
+          ],
+          "failure_guard": "Do not present scale, data or a benchmark gain as a learning mechanism without isolating the supervisory signal or policy substrate that caused it.",
+          "claim_altitude": "learning signal, policy-generation mechanism or transfer principle",
+          "model_simulated_capability_route": {
+            "cluster_id": "C06",
+            "runtime_question_id": "Q6",
+            "runtime_question": "Which data, representation, supervision, or policy substrate changes downstream robot behavior?",
+            "contribution_center": "learning, representation, and adaptation substrate",
+            "preferred_parent_pattern_ids": [
+              "P07",
+              "P03",
+              "P05"
+            ],
+            "preferred_subpattern_ids": [
+              "R19",
+              "R12",
+              "R15"
+            ],
+            "workflow_translation": "Use the runtime question to choose a contribution center; translate it into claim, trigger, matched contrast, metric, failure boundary, and artifact; then apply the stage-specific Skill contract."
+          }
+        },
+        "source_paper_ids": [
+          "J-E04",
+          "J-E05",
+          "J-E06",
+          "J-P02",
+          "J-C02",
+          "J-L01",
+          "J-L02",
+          "J-L03",
+          "J-L04",
+          "J-L05",
+          "J-L06",
+          "J-H05",
+          "J-A04",
+          "J-A05",
+          "J-S06",
+          "C-E04",
+          "C-E06",
+          "C-P04",
+          "C-C03",
+          "C-L01",
+          "C-L02",
+          "C-L03",
+          "C-L04",
+          "C-L05",
+          "C-L06",
+          "C-L07",
+          "C-D02",
+          "C-D05",
+          "C-D06",
+          "C-H02",
+          "C-A02",
+          "C-A03",
+          "C-A04",
+          "C-A05",
+          "C-S05"
+        ],
+        "venue_scope_candidates": [
+          {
+            "venue_id": "conf-iclr",
+            "name": "ICLR",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "foundation model",
+              "representation learning",
+              "robot learning",
+              "vla"
+            ],
+            "scope_fit": 0.5375,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-icml",
+            "name": "ICML",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "imitation learning",
+              "reinforcement learning",
+              "representation learning",
+              "robot learning"
+            ],
+            "scope_fit": 0.5375,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-neurips",
+            "name": "NeurIPS",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "reinforcement learning",
+              "robot learning",
+              "world model"
+            ],
+            "scope_fit": 0.4437,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "journal-autonomous-robots",
+            "name": "Autonomous Robots",
+            "kind": "journal",
+            "layer": "direct_robotics",
+            "directness_weight": 1.0,
+            "matched_scope_tags": [
+              "learning"
+            ],
+            "scope_fit": 0.3438,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-humanoids",
+            "name": "Humanoids",
+            "kind": "conference",
+            "layer": "direct_robotics",
+            "directness_weight": 1.0,
+            "matched_scope_tags": [
+              "learning"
+            ],
+            "scope_fit": 0.3438,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-icra",
+            "name": "ICRA",
+            "kind": "conference",
+            "layer": "direct_robotics",
+            "directness_weight": 1.0,
+            "matched_scope_tags": [
+              "learning"
+            ],
+            "scope_fit": 0.3438,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "journal-ral",
+            "name": "IEEE Robotics and Automation Letters",
+            "kind": "journal",
+            "layer": "direct_robotics",
+            "directness_weight": 1.0,
+            "matched_scope_tags": [
+              "learning"
+            ],
+            "scope_fit": 0.3438,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "journal-t-robotics",
+            "name": "IEEE Transactions on Robotics",
+            "kind": "journal",
+            "layer": "direct_robotics",
+            "directness_weight": 1.0,
+            "matched_scope_tags": [
+              "learning"
+            ],
+            "scope_fit": 0.3438,
+            "official_scope_status": "REFRESH_REQUIRED"
+          }
+        ],
+        "official_scope_status": "REFRESH_REQUIRED"
+      },
+      "D": {
+        "axis_id": "D",
+        "axis_name": "planning_decision_coordination",
+        "axis_name_zh": "规划、决策与协同",
+        "corpus_sample_count": 34,
+        "signature_fidelity_counts": {
+          "FULLTEXT_EXTRACTED": 30,
+          "FULLTEXT_WEB_VERIFIED": 4
+        },
+        "best_posting_strategy": {
+          "anchor_pattern": {
+            "pattern_id": "P10",
+            "name": "Decompose for Differentiated Treatment",
+            "structural_prior": 1.0,
+            "corpus_coverage": {
+              "matched": 12,
+              "total": 12,
+              "rate": 1.0
+            },
+            "mean_signal_density": 0.4524,
+            "venue_diversity": {
+              "count": 8,
+              "names": [
+                "AAMAS",
+                "CoRL",
+                "ICAPS",
+                "ICRA",
+                "IEEE Robotics and Automation Letters",
+                "IEEE Transactions on Robotics",
+                "Robotics: Science and Systems",
+                "The International Journal of Robotics Research"
+              ]
+            },
+            "directness_weighted_support": 0.8542,
+            "fit_score": 92.1518,
+            "evidence_paper_ids": [
+              "J-D01",
+              "J-D02",
+              "J-D03",
+              "J-D04",
+              "J-D05",
+              "J-D06",
+              "C-D01",
+              "C-D02"
+            ],
+            "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+          },
+          "supporting_patterns": [
+            {
+              "pattern_id": "P11",
+              "name": "Decompose and Delegate to Solvers",
+              "structural_prior": 0.9,
+              "corpus_coverage": {
+                "matched": 12,
+                "total": 12,
+                "rate": 1.0
+              },
+              "mean_signal_density": 0.2024,
+              "venue_diversity": {
+                "count": 8,
+                "names": [
+                  "AAMAS",
+                  "CoRL",
+                  "ICAPS",
+                  "ICRA",
+                  "IEEE Robotics and Automation Letters",
+                  "IEEE Transactions on Robotics",
+                  "Robotics: Science and Systems",
+                  "The International Journal of Robotics Research"
+                ]
+              },
+              "directness_weighted_support": 0.8542,
+              "fit_score": 84.1018,
+              "evidence_paper_ids": [
+                "J-D01",
+                "J-D02",
+                "J-D03",
+                "J-D04",
+                "J-D05",
+                "J-D06",
+                "C-D01",
+                "C-D02"
+              ],
+              "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+            },
+            {
+              "pattern_id": "P06",
+              "name": "Reframe as a Solvable Object",
+              "structural_prior": 0.86,
+              "corpus_coverage": {
+                "matched": 4,
+                "total": 12,
+                "rate": 0.3333
+              },
+              "mean_signal_density": 0.2083,
+              "venue_diversity": {
+                "count": 4,
+                "names": [
+                  "CoRL",
+                  "IEEE Robotics and Automation Letters",
+                  "IEEE Transactions on Robotics",
+                  "Robotics: Science and Systems"
+                ]
+              },
+              "directness_weighted_support": 0.825,
+              "fit_score": 62.7133,
+              "evidence_paper_ids": [
+                "J-D04",
+                "J-D06",
+                "C-D02",
+                "C-D06"
+              ],
+              "selection_semantics": "structural_fit_and_descriptive_corpus_support; not acceptance probability"
+            }
+          ],
+          "composition_default": [
+            "P10",
+            "P11"
+          ],
+          "tactical_subpatterns": [
+            {
+              "subpattern_id": "R26",
+              "parent_pattern_id": "P10",
+              "name": "Heterogeneous regime decomposition",
+              "when_to_apply": "Use when a single controller or policy averages incompatible regimes."
+            },
+            {
+              "subpattern_id": "R27",
+              "parent_pattern_id": "P11",
+              "name": "Decompose and delegate to solvers",
+              "when_to_apply": "Use when planning or coordination contains separable subproblems."
+            },
+            {
+              "subpattern_id": "R18",
+              "parent_pattern_id": "P06",
+              "name": "Feasibility-object re-casting",
+              "when_to_apply": "Use when field performance fails because the target was never bounded."
+            }
+          ],
+          "strategy_signature": "Decompose heterogeneous long-horizon decision structure into typed subproblems, delegate or relax them with explicit interface and recovery guarantees.",
+          "evidence_recipe": [
+            "task/decision decomposition",
+            "typed state and solver interfaces",
+            "coordination and recovery tests",
+            "long-horizon or multi-agent stress cases"
+          ],
+          "failure_guard": "Do not call a pipeline a planning contribution when the subproblem interfaces, coordination cost or failure recovery are unspecified.",
+          "claim_altitude": "planning decomposition, coordination protocol or long-horizon decision mechanism",
+          "model_simulated_capability_route": {
+            "cluster_id": "C03",
+            "runtime_question_id": "Q3",
+            "runtime_question": "Which task, coordination, or planning constraint must be typed and isolated first?",
+            "contribution_center": "planning, decision, and coordination decomposition",
+            "preferred_parent_pattern_ids": [
+              "P10",
+              "P11",
+              "P06"
+            ],
+            "preferred_subpattern_ids": [
+              "R26",
+              "R27",
+              "R18"
+            ],
+            "workflow_translation": "Use the runtime question to choose a contribution center; translate it into claim, trigger, matched contrast, metric, failure boundary, and artifact; then apply the stage-specific Skill contract."
+          }
+        },
+        "source_paper_ids": [
+          "J-E07",
+          "J-L02",
+          "J-L03",
+          "J-L04",
+          "J-L05",
+          "J-D01",
+          "J-D02",
+          "J-D03",
+          "J-D04",
+          "J-D05",
+          "J-D06",
+          "J-A02",
+          "J-A04",
+          "J-A05",
+          "C-E03",
+          "C-E06",
+          "C-P01",
+          "C-P03",
+          "C-C01",
+          "C-C05",
+          "C-L02",
+          "C-L03",
+          "C-L04",
+          "C-D01",
+          "C-D02",
+          "C-D03",
+          "C-D04",
+          "C-D05",
+          "C-D06",
+          "C-H02",
+          "C-A01",
+          "C-A02",
+          "C-A05",
+          "C-A06"
+        ],
+        "venue_scope_candidates": [
+          {
+            "venue_id": "conf-aaai",
+            "name": "AAAI",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "multi agent",
+              "planning",
+              "reasoning"
+            ],
+            "scope_fit": 0.4437,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-aamas",
+            "name": "AAMAS",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "coordination",
+              "multi agent",
+              "multi robot"
+            ],
+            "scope_fit": 0.4437,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "journal-artificial-intelligence",
+            "name": "Artificial Intelligence",
+            "kind": "journal",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "decision",
+              "planning",
+              "reasoning"
+            ],
+            "scope_fit": 0.4437,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "journal-aamas",
+            "name": "Autonomous Agents and Multi-Agent Systems",
+            "kind": "journal",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "coordination",
+              "multi agent",
+              "multi robot"
+            ],
+            "scope_fit": 0.4437,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-icaps",
+            "name": "ICAPS",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "planning",
+              "scheduling",
+              "task motion planning"
+            ],
+            "scope_fit": 0.4437,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-ijcai",
+            "name": "IJCAI",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "multi agent",
+              "planning",
+              "reasoning"
+            ],
+            "scope_fit": 0.4437,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "conf-ecai",
+            "name": "ECAI",
+            "kind": "conference",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "planning",
+              "reasoning"
+            ],
+            "scope_fit": 0.35,
+            "official_scope_status": "REFRESH_REQUIRED"
+          },
+          {
+            "venue_id": "journal-jair",
+            "name": "Journal of Artificial Intelligence Research",
+            "kind": "journal",
+            "layer": "robotics_strong_related",
+            "directness_weight": 0.65,
+            "matched_scope_tags": [
+              "planning",
+              "reasoning"
+            ],
+            "scope_fit": 0.35,
+            "official_scope_status": "REFRESH_REQUIRED"
+          }
+        ],
+        "official_scope_status": "REFRESH_REQUIRED"
+      }
+    },
+    "tactical_cards": [
+      {
+        "subpattern_id": "R02",
+        "level": 2,
+        "parent_pattern_id": "P01",
+        "name": "Remove a fixed model assumption",
+        "tactical_move": "Replace a required model, calibration or distributional assumption with a weaker observable condition.",
+        "when_to_apply": "Use when the robot must operate under unknown contact, friction, terrain or dynamics.",
+        "success_conditions": [
+          "The weaker condition occurs in the target operating envelope.",
+          "A tightness or failure-case analysis shows the removed assumption was binding."
+        ],
+        "failure_modes": [
+          "An equally strong hidden model is reintroduced."
+        ],
+        "trigger": "A controller or estimator fails when a nominal model, calibration, friction or distribution assumption drifts.",
+        "changed_object": "The required model assumption is replaced by an observable condition or bounded uncertainty set.",
+        "retained_invariant": "Task, sensing interface, actuation limits and evaluation denominator remain fixed.",
+        "five_step_recipe": [
+          "Name the inherited assumption and the failure it causes.",
+          "Define the weaker observable condition and its operating range.",
+          "Implement the mechanism without reintroducing the original assumption.",
+          "Compare against the nominal model and an oracle-model upper bound.",
+          "Sweep the violated assumption until both methods reach their failure boundary."
+        ],
+        "differentiation_within_parent": "Unlike locus relocation, this changes assumption strength rather than where a signal is enforced.",
+        "robotics_failure_modes": [
+          "Online identification recreates an equally strong hidden model.",
+          "The observable condition cannot be measured at control rate.",
+          "Safety depends on an untested uncertainty bound."
+        ],
+        "decisive_experiment": "Sweep model mismatch over a predeclared range and test whether the new mechanism retains the claimed outcome after the nominal method crosses its boundary.",
+        "semantic_negative_control": "Give the baseline the same compute and observations but a shuffled or stale condition estimate.",
+        "prior_art_search_signature": "robotics unknown dynamics OR friction robust control weaker assumption observable condition model-free boundary",
+        "required_evidence_profile": [
+          "matched model-mismatch sweep",
+          "observable-condition latency and noise",
+          "failure boundary",
+          "oracle-model comparator"
+        ],
+        "source_records": [
+          "MODEL_SUPPLIED:R02-v2"
+        ],
+        "confidence": "MEDIUM",
+        "upstream_reference": null,
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "Name the inherited assumption and the failure it causes.",
+          "Define the weaker observable condition and its operating range.",
+          "Implement the mechanism without reintroducing the original assumption.",
+          "Compare against the nominal model and an oracle-model upper bound.",
+          "Sweep the violated assumption until both methods reach their failure boundary."
+        ],
+        "evidence_requirement": [
+          "matched model-mismatch sweep",
+          "observable-condition latency and noise",
+          "failure boundary",
+          "oracle-model comparator"
+        ]
+      },
+      {
+        "subpattern_id": "R30",
+        "level": 2,
+        "parent_pattern_id": "P14",
+        "name": "Limit characterization and strict surpass",
+        "tactical_move": "Establish a stability, safety, bandwidth, sample or planning boundary, then exceed it with a named mechanism.",
+        "when_to_apply": "Use when a matched baseline has a sharp and reproducible boundary.",
+        "success_conditions": [
+          "The boundary is measured under the same regime.",
+          "The improvement exceeds uncertainty and has a mechanism."
+        ],
+        "failure_modes": [
+          "Only an empirical improvement is shown with no boundary or tightness."
+        ],
+        "trigger": "A matched baseline has a sharp reproducible stability, safety, bandwidth, sample or planning boundary.",
+        "changed_object": "The mechanism that moves one named limit.",
+        "retained_invariant": "Robot, task, information, compute, safety protocol and uncertainty accounting remain matched.",
+        "five_step_recipe": [
+          "Define and reproduce the inherited limit.",
+          "Measure uncertainty around the boundary.",
+          "Name the mechanism predicted to move it.",
+          "Run matched sweeps through both boundaries.",
+          "Remove the mechanism and test return to the old limit."
+        ],
+        "differentiation_within_parent": "This requires an explicit inherited limit and strict surpass, not a generic average improvement.",
+        "robotics_failure_modes": [
+          "The old boundary is under-tuned.",
+          "Regimes differ across sweeps.",
+          "Uncertainty overlaps the claimed surpass."
+        ],
+        "decisive_experiment": "Sweep the limiting variable under an identical regime and show a non-overlapping boundary shift that vanishes when the named mechanism is removed.",
+        "semantic_negative_control": "Add a cost-matched mechanism that cannot affect the named limit.",
+        "prior_art_search_signature": "robot stability safety bandwidth sample planning limit boundary strict surpass matched sweep",
+        "required_evidence_profile": [
+          "baseline limit reproduction",
+          "boundary uncertainty",
+          "matched sweep",
+          "mechanism removal"
+        ],
+        "source_records": [
+          "MODEL_SUPPLIED:R30-v2"
+        ],
+        "confidence": "HIGH",
+        "upstream_reference": null,
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "Define and reproduce the inherited limit.",
+          "Measure uncertainty around the boundary.",
+          "Name the mechanism predicted to move it.",
+          "Run matched sweeps through both boundaries.",
+          "Remove the mechanism and test return to the old limit."
+        ],
+        "evidence_requirement": [
+          "baseline limit reproduction",
+          "boundary uncertainty",
+          "matched sweep",
+          "mechanism removal"
+        ]
+      },
+      {
+        "subpattern_id": "R14",
+        "level": 2,
+        "parent_pattern_id": "P04",
+        "name": "Controlled diagnostic construction",
+        "tactical_move": "Build a one-variable-isolated intervention or measurement instrument.",
+        "when_to_apply": "Use when a robot claim can be explained by hardware, data, tuning or human adaptation confounds.",
+        "success_conditions": [
+          "The intervention has a downstream prediction.",
+          "Controls are matched in cost and information."
+        ],
+        "failure_modes": [
+          "Only the intermediate metric changes, not the task outcome."
+        ],
+        "trigger": "A claimed mechanism can still be explained by hardware, data, compute, tuning or operator adaptation.",
+        "changed_object": "One load-bearing variable is intervened on while the visible interface and resource budget stay fixed.",
+        "retained_invariant": "Hardware, data split, observations, tuning budget, task and denominator remain matched.",
+        "five_step_recipe": [
+          "List the mechanism and strongest alternative explanation.",
+          "Choose one intervention that separates their predictions.",
+          "Construct a cost- and information-matched semantic control.",
+          "Freeze the downstream metric and decision rule.",
+          "Run the intervention and require a predicted task-level divergence."
+        ],
+        "differentiation_within_parent": "This constructs a new causal diagnostic; it is not a generic ablation that merely deletes a module.",
+        "robotics_failure_modes": [
+          "Intervention changes controller stability or latency.",
+          "Negative control is cheaper or less informed.",
+          "Only an internal proxy changes.",
+          "Operator behavior adapts across conditions."
+        ],
+        "decisive_experiment": "Intervene on the load-bearing variable and its semantic control under matched cost; the two must produce different predeclared downstream signatures.",
+        "semantic_negative_control": "Preserve dimensions, compute and surface statistics while permuting or misbinding the claimed semantics.",
+        "prior_art_search_signature": "robotics mechanism diagnostic causal intervention semantic negative control matched ablation confound",
+        "required_evidence_profile": [
+          "intervention fidelity",
+          "matched-cost control",
+          "task-level metric",
+          "confound ledger"
+        ],
+        "source_records": [
+          "ResearchStudio:C02",
+          "MODEL_SUPPLIED:R14-v2"
+        ],
+        "confidence": "HIGH",
+        "upstream_reference": "ResearchStudio C02 Controlled Diagnostic Construction",
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "List the mechanism and strongest alternative explanation.",
+          "Choose one intervention that separates their predictions.",
+          "Construct a cost- and information-matched semantic control.",
+          "Freeze the downstream metric and decision rule.",
+          "Run the intervention and require a predicted task-level divergence."
+        ],
+        "evidence_requirement": [
+          "intervention fidelity",
+          "matched-cost control",
+          "task-level metric",
+          "confound ledger"
+        ]
+      },
+      {
+        "subpattern_id": "R19",
+        "level": 2,
+        "parent_pattern_id": "P07",
+        "name": "Self-supervised signal engineering",
+        "tactical_move": "Derive supervision from temporal, geometric, cross-view or task consistency.",
+        "when_to_apply": "Use when robot labels are expensive but structure is observable.",
+        "success_conditions": [
+          "The pretext signal is tied to the downstream property.",
+          "Signal removal degrades the intended behavior."
+        ],
+        "failure_modes": [
+          "The pretext is generic and unrelated to the task."
+        ],
+        "trigger": "Labels are scarce while a temporal, geometric, cross-view or task consistency relation is observable.",
+        "changed_object": "The source and semantics of the supervisory signal.",
+        "retained_invariant": "Model capacity, data frames, optimizer budget and downstream evaluation remain matched.",
+        "five_step_recipe": [
+          "Name the downstream property that lacks labels.",
+          "Identify an observable consistency relation.",
+          "Construct the signal without target leakage.",
+          "Train matched supervised and generic-pretext controls.",
+          "Remove or misbind the signal and test the downstream property."
+        ],
+        "differentiation_within_parent": "This engineers supervision from robot structure; it does not merely add an auxiliary generic loss.",
+        "robotics_failure_modes": [
+          "Future or privileged state leaks into the signal.",
+          "Pretext success is disconnected from task behavior.",
+          "More frames or compute explain the gain."
+        ],
+        "decisive_experiment": "Preserve data and compute while removing the structural correspondence; only the mechanism-aligned signal should retain the downstream gain.",
+        "semantic_negative_control": "Permute temporal, geometric or cross-view correspondence while preserving marginal statistics.",
+        "prior_art_search_signature": "robot self-supervised temporal geometric cross-view task consistency downstream property",
+        "required_evidence_profile": [
+          "signal provenance",
+          "leakage audit",
+          "matched generic pretext",
+          "downstream removal test"
+        ],
+        "source_records": [
+          "MODEL_SUPPLIED:R19-v2"
+        ],
+        "confidence": "MEDIUM",
+        "upstream_reference": null,
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "Name the downstream property that lacks labels.",
+          "Identify an observable consistency relation.",
+          "Construct the signal without target leakage.",
+          "Train matched supervised and generic-pretext controls.",
+          "Remove or misbind the signal and test the downstream property."
+        ],
+        "evidence_requirement": [
+          "signal provenance",
+          "leakage audit",
+          "matched generic pretext",
+          "downstream removal test"
+        ]
+      },
+      {
+        "subpattern_id": "R12",
+        "level": 2,
+        "parent_pattern_id": "P03",
+        "name": "Residual mechanism liberation",
+        "tactical_move": "Expose the physical or modeling residual that a fixed generator cannot explain.",
+        "when_to_apply": "Use when sim-to-real, friction, contact or dynamics residuals dominate the error.",
+        "success_conditions": [
+          "The residual is measurable and closed by the mechanism.",
+          "A residual-removal control returns performance toward baseline."
+        ],
+        "failure_modes": [
+          "The residual model becomes a generic error-corrector with no mechanism."
+        ],
+        "trigger": "A reproducible physical or modeling residual dominates error after the fixed generator is matched.",
+        "changed_object": "The explicit residual channel and mechanism that closes it.",
+        "retained_invariant": "Generator, observations, training budget, task and evaluation protocol remain fixed.",
+        "five_step_recipe": [
+          "Measure and stratify the residual.",
+          "Tie one residual component to a physical mechanism.",
+          "Expose that component to the correction path.",
+          "Match capacity and compute controls.",
+          "Remove or permute the residual signal and test downstream return."
+        ],
+        "differentiation_within_parent": "Unlike redesigning the generator, this preserves it and liberates one measurable unexplained residual.",
+        "robotics_failure_modes": [
+          "Residual leaks target labels.",
+          "Correction capacity rather than mechanism explains the gain.",
+          "Residual is defined after observing results."
+        ],
+        "decisive_experiment": "Remove the mechanism-aligned residual channel under matched capacity and require performance to return toward the fixed-generator baseline.",
+        "semantic_negative_control": "Use a magnitude-matched residual with shuffled time, contact or object correspondence.",
+        "prior_art_search_signature": "robotics residual mechanism sim-to-real friction contact dynamics error correction matched capacity",
+        "required_evidence_profile": [
+          "residual decomposition",
+          "matched-capacity control",
+          "signal removal",
+          "physical boundary sweep"
+        ],
+        "source_records": [
+          "MODEL_SUPPLIED:R12-v2"
+        ],
+        "confidence": "MEDIUM",
+        "upstream_reference": null,
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "Measure and stratify the residual.",
+          "Tie one residual component to a physical mechanism.",
+          "Expose that component to the correction path.",
+          "Match capacity and compute controls.",
+          "Remove or permute the residual signal and test downstream return."
+        ],
+        "evidence_requirement": [
+          "residual decomposition",
+          "matched-capacity control",
+          "signal removal",
+          "physical boundary sweep"
+        ]
+      },
+      {
+        "subpattern_id": "R15",
+        "level": 2,
+        "parent_pattern_id": "P05",
+        "name": "Cross-modal shared representation",
+        "tactical_move": "Align vision, touch, language, proprioception or force into a task-usable state.",
+        "when_to_apply": "Use when modalities are complementary but not jointly actionable.",
+        "success_conditions": [
+          "Each modality has a leave-one-out test.",
+          "Alignment improves a downstream decision rather than only retrieval similarity."
+        ],
+        "failure_modes": [
+          "The common space is a concatenation with no causal use."
+        ],
+        "trigger": "Complementary modalities exist but cannot jointly affect a downstream decision through a stable interface.",
+        "changed_object": "Modality-specific observations are mapped into a shared task-usable state.",
+        "retained_invariant": "Downstream policy, training budget, task split and sensor availability remain controlled.",
+        "five_step_recipe": [
+          "Define the distinct information supplied by each modality.",
+          "Specify the shared state and alignment constraint.",
+          "Expose the shared state to one downstream decision point.",
+          "Run leave-one-modality and misalignment controls.",
+          "Test held-out sensor noise, delay and missing-modality conditions."
+        ],
+        "differentiation_within_parent": "Unlike generic fusion, this requires cross-modal alignment to be causally used by the robot decision loop.",
+        "robotics_failure_modes": [
+          "Timestamp or frame mismatch creates false complementarity.",
+          "One modality dominates and the shared space is unused.",
+          "Training labels leak alignment."
+        ],
+        "decisive_experiment": "Hold downstream capacity fixed and compare correct alignment with modality permutation; only correct alignment should improve the task decision.",
+        "semantic_negative_control": "Time-shift or identity-permute one modality while preserving its marginal statistics and tensor shape.",
+        "prior_art_search_signature": "robot multimodal shared representation vision touch force proprioception alignment downstream control",
+        "required_evidence_profile": [
+          "leave-one-modality tests",
+          "alignment permutation",
+          "timestamp/frame audit",
+          "held-out sensor condition"
+        ],
+        "source_records": [
+          "MODEL_SUPPLIED:R15-v2"
+        ],
+        "confidence": "MEDIUM",
+        "upstream_reference": null,
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "Define the distinct information supplied by each modality.",
+          "Specify the shared state and alignment constraint.",
+          "Expose the shared state to one downstream decision point.",
+          "Run leave-one-modality and misalignment controls.",
+          "Test held-out sensor noise, delay and missing-modality conditions."
+        ],
+        "evidence_requirement": [
+          "leave-one-modality tests",
+          "alignment permutation",
+          "timestamp/frame audit",
+          "held-out sensor condition"
+        ]
+      },
+      {
+        "subpattern_id": "R26",
+        "level": 2,
+        "parent_pattern_id": "P10",
+        "name": "Heterogeneous regime decomposition",
+        "tactical_move": "Split contact, terrain, object, user or agent regimes and allocate distinct treatment.",
+        "when_to_apply": "Use when a single controller or policy averages incompatible regimes.",
+        "success_conditions": [
+          "The partition variable is measurable online or at design time.",
+          "A single-policy control fails under the same budget."
+        ],
+        "failure_modes": [
+          "The partition is tuned after results or has no operational meaning."
+        ],
+        "trigger": "One controller or policy averages regimes with incompatible dynamics, observations or objectives.",
+        "changed_object": "The predeclared regime partition and allocation rule.",
+        "retained_invariant": "Total data, compute, tuning budget, task and denominator remain matched.",
+        "five_step_recipe": [
+          "Demonstrate incompatible regime signatures.",
+          "Choose an observable predeclared partition variable.",
+          "Allocate distinct treatment under a fixed total budget.",
+          "Compare with one pooled model and random partitions.",
+          "Test unseen transitions and partition errors."
+        ],
+        "differentiation_within_parent": "Unlike solver delegation, this first establishes heterogeneous regimes and then allocates treatment by a measurable partition.",
+        "robotics_failure_modes": [
+          "Partition labels leak outcomes.",
+          "Per-regime models receive more total capacity.",
+          "Transition regions are omitted."
+        ],
+        "decisive_experiment": "Under the same total budget, replace the meaningful partition with pooled and random partitions and test both regimes plus their transitions.",
+        "semantic_negative_control": "Use a frequency-matched random partition unrelated to contact, terrain, object, user or agent regime.",
+        "prior_art_search_signature": "robot heterogeneous regime decomposition mixture controller terrain contact user matched budget",
+        "required_evidence_profile": [
+          "regime separability",
+          "online observability",
+          "matched pooled control",
+          "transition failure matrix"
+        ],
+        "source_records": [
+          "MODEL_SUPPLIED:R26-v2"
+        ],
+        "confidence": "MEDIUM",
+        "upstream_reference": null,
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "Demonstrate incompatible regime signatures.",
+          "Choose an observable predeclared partition variable.",
+          "Allocate distinct treatment under a fixed total budget.",
+          "Compare with one pooled model and random partitions.",
+          "Test unseen transitions and partition errors."
+        ],
+        "evidence_requirement": [
+          "regime separability",
+          "online observability",
+          "matched pooled control",
+          "transition failure matrix"
+        ]
+      },
+      {
+        "subpattern_id": "R27",
+        "level": 2,
+        "parent_pattern_id": "P11",
+        "name": "Decompose and delegate to solvers",
+        "tactical_move": "Give typed subproblems to specialized planners, learned policies, agents or tools.",
+        "when_to_apply": "Use when planning or coordination contains separable subproblems.",
+        "success_conditions": [
+          "Interfaces and failure recovery are explicit.",
+          "Coordination cost is included in the end-to-end evaluation."
+        ],
+        "failure_modes": [
+          "A pipeline of modules is called a contribution without a unifying interface."
+        ],
+        "trigger": "A task contains typed subproblems with different solver structure and a monolithic solver fails or scales poorly.",
+        "changed_object": "The task is partitioned into explicit solver responsibilities and interfaces.",
+        "retained_invariant": "End-to-end task, information access, total compute and recovery budget remain matched.",
+        "five_step_recipe": [
+          "Identify separable subproblems and their ownership.",
+          "Specify typed inputs, outputs and failure states.",
+          "Assign the smallest competent solver to each subproblem.",
+          "Add bounded coordination and recovery behavior.",
+          "Compare end-to-end quality, cost and failure against a monolithic baseline."
+        ],
+        "differentiation_within_parent": "Unlike regime decomposition, this delegates algorithmically distinct subproblems rather than choosing treatments for data regimes.",
+        "robotics_failure_modes": [
+          "Interfaces hide privileged state.",
+          "Coordination latency erases solver gains.",
+          "One solver failure cascades without recovery.",
+          "Budget matching omits orchestration cost."
+        ],
+        "decisive_experiment": "Disable or replace one delegated solver at a time and verify the predicted typed failure while accounting for full orchestration cost.",
+        "semantic_negative_control": "Randomly swap solver assignments between type-compatible interfaces while preserving module count and compute.",
+        "prior_art_search_signature": "robot task decomposition specialized solver delegation interface recovery planner policy tool",
+        "required_evidence_profile": [
+          "typed interface contract",
+          "solver replacement tests",
+          "coordination cost",
+          "failure recovery"
+        ],
+        "source_records": [
+          "MODEL_SUPPLIED:R27-v2"
+        ],
+        "confidence": "MEDIUM",
+        "upstream_reference": null,
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "Identify separable subproblems and their ownership.",
+          "Specify typed inputs, outputs and failure states.",
+          "Assign the smallest competent solver to each subproblem.",
+          "Add bounded coordination and recovery behavior.",
+          "Compare end-to-end quality, cost and failure against a monolithic baseline."
+        ],
+        "evidence_requirement": [
+          "typed interface contract",
+          "solver replacement tests",
+          "coordination cost",
+          "failure recovery"
+        ]
+      },
+      {
+        "subpattern_id": "R18",
+        "level": 2,
+        "parent_pattern_id": "P06",
+        "name": "Feasibility-object re-casting",
+        "tactical_move": "Replace an open-ended deployment goal with an explicit operating envelope and feasibility object.",
+        "when_to_apply": "Use when field performance fails because the target was never bounded.",
+        "success_conditions": [
+          "The envelope is measurable before deployment.",
+          "The resulting claim is falsifiable and transferable."
+        ],
+        "failure_modes": [
+          "The envelope is selected after seeing the result."
+        ],
+        "trigger": "A deployment goal is too open-ended to yield a reproducible success or failure statement.",
+        "changed_object": "The goal becomes a measurable operating envelope plus a feasibility decision.",
+        "retained_invariant": "Robot capability, task meaning and safety limits are not weakened after outcomes are observed.",
+        "five_step_recipe": [
+          "Enumerate the deployment variables and hazards.",
+          "Predeclare the measurable operating envelope.",
+          "Define feasibility and abort decisions inside that envelope.",
+          "Sample boundary and interior conditions.",
+          "Report both feasible regions and observed failure regions."
+        ],
+        "differentiation_within_parent": "Unlike sequential recasting, this changes an unbounded deployment target into a bounded feasibility object rather than temporal phases.",
+        "robotics_failure_modes": [
+          "Envelope excludes known hard cases after the fact.",
+          "Safety stops are counted as successes.",
+          "Coverage is dense only near nominal operation."
+        ],
+        "decisive_experiment": "Evaluate predeclared interior and boundary cells and require predicted feasibility transitions without post-hoc envelope edits.",
+        "semantic_negative_control": "Use an equal-size envelope chosen from irrelevant variables and show it does not predict success/failure boundaries.",
+        "prior_art_search_signature": "robot deployment operating envelope feasibility boundary field robustness safety stop",
+        "required_evidence_profile": [
+          "predeclared envelope",
+          "boundary sampling",
+          "abort accounting",
+          "failure-region map"
+        ],
+        "source_records": [
+          "MODEL_SUPPLIED:R18-v2"
+        ],
+        "confidence": "MEDIUM",
+        "upstream_reference": null,
+        "source_kind": "robotics_adapted_tactical_seed",
+        "status": "runtime_active",
+        "citation_policy": "cite_parent_card_and_current_retrieved_papers; do_not_invent_paper_ids",
+        "step_by_step_recipe": [
+          "Enumerate the deployment variables and hazards.",
+          "Predeclare the measurable operating envelope.",
+          "Define feasibility and abort decisions inside that envelope.",
+          "Sample boundary and interior conditions.",
+          "Report both feasible regions and observed failure regions."
+        ],
+        "evidence_requirement": [
+          "predeclared envelope",
+          "boundary sampling",
+          "abort accounting",
+          "failure-region map"
+        ]
+      }
+    ],
+    "gap_text": "",
+    "pattern_fit": [],
+    "target_venue": null,
+    "selection_rule": "fit the structural gap to one or two pattern operators; do not select by pattern frequency, award status or acceptance signal",
+    "outcome_context": "descriptive audit only; acceptance probability is not estimable",
+    "online_chain": [
+      "retrieve",
+      "diagnose",
+      "fit_pattern",
+      "instantiate",
+      "collision_audit",
+      "failure_audit",
+      "decide",
+      "validate"
+    ]
+  },
+  "routing_contract": {
+    "order": [
+      "compact robotics runtime artifact",
+      "eight-axis context",
+      "ResearchStudio axis-pattern cards",
+      "stage adapter",
+      "official venue scope"
+    ],
+    "raw_corpus_loaded": false,
+    "outcome_semantics": "pattern and corpus outcomes are audit context only; acceptance probability is NOT_ESTIMABLE"
+  }
+}

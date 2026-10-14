@@ -1,0 +1,139 @@
+{
+  "status": "50000 iterations completed; stable final training windows and bounded matched-condition replay",
+  "revision": "feedback_stable_20261008",
+  "completed_jst": "2026-10-09T21:47:13.900247+09:00",
+  "run_dir": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3/2026-10-08_11-48-24_feedback_stable_20261008_v2init",
+  "last1000": {
+    "v2": {
+      "mean_episode_seconds": 53.067862167968755,
+      "recovered_serve_share": 0.9436895036101342,
+      "kick_proxy_share": 0.9005556306242943,
+      "mean_reward": 141.5014741973877,
+      "visible_ball_position_rmse_cm": 20.87774540710449,
+      "incoming_ball_position_rmse_cm": 88.09836524963379,
+      "speed_ceiling_m_s": 6.0
+    },
+    "v3": {
+      "mean_episode_seconds": 57.78313960000001,
+      "recovered_serve_share": 0.9663484999999999,
+      "kick_proxy_share": 0.9828197,
+      "mean_reward": 257.04562,
+      "visible_ball_position_rmse_cm": 12.787624,
+      "incoming_ball_position_rmse_cm": 52.6408854,
+      "speed_ceiling_m_s": 6.0
+    }
+  },
+  "replay_settings": {
+    "seed": 4208,
+    "num_envs": 64,
+    "control_steps_per_condition": 1500,
+    "control_dt_s": 0.02,
+    "speed_conditions_m_s": [
+      [
+        0.4,
+        6.0
+      ],
+      [
+        6.0,
+        6.0
+      ]
+    ],
+    "distance_range_m": [
+      1.3,
+      2.0
+    ]
+  },
+  "replay": {
+    "v2_uniform": {
+      "speed_range_m_s": [
+        0.4,
+        6.0
+      ],
+      "recovered_serves": 1116,
+      "episode_terminations": 3,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 1,
+        "fell": 0,
+        "walked_away": 2,
+        "self_collision": 0,
+        "recovery_timeout": 0
+      },
+      "kick_proxies": 1068,
+      "observed_pulses_with_foot_distance_lt_03": 1044,
+      "completed_episode_mean_s": 24.2
+    },
+    "v3_uniform": {
+      "speed_range_m_s": [
+        0.4,
+        6.0
+      ],
+      "recovered_serves": 1181,
+      "episode_terminations": 0,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 0,
+        "fell": 0,
+        "walked_away": 0,
+        "self_collision": 0,
+        "recovery_timeout": 0
+      },
+      "kick_proxies": 1223,
+      "observed_pulses_with_foot_distance_lt_03": 1222,
+      "completed_episode_mean_s": null
+    },
+    "v2_fixed6": {
+      "speed_range_m_s": [
+        6.0,
+        6.0
+      ],
+      "recovered_serves": 1200,
+      "episode_terminations": 11,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 8,
+        "fell": 0,
+        "walked_away": 3,
+        "self_collision": 0,
+        "recovery_timeout": 0
+      },
+      "kick_proxies": 1119,
+      "observed_pulses_with_foot_distance_lt_03": 1091,
+      "completed_episode_mean_s": 21.92909090909091
+    },
+    "v3_fixed6": {
+      "speed_range_m_s": [
+        6.0,
+        6.0
+      ],
+      "recovered_serves": 1298,
+      "episode_terminations": 0,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 0,
+        "fell": 0,
+        "walked_away": 0,
+        "self_collision": 0,
+        "recovery_timeout": 0
+      },
+      "kick_proxies": 1316,
+      "observed_pulses_with_foot_distance_lt_03": 1316,
+      "completed_episode_mean_s": null
+    }
+  },
+  "module": {
+    "accepted_auxiliary_batches": 200000,
+    "nll_updates_encoder": false,
+    "mean_action_correction_raw_last1000": 0.018347299999999997
+  },
+  "limitations": [
+    "V3 starts from trained V2 weights, so training budgets/initialization are different; no isolated module efficacy claim.",
+    "Replay uses one seed, 64 environments and 30 seconds per condition; counts are events, not independent success rates.",
+    "No completed episodes in V3 replay means all 64 are right-censored at 30 seconds; mean completed-episode length is undefined.",
+    "Visible-ball errors are conditional training diagnostics; incoming-ball position RMSE is still about 52.6 cm."
+  ]
+}

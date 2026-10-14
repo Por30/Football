@@ -1,0 +1,563 @@
+{
+  "num_envs": 4096,
+  "backend": "WarpDepthCamera",
+  "rtx_enabled": false,
+  "contract": {
+    "variant": "walled4",
+    "migration_revision": 5,
+    "depth_backend": "warp",
+    "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+    "depth_clip": "optical_near_plane_pixel_centers_v1",
+    "failure_reward": "current_transition",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "convex_hull_32",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.8,
+      0.15,
+      0.05
+    ],
+    "search_prob": 0.02,
+    "noise": 0.01,
+    "delay": 2,
+    "freeze": 0.01,
+    "freeze_steps": 3,
+    "mount_pos": 0.005,
+    "mount_rot": 2.0,
+    "curriculum": "process_anchor",
+    "reward_parent": "g1_carrybox_v0"
+  },
+  "mesh_manifest": [
+    {
+      "root": "/World/envs/env_0/Robot/pelvis",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/pelvis/visuals/pelvis/mesh",
+          "vertices": 63648,
+          "triangles": 21216
+        }
+      ],
+      "digest": "1022cd6e60ffb7713f8148719475c1680551b7654a130a8803c41466c826e3c8",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_hip_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_hip_pitch_link/visuals/left_hip_pitch_link/mesh",
+          "vertices": 10896,
+          "triangles": 3632
+        }
+      ],
+      "digest": "16426ba8286d6d55e71aaf13208e21783519f5b32688f42f7368f98720c97a3c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_hip_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_hip_roll_link/visuals/left_hip_roll_link/mesh",
+          "vertices": 11526,
+          "triangles": 3842
+        }
+      ],
+      "digest": "3c8b34126d66807c096f36a8df9bd5840a5325ae0ee00bda3a3737fe5c8efcb6",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_hip_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_hip_yaw_link/visuals/left_hip_yaw_link/mesh",
+          "vertices": 17772,
+          "triangles": 5924
+        }
+      ],
+      "digest": "0c702bf989d4839297de0d148b7769b8a61e73146b65c72a452038638afa4762",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_knee_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_knee_link/visuals/left_knee_link/mesh",
+          "vertices": 51288,
+          "triangles": 17096
+        }
+      ],
+      "digest": "d0fb5359182fc0d60bf954d24447a848be161ec123f2909c9e178410fd70005c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_ankle_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_ankle_pitch_link/visuals/left_ankle_pitch_link/mesh",
+          "vertices": 4266,
+          "triangles": 1422
+        }
+      ],
+      "digest": "84e052b3c72ddefbf136724c8298a8424025f83a76a650bb0fb1b2123e2b5024",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_ankle_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_ankle_roll_link/visuals/left_ankle_roll_link/mesh",
+          "vertices": 39198,
+          "triangles": 13066
+        }
+      ],
+      "digest": "f460c1b829d230a25e3df388d860bef5cbfe99c2989a8d9b0ee30ae53eded1af",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/pelvis_contact_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/pelvis_contact_link/visuals/mesh_0/sphere",
+          "vertices": 7936,
+          "triangles": 15360
+        }
+      ],
+      "digest": "1abf2429b524469312249a6eae73ee4a382cc38445b006600aff63500b44ebd8",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/pelvis_contour_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/pelvis_contour_link/visuals/pelvis_contour_link/mesh",
+          "vertices": 108306,
+          "triangles": 36102
+        }
+      ],
+      "digest": "52b0f8cd56e253d31570cbcef61da38bfdab5b217580347693f8a9e14fd1fe4c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_hip_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_hip_pitch_link/visuals/right_hip_pitch_link/mesh",
+          "vertices": 10872,
+          "triangles": 3624
+        }
+      ],
+      "digest": "77cbee941fd6d7f24fe9c0e3d318f408aa654b37cc4f64ae7ed893e42bd21e78",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_hip_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_hip_roll_link/visuals/right_hip_roll_link/mesh",
+          "vertices": 11556,
+          "triangles": 3852
+        }
+      ],
+      "digest": "725102aceb28e1d500148411e45efdcdfa159a0e41fa149f4436b1278951a193",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_hip_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_hip_yaw_link/visuals/right_hip_yaw_link/mesh",
+          "vertices": 17772,
+          "triangles": 5924
+        }
+      ],
+      "digest": "0c28bde585b5415ce591648cc578893f1d347585b1684c2e556b08d3c345acbb",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_knee_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_knee_link/visuals/right_knee_link/mesh",
+          "vertices": 51132,
+          "triangles": 17044
+        }
+      ],
+      "digest": "eaa13a7d8c58f82c6d79688680c6252bc6e6e183da3f7626e23944e9cab3e286",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_ankle_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_ankle_pitch_link/visuals/right_ankle_pitch_link/mesh",
+          "vertices": 4266,
+          "triangles": 1422
+        }
+      ],
+      "digest": "9de0e9cbb886954e305b9b8bbe049f4c9e76e4e82dcccea087047fb4e0d8686b",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_ankle_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_ankle_roll_link/visuals/right_ankle_roll_link/mesh",
+          "vertices": 39222,
+          "triangles": 13074
+        }
+      ],
+      "digest": "77c54d444152a4519890ee6172e1f2fc7aafa2534396a0be2aeeec45b0c093d0",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/waist_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/waist_yaw_link/visuals/waist_yaw_link_rev_1_0/mesh",
+          "vertices": 37194,
+          "triangles": 12398
+        }
+      ],
+      "digest": "1c3148f195d0729c798d3c2e3233864fa76ad39c3f5503192fd552d70d78f8ac",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/waist_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/waist_roll_link/visuals/waist_roll_link_rev_1_0/mesh",
+          "vertices": 5148,
+          "triangles": 1716
+        }
+      ],
+      "digest": "9c77218363f6193fe9be3f03f6bc0c8bd824b4f02682fd4a1d80e6e4cc6a0dda",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/torso_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/torso_link/visuals/torso_link_rev_1_0/mesh",
+          "vertices": 154230,
+          "triangles": 51410
+        }
+      ],
+      "digest": "6c329168e318e83de6306d3187d3b7a8af001be961291a3a6b357d3388e95981",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/head_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/head_link/visuals/head_link/mesh",
+          "vertices": 55962,
+          "triangles": 18654
+        }
+      ],
+      "digest": "685eafc700fba095c03983a099e31b1c86d47fac18557bb6b862c3bb593704e0",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_shoulder_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_shoulder_pitch_link/visuals/left_shoulder_pitch_link/mesh",
+          "vertices": 10602,
+          "triangles": 3534
+        }
+      ],
+      "digest": "d61cd2e61429ddbf2cbc015dc6a37978ba1c931f2b1085f4802f7563166c9c55",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_shoulder_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_shoulder_roll_link/visuals/left_shoulder_roll_link/mesh",
+          "vertices": 24012,
+          "triangles": 8004
+        }
+      ],
+      "digest": "bc3f2357ac6dd0b399d6a688de4b71baf87f7da3684f6f4664903eb28a9992db",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_shoulder_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_shoulder_yaw_link/visuals/left_shoulder_yaw_link/mesh",
+          "vertices": 14946,
+          "triangles": 4982
+        }
+      ],
+      "digest": "b0f8f8d95a0c2c9d35a2954c8ef4d9c6f7fba0ded29d056b772d5cb4afc1acba",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_elbow_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_elbow_link/visuals/left_elbow_link/mesh",
+          "vertices": 5322,
+          "triangles": 1774
+        }
+      ],
+      "digest": "0040b0250c191b6e6ce9e0a6719da650c909cb48d4b595169ced31ccce1e0799",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_wrist_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_wrist_roll_link/visuals/left_wrist_roll_link/mesh",
+          "vertices": 21366,
+          "triangles": 7122
+        }
+      ],
+      "digest": "bcd53dd116f111f77743f44ca82dde4d44e7d44ba677c28e61a29f392fa1e35c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_wrist_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_wrist_pitch_link/visuals/left_wrist_pitch_link/mesh",
+          "vertices": 5154,
+          "triangles": 1718
+        }
+      ],
+      "digest": "92bb0918dc0da7167d154b4a2d8c3d333f549941562a7783ea1d05dfed0408c2",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_wrist_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_wrist_yaw_link/visuals/left_wrist_yaw_link/mesh",
+          "vertices": 19116,
+          "triangles": 6372
+        }
+      ],
+      "digest": "99125785290deaa67e9ef458e081ce89573de6d6765027a9fece745a1566fe9a",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_rubber_hand",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_rubber_hand/visuals/left_rubber_hand/mesh",
+          "vertices": 137244,
+          "triangles": 45748
+        }
+      ],
+      "digest": "40445d8f1063cc8e7cd6336882b40182f274eac915c5c05e57772e2429a0fc7c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/logo_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/logo_link/visuals/logo_link/mesh",
+          "vertices": 14598,
+          "triangles": 4866
+        }
+      ],
+      "digest": "5b3a4784083dbe0cc27940874caed3fbec3bbd4d726bf3ddc17ce63763ffdf5e",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_shoulder_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_shoulder_pitch_link/visuals/right_shoulder_pitch_link/mesh",
+          "vertices": 10602,
+          "triangles": 3534
+        }
+      ],
+      "digest": "c4ca396e83c85e2cdb23684d4108f209ae73794d1d32c1415d1164626311f5fa",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_shoulder_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_shoulder_roll_link/visuals/right_shoulder_roll_link/mesh",
+          "vertices": 24108,
+          "triangles": 8036
+        }
+      ],
+      "digest": "b5b2a9367ec7fef024a946293fc3730bb94d6cb0a567d91b7803f775248cc393",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_shoulder_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_shoulder_yaw_link/visuals/right_shoulder_yaw_link/mesh",
+          "vertices": 14994,
+          "triangles": 4998
+        }
+      ],
+      "digest": "70ca825fb507183df33870bce9a91dda6365c185e8792f608d84fedc6aeafdce",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_elbow_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_elbow_link/visuals/right_elbow_link/mesh",
+          "vertices": 5322,
+          "triangles": 1774
+        }
+      ],
+      "digest": "e306a7b2f3f62aa6746455cb65eb4d62746c499255eaa05ed7c941b88f5b3100",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_wrist_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_wrist_roll_link/visuals/right_wrist_roll_link/mesh",
+          "vertices": 21360,
+          "triangles": 7120
+        }
+      ],
+      "digest": "0c6d4999f81a2b7f7eaa3e7109184fe1498f14264609ae40bfc8bf7e1ce4cb24",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_wrist_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_wrist_pitch_link/visuals/right_wrist_pitch_link/mesh",
+          "vertices": 4770,
+          "triangles": 1590
+        }
+      ],
+      "digest": "af070c2551daaa1bc163993bbe0f71791483b6e71e4023cc027e8b6ade70b26c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_wrist_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_wrist_yaw_link/visuals/right_wrist_yaw_link/mesh",
+          "vertices": 20484,
+          "triangles": 6828
+        }
+      ],
+      "digest": "d6673f0cfd684081646962ce78eabe04702c8cf8e7f3ebd01c728f496862955c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_rubber_hand",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_rubber_hand/visuals/right_rubber_hand/mesh",
+          "vertices": 131556,
+          "triangles": 43852
+        }
+      ],
+      "digest": "f4007e18817f19e1ea318d7594b060e015210e37aeb473f77b364506f0159609",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Box",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Box/geometry/mesh",
+          "vertices": 8,
+          "triangles": 12
+        }
+      ],
+      "digest": "3ba66073a4d8712ca0ada780e47a4ae7663f8b987a557c0428f7315fa1c1469e",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Wall",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Wall/geometry/mesh",
+          "vertices": 8,
+          "triangles": 12
+        }
+      ],
+      "digest": "0dc8ad89250d1f9602abef394cdcf666e215310138d0b803a0f27eb3422def40",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Cylinder0",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Cylinder0/geometry/mesh",
+          "vertices": 66,
+          "triangles": 128
+        }
+      ],
+      "digest": "88aa04f2f2078d0fd6475602e1cf341db2a2c44c5bc8e04709f0130c7f3880bd",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Cylinder1",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Cylinder1/geometry/mesh",
+          "vertices": 66,
+          "triangles": 128
+        }
+      ],
+      "digest": "88aa04f2f2078d0fd6475602e1cf341db2a2c44c5bc8e04709f0130c7f3880bd",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Cylinder2",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Cylinder2/geometry/mesh",
+          "vertices": 66,
+          "triangles": 128
+        }
+      ],
+      "digest": "88aa04f2f2078d0fd6475602e1cf341db2a2c44c5bc8e04709f0130c7f3880bd",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Platform",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Platform/geometry/mesh",
+          "vertices": 8,
+          "triangles": 12
+        }
+      ],
+      "digest": "989429752bf71e29ade1b832b7979db62f536658397b38b4d5961f2413ec583c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/ground",
+      "sources": [
+        {
+          "path": "/World/ground/Environment/Geometry",
+          "vertices": 4,
+          "triangles": 2
+        }
+      ],
+      "digest": "67ae55051184e248153a30f790a20e44777abcb751432081720c9eba1af6d12a",
+      "dynamic": false
+    }
+  ],
+  "geometry_free_links": [
+    "/World/envs/env_0/Robot/imu_in_pelvis",
+    "/World/envs/env_0/Robot/d435_link",
+    "/World/envs/env_0/Robot/imu_in_torso",
+    "/World/envs/env_0/Robot/left_palm_link",
+    "/World/envs/env_0/Robot/mid360_link",
+    "/World/envs/env_0/Robot/right_palm_link",
+    "/World/envs/env_0/Robot/temp_link",
+    "/World/envs/env_0/Robot/d455_link"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "pid": 1257523,
+  "start_ticks": 175645407,
+  "started_at_jst": "2026-10-03T23:56:22.894563+09:00",
+  "command": [
+    "bash",
+    "/home/cao/perceptual_ball/scripts/rsl_rl/train_agilekickball_v3.sh"
+  ],
+  "log": "/home/cao/perceptual_ball/logs/background/agilekickball_v3_20261003_235622.log",
+  "cwd": "/home/cao/perceptual_ball",
+  "session_id": 1257523,
+  "launcher_sha256": "81669198e1bb2f41495ff8deb5b4aad2966918898e5f69d5fc47dae75f7028cf"
+}

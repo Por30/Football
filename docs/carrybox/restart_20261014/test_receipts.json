@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_carrybox_convergence.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "fba75ac136727a58d4f451acf516032c5314d1b13303edf011eabe022ffe2b53",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "1da81c3aa47c6ab48c0ec42bcc5ee5f7ab6ce34c1678fc222c01951289aa9bd2",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

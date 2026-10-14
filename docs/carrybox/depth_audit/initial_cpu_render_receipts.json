@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python scripts/audit_g1_depth.py --geometry-only",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "10820eef28883b15c91920ec79a33c6825f40fdab2f56363571c693d4a15e584",
+      "stdout_sha256": "db300d67fb6b1a14d69d3405c34fe49c70ab8d58c575520e25a682e4718eac1c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash scripts/audit_g1_depth.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "d886dfcf8c799d70d632e511c491b8113b247c374408cb2e71c94aead2fa33d7",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

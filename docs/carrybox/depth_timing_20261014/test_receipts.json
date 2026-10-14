@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python scripts/rsl_rl/summarize_carrybox_timing.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "14b1e0008735101b4b5506813462eb70fa23c5ef53788083ba3b51622ef9ab3e",
+      "stdout_sha256": "5d2dcddc0a9eb684d15726e3b9411062fe0a81a10360b260607434bfdc9995d0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

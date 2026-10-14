@@ -27,6 +27,12 @@ parser.add_argument(
 )
 parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
 parser.add_argument("--max_iterations", type=int, default=None, help="RL Policy training iterations.")
+parser.add_argument("--warm_start_carrybox", type=str, default=None,
+                    help="Explicit wall-variant policy/pose transfer; fresh PPO, AMP and curriculum.")
+parser.add_argument("--warm_start_v2", type=str, default=None,
+                    help="Initialize state feedback from v2 weights, with fresh optimizers and curriculum.")
+parser.add_argument("--warm_start_v3", type=str, default=None,
+                    help="Initialize v4 from complete stable v3 weights, with fresh optimizers and curriculum.")
 parser.add_argument(
     "--distributed", action="store_true", default=False, help="Run training with multiple GPUs or nodes."
 )
@@ -36,6 +42,8 @@ cli_args.add_rsl_rl_args(parser)
 # append AppLauncher cli args
 AppLauncher.add_app_launcher_args(parser)
 args_cli, hydra_args = parser.parse_known_args()
+if sum(bool(v) for v in (args_cli.warm_start_v2, args_cli.warm_start_v3, args_cli.warm_start_carrybox, args_cli.resume)) > 1:
+    parser.error('warm-start options and --resume are mutually exclusive')
 
 # always enable cameras to record video
 if args_cli.video:
@@ -98,6 +106,7 @@ from isaaclab_tasks.utils.hydra import hydra_task_config
 
 import perceptual_ball.tasks  # noqa: F401
 from perceptual_ball.rsl_rl_extensions import BallRegressionOnPolicyRunner
+from perceptual_ball.rsl_rl_extensions.carrybox import CarryBoxOnPolicyRunner
 
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
@@ -189,6 +198,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     elif agent_cfg.class_name == "DistillationRunner":
         runner = DistillationRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
+    elif agent_cfg.class_name == "CarryBoxOnPolicyRunner":
+        runner = CarryBoxOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     elif agent_cfg.class_name == "BallRegressionOnPolicyRunner":
         runner = BallRegressionOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     else:
@@ -205,6 +216,25 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
             env.reset()
 
     # dump the configuration into log-directory
+    if args_cli.warm_start_v2 or args_cli.warm_start_v3:
+        if agent_cfg.resume or not isinstance(runner, BallRegressionOnPolicyRunner):
+            raise ValueError('v2 warm-start requires a fresh BallRegressionOnPolicyRunner')
+        if args_cli.warm_start_v3:
+            runner.warm_start_from_v3(args_cli.warm_start_v3)
+        else:
+            runner.warm_start_from_v2(args_cli.warm_start_v2)
+        import json
+        os.makedirs(log_dir, exist_ok=True)
+        with open(os.path.join(log_dir, 'initialization.json'), 'w') as stream:
+            json.dump(runner.warm_start_info, stream, indent=2)
+    if args_cli.warm_start_carrybox:
+        if not isinstance(runner, CarryBoxOnPolicyRunner):
+            raise ValueError('--warm_start_carrybox requires a CarryBox wall variant')
+        runner.warm_start(args_cli.warm_start_carrybox)
+        import json
+        os.makedirs(log_dir, exist_ok=True)
+        with open(os.path.join(log_dir, 'initialization.json'), 'w') as stream:
+            json.dump(runner.warm_start_info, stream, indent=2)
     dump_yaml(os.path.join(log_dir, "params", "env.yaml"), env_cfg)
     dump_yaml(os.path.join(log_dir, "params", "agent.yaml"), agent_cfg)
 

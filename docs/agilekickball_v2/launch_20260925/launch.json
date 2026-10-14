@@ -1,0 +1,25 @@
+{
+  "pid": 9824,
+  "stdout_log": "/home/cao/perceptual_ball/logs/background/agilekickball_v2_20260925_221850.log",
+  "command": [
+    "/home/cao/ENTER/envs/ball/bin/python",
+    "-u",
+    "scripts/rsl_rl/train.py",
+    "--task",
+    "Template-Perceptual-Ball-AgileKickball-v2",
+    "--num_envs",
+    "4096",
+    "--device",
+    "cuda:0",
+    "--headless",
+    "--max_iterations",
+    "50000",
+    "--seed",
+    "42",
+    "--run_name",
+    "v1_speed_only_20260925_scratch"
+  ],
+  "started_at": "2026-09-25T22:18:50.884708",
+  "revision": "v1_speed_only_20260925",
+  "resume": false
+}

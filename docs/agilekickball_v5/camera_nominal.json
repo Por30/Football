@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "calibration_status": "nominal_unverified",
+  "calibration_evidence": null,
+  "parent_link": "torso_link",
+  "position_m": [
+    0.0576235,
+    0.01753,
+    0.42987
+  ],
+  "quaternion_wxyz_world": [
+    0.9149596678498247,
+    0.0,
+    0.40354529635239006,
+    0.0
+  ],
+  "source_width": 48,
+  "source_height": 27,
+  "source_intrinsics": [
+    24.354644696164222,
+    24.354644696164222,
+    23.5,
+    13.0
+  ],
+  "crop_xywh": [
+    0,
+    0,
+    48,
+    27
+  ],
+  "width": 48,
+  "height": 27,
+  "near_m": 0.1,
+  "far_m": 3.0,
+  "update_period_s": 0.02,
+  "depth_unit_m": 0.001,
+  "rectified": true,
+  "distortion": "rectified_before_input",
+  "resize": "nearest_exact",
+  "invalid": "nonfinite_or_nonpositive_to_far",
+  "depth_semantics": "optical_z_metres",
+  "history_length": 8
+}

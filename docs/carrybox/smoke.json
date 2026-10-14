@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "envs": 4,
+  "updates": 2,
+  "timeout_transitions": 12,
+  "depth_pixel_change": [
+    0.11695751547813416,
+    0.12501206994056702,
+    0.1098780632019043,
+    0.11330726742744446
+  ],
+  "losses": [
+    {
+      "value_function": 0.0018451092764735222,
+      "surrogate": 2.4835269840650653e-08,
+      "entropy": 21.047948837280273,
+      "box_position": 0.6298384070396423,
+      "box_rotation": 0.3164309859275818,
+      "amp_loss": 2.7580831050872803,
+      "amp_expert_loss": 0.9144223928451538,
+      "amp_policy_loss": 1.7511913776397705,
+      "amp_valid_samples": 32.0
+    },
+    {
+      "value_function": 0.0017655231058597565,
+      "surrogate": 1.390775139498146e-07,
+      "entropy": 21.049449920654297,
+      "box_position": 0.5698671936988831,
+      "box_rotation": 0.3077757656574249,
+      "amp_loss": 2.345670223236084,
+      "amp_expert_loss": 0.9306495189666748,
+      "amp_policy_loss": 1.3272309303283691,
+      "amp_valid_samples": 52.0
+    }
+  ],
+  "hand_bodies": [
+    "left_rubber_hand",
+    "right_rubber_hand"
+  ],
+  "forced_hand_contact_newtons": {
+    "left": 7528.958984375,
+    "right": 7985.77001953125
+  },
+  "amp_dataset": {
+    "schema": 1,
+    "manifest_sha256": "eef4d55d77eb26b46fd1be58da628edd07920f5e02198a7636c2e83253e5cb3c",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 17,
+    "total_frames": 4628
+  },
+  "amp_observation_dim": 640,
+  "checkpoint_and_export": true,
+  "trained_pickup_success": "not_evaluated"
+}

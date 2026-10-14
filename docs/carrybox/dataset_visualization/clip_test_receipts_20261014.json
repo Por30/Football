@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/dataset_visualization/export_clips.py --verify-only",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "f3644c99dc64615fcb5e3c8535e1c4033237ee0456fbd6d58cf7837ce4d4e60b",
+      "stdout_sha256": "09a15b562f3c4b96f9a57f5298b9217c098344b5058e64d18d1b532e1952de14",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

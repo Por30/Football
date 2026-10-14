@@ -1,0 +1,66 @@
+{
+  "40982": {
+    "Train/mean_episode_length": {
+      "mean": 2186.478280883789,
+      "last": 2092.550048828125,
+      "delta": -75.079833984375
+    },
+    "Train/mean_reward": {
+      "mean": 94.40399533081055,
+      "last": 92.94715118408203,
+      "delta": -0.29437255859375
+    },
+    "AgileKickball/serves": {
+      "mean": 28793394.218,
+      "last": 29103116.0,
+      "delta": 617140.0
+    },
+    "AgileKickball/recovered_serves": {
+      "mean": 9976343.2,
+      "last": 10263608.0,
+      "delta": 572134.0
+    },
+    "AgileKickball/kick_proxy_successes": {
+      "mean": 18698335.734,
+      "last": 18984620.0,
+      "delta": 569724.0
+    },
+    "Curriculum/incoming_ball_speed": {
+      "mean": 1.5148890463113784,
+      "last": 1.5280460119247437,
+      "delta": 0.026375412940979004
+    }
+  },
+  "47542": {
+    "Train/mean_episode_length": {
+      "mean": 2385.8772443847656,
+      "last": 2344.47998046875,
+      "delta": -63.989990234375
+    },
+    "Train/mean_reward": {
+      "mean": 120.02512055969238,
+      "last": 112.22030639648438,
+      "delta": -10.300544738769531
+    },
+    "AgileKickball/serves": {
+      "mean": 33078204.87,
+      "last": 33413614.0,
+      "delta": 674546.0
+    },
+    "AgileKickball/recovered_serves": {
+      "mean": 13979143.199,
+      "last": 14294046.0,
+      "delta": 633280.0
+    },
+    "AgileKickball/kick_proxy_successes": {
+      "mean": 22718089.752,
+      "last": 23035576.0,
+      "delta": 639164.0
+    },
+    "Curriculum/incoming_ball_speed": {
+      "mean": 1.6957825899124146,
+      "last": 1.7099006175994873,
+      "delta": 0.028303861618041992
+    }
+  }
+}

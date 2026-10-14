@@ -1,0 +1,15 @@
+{
+  "pid": 1257523,
+  "independent_session": true,
+  "num_envs": 4096,
+  "max_iterations": 50000,
+  "seed": 42,
+  "resume": false,
+  "revision": "contact_outcome_20261003",
+  "latest_iteration_at_check": 11,
+  "run_dir": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3/2026-10-03_23-56-27_contact_outcome_20261003_scratch",
+  "log": "/home/cao/perceptual_ball/logs/background/agilekickball_v3_20261003_235622.log",
+  "first_checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3/2026-10-03_23-56-27_contact_outcome_20261003_scratch/model_0.pt",
+  "finite_first_checkpoint": true,
+  "outcome_optimizer_present": true
+}

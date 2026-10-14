@@ -1,0 +1,82 @@
+{
+  "run": "logs/rsl_rl/agilekickball_v4_smoke/2026-10-12_13-42-42_return_to_sender_scale_smoke",
+  "checkpoint": "logs/rsl_rl/agilekickball_v4_smoke/2026-10-12_13-42-42_return_to_sender_scale_smoke/model_99.pt",
+  "iterations": 100,
+  "num_envs": 4096,
+  "initialization": {
+    "schema": 1,
+    "kind": "v3_weights_only",
+    "source": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3/2026-10-08_11-48-24_feedback_stable_20261008_v2init/model_49999.pt",
+    "sha256": "30bcf9da6f1afe46a928536c59156f2de75bdb730499622818afcb40b3425a22",
+    "source_iteration": 49999,
+    "transferred": [
+      "complete_policy",
+      "encoder",
+      "ball_head",
+      "feedback_residual",
+      "critic_and_normalization",
+      "action_std",
+      "AMP"
+    ],
+    "fresh": [
+      "PPO_optimizer",
+      "ball_aux_optimizer",
+      "AMP_optimizer",
+      "curriculum",
+      "iteration_counter",
+      "aux_update_counter"
+    ]
+  },
+  "curriculum": {
+    "schema": 5,
+    "config": {
+      "revision": "return_to_sender_20261012",
+      "bootstrap_steps": 240000,
+      "distance_steps": 60000,
+      "window_steps": 6000,
+      "min_serves": 128,
+      "unlock_recovery": 0.8,
+      "unlock_kick_proxy": 0.6,
+      "pause_recovery": 0.5,
+      "extension_steps": 288000,
+      "speed_bounds": [
+        0.4,
+        0.8,
+        2.0,
+        6.0
+      ],
+      "initial_exposure_steps": 60000.0,
+      "return_to_sender": {
+        "initial_half_width_m": 0.6,
+        "final_half_width_m": 0.2,
+        "ramp_steps": 120000,
+        "window_steps": 6000,
+        "min_completed": 128,
+        "advance_hit_rate": 0.6,
+        "advance_recovery": 0.8,
+        "min_forward_speed_m_s": 0.4,
+        "max_height_m": 0.35,
+        "shaping_duration_s": 0.5
+      }
+    },
+    "exposure_steps": 60783.832763671875,
+    "control_steps": 2400,
+    "extension_unlocked": false,
+    "extension_start_upper": 0.8,
+    "extension_steps": 0.0,
+    "advance_rate": 0.0,
+    "recent_recovery_share": 0.0,
+    "recent_kick_proxy_share": 0.0,
+    "recent_serves": 0,
+    "recent_window_steps": 0,
+    "return_direction": {
+      "steps": 0.0,
+      "advance_rate": 0.0,
+      "recent_hit_rate": 0.0,
+      "recent_completed": 0
+    }
+  },
+  "aux_updates": 400,
+  "finite_policy_amp": true,
+  "recovery_completed_rounds_and_foot_contacts_positive": true
+}

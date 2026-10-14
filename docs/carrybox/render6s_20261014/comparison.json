@@ -1,0 +1,48 @@
+{
+  "before_mean_s": 21.0515,
+  "probe_iterations": [
+    [
+      16.171,
+      2.583
+    ],
+    [
+      16.078,
+      1.614
+    ],
+    [
+      15.925,
+      1.636
+    ],
+    [
+      15.754,
+      1.633
+    ],
+    [
+      15.737,
+      1.58
+    ],
+    [
+      15.795,
+      1.625
+    ],
+    [
+      15.706,
+      1.625
+    ],
+    [
+      15.713,
+      1.62
+    ]
+  ],
+  "probe_warm_mean_s": 17.434428571428572,
+  "probe_warm_range_s": [
+    17.317,
+    17.692
+  ],
+  "time_reduction": 0.17182012818903303,
+  "target_s": 6,
+  "target_met": false,
+  "scope": "4096 x 24, PPO 4 epochs x 4 batches, full AMP; first iteration excluded only for warm mean",
+  "profile_render_s_per_4steps": 2.107,
+  "profile_pose_s_per_4steps": 0.018
+}

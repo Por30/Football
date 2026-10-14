@@ -1,0 +1,675 @@
+{
+  "status": "PASS",
+  "training_updates": 0,
+  "num_envs": 16,
+  "policy_dt": 0.02,
+  "cases": {
+    "default_target": {
+      "transitions": 3840,
+      "completed_episodes": 86,
+      "mean_episode_steps": 41.69767441860465,
+      "amp_valid_fraction": 0.79453125,
+      "alive_transitions": 3754,
+      "old_false_penalty_alive_transitions": 2967,
+      "fixed_false_penalty_alive_transitions": 0,
+      "old_fall_penalty_sum": -610.6000060141087,
+      "fixed_fall_penalty_sum": -17.199997663497925,
+      "raw_action_max": 0.0,
+      "clipped_action_fraction": 0.0,
+      "by_skill": {
+        "0": {
+          "completed_episodes": 69,
+          "mean_steps": 42.072463768115945,
+          "tipped_fraction": 0.7536231884057971
+        },
+        "1": {
+          "completed_episodes": 13,
+          "mean_steps": 40.30769230769231,
+          "tipped_fraction": 0.6153846153846154
+        },
+        "2": {
+          "completed_episodes": 4,
+          "mean_steps": 39.75,
+          "tipped_fraction": 0.5
+        }
+      },
+      "terminal_examples": [
+        {
+          "skill": 0,
+          "steps": 29,
+          "roll": 0.5264582633972168,
+          "pitch": 0.56026291847229,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 33,
+          "roll": 0.5358707904815674,
+          "pitch": 0.7844233512878418,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 36,
+          "roll": 0.505913496017456,
+          "pitch": 0.6402988433837891,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 36,
+          "roll": -0.43488597869873047,
+          "pitch": 1.158794641494751,
+          "fell": true,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 36,
+          "roll": -0.5176756381988525,
+          "pitch": 1.0916898250579834,
+          "fell": true,
+          "tipped": false
+        },
+        {
+          "skill": 2,
+          "steps": 37,
+          "roll": 0.44965219497680664,
+          "pitch": 1.1485321521759033,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 40,
+          "roll": 0.0788571834564209,
+          "pitch": 1.1148498058319092,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 41,
+          "roll": 0.5182602405548096,
+          "pitch": 0.5914528369903564,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 42,
+          "roll": -0.2869069576263428,
+          "pitch": 1.1375114917755127,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 46,
+          "roll": -0.56943678855896,
+          "pitch": 1.0946266651153564,
+          "fell": true,
+          "tipped": false
+        },
+        {
+          "skill": 0,
+          "steps": 46,
+          "roll": -0.17345952987670898,
+          "pitch": 1.1543200016021729,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 2,
+          "steps": 53,
+          "roll": -1.1097774505615234,
+          "pitch": 0.4761941432952881,
+          "fell": true,
+          "tipped": false
+        }
+      ]
+    },
+    "hold_reset_pose": {
+      "transitions": 3840,
+      "completed_episodes": 81,
+      "mean_episode_steps": 43.01234567901235,
+      "amp_valid_fraction": 0.8013020833333333,
+      "alive_transitions": 3759,
+      "old_false_penalty_alive_transitions": 3759,
+      "fixed_false_penalty_alive_transitions": 0,
+      "old_fall_penalty_sum": -768.0000114440918,
+      "fixed_fall_penalty_sum": -16.199997812509537,
+      "raw_action_max": 6.795228958129883,
+      "clipped_action_fraction": 0.0018139367816091955,
+      "by_skill": {
+        "0": {
+          "completed_episodes": 68,
+          "mean_steps": 42.029411764705884,
+          "tipped_fraction": 0.6323529411764706
+        },
+        "1": {
+          "completed_episodes": 9,
+          "mean_steps": 51.0,
+          "tipped_fraction": 0.4444444444444444
+        },
+        "2": {
+          "completed_episodes": 4,
+          "mean_steps": 41.75,
+          "tipped_fraction": 0.75
+        }
+      },
+      "terminal_examples": [
+        {
+          "skill": 0,
+          "steps": 26,
+          "roll": 0.5038554668426514,
+          "pitch": 0.27774739265441895,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 28,
+          "roll": 0.5117781162261963,
+          "pitch": 0.2949836254119873,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 2,
+          "steps": 31,
+          "roll": 0.5762526988983154,
+          "pitch": 0.6135654449462891,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 34,
+          "roll": -0.09000730514526367,
+          "pitch": 1.0723445415496826,
+          "fell": true,
+          "tipped": false
+        },
+        {
+          "skill": 0,
+          "steps": 35,
+          "roll": 0.5980002880096436,
+          "pitch": 0.7630138397216797,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 36,
+          "roll": 0.5386998653411865,
+          "pitch": 0.7032260894775391,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 36,
+          "roll": 0.5241611003875732,
+          "pitch": 0.42175793647766113,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 38,
+          "roll": -0.27831077575683594,
+          "pitch": 1.1033046245574951,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 44,
+          "roll": 0.5573933124542236,
+          "pitch": 0.43711090087890625,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 46,
+          "roll": 0.5067868232727051,
+          "pitch": 0.6183681488037109,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 48,
+          "roll": -0.5238645076751709,
+          "pitch": 1.0476434230804443,
+          "fell": true,
+          "tipped": false
+        },
+        {
+          "skill": 2,
+          "steps": 51,
+          "roll": -0.0043888092041015625,
+          "pitch": 1.115039587020874,
+          "fell": false,
+          "tipped": true
+        }
+      ]
+    },
+    "checkpoint_0": {
+      "transitions": 3840,
+      "completed_episodes": 83,
+      "mean_episode_steps": 41.373493975903614,
+      "amp_valid_fraction": 0.7971354166666667,
+      "alive_transitions": 3757,
+      "old_false_penalty_alive_transitions": 3757,
+      "fixed_false_penalty_alive_transitions": 0,
+      "old_fall_penalty_sum": -768.0000114440918,
+      "fixed_fall_penalty_sum": -16.599997773766518,
+      "raw_action_max": 0.3703654110431671,
+      "clipped_action_fraction": 0.0,
+      "by_skill": {
+        "0": {
+          "completed_episodes": 66,
+          "mean_steps": 40.90909090909091,
+          "tipped_fraction": 0.7272727272727273
+        },
+        "1": {
+          "completed_episodes": 8,
+          "mean_steps": 44.125,
+          "tipped_fraction": 0.75
+        },
+        "2": {
+          "completed_episodes": 9,
+          "mean_steps": 42.333333333333336,
+          "tipped_fraction": 0.7777777777777778
+        }
+      },
+      "terminal_examples": [
+        {
+          "skill": 0,
+          "steps": 34,
+          "roll": 0.5342996120452881,
+          "pitch": 0.9761254787445068,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 34,
+          "roll": 0.5003480911254883,
+          "pitch": 0.8757297992706299,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 2,
+          "steps": 35,
+          "roll": 0.5076816082000732,
+          "pitch": 0.874098539352417,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 36,
+          "roll": -0.46445465087890625,
+          "pitch": 1.1121666431427002,
+          "fell": true,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 36,
+          "roll": -0.6944043636322021,
+          "pitch": 1.0492780208587646,
+          "fell": true,
+          "tipped": false
+        },
+        {
+          "skill": 0,
+          "steps": 39,
+          "roll": 0.5020148754119873,
+          "pitch": 0.842247724533081,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 41,
+          "roll": 0.5234966278076172,
+          "pitch": 0.6163756847381592,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 41,
+          "roll": 0.280653715133667,
+          "pitch": 1.1089394092559814,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 43,
+          "roll": -0.4162018299102783,
+          "pitch": 1.147005319595337,
+          "fell": true,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 45,
+          "roll": -0.42691469192504883,
+          "pitch": 1.1367719173431396,
+          "fell": true,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 47,
+          "roll": -0.4822876453399658,
+          "pitch": 1.1332786083221436,
+          "fell": true,
+          "tipped": true
+        },
+        {
+          "skill": 2,
+          "steps": 52,
+          "roll": -1.2628540992736816,
+          "pitch": 0.8225934505462646,
+          "fell": true,
+          "tipped": false
+        }
+      ]
+    },
+    "checkpoint_200": {
+      "transitions": 3840,
+      "completed_episodes": 1014,
+      "mean_episode_steps": 3.7662721893491122,
+      "amp_valid_fraction": 0.00026041666666666666,
+      "alive_transitions": 2826,
+      "old_false_penalty_alive_transitions": 2826,
+      "fixed_false_penalty_alive_transitions": 0,
+      "old_fall_penalty_sum": -768.0000114440918,
+      "fixed_fall_penalty_sum": -202.79997242987156,
+      "raw_action_max": 5.634605407714844,
+      "clipped_action_fraction": 0.0006285919540229885,
+      "by_skill": {
+        "0": {
+          "completed_episodes": 813,
+          "mean_steps": 3.715867158671587,
+          "tipped_fraction": 1.0
+        },
+        "1": {
+          "completed_episodes": 140,
+          "mean_steps": 3.657142857142857,
+          "tipped_fraction": 0.9071428571428571
+        },
+        "2": {
+          "completed_episodes": 61,
+          "mean_steps": 4.688524590163935,
+          "tipped_fraction": 1.0
+        }
+      },
+      "terminal_examples": [
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.527519702911377,
+          "pitch": 0.2776784896850586,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.50508713722229,
+          "pitch": 0.29921698570251465,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 3,
+          "roll": 0.6508636474609375,
+          "pitch": 0.30501532554626465,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 3,
+          "roll": 0.6098716259002686,
+          "pitch": 0.30205464363098145,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 3,
+          "roll": 0.581648588180542,
+          "pitch": 0.254744291305542,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 3,
+          "roll": 0.5414431095123291,
+          "pitch": 0.18314719200134277,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 1,
+          "steps": 4,
+          "roll": 0.5821259021759033,
+          "pitch": 0.5367987155914307,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 4,
+          "roll": 0.5295238494873047,
+          "pitch": 0.2702910900115967,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5677554607391357,
+          "pitch": 0.2723088264465332,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 2,
+          "steps": 5,
+          "roll": 0.5300314426422119,
+          "pitch": 0.290635347366333,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 5,
+          "roll": 0.585350513458252,
+          "pitch": 0.17149591445922852,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 5,
+          "roll": 0.587543249130249,
+          "pitch": 0.23244380950927734,
+          "fell": false,
+          "tipped": true
+        }
+      ]
+    },
+    "checkpoint_14600": {
+      "transitions": 3840,
+      "completed_episodes": 1827,
+      "mean_episode_steps": 2.097974822112753,
+      "amp_valid_fraction": 0.0,
+      "alive_transitions": 2013,
+      "old_false_penalty_alive_transitions": 2013,
+      "fixed_false_penalty_alive_transitions": 0,
+      "old_fall_penalty_sum": -768.0000114440918,
+      "fixed_fall_penalty_sum": -365.3999515771866,
+      "raw_action_max": 11.656611442565918,
+      "clipped_action_fraction": 0.024739583333333332,
+      "by_skill": {
+        "0": {
+          "completed_episodes": 1448,
+          "mean_steps": 2.0,
+          "tipped_fraction": 1.0
+        },
+        "1": {
+          "completed_episodes": 267,
+          "mean_steps": 2.247191011235955,
+          "tipped_fraction": 0.9363295880149812
+        },
+        "2": {
+          "completed_episodes": 112,
+          "mean_steps": 3.0089285714285716,
+          "tipped_fraction": 1.0
+        }
+      },
+      "terminal_examples": [
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5235230922698975,
+          "pitch": 0.3084843158721924,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5231497287750244,
+          "pitch": 0.37918543815612793,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5163884162902832,
+          "pitch": 0.36533617973327637,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5248606204986572,
+          "pitch": 0.32838869094848633,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5262439250946045,
+          "pitch": 0.313732385635376,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5126259326934814,
+          "pitch": 0.33196353912353516,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5231595039367676,
+          "pitch": 0.31139659881591797,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5228238105773926,
+          "pitch": 0.34639430046081543,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5200908184051514,
+          "pitch": 0.33252406120300293,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.515324592590332,
+          "pitch": 0.2998654842376709,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5235238075256348,
+          "pitch": 0.31913161277770996,
+          "fell": false,
+          "tipped": true
+        },
+        {
+          "skill": 0,
+          "steps": 2,
+          "roll": 0.5248875617980957,
+          "pitch": 0.3056948184967041,
+          "fell": false,
+          "tipped": true
+        }
+      ]
+    }
+  },
+  "environment_contract": {
+    "variant": "walled4",
+    "migration_revision": 4,
+    "failure_reward": "current_transition",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "convex_hull_32",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.8,
+      0.15,
+      0.05
+    ],
+    "search_prob": 0.02,
+    "noise": 0.01,
+    "delay": 2,
+    "freeze": 0.01,
+    "freeze_steps": 3,
+    "mount_pos": 0.005,
+    "mount_rot": 2.0,
+    "curriculum": "process_anchor",
+    "reward_parent": "g1_carrybox_v0"
+  }
+}

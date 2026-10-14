@@ -1,0 +1,146 @@
+{
+  "seed": 4208,
+  "num_envs": 64,
+  "control_steps_per_condition": 1500,
+  "control_dt_s": 0.02,
+  "speed_range_m_s": [
+    0.4,
+    2.0
+  ],
+  "distance_range_m": [
+    1.3,
+    2.0
+  ],
+  "conditions": {
+    "v2_mean": {
+      "checkpoint": "logs/rsl_rl/agilekickball_v2/2026-09-25_22-18-55_v1_speed_only_20260925_scratch/model_49999.pt",
+      "sampled": false,
+      "residual_disabled": false,
+      "episode_terminations": 51,
+      "completed_episode_mean_s": 19.338039215686276,
+      "right_censored_episodes": 64,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 0,
+        "fell": 0,
+        "walked_away": 51,
+        "self_collision": 0,
+        "recovery_timeout": 0
+      },
+      "new_serves": 906,
+      "recovered_serves": 855,
+      "kick_proxies": 816,
+      "observed_nonterminal_kick_pulses": 816,
+      "observed_pulses_with_foot_distance_lt_03": 816,
+      "balanced_frame_fraction": 0.5918020833333333,
+      "task_reward_per_step": 0.08500811836666738,
+      "action_abs_mean_raw": 0.7073019801576932,
+      "residual_abs_mean_raw": 0.0
+    },
+    "v3_mean": {
+      "checkpoint": "logs/rsl_rl/agilekickball_v3/2026-10-06_13-17-10_state_feedback_20261006_scratch/model_49999.pt",
+      "sampled": false,
+      "residual_disabled": false,
+      "episode_terminations": 1657,
+      "completed_episode_mean_s": 1.1347012673506338,
+      "right_censored_episodes": 63,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 8,
+        "fell": 0,
+        "walked_away": 1649,
+        "self_collision": 0,
+        "recovery_timeout": 0
+      },
+      "new_serves": 1657,
+      "recovered_serves": 0,
+      "kick_proxies": 1656,
+      "observed_nonterminal_kick_pulses": 1656,
+      "observed_pulses_with_foot_distance_lt_03": 1656,
+      "balanced_frame_fraction": 0.150125,
+      "task_reward_per_step": 0.17507471422719148,
+      "action_abs_mean_raw": 1.147766161620617,
+      "residual_abs_mean_raw": 0.11683369886378447
+    },
+    "v3_without_residual_mean": {
+      "checkpoint": "logs/rsl_rl/agilekickball_v3/2026-10-06_13-17-10_state_feedback_20261006_scratch/model_49999.pt",
+      "sampled": false,
+      "residual_disabled": true,
+      "episode_terminations": 1612,
+      "completed_episode_mean_s": 1.1685980148883375,
+      "right_censored_episodes": 60,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 214,
+        "fell": 0,
+        "walked_away": 1398,
+        "self_collision": 0,
+        "recovery_timeout": 0
+      },
+      "new_serves": 1612,
+      "recovered_serves": 0,
+      "kick_proxies": 1617,
+      "observed_nonterminal_kick_pulses": 1617,
+      "observed_pulses_with_foot_distance_lt_03": 1617,
+      "balanced_frame_fraction": 0.13029166666666667,
+      "task_reward_per_step": 0.17193947507495372,
+      "action_abs_mean_raw": 1.0596736690998076,
+      "residual_abs_mean_raw": 0.0
+    },
+    "v2_sampled": {
+      "checkpoint": "logs/rsl_rl/agilekickball_v2/2026-09-25_22-18-55_v1_speed_only_20260925_scratch/model_49999.pt",
+      "sampled": true,
+      "residual_disabled": false,
+      "episode_terminations": 27,
+      "completed_episode_mean_s": 22.119259259259263,
+      "right_censored_episodes": 64,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 2,
+        "fell": 0,
+        "walked_away": 20,
+        "self_collision": 0,
+        "recovery_timeout": 5
+      },
+      "new_serves": 594,
+      "recovered_serves": 567,
+      "kick_proxies": 559,
+      "observed_nonterminal_kick_pulses": 559,
+      "observed_pulses_with_foot_distance_lt_03": 559,
+      "balanced_frame_fraction": 0.5781979166666666,
+      "task_reward_per_step": 0.04146630843135063,
+      "action_abs_mean_raw": 0.7861512122948965,
+      "residual_abs_mean_raw": 0.0
+    },
+    "v3_sampled": {
+      "checkpoint": "logs/rsl_rl/agilekickball_v3/2026-10-06_13-17-10_state_feedback_20261006_scratch/model_49999.pt",
+      "sampled": true,
+      "residual_disabled": false,
+      "episode_terminations": 1586,
+      "completed_episode_mean_s": 1.1879823455233292,
+      "right_censored_episodes": 61,
+      "fresh_termination_counts": {
+        "time_out": 0,
+        "non_finite": 0,
+        "tipped": 139,
+        "fell": 0,
+        "walked_away": 1436,
+        "self_collision": 11,
+        "recovery_timeout": 0
+      },
+      "new_serves": 1586,
+      "recovered_serves": 0,
+      "kick_proxies": 1590,
+      "observed_nonterminal_kick_pulses": 1590,
+      "observed_pulses_with_foot_distance_lt_03": 1590,
+      "balanced_frame_fraction": 0.017552083333333333,
+      "task_reward_per_step": 0.13402632252289914,
+      "action_abs_mean_raw": 1.4190075118939083,
+      "residual_abs_mean_raw": 0.13054826164245606
+    }
+  }
+}

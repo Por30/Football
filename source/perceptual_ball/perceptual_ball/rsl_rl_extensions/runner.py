@@ -7,6 +7,8 @@ from __future__ import annotations
 
 import torch
 import warnings
+import hashlib
+from pathlib import Path
 
 from rsl_rl.algorithms import PPO
 from rsl_rl.modules import ActorCritic, ActorCriticRecurrent, resolve_rnd_config, resolve_symmetry_config
@@ -14,6 +16,8 @@ from rsl_rl.runners import OnPolicyRunner
 
 from .algorithm import BallRegressionPPO, SkillAMPPPO  # noqa: F401
 from .modules import PerceptionActorCritic  # noqa: F401
+from .contact_outcome import ContactOutcomePPO, OutcomeActorCritic  # noqa: F401
+from .state_feedback import StateFeedbackPPO, StateFeedbackActorCritic  # noqa: F401
 
 
 class BallRegressionOnPolicyRunner(OnPolicyRunner):
@@ -65,6 +69,14 @@ class BallRegressionOnPolicyRunner(OnPolicyRunner):
             "ball_aux_optimizer_state_dict": self.alg.ball_aux_optimizer.state_dict() if self.alg.ball_aux_optimizer else None,
             "torch_rng_state": torch.get_rng_state(),
         }
+        if hasattr(self.alg, "outcome_config"):
+            state["contact_outcome"] = {
+                "config": self.alg.outcome_config,
+                "optimizer": self.alg.outcome_optimizer.state_dict() if self.alg.outcome_optimizer else None,
+            }
+        if hasattr(self.alg, "state_feedback_config"):
+            state['state_feedback'] = {'config': self.alg.state_feedback_config,
+                                       'aux_updates': self.alg.state_feedback_updates}
         kb = getattr(getattr(getattr(self, "env", None), "unwrapped", None), "_kickball", None)
         if hasattr(kb, "curriculum_state_dict"):
             state[getattr(kb, "curriculum_checkpoint_key", "agile_success_curriculum")] = kb.curriculum_state_dict()
@@ -73,9 +85,101 @@ class BallRegressionOnPolicyRunner(OnPolicyRunner):
         if self.alg.rnd:
             state["rnd_state_dict"] = self.alg.rnd.state_dict()
             state["rnd_optimizer_state_dict"] = self.alg.rnd_optimizer.state_dict()
+        if hasattr(self, 'warm_start_info'):
+            state['initialization'] = self.warm_start_info
         torch.save(state, path)
         if getattr(self, "logger_type", None) in ["neptune", "wandb"] and not self.disable_logs:
             self.writer.save_model(path, self.current_learning_iteration)
+
+    def warm_start_from_v2(self, path):
+        """Explicit weight initialization, never a PPO/curriculum/optimizer resume."""
+        kb = getattr(getattr(self.env, 'unwrapped', None), '_kickball', None)
+        if getattr(kb, 'curriculum_checkpoint_key', None) == 'agile_v5_scene_depth_curriculum':
+            raise ValueError('v5 scene depth requires fresh training or an exact v5 resume')
+        if (not isinstance(self.alg, StateFeedbackPPO) or self.current_learning_iteration != 0
+                or self.alg.state_feedback_updates != 0 or self.alg.optimizer.state
+                or self.alg.ball_aux_optimizer.state
+                or (self.alg.amp is not None and self.alg.amp_optimizer.state)):
+            raise ValueError('v2 warm-start requires a fresh state feedback runner')
+        path = Path(path).expanduser().resolve()
+        state = torch.load(path, map_location=self.device, weights_only=False)
+        course = state.get('agile_v2_recovery_curriculum', {})
+        if (state.get('soccer_schema_version') != 3 or course.get('schema') != 5
+                or course.get('config', {}).get('revision') != 'v1_speed_only_20260925'
+                or 'state_feedback' in state or 'contact_outcome' in state):
+            raise ValueError('v2 warm-start source must be the compatible v2 baseline')
+        source = state['model_state_dict']
+        target = self.alg.policy.state_dict()
+        mapped = {}
+        for key, value in target.items():
+            if key.startswith(('ball_head.', 'actor.residual.')) or key == 'ball_state_scale':
+                continue
+            old_key = 'actor.' + key[len('actor.base.'):] if key.startswith('actor.base.') else key
+            if (old_key not in source or source[old_key].shape != value.shape
+                    or not torch.isfinite(source[old_key]).all()):
+                raise ValueError('v2 warm-start incompatible/nonfinite weight: ' + old_key)
+            mapped[key] = source[old_key]
+        if not all(torch.isfinite(v).all() for v in source.values()):
+            raise ValueError('v2 warm-start source contains nonfinite weights')
+        if (self.alg.policy.actor.residual[-1].weight.count_nonzero()
+                or self.alg.policy.actor.residual[-1].bias.count_nonzero()):
+            raise ValueError('v2 warm-start requires initially zero action correction')
+        amp_state = state.get('amp_state_dict')
+        if self.alg.amp is not None:
+            expected = self.alg.amp.state_dict()
+            if (not isinstance(amp_state, dict) or set(amp_state) != set(expected)
+                    or any(amp_state[k].shape != v.shape or not torch.isfinite(amp_state[k]).all()
+                           for k, v in expected.items())):
+                raise ValueError('v2 warm-start incompatible/nonfinite AMP state')
+        target.update(mapped)
+        self.alg.policy.load_state_dict(target, strict=True)
+        if self.alg.amp is not None:
+            self.alg.amp.load_state_dict(amp_state, strict=True)
+        self.warm_start_info = dict(schema=1, kind='v2_weights_only', source=str(path),
+            sha256=hashlib.sha256(path.read_bytes()).hexdigest(), source_iteration=state['iter'],
+            transferred=['main_actor', 'perception_encoder', 'critic_and_normalization', 'action_std', 'AMP'],
+            fresh=['PPO_optimizer', 'ball_aux_optimizer', 'AMP_optimizer', 'ball_head', 'residual', 'curriculum', 'iteration_counter'])
+        print('[INFO] v2 warm-start weights loaded; optimizers/curriculum/iteration are fresh: ' + str(path), flush=True)
+
+    def warm_start_from_v3(self, path):
+        """Copy the complete stable v3 policy/AMP into a fresh v4 training run."""
+        kb = getattr(getattr(self.env, 'unwrapped', None), '_kickball', None)
+        if (not isinstance(self.alg, StateFeedbackPPO) or self.current_learning_iteration != 0
+                or self.alg.state_feedback_updates != 0 or self.alg.optimizer.state
+                or self.alg.ball_aux_optimizer.state
+                or (self.alg.amp is not None and self.alg.amp_optimizer.state)
+                or getattr(kb, 'curriculum_checkpoint_key', None) != 'agile_v4_return_curriculum'):
+            raise ValueError('v3 warm-start requires a fresh v4 state feedback runner')
+        path = Path(path).expanduser().resolve()
+        state = torch.load(path, map_location=self.device, weights_only=False)
+        course = state.get('agile_v3_state_feedback_curriculum', {})
+        feedback = state.get('state_feedback', {})
+        if (state.get('soccer_schema_version') != 3 or course.get('schema') != 5
+                or course.get('config', {}).get('revision') != 'feedback_stable_20261008'
+                or feedback.get('config') != self.alg.state_feedback_config
+                or 'contact_outcome' in state):
+            raise ValueError('v3 warm-start source must be compatible stable v3')
+        source, target = state.get('model_state_dict', {}), self.alg.policy.state_dict()
+        if (source.keys() != target.keys() or any(source[key].shape != value.shape
+                or not torch.isfinite(source[key]).all() for key, value in target.items())):
+            raise ValueError('v3 warm-start incompatible/nonfinite policy state')
+        amp_state = state.get('amp_state_dict')
+        if self.alg.amp is not None:
+            expected = self.alg.amp.state_dict()
+            if (not isinstance(amp_state, dict) or amp_state.keys() != expected.keys()
+                    or any(amp_state[key].shape != value.shape or not torch.isfinite(amp_state[key]).all()
+                           for key, value in expected.items())):
+                raise ValueError('v3 warm-start incompatible/nonfinite AMP state')
+        self.alg.policy.load_state_dict(source, strict=True)
+        if self.alg.amp is not None:
+            self.alg.amp.load_state_dict(amp_state, strict=True)
+        self.warm_start_info = dict(schema=1, kind='v3_weights_only', source=str(path),
+            sha256=hashlib.sha256(path.read_bytes()).hexdigest(), source_iteration=state['iter'],
+            transferred=['complete_policy', 'encoder', 'ball_head', 'feedback_residual',
+                         'critic_and_normalization', 'action_std', 'AMP'],
+            fresh=['PPO_optimizer', 'ball_aux_optimizer', 'AMP_optimizer',
+                   'curriculum', 'iteration_counter', 'aux_update_counter'])
+        print('[INFO] v3 complete weights loaded; v4 optimizers/curriculum/iteration are fresh: ' + str(path), flush=True)
 
     def load(self, path, load_optimizer=True, map_location=None, allow_legacy=False):
         state = torch.load(path, weights_only=False, map_location=map_location or self.device)
@@ -88,7 +192,43 @@ class BallRegressionOnPolicyRunner(OnPolicyRunner):
         if course_key == "agile_speed_curriculum" and "agile_success_curriculum" in state:
             raise ValueError("Old strict-success v1 checkpoint is incompatible with the new speed curriculum; "
                              "start a fresh training run (no --resume).")
+        if hasattr(kb, "validate_curriculum_state_dict"):
+            kb.validate_curriculum_state_dict(state.get(course_key))
+        # Preflight before super().load mutates model/PPO state. V2 has no outcome stage.
+        outcome = state.get("contact_outcome")
+        if hasattr(self.alg, "outcome_config"):
+            if not isinstance(outcome, dict) or outcome.get("config") != self.alg.outcome_config:
+                raise ValueError("Incompatible contact outcome config; start fresh without --resume")
+            if load_optimizer and self.alg.outcome_optimizer is not None:
+                saved_optimizer = outcome.get("optimizer")
+                if not isinstance(saved_optimizer, dict) or not {"state", "param_groups"} <= saved_optimizer.keys():
+                    raise ValueError("Checkpoint has no valid contact outcome optimizer state")
+        elif outcome is not None:
+            raise ValueError("Contact outcome checkpoint requires its v3 algorithm")
+        feedback = state.get('state_feedback')
+        if hasattr(self.alg, 'state_feedback_config'):
+            if (not isinstance(feedback, dict)
+                    or feedback.get('config') != self.alg.state_feedback_config
+                    or type(feedback.get('aux_updates')) is not int or feedback['aux_updates'] < 0):
+                raise ValueError('Incompatible state feedback checkpoint config/counter')
+            if load_optimizer:
+                optimizer = state.get('ball_aux_optimizer_state_dict')
+                expected = self.alg.ball_aux_optimizer.state_dict()['param_groups']
+                if (not isinstance(optimizer, dict) or not isinstance(optimizer.get('state'), dict)
+                        or not isinstance(optimizer.get('param_groups'), list)
+                        or len(optimizer['param_groups']) != len(expected)
+                        or any(len(group.get('params', [])) != len(target['params'])
+                               for group, target in zip(optimizer['param_groups'], expected))):
+                    raise ValueError('Missing or incompatible state feedback auxiliary optimizer')
+        elif feedback is not None:
+            raise ValueError('State feedback checkpoint requires its v3 algorithm')
         infos = super().load(path, load_optimizer=load_optimizer, map_location=map_location or self.device)
+        if 'initialization' in state:
+            self.warm_start_info = state['initialization']
+        if hasattr(self.alg, 'state_feedback_config'):
+            self.alg.state_feedback_updates = feedback['aux_updates']
+        if hasattr(self.alg, "outcome_config") and load_optimizer and self.alg.outcome_optimizer is not None:
+            self.alg.outcome_optimizer.load_state_dict(outcome["optimizer"])
         if state.get("soccer_schema_version") == 3:
             if self.alg.amp is not None:
                 if state["amp_state_dict"] is None:

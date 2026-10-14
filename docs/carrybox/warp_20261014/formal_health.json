@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "checked_local": "2026-10-14T16:01:19.598648+09:00",
+  "pid": 2348537,
+  "last_complete_iteration": 18,
+  "num_envs": 4096,
+  "num_steps_per_env": 24,
+  "epochs": 4,
+  "minibatches": 4,
+  "depth_backend": "warp",
+  "formal_timings": [
+    [
+      0,
+      3.223,
+      2.605
+    ],
+    [
+      1,
+      2.662,
+      1.528
+    ],
+    [
+      2,
+      2.547,
+      1.531
+    ],
+    [
+      3,
+      2.479,
+      1.546
+    ],
+    [
+      4,
+      2.481,
+      1.514
+    ],
+    [
+      5,
+      2.482,
+      1.531
+    ],
+    [
+      6,
+      2.469,
+      1.548
+    ],
+    [
+      7,
+      2.472,
+      1.538
+    ],
+    [
+      8,
+      2.483,
+      1.546
+    ],
+    [
+      9,
+      2.464,
+      1.535
+    ],
+    [
+      10,
+      2.466,
+      1.552
+    ],
+    [
+      11,
+      2.475,
+      1.566
+    ],
+    [
+      12,
+      2.467,
+      1.568
+    ],
+    [
+      13,
+      2.482,
+      1.531
+    ],
+    [
+      14,
+      2.469,
+      1.523
+    ],
+    [
+      15,
+      2.48,
+      1.548
+    ],
+    [
+      16,
+      2.48,
+      1.552
+    ],
+    [
+      17,
+      2.479,
+      1.549
+    ],
+    [
+      18,
+      2.481,
+      1.557
+    ]
+  ],
+  "warm_mean_s": 4.023,
+  "warm_max_s": 4.078,
+  "target_met": true,
+  "finite_policy_amp": true,
+  "amp_statistics_initialized": true,
+  "dataset": {
+    "schema": 1,
+    "manifest_sha256": "eef4d55d77eb26b46fd1be58da628edd07920f5e02198a7636c2e83253e5cb3c",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 17,
+    "total_frames": 4628
+  },
+  "checkpoint_schema": 2,
+  "migration_revision": 5,
+  "initialization": {
+    "source": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_15-04-04_wall4_4096_depthfast_20261014_150357/model_0.pt",
+    "source_environment": {
+      "variant": "walled4",
+      "migration_revision": 4,
+      "failure_reward": "current_transition",
+      "obstacle_backend": "locked_rigid_6dof",
+      "shoulder_colliders": "convex_hull_32",
+      "depth_shape": [
+        4,
+        27,
+        48
+      ],
+      "reference_init": true,
+      "reset_probs": [
+        0.8,
+        0.15,
+        0.05
+      ],
+      "search_prob": 0.02,
+      "noise": 0.01,
+      "delay": 2,
+      "freeze": 0.01,
+      "freeze_steps": 3,
+      "mount_pos": 0.005,
+      "mount_rot": 2.0,
+      "curriculum": "process_anchor",
+      "reward_parent": "g1_carrybox_v0"
+    },
+    "transfer": "policy_encoder_actor_critic_pose_head",
+    "fresh": "PPO_AMP_curriculum"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "variant": "baseline",
+  "physics_device": "cuda:0",
+  "scope": "static RTX render / no PPO",
+  "nominal_mount_torso_m": [
+    0.057623498141765594,
+    0.01752999797463417,
+    0.42987000942230225
+  ],
+  "asset_d435_mount_torso_m": [
+    0.05762350186705589,
+    0.017529994249343872,
+    0.42987000942230225
+  ],
+  "attached_pose_follows_root": true,
+  "intrinsics": [
+    [
+      28.799999237060547,
+      0.0,
+      24.0
+    ],
+    [
+      0.0,
+      28.799999237060547,
+      16.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "resolution": [
+    48,
+    32
+  ],
+  "vfov_deg": 58.10920948686925,
+  "hfov_deg": 79.61114367746794,
+  "observation_matches_rendered_depth": true,
+  "optical_z_verified": true,
+  "occlusion": {
+    "wall": {
+      "clear_center_m": 0.8750001192092896,
+      "blocked_center_m": 0.4500000774860382,
+      "hidden_box_removal_max_change_m": 0.0,
+      "restored_max_error_m": 0.0
+    },
+    "cylinder0": {
+      "clear_center_m": 0.8750001192092896,
+      "blocked_center_m": 0.32849597930908203,
+      "hidden_box_removal_max_change_m": 0.0,
+      "restored_max_error_m": 0.0
+    }
+  },
+  "probe_overrides": "one environment; walled RSI/mount noise/depth noise/delay/freeze disabled for deterministic geometry",
+  "hardware_calibration_verified": false
+}

@@ -1,0 +1,60 @@
+{
+  "checked_local": "2026-10-14T12:55:28.570070+09:00",
+  "pid": 2322385,
+  "last_complete_iteration": 24,
+  "latest_metrics": {
+    "iteration": 24,
+    "Mean episode length": 32.92,
+    "Mean reward": -0.38,
+    "Mean amp_valid_samples loss": 2380.0,
+    "AMP/valid_fraction": 0.7747,
+    "Episode_Reward/fall": -0.01,
+    "Metrics/episode_lift_success": 0.0
+  },
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_12-54-15_wall4_rewardfix_20261014_125408/model_0.pt",
+  "checkpoint_finite": true,
+  "checkpoint_schema": 2,
+  "environment_contract": {
+    "variant": "walled4",
+    "migration_revision": 4,
+    "failure_reward": "current_transition",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "convex_hull_32",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.8,
+      0.15,
+      0.05
+    ],
+    "search_prob": 0.02,
+    "noise": 0.01,
+    "delay": 2,
+    "freeze": 0.01,
+    "freeze_steps": 3,
+    "mount_pos": 0.005,
+    "mount_rot": 2.0,
+    "curriculum": "process_anchor",
+    "reward_parent": "g1_carrybox_v0"
+  },
+  "amp_dataset": {
+    "schema": 1,
+    "manifest_sha256": "eef4d55d77eb26b46fd1be58da628edd07920f5e02198a7636c2e83253e5cb3c",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 17,
+    "total_frames": 4628
+  },
+  "training_health_conclusion": "Startup and initial updates only; convergence not established"
+}

@@ -1,0 +1,7 @@
+{
+  "source/perceptual_ball/perceptual_ball/carrybox_camera.py": "3ca6d555da47135e9a792c897ccc07e27bb77d95fc0e01b6c5ebbda1f5d287fb",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "c6977401b24412a1bb1575b6cc5045bb71f655ce588312186eb4f6fcd8070715",
+  "scripts/rsl_rl/benchmark_carrybox_camera.py": "2eb00cc6e378205db841127355fe14381df0ddd0e0e1ce0d648d54475adada1d",
+  "scripts/rsl_rl/benchmark_carrybox_camera.sh": "ee2af3134807484e1ec705e42990f82c8e024a452d64570055e27bc8c5119cf9",
+  "findbox/amp_manifest.json": "eef4d55d77eb26b46fd1be58da628edd07920f5e02198a7636c2e83253e5cb3c"
+}

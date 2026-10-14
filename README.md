@@ -1,10 +1,29 @@
-# Football / Perceptual Ball
+# Perceptual Ball：FindBox 与 Football
 
-基于 Isaac Lab 与 RSL-RL 的 Unitree G1 踢球项目：深度感知、AMP 动作先验、连续来球、恢复平衡与来球速度课程。
+2026-10-14：足球新增[MuJoCo s2s入口](docs/agilekickball_v4/sim2sim_20261014/README.md)，官方仓库更新、G1编译及部署接口短测完成；接球回传稳定迁移、真实视觉和真机尚未验收。
 
-## 获取和安装
+2026-10-14 16:01 JST：Warp迁移完成，正式训练PID2348537已核验到iteration18；4096环境×24步、PPO 4 epochs×4 minibatches及完整AMP保持，热身后平均4.023秒、最慢4.078秒，达到6秒目标。新model_0.pt为schema2/revision5/warp，策略和AMP参数有限。尚未完成长训或证明拾箱收敛。[迁移与日志](docs/carrybox/warp_20261014/README.md)。下方为历史快照。
 
-模型资源与动作参考数据使用 Git LFS。先安装 Git LFS，并使用已经配置好 Isaac Sim / Isaac Lab 的 Python 环境：
+2026-10-14 15:09 JST：正式wall4 4096环境已从原正式model_0.pt恢复，PID2341959，检查到iteration2；后两轮17.62/17.42秒，schema2/revision4、策略与AMP有限值检查通过。6秒目标未达，训练尚未完成或证明收敛。[性能记录与日志](docs/carrybox/render6s_20261014/README.md)。下方状态为历史快照。
+
+基于 Isaac Lab / RSL-RL 的 Unitree G1 项目。当前维护两个并列项目：`findbox`（找箱并抬起）与 `football`（接球回传），共享机器人资产和训练基础设施：
+
+| 任务 | 当前主线 | 状态快照（2026-10-14） | 项目入口 |
+|---|---|---|---|
+| 足球 `football` | AgileKickball v4：接球、回传给发球者、恢复站稳 | 正式50000轮已结束，最终 `model_49999.pt` 已核验，独立评估待做 | [足球项目](projects/football/README.md) |
+| 搬箱子 `findbox` | CarryBox v0：深度找箱、双手抬起保持、位姿辅助监督、FindBox AMP | wall4 Warp正式运行，4096环境约4.02秒/轮，未证明收敛 | [搬箱子项目](projects/findbox/README.md) |
+
+搬箱子新增的[walled3/walled4迁移](docs/carrybox/walled/README.md)已完成[运行修复](docs/carrybox/wall4_repair/README.md)，两变体4环境持续短训通过；128环境50＋2轮运行验收曾通过，但正式训练未收敛并已停止；最新[根因与任务设计](docs/carrybox/convergence_20261014/README.md)区分运行稳定性和学习有效性。CarryBox-v0基线仍保留。2026-10-14 12:54按用户新指令[重新启动wall4](docs/carrybox/restart_20261014/README.md)，使用独立新run与日志。
+
+2026-10-14 14:06已停止上述128环境run，切换为[4096环境新训练](docs/carrybox/scale4096_20261014/README.md)。
+
+2026-10-14 14:41历史：[4096相机读取优化与正式恢复](docs/carrybox/performance_20261014/README.md)，环境步耗时减少23.2%，新PID2336376。
+
+[项目看板与管理约定](projects/README.md)记录任务归属、待办和进度更新规则。状态是带日期的快照，运行状态以进程及最新日志为准。
+
+## 安装
+
+使用已配置 Isaac Sim / Isaac Lab 的 Python 环境。模型和动作数据由 Git LFS 管理：
 
 ```bash
 git lfs install
@@ -15,52 +34,58 @@ python -m pip install -e source/perceptual_ball
 python scripts/list_envs.py
 ```
 
-仓库包含 G1 USD 及其依赖层、左右脚踢球动作参考数据；不包含本地训练 checkpoint、TensorBoard 日志或验证临时模型。`unitree_g1_retarget/` 保留动作重定向数据和演示。
+本地训练 checkpoint、日志和临时验证模型不随仓库分发。搬箱子 AMP 训练需要 `findbox/` 及其 `amp_manifest.json`；CarryBox-v0基线播放及策略导出不需要动作数据集，walled变体仿真播放的参考初始化需要该数据集。
 
-## 当前任务
+## 任务入口
 
-- `Template-Perceptual-Ball-AgileKickball-v0`：基础连续踢球与恢复发球任务。
-- `Template-Perceptual-Ball-AgileKickball-v1`：在 v0 上增加渐进来球速度（0.4–5.0 m/s），修正恢复门控并加强踢球奖励。
-- 其他注册任务和历史 Soccer-v2/v3 实现保留在源码中。
+足球当前训练配方：
 
-v1 当前采用有效来球曝光课程，不是早期的严格成功窗口课程。设计和版本差异见 [v1 说明](docs/agilekickball_v1/README.md)。
+```bash
+bash scripts/rsl_rl/train_agilekickball_v4.sh
+```
 
-## 从头训练 v1
+2026-10-13检查时已有足球训练进程；再次启动前查看[足球运行状态](projects/football/README.md#运行状态与下一步)。脚本默认由稳定v3权重初始化，恢复v4训练使用同版本checkpoint。
+
+搬箱子从头训练配方：
 
 ```bash
 python scripts/rsl_rl/train.py \
-  --task Template-Perceptual-Ball-AgileKickball-v1 \
-  --num_envs 4096 \
-  --device cuda:0 \
-  --headless \
-  --max_iterations 50000 \
-  --seed 42 \
-  --run_name v0_gradual_speed_kick_reward_scratch
+  --task Template-Perceptual-Ball-CarryBox-v0 \
+  --num_envs 128 --device cuda:0 --headless --enable_cameras \
+  --max_iterations 30000 --seed 42 --run_name depth_pose_amp_scratch
 ```
 
-默认从头训练，不需要 `--resume`。速度课程按实际来球曝光推进，50000 轮不保证达到最终速度。
+真实深度相机需要 `--enable_cameras`。两条任务目前都使用 `cuda:0`，启动前检查已有训练和可用显存，环境数量分别由任务配方决定。
 
-## 播放和深度视场
+## 目录
 
-把 checkpoint 路径替换为本机已有模型；任务版本须与模型对应：
+```text
+projects/
+├── findbox/       # 找箱、拾箱、深度辅助监督、FindBox AMP
+├── football/      # 接球、回传、恢复站稳
+└── README.md      # 两项目总看板
 
-```bash
-python scripts/rsl_rl/play.py \
-  --task Template-Perceptual-Ball-AgileKickball-v0 \
-  --num_envs 4 \
-  --checkpoint /path/to/model_25000.pt \
-  --ballspeed 0.4 3 \
-  --visray
+source/            # 共享Python包；各任务模块保持原导入路径
+scripts/           # 通用train/play，以及各项目训练和验证脚本
+findbox/           # FindBox原始动作数据，不是项目代码入口
 ```
 
-`--ballspeed MIN MAX` 覆盖播放来球速度，`--visray` 用绿色射线和采样点显示深度视场；省略对应参数即使用默认行为。当前深度是解析球面相交，并非完整场景深度。详见 [可视化说明](docs/play_visray/README.md)。
+两个项目处于同一层级。`projects/carrybox → findbox`仅为旧链接兼容别名；`CarryBox`继续作为已有Gym任务和源码名称，不代表第三个项目。
 
-## 目录与验证记录
 
-- `source/perceptual_ball/`：任务、感知、奖励、PPO/AMP 扩展及资源。
-- `scripts/rsl_rl/`：训练、播放、诊断和有限仿真验证脚本。
-- `tests/`：CPU 回归与感知/状态机边界测试。
-- `docs/`：设计、训练审计、验证报告与可视化截图。
-- `agent/`：工程计划、任务、报告与交接记录。
+| 路径 | 归属与用途 |
+|---|---|
+| `projects/football/`、`projects/findbox/` | 两个项目的入口、状态、代码地图和任务命令 |
+| `source/perceptual_ball/` | 共用Python包、G1资产及两条任务的独立配置/实现 |
+| `scripts/rsl_rl/train.py`、`play.py` | 共用训练和播放入口；通过任务ID选择 |
+| `scripts/rsl_rl/*agilekickball*` | football配方和验证脚本 |
+| `scripts/rsl_rl/*carrybox*`、`scripts/visualize_findbox*` | findbox配方、验证与数据可视化脚本 |
+| `findbox/` | 搬箱子AMP原始数据与schema/hash清单 |
+| `docs/agilekickball*/`、`docs/carrybox/` | 各任务设计和验证记录 |
+| `tests/` | 测试按任务文件名前缀区分 |
+| `logs/rsl_rl/agilekickball_v4/` | 足球当前正式训练产物 |
+| `logs/rsl_rl/g1_carrybox_depth/` | 搬箱子正式训练产物；首训时创建 |
+| `agent/{plan,task,report,handoff}/` | 历史工程工件，按任务前缀索引 |
+| `unitree_g1_retarget/` | 足球动作重定向来源及演示 |
 
-部分测试和诊断脚本保留开发机的 Isaac Lab 安装路径、历史 checkpoint 路径；在其他机器运行前需调整这些路径并准备相应模型。历史报告记录当时的验证结果，短仿真不代表长期训练收敛。
+足球旧版本、旧入口和checkpoint兼容说明见[足球版本索引](projects/football/README.md#版本与历史)。工程协作边界见 [AGENTS.md](AGENTS.md)。

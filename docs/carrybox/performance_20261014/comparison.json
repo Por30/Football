@@ -1,0 +1,10 @@
+{
+  "controlled_step_before_s": 0.9557266033467992,
+  "controlled_step_after_s": 0.733925879544889,
+  "controlled_speedup": 1.3022113403869202,
+  "controlled_time_reduction": 0.23207549421058293,
+  "prior_formal_total_s": 25.6342,
+  "smoke_training_total_s": 21.105,
+  "smoke_iterations": 4,
+  "remaining_major_cost": "RTX render before transitions and again after resets; sensor/reset semantics preserved"
+}

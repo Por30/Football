@@ -1,0 +1,25 @@
+{
+  "repos": {
+    "unitree_mujoco": {
+      "head": "1eb6642e3f3fdfb7fb13a9794fd6a2dd93ea0e7d",
+      "origin_main": "1eb6642e3f3fdfb7fb13a9794fd6a2dd93ea0e7d",
+      "status": "## main...origin/main\n M simulate/CMakeLists.txt\n M simulate/config.yaml\n M simulate/src/main.cc\n M simulate/src/param.h\n?? simulate/src/height_scan_publisher.cpp\n?? simulate/src/height_scan_publisher.h\n?? unitree_robots/go2/scene_climb_s2s.xml",
+      "upstream_contained": true
+    },
+    "unitree_rl_lab": {
+      "head": "631136f5dde8cc3aeea022fd062938b8d463ec71",
+      "origin_main": "4960b84732b0c2ec593dccbfe963fda1bcd7b1e3",
+      "status": "## main...origin/main [ahead 1]\n M deploy/include/FSM/FSMState.h\n M deploy/include/isaaclab/envs/mdp/observations/observations.h\n M deploy/robots/g1_29dof/main.cpp\n?? deploy/robots/go2real/",
+      "upstream_contained": true
+    }
+  },
+  "training_urdf": "/home/cao/PhysHSI/legged_gym/resources/robots/g1/urdf/g1_29dof.urdf",
+  "training_urdf_sha256": "427c3b69c2f3f3bfb16e1bfdecd564326a505642efba33198c8d33db44ac974e",
+  "training_mass_kg": 33.34114202000001,
+  "torchscript_matches_final_checkpoint_all_parameters": true,
+  "verification_test": "test_export_matches_final_checkpoint",
+  "checkpoint": "logs/rsl_rl/agilekickball_v4/2026-10-12_13-48-41_return_to_sender_20261012_v3init/model_49999.pt",
+  "backup": "repo_backup/",
+  "stash_preserved": "unitree_mujoco: kickball-s2s-before-update-20261014",
+  "checkpoint_sha256": "c7a06d2cc6659d95a86676e0c95014ac57107fb53ddbdce945cc9c2a52ab03f0"
+}

@@ -1,0 +1,121 @@
+{
+  "carryWith/carrywith1.pt": {
+    "frames": 256,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 4.504830837249756,
+    "joints": []
+  },
+  "carryWith/carrywith2.pt": {
+    "frames": 194,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 4.166935443878174,
+    "joints": []
+  },
+  "carryWith/carrywith3.pt": {
+    "frames": 323,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 4.625629901885986,
+    "joints": []
+  },
+  "loco_direction/B10_-_walk_turn_left_(45)_stageii.pt": {
+    "frames": 253,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.6044180393218994,
+    "joints": []
+  },
+  "loco_direction/B11_-_walk_turn_left_(135)_stageii.pt": {
+    "frames": 289,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.533019781112671,
+    "joints": []
+  },
+  "loco_direction/B12_-_walk_turn_right_(90)_stageii.pt": {
+    "frames": 263,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.4325835704803467,
+    "joints": []
+  },
+  "loco_direction/B13_-_walk_turn_right_(45)_stageii.pt": {
+    "frames": 256,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.52209734916687,
+    "joints": []
+  },
+  "loco_direction/B14_-_walk_turn_right_(135)_stageii.pt": {
+    "frames": 321,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.5436317920684814,
+    "joints": []
+  },
+  "loco_direction/B15_-_walk_turn_around_(same_direction)_stageii.pt": {
+    "frames": 329,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 4.625629901885986,
+    "joints": []
+  },
+  "loco_direction/B1_-_stand_to_walk_stageii.pt": {
+    "frames": 342,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.373889684677124,
+    "joints": []
+  },
+  "loco_direction/B2_-_walk_to_stand_stageii.pt": {
+    "frames": 340,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.4227259159088135,
+    "joints": []
+  },
+  "loco_direction/B2_-_walk_to_stand_t2_stageii.pt": {
+    "frames": 293,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.3933489322662354,
+    "joints": []
+  },
+  "loco_direction/B3_-_walk1_stageii.pt": {
+    "frames": 456,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.3244526386260986,
+    "joints": []
+  },
+  "loco_direction/B9_-_walk_turn_left_(90)_stageii.pt": {
+    "frames": 214,
+    "unreachable_frame_fraction": 0.0,
+    "max_required_abs_action": 3.585634469985962,
+    "joints": []
+  },
+  "pickUp/pickup1.pt": {
+    "frames": 192,
+    "unreachable_frame_fraction": 0.2083333283662796,
+    "max_required_abs_action": 7.65545654296875,
+    "joints": [
+      "left_hip_pitch_joint",
+      "left_knee_joint",
+      "right_hip_pitch_joint",
+      "right_knee_joint"
+    ]
+  },
+  "pickUp/pickup2.pt": {
+    "frames": 178,
+    "unreachable_frame_fraction": 0.2977527976036072,
+    "max_required_abs_action": 8.841948509216309,
+    "joints": [
+      "left_hip_pitch_joint",
+      "left_knee_joint",
+      "right_hip_pitch_joint",
+      "right_knee_joint",
+      "left_shoulder_pitch_joint"
+    ]
+  },
+  "pickUp/pickup3.pt": {
+    "frames": 129,
+    "unreachable_frame_fraction": 0.4961240291595459,
+    "max_required_abs_action": 8.616896629333496,
+    "joints": [
+      "left_hip_pitch_joint",
+      "left_knee_joint",
+      "right_hip_pitch_joint",
+      "right_knee_joint",
+      "left_shoulder_pitch_joint"
+    ]
+  }
+}

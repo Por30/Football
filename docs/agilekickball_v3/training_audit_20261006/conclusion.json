@@ -1,0 +1,10 @@
+{
+  "verdict": "The auxiliary demonstrably trained; no evidence of task improvement. This v3 run had worse training diagnostics than v2 under different task distributions.",
+  "source": "comparison.json; scalar windows [49000,49999] unless explicitly final checkpoint",
+  "causal_effect_of_module": "NOT_IDENTIFIED: no same-geometry outcome-off run or shared-distribution held-out evaluation",
+  "termination_metric_caveat": "Episode_Termination scalars average the last stored termination type over environments, then over rollout logging; they are not pooled newly terminated-episode frequencies.",
+  "metric_caveat": "Recovered-serve and kick-proxy shares have separate numerators; neither is strict per-ball joint success. Final speed ceiling is sampling distribution, not established skill.",
+  "mechanism_limit": "Auxiliary head optimizes shared visual encoder, not actor MLP or recovery reward; 0.16-s targets censor all done-crossing windows. Long-horizon recovery improvement is not directly supervised.",
+  "next_decisive_comparator": "Train v3 geometry with outcome_aux_coef=0 using matched interaction budget; evaluate existing v2/v3 policies on a shared fixed distribution before attributing gain or harm.",
+  "no_new_training_started": true
+}

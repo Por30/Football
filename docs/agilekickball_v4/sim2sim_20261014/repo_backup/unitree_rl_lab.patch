@@ -1,0 +1,198 @@
+diff --git a/deploy/include/FSM/FSMState.h b/deploy/include/FSM/FSMState.h
+index cbbc2af..5222f57 100644
+--- a/deploy/include/FSM/FSMState.h
++++ b/deploy/include/FSM/FSMState.h
+@@ -5,6 +5,7 @@
+ #include "FSM/BaseState.h"
+ #include "isaaclab/devices/keyboard/keyboard.h"
+ #include "unitree_joystick_dsl.hpp"
++#include <cctype>
+ 
+ class FSMState : public BaseState
+ {
+@@ -32,15 +33,20 @@ public:
+                 int fsm_id = FSMStringMap.right.at(target_fsm);
+ 
+                 std::string condition = it->second;
+-                unitree::common::dsl::Parser p(condition);
+-                auto ast = p.Parse();
+-                auto func = unitree::common::dsl::Compile(*ast);
+-                registered_checks.emplace_back(
+-                    std::make_pair(
+-                        [func]()->bool{ return func(FSMState::lowstate->joystick); },
+-                        fsm_id
+-                    )
+-                );
++                auto key_check = make_keyboard_check(condition);
++                if (key_check) {
++                    registered_checks.emplace_back(std::make_pair(key_check, fsm_id));
++                } else {
++                    unitree::common::dsl::Parser p(condition);
++                    auto ast = p.Parse();
++                    auto func = unitree::common::dsl::Compile(*ast);
++                    registered_checks.emplace_back(
++                        std::make_pair(
++                            [func]()->bool{ return func(FSMState::lowstate->joystick); },
++                            fsm_id
++                        )
++                    );
++                }
+             }
+         }
+ 
+@@ -67,4 +73,60 @@ public:
+     static std::unique_ptr<LowCmd_t> lowcmd;
+     static std::shared_ptr<LowState_t> lowstate;
+     static std::shared_ptr<Keyboard> keyboard;
+-};
+\ No newline at end of file
++
++private:
++    static inline std::string trim(const std::string& s)
++    {
++        std::size_t b = 0;
++        std::size_t e = s.size();
++        while (b < e && std::isspace(static_cast<unsigned char>(s[b]))) {
++            ++b;
++        }
++        while (e > b && std::isspace(static_cast<unsigned char>(s[e - 1]))) {
++            --e;
++        }
++        return s.substr(b, e - b);
++    }
++
++    // Keyboard condition syntax:
++    //   key(1).on_pressed
++    //   key(2).pressed
++    //   key(1)
++    static inline std::function<bool()> make_keyboard_check(const std::string& raw_condition)
++    {
++        const std::string condition = trim(raw_condition);
++        if (condition.rfind("key(", 0) != 0) {
++            return {};
++        }
++
++        const std::size_t close_pos = condition.find(')');
++        if (close_pos == std::string::npos || close_pos <= 4) {
++            throw std::runtime_error("Invalid keyboard transition syntax: " + condition);
++        }
++        const std::string key_name = condition.substr(4, close_pos - 4);
++
++        std::string suffix;
++        if (close_pos + 1 < condition.size()) {
++            suffix = condition.substr(close_pos + 1);
++        }
++        suffix = trim(suffix);
++        if (suffix.empty()) {
++            suffix = ".on_pressed";
++        }
++
++        if (suffix == ".pressed") {
++            return [key_name]() -> bool {
++                return FSMState::keyboard && FSMState::keyboard->key() == key_name;
++            };
++        }
++        if (suffix == ".on_pressed") {
++            return [key_name]() -> bool {
++                return FSMState::keyboard &&
++                       FSMState::keyboard->on_pressed &&
++                       FSMState::keyboard->key() == key_name;
++            };
++        }
++
++        throw std::runtime_error("Unsupported keyboard transition suffix: " + suffix);
++    }
++};
+diff --git a/deploy/include/isaaclab/envs/mdp/observations/observations.h b/deploy/include/isaaclab/envs/mdp/observations/observations.h
+index 978a918..bcc8b26 100644
+--- a/deploy/include/isaaclab/envs/mdp/observations/observations.h
++++ b/deploy/include/isaaclab/envs/mdp/observations/observations.h
+@@ -3,6 +3,9 @@
+ 
+ #pragma once
+ 
++#include <array>
++#include <cmath>
++
+ #include "isaaclab/envs/manager_based_rl_env.h"
+ 
+ namespace isaaclab
+@@ -115,9 +118,68 @@ REGISTER_OBSERVATION(velocity_commands)
+ 
+     const auto cfg = env->cfg["commands"]["base_velocity"]["ranges"];
+ 
+-    obs[0] = std::clamp(joystick->ly(), cfg["lin_vel_x"][0].as<float>(), cfg["lin_vel_x"][1].as<float>());
+-    obs[1] = std::clamp(-joystick->lx(), cfg["lin_vel_y"][0].as<float>(), cfg["lin_vel_y"][1].as<float>());
+-    obs[2] = std::clamp(-joystick->rx(), cfg["ang_vel_z"][0].as<float>(), cfg["ang_vel_z"][1].as<float>());
++    float deadzone = 0.0f;
++    float smoothing_alpha = 1.0f;
++    float gain_lin_x_pos = 1.0f;
++    float gain_lin_x_neg = 1.0f;
++    float gain_lin_y = 1.0f;
++    float gain_ang_z = 1.0f;
++    try {
++        if (params["deadzone"]) {
++            deadzone = params["deadzone"].as<float>();
++        }
++        if (params["smoothing_alpha"]) {
++            smoothing_alpha = params["smoothing_alpha"].as<float>();
++        }
++        if (params["gain_lin_x_pos"]) {
++            gain_lin_x_pos = params["gain_lin_x_pos"].as<float>();
++        }
++        if (params["gain_lin_x_neg"]) {
++            gain_lin_x_neg = params["gain_lin_x_neg"].as<float>();
++        }
++        if (params["gain_lin_y"]) {
++            gain_lin_y = params["gain_lin_y"].as<float>();
++        }
++        if (params["gain_ang_z"]) {
++            gain_ang_z = params["gain_ang_z"].as<float>();
++        }
++    } catch (const std::exception&) {
++    }
++
++    deadzone = std::max(0.0f, deadzone);
++    smoothing_alpha = std::clamp(smoothing_alpha, 0.0f, 1.0f);
++    gain_lin_x_pos = std::clamp(gain_lin_x_pos, 0.0f, 5.0f);
++    gain_lin_x_neg = std::clamp(gain_lin_x_neg, 0.0f, 5.0f);
++    gain_lin_y = std::clamp(gain_lin_y, 0.0f, 5.0f);
++    gain_ang_z = std::clamp(gain_ang_z, 0.0f, 5.0f);
++
++    auto apply_deadzone = [deadzone](float v) {
++        return (std::abs(v) < deadzone) ? 0.0f : v;
++    };
++
++    float cmd_x = apply_deadzone(static_cast<float>(joystick->ly()));
++    float cmd_y = apply_deadzone(static_cast<float>(-joystick->lx()));
++    float cmd_yaw = apply_deadzone(static_cast<float>(-joystick->rx()));
++
++    if (cmd_x >= 0.0f) {
++        cmd_x *= gain_lin_x_pos;
++    } else {
++        cmd_x *= gain_lin_x_neg;
++    }
++    cmd_y *= gain_lin_y;
++    cmd_yaw *= gain_ang_z;
++
++    obs[0] = std::clamp(cmd_x, cfg["lin_vel_x"][0].as<float>(), cfg["lin_vel_x"][1].as<float>());
++    obs[1] = std::clamp(cmd_y, cfg["lin_vel_y"][0].as<float>(), cfg["lin_vel_y"][1].as<float>());
++    obs[2] = std::clamp(cmd_yaw, cfg["ang_vel_z"][0].as<float>(), cfg["ang_vel_z"][1].as<float>());
++
++    if (smoothing_alpha < 1.0f) {
++        static std::array<float, 3> prev = {0.0f, 0.0f, 0.0f};
++        for (int i = 0; i < 3; ++i) {
++            obs[i] = smoothing_alpha * obs[i] + (1.0f - smoothing_alpha) * prev[i];
++            prev[i] = obs[i];
++        }
++    }
+ 
+     return obs;
+ }
+@@ -137,4 +199,4 @@ REGISTER_OBSERVATION(gait_phase)
+ }
+ 
+ }
+-}
+\ No newline at end of file
++}

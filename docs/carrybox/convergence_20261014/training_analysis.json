@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "last_iteration": 14695,
+  "rows": 14696,
+  "windows": {
+    "0-49": {
+      "Mean episode length": 31.116200000000003,
+      "Mean reward": -6.214600000000001,
+      "Mean amp_valid_samples loss": 2281.5,
+      "AMP/valid_fraction": 0.7492460000000001,
+      "AMP/style_reward": 0.08456800000000002,
+      "Metrics/episode_lift_success": 0.0,
+      "Episode_Reward/fall": -0.30130599999999996,
+      "Mean box_position loss": 0.21094200000000002
+    },
+    "50-99": {
+      "Mean episode length": 17.4236,
+      "Mean reward": -3.7174,
+      "Mean amp_valid_samples loss": 1579.28,
+      "AMP/valid_fraction": 0.514092,
+      "AMP/style_reward": 0.034128,
+      "Metrics/episode_lift_success": 0.0,
+      "Episode_Reward/fall": -0.174716,
+      "Mean box_position loss": 0.164786
+    },
+    "100-199": {
+      "Mean episode length": 6.2942,
+      "Mean reward": -1.4650999999999998,
+      "Mean amp_valid_samples loss": 172.41,
+      "AMP/valid_fraction": 0.056122,
+      "AMP/style_reward": 0.023434000000000003,
+      "Metrics/episode_lift_success": 0.0,
+      "Episode_Reward/fall": -0.063112,
+      "Mean box_position loss": 0.078933
+    },
+    "200-499": {
+      "Mean episode length": 2.7226333333333335,
+      "Mean reward": -0.6400666666666666,
+      "Mean amp_valid_samples loss": 1.1933333333333334,
+      "AMP/valid_fraction": 0.00039,
+      "AMP/style_reward": 0.0029649999999999998,
+      "Metrics/episode_lift_success": 0.0,
+      "Episode_Reward/fall": -0.027253333333333334,
+      "Mean box_position loss": 0.04920166666666667
+    },
+    "500-999": {
+      "Mean episode length": 2.13216,
+      "Mean reward": -0.46472,
+      "Mean amp_valid_samples loss": 0.122,
+      "AMP/valid_fraction": 3.98e-05,
+      "AMP/style_reward": 0.0010287999999999999,
+      "Metrics/episode_lift_success": 0.0,
+      "Episode_Reward/fall": -0.0212986,
+      "Mean box_position loss": 0.034230000000000003
+    },
+    "13696-14695": {
+      "Mean episode length": 2.1059099999999997,
+      "Mean reward": -0.4381300000000001,
+      "Mean amp_valid_samples loss": 4.125,
+      "AMP/valid_fraction": 0.0013452,
+      "AMP/style_reward": 0.0064150000000000006,
+      "Metrics/episode_lift_success": 0.0,
+      "Episode_Reward/fall": -0.021076700000000004,
+      "Mean box_position loss": 0.0160674
+    }
+  },
+  "max_logged_success": 0.0,
+  "amp_zero_update_fraction": 0.644,
+  "policy_dt": 0.02,
+  "amp_first_valid_step": 9,
+  "stopped": true
+}

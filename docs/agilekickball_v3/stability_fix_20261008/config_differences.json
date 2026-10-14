@@ -1,0 +1,41 @@
+{
+  "agent.yaml": [
+    {
+      "path": "/algorithm/class_name",
+      "v2": "BallRegressionPPO",
+      "v3": "StateFeedbackPPO"
+    },
+    {
+      "path": "/experiment_name",
+      "v2": "agilekickball_v2",
+      "v3": "agilekickball_v3"
+    },
+    {
+      "path": "/policy/class_name",
+      "v2": "PerceptionActorCritic",
+      "v3": "StateFeedbackActorCritic"
+    },
+    {
+      "path": "/run_name",
+      "v2": "v1_speed_only_20260925_scratch",
+      "v3": "state_feedback_20261006_scratch"
+    }
+  ],
+  "env.yaml": [
+    {
+      "path": "/events/setup_kickball_state/func",
+      "v2": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.agilekickball_v2:setup_agilekickball_v2",
+      "v3": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.agilekickball_v3:setup_agilekickball_v3"
+    },
+    {
+      "path": "/events/setup_kickball_state/params/revision",
+      "v2": "v1_speed_only_20260925",
+      "v3": "state_feedback_20261006"
+    },
+    {
+      "path": "/log_dir",
+      "v2": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v2/2026-09-25_22-18-55_v1_speed_only_20260925_scratch",
+      "v3": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3/2026-10-06_13-17-10_state_feedback_20261006_scratch"
+    }
+  ]
+}

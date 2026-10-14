@@ -1,0 +1,35 @@
+{
+  "pid": 2056902,
+  "command": [
+    "nohup",
+    "bash",
+    "scripts/rsl_rl/train_agilekickball_v4.sh"
+  ],
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v4/train_20261012.log",
+  "started_at": "2026-10-12T13:48:36.999347+09:00",
+  "initialization": {
+    "schema": 1,
+    "kind": "v3_weights_only",
+    "source": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3/2026-10-08_11-48-24_feedback_stable_20261008_v2init/model_49999.pt",
+    "sha256": "30bcf9da6f1afe46a928536c59156f2de75bdb730499622818afcb40b3425a22",
+    "source_iteration": 49999,
+    "transferred": [
+      "complete_policy",
+      "encoder",
+      "ball_head",
+      "feedback_residual",
+      "critic_and_normalization",
+      "action_std",
+      "AMP"
+    ],
+    "fresh": [
+      "PPO_optimizer",
+      "ball_aux_optimizer",
+      "AMP_optimizer",
+      "curriculum",
+      "iteration_counter",
+      "aux_update_counter"
+    ]
+  },
+  "receipt_file": "/home/cao/perceptual_ball/docs/agilekickball_v4/return_to_sender_20261012/receipts.json"
+}

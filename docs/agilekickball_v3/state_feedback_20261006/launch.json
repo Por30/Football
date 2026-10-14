@@ -1,0 +1,35 @@
+{
+  "pid": 1499582,
+  "start_ticks": 197729736,
+  "session_id": 1499582,
+  "started_at_jst": "2026-10-06T13:17:06.192037+09:00",
+  "command": [
+    "bash",
+    "/home/cao/perceptual_ball/scripts/rsl_rl/train_agilekickball_v3.sh"
+  ],
+  "log": "/home/cao/perceptual_ball/logs/background/agilekickball_v3_state_feedback_20261006_131706.log",
+  "cwd": "/home/cao/perceptual_ball",
+  "task": "Template-Perceptual-Ball-AgileKickball-v3",
+  "revision": "state_feedback_20261006",
+  "num_envs": 4096,
+  "max_iterations": 50000,
+  "seed": 42,
+  "resume": false,
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/state_feedback.py": "6b2457f5fb160c1bb0232dcabd53336bc2581d59ac6bcdfd673b9840a8488378",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/runner.py": "eb66d8c186e7aa6cb73e9cb172944f122f895f8616cc137b98e6e088e58962fc",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/export.py": "9feab0972bf0a56b96e07bd9b155d4e740af8d935e6a203bd888bca9b41dc947",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/__init__.py": "8b50e0657cbb1bfd9ac147aba3ca31f44097c21a2ef572f1dfee5c5b2849bfce",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/agilekickball_v3_env_cfg.py": "5c5a1e132b2a3a618261ec7e038199b451d1e8d52a6c75fb0afa6010d1aad13a",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/agilekickball_v3_outcome_env_cfg.py": "561732f410fa75aaeaceec090ef68ab737e957ac2e3a904ad71fb7ba81622958",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/agilekickball_v3.py": "4bfc01438c09af9bc5b254e3708e3cd72ffb842ddb7e7c9c48d2ecdcf1fdb8de",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/agilekickball_v3_outcome.py": "0bcd08f1081480e9ecb9b6ba0f273cf9723d3413c2ec0451aa7a53c7fe30885f",
+    "tests/test_state_feedback.py": "ebc73e9b07d6e63e5e1517833ff10a7437957100e7f80d2c3639a449cf54ba0b",
+    "tests/test_agilekickball_v3.py": "bad01ceec03cdce1659379afe8297b72070c850648a88408ee53997288b123ca",
+    "tests/test_agilekickball_v3_outcome.py": "dda8f6d8b452f5d578ceca270b02867f71f3054a3cbc0296dc7c522dd79f6c48",
+    "tests/test_contact_outcome.py": "43a09c65842ca4c7018639660248d32d14ca6f2fdc112da54404c87bae773100",
+    "scripts/rsl_rl/smoke_agilekickball_v3.py": "ab5782d0bc5a9a96f0ff81aa48fecca25c260e8f7f6eec8ca76ac5481e842b26",
+    "scripts/rsl_rl/smoke_agilekickball_v3.sh": "3078de904ec58d8246ff6e636e7b5315b8cda6384b2a2b4e9ffab11a096bd0a0",
+    "scripts/rsl_rl/train_agilekickball_v3.sh": "8281a1ed58e23b009544a7da43fe99a152a7d5c91a3e8af20be758dcd9da6a7a"
+  }
+}

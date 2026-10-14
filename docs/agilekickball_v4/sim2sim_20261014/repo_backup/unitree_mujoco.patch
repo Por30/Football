@@ -1,0 +1,205 @@
+diff --git a/simulate/CMakeLists.txt b/simulate/CMakeLists.txt
+index 3c961a8..e405743 100644
+--- a/simulate/CMakeLists.txt
++++ b/simulate/CMakeLists.txt
+@@ -23,6 +23,7 @@ link_directories(mujoco/lib)
+ 
+ file(GLOB SIM_SRC
+   src/joystick/joystick.cc
++  src/height_scan_publisher.cpp
+ 
+   # exclude mujoco/simulate/main.cc
+   mujoco/simulate/glfw_*.cc
+diff --git a/simulate/config.yaml b/simulate/config.yaml
+index d2131bc..1bc28c7 100644
+--- a/simulate/config.yaml
++++ b/simulate/config.yaml
+@@ -1,10 +1,10 @@
+ robot: "go2"  # Robot name, "go2", "b2", "b2w", "h1", "go2w", "g1"
+ robot_scene: "scene.xml" # Robot scene, /unitree_robots/[robot]/scene.xml 
+ 
+-domain_id: 1  # Domain id
++domain_id: 0  # Domain id
+ interface: "lo" # Interface 
+ 
+-use_joystick: 0 # Simulate Unitree WirelessController using a gamepad
++use_joystick: 1 # Simulate Unitree WirelessController using a gamepad
+ joystick_type: "xbox" # support "xbox" and "switch" gamepad layout
+ joystick_device: "/dev/input/js0" # Device path
+ joystick_bits: 16 # Some game controllers may only have 8-bit accuracy
+@@ -12,3 +12,18 @@ joystick_bits: 16 # Some game controllers may only have 8-bit accuracy
+ print_scene_information: 1 # Print link, joint and sensors information of robot
+ 
+ enable_elastic_band: 0 # Virtual spring band, used for lifting h1
++
++# Height-scan publisher for S2S (MuJoCo -> go2real height_scan observation)
++# IsaacLab equivalent: GridPattern(size=[1.6, 1.0], resolution=0.1, ordering=xy), ray_alignment=yaw
++# Dimension = (1.6 / 0.1 + 1) * (1.0 / 0.1 + 1) = 17 * 11 = 187
++enable_height_scan_pub: 1
++height_scan_dest_ip: "127.0.0.1"
++height_scan_dest_port: 9876
++height_scan_publish_hz: 50.0
++height_scan_resolution: 0.1
++height_scan_size_x: 1.6
++height_scan_size_y: 1.0
++height_scan_ray_origin_z: 20.0
++height_scan_offset: 0.5
++height_scan_clip_min: -1.0
++height_scan_clip_max: 1.0
+diff --git a/simulate/src/main.cc b/simulate/src/main.cc
+index 3368d91..65115e1 100755
+--- a/simulate/src/main.cc
++++ b/simulate/src/main.cc
+@@ -34,6 +34,7 @@
+ #include "array_safety.h"
+ #include "unitree_sdk2_bridge.h"
+ #include "param.h"
++#include "height_scan_publisher.h"
+ 
+ #define MUJOCO_PLUGIN_DIR "mujoco_plugin"
+ #define NUM_MOTOR_IDL_GO 20
+@@ -84,7 +85,7 @@ public:
+   std::vector<double> f_ = {0, 0, 0};
+ };
+ inline ElasticBand elastic_band;
+-
++inline HeightScanPublisher height_scan_publisher;
+ 
+ namespace
+ {
+@@ -463,6 +464,7 @@ namespace
+ 
+               // run single step, let next iteration deal with timing
+               mj_step(m, d);
++              height_scan_publisher.try_publish(m, d);
+               stepped = true;
+             }
+ 
+@@ -504,7 +506,8 @@ namespace
+ 
+                 // call mj_step
+                 mj_step(m, d);
+-                stepped = true;
++              height_scan_publisher.try_publish(m, d);
++              stepped = true;
+ 
+                 // break if reset
+                 if (d->time < prevSim)
+@@ -674,6 +677,7 @@ int main(int argc, char **argv)
+   std::filesystem::path proj_dir = std::filesystem::path(getExecutableDir()).parent_path();
+   param::config.load_from_yaml(proj_dir / "config.yaml");
+   param::helper(argc, argv);
++  height_scan_publisher.init(param::config);
+   if(param::config.robot_scene.is_relative()) {
+     param::config.robot_scene = proj_dir.parent_path() / "unitree_robots" / param::config.robot / param::config.robot_scene;
+   }
+diff --git a/simulate/src/param.h b/simulate/src/param.h
+index 76d1137..b07f316 100644
+--- a/simulate/src/param.h
++++ b/simulate/src/param.h
+@@ -1,9 +1,9 @@
+ #pragma once
+ 
+-#include <iostream>
+ #include <boost/program_options.hpp>
+-#include <yaml-cpp/yaml.h>
+ #include <filesystem>
++#include <iostream>
++#include <yaml-cpp/yaml.h>
+ 
+ namespace param
+ {
+@@ -26,11 +26,23 @@ inline struct SimulationConfig
+     int enable_elastic_band;
+     int band_attached_link = 0;
+ 
+-    void load_from_yaml(const std::string &filename)
++    // Height-scan UDP publisher (for S2S with policies using height_scan obs)
++    int enable_height_scan_pub = 0;
++    std::string height_scan_dest_ip = "127.0.0.1";
++    int height_scan_dest_port = 9876;
++    double height_scan_publish_hz = 50.0;
++    double height_scan_resolution = 0.1;
++    double height_scan_size_x = 1.6;
++    double height_scan_size_y = 1.0;
++    double height_scan_ray_origin_z = 20.0;
++    double height_scan_offset = 0.5;
++    double height_scan_clip_min = -1.0;
++    double height_scan_clip_max = 1.0;
++
++    void load_from_yaml(const std::string& filename)
+     {
+         auto cfg = YAML::LoadFile(filename);
+-        try
+-        {
++        try {
+             robot = cfg["robot"].as<std::string>();
+             robot_scene = cfg["robot_scene"].as<std::string>();
+             domain_id = cfg["domain_id"].as<int>();
+@@ -41,8 +53,42 @@ inline struct SimulationConfig
+             joystick_bits = cfg["joystick_bits"].as<int>();
+             print_scene_information = cfg["print_scene_information"].as<int>();
+             enable_elastic_band = cfg["enable_elastic_band"].as<int>();
++
++            if (cfg["enable_height_scan_pub"]) {
++                enable_height_scan_pub = cfg["enable_height_scan_pub"].as<int>();
++            }
++            if (cfg["height_scan_dest_ip"]) {
++                height_scan_dest_ip = cfg["height_scan_dest_ip"].as<std::string>();
++            }
++            if (cfg["height_scan_dest_port"]) {
++                height_scan_dest_port = cfg["height_scan_dest_port"].as<int>();
++            }
++            if (cfg["height_scan_publish_hz"]) {
++                height_scan_publish_hz = cfg["height_scan_publish_hz"].as<double>();
++            }
++            if (cfg["height_scan_resolution"]) {
++                height_scan_resolution = cfg["height_scan_resolution"].as<double>();
++            }
++            if (cfg["height_scan_size_x"]) {
++                height_scan_size_x = cfg["height_scan_size_x"].as<double>();
++            }
++            if (cfg["height_scan_size_y"]) {
++                height_scan_size_y = cfg["height_scan_size_y"].as<double>();
++            }
++            if (cfg["height_scan_ray_origin_z"]) {
++                height_scan_ray_origin_z = cfg["height_scan_ray_origin_z"].as<double>();
++            }
++            if (cfg["height_scan_offset"]) {
++                height_scan_offset = cfg["height_scan_offset"].as<double>();
++            }
++            if (cfg["height_scan_clip_min"]) {
++                height_scan_clip_min = cfg["height_scan_clip_min"].as<double>();
++            }
++            if (cfg["height_scan_clip_max"]) {
++                height_scan_clip_max = cfg["height_scan_clip_max"].as<double>();
++            }
+         }
+-        catch(const std::exception& e)
++        catch (const std::exception& e)
+         {
+             std::cerr << e.what() << '\n';
+             exit(EXIT_FAILURE);
+@@ -62,13 +108,12 @@ inline po::variables_map helper(int argc, char** argv)
+         ("domain_id,i", po::value<int>(&config.domain_id), "DDS domain ID; -i 0")
+         ("network,n", po::value<std::string>(&config.interface), "DDS network interface; -n eth0")
+         ("robot,r", po::value<std::string>(&config.robot), "Robot type; -r go2")
+-        ("scene,s", po::value<std::filesystem::path>(&config.robot_scene), "Robot scene file; -s scene_terrain.xml")
+-    ;
++        ("scene,s", po::value<std::filesystem::path>(&config.robot_scene), "Robot scene file; -s scene_terrain.xml");
+ 
+     po::variables_map vm;
+     po::store(po::parse_command_line(argc, argv, desc), vm);
+     po::notify(vm);
+-    
++
+     if (vm.count("help"))
+     {
+         std::cout << desc << std::endl;
+@@ -78,4 +123,4 @@ inline po::variables_map helper(int argc, char** argv)
+     return vm;
+ }
+ 
+-}
+\ No newline at end of file
++} // namespace param

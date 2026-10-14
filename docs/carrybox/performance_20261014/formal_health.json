@@ -1,0 +1,52 @@
+{
+  "checked_local": "2026-10-14T14:41:43.118403+09:00",
+  "pid": 2336376,
+  "num_envs": 4096,
+  "latest_metrics": {
+    "iteration": 2,
+    "collection_s": 19.384,
+    "learning_s": 1.515,
+    "total_s": 20.899,
+    "Mean episode length": 35.93,
+    "Mean amp_valid_samples loss": 78524.0,
+    "AMP/valid_fraction": 0.7988,
+    "Metrics/episode_lift_success": 0.0
+  },
+  "iterations": [
+    {
+      "iteration": 0,
+      "collection_s": 19.997,
+      "learning_s": 2.452,
+      "total_s": 22.448999999999998,
+      "Mean episode length": 23.79,
+      "Mean amp_valid_samples loss": 64123.0,
+      "AMP/valid_fraction": 0.6523,
+      "Metrics/episode_lift_success": 0.0
+    },
+    {
+      "iteration": 1,
+      "collection_s": 19.64,
+      "learning_s": 1.522,
+      "total_s": 21.162,
+      "Mean episode length": 37.17,
+      "Mean amp_valid_samples loss": 69387.0,
+      "AMP/valid_fraction": 0.7058,
+      "Metrics/episode_lift_success": 0.0
+    },
+    {
+      "iteration": 2,
+      "collection_s": 19.384,
+      "learning_s": 1.515,
+      "total_s": 20.899,
+      "Mean episode length": 35.93,
+      "Mean amp_valid_samples loss": 78524.0,
+      "AMP/valid_fraction": 0.7988,
+      "Metrics/episode_lift_success": 0.0
+    }
+  ],
+  "checkpoint_finite": true,
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_14-36-28_wall4_4096_camfast_20261014_143621/model_0.pt",
+  "run_directory": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_14-36-28_wall4_4096_camfast_20261014_143621",
+  "status": "RUNNING",
+  "trained_success": "not_established"
+}

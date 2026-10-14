@@ -1,0 +1,35 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_carrybox*.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "92f70112e537d24b924ce67a25ba6bc941f6e81f0943e1b23723badcdbb5cfe4",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "699645a91888e1757896508c352a6872e4d6a0401c90647d63a9dd3a10a94cb6",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash scripts/rsl_rl/smoke_carrybox_walled.sh",
+      "result": "FAIL",
+      "exit_code": 137,
+      "executed": true,
+      "receipt_sha256": "20b4d65f83caa4c9b078e5dddba8095ded41f03e7fd51031d05b37d3da214d98",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "0c41b22fd6797fe64f44ebfe5cf82d2421940fee4d7241df73db51b451c1e15f",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python scripts/rsl_rl/queue_wall4.py --check-only",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "723dcc9082604a00fbdf372516fe2da14e2a65fbd939adb2fe862256bb07f7f6",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "9ee77c6ba380bf657bfac6243616209dfb3c0dae305382cc9f7d4b2b4e3788e0",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "frames": 120,
+  "video_fps": 10,
+  "video_duration_s": 12.0,
+  "video_size": [
+    1200,
+    700
+  ],
+  "decoded_frames": 120,
+  "raw_shape": [
+    120,
+    8,
+    27,
+    48
+  ],
+  "policy_hz": 50,
+  "history_step_s": 0.02,
+  "sampled_visible_frames": 107,
+  "preview_time_s": 4.399999999999928,
+  "preview_hit_pixels": 19,
+  "min_hit_depth_m": 1.1202940940856934,
+  "depth_semantics": "v4 analytic ball-only ray distance in metres; 3m=no hit",
+  "video": "depth.mp4",
+  "preview": "depth_preview.png",
+  "raw": "depth_raw.npz"
+}

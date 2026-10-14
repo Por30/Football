@@ -1,0 +1,35 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash scripts/sim2sim/check_unitree_build.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "483e393fc96acd28afca90c94b52d8c2238ae5164b3f58fe79fabfb5b637fd57",
+      "stdout_sha256": "8e313dcef1ab1537b55d85a768e3282c84684e344922e9cc8488ee3f79b0cfaf",
+      "stderr_sha256": "01b6194a6e6277db8876b4ceb348aab6ab94450a912659e60314b3f08afa2d15",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p test_kickball_mujoco.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "e285bbaef756008edc846cd4a06c7d45d16f544eb95777d67efe56c4fafd767f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "cb957aca24ba765eda2ec4d331297c44a6e27f2007615b2f9de3c952b013223a",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/umr/bin/python scripts/sim2sim/kickball_mujoco.py --headless --duration 10 --output docs/agilekickball_v4/sim2sim_20261014/smoke.json",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "b919f09b6b768563ffa14617dcc8c0b1af7400c054f153eeae27afbfaf76fc79",
+      "stdout_sha256": "6f708e4771e0ea516979c7c1476b4c7b5def73528f810a59b3f887eacb679267",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

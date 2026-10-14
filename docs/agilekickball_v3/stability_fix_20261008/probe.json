@@ -1,0 +1,71 @@
+{
+  "num_states": 512,
+  "raw_logstd_below_min_fraction_per_dim": [
+    1.0,
+    1.0,
+    1.0,
+    0.109375,
+    0.390625,
+    0.966796875
+  ],
+  "raw_logstd_above_max_fraction_per_dim": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "raw_logstd_min_per_dim": [
+    -5.608880519866943,
+    -5.793730735778809,
+    -6.017553329467773,
+    -8.12423038482666,
+    -9.323873519897461,
+    -9.064665794372559
+  ],
+  "raw_logstd_max_per_dim": [
+    -4.214146137237549,
+    -4.181033134460449,
+    -4.708337306976318,
+    -1.833013653755188,
+    -1.7012546062469482,
+    -3.72428560256958
+  ],
+  "nll_mean_per_dim": [
+    -3.9441184997558594,
+    -3.942732334136963,
+    -3.864114761352539,
+    -2.7598962783813477,
+    -3.3796916007995605,
+    -3.8729732036590576
+  ],
+  "mean_error_weight_per_dim": [
+    2980.957275390625,
+    2980.957275390625,
+    2980.957275390625,
+    1588.7205810546875,
+    2017.243896484375,
+    2964.596435546875
+  ],
+  "nll_encoder_gradient_norm": 3.6128928661346436,
+  "half_normalized_mse_encoder_gradient_norm": 0.002639921149238944,
+  "nll_to_half_normalized_mse_encoder_grad_ratio": 1368.5609008345552,
+  "termination_after_prior_kick_pulse": 35,
+  "termination_without_prior_kick_pulse": 0,
+  "note": "Actual sampled-state diagnostic. Gradient ratio does not alone establish training causality.",
+  "one_aux_step_trials": [
+    {
+      "lr": 0.001,
+      "same_state_action_kl_unbacktracked": 0.02963276393711567
+    },
+    {
+      "lr": 0.0001,
+      "same_state_action_kl_unbacktracked": 0.00031617606873624027
+    },
+    {
+      "lr": 1e-05,
+      "same_state_action_kl_unbacktracked": 3.1765250696480507e-06
+    }
+  ]
+}

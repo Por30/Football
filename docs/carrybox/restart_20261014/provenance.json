@@ -1,0 +1,13 @@
+{
+  "git_head": "2cf3ccb88b0a8939339f33bbec36ee0b2b86ef83",
+  "files": {
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "9fe193ff45620e58eb62cb7a679a1475b885b4378eafb298b6446c9945174c63",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "52cb775f465cf808783f1eefc44b706b3957eb6de1b8b80bd7bdb5c900da90a3",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_env_cfg.py": "ba3e4bfc287783b7cfafc19c8a993988f1618e32981bba0dcda04450778e3463",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py": "91f93dceafd944f36eb8647760642acde676d889ac1714abf7f2c9d5d32c7a01",
+    "source/perceptual_ball/perceptual_ball/carrybox_amp.py": "5a5fac952934b494529c71959960927528d53c81d09182bd7c8a9e62509da3a4",
+    "findbox/amp_manifest.json": "eef4d55d77eb26b46fd1be58da628edd07920f5e02198a7636c2e83253e5cb3c"
+  },
+  "dataset_clips": 17,
+  "dataset_hashes_verified": true
+}

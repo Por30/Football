@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "checked_local": "2026-10-14T15:09:05.399551+09:00",
+  "pid": 2341959,
+  "process_identity": true,
+  "num_envs": 4096,
+  "num_steps_per_env": 24,
+  "formal_iterations": [
+    [
+      16.301,
+      2.431
+    ],
+    [
+      16.12,
+      1.504
+    ],
+    [
+      15.911,
+      1.513
+    ]
+  ],
+  "last_complete_iteration": 2,
+  "finite_policy_amp": true,
+  "checkpoint_schema": 2,
+  "environment_revision": 4,
+  "target_met": false
+}

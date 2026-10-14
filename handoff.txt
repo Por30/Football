@@ -1,0 +1,89 @@
+FindBox walled3 / walled4 复现说明
+
+本文只描述 x2_findbox_depth_v2_5_random_finetune_walled3 与 ...walled4。复现时应以仓库对应任务代码为准；wall3 和 wall4 是基于 FindBox finetune 任务逐层继承的配置/环境变体，不是独立重写的环境。
+共同基础（从父任务继承）
+- 控制：X2 29 自由度位置目标控制，仿真 `dt=0.005s`、decimation=4，即 200Hz 物理仿真、50Hz policy 控制。
+- 相机：头部深度相机 48×27，垂直视场角 58°，有效距离 0.1–3.0m，每 0.02s 更新；从 v2.5 起还带相机安装误差、深度噪声、随机延迟与短时冻结等传感器扰动。wall3/wall4 没有改变相机分辨率或观测维度。
+- 箱子：loco 初始化时箱子在前方 ±45°、距离 0.7–2.0m；finetune 版取消尺寸随机化，保留姿态随机化，倾斜最大 30°，并计算箱体倾斜后的最低点以保证贴地。
+- 策略观测：actor 使用本体感知+深度图历史；critic 额外获得特权状态。墙和圆柱加入深度 ray target 列表，因此可见且可碰撞，但不引入专门的避障奖励。
+- AMP 初始化技能概率：`loco=0.8, pickUp=0.15, carryWith=0.05, putDown=0.0`；`putDown` 参考片段仍可作为判别器专家数据。
+- ** episode/终止**：每回合上限 20s（约1000个policy步）。继承的失败条件包括超时、roll>0.5、|pitch|>1.1、root z<0.2m、head z<0.4m；成功判定用于奖励/统计，不会因为找到箱子立即重置。wall3/wall4 没有额外终止条件。
+wall3 实现
+场景和 reset
+1. 继承 wall2 的一面运动学墙：尺寸 0.2×8.0×3.0m，可碰撞、禁重力；每回合距机器人 3–4m，bearing 全圆随机，长面朝向机器人。
+2. 新增 3 个圆柱（person-sized 静态代理）：半径 0.15m、高 1.8m，运动学刚体、禁重力、可碰撞；地面中心高度 z=0.9m。它们不会主动移动。
+3. 每个圆柱独立采样中心：相对机器人 root 的半径 U[2.2,3.2)m、bearing U[0,2π)；朝向单位四元数，线/角速度清零。圆柱距离下限高于正常箱子最大初始距离，降低与箱子重叠的概率。
+4. 三个圆柱和墙都加入 depth_wall_prim_exprs，使 ray-cast 深度传感器可见这些障碍。
+5. reset 顺序：父类先重置机器人、箱子/平台和 wall2 墙；随后 wall3 放置圆柱。不要在父类 reset 之前生成圆柱，否则机器人/箱子的本回合位置可能尚未更新。
+箱子 yaw 难度课程
+- tilt 保持 finetune 的最大 ±30°。
+- yaw 随有效训练迭代线性增大：10° → 180°，课程长度 8000 iter；之后保持 180°。
+- 初始化阶段（runner 尚无 training iteration）用 10°。首次获得真实训练迭代时记录课程锚点，再从锚点开始计 8000 iter。warm-start 时也从当前训练进程的锚点重新走课程，而非直接按 checkpoint 的绝对迭代数跳级。
+- _reset_boxes 每次记录当前 yaw range 到 Curriculum/box_yaw_range_deg。
+奖励变化
+wall3 继承 FindBox finetune 奖励，并新增以下项；同时把继承的 torque_limits 设为 None，因此基础的 applied-torque-limit 惩罚不再启用。
+
+奖励项
+配置
+计算/门控
+held_hand_speed
+weight -2e-2，阈值 1.0 rad/s
+对双臂关节超阈速度的平方 excess 取均值；仅 held phase 生效
+held_hand_acc
+weight -2e-5，阈值 20.0 rad/s²
+对双臂关节超阈加速度的平方 excess 取均值；仅 held phase 生效
+waist_yaw_penalty
+weight -0.5
+waist_yaw_joint 相对默认角度的 L1 偏差
+
+双臂关节集合沿用父配置的 shoulder/elbow/wrist 关节名模式。held phase 定义为箱子高度 >0.55m 且双手中心到箱子距离 <0.15m。这只是奖励门控，不等同于任务成功判定。
+
+注意：代码里虽然定义了 applied_torque_over_limit_widened 函数，但没有任何 RewTerm 接入它；wall3/wall4 实际没有所谓的“放宽到 1.5 倍力矩阈值”。复现时不要把未注册的函数当作有效奖励。
+wall4 继承 wall3 的墙、圆柱、箱子姿态、相机、held-phase 惩罚及全部终止逻辑，只增加三项：
+1. 视野外箱子初始化
+
+- search_prob=0.02，只对本回合初始化技能为 loco 的环境抽样；其他技能不参与。
+- 被抽中的箱子 bearing 相对机器人朝向取 ±U[60°,180°)，左右符号各半，确保初始位置在相机 ±45°水平视场之外。
+- 距离取 U[0.9,2.0)m。箱子移到该位置后同步更新 platform 的 XY，保持平台和箱子状态一致。
+- 未被抽中的环境沿用 wall3 的普通箱子初始化。每回合清空并重新采样 search 标记。
+- 搜索箱子进入视野/接近箱子后仍用原 FindBox walk/pickup 奖励；没有独立的“搜索状态机”或额外终止条件。
+2.`search_turn` 奖励
+
+配置 weight +0.5。仅当该环境被标记为 search、箱子 bearing error>45°、且机器人到箱距离>0.7m 时启用。
+
+bearing_error = abs(wrap_to_pi(target_heading - robot_heading))
+heading_reward = exp(-0.75 * bearing_error)
+desired_dir = sign(wrap_to_pi(target_heading - robot_heading))
+turn_reward = clamp(desired_dir * body_yaw_rate, min=0)
+search_turn = 0.7 * heading_reward + 0.3 * tanh(turn_reward)
+
+其他情况奖励为 0。第一项让机器人朝向目标，第二项只奖励朝正确方向的原地转动；0.7m 门控距离沿用 AMP 配置的 thresh_robot2object。
+
+3. 分段箱子 yaw 课程
+
+wall4 替换 wall3 的单段课程，使用分段线性课程：
+
+有效训练迭代
+yaw 范围上限
+0
+0°
+10,000
+10°
+20,000
+30°
+30,000 及以后
+40°
+
+相邻锚点之间线性插值，两端 clamp。构造/初始化阶段返回 0°；首次真实训练迭代建立锚点。tilt 仍为 ±30°。
+
+未改变的部分
+
+wall4 不改变 wall3 的障碍物尺寸/采样、depth targets、held-hand speed/acc 阈值与权重、waist yaw 惩罚、torque 配置、episode 时长或 reset 终止规则。
+
+- 两个任务的 agent config 只覆写 run_name（walled3 / walled4）；experiment_name 继承 finetune 配置，默认都不是独立的实验目录。复现者需要通过 CLI 明确指定正确的 resume/load_run/checkpoint，避免误加载另一变体的 checkpoint。
+- 主要源文件：
+  - wall3：legged_lab/envs/x2/TASKS/findbox_depth_v2_5_random_finetune_walled3/
+  - wall4：legged_lab/envs/x2/TASKS/findbox_depth_v2_5_random_finetune_walled4/
+  - 父场景：.../findbox_depth_v2_5_random_finetune_walled2/
+  - 箱子初始化与 finetune 奖励：.../findbox_depth_v2_5_random_finetune/
+  - 深度相机基线：legged_lab/envs/x2/TASKS/hold_box_depth_v6/x2_config.py

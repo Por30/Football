@@ -1,0 +1,97 @@
+{
+  "agent": [
+    [
+      "/policy/class_name",
+      "PerceptionActorCritic",
+      "OutcomeActorCritic"
+    ],
+    [
+      "/algorithm/outcome_max_samples",
+      null,
+      "8192"
+    ],
+    [
+      "/algorithm/outcome_batch_size",
+      null,
+      "2048"
+    ],
+    [
+      "/algorithm/outcome_aux_coef",
+      null,
+      "0.1"
+    ],
+    [
+      "/algorithm/outcome_aux_lr",
+      null,
+      "0.0001"
+    ],
+    [
+      "/algorithm/class_name",
+      "BallRegressionPPO",
+      "ContactOutcomePPO"
+    ],
+    [
+      "/algorithm/outcome_horizon",
+      null,
+      "8"
+    ],
+    [
+      "/algorithm/outcome_max_kl",
+      null,
+      "0.005"
+    ],
+    [
+      "/experiment_name",
+      "agilekickball_v2",
+      "agilekickball_v3"
+    ],
+    [
+      "/run_name",
+      "v1_speed_only_20260925_scratch",
+      "contact_outcome_20261003_scratch"
+    ]
+  ],
+  "env": [
+    [
+      "/events/setup_kickball_state/params/revision",
+      "v1_speed_only_20260925",
+      "contact_outcome_20261003"
+    ],
+    [
+      "/events/setup_kickball_state/func",
+      "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.agilekickball_v2:setup_agilekickball_v2",
+      "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.agilekickball_v3:setup_agilekickball_v3"
+    ],
+    [
+      "/observations/outcome_state",
+      null,
+      {
+        "concatenate_terms": "true",
+        "concatenate_dim": "-1",
+        "enable_corruption": "false",
+        "history_length": "null",
+        "flatten_history_dim": "true",
+        "state": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.agilekickball_v3:outcome_training_state",
+          "params": {},
+          "modifiers": "null",
+          "noise": "null",
+          "clip": "null",
+          "scale": "null",
+          "history_length": "0",
+          "flatten_history_dim": "true"
+        }
+      }
+    ],
+    [
+      "/log_dir",
+      "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v2/2026-09-25_22-18-55_v1_speed_only_20260925_scratch",
+      "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v3/2026-10-03_23-56-27_contact_outcome_20261003_scratch"
+    ],
+    [
+      "/terminations/walked_away/params/max_dist",
+      "0.6",
+      "1.2"
+    ]
+  ]
+}

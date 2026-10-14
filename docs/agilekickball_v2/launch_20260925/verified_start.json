@@ -1,0 +1,15 @@
+{
+  "pid": 9824,
+  "run_directory": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v2/2026-09-25_22-18-55_v1_speed_only_20260925_scratch",
+  "stdout_log": "/home/cao/perceptual_ball/logs/background/agilekickball_v2_20260925_221850.log",
+  "last_verified_iteration": 12,
+  "revision": "v1_speed_only_20260925",
+  "schema": 5,
+  "num_envs": 4096,
+  "max_iterations": 50000,
+  "seed": 42,
+  "device": "cuda:0",
+  "resume": false,
+  "checkpoint_0_control_steps": 24,
+  "tensorboard_scalars_written": true
+}

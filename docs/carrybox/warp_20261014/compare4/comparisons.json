@@ -1,0 +1,170 @@
+[
+  {
+    "name": "reset",
+    "max_m": 0.00012946128845214844,
+    "mean_m": 1.2966223948751576e-05,
+    "interior_max_m": 0.00012946128845214844,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_0",
+    "max_m": 0.00014162063598632812,
+    "mean_m": 1.3338562894205097e-05,
+    "interior_max_m": 0.00014162063598632812,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_1",
+    "max_m": 0.00015306472778320312,
+    "mean_m": 1.348660316580208e-05,
+    "interior_max_m": 0.00011420249938964844,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_2",
+    "max_m": 0.00013518333435058594,
+    "mean_m": 1.3342431884666439e-05,
+    "interior_max_m": 0.00011837482452392578,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_3",
+    "max_m": 0.00015413761138916016,
+    "mean_m": 1.3523833331419155e-05,
+    "interior_max_m": 0.00015413761138916016,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_4",
+    "max_m": 0.00012373924255371094,
+    "mean_m": 1.3098511772113852e-05,
+    "interior_max_m": 0.000118255615234375,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_5",
+    "max_m": 0.0001323223114013672,
+    "mean_m": 1.313399388891412e-05,
+    "interior_max_m": 0.00011301040649414062,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_6",
+    "max_m": 0.00013637542724609375,
+    "mean_m": 1.3489230695995502e-05,
+    "interior_max_m": 0.0001302957534790039,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_7",
+    "max_m": 0.00013327598571777344,
+    "mean_m": 1.3468856195686385e-05,
+    "interior_max_m": 0.00013327598571777344,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "partial_reset",
+    "max_m": 0.000148773193359375,
+    "mean_m": 1.0470210327184759e-05,
+    "interior_max_m": 0.00013327598571777344,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_8",
+    "max_m": 0.00016427040100097656,
+    "mean_m": 1.031938154483214e-05,
+    "interior_max_m": 0.00016427040100097656,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_9",
+    "max_m": 0.00012683868408203125,
+    "mean_m": 9.671129191701766e-06,
+    "interior_max_m": 0.00011467933654785156,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_10",
+    "max_m": 0.00013828277587890625,
+    "mean_m": 8.965242159320042e-06,
+    "interior_max_m": 0.00013828277587890625,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_11",
+    "max_m": 0.00013518333435058594,
+    "mean_m": 8.831056220515165e-06,
+    "interior_max_m": 0.00011849403381347656,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_12",
+    "max_m": 0.00013875961303710938,
+    "mean_m": 7.905830898380373e-06,
+    "interior_max_m": 0.00012826919555664062,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_13",
+    "max_m": 0.00012028217315673828,
+    "mean_m": 7.098052265064325e-06,
+    "interior_max_m": 0.00012028217315673828,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_14",
+    "max_m": 0.0001285076141357422,
+    "mean_m": 5.979372872388922e-06,
+    "interior_max_m": 0.00012373924255371094,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_15",
+    "max_m": 0.0001251697540283203,
+    "mean_m": 5.350494120648364e-06,
+    "interior_max_m": 0.0001251697540283203,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "visible_box",
+    "max_m": 0.00011074542999267578,
+    "mean_m": 5.118296030559577e-06,
+    "interior_max_m": 1.1920928955078125e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "wall",
+    "max_m": 1.430511474609375e-06,
+    "mean_m": 9.360826993543014e-07,
+    "interior_max_m": 1.430511474609375e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "wall_hidden_move",
+    "max_m": 1.430511474609375e-06,
+    "mean_m": 9.360826993543014e-07,
+    "interior_max_m": 1.430511474609375e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "cylinder0",
+    "max_m": 0.00011074542999267578,
+    "mean_m": 4.715596787718823e-06,
+    "interior_max_m": 1.3113021850585938e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "cylinder0_hidden_move",
+    "max_m": 0.00011074542999267578,
+    "mean_m": 4.715596787718823e-06,
+    "interior_max_m": 1.3113021850585938e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "self_occlusion",
+    "max_m": 0.0001405477523803711,
+    "mean_m": 6.951564046175918e-06,
+    "interior_max_m": 3.2186508178710938e-06,
+    "fraction_over_2cm": 0.0
+  }
+]

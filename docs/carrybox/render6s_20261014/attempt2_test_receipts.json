@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_carrybox*.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "92f70112e537d24b924ce67a25ba6bc941f6e81f0943e1b23723badcdbb5cfe4",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c1cb7f76b1eb5bad6aba694943589946c907f4c27752c608c0530e73517dc4d6",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash scripts/rsl_rl/benchmark_carrybox_render.sh",
+      "result": "FAIL",
+      "exit_code": 137,
+      "executed": true,
+      "receipt_sha256": "b6814f0c3ee0117940c8269a15dc45f0b012147a1a0682b89883a4b2d4570f58",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "60ed03223439f54d58f8d91c0f35be25b0e6de95f1d86f831c1b5633d6824c5f",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

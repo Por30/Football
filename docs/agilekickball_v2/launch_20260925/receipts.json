@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/agilekickball_v2/launch_20260925/verify_start.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "201269e96968beab1fa32a77692b6042bb5f2d06384075b76b81a80603277c41",
+      "stdout_sha256": "419d9b2993a13344bbff6610a86309962208d488e52dfd7225a7b4a7acd5623e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

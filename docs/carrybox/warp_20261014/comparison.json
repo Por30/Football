@@ -1,0 +1,14 @@
+{
+  "warm_mean_s": 4.098675036430359,
+  "warm_min_s": 4.065918922424316,
+  "warm_max_s": 4.166252613067627,
+  "warm_count": 10,
+  "target_s": 6.0,
+  "target_met": true,
+  "rtx_recent_mean_s": 17.2551,
+  "football_recent_total_s": 2.47,
+  "football_depth": "analytic ball sphere only; no scene occlusion",
+  "meshes": 43,
+  "rtx_warp_max_depth_error_m": 0.00016427040100097656,
+  "cpu_tests": 24
+}

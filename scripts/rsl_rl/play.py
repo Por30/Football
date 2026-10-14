@@ -81,6 +81,7 @@ from isaaclab_tasks.utils.hydra import hydra_task_config
 
 import perceptual_ball.tasks  # noqa: F401
 from perceptual_ball.rsl_rl_extensions import BallRegressionOnPolicyRunner
+from perceptual_ball.rsl_rl_extensions.carrybox import CarryBoxOnPolicyRunner
 
 
 @hydra_task_config(args_cli.task, args_cli.agent)
@@ -146,6 +147,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         runner = OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     elif agent_cfg.class_name == "DistillationRunner":
         runner = DistillationRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
+    elif agent_cfg.class_name == "CarryBoxOnPolicyRunner":
+        runner = CarryBoxOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     elif agent_cfg.class_name == "BallRegressionOnPolicyRunner":
         runner = BallRegressionOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     else:
@@ -202,6 +205,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
             "action_scale": 0.25, "clip_actions": agent_cfg.clip_actions,
             "default_joint_positions": robot.data.default_joint_pos[0].cpu().tolist(),
             "action_offset": term._offset[0].cpu().tolist(),
+            "depth_contract": getattr(env.unwrapped, "depth_contract", None),
         })
     else:
         export_policy_as_jit(policy_nn, normalizer=normalizer, path=export_model_dir, filename="policy.pt")

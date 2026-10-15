@@ -42,18 +42,8 @@
   "clips": [
     {
       "file": "carryWith/carrywith1.pt",
-      "frames": 256,
-      "sha256": "da7e7cb38bcc2324a9d6aeac347dfb94d567f624a4d0c8cb86f22c860bffafb9"
-    },
-    {
-      "file": "carryWith/carrywith2.pt",
-      "frames": 194,
-      "sha256": "a35d464857092be005533adbfbe5b4e77ae637f8616210ddeb342f7fdd886ff0"
-    },
-    {
-      "file": "carryWith/carrywith3.pt",
-      "frames": 323,
-      "sha256": "1f0868733cee5eafeb85f72fd2975c521f8d6d085f7961541c1f55f505c55d29"
+      "frames": 300,
+      "sha256": "ac0e873274b3425925b218ccbd682e59590210363754c39bc78092231be273e8"
     },
     {
       "file": "loco_direction/B10_-_walk_turn_left_(45)_stageii.pt",
@@ -125,5 +115,11 @@
       "frames": 129,
       "sha256": "cd54f21376d77ea7d6cccb662b5ea2ae53b68ca7a61528742e40ef0c2cdf30f5"
     }
-  ]
+  ],
+  "dataset_revision": 2,
+  "dataset_version": "carrywith1_prefix_hold_v1",
+  "provenance": {
+    "previous_manifest_sha256": "eef4d55d77eb26b46fd1be58da628edd07920f5e02198a7636c2e83253e5cb3c",
+    "edit_record": "docs/carrybox/amp_hold_20261014/edit_record.json"
+  }
 }

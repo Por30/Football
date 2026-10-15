@@ -1,0 +1,19 @@
+{
+  "schema_version": 3,
+  "flat_groups": [
+    "proprio"
+  ],
+  "flat_group_dims": [
+    372
+  ],
+  "depth_shape": [
+    4,
+    27,
+    48
+  ],
+  "depth_order": "oldest_to_newest",
+  "proprio_history_order": "term_major_then_oldest_to_newest",
+  "output": "raw joint action; apply external clip, scale and offset",
+  "includes_ball_state_feedback": false,
+  "metadata": {}
+}

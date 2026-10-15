@@ -1,0 +1,781 @@
+{
+  "status": "PASS",
+  "num_envs": 4,
+  "iterations": 3,
+  "mesh_manifest": [
+    {
+      "root": "/World/envs/env_0/Robot/pelvis",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/pelvis/visuals/pelvis/mesh",
+          "vertices": 63648,
+          "triangles": 21216
+        }
+      ],
+      "digest": "1022cd6e60ffb7713f8148719475c1680551b7654a130a8803c41466c826e3c8",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_hip_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_hip_pitch_link/visuals/left_hip_pitch_link/mesh",
+          "vertices": 10896,
+          "triangles": 3632
+        }
+      ],
+      "digest": "16426ba8286d6d55e71aaf13208e21783519f5b32688f42f7368f98720c97a3c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_hip_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_hip_roll_link/visuals/left_hip_roll_link/mesh",
+          "vertices": 11526,
+          "triangles": 3842
+        }
+      ],
+      "digest": "fbde0bc48b3e5a7f40ed07ca2af8e462ce42c953bb6965524703f97a86f12d4d",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_hip_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_hip_yaw_link/visuals/left_hip_yaw_link/mesh",
+          "vertices": 17772,
+          "triangles": 5924
+        }
+      ],
+      "digest": "f28f157d32bcbda4c2b3e4b546228ad88c6d1d5207beacd05136414af09ee9bb",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_knee_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_knee_link/visuals/left_knee_link/mesh",
+          "vertices": 51288,
+          "triangles": 17096
+        }
+      ],
+      "digest": "d0fb5359182fc0d60bf954d24447a848be161ec123f2909c9e178410fd70005c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_ankle_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_ankle_pitch_link/visuals/left_ankle_pitch_link/mesh",
+          "vertices": 4266,
+          "triangles": 1422
+        }
+      ],
+      "digest": "84e052b3c72ddefbf136724c8298a8424025f83a76a650bb0fb1b2123e2b5024",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_ankle_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_ankle_roll_link/visuals/left_ankle_roll_link/mesh",
+          "vertices": 39198,
+          "triangles": 13066
+        }
+      ],
+      "digest": "f460c1b829d230a25e3df388d860bef5cbfe99c2989a8d9b0ee30ae53eded1af",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/pelvis_contact_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/pelvis_contact_link/visuals/mesh_0/sphere",
+          "vertices": 7936,
+          "triangles": 15360
+        }
+      ],
+      "digest": "1abf2429b524469312249a6eae73ee4a382cc38445b006600aff63500b44ebd8",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/pelvis_contour_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/pelvis_contour_link/visuals/pelvis_contour_link/mesh",
+          "vertices": 108306,
+          "triangles": 36102
+        }
+      ],
+      "digest": "52b0f8cd56e253d31570cbcef61da38bfdab5b217580347693f8a9e14fd1fe4c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_hip_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_hip_pitch_link/visuals/right_hip_pitch_link/mesh",
+          "vertices": 10872,
+          "triangles": 3624
+        }
+      ],
+      "digest": "77cbee941fd6d7f24fe9c0e3d318f408aa654b37cc4f64ae7ed893e42bd21e78",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_hip_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_hip_roll_link/visuals/right_hip_roll_link/mesh",
+          "vertices": 11556,
+          "triangles": 3852
+        }
+      ],
+      "digest": "e1c9af298277b62db1f3e9159bb5ef5d943886595e6881baca3df9151265beee",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_hip_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_hip_yaw_link/visuals/right_hip_yaw_link/mesh",
+          "vertices": 17772,
+          "triangles": 5924
+        }
+      ],
+      "digest": "77d46c1999e80c8fcf443751965b675803cefea576716d27e08631f179d50a7a",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_knee_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_knee_link/visuals/right_knee_link/mesh",
+          "vertices": 51132,
+          "triangles": 17044
+        }
+      ],
+      "digest": "eaa13a7d8c58f82c6d79688680c6252bc6e6e183da3f7626e23944e9cab3e286",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_ankle_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_ankle_pitch_link/visuals/right_ankle_pitch_link/mesh",
+          "vertices": 4266,
+          "triangles": 1422
+        }
+      ],
+      "digest": "9de0e9cbb886954e305b9b8bbe049f4c9e76e4e82dcccea087047fb4e0d8686b",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_ankle_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_ankle_roll_link/visuals/right_ankle_roll_link/mesh",
+          "vertices": 39222,
+          "triangles": 13074
+        }
+      ],
+      "digest": "77c54d444152a4519890ee6172e1f2fc7aafa2534396a0be2aeeec45b0c093d0",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/waist_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/waist_yaw_link/visuals/waist_yaw_link_rev_1_0/mesh",
+          "vertices": 37194,
+          "triangles": 12398
+        }
+      ],
+      "digest": "1c3148f195d0729c798d3c2e3233864fa76ad39c3f5503192fd552d70d78f8ac",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/waist_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/waist_roll_link/visuals/waist_roll_link_rev_1_0/mesh",
+          "vertices": 5148,
+          "triangles": 1716
+        }
+      ],
+      "digest": "9c77218363f6193fe9be3f03f6bc0c8bd824b4f02682fd4a1d80e6e4cc6a0dda",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/torso_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/torso_link/visuals/torso_link_rev_1_0/mesh",
+          "vertices": 154230,
+          "triangles": 51410
+        }
+      ],
+      "digest": "6c329168e318e83de6306d3187d3b7a8af001be961291a3a6b357d3388e95981",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/head_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/head_link/visuals/head_link/mesh",
+          "vertices": 55962,
+          "triangles": 18654
+        }
+      ],
+      "digest": "685eafc700fba095c03983a099e31b1c86d47fac18557bb6b862c3bb593704e0",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_shoulder_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_shoulder_pitch_link/visuals/left_shoulder_pitch_link/mesh",
+          "vertices": 10602,
+          "triangles": 3534
+        }
+      ],
+      "digest": "01017a8db68f2519da50bc3316b662c3bba6393b5e89b4a2421db9351d497a37",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_shoulder_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_shoulder_roll_link/visuals/left_shoulder_roll_link/mesh",
+          "vertices": 24012,
+          "triangles": 8004
+        }
+      ],
+      "digest": "bc3f2357ac6dd0b399d6a688de4b71baf87f7da3684f6f4664903eb28a9992db",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_shoulder_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_shoulder_yaw_link/visuals/left_shoulder_yaw_link/mesh",
+          "vertices": 14946,
+          "triangles": 4982
+        }
+      ],
+      "digest": "b0f8f8d95a0c2c9d35a2954c8ef4d9c6f7fba0ded29d056b772d5cb4afc1acba",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_elbow_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_elbow_link/visuals/left_elbow_link/mesh",
+          "vertices": 5322,
+          "triangles": 1774
+        }
+      ],
+      "digest": "0040b0250c191b6e6ce9e0a6719da650c909cb48d4b595169ced31ccce1e0799",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_wrist_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_wrist_roll_link/visuals/left_wrist_roll_link/mesh",
+          "vertices": 21366,
+          "triangles": 7122
+        }
+      ],
+      "digest": "bcd53dd116f111f77743f44ca82dde4d44e7d44ba677c28e61a29f392fa1e35c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_wrist_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_wrist_pitch_link/visuals/left_wrist_pitch_link/mesh",
+          "vertices": 5154,
+          "triangles": 1718
+        }
+      ],
+      "digest": "92bb0918dc0da7167d154b4a2d8c3d333f549941562a7783ea1d05dfed0408c2",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_wrist_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_wrist_yaw_link/visuals/left_wrist_yaw_link/mesh",
+          "vertices": 19116,
+          "triangles": 6372
+        }
+      ],
+      "digest": "99125785290deaa67e9ef458e081ce89573de6d6765027a9fece745a1566fe9a",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/left_rubber_hand",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/left_rubber_hand/visuals/left_rubber_hand/mesh",
+          "vertices": 137244,
+          "triangles": 45748
+        }
+      ],
+      "digest": "40445d8f1063cc8e7cd6336882b40182f274eac915c5c05e57772e2429a0fc7c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/logo_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/logo_link/visuals/logo_link/mesh",
+          "vertices": 14598,
+          "triangles": 4866
+        }
+      ],
+      "digest": "5b3a4784083dbe0cc27940874caed3fbec3bbd4d726bf3ddc17ce63763ffdf5e",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_shoulder_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_shoulder_pitch_link/visuals/right_shoulder_pitch_link/mesh",
+          "vertices": 10602,
+          "triangles": 3534
+        }
+      ],
+      "digest": "28677f47453797c198712e91a51b5f96b99d82fcdc42089d493c385a16c104ab",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_shoulder_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_shoulder_roll_link/visuals/right_shoulder_roll_link/mesh",
+          "vertices": 24108,
+          "triangles": 8036
+        }
+      ],
+      "digest": "b5b2a9367ec7fef024a946293fc3730bb94d6cb0a567d91b7803f775248cc393",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_shoulder_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_shoulder_yaw_link/visuals/right_shoulder_yaw_link/mesh",
+          "vertices": 14994,
+          "triangles": 4998
+        }
+      ],
+      "digest": "70ca825fb507183df33870bce9a91dda6365c185e8792f608d84fedc6aeafdce",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_elbow_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_elbow_link/visuals/right_elbow_link/mesh",
+          "vertices": 5322,
+          "triangles": 1774
+        }
+      ],
+      "digest": "e306a7b2f3f62aa6746455cb65eb4d62746c499255eaa05ed7c941b88f5b3100",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_wrist_roll_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_wrist_roll_link/visuals/right_wrist_roll_link/mesh",
+          "vertices": 21360,
+          "triangles": 7120
+        }
+      ],
+      "digest": "0c6d4999f81a2b7f7eaa3e7109184fe1498f14264609ae40bfc8bf7e1ce4cb24",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_wrist_pitch_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_wrist_pitch_link/visuals/right_wrist_pitch_link/mesh",
+          "vertices": 4770,
+          "triangles": 1590
+        }
+      ],
+      "digest": "af070c2551daaa1bc163993bbe0f71791483b6e71e4023cc027e8b6ade70b26c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_wrist_yaw_link",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_wrist_yaw_link/visuals/right_wrist_yaw_link/mesh",
+          "vertices": 20484,
+          "triangles": 6828
+        }
+      ],
+      "digest": "d6673f0cfd684081646962ce78eabe04702c8cf8e7f3ebd01c728f496862955c",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Robot/right_rubber_hand",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Robot/right_rubber_hand/visuals/right_rubber_hand/mesh",
+          "vertices": 131556,
+          "triangles": 43852
+        }
+      ],
+      "digest": "f4007e18817f19e1ea318d7594b060e015210e37aeb473f77b364506f0159609",
+      "dynamic": true
+    },
+    {
+      "root": "/World/envs/env_0/Ball",
+      "sources": [
+        {
+          "path": "/World/envs/env_0/Ball/geometry/depth_visual",
+          "vertices": 7938,
+          "triangles": 15872
+        }
+      ],
+      "digest": "fb3f420fe4f5ddd89fb7f7aeb0986eedd5e56e9a0743632d935f35ea06980543",
+      "dynamic": true
+    },
+    {
+      "root": "/World/ground",
+      "sources": [
+        {
+          "path": "/World/ground/Environment/Geometry",
+          "vertices": 4,
+          "triangles": 2
+        }
+      ],
+      "digest": "67ae55051184e248153a30f790a20e44777abcb751432081720c9eba1af6d12a",
+      "dynamic": false
+    }
+  ],
+  "comparisons": [
+    {
+      "name": "reset",
+      "max_m": 0.0001533031463623047,
+      "interior_max_m": 0.00014531612396240234,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_0",
+      "max_m": 0.00014162063598632812,
+      "interior_max_m": 0.00013148784637451172,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_1",
+      "max_m": 0.00014543533325195312,
+      "interior_max_m": 0.00012922286987304688,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_2",
+      "max_m": 0.00016355514526367188,
+      "interior_max_m": 0.00011777877807617188,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_3",
+      "max_m": 0.00013184547424316406,
+      "interior_max_m": 0.00011849403381347656,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_4",
+      "max_m": 0.00011587142944335938,
+      "interior_max_m": 0.00011587142944335938,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_5",
+      "max_m": 0.00013136863708496094,
+      "interior_max_m": 0.00012540817260742188,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_6",
+      "max_m": 0.0001347064971923828,
+      "interior_max_m": 0.00011539459228515625,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_7",
+      "max_m": 0.0001552104949951172,
+      "interior_max_m": 0.00012886524200439453,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_8",
+      "max_m": 0.00014090538024902344,
+      "interior_max_m": 0.0001392364501953125,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_9",
+      "max_m": 0.00013685226440429688,
+      "interior_max_m": 0.00013446807861328125,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_10",
+      "max_m": 0.00013637542724609375,
+      "interior_max_m": 0.00013208389282226562,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "motion_11",
+      "max_m": 0.00015115737915039062,
+      "interior_max_m": 0.00011742115020751953,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "reverse_partial_reset",
+      "max_m": 0.00013828277587890625,
+      "interior_max_m": 0.0001169443130493164,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "ball_near",
+      "max_m": 0.00012373924255371094,
+      "interior_max_m": 1.3113021850585938e-06,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "ball_far",
+      "max_m": 0.00012373924255371094,
+      "interior_max_m": 1.6689300537109375e-06,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "body_blocks_ball",
+      "max_m": 0.00012600421905517578,
+      "interior_max_m": 2.9802322387695312e-06,
+      "fraction_over_2cm": 0.0
+    },
+    {
+      "name": "hidden_ball_moved",
+      "max_m": 0.00012600421905517578,
+      "interior_max_m": 2.9802322387695312e-06,
+      "fraction_over_2cm": 0.0
+    }
+  ],
+  "depth_contract": {
+    "schema": 1,
+    "backend": "warp_visual_mesh",
+    "geometry": "all_visible_rigid_links_ball_ground_v1",
+    "profile": {
+      "schema": 1,
+      "calibration_status": "nominal_unverified",
+      "calibration_evidence": null,
+      "parent_link": "torso_link",
+      "position_m": [
+        0.0576235,
+        0.01753,
+        0.42987
+      ],
+      "quaternion_wxyz_world": [
+        0.9149596678498247,
+        0.0,
+        0.40354529635239006,
+        0.0
+      ],
+      "source_width": 48,
+      "source_height": 27,
+      "source_intrinsics": [
+        24.354644696164222,
+        24.354644696164222,
+        23.5,
+        13.0
+      ],
+      "crop_xywh": [
+        0,
+        0,
+        48,
+        27
+      ],
+      "width": 48,
+      "height": 27,
+      "near_m": 0.1,
+      "far_m": 3.0,
+      "update_period_s": 0.02,
+      "depth_unit_m": 0.001,
+      "rectified": true,
+      "distortion": "rectified_before_input",
+      "resize": "nearest_exact",
+      "invalid": "nonfinite_or_nonpositive_to_far",
+      "depth_semantics": "optical_z_metres",
+      "history_length": 8
+    },
+    "target_intrinsics": [
+      24.354644696164222,
+      24.354644696164222,
+      23.5,
+      13.0
+    ],
+    "output": "optical_z_metres",
+    "normalization": "none",
+    "history_order": "oldest_to_newest",
+    "feedback_gate": "valid_depth_recency_and_predicted_uncertainty_not_ball_visibility",
+    "training_randomization": {
+      "schema": 1,
+      "training_only": true,
+      "gains": {
+        "enabled": true,
+        "kp_scale_range": [
+          0.9,
+          1.1
+        ],
+        "kd_scale_range": [
+          0.9,
+          1.1
+        ],
+        "sampling": "independent_per_joint_per_environment_per_reset_from_nominal",
+        "joint_names": [
+          "left_hip_pitch_joint",
+          "right_hip_pitch_joint",
+          "waist_yaw_joint",
+          "left_hip_roll_joint",
+          "right_hip_roll_joint",
+          "waist_roll_joint",
+          "left_hip_yaw_joint",
+          "right_hip_yaw_joint",
+          "waist_pitch_joint",
+          "left_knee_joint",
+          "right_knee_joint",
+          "left_shoulder_pitch_joint",
+          "right_shoulder_pitch_joint",
+          "left_ankle_pitch_joint",
+          "right_ankle_pitch_joint",
+          "left_shoulder_roll_joint",
+          "right_shoulder_roll_joint",
+          "left_ankle_roll_joint",
+          "right_ankle_roll_joint",
+          "left_shoulder_yaw_joint",
+          "right_shoulder_yaw_joint",
+          "left_elbow_joint",
+          "right_elbow_joint",
+          "left_wrist_roll_joint",
+          "right_wrist_roll_joint",
+          "left_wrist_pitch_joint",
+          "right_wrist_pitch_joint",
+          "left_wrist_yaw_joint",
+          "right_wrist_yaw_joint"
+        ],
+        "nominal_kp": [
+          150.0,
+          150.0,
+          300.0,
+          150.0,
+          150.0,
+          300.0,
+          150.0,
+          150.0,
+          300.0,
+          300.0,
+          300.0,
+          200.0,
+          200.0,
+          40.0,
+          40.0,
+          200.0,
+          200.0,
+          40.0,
+          40.0,
+          200.0,
+          200.0,
+          100.0,
+          100.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0,
+          20.0
+        ],
+        "nominal_kd": [
+          2.0,
+          2.0,
+          4.0,
+          2.0,
+          2.0,
+          4.0,
+          2.0,
+          2.0,
+          4.0,
+          4.0,
+          4.0,
+          3.0,
+          3.0,
+          1.0,
+          1.0,
+          3.0,
+          3.0,
+          1.0,
+          1.0,
+          3.0,
+          3.0,
+          1.0,
+          1.0,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      },
+      "depth": {
+        "enabled": true,
+        "ranges": {
+          "scale_range": [
+            0.99,
+            1.01
+          ],
+          "bias_m_range": [
+            -0.005,
+            0.005
+          ],
+          "sigma_m_range": [
+            0.001,
+            0.005
+          ],
+          "sigma_distance_range": [
+            0.0,
+            0.001
+          ],
+          "hole_probability_range": [
+            0.0,
+            0.005
+          ],
+          "edge_hole_probability_range": [
+            0.0,
+            0.02
+          ],
+          "edge_threshold_m": 0.1
+        },
+        "parameters": "per_environment_per_reset",
+        "noise": "once_per_sensor_capture",
+        "sigma_m": "sigma_m + sigma_distance * optical_z_m**2",
+        "miss_and_hole": "far=3m",
+        "geometry": "noise_after_nearest_surface_no_background_reveal"
+      }
+    }
+  },
+  "randomization_timings": {
+    "gain_reset_4env_mean_ms": 3.243301622569561,
+    "noise_4env_mean_ms": 0.1713645877316594
+  },
+  "hardware_calibration_verified": false,
+  "formal_training_started": false
+}

@@ -11,7 +11,7 @@ from matplotlib.figure import Figure
 
 class LiveDepthWindow:
     """Nonblocking Tk window; closing it leaves the MuJoCo simulation running."""
-    def __init__(self):
+    def __init__(self, speed=2.):
         import tkinter as tk
         from PIL import Image, ImageTk
         self.Image, self.ImageTk = Image, ImageTk
@@ -21,6 +21,7 @@ class LiveDepthWindow:
         self.root.protocol('WM_DELETE_WINDOW',self.close)
         self.closed = False
         self.frames = 0
+        self.commands = []
         self.cmap = colormaps['turbo_r']
         tk.Label(self.root,text='LIVE POLICY DEPTH  |  48 x 27  |  ray distance [m]',
                  font=('Sans',15,'bold'),bg='#f5f7fa').grid(row=0,column=0,columnspan=8,pady=10)
@@ -42,7 +43,33 @@ class LiveDepthWindow:
             self.history.append(label)
         tk.Label(self.root,text='Grey: no hit (3 m). v4 analytic ball only; no ground/body occlusion.',
                  bg='#f5f7fa',fg='#765129').grid(row=6,column=0,columnspan=8,pady=10)
+        controls = tk.LabelFrame(self.root,text='Ball speed [m/s]',bg='#f5f7fa',padx=10,pady=6)
+        controls.grid(row=7,column=0,columnspan=8,sticky='ew',padx=8,pady=(0,10))
+        self.speed_slider = tk.Scale(controls,from_=min(.1,speed),to=max(6.,speed),resolution=-1,
+                                     orient='horizontal',length=360,bg='#f5f7fa',digits=3)
+        self.speed_slider.set(speed)
+        self.speed_slider.grid(row=0,column=0,rowspan=2)
+        self.speed_slider.configure(command=lambda value: self.commands.append(('set',float(value))))
+        self.apply_button = tk.Button(controls,text='Apply now',command=lambda: self._queue_speed('apply'))
+        self.apply_button.grid(row=0,column=1,padx=10)
+        self.serve_button = tk.Button(controls,text='Re-serve',command=lambda: self._queue_speed('serve'))
+        self.serve_button.grid(row=0,column=2,padx=10)
+        self.speed_info = tk.Label(controls,text=f'Serve: {speed:.2f} m/s',bg='#f5f7fa')
+        self.speed_info.grid(row=1,column=1,columnspan=2)
+        tk.Label(controls,text='Slider: next serve. Apply now: keep direction. Re-serve: reset ball only.',
+                 bg='#f5f7fa').grid(row=2,column=0,columnspan=3,sticky='w')
         self.root.update_idletasks()
+
+    def _queue_speed(self, action):
+        self.commands.append((action,float(self.speed_slider.get())))
+
+    def take_commands(self):
+        commands, self.commands = self.commands, []
+        return commands
+
+    def update_speed(self, requested, measured):
+        if not self.closed:
+            self.speed_info.configure(text=f'Serve: {requested:.2f} m/s  |  Actual XY: {measured:.2f} m/s')
 
     def _set_image(self,label,depth,size,mask_far=True):
         rgb = (self.cmap(np.clip((depth-.1)/2.9,0,1))[:,:,:3]*255).astype(np.uint8)

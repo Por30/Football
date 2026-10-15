@@ -1,0 +1,11 @@
+{
+  "formal_resource_before": "3235, 12 MiB\n",
+  "diagnostic_only_failure_history": [
+    "old mock lacked sim.forward; updated without dropping checks",
+    "16-env external obstacle probe isolated from randomly positioned robot geometry",
+    "inference-mode-only sim buffers required resets inside inference_mode",
+    "USD merged convex collider API belongs to parent Xform, fixed extraction",
+    "failed preflight shutdown process and its follow-on startup were terminated before formal launch"
+  ],
+  "validation_timing_note": "Final 4096 validation overlapped briefly with a failed harness shutdown/startup before cleanup; final formal iteration timing is verified separately without diagnostic processes."
+}

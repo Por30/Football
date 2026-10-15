@@ -1,0 +1,222 @@
+{
+  "schema_version": 3,
+  "flat_groups": [
+    "proprio_hist"
+  ],
+  "flat_group_dims": [
+    864
+  ],
+  "depth_shape": [
+    8,
+    27,
+    48
+  ],
+  "depth_order": "oldest_to_newest",
+  "proprio_history_order": "term_major_then_oldest_to_newest",
+  "output": "raw joint action; apply external clip, scale and offset",
+  "includes_ball_state_feedback": true,
+  "metadata": {
+    "depth_contract": {
+      "schema": 1,
+      "backend": "warp_visual_mesh",
+      "geometry": "all_visible_rigid_links_ball_ground_v1",
+      "profile": {
+        "schema": 1,
+        "calibration_status": "nominal_unverified",
+        "calibration_evidence": null,
+        "parent_link": "torso_link",
+        "position_m": [
+          0.0576235,
+          0.01753,
+          0.42987
+        ],
+        "quaternion_wxyz_world": [
+          0.9149596678498247,
+          0.0,
+          0.40354529635239006,
+          0.0
+        ],
+        "source_width": 48,
+        "source_height": 27,
+        "source_intrinsics": [
+          24.354644696164222,
+          24.354644696164222,
+          23.5,
+          13.0
+        ],
+        "crop_xywh": [
+          0,
+          0,
+          48,
+          27
+        ],
+        "width": 48,
+        "height": 27,
+        "near_m": 0.1,
+        "far_m": 3.0,
+        "update_period_s": 0.02,
+        "depth_unit_m": 0.001,
+        "rectified": true,
+        "distortion": "rectified_before_input",
+        "resize": "nearest_exact",
+        "invalid": "nonfinite_or_nonpositive_to_far",
+        "depth_semantics": "optical_z_metres",
+        "history_length": 8
+      },
+      "target_intrinsics": [
+        24.354644696164222,
+        24.354644696164222,
+        23.5,
+        13.0
+      ],
+      "output": "optical_z_metres",
+      "normalization": "none",
+      "history_order": "oldest_to_newest",
+      "feedback_gate": "valid_depth_recency_and_predicted_uncertainty_not_ball_visibility",
+      "training_randomization": {
+        "schema": 1,
+        "training_only": true,
+        "gains": {
+          "enabled": true,
+          "kp_scale_range": [
+            0.9,
+            1.1
+          ],
+          "kd_scale_range": [
+            0.9,
+            1.1
+          ],
+          "sampling": "independent_per_joint_per_environment_per_reset_from_nominal",
+          "joint_names": [
+            "left_hip_pitch_joint",
+            "right_hip_pitch_joint",
+            "waist_yaw_joint",
+            "left_hip_roll_joint",
+            "right_hip_roll_joint",
+            "waist_roll_joint",
+            "left_hip_yaw_joint",
+            "right_hip_yaw_joint",
+            "waist_pitch_joint",
+            "left_knee_joint",
+            "right_knee_joint",
+            "left_shoulder_pitch_joint",
+            "right_shoulder_pitch_joint",
+            "left_ankle_pitch_joint",
+            "right_ankle_pitch_joint",
+            "left_shoulder_roll_joint",
+            "right_shoulder_roll_joint",
+            "left_ankle_roll_joint",
+            "right_ankle_roll_joint",
+            "left_shoulder_yaw_joint",
+            "right_shoulder_yaw_joint",
+            "left_elbow_joint",
+            "right_elbow_joint",
+            "left_wrist_roll_joint",
+            "right_wrist_roll_joint",
+            "left_wrist_pitch_joint",
+            "right_wrist_pitch_joint",
+            "left_wrist_yaw_joint",
+            "right_wrist_yaw_joint"
+          ],
+          "nominal_kp": [
+            150.0,
+            150.0,
+            300.0,
+            150.0,
+            150.0,
+            300.0,
+            150.0,
+            150.0,
+            300.0,
+            300.0,
+            300.0,
+            200.0,
+            200.0,
+            40.0,
+            40.0,
+            200.0,
+            200.0,
+            40.0,
+            40.0,
+            200.0,
+            200.0,
+            100.0,
+            100.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0,
+            20.0
+          ],
+          "nominal_kd": [
+            2.0,
+            2.0,
+            4.0,
+            2.0,
+            2.0,
+            4.0,
+            2.0,
+            2.0,
+            4.0,
+            4.0,
+            4.0,
+            3.0,
+            3.0,
+            1.0,
+            1.0,
+            3.0,
+            3.0,
+            1.0,
+            1.0,
+            3.0,
+            3.0,
+            1.0,
+            1.0,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "depth": {
+          "enabled": true,
+          "ranges": {
+            "scale_range": [
+              0.99,
+              1.01
+            ],
+            "bias_m_range": [
+              -0.005,
+              0.005
+            ],
+            "sigma_m_range": [
+              0.001,
+              0.005
+            ],
+            "sigma_distance_range": [
+              0.0,
+              0.001
+            ],
+            "hole_probability_range": [
+              0.0,
+              0.005
+            ],
+            "edge_hole_probability_range": [
+              0.0,
+              0.02
+            ],
+            "edge_threshold_m": 0.1
+          },
+          "parameters": "per_environment_per_reset",
+          "noise": "once_per_sensor_capture",
+          "sigma_m": "sigma_m + sigma_distance * optical_z_m**2",
+          "miss_and_hole": "far=3m",
+          "geometry": "noise_after_nearest_surface_no_background_reveal"
+        }
+      }
+    }
+  }
+}

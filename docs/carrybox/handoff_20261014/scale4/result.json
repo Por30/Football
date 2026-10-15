@@ -1,0 +1,364 @@
+{
+  "num_envs": 4,
+  "contract": {
+    "variant": "walled4",
+    "migration_revision": 6,
+    "depth_backend": "warp",
+    "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+    "depth_clip": "optical_near_plane_pixel_centers_v1",
+    "failure_reward": "none_x2_recipe",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "convex_hull_32",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.8,
+      0.0,
+      0.2
+    ],
+    "search_prob": 0.02,
+    "noise": 0.06,
+    "depth_edge": [
+      0.15,
+      0.05
+    ],
+    "depth_holes": 0.02,
+    "depth_stereo": [
+      0.024,
+      0.09
+    ],
+    "latency_probability": 0.1,
+    "depth_noise_contract": "metres_miss_preserved_near_clamp_15_including_onset",
+    "delay": 1,
+    "freeze": 0.002,
+    "freeze_steps": 15,
+    "mount_pos": 0.01,
+    "mount_rot": 0.0,
+    "curriculum": "process_anchor",
+    "reward_parent": "x2_handoff_g1_v1",
+    "reward_weights": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "undesired_contacts": -1.0,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.4,
+      "slow_pickup": -0.0005,
+      "stable_grasp": 0.2,
+      "arm_speed_pickup": -0.02,
+      "arm_acc_pickup": -2e-05,
+      "grip_force_cap": -0.02,
+      "held_hand_speed": -0.02,
+      "held_hand_acc": -2e-05,
+      "waist_yaw_penalty": -0.5,
+      "search_turn": 0.5
+    },
+    "roll_termination": "abs_roll_gt_0.5",
+    "action_scale": 0.25,
+    "action_clip": 9.0,
+    "randomization": {
+      "box_material": {
+        "static_friction_range": [
+          0.3,
+          2.0
+        ],
+        "dynamic_friction_range": [
+          0.4,
+          1.5
+        ],
+        "restitution_range": [
+          0.0,
+          0.2
+        ],
+        "num_buckets": 64
+      },
+      "box_mass": {
+        "mass_distribution_params": [
+          0.1,
+          1.5
+        ],
+        "operation": "scale",
+        "recompute_inertia": true
+      },
+      "default_joint_pos": {},
+      "torso_com": {
+        "com_range": {
+          "x": [
+            -0.025,
+            0.025
+          ],
+          "y": [
+            -0.05,
+            0.05
+          ],
+          "z": [
+            -0.05,
+            0.05
+          ]
+        }
+      },
+      "push_robot": {
+        "velocity_range": {
+          "x": [
+            -0.5,
+            0.5
+          ],
+          "y": [
+            -0.5,
+            0.5
+          ],
+          "z": [
+            -0.2,
+            0.2
+          ],
+          "roll": [
+            -0.52,
+            0.52
+          ],
+          "pitch": [
+            -0.52,
+            0.52
+          ],
+          "yaw": [
+            -0.78,
+            0.78
+          ]
+        }
+      }
+    },
+    "box_mass_kg": 0.8,
+    "com_body": "torso_link",
+    "push_interval": [
+      1.0,
+      3.0
+    ],
+    "hand_forces": "g1_rubber_hands_box_filtered",
+    "standup_success": "instant_x2",
+    "strict_success_metric": "g1_contact_clearance_hold0.5s"
+  },
+  "status": "PASS",
+  "mass_samples": [
+    [
+      0.7210082411766052,
+      0.49497637152671814,
+      0.8716805577278137,
+      0.4267062842845917
+    ],
+    [
+      0.2775368392467499,
+      1.0487369298934937,
+      0.3853670060634613,
+      0.527738630771637
+    ],
+    [
+      0.08290961384773254,
+      1.0147916078567505,
+      1.0642753839492798,
+      0.8440909385681152
+    ],
+    [
+      0.24952644109725952,
+      0.08731365203857422,
+      0.18517978489398956,
+      1.0575921535491943
+    ]
+  ],
+  "materials": [
+    [
+      [
+        0.4790353775024414,
+        0.6964443325996399,
+        0.07176252454519272
+      ]
+    ],
+    [
+      [
+        1.5077290534973145,
+        1.4410521984100342,
+        0.15780596435070038
+      ]
+    ],
+    [
+      [
+        1.5077290534973145,
+        1.4410521984100342,
+        0.15780596435070038
+      ]
+    ],
+    [
+      [
+        0.48499080538749695,
+        0.5800210237503052,
+        0.14050401747226715
+      ]
+    ]
+  ],
+  "torso_com": [
+    [
+      0.001295806490816176,
+      -0.0026394103188067675,
+      0.1628405749797821
+    ],
+    [
+      0.007936842739582062,
+      -0.04506683722138405,
+      0.13236811757087708
+    ],
+    [
+      0.021984238177537918,
+      0.019823750481009483,
+      0.1483331322669983
+    ],
+    [
+      -0.014141643419861794,
+      -0.030244255438447,
+      0.10603165626525879
+    ]
+  ],
+  "action_coverage": {
+    "hold/hold_box_01.pt": 4.190910339355469,
+    "locomotion/walk_turn_left_045.pt": 3.63071346282959,
+    "locomotion/walk_turn_left_135.pt": 3.5593152046203613,
+    "locomotion/walk_turn_right_090.pt": 3.458878993988037,
+    "locomotion/walk_turn_right_045.pt": 3.5483927726745605,
+    "locomotion/walk_turn_right_135.pt": 3.569927215576172,
+    "locomotion/walk_turn_around_01.pt": 4.643568992614746,
+    "locomotion/stand_to_walk_01.pt": 3.4001851081848145,
+    "locomotion/walk_to_stand_01.pt": 3.449021339416504,
+    "locomotion/walk_to_stand_02.pt": 3.419644355773926,
+    "locomotion/walk_forward_01.pt": 3.350748062133789,
+    "locomotion/walk_turn_left_090.pt": 3.6119298934936523,
+    "pick_up/pick_up_01.pt": 7.681751728057861,
+    "pick_up/pick_up_02.pt": 8.828595161437988,
+    "pick_up/pick_up_03.pt": 8.603543281555176
+  },
+  "obs_shapes": {
+    "proprio": [
+      4,
+      372
+    ],
+    "perception": [
+      4,
+      4,
+      27,
+      48
+    ],
+    "box_pose_target": [
+      4,
+      9
+    ],
+    "amp": [
+      4,
+      640
+    ]
+  },
+  "reward_terms": [
+    "action_rate",
+    "arm_acc_pickup",
+    "arm_speed_pickup",
+    "carryup_task",
+    "dof_acc",
+    "dof_pos_limits",
+    "dof_vel",
+    "dof_vel_limits",
+    "grip_force_cap",
+    "held_hand_acc",
+    "held_hand_speed",
+    "search_turn",
+    "slow_pickup",
+    "stable_grasp",
+    "standup_task",
+    "torques",
+    "undesired_contacts",
+    "waist_yaw_penalty",
+    "walk_task"
+  ],
+  "timings": [
+    {
+      "collection": 1.2603533267974854,
+      "learning": 0.20498037338256836,
+      "total": 1.4653337001800537
+    },
+    {
+      "collection": 0.897031307220459,
+      "learning": 0.12415599822998047,
+      "total": 1.0211873054504395
+    },
+    {
+      "collection": 0.9291849136352539,
+      "learning": 0.0963742733001709,
+      "total": 1.0255591869354248
+    },
+    {
+      "collection": 0.9328370094299316,
+      "learning": 0.09376811981201172,
+      "total": 1.0266051292419434
+    },
+    {
+      "collection": 0.8626501560211182,
+      "learning": 0.12380671501159668,
+      "total": 0.9864568710327148
+    }
+  ],
+  "amp_dataset": {
+    "schema": 1,
+    "manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 15,
+    "total_frames": 4155
+  },
+  "full_resume": true,
+  "warm_start_source": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_15-56-58_wall4_4096_warp_20261014_155653/model_4200.pt",
+  "initialization": {
+    "source": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_15-56-58_wall4_4096_warp_20261014_155653/model_4200.pt",
+    "source_environment": {
+      "variant": "walled4",
+      "migration_revision": 5,
+      "depth_backend": "warp",
+      "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+      "depth_clip": "optical_near_plane_pixel_centers_v1",
+      "failure_reward": "current_transition",
+      "obstacle_backend": "locked_rigid_6dof",
+      "shoulder_colliders": "convex_hull_32",
+      "depth_shape": [
+        4,
+        27,
+        48
+      ],
+      "reference_init": true,
+      "reset_probs": [
+        0.8,
+        0.15,
+        0.05
+      ],
+      "search_prob": 0.02,
+      "noise": 0.01,
+      "delay": 2,
+      "freeze": 0.01,
+      "freeze_steps": 3,
+      "mount_pos": 0.005,
+      "mount_rot": 2.0,
+      "curriculum": "process_anchor",
+      "reward_parent": "g1_carrybox_v0"
+    },
+    "transfer": "policy_encoder_actor_critic_pose_head",
+    "fresh": "PPO_AMP_curriculum"
+  },
+  "export": true
+}

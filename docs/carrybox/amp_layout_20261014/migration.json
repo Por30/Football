@@ -1,0 +1,35 @@
+{
+  "old_dataset": "findbox",
+  "new_dataset": "source/perceptual_ball/perceptual_ball/assets/motions/findbox",
+  "previous_manifest_sha256": "a6240ca6a4c0991a35860c8f336d48e067bcfd6968930876b8a88177c5dda507",
+  "new_manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+  "mapping": {
+    "carryWith/carrywith1.pt": "hold/hold_box_01.pt",
+    "pickUp/pickup1.pt": "pick_up/pick_up_01.pt",
+    "pickUp/pickup2.pt": "pick_up/pick_up_02.pt",
+    "pickUp/pickup3.pt": "pick_up/pick_up_03.pt",
+    "loco_direction/B1_-_stand_to_walk_stageii.pt": "locomotion/stand_to_walk_01.pt",
+    "loco_direction/B2_-_walk_to_stand_stageii.pt": "locomotion/walk_to_stand_01.pt",
+    "loco_direction/B2_-_walk_to_stand_t2_stageii.pt": "locomotion/walk_to_stand_02.pt",
+    "loco_direction/B3_-_walk1_stageii.pt": "locomotion/walk_forward_01.pt",
+    "loco_direction/B9_-_walk_turn_left_(90)_stageii.pt": "locomotion/walk_turn_left_090.pt",
+    "loco_direction/B10_-_walk_turn_left_(45)_stageii.pt": "locomotion/walk_turn_left_045.pt",
+    "loco_direction/B11_-_walk_turn_left_(135)_stageii.pt": "locomotion/walk_turn_left_135.pt",
+    "loco_direction/B12_-_walk_turn_right_(90)_stageii.pt": "locomotion/walk_turn_right_090.pt",
+    "loco_direction/B13_-_walk_turn_right_(45)_stageii.pt": "locomotion/walk_turn_right_045.pt",
+    "loco_direction/B14_-_walk_turn_right_(135)_stageii.pt": "locomotion/walk_turn_right_135.pt",
+    "loco_direction/B15_-_walk_turn_around_(same_direction)_stageii.pt": "locomotion/walk_turn_around_01.pt"
+  },
+  "protected_hashes": {
+    "source/perceptual_ball/perceptual_ball/assets/motions/kick/kick_right.pt": "175c2e410f48af72322b6702e3bb73259eadcdc876d0e0ad594bd67861b27a64",
+    "source/perceptual_ball/perceptual_ball/assets/motions/kick/kick_left.pt": "29906388f4192273b07277464ec01cae17c72ac2e3130382bc9265b1ac45aa78",
+    "source/perceptual_ball/perceptual_ball/assets/motions/carrybox/manifest.json": "515178f6d1f766bf5d18caf5e693280f177f72ba4b38bba15e477e962c042a61",
+    "source/perceptual_ball/perceptual_ball/assets/motions/carrybox/pickUp/pickup1.pt": "6a44d35afc4912781505615576e7a5ba141ffe3c756db652968c5bb0af31d17a",
+    "source/perceptual_ball/perceptual_ball/assets/motions/carrybox/pickUp/pickup3.pt": "cd54f21376d77ea7d6cccb662b5ea2ae53b68ca7a61528742e40ef0c2cdf30f5",
+    "source/perceptual_ball/perceptual_ball/assets/motions/carrybox/pickUp/pickup2.pt": "429cb67521975946fcf930fb5a430bbae9c7495e6d4db1ba2d4b330cdfbf023d"
+  },
+  "clips": 15,
+  "total_frames": 4155,
+  "hold_frames": 300,
+  "source_fps": 60
+}

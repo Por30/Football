@@ -1,0 +1,11 @@
+{
+  "handoff.txt": "19389e1d43e8b928dfe3bdbda0fed388260295f923f835833eac47d502502868",
+  "source/perceptual_ball/perceptual_ball/carrybox_walled.py": "1bdc1cd42225730cc7bd49457f934731a310c1cd849a821666f99c92e47f6671",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "3fbb35b2bb7970371a4101963a934550ce89179e228eb9d4aa237542dd1a7cad",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "d88f5ab9ca92825c70dd5c033d2785649a9bea30c612d03d60a6ed29527901a2",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "c726f2178e53e11910e768a30e5ade117a61a9195894efeb3207ea900b5c44d9",
+  "tests/test_carrybox_x2.py": "acb666b1f2b864a8512ad920f7a86def3935b2f9b9e960260e6c37a7e5d29507",
+  "scripts/rsl_rl/validate_carrybox_handoff.py": "8879c5ebf3ce3e48741a65a53498fd4bb9b365c6462aaddd595967364457e95c",
+  "scripts/rsl_rl/validate_carrybox_handoff.sh": "49c2f8321fbeb92190be66677eabe7ac07b368ce288288ee26241bb0fd49d14e",
+  "source/perceptual_ball/perceptual_ball/assets/motions/findbox/amp_manifest.json": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8"
+}

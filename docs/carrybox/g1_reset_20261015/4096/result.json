@@ -1,0 +1,232 @@
+{
+  "num_envs": 4096,
+  "contract": {
+    "variant": "walled4",
+    "migration_revision": 8,
+    "depth_backend": "warp",
+    "reference_ground_clearance": "G1_collision_hull_min_5mm_upward_only",
+    "obstacle_cylinders": 3,
+    "head_reference": "head_link_COM",
+    "knee_lower_penalty": "hard_limit_other_limits_soft",
+    "action_targets": "clamp_to_physical_joint_limits",
+    "push_curriculum": [
+      1000,
+      4000
+    ],
+    "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+    "depth_clip": "optical_near_plane_pixel_centers_v1",
+    "failure_reward": "none_x2_recipe",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "convex_hull_32",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.6,
+      0.3,
+      0.1
+    ],
+    "search_prob": 0.02,
+    "noise": 0.06,
+    "depth_edge": [
+      0.15,
+      0.05
+    ],
+    "depth_holes": 0.02,
+    "depth_stereo": [
+      0.024,
+      0.09
+    ],
+    "latency_probability": 0.1,
+    "depth_noise_contract": "metres_miss_preserved_near_clamp_15_including_onset",
+    "delay": 1,
+    "freeze": 0.002,
+    "freeze_steps": 15,
+    "mount_pos": 0.01,
+    "mount_rot": 0.0,
+    "curriculum": "shared_piecewise_process_anchor",
+    "reward_parent": "g1_corrected_common_v2",
+    "reward_weights": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "undesired_contacts": -1.0,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.4,
+      "slow_pickup": -0.0005,
+      "stable_grasp": 0.2,
+      "arm_speed_pickup": -0.02,
+      "arm_acc_pickup": -2e-05,
+      "grip_force_cap": -0.02,
+      "held_hand_speed": -0.02,
+      "held_hand_acc": -2e-05,
+      "waist_yaw_penalty": -0.5,
+      "search_turn": 0.5
+    },
+    "roll_termination": "abs_roll_gt_0.5",
+    "action_scale": 0.25,
+    "action_clip": 9.0,
+    "randomization": {
+      "box_material": {
+        "static_friction_range": [
+          0.3,
+          2.0
+        ],
+        "dynamic_friction_range": [
+          0.4,
+          1.5
+        ],
+        "restitution_range": [
+          0.0,
+          0.2
+        ],
+        "num_buckets": 64
+      },
+      "box_mass": {
+        "mass_distribution_params": [
+          0.1,
+          1.5
+        ],
+        "operation": "scale",
+        "recompute_inertia": true
+      },
+      "default_joint_pos": {},
+      "torso_com": {
+        "com_range": {
+          "x": [
+            -0.025,
+            0.025
+          ],
+          "y": [
+            -0.05,
+            0.05
+          ],
+          "z": [
+            -0.05,
+            0.05
+          ]
+        }
+      },
+      "push_robot": {
+        "velocity_range": {
+          "x": [
+            -0.5,
+            0.5
+          ],
+          "y": [
+            -0.5,
+            0.5
+          ],
+          "z": [
+            -0.2,
+            0.2
+          ],
+          "roll": [
+            -0.52,
+            0.52
+          ],
+          "pitch": [
+            -0.52,
+            0.52
+          ],
+          "yaw": [
+            -0.78,
+            0.78
+          ]
+        }
+      }
+    },
+    "box_mass_kg": 0.8,
+    "com_body": "torso_link",
+    "push_interval": [
+      1.0,
+      3.0
+    ],
+    "hand_forces": "g1_rubber_hands_box_filtered",
+    "standup_success": "instant_x2",
+    "strict_success_metric": "g1_contact_clearance_hold0.5s"
+  },
+  "rsi": {},
+  "depth_changes": {},
+  "skill_completed_episodes": [
+    14099,
+    7024,
+    2306
+  ],
+  "skill_valid_window_steps": [
+    434683,
+    188325,
+    79974
+  ],
+  "timings": [
+    {
+      "collection": 3.348219156265259,
+      "learning": 2.6015563011169434,
+      "total": 5.949775457382202
+    },
+    {
+      "collection": 3.056145429611206,
+      "learning": 1.6302614212036133,
+      "total": 4.686406850814819
+    },
+    {
+      "collection": 3.0000739097595215,
+      "learning": 1.6379523277282715,
+      "total": 4.638026237487793
+    },
+    {
+      "collection": 2.9599037170410156,
+      "learning": 1.6797871589660645,
+      "total": 4.63969087600708
+    },
+    {
+      "collection": 2.999661445617676,
+      "learning": 1.663999319076538,
+      "total": 4.663660764694214
+    },
+    {
+      "collection": 2.920285940170288,
+      "learning": 1.6538102626800537,
+      "total": 4.574096202850342
+    },
+    {
+      "collection": 2.880995512008667,
+      "learning": 1.6113176345825195,
+      "total": 4.4923131465911865
+    },
+    {
+      "collection": 2.655355215072632,
+      "learning": 1.6025612354278564,
+      "total": 4.257916450500488
+    }
+  ],
+  "amp_dataset": {
+    "schema": 1,
+    "manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 15,
+    "total_frames": 4155
+  },
+  "restore": true,
+  "finite": true,
+  "updates": 10,
+  "initialization": "fresh",
+  "status": "PASS",
+  "warm_mean_seconds": 4.544283946355184,
+  "warm_max_seconds": 4.663660764694214
+}

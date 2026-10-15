@@ -11,6 +11,7 @@ from isaaclab.sensors import TiledCameraCfg, ContactSensorCfg
 from isaaclab.utils import configclass
 from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlPpoActorCriticCfg, RslRlPpoAlgorithmCfg
 from perceptual_ball.assets import G1_29DOF_CFG
+from perceptual_ball.carrybox_amp import DEFAULT_DATASET_PATH
 from .mdp import carrybox as task
 
 
@@ -140,7 +141,7 @@ class CarryBoxAlgorithmCfg(RslRlPpoAlgorithmCfg):
     amp_coef: float = .25
     amp_reward_scale: float = 2.
     amp_lr: float = 1.e-4
-    amp_data_dir: str = 'findbox'
+    amp_data_dir: str = DEFAULT_DATASET_PATH
 
 
 @configclass

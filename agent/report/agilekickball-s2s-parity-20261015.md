@@ -1,0 +1,13 @@
+---
+task_id: "agilekickball-s2s-parity-20261015"
+language: "zh-CN"
+axes: ["E", "P", "C"]
+risk_tier: "T2"
+status: "DONE"
+changed_files: ["scripts/sim2sim/kickball_mujoco.py", "scripts/sim2sim/audit_kickball_parity.py", "tests/test_kickball_parity.py", "projects/football/README.md", "projects/README.md", "docs/agilekickball_v4/sim2sim_parity_20261015/README.md", "docs/agilekickball_v4/sim2sim_parity_20261015/audit.json", "docs/agilekickball_v4/sim2sim_parity_20261015/expert_review.json", "docs/agilekickball_v4/sim2sim_parity_20261015/model_provenance.json", "docs/agilekickball_v4/sim2sim_parity_20261015/receipts.json", "agent/plan/agilekickball-s2s-parity-20261015.md", "agent/task/agilekickball-s2s-parity-20261015.md", "agent/report/agilekickball-s2s-parity-20261015.md", "agent/handoff/agilekickball-s2s-parity-20261015.md"]
+task_contract_sha256: "2938738e75c79e0b25d131895a295471936894d6c5543aad8306cbfd7a6fbf63"
+tests: [{"command": "/home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p test_kickball_mujoco.py -v", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "e285bbaef756008edc846cd4a06c7d45d16f544eb95777d67efe56c4fafd767f", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "acd0abcd84fa0709c3e95267d4232cfb4b84d2676ef1cd5f8d9530b6dbf64400", "runner": "run_engineering_tests.py"}, {"command": "/home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p test_kickball_parity.py -v", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "63a90737f440d65a5cad86265b38048eca8a8171eb49f4a33923edd5fdaf21d4", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "a79c71f634a52428c4d53571370d6029ee2efaf740a0da07746f3308e9cf610e", "runner": "run_engineering_tests.py"}, {"command": "/home/cao/ENTER/envs/umr/bin/python scripts/sim2sim/audit_kickball_parity.py --output docs/agilekickball_v4/sim2sim_parity_20261015/audit.json", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "a19be7bc938b23abed7010e0493a332c105a925571c999144d5b57528e42c5f1", "stdout_sha256": "d7fa65ac5a688e8d896059a5a455910b555def8e7620120f947efa07be2252f5", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "runner": "run_engineering_tests.py"}]
+artifact: "REPORT"
+---
+
+已核对正式v4训练快照、最终导出和实际USD/MuJoCo编译模型。球质量0.43kg、半径0.11m一致；阻尼和接触参数不一致。修正相机非单位四元数的逆变换，384姿态相同位姿重放的命中mask差异从10降为0，共同命中最大误差从8.639mm降为0.0166mm。读取实际USD确认机器人33.341kg对35.112kg、torso零腰角高差10mm，非零腰角差异不是固定平移；力矩上限也不同。8项原检查、4项新增检查和审计命令PASS；前后各10秒500步无跌倒/数值故障，接触控制步18/9不代表成功率。工程审计及深度修正完成；未证明接球改善或整体稳定迁移，未启动训练/PhysX/GPU或真机。专家安全边界和最小测试已逐项纳入，材料系数保留而未盲调。

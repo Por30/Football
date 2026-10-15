@@ -11,17 +11,59 @@ from perceptual_ball.carrybox_walled import YawCurriculum, PairedDepthBuffer, se
 from perceptual_ball.tasks.manager_based.perceptual_ball.mdp import carrybox_walled as mdp
 from perceptual_ball.rsl_rl_extensions.carrybox import CarryBoxOnPolicyRunner, CarryBoxPPO
 from rsl_rl.runners import OnPolicyRunner
+from perceptual_ball.carrybox_amp import DEFAULT_DATASET_PATH, SOURCE_JOINT_NAMES, FindBoxMotionLibrary
 
 
 class WalledTests(unittest.TestCase):
+    def test_reference_initialization_uses_named_amp_dataset_for_all_skills(self):
+        class Scene(dict): pass
+        class Robot:
+            joint_names = list(SOURCE_JOINT_NAMES)
+            data = NS(default_root_state=torch.zeros(3,13))
+            roots = torch.full((3,13), float('nan'))
+            joints = torch.full((3,29), float('nan'))
+            speeds = torch.full((3,29), float('nan'))
+            def write_root_state_to_sim(self, value, env_ids): self.roots[env_ids] = value
+            def write_joint_state_to_sim(self, pos, vel, env_ids):
+                self.joints[env_ids] = pos
+                self.speeds[env_ids] = vel
+        robot = Robot()
+        robot.data.root_state_w = robot.roots
+        scene = Scene(robot=robot); scene.env_origins = torch.zeros(3,3)
+        env = NS(device='cpu', scene=scene, sim=NS(forward=lambda: None),
+                 _walled=NS(library=None, references=None, skills=torch.arange(3)))
+        def deterministic_frame(high, size, device):
+            return torch.full(size, 20 if high > 20 else 0, dtype=torch.long, device=device)
+        with patch.object(torch, 'randint', side_effect=deterministic_frame), \
+                patch.object(mdp, 'reference_ground_correction', return_value=torch.zeros(3)):
+            box, support = mdp.initialize_reference(env, torch.arange(3))
+        self.assertEqual(env._walled.library.root, Path(DEFAULT_DATASET_PATH))
+        self.assertEqual(env._walled.library.metadata, FindBoxMotionLibrary().metadata)
+        self.assertEqual(len(env._walled.references),15)
+        for value in (robot.roots, robot.joints, robot.speeds, box, support):
+            self.assertTrue(torch.isfinite(value).all())
+        self.assertGreater(support[1],0)
+        self.assertEqual(support[[0,2]].sum(),0)
+        torch.testing.assert_close(robot.roots[2,7:13],torch.zeros(6),atol=1.e-5,rtol=0)
+        torch.testing.assert_close(robot.speeds[2],torch.zeros(29),atol=0,rtol=0)
+        original_root = robot.roots.clone()
+        delta = torch.tensor([.01, .02, .03])
+        with patch.object(torch, 'randint', side_effect=deterministic_frame), \
+                patch.object(mdp, 'reference_ground_correction', return_value=delta):
+            raised_box, raised_support = mdp.initialize_reference(env, torch.arange(3))
+        expected_root = original_root.clone(); expected_root[:, 2] += delta
+        expected_box = box.clone(); expected_box[:, 2] += delta
+        torch.testing.assert_close(robot.roots, expected_root)
+        torch.testing.assert_close(raised_box, expected_box)
+        torch.testing.assert_close(raised_support, support + delta)
+
     def test_curriculum_constructor_anchor_knots_and_warm_start(self):
-        for variant, initial in [('walled3',10),('walled4',0)]:
+        for variant, initial in [('walled3',0),('walled4',0)]:
             c=YawCurriculum(variant)
             self.assertEqual(c.degrees,initial)
             c.set_iteration(65000)
             self.assertEqual(c.degrees,initial)
-            points=([(4000,95),(8000,180),(9000,180)] if variant=='walled3' else
-                    [(5000,5),(10000,10),(15000,20),(20000,30),(25000,105),(30000,180),(40000,180)])
+            points=[(5000,5),(10000,10),(15000,20),(20000,30),(25000,105),(30000,180),(40000,180)]
             for offset,expected in points:
                 c.set_iteration(65000+offset); self.assertEqual(c.degrees,expected)
             fresh=YawCurriculum(variant); fresh.set_iteration(123456); self.assertEqual(fresh.degrees,initial)

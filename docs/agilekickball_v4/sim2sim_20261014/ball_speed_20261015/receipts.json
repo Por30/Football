@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p test_kickball_mujoco.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "e285bbaef756008edc846cd4a06c7d45d16f544eb95777d67efe56c4fafd767f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e05fd941d4906d3582c95434c0cb8ecc4813ef8eb422b5520622cd4ddacc0953",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "env LIBGL_ALWAYS_SOFTWARE=1 /home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p test_kickball_ball_speed.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "7be3e6b197e04277349cc0af63f1fa72f016179e771f379bb1aba84b7898cdfd",
+      "stdout_sha256": "b89b3c99ac3b8b24475bdaa41d3050fb109cdcc6bda33d59b25ca89d3957ac7c",
+      "stderr_sha256": "d8b5fdae8a6dd1806cf811de113949a89fa8c113c9a24742ad9db2791cc35fa4",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

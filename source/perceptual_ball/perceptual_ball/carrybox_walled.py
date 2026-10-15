@@ -19,8 +19,7 @@ class YawCurriculum:
     @property
     def degrees(self):
         effective = 0 if self.anchor is None else max(0, self.iteration - self.anchor)
-        if self.variant == 'walled3':
-            return 10. + 170. * min(effective / 8000., 1.)
+        # Both obstacle variants use the same process-anchored difficulty.
         knots = ((0, 0.), (10000, 10.), (20000, 30.), (30000, 180.))
         for (a, x), (b, y) in zip(knots, knots[1:]):
             if effective <= b:
@@ -33,6 +32,31 @@ def search_reward(marked, signed_error, distance, yaw_rate):
     gate = marked & (error > math.pi / 4) & (distance > .7)
     value = .7 * torch.exp(-.75 * error) + .3 * torch.tanh((signed_error.sign()*yaw_rate).clamp_min(0))
     return torch.where(gate, value, 0.)
+
+
+def corrupt_depth_m(depth, gaussian_std=.06, edge_threshold=.15, edge_probability=.05,
+                    hole_probability=.02, stereo_near=.024, stereo_far=.09):
+    """Handoff v2/v2.5 noise in metres; preserve misses and the optical near plane.
+
+    Adjacent depth discontinuities mark both pixels, without wraparound at borders.
+    The G1 adaptations (miss preservation and final 0.1m clamp) are explicit.
+    """
+    clean = depth.nan_to_num(nan=3., posinf=3., neginf=3.).clamp(.1, 3.)
+    valid = torch.isfinite(depth) & (depth < 3.) & (depth >= .1)
+    noisy = clean + torch.randn_like(clean) * gaussian_std
+    edge = torch.zeros_like(clean, dtype=torch.bool)
+    dx = (noisy[..., 1:] - noisy[..., :-1]).abs() > edge_threshold
+    dy = (noisy[..., 1:, :] - noisy[..., :-1, :]).abs() > edge_threshold
+    edge[..., 1:] |= dx
+    edge[..., :-1] |= dx
+    edge[..., 1:, :] |= dy
+    edge[..., :-1, :] |= dy
+    missing = (~valid) | (edge & (torch.rand_like(clean) < edge_probability))
+    missing |= torch.rand_like(clean) < hole_probability
+    noisy = torch.where(missing, 3., noisy)
+    sigma = stereo_near + (stereo_far-stereo_near) * noisy.clamp(0., 3.) / 3.
+    noisy = (noisy + torch.randn_like(noisy) * sigma).clamp(.1, 3.)
+    return torch.where(missing, 3., noisy)
 
 
 class PairedDepthBuffer:

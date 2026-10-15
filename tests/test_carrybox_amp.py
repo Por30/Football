@@ -2,6 +2,7 @@
 import copy
 import hashlib
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -11,7 +12,8 @@ from unittest.mock import patch
 
 import torch
 import test_carrybox as base
-from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, SOURCE_JOINT_NAMES, joint_mapping, pack_frame
+from perceptual_ball.carrybox_amp import (FindBoxMotionLibrary, SOURCE_JOINT_NAMES,
+    DEFAULT_DATASET_PATH, resolve_dataset_path, joint_mapping, pack_frame)
 from perceptual_ball.rsl_rl_extensions.carrybox import CarryBoxPPO, CarryBoxOnPolicyRunner
 from perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox import amp_frame
 
@@ -39,7 +41,7 @@ def amp_algorithm(steps=12):
     obs = base.observations()
     obs['amp'] = torch.zeros(4, 640)
     alg = CarryBoxPPO(base.policy(obs), device='cpu', schedule='fixed', num_learning_epochs=1,
-                      num_mini_batches=1, amp_coef=.25, amp_data_dir=str(ROOT / 'findbox'))
+                      num_mini_batches=1, amp_coef=.25)
     alg.init_storage('rl', 4, steps, obs, [29])
     return alg, obs
 
@@ -50,7 +52,9 @@ class FindBoxTests(unittest.TestCase):
 
     def test_real_data_mapping_weights_and_boundaries(self):
         library = FindBoxMotionLibrary()
-        self.assertEqual(library.num_clips, 17)
+        self.assertEqual(library.num_clips, 15)
+        self.assertEqual({group: library.clip_groups.count(group) for group in set(library.clip_groups)},
+                         {'loco_direction': 11, 'pickUp': 3, 'carryWith': 1})
         self.assertEqual(library.fps, 60.)
         sample, ids = library.sample_expert_amp_obs(300, return_clip_ids=True)
         self.assertEqual(sample.shape, (300, 640))
@@ -66,7 +70,97 @@ class FindBoxTests(unittest.TestCase):
             library.windows(torch.tensor([0]), torch.tensor([float(library.lengths[0] - 1)]))
         # Last legal start remains inside the selected clip, even at a fractional 60/50 rate.
         starts = library.lengths.float() - 1 - 9 * 60 / 50
-        self.assertTrue(torch.isfinite(library.windows(torch.arange(17), starts)).all())
+        self.assertTrue(torch.isfinite(library.windows(torch.arange(library.num_clips), starts)).all())
+
+    def test_carrywith1_hold_revision_and_original_snapshot(self):
+        record_dir = ROOT / 'docs/carrybox/amp_hold_20261014'
+        original = record_dir / 'original_dataset'
+        recipe = json.loads((record_dir / 'edit_record.json').read_text())
+        old_library = FindBoxMotionLibrary(original)
+        library = FindBoxMotionLibrary(ROOT / 'findbox')  # Preserve the revision-2 content audit.
+        self.assertEqual(old_library.num_clips, 17)
+        self.assertEqual(old_library.metadata['manifest_sha256'], recipe['previous_manifest_sha256'])
+        self.assertEqual(library.metadata['manifest_sha256'], recipe['new_manifest_sha256'])
+        self.assertNotEqual(old_library.metadata, library.metadata)
+        self.assertEqual(library.metadata['total_frames'], 4155)
+        self.assertEqual(library.clip_names.count('carryWith/carrywith1.pt'), 1)
+        for name in recipe['excluded_clips']:
+            self.assertNotIn(name, library.clip_names)
+            self.assertFalse((ROOT / 'findbox' / name).exists())
+            self.assertEqual(hashlib.sha256((record_dir/'excluded_from_active'/name).read_bytes()).hexdigest(),
+                             hashlib.sha256((original/name).read_bytes()).hexdigest())
+        for name in library.clip_names:
+            if name != 'carryWith/carrywith1.pt':
+                self.assertEqual((ROOT/'findbox'/name).read_bytes(), (original/name).read_bytes())
+        source = torch.load(original/'carryWith/carrywith1.pt', weights_only=True)
+        data = torch.load(ROOT/'findbox/carryWith/carrywith1.pt', weights_only=True)
+        self.assertEqual(set(source), set(data))
+        indices = torch.tensor(recipe['source_frame_indices'])
+        self.assertEqual(indices.tolist(), list(range(21)) + [20]*279)
+        for name in source:
+            expected = source[name][indices].clone()
+            if name in recipe['zeroed_velocity_fields']:
+                expected[20:] = 0
+            torch.testing.assert_close(data[name], expected, atol=0, rtol=0)
+            self.assertTrue(torch.isfinite(data[name]).all())
+        for positions, velocities in [('base_position', 'base_linear_velocity'),
+                                      ('joint_position', 'joint_velocity')]:
+            torch.testing.assert_close(torch.diff(data[positions], dim=0)*60, data[velocities][:-1],
+                                       atol=1.e-5, rtol=1.e-5)
+        slot = library.clip_names.index('carryWith/carrywith1.pt')
+        joints, velocity, quaternion, angular = library.clips[slot]
+        self.assertEqual(torch.count_nonzero(velocity[20:]).item(), 0)
+        torch.testing.assert_close(angular[20:], torch.zeros_like(angular[20:]), atol=1.e-5, rtol=0)
+        window = library.windows(torch.tensor([slot]), torch.tensor([20.])).reshape(10,64)
+        torch.testing.assert_close(window[:,29:58], torch.zeros(10,29), atol=0, rtol=0)
+        torch.testing.assert_close(window[:,61:], torch.zeros(10,3), atol=1.e-5, rtol=0)
+
+    def test_named_asset_migration_defaults_and_exact_motion_equivalence(self):
+        record = json.loads((ROOT/'docs/carrybox/amp_layout_20261014/migration.json').read_text())
+        canonical = ROOT / record['new_dataset']
+        previous = FindBoxMotionLibrary('findbox')
+        current = FindBoxMotionLibrary()
+        self.assertEqual(Path(DEFAULT_DATASET_PATH), canonical)
+        self.assertEqual(current.root, canonical)
+        self.assertTrue((canonical.parent/'kick/kick_left.pt').is_file())
+        self.assertEqual(current.metadata['manifest_sha256'], record['new_manifest_sha256'])
+        self.assertEqual(previous.metadata['manifest_sha256'], record['previous_manifest_sha256'])
+        self.assertEqual(current.clip_groups, previous.clip_groups)
+        torch.testing.assert_close(current.weights, previous.weights, atol=0, rtol=0)
+        self.assertEqual(current.clip_names, [record['mapping'][name] for name in previous.clip_names])
+        for old, new in record['mapping'].items():
+            self.assertRegex(new, r'^(locomotion|pick_up|hold)/[a-z][a-z0-9_]*\.pt$')
+            self.assertEqual((ROOT/'findbox'/old).read_bytes(), (canonical/new).read_bytes())
+        for path, digest in record['protected_hashes'].items():
+            self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(), digest)
+        starts = torch.zeros(current.num_clips)
+        ids = torch.arange(current.num_clips)
+        torch.testing.assert_close(current.windows(ids, starts), previous.windows(ids, starts), atol=0, rtol=0)
+        starts = current.lengths.float()-1-9*60/50
+        torch.testing.assert_close(current.windows(ids, starts), previous.windows(ids, starts), atol=0, rtol=0)
+        original_cwd = Path.cwd()
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                os.chdir(directory)
+                self.assertEqual(resolve_dataset_path(), canonical)
+                self.assertEqual(FindBoxMotionLibrary().metadata, current.metadata)
+                self.assertEqual(FindBoxMotionLibrary('findbox').metadata, previous.metadata)
+        finally:
+            os.chdir(original_cwd)
+        alg, _ = amp_algorithm()
+        self.assertEqual(Path(alg.amp_data_dir), canonical)
+        alg.motion_metadata = previous.metadata
+        with self.assertRaisesRegex(ValueError, 'dataset/schema'):
+            alg._ensure_motion_library()
+
+    def test_mismatched_named_group_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)
+            manifest = json.loads((Path(DEFAULT_DATASET_PATH)/'amp_manifest.json').read_text())
+            manifest['clips'][0]['group'] = 'pickUp'  # hold directory cannot become a pickup skill.
+            (path/'amp_manifest.json').write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(ValueError, 'group/directory'):
+                FindBoxMotionLibrary(path)
 
     def test_known_motion_gravity_sign_quaternion_and_live_order(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -158,7 +252,7 @@ class FindBoxTests(unittest.TestCase):
                 for name, tensor in value.items(): torch.testing.assert_close(current_opt['state'][key][name], tensor)
             self.assertIsNone(alg.motion_library)
             self.assertEqual(alg.amp_age.sum().item(), 0)
-            alg.amp_data_dir = str(ROOT / 'findbox')
+            alg.amp_data_dir = DEFAULT_DATASET_PATH
             alg.motion_metadata = dict(alg.motion_metadata, manifest_sha256='changed')
             with self.assertRaisesRegex(ValueError, 'dataset/schema'):
                 alg._ensure_motion_library()

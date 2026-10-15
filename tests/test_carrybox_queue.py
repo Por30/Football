@@ -36,6 +36,7 @@ class QueueTests(unittest.TestCase):
         state=NS(skills=torch.zeros(2,dtype=torch.long),search=torch.zeros(2,dtype=torch.bool),
                  achieved=torch.zeros(2,dtype=torch.bool),curriculum=NS(degrees=10.),paired=None)
         env=NS(scene=scene,device='cpu',_walled=state,cfg=NS(reset_skill_probabilities=(.8,.15,.05),reference_init=False,search_prob=.02))
+        env.cfg.obstacle_cylinder_count = 3
         with patch.object(mdp.base,'reset_box'),patch.object(mdp,'reset_camera'):
             mdp.reset_scene(env,torch.arange(2))
         for name in ['platform','wall','cylinder0','cylinder1','cylinder2']:

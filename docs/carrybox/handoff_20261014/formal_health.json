@@ -1,0 +1,67 @@
+{
+  "status": "RUNNING",
+  "checked_local": "2026-10-14T21:13:28.315503+09:00",
+  "pid": 2448113,
+  "last_logged_iteration": 30,
+  "completed_timing_records": 31,
+  "warmup_iterations_excluded": 2,
+  "mean_iteration_seconds": 4.230344827586207,
+  "max_iteration_seconds": 4.3,
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_21-08-12_wall4_handoff_v6_amp15_20261014_210808/model_0.pt",
+  "schema": 2,
+  "environment_revision": 6,
+  "finite_policy_and_amp": true,
+  "amp_dataset": {
+    "schema": 1,
+    "manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 15,
+    "total_frames": 4155
+  },
+  "num_envs": 4096,
+  "action_clip": 9,
+  "initialization": {
+    "source": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_15-56-58_wall4_4096_warp_20261014_155653/model_4200.pt",
+    "source_environment": {
+      "variant": "walled4",
+      "migration_revision": 5,
+      "depth_backend": "warp",
+      "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+      "depth_clip": "optical_near_plane_pixel_centers_v1",
+      "failure_reward": "current_transition",
+      "obstacle_backend": "locked_rigid_6dof",
+      "shoulder_colliders": "convex_hull_32",
+      "depth_shape": [
+        4,
+        27,
+        48
+      ],
+      "reference_init": true,
+      "reset_probs": [
+        0.8,
+        0.15,
+        0.05
+      ],
+      "search_prob": 0.02,
+      "noise": 0.01,
+      "delay": 2,
+      "freeze": 0.01,
+      "freeze_steps": 3,
+      "mount_pos": 0.005,
+      "mount_rot": 2.0,
+      "curriculum": "process_anchor",
+      "reward_parent": "g1_carrybox_v0"
+    },
+    "transfer": "policy_encoder_actor_critic_pose_head",
+    "fresh": "PPO_AMP_curriculum"
+  },
+  "learning_caveat": "Early episodes short and mostly tipped; no convergence or lift-success claim."
+}

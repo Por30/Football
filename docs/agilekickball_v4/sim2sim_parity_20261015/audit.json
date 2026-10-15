@@ -1,0 +1,204 @@
+{
+  "physics": {
+    "ball_mass_kg": {
+      "training": 0.43,
+      "mujoco": 0.43
+    },
+    "ball_radius_m": {
+      "training": 0.11,
+      "mujoco": 0.11
+    },
+    "ball_inertia_kg_m2": [
+      0.0020812,
+      0.0020812,
+      0.0020812
+    ],
+    "ball_damping": {
+      "training_linear_rate": 0.02,
+      "training_angular_rate": 0.02,
+      "mujoco_dof_damping": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "note": "PhysX damping rates and MuJoCo force coefficients have different units"
+    },
+    "training_ball_material": {
+      "static_friction": "0.6",
+      "dynamic_friction": "0.5",
+      "restitution": "0.5",
+      "friction_combine_mode": "average",
+      "restitution_combine_mode": "average"
+    },
+    "training_floor_material": {
+      "static_friction": "0.5",
+      "dynamic_friction": "0.5",
+      "restitution": "0.0"
+    },
+    "mujoco_ball_floor_contact": {
+      "friction": [
+        0.6,
+        0.6,
+        0.005,
+        0.0001,
+        0.0001
+      ],
+      "solref": [
+        0.02,
+        1.0
+      ],
+      "dim": 3
+    },
+    "robot_mass_kg": {
+      "training_usd": 33.341142419492826,
+      "mujoco": 35.112142
+    },
+    "torso_zero_waist_relative_to_root_m": {
+      "training_usd": [
+        -0.003963499795645475,
+        0.0,
+        0.04399999976158142
+      ],
+      "mujoco": [
+        -0.0039635,
+        0.0,
+        0.05400000000000005
+      ],
+      "difference": [
+        -2.043545246216416e-10,
+        0.0,
+        0.010000000238418627
+      ]
+    },
+    "policy_dt_s": {
+      "training": 0.02,
+      "mujoco": 0.02
+    },
+    "physics_dt_s": {
+      "training": 0.005,
+      "mujoco": 0.005
+    }
+  },
+  "geometry": [
+    {
+      "waist_yaw_roll_pitch_rad": [
+        0,
+        0,
+        0
+      ],
+      "camera_position_difference_m": [
+        -2.0435452635636508e-10,
+        0.0,
+        0.010000000238418627
+      ],
+      "camera_distance_m": 0.010000000238418629,
+      "depth": {
+        "frames": 15,
+        "pixels": 19440,
+        "reference_hit_pixels": 133,
+        "hit_mask_mismatches": 7,
+        "max_shared_hit_error_m": 0.03969860076904297,
+        "mean_shared_hit_error_m": 0.009187663905322552,
+        "max_all_pixel_error_m": 1.5020277500152588
+      }
+    },
+    {
+      "waist_yaw_roll_pitch_rad": [
+        0.2,
+        0.3,
+        -0.2
+      ],
+      "camera_position_difference_m": [
+        0.001115505031901682,
+        -0.005502960115483804,
+        0.009151393531805274
+      ],
+      "camera_distance_m": 0.01073661609087197,
+      "depth": {
+        "frames": 15,
+        "pixels": 19440,
+        "reference_hit_pixels": 109,
+        "hit_mask_mismatches": 16,
+        "max_shared_hit_error_m": 0.04056549072265625,
+        "mean_shared_hit_error_m": 0.009358351118862629,
+        "max_all_pixel_error_m": 1.7740097045898438
+      }
+    },
+    {
+      "waist_yaw_roll_pitch_rad": [
+        -0.2,
+        -0.3,
+        0.2
+      ],
+      "camera_position_difference_m": [
+        0.0011155050319016646,
+        0.0055029601154837765,
+        0.009151393531805052
+      ],
+      "camera_distance_m": 0.010736616090871766,
+      "depth": {
+        "frames": 15,
+        "pixels": 19440,
+        "reference_hit_pixels": 140,
+        "hit_mask_mismatches": 18,
+        "max_shared_hit_error_m": 0.03530585765838623,
+        "mean_shared_hit_error_m": 0.00896507129073143,
+        "max_all_pixel_error_m": 1.8610546588897705
+      }
+    }
+  ],
+  "depth_legacy": {
+    "frames": 384,
+    "pixels": 497664,
+    "reference_hit_pixels": 2339,
+    "hit_mask_mismatches": 10,
+    "max_shared_hit_error_m": 0.008639335632324219,
+    "mean_shared_hit_error_m": 0.0007567900465801358,
+    "max_all_pixel_error_m": 1.7728259563446045
+  },
+  "depth_current": {
+    "frames": 384,
+    "pixels": 497664,
+    "reference_hit_pixels": 2339,
+    "hit_mask_mismatches": 0,
+    "max_shared_hit_error_m": 1.6570091247558594e-05,
+    "mean_shared_hit_error_m": 1.6100133848340192e-07,
+    "max_all_pixel_error_m": 1.6570091247558594e-05
+  },
+  "camera_offset_quaternion_norm_squared": 1.0001179599999999,
+  "source_sha256": {
+    "/home/cao/perceptual_ball/docs/agilekickball_v4/return_to_sender_20261012/source_snapshot/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/perception.py": "aa78a32fc45f04c6a9a681742635d3ed7f1ffa550a47a06b9b2af4ab1304d6e2",
+    "/home/cao/IsaacLab/source/isaaclab/isaaclab/utils/math.py": "48f7052ed30d9e7ae21e0e20ac963ccb52f784a076f1a602cae1c641e923e3cd",
+    "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v4/2026-10-12_13-48-41_return_to_sender_20261012_v3init/params/env.yaml": "5365014973375fcf6ea2df9116f27f7f6830e78827e55c45c08ae4328dde9aaa",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/g1_29dof.usd": "3d758783f76d86afdfd5df6e951a1d521dcebba8fd27120f181cfee588aca132",
+    "/home/cao/unitree_mujoco/unitree_robots/g1/g1_29dof.xml": "423e28bd718b19f7a65cda539b6f794ddbb268b4b9bdbd85f4bd982b30729617",
+    "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v4/2026-10-12_13-48-41_return_to_sender_20261012_v3init/exported/policy.pt": "ff3a15763109715f4c4cce654b533108499a5454daba6635c5dc648509906cde"
+  },
+  "limitations": [
+    "CPU replay uses identical poses, not simultaneous PhysX/MuJoCo dynamics",
+    "Contact coefficients are not calibrated across engines; no task success-rate claim"
+  ],
+  "rollout_legacy": {
+    "duration_s": 10,
+    "steps": 500,
+    "falls": 0,
+    "recovery_timeouts": 0,
+    "ball_robot_contact_steps": 18,
+    "visible_steps": 430,
+    "min_root_height_m": 0.7415100125890204,
+    "max_root_displacement_m": 0.0727375048430282
+  },
+  "rollout_current": {
+    "duration_s": 10,
+    "steps": 500,
+    "falls": 0,
+    "recovery_timeouts": 0,
+    "ball_robot_contact_steps": 9,
+    "visible_steps": 455,
+    "min_root_height_m": 0.7409648911646178,
+    "max_root_displacement_m": 0.09523348607555955
+  }
+}

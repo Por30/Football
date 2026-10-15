@@ -1,0 +1,15 @@
+{
+  "source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py": "eb21c6fc9783f7914f7f9668fb223cb6b6627bcc393c2bdfb43c4c0b8116984d",
+  "source/perceptual_ball/perceptual_ball/kickball_depth.py": "c8bb768043a23ce5fecdb340142b8a42ab97b189ec53b6144e55a2d96989253b",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/agilekickball_v5_env_cfg.py": "20b87e2f80a6c1880c9d159fc9870c01e77169dad9a001ae00633c97f4aa1ac3",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/agilekickball_v5.py": "f2a353079b740b9c3a6a3f7ee9dfa0e84a9435c7c41702e9609326f777b307f9",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/__init__.py": "bd44c8c7a729c145cac1c3fa02be95cf34abed59cf20763589203487ac964f04",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/state_feedback.py": "cbd23fd61b1ae6ccc018af1d24223a2392d13c328e2ac12c48268363629e107a",
+  "scripts/rsl_rl/play.py": "e9e43283fe3e4ef7f1e2d7e686fd351c48eb06d6139389cb98869a70433b07b3",
+  "scripts/rsl_rl/train_agilekickball_v5.sh": "0d102425907a4dd3b6f59155dbac7c03bd5acbd5c660e59a9bba01ae5ff30de9",
+  "scripts/rsl_rl/smoke_agilekickball_v5.py": "acd6fbcec4e37c515868af3a2c4844d958fe83377dac4bffe09d1ea4660c25ad",
+  "scripts/rsl_rl/smoke_agilekickball_v5.sh": "df1ef9f7f755eef78a8bf299e9e5b280e3e69a803906af5f2168020d8f49a4f6",
+  "tests/test_agilekickball_v5.py": "1ac83b748d0779421ace72978da4cda6b2fcbd0da13f0a1064c03686eef83945",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/ball_metrics.py": "407f3e09763372a7e305235c0405a4885c0fb01224ff0964e99322f564336b6d",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/runner.py": "7be4d3cdc235ec35b6951c0c8e55c3fa5a1f4df12b4dd2aa622d901c426ae691"
+}

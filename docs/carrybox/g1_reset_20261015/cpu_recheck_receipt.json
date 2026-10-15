@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_carrybox*.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "92f70112e537d24b924ce67a25ba6bc941f6e81f0943e1b23723badcdbb5cfe4",
+      "stdout_sha256": "7ffec10452f4b4d1f4048b256d6c95a68b84dc92aa91d739f09ea48da6b38cfd",
+      "stderr_sha256": "5a1e1b278e51b09caaae8e0a6438f045a7bfd010e991bb72641d67298096cd6e",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

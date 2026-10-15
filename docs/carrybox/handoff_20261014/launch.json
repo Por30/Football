@@ -1,0 +1,50 @@
+{
+  "status": "RUNNING",
+  "started_local": "2026-10-14T21:08:08.240426+09:00",
+  "pid": 2448113,
+  "start_ticks": "269675941",
+  "boot_id": "c2f5d4bc-55e4-4a59-81ed-11128b106df1",
+  "command": [
+    "bash",
+    "scripts/rsl_rl/train_carrybox_walled.sh",
+    "--num_envs",
+    "4096",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall4_handoff_v6_amp15_20261014_210808",
+    "--warm_start_carrybox",
+    "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_15-56-58_wall4_4096_warp_20261014_155653/model_4200.pt"
+  ],
+  "run_name": "wall4_handoff_v6_amp15_20261014_210808",
+  "train_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/handoff_v6_20261014_210808/train.log",
+  "warm_start_checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_15-56-58_wall4_4096_warp_20261014_155653/model_4200.pt",
+  "num_envs": 4096,
+  "max_iterations": 40000,
+  "dataset": {
+    "schema": 1,
+    "manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 15,
+    "total_frames": 4155
+  },
+  "environment_revision": 6,
+  "action_clip": 9,
+  "transfer": "policy_encoder_actor_critic_pose_head; fresh PPO/AMP/curriculum",
+  "benchmark_mean_seconds": 4.294658660888672,
+  "benchmark_max_seconds": 4.317881345748901,
+  "checked_local": "2026-10-14T21:13:28.315503+09:00",
+  "last_logged_iteration": 30,
+  "run_directory": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_21-08-12_wall4_handoff_v6_amp15_20261014_210808",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_21-08-12_wall4_handoff_v6_amp15_20261014_210808/model_0.pt",
+  "formal_mean_iteration_seconds": 4.230344827586207,
+  "formal_max_iteration_seconds": 4.3
+}

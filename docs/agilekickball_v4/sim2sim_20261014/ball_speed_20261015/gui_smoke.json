@@ -1,0 +1,520 @@
+{
+  "interface_smoke_pass": true,
+  "stable_for_full_duration": false,
+  "real_vision_validated": false,
+  "real_robot_validated": false,
+  "depth_mode": "v4_analytic_ball_only_ray_distance",
+  "steps": 100,
+  "falls": 0,
+  "ball_robot_contact_steps": 13,
+  "visible_frames": 86,
+  "torque_saturated_joint_steps": 59,
+  "target_outside_joint_range_count": 16,
+  "serves": 2,
+  "errors": [],
+  "ball_speed_commands": [
+    {
+      "time_s": 0.2000000000000001,
+      "action": "apply",
+      "speed_m_s": 3.0
+    },
+    {
+      "time_s": 0.2000000000000001,
+      "action": "set",
+      "speed_m_s": 3.0
+    },
+    {
+      "time_s": 0.6000000000000004,
+      "action": "serve",
+      "speed_m_s": 1.5
+    },
+    {
+      "time_s": 0.6000000000000004,
+      "action": "set",
+      "speed_m_s": 1.5
+    }
+  ],
+  "manual_serves": 1,
+  "max_root_displacement_m": 0.08645919722204554,
+  "travel_limit_exceeded_steps": 0,
+  "recovery_timeouts": 0,
+  "recovered_serves": 0,
+  "serve_mode": "recovery",
+  "physics_dt": 0.005,
+  "training_physics_dt": 0.005,
+  "torch_version": "2.4.1+cu121",
+  "mujoco_version": "3.3.7",
+  "control_dt": 0.02,
+  "requested_steps": 100,
+  "policy_sha256": "ff3a15763109715f4c4cce654b533108499a5454daba6635c5dc648509906cde",
+  "manifest_sha256": "3c150df21ed1471d4f4d551feec62a68c3a4b16be2030940415a811b2169f775",
+  "source_model_sha256": "423e28bd718b19f7a65cda539b6f794ddbb268b4b9bdbd85f4bd982b30729617",
+  "scene_sha256": "158135c003b8fc79fda392c4a6153116fd9af1c7708e1efe413c1056ad0c3c7f",
+  "robot_mass_kg": 35.112142,
+  "model_changes": [
+    "floor and .43kg/.11m ball",
+    "training head frame site",
+    "robot self-collision disabled; official inertia/friction/torque bounds retained"
+  ],
+  "known_training_model_differences": {
+    "mass_kg": [
+      33.341,
+      35.112142
+    ],
+    "hip_roll_effort_Nm": [
+      139,
+      88
+    ],
+    "ankle_and_waist_roll_pitch_effort_Nm": [
+      35,
+      50
+    ],
+    "waist_pitch_range_rad": [
+      [
+        -0.62,
+        0.62
+      ],
+      [
+        -0.52,
+        0.52
+      ]
+    ],
+    "note": "training then official; waist frames, passive friction, foot contacts and restitution also differ"
+  },
+  "torque_limits": [
+    [
+      -88.0,
+      88.0
+    ],
+    [
+      -88.0,
+      88.0
+    ],
+    [
+      -88.0,
+      88.0
+    ],
+    [
+      -88.0,
+      88.0
+    ],
+    [
+      -88.0,
+      88.0
+    ],
+    [
+      -50.0,
+      50.0
+    ],
+    [
+      -88.0,
+      88.0
+    ],
+    [
+      -88.0,
+      88.0
+    ],
+    [
+      -50.0,
+      50.0
+    ],
+    [
+      -139.0,
+      139.0
+    ],
+    [
+      -139.0,
+      139.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -50.0,
+      50.0
+    ],
+    [
+      -50.0,
+      50.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -50.0,
+      50.0
+    ],
+    [
+      -50.0,
+      50.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -25.0,
+      25.0
+    ],
+    [
+      -5.0,
+      5.0
+    ],
+    [
+      -5.0,
+      5.0
+    ],
+    [
+      -5.0,
+      5.0
+    ],
+    [
+      -5.0,
+      5.0
+    ]
+  ],
+  "joint_names": [
+    "left_hip_pitch_joint",
+    "right_hip_pitch_joint",
+    "waist_yaw_joint",
+    "left_hip_roll_joint",
+    "right_hip_roll_joint",
+    "waist_roll_joint",
+    "left_hip_yaw_joint",
+    "right_hip_yaw_joint",
+    "waist_pitch_joint",
+    "left_knee_joint",
+    "right_knee_joint",
+    "left_shoulder_pitch_joint",
+    "right_shoulder_pitch_joint",
+    "left_ankle_pitch_joint",
+    "right_ankle_pitch_joint",
+    "left_shoulder_roll_joint",
+    "right_shoulder_roll_joint",
+    "left_ankle_roll_joint",
+    "right_ankle_roll_joint",
+    "left_shoulder_yaw_joint",
+    "right_shoulder_yaw_joint",
+    "left_elbow_joint",
+    "right_elbow_joint",
+    "left_wrist_roll_joint",
+    "right_wrist_roll_joint",
+    "left_wrist_pitch_joint",
+    "right_wrist_pitch_joint",
+    "left_wrist_yaw_joint",
+    "right_wrist_yaw_joint"
+  ],
+  "wall_time_s": 2.0000107870437205,
+  "depth_window_frames": 12,
+  "min_root_height_m": 0.7512757826130694,
+  "inference_ms_median": 0.6014744285494089,
+  "inference_ms_p99": 5.358137595467391,
+  "trace": [
+    {
+      "time_s": 0.02,
+      "root_height_m": 0.7983789810383682,
+      "root_xy": [
+        0.0038510790018527236,
+        -0.0013836110521290128
+      ],
+      "ball_xyz": [
+        1.9600089034619042,
+        0.15,
+        0.10960786610753703
+      ],
+      "max_abs_action": 1.6372867822647095
+    },
+    {
+      "time_s": 0.12000000000000004,
+      "root_height_m": 0.7896181821864205,
+      "root_xy": [
+        0.009087188516443717,
+        0.004989266109611829
+      ],
+      "ball_xyz": [
+        1.7600671651024156,
+        0.15,
+        0.10987960271939307
+      ],
+      "max_abs_action": 2.5242972373962402
+    },
+    {
+      "time_s": 0.2200000000000001,
+      "root_height_m": 0.7901972705462434,
+      "root_xy": [
+        0.00946906019941914,
+        0.0071672226647816134
+      ],
+      "ball_xyz": [
+        1.5400970094416768,
+        0.15,
+        0.10989378730231077
+      ],
+      "max_abs_action": 2.822659492492676
+    },
+    {
+      "time_s": 0.3200000000000002,
+      "root_height_m": 0.7899415855501778,
+      "root_xy": [
+        0.007069908313297308,
+        0.008424231991296632
+      ],
+      "ball_xyz": [
+        1.2401381457188752,
+        0.15,
+        0.1098943977401833
+      ],
+      "max_abs_action": 2.858358144760132
+    },
+    {
+      "time_s": 0.42000000000000026,
+      "root_height_m": 0.7865158231524149,
+      "root_xy": [
+        0.0010603200180387582,
+        0.009736387076494428
+      ],
+      "ball_xyz": [
+        0.9401793113106138,
+        0.15,
+        0.10989442413532656
+      ],
+      "max_abs_action": 2.6635029315948486
+    },
+    {
+      "time_s": 0.5200000000000004,
+      "root_height_m": 0.7897737407521289,
+      "root_xy": [
+        -0.013358503751308327,
+        0.024292120776328602
+      ],
+      "ball_xyz": [
+        0.6402204728354104,
+        0.15,
+        0.10989442527687815
+      ],
+      "max_abs_action": 3.2503020763397217
+    },
+    {
+      "time_s": 0.6200000000000004,
+      "root_height_m": 0.7770836521458407,
+      "root_xy": [
+        -0.027828401250715732,
+        0.04085459516641058
+      ],
+      "ball_xyz": [
+        1.970006677596428,
+        0.15,
+        0.10960786610753703
+      ],
+      "max_abs_action": 2.8752360343933105
+    },
+    {
+      "time_s": 0.7200000000000005,
+      "root_height_m": 0.7512757826130694,
+      "root_xy": [
+        -0.010822571547117563,
+        0.049193842372425835
+      ],
+      "ball_xyz": [
+        1.820050373826812,
+        0.15,
+        0.10987960271939307
+      ],
+      "max_abs_action": 2.6313343048095703
+    },
+    {
+      "time_s": 0.8200000000000006,
+      "root_height_m": 0.7896304869630612,
+      "root_xy": [
+        -0.0030065781623016246,
+        0.053346908510431126
+      ],
+      "ball_xyz": [
+        1.67007212931281,
+        0.15,
+        0.10989378730231077
+      ],
+      "max_abs_action": 2.602860689163208
+    },
+    {
+      "time_s": 0.9200000000000007,
+      "root_height_m": 0.7859083452213891,
+      "root_xy": [
+        0.0133711000813306,
+        0.04719519583873626
+      ],
+      "ball_xyz": [
+        1.5200927935233395,
+        0.15,
+        0.1098943977401833
+      ],
+      "max_abs_action": 2.6826322078704834
+    },
+    {
+      "time_s": 1.0200000000000002,
+      "root_height_m": 0.7897339866667664,
+      "root_xy": [
+        0.015055765735159668,
+        0.048516384494945
+      ],
+      "ball_xyz": [
+        1.3701134107075363,
+        0.15,
+        0.10989442413532656
+      ],
+      "max_abs_action": 2.7700717449188232
+    },
+    {
+      "time_s": 1.119999999999998,
+      "root_height_m": 0.7882386263960772,
+      "root_xy": [
+        0.020201722616821786,
+        0.04957500955093884
+      ],
+      "ball_xyz": [
+        1.220134025858214,
+        0.15,
+        0.10989442527687814
+      ],
+      "max_abs_action": 2.772531747817993
+    },
+    {
+      "time_s": 1.219999999999996,
+      "root_height_m": 0.7868022835032463,
+      "root_xy": [
+        0.021365526480049888,
+        0.05041703467766034
+      ],
+      "ball_xyz": [
+        1.0701546409209448,
+        0.15,
+        0.10989442532624902
+      ],
+      "max_abs_action": 2.7734692096710205
+    },
+    {
+      "time_s": 1.3199999999999938,
+      "root_height_m": 0.7829549599957855,
+      "root_xy": [
+        0.026474233283935382,
+        0.055176722163656086
+      ],
+      "ball_xyz": [
+        0.9201752559798714,
+        0.15,
+        0.10989442532838425
+      ],
+      "max_abs_action": 3.414576530456543
+    },
+    {
+      "time_s": 1.4199999999999917,
+      "root_height_m": 0.7866087249750036,
+      "root_xy": [
+        0.019552514255437328,
+        0.072986072123172
+      ],
+      "ball_xyz": [
+        0.7701958710386339,
+        0.15,
+        0.10989442532847661
+      ],
+      "max_abs_action": 2.6983439922332764
+    },
+    {
+      "time_s": 1.5199999999999896,
+      "root_height_m": 0.7769172082704349,
+      "root_xy": [
+        0.0075495207560398875,
+        0.08004467959120319
+      ],
+      "ball_xyz": [
+        0.6202164860973887,
+        0.15,
+        0.10989442532848061
+      ],
+      "max_abs_action": 2.156970500946045
+    },
+    {
+      "time_s": 1.6199999999999875,
+      "root_height_m": 0.7948090624127236,
+      "root_xy": [
+        0.024632203890953563,
+        0.07912339362770045
+      ],
+      "ball_xyz": [
+        0.5182759761416912,
+        0.14842110794909663,
+        0.1081570455760074
+      ],
+      "max_abs_action": 2.012964963912964
+    },
+    {
+      "time_s": 1.7199999999999853,
+      "root_height_m": 0.803698601091728,
+      "root_xy": [
+        0.006696159920357465,
+        0.08363312678131006
+      ],
+      "ball_xyz": [
+        0.39040716202433506,
+        0.1029756573424856,
+        0.11341228630924952
+      ],
+      "max_abs_action": 2.110443115234375
+    },
+    {
+      "time_s": 1.8199999999999832,
+      "root_height_m": 0.7818380912611052,
+      "root_xy": [
+        -0.013240071794422466,
+        0.07559248630291864
+      ],
+      "ball_xyz": [
+        0.23615523213637502,
+        0.03338428489895402,
+        0.10983525385541291
+      ],
+      "max_abs_action": 2.1075339317321777
+    },
+    {
+      "time_s": 1.919999999999981,
+      "root_height_m": 0.7999208371577735,
+      "root_xy": [
+        -0.04107877188151445,
+        0.06573991133445937
+      ],
+      "ball_xyz": [
+        0.17575696759163809,
+        0.04465085853680302,
+        0.18820713198801572
+      ],
+      "max_abs_action": 2.1724610328674316
+    }
+  ]
+}

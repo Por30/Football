@@ -1,5 +1,15 @@
 # 足球项目 · football
 
+2026-10-15：[足球快球跌倒诊断](../../docs/agilekickball_v4/speed_fall_20261015/README.md)完成：固定场景4/6m/s复现；4m/s无球机器人碰撞仍1.60秒跌倒，单独恢复训练hip-roll上限也未修复。接触前抬腿限幅及踢后支撑恢复失稳已取证；训练速度课程已到6m/s。8项接口检查与CPU诊断通过，不等于策略稳定；未改生产控制器或训练。
+
+2026-10-15：[足球s2s球/深度一致性核对](../../docs/agilekickball_v4/sim2sim_parity_20261015/README.md)完成：球0.43kg/0.11m一致；相机非单位四元数逆变换已修，384姿态命中mask零差异、最大误差0.0166mm，12项检查与两次10秒闭环通过。球阻尼/接触及G1质量、力矩、相机基准仍有差异，未证明接球改善或稳定迁移。
+
+2026-10-15：足球MuJoCo深度窗口新增球速滑块、立即应用与重新发球，显示设定/实际水平速度；8项原检查和4项新增检查（含实际GUI交互100步）通过。[使用方式与证据](../../docs/agilekickball_v4/sim2sim_20261014/README.md)。仅接口验证，未形成稳定迁移或真机结论。
+
+2026-10-14：v5增益倍率0.9–1.1及深度scale/bias/距离噪声/缺失随机化已接入并通过短测；[范围、开关与证据](../../docs/agilekickball_v5/randomization/README.md)。扰动仅在模拟环境使用，范围尚非实机标定。
+
+2026-10-14新增独立 [AgileKickball-v5](../../docs/agilekickball_v5/README.md)：继承v4回传流程，改用完整机身/Ball/ground网格光轴深度，包含自遮挡。仿真实现与4环境PPO/AMP、恢复/导出、18组遮挡对照已通过（最大差异0.152mm）；实机标定尚缺，未启动v5正式训练。v4作为已完成训练的基线保留。
+
 2026-10-14：MuJoCo图形启动默认同步打开实时深度窗口（当前帧+8帧历史，10Hz）；双窗口100控制步/20次刷新短测通过。可用`--no-depth-window`关闭，详见[s2s命令](../../docs/agilekickball_v4/sim2sim_20261014/README.md)。
 
 2026-10-14：新增[策略深度可视化](../../docs/agilekickball_v4/sim2sim_20261014/depth_visualization/depth.mp4)，12秒视频/8帧历史/原始NPZ已验证；v4解析球体深度，无场景遮挡。
@@ -8,7 +18,7 @@
 
 2026-10-14 11:39 JST检查：football正式训练已结束，日志到49999/50000，最终model_49999.pt已由队列核验版本及全部张量有限性，原进程已退出。随后wall4正式训练启动，PID2307414。独立足球成功率评估仍未执行；下文10月13日在训状态为历史。
 
-当前主线：`Template-Perceptual-Ball-AgileKickball-v4`，revision `return_to_sender_20261012`。目标是连续接球、回传给本轮发球者并恢复站稳。项目待办见[总看板](../README.md)。
+已训练基线：`Template-Perceptual-Ball-AgileKickball-v4`，revision `return_to_sender_20261012`。目标是连续接球、回传给本轮发球者并恢复站稳。项目待办见[总看板](../README.md)。
 
 ## 项目归属
 
@@ -47,7 +57,7 @@ tail -n 100 logs/rsl_rl/agilekickball_v4/train_20261012.log
 | 足球runner与checkpoint | `rsl_rl_extensions/runner.py` |
 | AMP动作参考 | `assets/motions/kick/` |
 
-环境与MDP的短路径均相对于`tasks/manager_based/perceptual_ball/`。足球使用现有解析深度及其自身critic配置；搬箱子的无特权观测规则仅适用于CarryBox。
+环境与MDP的短路径均相对于`tasks/manager_based/perceptual_ball/`。足球v4使用解析深度，v5使用Warp场景深度，均保留足球自身critic配置；搬箱子的无特权观测规则仅适用于CarryBox。
 
 ## 深度管线边界（2026-10-13核对）
 
@@ -89,7 +99,8 @@ python -m unittest discover -s tests -p test_state_feedback.py
 
 | 版本 | 角色 | 文档 |
 |---|---|---|
-| AgileKickball v4 | 当前开发和训练主线 | [任务设计](../../docs/agilekickball_v4/README.md) |
+| AgileKickball v5 | 场景深度开发版本，实机标定待核对 | [v5说明](../../docs/agilekickball_v5/README.md) |
+| AgileKickball v4 | 已训练回传基线 | [任务设计](../../docs/agilekickball_v4/README.md) |
 | AgileKickball v3 stable | v4初始化基线 | [v3说明](../../docs/agilekickball_v3/README.md) |
 | AgileKickball v2 | 速度课程历史基线 | [v2设计](../../docs/agilekickball_v2/DESIGN.md) |
 | AgileKickball v1 | 渐进来球课程历史版本 | [v1说明](../../docs/agilekickball_v1/README.md) |

@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-14T20:46:58.986480+09:00",
+  "pid": 2348537,
+  "process_exists": true,
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-14_15-56-58_wall4_4096_warp_20261014_155653/model_4000.pt",
+  "iteration": 4000,
+  "checkpoint_schema": 2,
+  "running_dataset": {
+    "schema": 1,
+    "manifest_sha256": "eef4d55d77eb26b46fd1be58da628edd07920f5e02198a7636c2e83253e5cb3c",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 17,
+    "total_frames": 4628
+  },
+  "default_dataset": "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox",
+  "default_manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+  "dataset_revision": 3,
+  "clips": 15,
+  "frames": 4155,
+  "training_restarted": false,
+  "running_matches_new_manifest": false
+}

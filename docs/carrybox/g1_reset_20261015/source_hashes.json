@@ -1,0 +1,8 @@
+{
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "60208e1146999ced6a60605fa4b9c102d152be290721a09eaa44c99764b07ce1",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "8dc506b3a7ac73e14e6654d6396614b0cb318772fec40c0ca05dee054b149626",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608",
+  "source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py": "eb21c6fc9783f7914f7f9668fb223cb6b6627bcc393c2bdfb43c4c0b8116984d",
+  "tests/test_carrybox_g1_reset.py": "6e6a3a8f1a59aa4a2c0527157ae83fba6ad07d5923d50ee12e1fcd323510a393",
+  "tests/test_carrybox_walled.py": "c1e17fa36b8140cb31adcdfe6203022127d757e47574cde4d85ef5d60445f9bd"
+}

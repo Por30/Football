@@ -10,7 +10,7 @@ from rsl_rl.algorithms import PPO
 from rsl_rl.runners import OnPolicyRunner
 from .modules import DepthCNNEncoder
 from .amp import AMP
-from perceptual_ball.carrybox_amp import AMP_WINDOW, AMP_FRAME_DIM, FindBoxMotionLibrary
+from perceptual_ball.carrybox_amp import AMP_WINDOW, AMP_FRAME_DIM, DEFAULT_DATASET_PATH, FindBoxMotionLibrary
 
 
 def square_box_symmetries(device, dtype):
@@ -90,7 +90,7 @@ class CarryBoxPPO(PPO):
     augmentation/distributed options fail loudly rather than silently misaligning labels.
     """
     def __init__(self, policy, *args, pose_aux_coef=.5, amp_coef=0., amp_reward_scale=2.,
-                 amp_lr=1.e-4, amp_data_dir='findbox', control_dt=.02, **kwargs):
+                 amp_lr=1.e-4, amp_data_dir=DEFAULT_DATASET_PATH, control_dt=.02, **kwargs):
         super().__init__(policy, *args, **kwargs)
         if self.rnd or self.symmetry or self.is_multi_gpu or self.schedule != 'fixed':
             raise ValueError('CarryBox supports single-device fixed-schedule PPO without RND/symmetry augmentation')

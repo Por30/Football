@@ -1,0 +1,266 @@
+{
+  "config_differences": [
+    ".scene.cylinder1",
+    ".scene.depth_camera.object_names",
+    ".scene.cylinder0",
+    ".scene.cylinder2",
+    ".walled_variant",
+    ".obstacle_cylinder_count"
+  ],
+  "rsi": {
+    "0": {
+      "root_height": [
+        0.7655317187309265,
+        0.7786067128181458,
+        0.7667103409767151,
+        0.7752791047096252
+      ],
+      "hand_center_distance": [
+        1.9145787954330444,
+        1.4805684089660645,
+        1.2205127477645874,
+        1.2089083194732666
+      ]
+    },
+    "1": {
+      "root_height": [
+        0.4148533046245575,
+        0.7705699801445007,
+        0.6661521196365356,
+        0.7739855647087097
+      ],
+      "hand_center_distance": [
+        0.09715121239423752,
+        0.08991807699203491,
+        0.07695189118385315,
+        0.09057894349098206
+      ]
+    },
+    "2": {
+      "root_height": [
+        0.7891765832901001,
+        0.7891765832901001,
+        0.7891765832901001,
+        0.7891765832901001
+      ],
+      "hand_center_distance": [
+        0.05406579002737999,
+        0.05406579002737999,
+        0.05406579002737999,
+        0.05406579002737999
+      ]
+    }
+  },
+  "depth_changes": {
+    "wall": {
+      "nearest_depth_m": [
+        1.4000003337860107,
+        1.3999996185302734,
+        1.4000000953674316,
+        1.4000003337860107
+      ],
+      "hidden_box_invariant": true
+    }
+  },
+  "collision_checks": {
+    "wall": [
+      1.2398624420166016,
+      1.22745943069458,
+      1.2274494171142578,
+      1.2300224304199219
+    ],
+    "platform_support_z": [
+      1.1249998807907104,
+      1.1249998807907104,
+      1.1249998807907104,
+      1.125
+    ]
+  },
+  "hold_reference_penalty": [
+    0.0016517192125320435,
+    0.0016517192125320435,
+    0.0016517192125320435,
+    0.0016517192125320435
+  ],
+  "status": "PASS",
+  "revision": 7,
+  "iterations": 4,
+  "finite": true,
+  "export": true,
+  "contract": {
+    "variant": "walled3",
+    "migration_revision": 7,
+    "depth_backend": "warp",
+    "obstacle_cylinders": 0,
+    "head_reference": "head_link_COM",
+    "knee_lower_penalty": "hard_limit_other_limits_soft",
+    "action_targets": "clamp_to_physical_joint_limits",
+    "push_curriculum": [
+      1000,
+      4000
+    ],
+    "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+    "depth_clip": "optical_near_plane_pixel_centers_v1",
+    "failure_reward": "none_x2_recipe",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "convex_hull_32",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.6,
+      0.3,
+      0.1
+    ],
+    "search_prob": 0.02,
+    "noise": 0.06,
+    "depth_edge": [
+      0.15,
+      0.05
+    ],
+    "depth_holes": 0.02,
+    "depth_stereo": [
+      0.024,
+      0.09
+    ],
+    "latency_probability": 0.1,
+    "depth_noise_contract": "metres_miss_preserved_near_clamp_15_including_onset",
+    "delay": 1,
+    "freeze": 0.002,
+    "freeze_steps": 15,
+    "mount_pos": 0.01,
+    "mount_rot": 0.0,
+    "curriculum": "shared_piecewise_process_anchor",
+    "reward_parent": "g1_corrected_common_v2",
+    "reward_weights": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "undesired_contacts": -1.0,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.4,
+      "slow_pickup": -0.0005,
+      "stable_grasp": 0.2,
+      "arm_speed_pickup": -0.02,
+      "arm_acc_pickup": -2e-05,
+      "grip_force_cap": -0.02,
+      "held_hand_speed": -0.02,
+      "held_hand_acc": -2e-05,
+      "waist_yaw_penalty": -0.5,
+      "search_turn": 0.5
+    },
+    "roll_termination": "abs_roll_gt_0.5",
+    "action_scale": 0.25,
+    "action_clip": 9.0,
+    "randomization": {
+      "box_material": {
+        "static_friction_range": [
+          0.3,
+          2.0
+        ],
+        "dynamic_friction_range": [
+          0.4,
+          1.5
+        ],
+        "restitution_range": [
+          0.0,
+          0.2
+        ],
+        "num_buckets": 64
+      },
+      "box_mass": {
+        "mass_distribution_params": [
+          0.1,
+          1.5
+        ],
+        "operation": "scale",
+        "recompute_inertia": true
+      },
+      "default_joint_pos": {},
+      "torso_com": {
+        "com_range": {
+          "x": [
+            -0.025,
+            0.025
+          ],
+          "y": [
+            -0.05,
+            0.05
+          ],
+          "z": [
+            -0.05,
+            0.05
+          ]
+        }
+      },
+      "push_robot": {
+        "velocity_range": {
+          "x": [
+            -0.5,
+            0.5
+          ],
+          "y": [
+            -0.5,
+            0.5
+          ],
+          "z": [
+            -0.2,
+            0.2
+          ],
+          "roll": [
+            -0.52,
+            0.52
+          ],
+          "pitch": [
+            -0.52,
+            0.52
+          ],
+          "yaw": [
+            -0.78,
+            0.78
+          ]
+        }
+      }
+    },
+    "box_mass_kg": 0.8,
+    "com_body": "torso_link",
+    "push_interval": [
+      1.0,
+      3.0
+    ],
+    "hand_forces": "g1_rubber_hands_box_filtered",
+    "standup_success": "instant_x2",
+    "strict_success_metric": "g1_contact_clearance_hold0.5s"
+  },
+  "head_reference": "COM",
+  "mesh_count": 40,
+  "reset_counts": [
+    5,
+    4,
+    0
+  ],
+  "amp_optimizer_updated": true,
+  "amp_parameters_finite": true,
+  "amp_dataset": {
+    "schema": 1,
+    "manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 15,
+    "total_frames": 4155
+  }
+}

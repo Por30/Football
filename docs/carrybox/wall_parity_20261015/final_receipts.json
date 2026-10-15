@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_carrybox*.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "92f70112e537d24b924ce67a25ba6bc941f6e81f0943e1b23723badcdbb5cfe4",
+      "stdout_sha256": "3bbe0b51c67194aba7504e346564433a363142ef311096d22c6062dd8cf1aee5",
+      "stderr_sha256": "46ce5bee3e1f432fc639dab17720903a2b7b70af9e1d7051fe3a974ff4cd7db8",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash docs/carrybox/wall_parity_20261015/validate.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "e88d18fd6908f2f6d59700f97849777380c19765dfeb26992f924ba3243a6ec8",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ],
+  "provenance": [
+    "cpu_final_receipt.json",
+    "receipts2.json:tests[1]"
+  ],
+  "note": "GPU通过后仅修正回合实际步数统计；最终CPU包含随机timeout年龄回归。未重复GPU短测。"
+}

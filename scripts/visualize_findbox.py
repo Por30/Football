@@ -8,19 +8,20 @@ from pathlib import Path
 import sys
 
 
-def verify(output):
+def verify(output, dataset_path=None):
     import imageio.v2 as imageio
     import numpy as np
     report = json.loads((output / 'recording.json').read_text())
-    if report.get('mode') == 'individual':
-        verify_individual(output, report)
-        return
     root = Path(__file__).resolve().parents[1]
-    manifest = json.loads((root / 'findbox/amp_manifest.json').read_text())
-    assert len(report['clips']) == len(manifest['clips']) == 17
+    dataset = root / (dataset_path if dataset_path is not None else report.get('dataset_path', 'findbox'))
+    if report.get('mode') == 'individual':
+        verify_individual(output, report, dataset)
+        return
+    manifest = json.loads((dataset / 'amp_manifest.json').read_text())
+    assert len(report['clips']) == len(manifest['clips'])
     assert {c['file'] for c in report['clips']} == {c['file'] for c in manifest['clips']}
     for clip in manifest['clips']:
-        assert hashlib.sha256((root / 'findbox' / clip['file']).read_bytes()).hexdigest() == clip['sha256']
+        assert hashlib.sha256((dataset / clip['file']).read_bytes()).hexdigest() == clip['sha256']
     reader = imageio.get_reader(output / 'findbox_dataset.mp4')
     metadata = reader.get_meta_data()
     assert metadata['size'] == (960, 720) and abs(metadata['fps'] - 30.) < 1.e-4
@@ -34,17 +35,16 @@ def verify(output):
     assert count == report['video_frames'] == sum(c['video_frames'] for c in report['clips'])
     expected = sum((c['frames'] + 1) // 2 for c in manifest['clips'])
     assert count == expected, 'Not all native 60Hz motion durations are represented at 30fps'
-    result = dict(status='PASS', clips=17, decoded_frames=count, fps=30,
+    result = dict(status='PASS', clips=len(manifest['clips']), decoded_frames=count, fps=30,
                   duration_seconds=count/30, resolution=[960,720], all_source_hashes_unchanged=True)
     (output / 'verification.json').write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps(result))
 
 
-def verify_individual(output, report):
+def verify_individual(output, report, dataset):
     import imageio.v2 as imageio
     import numpy as np
-    root = Path(__file__).resolve().parents[1]
-    manifest_path = root / 'findbox/amp_manifest.json'
+    manifest_path = dataset / 'amp_manifest.json'
     manifest = json.loads(manifest_path.read_text())
     assert hashlib.sha256(manifest_path.read_bytes()).hexdigest() == report['dataset']['manifest_sha256']
     rows = {c['file']: c for c in manifest['clips']}
@@ -57,7 +57,7 @@ def verify_individual(output, report):
     total = 0
     for clip in report['clips']:
         row = rows[clip['file']]
-        assert hashlib.sha256((root / 'findbox' / clip['file']).read_bytes()).hexdigest() == row['sha256'] == clip['source_sha256']
+        assert hashlib.sha256((dataset / clip['file']).read_bytes()).hexdigest() == row['sha256'] == clip['source_sha256']
         assert clip['source_frames'] == clip['video_frames'] == row['frames']
         assert clip['source_frame_first'] == 0 and clip['source_frame_last'] == row['frames'] - 1
         assert json.loads((output / Path(clip['video']).with_suffix('.json')).read_text()) == clip
@@ -84,8 +84,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--verify-only', action='store_true')
+    parser.add_argument('--dataset', type=Path, help='Dataset directory; recording defaults to assets/motions/findbox')
     parser.add_argument('--individual', action='store_true', help='Record each PT directly as a separate native 60fps MP4')
-    parser.add_argument('--clip', help='Select one relative PT path, e.g. pickUp/pickup1.pt; requires --individual')
+    parser.add_argument('--clip', help='Select one relative PT path, e.g. hold/hold_box_01.pt; requires --individual')
     def configure(args):
         if args.clip and not args.individual:
             parser.error('--clip requires --individual')
@@ -94,7 +95,7 @@ def main():
         return args
     if '--verify-only' in sys.argv:
         args = configure(parser.parse_args())
-        verify(args.output)
+        verify(args.output, args.dataset)
         return
     from isaaclab.app import AppLauncher
     AppLauncher.add_app_launcher_args(parser)
@@ -125,15 +126,16 @@ def record(args):
     from isaaclab.utils import configclass
     from isaaclab.utils.math import quat_apply, quat_mul, yaw_quat
     from perceptual_ball.assets import G1_29DOF_CFG
-    from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, joint_mapping
+    from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, joint_mapping, clip_group
 
     torch.set_num_threads(2)
     out = args.output.resolve(); out.mkdir(parents=True, exist_ok=True)
     root = Path(__file__).resolve().parents[1]
-    library = FindBoxMotionLibrary(root / 'findbox', device='cpu')  # validates actual AMP dataset
-    manifest = json.loads((root / 'findbox/amp_manifest.json').read_text())
+    library = FindBoxMotionLibrary(args.dataset, device='cpu')
+    dataset = library.root
+    manifest = json.loads((dataset / 'amp_manifest.json').read_text())
     priority = {'pickUp': 0, 'carryWith': 1, 'loco_direction': 2}
-    rows = sorted(manifest['clips'], key=lambda c: (priority[c['file'].split('/')[0]], c['file']))
+    rows = sorted(manifest['clips'], key=lambda c: (priority[clip_group(c)], c['file']))
     if args.clip:
         rows = [row for row in rows if row['file'] == args.clip]
         if not rows:
@@ -185,7 +187,7 @@ def record(args):
             video_path = out / Path(row['file']).with_suffix('.mp4')
             if args.individual:
                 writer = open_writer(video_path)
-            data = torch.load(root/'findbox'/row['file'], map_location=args.device, weights_only=True)
+            data = torch.load(dataset/row['file'], map_location=args.device, weights_only=True)
             n = row['frames']
             for field in ('base_position','base_quat','joint_position','box_pos_local'):
                 assert torch.isfinite(data[field]).all(), (row['file'], field)
@@ -198,7 +200,7 @@ def record(args):
             rotation = quat_mul(turn,q)
             box_pos = quat_apply(turn, (data['base_position'] + data['box_pos_local'] - origin).float())
             box_rotation = yaw_quat(rotation)  # box rotation was not recorded
-            group = row['file'].split('/')[0]
+            group = clip_group(row)
             if group == 'pickUp':
                 contact = int(data['contact_index'])
                 center = box_pos[contact].cpu().tolist()
@@ -270,6 +272,7 @@ def record(args):
                 support_display='pickUp only: illustrative support top inferred at contact_index; not measured geometry')
     if args.individual:
         report.update(mode='individual', selected_clip=args.clip, source_frame_step=1)
+    report['dataset_path'] = str(dataset.relative_to(root)) if dataset.is_relative_to(root) else str(dataset)
     (out/'recording.json').write_text(json.dumps(report,indent=2)+'\n')
     print('FINDBOX_RECORDING_COMPLETE',str(out if args.individual else out/'findbox_dataset.mp4'),flush=True)
 

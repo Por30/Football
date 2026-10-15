@@ -1,0 +1,118 @@
+{
+  "old_policy_loco": {
+    "completed_episodes": 1600,
+    "mean_steps": 3,
+    "min_steps": 3,
+    "max_steps": 3,
+    "fell": 0,
+    "tipped": 1600,
+    "timeout": 0,
+    "unfinished": 16,
+    "first_terminal": {
+      "skill": 0,
+      "steps": 3,
+      "root_z": 0.7161243557929993,
+      "head_z": 1.153106689453125,
+      "roll": 0.5343983173370361,
+      "pitch": -0.2030954360961914,
+      "root_vel": [
+        1.8465046882629395,
+        0.2804330885410309,
+        -0.4061276912689209,
+        7.423240661621094,
+        -5.172082424163818,
+        -5.177164077758789
+      ],
+      "fell": false,
+      "tipped": true,
+      "timeout": false
+    }
+  },
+  "hold_rsi_loco": {
+    "completed_episodes": 117,
+    "mean_steps": 38.93162393162393,
+    "min_steps": 20,
+    "max_steps": 71,
+    "fell": 21,
+    "tipped": 115,
+    "timeout": 0,
+    "unfinished": 16,
+    "first_terminal": {
+      "skill": 0,
+      "steps": 28,
+      "root_z": 0.6744181513786316,
+      "head_z": 0.9352855682373047,
+      "roll": 0.5055637359619141,
+      "pitch": 0.40839195251464844,
+      "root_vel": [
+        1.138817548751831,
+        -0.5575444102287292,
+        -0.5935640931129456,
+        0.371915727853775,
+        1.380061149597168,
+        -0.5871177315711975
+      ],
+      "fell": false,
+      "tipped": true,
+      "timeout": false
+    }
+  },
+  "hold_rsi_zero_velocity": {
+    "completed_episodes": 88,
+    "mean_steps": 50.38636363636363,
+    "min_steps": 18,
+    "max_steps": 104,
+    "fell": 5,
+    "tipped": 86,
+    "timeout": 0,
+    "unfinished": 16,
+    "first_terminal": {
+      "skill": 0,
+      "steps": 38,
+      "root_z": 0.49520745873451233,
+      "head_z": 0.7432822585105896,
+      "roll": 0.5524880886077881,
+      "pitch": 0.5277040004730225,
+      "root_vel": [
+        1.3053773641586304,
+        -0.6939539909362793,
+        -1.1762853860855103,
+        2.8363912105560303,
+        2.075624465942383,
+        0.8616468906402588
+      ],
+      "fell": false,
+      "tipped": true,
+      "timeout": false
+    }
+  },
+  "default_stand": {
+    "completed_episodes": 80,
+    "mean_steps": 57.75,
+    "min_steps": 56,
+    "max_steps": 60,
+    "fell": 0,
+    "tipped": 80,
+    "timeout": 0,
+    "unfinished": 16,
+    "first_terminal": {
+      "skill": 0,
+      "steps": 56,
+      "root_z": 0.4124770760536194,
+      "head_z": 0.6047208309173584,
+      "roll": -0.04739785194396973,
+      "pitch": 1.1417391300201416,
+      "root_vel": [
+        -0.8328295350074768,
+        1.3821929693222046,
+        -1.5475883483886719,
+        -2.863920211791992,
+        -1.707796573638916,
+        -0.008633759804069996
+      ],
+      "fell": false,
+      "tipped": true,
+      "timeout": false
+    }
+  }
+}

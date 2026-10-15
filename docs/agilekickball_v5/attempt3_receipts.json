@@ -1,0 +1,35 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_agilekickball_v5.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "ec9c6914a2fec4de103b789e1aea85841cf2f609d01a5cdbba2130ce21f45e23",
+      "stdout_sha256": "d591310090829557e43ed81cebfb4e8d5bf14ec82fcb7746b22e6637b88baf2f",
+      "stderr_sha256": "a3bd69662abec5bb2e11fe2bb7412498bdf97974b8b94076511301fafcb651a0",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_carrybox*.py -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "92f70112e537d24b924ce67a25ba6bc941f6e81f0943e1b23723badcdbb5cfe4",
+      "stdout_sha256": "f34c72629613014a231b8ce3915dd0aec8f80ab54621ab598839837ee0d44e85",
+      "stderr_sha256": "8d1a3c5cf59a806c074d3278e624097ebe803b93f7bd0b1bb23a958aa4b4f857",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash scripts/rsl_rl/smoke_agilekickball_v5.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "b98e6e08ff70268f30d659bd0d0c28457557318aab74f786199010d523c97f0b",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+---
+task_id: "agilekickball-s2s-parity-20261015"
+language: "zh-CN"
+axes: ["E", "P", "C"]
+risk_tier: "T2"
+status: "DONE"
+changed_files: ["scripts/sim2sim/kickball_mujoco.py", "scripts/sim2sim/audit_kickball_parity.py", "tests/test_kickball_parity.py", "projects/football/README.md", "projects/README.md", "docs/agilekickball_v4/sim2sim_parity_20261015/README.md", "docs/agilekickball_v4/sim2sim_parity_20261015/audit.json", "docs/agilekickball_v4/sim2sim_parity_20261015/expert_review.json", "docs/agilekickball_v4/sim2sim_parity_20261015/model_provenance.json", "docs/agilekickball_v4/sim2sim_parity_20261015/receipts.json", "agent/plan/agilekickball-s2s-parity-20261015.md", "agent/task/agilekickball-s2s-parity-20261015.md", "agent/report/agilekickball-s2s-parity-20261015.md", "agent/handoff/agilekickball-s2s-parity-20261015.md"]
+task_contract_sha256: "2938738e75c79e0b25d131895a295471936894d6c5543aad8306cbfd7a6fbf63"
+tests: [{"command": "/home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p test_kickball_mujoco.py -v", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "e285bbaef756008edc846cd4a06c7d45d16f544eb95777d67efe56c4fafd767f", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "acd0abcd84fa0709c3e95267d4232cfb4b84d2676ef1cd5f8d9530b6dbf64400", "runner": "run_engineering_tests.py"}, {"command": "/home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p test_kickball_parity.py -v", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "63a90737f440d65a5cad86265b38048eca8a8171eb49f4a33923edd5fdaf21d4", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "a79c71f634a52428c4d53571370d6029ee2efaf740a0da07746f3308e9cf610e", "runner": "run_engineering_tests.py"}, {"command": "/home/cao/ENTER/envs/umr/bin/python scripts/sim2sim/audit_kickball_parity.py --output docs/agilekickball_v4/sim2sim_parity_20261015/audit.json", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "a19be7bc938b23abed7010e0493a332c105a925571c999144d5b57528e42c5f1", "stdout_sha256": "d7fa65ac5a688e8d896059a5a455910b555def8e7620120f947efa07be2252f5", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "runner": "run_engineering_tests.py"}]
+artifact: "HANDOFF"
+resume_command: null
+---
+
+稳定状态：v4 s2s深度使用policy_depth()，复现float32完整世界相机quat_mul -> quat_inv -> quat_apply；保留原外参和解析深度语义，UI/发球逻辑不变。audit_kickball_parity.py加载训练快照类及IsaacLab数学函数作为独立CPU参考，保留legacy_depth供重放；测试、结果、模型/层文件hash和审查摘要在docs/agilekickball_v4/sim2sim_parity_20261015。审计任务已完成，不等于稳定迁移完成。后续重点是独立s2s资产对齐训练机器人几何/惯量/执行器以及球阻尼、反弹、接触校准；不能直接给MuJoCo damping填.02或拿固定-10mm相机平移代替完整几何对齐。原绝对路径启动命令继续可用，显式--physics-dt 0.005；本次未改变任何训练/共享资产/真机设置。

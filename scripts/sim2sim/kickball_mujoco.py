@@ -58,6 +58,36 @@ def ball_depth(center, rays=RAYS):
     return np.where((disc >= 0) & (near > .1) & (near < 3), near, 3).astype(np.float32)
 
 
+def policy_depth(torso_position, torso_quaternion, ball_position):
+    """Match v4's float32 world-camera quat_mul -> quat_inv -> quat_apply.
+
+    The saved camera quaternion is slightly nonunit. Normalizing it or using
+    a rotation-matrix transpose changes the trained silhouette at edge pixels.
+    Quaternion arithmetic follows IsaacLab utils.math (BSD-3-Clause).
+    """
+    position = torch.as_tensor(torso_position,dtype=torch.float32)
+    q = torch.as_tensor(torso_quaternion,dtype=torch.float32)
+    ball = torch.as_tensor(ball_position,dtype=torch.float32)
+
+    def apply(quat, vector):
+        t = torch.linalg.cross(quat[1:],vector)*2
+        return vector+quat[0]*t+torch.linalg.cross(quat[1:],t)
+
+    cam_pos = position+apply(q,torch.as_tensor(CAM_POS,dtype=torch.float32))
+    w1,x1,y1,z1 = q.unbind()
+    w2,x2,y2,z2 = torch.as_tensor(CAM_QUAT,dtype=torch.float32).unbind()
+    ww = (z1+x1)*(x2+y2)
+    yy = (w1-y1)*(w2+z2)
+    zz = (w1+y1)*(w2-z2)
+    xx = ww+yy+zz
+    qq = .5*(xx+(z1-x1)*(x2-y2))
+    cam_q = torch.stack((qq-ww+(z1-y1)*(y2-z2),qq-xx+(x1+w1)*(x2+w2),
+                         qq-yy+(w1-x1)*(y2+z2),qq-zz+(z1+y1)*(w2-x2)))
+    inverse = cam_q*torch.tensor([1.,-1.,-1.,-1.])/cam_q.square().sum().clamp(min=1.e-9)
+    center = apply(inverse,ball-cam_pos)
+    return ball_depth(center.numpy())
+
+
 class History:
     def __init__(self):
         self.terms = None
@@ -208,6 +238,29 @@ class KickballSim:
         self.wait_elapsed = self.stable_elapsed = 0.
         mujoco.mj_forward(self.model,self.data)
 
+    def set_ball_speed(self, speed, apply_now=False):
+        """Set future serves; optionally change only the current ball's rolling speed."""
+        if not np.isfinite(speed) or speed <= 0:
+            raise ValueError('Ball speed must be positive and finite')
+        self.speed = float(speed)
+        if apply_now:
+            velocity = self.data.qvel[self.bv:self.bv+6]
+            current = np.linalg.norm(velocity[:2])
+            direction = velocity[:2]/current if current > 1e-6 else np.array([-1.,0.])
+            velocity[:2] = direction*self.speed
+            # Free-joint translation is world-frame, angular velocity is body-frame.
+            rotation = quat_matrix(self.data.qpos[self.bq+3:self.bq+7])
+            spin_z = (rotation @ velocity[3:])[2]
+            velocity[3:] = rotation.T @ [-velocity[1]/.11,velocity[0]/.11,spin_z]
+            mujoco.mj_forward(self.model,self.data)
+
+    def apply_ball_command(self, action, speed):
+        if action not in ('set','apply','serve'):
+            raise ValueError(f'Unknown ball command: {action}')
+        self.set_ball_speed(speed,apply_now=action == 'apply')
+        if action == 'serve':
+            self.serve()
+
     def balanced(self):
         d = self.data
         gravity = d.xmat[self.pelvis].reshape(3,3).T @ [0,0,-1]
@@ -246,11 +299,7 @@ class KickballSim:
         relative = (positions - d.xpos[self.pelvis]) @ rotation
         terms = [rotation.T @ vel[:3], rotation.T @ [0,0,-1], d.qpos[self.qadr]-self.default,
                  d.qvel[self.vadr], relative.ravel(), self.last_action]
-        torso_rot = d.xmat[self.torso].reshape(3,3)
-        cam_pos = d.xpos[self.torso] + torso_rot @ CAM_POS
-        cam_rot = torso_rot @ quat_matrix(CAM_QUAT)
-        center = cam_rot.T @ (d.xpos[self.ball_body]-cam_pos)
-        depth = ball_depth(center)
+        depth = policy_depth(d.xpos[self.torso],d.xquat[self.torso],d.xpos[self.ball_body])
         flat, stack = self.history.append(terms,depth)
         return flat, stack
 
@@ -277,6 +326,7 @@ def run(args):
                'depth_mode': 'v4_analytic_ball_only_ray_distance', 'steps': 0, 'falls': 0,
                'ball_robot_contact_steps': 0, 'visible_frames': 0, 'torque_saturated_joint_steps': 0,
                'target_outside_joint_range_count': 0, 'serves': 1, 'errors': [],
+               'ball_speed_commands': [], 'manual_serves': 0,
                'max_root_displacement_m': 0., 'travel_limit_exceeded_steps': 0,
                'recovery_timeouts': 0, 'recovered_serves': 0, 'serve_mode': args.serve_mode,
                'physics_dt': args.physics_dt, 'training_physics_dt': .005,
@@ -315,17 +365,25 @@ def run(args):
             viewer.cam.lookat[:] = [0,0,.7]
             if not args.no_depth_window:
                 from depth_visualization import LiveDepthWindow
-                depth_window = LiveDepthWindow()
+                depth_window = LiveDepthWindow(speed=sim.speed)
         start = time.perf_counter()
         for i in range(total):
             if viewer is not None and not viewer.is_running():
                 raise RuntimeError('Viewer closed before requested duration')
+            if depth_window is not None:
+                depth_window.poll()
+                for command, speed in depth_window.take_commands():
+                    sim.apply_ball_command(command,speed)
+                    summary['ball_speed_commands'].append({'time_s':float(d.time),
+                        'action':command,'speed_m_s':speed})
+                    if command == 'serve':
+                        summary['serves'] += 1
+                        summary['manual_serves'] += 1
             flat, depth = sim.observe()
             if depth_window is not None:
                 if i % 5 == 0:
+                    depth_window.update_speed(sim.speed,float(np.linalg.norm(d.qvel[sim.bv:sim.bv+2])))
                     depth_window.update(depth[0],float(d.time))
-                else:
-                    depth_window.poll()
             if args.depth_output is not None and i % 5 == 0:
                 # Copy the exact network input before stepping; never call observe twice.
                 depth_samples.append((float(d.time),depth[0].copy()))

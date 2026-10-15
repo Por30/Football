@@ -34,6 +34,10 @@ parser.add_argument(
     help="Use the pre-trained checkpoint from Nucleus.",
 )
 parser.add_argument("--real-time", action="store_true", default=False, help="Run in real-time, if possible.")
+parser.add_argument(
+    "--carrybox_weights_only", action="store_true",
+    help="Explicit CarryBox policy-only playback in the CURRENT environment; not a historical environment replay.",
+)
 cli_args.add_ball_speed_arg(parser)
 cli_args.add_visray_arg(parser)
 # append RSL-RL cli arguments
@@ -153,7 +157,13 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         runner = BallRegressionOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     else:
         raise ValueError(f"Unsupported runner class: {agent_cfg.class_name}")
-    runner.load(resume_path, load_optimizer=False)
+    if args_cli.carrybox_weights_only:
+        if not isinstance(runner, CarryBoxOnPolicyRunner):
+            raise ValueError("--carrybox_weights_only requires a CarryBox wall task")
+        print("[INFO]: Policy-only playback in the CURRENT CarryBox environment; source environment is not restored.")
+        runner.warm_start(resume_path)
+    else:
+        runner.load(resume_path, load_optimizer=False)
     kb = getattr(env.unwrapped, "_kickball", None)
     if args_cli.ballspeed is not None:
         if kb is None or not hasattr(kb, "serve_speed_override"):
@@ -195,7 +205,9 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         normalizer = None
 
     # export policy to onnx/jit
-    export_model_dir = os.path.join(os.path.dirname(resume_path), "exported")
+    export_model_dir = os.path.join(
+        os.path.dirname(resume_path), "exported_current_env" if args_cli.carrybox_weights_only else "exported"
+    )
     if hasattr(policy_nn, "perception_encoder"):
         from perceptual_ball.rsl_rl_extensions.export import export_depth_policy
         robot = env.unwrapped.scene["robot"]

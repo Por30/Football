@@ -1,8 +1,110 @@
 [
   {
     "name": "reset",
-    "max_m": 0.01718282699584961,
-    "interior_max_m": 0.009635448455810547,
+    "max_m": 0.0001423358917236328,
+    "interior_max_m": 0.0001423358917236328,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_0",
+    "max_m": 0.0001494884490966797,
+    "interior_max_m": 0.00011432170867919922,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_1",
+    "max_m": 0.00014066696166992188,
+    "interior_max_m": 0.00012004375457763672,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_2",
+    "max_m": 0.00013780593872070312,
+    "interior_max_m": 0.00012934207916259766,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_3",
+    "max_m": 0.00013947486877441406,
+    "interior_max_m": 0.0001285076141357422,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_4",
+    "max_m": 0.00012803077697753906,
+    "interior_max_m": 0.00012350082397460938,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_5",
+    "max_m": 0.0001404285430908203,
+    "interior_max_m": 0.00011444091796875,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_6",
+    "max_m": 0.0001342296600341797,
+    "interior_max_m": 0.00012576580047607422,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_7",
+    "max_m": 0.0001347064971923828,
+    "interior_max_m": 0.00011920928955078125,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_8",
+    "max_m": 0.0001518726348876953,
+    "interior_max_m": 0.0001270771026611328,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_9",
+    "max_m": 0.00013375282287597656,
+    "interior_max_m": 0.0001277923583984375,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_10",
+    "max_m": 0.000141143798828125,
+    "interior_max_m": 0.00014102458953857422,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_11",
+    "max_m": 0.00013458728790283203,
+    "interior_max_m": 0.00013458728790283203,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "reverse_partial_reset",
+    "max_m": 0.00013685226440429688,
+    "interior_max_m": 0.00012254714965820312,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "ball_near",
+    "max_m": 0.00011873245239257812,
+    "interior_max_m": 1.0132789611816406e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "ball_far",
+    "max_m": 0.00011873245239257812,
+    "interior_max_m": 1.1920928955078125e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "body_blocks_ball",
+    "max_m": 0.00011539459228515625,
+    "interior_max_m": 3.5762786865234375e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "hidden_ball_moved",
+    "max_m": 0.00011539459228515625,
+    "interior_max_m": 3.5762786865234375e-06,
     "fraction_over_2cm": 0.0
   }
 ]

@@ -1,0 +1,13 @@
+{
+  "source": "/home/cao/.local/share/Trash/files/warp_20261014_155653/train.log",
+  "iterations": "4101-4200",
+  "count": 100,
+  "metrics": {
+    "Mean episode length": 65.0945,
+    "Mean action noise std": 1.5805,
+    "Metrics/episode_lift_success": 0.0,
+    "Episode_Termination/tipped": 0.901731,
+    "AMP/style_reward": 0.001179,
+    "AMP/valid_fraction": 0.904141
+  }
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "reset",
+    "max_m": 0.0001533031463623047,
+    "interior_max_m": 0.00014531612396240234,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_0",
+    "max_m": 0.00014162063598632812,
+    "interior_max_m": 0.00013148784637451172,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_1",
+    "max_m": 0.00014543533325195312,
+    "interior_max_m": 0.00012922286987304688,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_2",
+    "max_m": 0.00016355514526367188,
+    "interior_max_m": 0.00011777877807617188,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_3",
+    "max_m": 0.00013184547424316406,
+    "interior_max_m": 0.00011849403381347656,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_4",
+    "max_m": 0.00011587142944335938,
+    "interior_max_m": 0.00011587142944335938,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_5",
+    "max_m": 0.00013136863708496094,
+    "interior_max_m": 0.00012540817260742188,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_6",
+    "max_m": 0.0001347064971923828,
+    "interior_max_m": 0.00011539459228515625,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_7",
+    "max_m": 0.0001552104949951172,
+    "interior_max_m": 0.00012886524200439453,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_8",
+    "max_m": 0.00014090538024902344,
+    "interior_max_m": 0.0001392364501953125,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_9",
+    "max_m": 0.00013685226440429688,
+    "interior_max_m": 0.00013446807861328125,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_10",
+    "max_m": 0.00013637542724609375,
+    "interior_max_m": 0.00013208389282226562,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "motion_11",
+    "max_m": 0.00015115737915039062,
+    "interior_max_m": 0.00011742115020751953,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "reverse_partial_reset",
+    "max_m": 0.00013828277587890625,
+    "interior_max_m": 0.0001169443130493164,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "ball_near",
+    "max_m": 0.00012373924255371094,
+    "interior_max_m": 1.3113021850585938e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "ball_far",
+    "max_m": 0.00012373924255371094,
+    "interior_max_m": 1.6689300537109375e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "body_blocks_ball",
+    "max_m": 0.00012600421905517578,
+    "interior_max_m": 2.9802322387695312e-06,
+    "fraction_over_2cm": 0.0
+  },
+  {
+    "name": "hidden_ball_moved",
+    "max_m": 0.00012600421905517578,
+    "interior_max_m": 2.9802322387695312e-06,
+    "fraction_over_2cm": 0.0
+  }
+]

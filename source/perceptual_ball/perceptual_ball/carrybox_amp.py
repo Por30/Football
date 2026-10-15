@@ -1,7 +1,7 @@
 """FindBox motion schema: 60 Hz PhysHSI data -> 50 Hz proprioceptive AMP windows.
 
 No object, world position, root linear velocity or end-effector truth enters AMP.
-Source provenance and immutable clip hashes are in findbox/amp_manifest.json.
+Source provenance and immutable clip hashes are in assets/motions/findbox/amp_manifest.json.
 """
 from __future__ import annotations
 
@@ -15,6 +15,9 @@ from isaaclab.utils.math import quat_apply_inverse, quat_mul, quat_conjugate, ax
 
 AMP_WINDOW = 10
 AMP_FRAME_DIM = 64
+DEFAULT_DATASET_PATH = str(Path(__file__).resolve().parent / 'assets/motions/findbox')
+DIRECTORY_GROUPS = {'locomotion': 'loco_direction', 'pick_up': 'pickUp', 'hold': 'carryWith',
+                    'loco_direction': 'loco_direction', 'pickUp': 'pickUp', 'carryWith': 'carryWith'}
 SOURCE_JOINT_NAMES = tuple(
     [f'{side}_{part}_joint' for side in ('left', 'right') for part in
      ('hip_pitch', 'hip_roll', 'hip_yaw', 'knee', 'ankle_pitch', 'ankle_roll')]
@@ -35,17 +38,31 @@ def joint_mapping(robot_joint_names):
     return [robot_joint_names.index(name) for name in SOURCE_JOINT_NAMES]
 
 
-def resolve_dataset_path(path='findbox'):
+def resolve_dataset_path(path=None):
+    if path is None:
+        path = DEFAULT_DATASET_PATH
     path = Path(path).expanduser()
     return path if path.is_absolute() else Path(__file__).resolve().parents[3] / path
 
 
+def clip_group(row):
+    """Keep AMP/RSI skill names independent of normalized directory spelling."""
+    relative = Path(row['file'])
+    if relative.is_absolute() or '..' in relative.parts or len(relative.parts) != 2:
+        raise ValueError('Invalid FindBox clip path')
+    group = row.get('group', relative.parts[0])
+    if DIRECTORY_GROUPS.get(relative.parts[0]) != group:
+        raise ValueError('Invalid FindBox clip group/directory')
+    return group
+
+
 class FindBoxMotionLibrary:
-    def __init__(self, dataset_path='findbox', device='cpu', env_fps=50., window_length=AMP_WINDOW):
+    def __init__(self, dataset_path=None, device='cpu', env_fps=50., window_length=AMP_WINDOW):
         self.device = device
         self.env_fps = float(env_fps)
         self.window_length = window_length
         root = resolve_dataset_path(dataset_path)
+        self.root = root
         raw_manifest = (root / 'amp_manifest.json').read_bytes()
         manifest = json.loads(raw_manifest)
         if (manifest.get('schema') != 1 or manifest.get('fps') != 60
@@ -64,13 +81,12 @@ class FindBoxMotionLibrary:
                              feature_schema='joint_pos29_joint_vel29_gravity3_angvel3', groups=groups)
         self.clips, self.clip_names, self.clip_groups, self.weights = [], [], [], []
         rows = manifest['clips']
-        group_counts = {g: sum(Path(row['file']).parts[0] == g for row in rows) for g in groups}
+        row_groups = [clip_group(row) for row in rows]
+        group_counts = {g: row_groups.count(g) for g in groups}
         if not rows or not all(group_counts.values()) or len({row['file'] for row in rows}) != len(rows):
             raise ValueError('FindBox manifest requires distinct clips and all three motion groups')
-        for row in rows:
+        for row, group in zip(rows, row_groups):
             relative = Path(row['file'])
-            if relative.is_absolute() or '..' in relative.parts or len(relative.parts) != 2 or relative.parts[0] not in groups:
-                raise ValueError('Invalid FindBox clip path')
             path = root / relative
             if hashlib.sha256(path.read_bytes()).hexdigest() != row['sha256']:
                 raise ValueError(f'FindBox clip hash mismatch: {relative}')
@@ -99,8 +115,8 @@ class FindBoxMotionLibrary:
             angular[-1] = angular[-2]
             self.clips.append((joints, velocity, quat, angular))
             self.clip_names.append(str(relative))
-            self.clip_groups.append(relative.parts[0])
-            self.weights.append(groups[relative.parts[0]] / group_counts[relative.parts[0]])
+            self.clip_groups.append(group)
+            self.weights.append(groups[group] / group_counts[group])
         self.weights = torch.tensor(self.weights, device=device)
         self.weights /= self.weights.sum()
         self.lengths = torch.tensor([len(c[0]) for c in self.clips], device=device)

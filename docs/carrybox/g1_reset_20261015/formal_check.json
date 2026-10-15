@@ -1,0 +1,45 @@
+{
+  "status": "RUNNING_VERIFIED",
+  "verified_at": "2026-10-15T13:10:49.858630+09:00",
+  "pid": 2660033,
+  "run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-15_13-06-53_wall4_g1_v8_scratch_20261015_130649",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/launch_g1_v8_20261015_130649/train.log",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-15_13-06-53_wall4_g1_v8_scratch_20261015_130649/model_0.pt",
+  "schema": 2,
+  "revision": 8,
+  "dataset": {
+    "schema": 1,
+    "manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "fps": 60.0,
+    "env_fps": 50.0,
+    "window_length": 10,
+    "feature_schema": "joint_pos29_joint_vel29_gravity3_angvel3",
+    "groups": {
+      "loco_direction": 0.4,
+      "pickUp": 0.4,
+      "carryWith": 0.2
+    },
+    "clip_count": 15,
+    "total_frames": 4155
+  },
+  "checkpoint_parameters_finite": true,
+  "initialization": "fresh",
+  "last_iteration": 12,
+  "num_envs": 4096,
+  "initial_std_mean": 0.1998804211616516,
+  "warm_iteration_seconds": [
+    4.33,
+    4.31,
+    4.22,
+    4.19,
+    4.19,
+    4.2,
+    4.21,
+    4.23,
+    4.22,
+    4.29,
+    4.23
+  ],
+  "warm_mean_seconds": 4.238181818181818,
+  "warm_max_seconds": 4.33
+}

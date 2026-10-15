@@ -1,0 +1,27 @@
+{
+  "pid": 2660033,
+  "started_at": "2026-10-15T13:06:49.267225+09:00",
+  "command": [
+    "bash",
+    "scripts/rsl_rl/train_carrybox_walled.sh",
+    "--num_envs",
+    "4096",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall4_g1_v8_scratch_20261015_130649"
+  ],
+  "variant": 4,
+  "num_envs": 4096,
+  "initialization": "fresh_no_resume_no_warm_start",
+  "checkpoint_schema": 2,
+  "environment_revision": 8,
+  "run_name": "wall4_g1_v8_scratch_20261015_130649",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/launch_g1_v8_20261015_130649/train.log",
+  "resource_before": "3235, 12 MiB\n",
+  "status": "RUNNING_VERIFIED",
+  "verified_at": "2026-10-15T13:10:49.858630+09:00",
+  "run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-15_13-06-53_wall4_g1_v8_scratch_20261015_130649",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled4/2026-10-15_13-06-53_wall4_g1_v8_scratch_20261015_130649/model_0.pt",
+  "last_iteration": 12
+}

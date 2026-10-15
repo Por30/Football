@@ -1,0 +1,34 @@
+{
+  "affected_call_path": [
+    "training env.yaml -> saved perception.py -> exported policy",
+    "MuJoCo make_scene -> compiled contacts -> observe -> policy"
+  ],
+  "critical_interfaces": [
+    "ball mass/radius match; damping/material differ",
+    "nonunit camera quaternion inverse differs",
+    "training USD and official MuJoCo torso geometry differ"
+  ],
+  "invariants": [
+    "v4 metric ray distance, no scene occlusion",
+    "same pose for arithmetic comparisons; separate asset FK comparison",
+    "no extra observe/history updates"
+  ],
+  "smallest_change_locus": [
+    "kickball_mujoco.policy_depth and observe"
+  ],
+  "mandatory_safeguards": [
+    "use actual training snapshot CPU oracle",
+    "read compiled model and actual USD",
+    "do not guess restitution/solref mapping or change shared assets",
+    "retain old algorithm in audit; no success-rate claim"
+  ],
+  "minimal_tests": [
+    "existing 8 tests",
+    "training replay, compiled ball, nonzero waist FK, history test",
+    "paired CPU closed-loop with old/current depth"
+  ],
+  "blockers": [
+    "No blocker for camera arithmetic fix",
+    "Full physics parity awaits asset/dynamics alignment and contact calibration"
+  ]
+}

@@ -1,5 +1,9 @@
 # FindBox 数据集视频
 
+2026-10-14目录迁移后：录制默认使用`assets/motions/findbox/`规范命名数据，例如`--clip hold/hold_box_01.pt`。下方15段已录视频内容与新目录逐字节对应，画面文件名属于迁移前命名；[规范文件名与视频对照](../../../source/perceptual_ball/perceptual_ball/assets/motions/findbox/README.md)。历史录像验证从recording.json中的dataset_path选择数据，没有该字段的旧录像仍核对根findbox；可用`--dataset`显式指定归档。
+
+2026-10-14抱箱修订版：有效AMP已整理为15段，carrywith1保留原0–20帧并重复第20帧至5秒，carrywith2/3归档。已重新逐PT录制[新版15段60fps视频](../../../outputs/carrybox/findbox_hold_20261014/README.md)，全4155帧/69.25秒解码及源hash校验通过。[数据编辑、备份与训练兼容说明](../amp_hold_20261014/README.md)。下方17段成片均属于修改前的历史数据。
+
 2026-10-14后续：按逐段调整数据的需求，从每个原始PT分别直接录制[17段原生60fps视频](../../../outputs/carrybox/findbox_individual/README.md)。每个PT对应同名MP4、PNG预览和JSON帧记录，画面显示0起始源帧号及时间。全4628帧均保留，累计77.133秒，全部解码和源hash检查通过；见[独立录制回执](individual_test_receipts_20261014.json)。重录命令：`bash scripts/visualize_findbox.sh --individual --clip pickUp/pickup1.pt --output outputs/carrybox/findbox_pickup1_review`，省略`--clip`录制全部。输出目录必须为新目录；源数据仍未修改。
 
 2026-10-14：核对当前根目录`findbox/`全部17个源文件及manifest的SHA-256，均与已有完整录像记录一致；复用该录像，新增[17段独立MP4及逐段索引](../../../outputs/carrybox/findbox_dataset/clips/README.md)。拾箱3段、持箱3段、行走11段，合计77.27秒，960×720、30fps、H.264/yuv420p。逐帧解码2318帧并与完整录像对应帧比较通过，最大单帧像素平均绝对误差2.314/255（来自重新编码）。查看[校验结果](../../../outputs/carrybox/findbox_dataset/clips/verification.json)及[执行回执](clip_test_receipts_20261014.json)。本次仅CPU视频处理，未启动仿真或调整训练。

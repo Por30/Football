@@ -1,0 +1,45 @@
+{
+  "torque_bounds": [
+    {
+      "joint": "left_hip_roll_joint",
+      "training_usd_max_force_Nm": 139.0,
+      "mujoco_torque_bounds_Nm": [
+        -88.0,
+        88.0
+      ]
+    },
+    {
+      "joint": "left_ankle_pitch_joint",
+      "training_usd_max_force_Nm": 35.0,
+      "mujoco_torque_bounds_Nm": [
+        -50.0,
+        50.0
+      ]
+    },
+    {
+      "joint": "waist_roll_joint",
+      "training_usd_max_force_Nm": 35.0,
+      "mujoco_torque_bounds_Nm": [
+        -50.0,
+        50.0
+      ]
+    },
+    {
+      "joint": "waist_pitch_joint",
+      "training_usd_max_force_Nm": 35.0,
+      "mujoco_torque_bounds_Nm": [
+        -50.0,
+        50.0
+      ]
+    }
+  ],
+  "input_hashes": {
+    "scripts/sim2sim/kickball_mujoco.py": "89301062ab1e90d8717db29e84922e76574cd16553f7878b4f5fcadfa0b5656f",
+    "scripts/sim2sim/audit_kickball_parity.py": "780575fb1db43809fb2cb4fda325e4966183f73b5fdca6c79ee3f9536db35101",
+    "tests/test_kickball_parity.py": "ac925d3a0718dfc8dc189c8a4c87fdf0a1b23681909397035840d3d4095049ab",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/g1_29dof.usd": "3d758783f76d86afdfd5df6e951a1d521dcebba8fd27120f181cfee588aca132",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_physics.usd": "c4f83d17273ae97b1d4c71feb399bd6cb9c8ba6f607dd64ecb62ae3b6fcd5a52",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_sensor.usd": "173c9feba7fd9fbafa38f4cefa03859a6f89d6fe6e82ef4a1f464940db95a3a9",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_base.usd": "fb6897abaa287dc547e36ab73c3c955432195200d71948b697968c45ab3222c7"
+  }
+}

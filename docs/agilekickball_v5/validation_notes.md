@@ -1,0 +1,11 @@
+# 验证范围与失败记录
+
+最终固定命令回执为attempt7_receipts.json，三项全部PASS。未用并发短测耗时声称正式4096速度。正式Wall4进程2348537未停止或重启；17:57快照仍运行，最近一轮4.41秒。
+
+attempt1与diagnostic：相机pose缓存未同步，补齐参考mount同步及update_latest_camera_pose；随后确认pose一致但球面深度仍不同。attempt2：另一个数据集录像进程同时占GPU，PhysX分配失败，未停止他人进程，等待其退出后继续。
+
+attempt3/4：默认RTX隐式Sphere视觉网格与Warp64×64球面不同；仅21像素误差大于2mm，主要为球面。attempt5：RTX全局细分3仍不满足2mm，不能视为同一球几何。最终v5直接定义64×64显式球视觉三角Mesh，保留Sphere碰撞API、半径、质量和物理材质；RTX与Warp使用相同网格，补独立理想球面距离断言，原误差阈值未放宽。
+
+attempt6：几何和两轮PPO/AMP通过，原地对已经learn过的同一runner load触发PyTorch inference normalizer buffer原地写限制。实际CLI恢复使用新runner；harness按此流程新建runner后load并再训，attempt7通过。生产runner加载逻辑未为此改变。
+
+缺失实机CameraInfo、光学外参和真实采样/预处理记录，因此总体实机一致性任务仍PARTIAL。nominal仿真工程已完成。唯一只读专家核对了版本、门控指标、export、Hydra配置应用；其指出的30Hz量化问题已用明确配置拒绝处理，非20ms整数倍的时序需要另外实现。

@@ -1,0 +1,10 @@
+{
+  "source/perceptual_ball/perceptual_ball/kickball_randomization.py": "1145505fd0c30269a07d09ffb67ee95fa6165e0826ba88b4415566c21009dc46",
+  "source/perceptual_ball/perceptual_ball/kickball_randomized_camera.py": "3d4c90be418d41a0dbf5822dc6e9c5ff94f9038e32683e11965a2529448c5faf",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/agilekickball_v5_env_cfg.py": "8d2dd41d72546d5c8334adaf73a822382bbdea56fe1563a1368f50134d5ded52",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/agilekickball_v5.py": "7825313991b7472d35a620fd8ed4bbd004c834e6d4ccf52958bcb071ff3484cc",
+  "tests/test_agilekickball_v5_randomization.py": "992419f7df1a997d03fd194df388827d02e8b1b0588388895e5dc002d241c129",
+  "scripts/rsl_rl/smoke_agilekickball_v5.py": "8619a5f77017fb51f955d0f96c459c8e56d1d770e008bfbfe32a60d288d93703",
+  "scripts/rsl_rl/smoke_agilekickball_v5.sh": "355d1ab05083b068a228d6ae9d352628c206855ae97d604f746f3ad533d231d9",
+  "scripts/rsl_rl/smoke_agilekickball_v5_randomization.sh": "5f659bfa9fc7c9251a7cb099d1fd43191d04c12e154506331c0bfc06454632f0"
+}

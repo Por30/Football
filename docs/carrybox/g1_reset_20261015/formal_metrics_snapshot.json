@@ -1,0 +1,14 @@
+{
+  "Skill/loco_mean_steps": 39.8779,
+  "Skill/loco_success_fraction": 0.0,
+  "Skill/loco_tipped_fraction": 0.9978,
+  "Skill/loco_valid_amp_steps": 1283851.125,
+  "Skill/pickup_mean_steps": 38.1279,
+  "Skill/pickup_success_fraction": 0.0,
+  "Skill/pickup_tipped_fraction": 0.997,
+  "Skill/pickup_valid_amp_steps": 613883.625,
+  "Skill/hold_mean_steps": 43.1536,
+  "Skill/hold_success_fraction": 0.0,
+  "Skill/hold_tipped_fraction": 0.9963,
+  "Skill/hold_valid_amp_steps": 238688.5469
+}

@@ -1,6 +1,8 @@
 # FindBox AMP 接入
 
-CarryBox 默认已启用 AMP，数据目录为仓库根目录 `findbox/`，由代码按仓库位置解析，不依赖启动时的工作目录。原始17个动作文件保持不变；新增 `findbox/amp_manifest.json` 补齐 schema 和 hash。
+2026-10-14规范目录与命名：[当前数据目录及旧新文件名对照](../../../source/perceptual_ball/perceptual_ball/assets/motions/findbox/README.md)，[迁移与兼容性记录](../amp_layout_20261014/README.md)。新目录15段与根findbox修订2逐字节相同，显式group维持旧采样语义。
+
+CarryBox 默认已启用 AMP，默认数据目录为Python包 `assets/motions/findbox/`，与足球`kick/`并列；AMP和walled RSI默认路径一致，不依赖工作目录。根目录`findbox/`保留旧命名兼容快照。2026-10-14按用户要求整理为15段：行走11、拾箱3、抱箱1。`carrywith1`保留原0–20帧后重复第20帧至300帧（5秒），静止段速度为0；`carrywith2/3`已移出有效数据并归档。14段行走/拾箱文件hash不变。详见[修改、备份与兼容性说明](../amp_hold_20261014/README.md)。manifest schema仍为1，抱箱内容修订为dataset_revision=2，当前规范命名目录为revision=3；原17段完整数据及旧manifest保留在该记录的`original_dataset/`。
 
 | 设置 | 当前值 |
 |---|---|
@@ -20,6 +22,8 @@ AMP训练对每个动作后的窗口评分。done环境从`terminal_observations
 
 checkpoint schema从1升级到2。含双方optimizer、判别器及其统计量、manifest hash与采样契约。恢复训练首次收集transition时才读取并校验数据；播放/导出只依赖checkpoint，无需`findbox`。既有无AMP模型需另做显式权重迁移，此接入不允许把它当完整AMP训练状态恢复。
 
+本次数据修订改变manifest身份：旧17段checkpoint不能直接按完整AMP状态恢复到新15段数据。旧数据备份可供原契约加载核对。当前已运行进程缓存的数据不会热切换，本次没有重启或迁移训练；walled的RSI默认从规范assets目录加载，新进程须与所选AMP版本保持一致。
+
 启动命令不变，完整示例见[任务说明](../README.md)。可以通过Hydra覆盖 `agent.algorithm.amp_coef`、`agent.algorithm.amp_reward_scale`、`agent.algorithm.amp_lr`、`agent.algorithm.amp_data_dir`；更改AMP奖励契约后需新开训练，不允许静默接续旧契约。没有启动长期训练。
 
-验证包含：真实17片段、合成恒速运动/符号翻转、重力与关节映射、边界及坏数据拒绝、信息隔离、terminal评分和训练缓存一致、冷启动窗口屏蔽、AMP实际参数更新、optimizer/checkpoint恢复、无数据集推理。RTX smoke另外检查640维live状态、终止窗口及reset历史，与原深度/位姿、物理接触和导出测试共同执行。具体结果见`test_receipts.json`及上级`smoke.json`。两次短更新仅验证管线，不证明动作自然度或拾箱成功率已提升。
+初次接入验证（历史）包含：真实17片段、合成恒速运动/符号翻转、重力与关节映射、边界及坏数据拒绝、信息隔离、terminal评分和训练缓存一致、冷启动窗口屏蔽、AMP实际参数更新、optimizer/checkpoint恢复、无数据集推理。RTX smoke另外检查640维live状态、终止窗口及reset历史，与原深度/位姿、物理接触和导出测试共同执行。具体结果见`test_receipts.json`及上级`smoke.json`。两次短更新仅验证管线，不证明动作自然度或拾箱成功率已提升。新版15段的数据与AMP/RSI检查见[本次记录](../amp_hold_20261014/README.md)。

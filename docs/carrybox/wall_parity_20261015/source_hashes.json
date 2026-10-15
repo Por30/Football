@@ -1,0 +1,10 @@
+{
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "6b0e95918a9e07b3d2ad6be0e854a31e222bdc8c481fa3def5e88bec51a1edee",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "8dc506b3a7ac73e14e6654d6396614b0cb318772fec40c0ca05dee054b149626",
+  "source/perceptual_ball/perceptual_ball/carrybox_walled.py": "a61b328c814eec7ec3ff77c079211a2781209f414fbc7f685841d09354853cbd",
+  "tests/test_carrybox_wall_parity.py": "47317d83eb310d8807bd14fa9fc030ee96a30c98bee018e312efb697e4b6bd91",
+  "tests/test_carrybox_x2.py": "7bdce8ac9ec842d1f1492f6a67146ae987f664a436f0e1abff527abc5d4fb815",
+  "tests/test_carrybox_walled.py": "a6448468f63310c721a0c06b1c13509e35f2a7089cb32d0643aeda35f23eef2f",
+  "tests/test_carrybox_queue.py": "3622190e0e39b9b25d2fb836c896557ae7965efa815ace428b019839d1ffb7ad"
+}

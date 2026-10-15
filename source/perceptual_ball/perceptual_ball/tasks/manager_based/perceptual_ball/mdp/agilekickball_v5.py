@@ -2,8 +2,36 @@
 from .agilekickball_v4 import AgileKickballV4State
 from ..soccer_env import SoccerEnv
 from perceptual_ball.kickball_depth import clean_depth_m, depth_contract
+import isaaclab.sim as sim_utils
+import copy
 
-REVISION = 'scene_depth_self_occlusion_20261014'
+REVISION = 'scene_depth_gain_noise_20261014'
+
+
+@sim_utils.clone
+def spawn_depth_ball(prim_path, cfg, translation=None, orientation=None, **kwargs):
+    """Explicit visual triangles; keep the original ideal sphere collider unchanged.
+
+    USD's implicit Sphere is tessellated differently by different renderers.
+    Author one visible surface so Warp, RTX and saved scene geometry agree.
+    """
+    import trimesh
+    from pxr import UsdGeom, UsdShade
+    root = sim_utils.spawn_sphere(prim_path, cfg, translation, orientation, **kwargs)
+    stage = root.GetStage()
+    collider = stage.GetPrimAtPath(prim_path+'/geometry/mesh')
+    material, _ = UsdShade.MaterialBindingAPI(collider).ComputeBoundMaterial()
+    UsdGeom.Imageable(collider).MakeInvisible()
+    geometry = trimesh.creation.uv_sphere(radius=cfg.radius, count=[64, 64])
+    visual = UsdGeom.Mesh.Define(stage, prim_path+'/geometry/depth_visual')
+    visual.CreatePointsAttr().Set(geometry.vertices.tolist())
+    visual.CreateFaceVertexCountsAttr().Set([3]*len(geometry.faces))
+    visual.CreateFaceVertexIndicesAttr().Set(geometry.faces.flatten().tolist())
+    visual.CreateSubdivisionSchemeAttr().Set('none')
+    visual.CreateDoubleSidedAttr().Set(True)
+    if material:
+        UsdShade.MaterialBindingAPI.Apply(visual.GetPrim()).Bind(material)
+    return root
 
 
 class AgileKickballV5State(AgileKickballV4State):
@@ -14,6 +42,20 @@ class AgileKickballV5State(AgileKickballV4State):
         self.course_config['revision'] = REVISION
         self.course_config['depth_contract'] = depth_contract(env.cfg.camera_profile)
         env.depth_contract = self.course_config['depth_contract']
+        robot=env.scene['robot']
+        env.depth_contract['training_randomization'] = {
+            'schema': 1, 'training_only': True,
+            'gains': {'enabled': env.cfg.randomize_gains,
+                'kp_scale_range': list(env.cfg.kp_scale_range), 'kd_scale_range': list(env.cfg.kd_scale_range),
+                'sampling': 'independent_per_joint_per_environment_per_reset_from_nominal',
+                'joint_names': list(robot.joint_names),
+                'nominal_kp': robot.data.default_joint_stiffness[0].cpu().tolist(),
+                'nominal_kd': robot.data.default_joint_damping[0].cpu().tolist()},
+            'depth': {'enabled': env.cfg.randomize_depth, 'ranges': copy.deepcopy(env.cfg.depth_randomization),
+                'parameters': 'per_environment_per_reset', 'noise': 'once_per_sensor_capture',
+                'sigma_m': 'sigma_m + sigma_distance * optical_z_m**2',
+                'miss_and_hole': 'far=3m', 'geometry': 'noise_after_nearest_surface_no_background_reveal'},
+        }
 
     def metrics(self):
         return {k.replace('AgileV4/', 'AgileV5/'): v for k, v in super().metrics().items()}

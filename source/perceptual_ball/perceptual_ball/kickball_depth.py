@@ -43,6 +43,9 @@ def load_profile(path):
             raise ValueError('Invalid '+name)
     if profile['near_m'] != .1 or profile['far_m'] != 3.:
         raise ValueError('V5 feedback bounds require 0.1-3.0 m')
+    ticks = profile['update_period_s']/.02
+    if ticks < 1. or abs(ticks-round(ticks)) > 1.e-6:
+        raise ValueError('Lazy v5 capture requires a multiple of 20 ms; other frame rates need explicit timing support')
     if profile['calibration_status'] == 'calibrated' and not profile.get('calibration_evidence'):
         raise ValueError('Calibrated profile requires calibration_evidence')
     return profile

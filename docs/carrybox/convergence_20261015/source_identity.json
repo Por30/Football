@@ -1,0 +1,27 @@
+{
+  "source/perceptual_ball/perceptual_ball/carrybox_walled.py": {
+    "launch_sha256": "1bdc1cd42225730cc7bd49457f934731a310c1cd849a821666f99c92e47f6671",
+    "current_sha256": "1bdc1cd42225730cc7bd49457f934731a310c1cd849a821666f99c92e47f6671",
+    "same": true
+  },
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": {
+    "launch_sha256": "3fbb35b2bb7970371a4101963a934550ce89179e228eb9d4aa237542dd1a7cad",
+    "current_sha256": "3fbb35b2bb7970371a4101963a934550ce89179e228eb9d4aa237542dd1a7cad",
+    "same": true
+  },
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": {
+    "launch_sha256": "d88f5ab9ca92825c70dd5c033d2785649a9bea30c612d03d60a6ed29527901a2",
+    "current_sha256": "d88f5ab9ca92825c70dd5c033d2785649a9bea30c612d03d60a6ed29527901a2",
+    "same": true
+  },
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": {
+    "launch_sha256": "c726f2178e53e11910e768a30e5ade117a61a9195894efeb3207ea900b5c44d9",
+    "current_sha256": "c726f2178e53e11910e768a30e5ade117a61a9195894efeb3207ea900b5c44d9",
+    "same": true
+  },
+  "source/perceptual_ball/perceptual_ball/assets/motions/findbox/amp_manifest.json": {
+    "launch_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "current_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "same": true
+  }
+}

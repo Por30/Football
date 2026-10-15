@@ -4,8 +4,8 @@ from types import SimpleNamespace
 import torch
 from isaaclab.utils.math import (quat_apply, quat_apply_inverse, quat_mul, quat_conjugate,
     quat_from_euler_xyz, matrix_from_quat, yaw_quat, euler_xyz_from_quat, wrap_to_pi)
-from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, joint_mapping, resolve_dataset_path
-from perceptual_ball.carrybox_walled import YawCurriculum, PairedDepthBuffer, search_reward
+from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, joint_mapping
+from perceptual_ball.carrybox_walled import YawCurriculum, PairedDepthBuffer, search_reward, corrupt_depth_m
 from . import carrybox as base
 
 
@@ -17,8 +17,16 @@ def state(env):
             skills=torch.zeros(env.num_envs, device=env.device, dtype=torch.long),
             search=torch.zeros(env.num_envs, device=env.device, dtype=torch.bool),
             achieved=torch.zeros(env.num_envs, device=env.device, dtype=torch.bool),
+            episode_counts=torch.zeros(3, device=env.device, dtype=torch.long),
+            success_counts=torch.zeros(3, device=env.device, dtype=torch.long),
+            episode_steps=torch.zeros(3, device=env.device, dtype=torch.long),
+            valid_amp_steps=torch.zeros(3, device=env.device, dtype=torch.long),
+            tipped_counts=torch.zeros(3, device=env.device, dtype=torch.long),
+            fell_counts=torch.zeros(3, device=env.device, dtype=torch.long),
+            actual_episode_steps=torch.zeros(env.num_envs, device=env.device, dtype=torch.long),
             arm_ids=robot.find_joints(['.*shoulder.*', '.*elbow.*', '.*wrist.*'])[0],
             waist_id=robot.find_joints('waist_yaw_joint')[0][0],
+            knees=robot.find_joints(['left_knee_joint', 'right_knee_joint'], preserve_order=True)[0],
             hands=robot.find_bodies(['left_rubber_hand', 'right_rubber_hand'], preserve_order=True)[0],
             torso=robot.find_bodies('torso_link')[0][0],
             head=robot.find_bodies('head_link')[0][0])
@@ -27,16 +35,20 @@ def state(env):
 
 def captured_pair(env):
     s = state(env)
+    if s.paired is not None and (s.paired.last_step == env.common_step_counter).all():
+        return s.paired.output_depth, s.paired.output_pose
     depth = base.depth_image(env)
     pose = base.box_pose_target(env)
     if s.paired is None:
         s.paired = PairedDepthBuffer(depth, pose, env.cfg.depth_max_delay_steps)
-    if (s.paired.last_step == env.common_step_counter).all():
-        return s.paired.output_depth, s.paired.output_pose
-    depth = (depth + torch.randn_like(depth)*env.cfg.depth_noise_std_m/3.).clamp(.1/3., 1.)
-    delays = torch.randint(env.cfg.depth_max_delay_steps+1, (env.num_envs,), device=env.device)
-    freezes = torch.randint(1, env.cfg.depth_freeze_max_steps+1, (env.num_envs,), device=env.device)
-    freezes *= torch.rand(env.num_envs, device=env.device) < env.cfg.depth_freeze_probability
+    depth = corrupt_depth_m(depth*3., gaussian_std=env.cfg.depth_noise_std_m,
+        edge_threshold=env.cfg.depth_edge_threshold_m, edge_probability=env.cfg.depth_edge_probability,
+        hole_probability=env.cfg.depth_hole_probability,
+        stereo_near=env.cfg.depth_stereo_near_m, stereo_far=env.cfg.depth_stereo_far_m) / 3.
+    delays = (torch.rand(env.num_envs, device=env.device) < env.cfg.depth_delay_probability).long()
+    # Count the onset image as frame 1, then hold it for fourteen more frames.
+    freezes = (torch.rand(env.num_envs, device=env.device) < env.cfg.depth_freeze_probability).long()
+    freezes *= env.cfg.depth_freeze_max_steps - 1
     return s.paired.update(env.common_step_counter, depth, pose, delays, freezes)
 
 
@@ -56,10 +68,10 @@ def initialize_reference(env, ids):
     """RSI root/joints use verified G1 data; box orientation is unavailable in source."""
     s, robot = state(env), env.scene['robot']
     if s.library is None:
-        s.library = FindBoxMotionLibrary('findbox', device=env.device)
+        s.library = FindBoxMotionLibrary(device=env.device)
         s.references = []
         for name in s.library.clip_names:
-            data = torch.load(resolve_dataset_path()/name, map_location=env.device, weights_only=True)
+            data = torch.load(s.library.root/name, map_location=env.device, weights_only=True)
             data = {k: v.float() if isinstance(v, torch.Tensor) and v.is_floating_point() else v for k,v in data.items()}
             for key, shape in [('base_position',(len(data['joint_position']),3)),
                                ('base_height',(len(data['joint_position']),)),
@@ -100,7 +112,59 @@ def initialize_reference(env, ids):
                 # Proxy support: source provides no platform geometry or box orientation.
                 top = data['base_height'][contact]+.05+data['box_pos_local'][contact,2]-base.BOX_SIZE[2]/2
                 support_tops[selected] = top.clamp_min(0.)
+    # base_height is a reference-frame height, not the bottom of the G1 foot
+    # collider. Refresh the written articulation before resolving penetration.
+    env.sim.forward()
+    correction = reference_ground_correction(env, ids)
+    root = robot.data.root_state_w[ids].clone()
+    root[:, 2] += correction
+    robot.write_root_state_to_sim(root, env_ids=ids)
+    box_positions[:, 2] += correction
+    support_tops += correction
     return box_positions, support_tops
+
+
+def reference_ground_correction(env, ids):
+    """Lift penetrating RSI feet to 5 mm clearance using the G1 collision hulls."""
+    s, robot = state(env), env.scene['robot']
+    if not hasattr(s, 'foot_support_points'):
+        import numpy as np
+        import trimesh
+        from pxr import Usd, UsdGeom, UsdPhysics
+        stage = env.sim.get_initial_stage()
+        cache = UsdGeom.XformCache()
+        names = ['left_ankle_roll_link', 'right_ankle_roll_link']
+        s.feet = robot.find_bodies(names, preserve_order=True)[0]
+        s.foot_support_points = []
+        for name in names:
+            link = stage.GetPrimAtPath('/World/envs/env_0/Robot/' + name)
+            inverse = cache.GetLocalToWorldTransform(link).GetInverse()
+            points = []
+            # The URDF converter applies a merged convex collider to this
+            # parent Xform, rather than CollisionAPI to each descendant mesh.
+            collider = stage.GetPrimAtPath(str(link.GetPath()) + '/collisions')
+            if (not collider.HasAPI(UsdPhysics.CollisionAPI)
+                    or UsdPhysics.MeshCollisionAPI(collider).GetApproximationAttr().Get() != 'convexHull'):
+                raise RuntimeError(f'Unexpected G1 foot collision approximation: {name}')
+            for prim in Usd.PrimRange(collider, Usd.TraverseInstanceProxies()):
+                if prim.IsA(UsdGeom.Mesh):
+                    vertices = np.asarray(UsdGeom.Mesh(prim).GetPointsAttr().Get())
+                    transform = np.asarray(cache.GetLocalToWorldTransform(prim) * inverse)
+                    points.append((np.c_[vertices, np.ones(len(vertices))] @ transform)[:, :3])
+            if not points:
+                raise RuntimeError(f'Missing G1 foot collision mesh: {name}')
+            # Linear support extrema are unchanged by convex-hull reduction.
+            vertices = np.concatenate(points)
+            if not np.isfinite(vertices).all():
+                raise RuntimeError(f'Non-finite G1 foot collision geometry: {name}')
+            hull = trimesh.convex.convex_hull(vertices)
+            s.foot_support_points.append(torch.tensor(np.asarray(hull.vertices).copy(), device=env.device, dtype=torch.float32))
+    lowest = []
+    for foot, points in zip(s.feet, s.foot_support_points):
+        q = robot.data.body_link_quat_w[ids, foot, None].expand(-1, len(points), -1)
+        world = quat_apply(q.reshape(-1, 4), points[None].expand(len(ids), -1, -1).reshape(-1, 3)).reshape(len(ids), -1, 3)
+        lowest.append(world[:, :, 2].amin(-1) + robot.data.body_link_pos_w[ids, foot, 2])
+    return (env.scene.env_origins[ids, 2] + .005 - torch.stack(lowest, -1).amin(-1)).clamp_min(0.)
 
 
 def obstacle_pose(env, name):
@@ -116,6 +180,7 @@ def write_obstacle_pose(env, name, pose, env_ids=None):
 
 def reset_scene(env, env_ids):
     s = state(env)
+    s.reward_step = None
     n, device = len(env_ids), env.device
     probs = torch.tensor(env.cfg.reset_skill_probabilities, device=device)
     if probs.shape != (3,) or (probs < 0).any() or abs(float(probs.sum())-1.) > 1e-6:
@@ -168,7 +233,7 @@ def reset_scene(env, env_ids):
     platform_state[:,3:7] = torch.tensor([1.,0.,0.,0.],device=device)
     write_obstacle_pose(env, 'platform', platform_state, env_ids)
     # Parent robot/box/platform first; wall then independently sampled columns.
-    for name, low, high, z in [('wall',3.,4.,1.5)]+[(f'cylinder{i}',2.2,3.2,.9) for i in range(3)]:
+    for name, low, high, z in [('wall',3.,4.,1.5)]+[(f'cylinder{i}',2.2,3.2,.9) for i in range(env.cfg.obstacle_cylinder_count)]:
         p = torch.zeros((n,7),device=device)
         a = torch.rand(n,device=device)*2*math.pi
         r = torch.empty(n,device=device).uniform_(low,high)
@@ -186,7 +251,8 @@ def reset_camera(env, ids):
     s = state(env)
     cfg = env.cfg.scene.depth_camera.offset
     position = torch.tensor(cfg.pos,device=env.device).expand(len(ids),3).clone()
-    position += torch.empty_like(position).uniform_(-env.cfg.camera_position_error_m,env.cfg.camera_position_error_m)
+    direction = torch.randn_like(position)
+    position += direction / direction.norm(dim=-1, keepdim=True).clamp_min(1.e-9) * env.cfg.camera_position_error_m
     delta = torch.empty_like(position).uniform_(-math.radians(env.cfg.camera_rotation_error_deg),math.radians(env.cfg.camera_rotation_error_deg))
     q = quat_mul(torch.tensor(cfg.rot,device=env.device).expand(len(ids),4),quat_from_euler_xyz(*delta.unbind(-1)))
     # Set the mount in its parent torso frame. World setters invert USD parent
@@ -218,7 +284,9 @@ def search_turn(env):
     robot, box = env.scene['robot'].data,env.scene['box'].data
     delta = box.root_pos_w-robot.root_pos_w
     angle = wrap_to_pi(torch.atan2(delta[:,1],delta[:,0])-heading(robot.root_quat_w))
-    return search_reward(state(env).search,angle,delta[:,:2].norm(dim=-1),robot.root_ang_vel_b[:,2])
+    torso = state(env).torso
+    angular = quat_apply_inverse(robot.body_quat_w[:,torso], robot.body_ang_vel_w[:,torso])
+    return search_reward(state(env).search,angle,delta[:,:2].norm(dim=-1),angular[:,2])
 
 
 def success_pulse(env):
@@ -244,19 +312,79 @@ def failure_event(env, term_keys=('fell', 'tipped')):
 
 def tipped(env):
     roll,pitch,_ = euler_xyz_from_quat(env.scene['robot'].data.root_quat_w)
-    # Literal source criterion: positive roll > .5; symmetric pitch threshold.
-    return (wrap_to_pi(roll)>.5) | (wrap_to_pi(pitch).abs()>1.1)
+    return (wrap_to_pi(roll).abs()>.5) | (wrap_to_pi(pitch).abs()>1.1)
+
+
+def randomize_default_joint_pos(env, env_ids, magnitude=.01):
+    """Startup only; keep action offsets and observed defaults in the same frame."""
+    robot = env.scene['robot']
+    if env_ids is None:
+        env_ids = torch.arange(env.num_envs, device=env.device)
+    default = robot.data.default_joint_pos
+    default[env_ids] += torch.empty_like(default[env_ids]).uniform_(-magnitude, magnitude)
+    action = env.action_manager.get_term('joint_pos')
+    action._offset[env_ids] = default[env_ids][:, action._joint_ids]
+
+
+def push_velocity(env, env_ids, velocity_range):
+    """Set a bounded root velocity, not an accumulating velocity increment."""
+    ranges = torch.tensor([velocity_range[k] for k in ('x','y','z','roll','pitch','yaw')], device=env.device)
+    velocity = ranges[:,0] + torch.rand((len(env_ids),6), device=env.device) * (ranges[:,1]-ranges[:,0])
+    if hasattr(getattr(env, 'cfg', None), 'push_warmup_iterations'):
+        curriculum = state(env).curriculum
+        effective = 0 if curriculum.anchor is None else max(0, curriculum.iteration-curriculum.anchor)
+        scale = max(0., min(1., (effective-env.cfg.push_warmup_iterations)/env.cfg.push_ramp_iterations))
+        if scale == 0.:
+            return  # Do not set velocity to zero: that would itself perturb locomotion.
+        current = env.scene['robot'].data.root_vel_w[env_ids]
+        velocity = current + scale*(velocity-current)
+    env.scene['robot'].write_root_velocity_to_sim(velocity, env_ids=env_ids)
+
+
+def head_height(env):
+    """Physical head COM, not the G1 head-link frame near the waist."""
+    return env.scene['robot'].data.body_com_pos_w[:, state(env).head, 2] - env.scene.env_origins[:, 2]
+
+
+def reference_joint_pos_limits(env):
+    """Retain soft limits except knee extension, where valid expert poses use the hard lower bound."""
+    robot = env.scene['robot'].data
+    low = robot.soft_joint_pos_limits[..., 0].clone()
+    low[:, state(env).knees] = robot.joint_pos_limits[:, state(env).knees, 0]
+    return ((low-robot.joint_pos).clamp_min(0)
+            + (robot.joint_pos-robot.soft_joint_pos_limits[..., 1]).clamp_min(0)).sum(-1)
 
 
 def fallen(env):
     robot = env.scene['robot'].data
-    s = state(env)
-    head = robot.body_pos_w[:,s.head]
     z = env.scene.env_origins[:,2]
-    return (robot.root_pos_w[:,2]-z<.2) | (head[:,2]-z<.4)
+    return (robot.root_pos_w[:,2]-z<.2) | (head_height(env)<.4)
+
+
+def record_episode_metrics(env, env_ids):
+    """Count executed transitions, independent of runner-randomized timeout ages."""
+    s = state(env)
+    if getattr(env, '_carrybox_in_step', False):
+        for skill in range(3):
+            ids = env_ids[s.skills[env_ids] == skill]
+            s.episode_counts[skill] += len(ids)
+            s.success_counts[skill] += s.achieved[ids].sum()
+            lengths = s.actual_episode_steps[ids]
+            s.episode_steps[skill] += lengths.sum()
+            s.valid_amp_steps[skill] += (lengths-8).clamp_min(0).sum()
+            s.tipped_counts[skill] += env.termination_manager.get_term('tipped')[ids].sum()
+            s.fell_counts[skill] += env.termination_manager.get_term('fell')[ids].sum()
+    s.actual_episode_steps[env_ids] = 0
 
 
 class WalledCarryBoxEnv(base.CarryBoxEnv):
+    def step(self, action):
+        state(self).actual_episode_steps += 1
+        result = super().step(action)
+        term = self.action_manager.get_term('joint_pos')
+        self.extras.setdefault('log', {})['Control/physical_target_clipped_fraction'] = term.target_saturation.float().mean()
+        return result
+
     def terminal_frame(self, group):
         return {'proprio':base.proprioception,'perception':depth_image,'amp':base.amp_frame}[group](self)
 
@@ -264,18 +392,39 @@ class WalledCarryBoxEnv(base.CarryBoxEnv):
         state(self).curriculum.set_iteration(iteration)
 
     def checkpoint_contract(self):
-        return dict(variant=self.cfg.walled_variant, migration_revision=5, depth_backend=self.cfg.depth_backend,
+        return dict(variant=self.cfg.walled_variant, migration_revision=8, depth_backend=self.cfg.depth_backend,
+                    reference_ground_clearance='G1_collision_hull_min_5mm_upward_only',
+                    obstacle_cylinders=self.cfg.obstacle_cylinder_count,
+                    head_reference='head_link_COM', knee_lower_penalty='hard_limit_other_limits_soft',
+                    action_targets='clamp_to_physical_joint_limits',
+                    push_curriculum=[self.cfg.push_warmup_iterations,self.cfg.push_ramp_iterations],
                     depth_geometry='all_visible_link_meshes_ground2000_v1', depth_clip='optical_near_plane_pixel_centers_v1',
-                    failure_reward="current_transition", obstacle_backend="locked_rigid_6dof", shoulder_colliders="convex_hull_32", depth_shape=[4,27,48],
+                    failure_reward="none_x2_recipe", obstacle_backend="locked_rigid_6dof", shoulder_colliders="convex_hull_32", depth_shape=[4,27,48],
                     reference_init=self.cfg.reference_init, reset_probs=list(self.cfg.reset_skill_probabilities),
                     search_prob=self.cfg.search_prob, noise=self.cfg.depth_noise_std_m,
+                    depth_edge=[self.cfg.depth_edge_threshold_m,self.cfg.depth_edge_probability],
+                    depth_holes=self.cfg.depth_hole_probability,
+                    depth_stereo=[self.cfg.depth_stereo_near_m,self.cfg.depth_stereo_far_m],
+                    latency_probability=self.cfg.depth_delay_probability,
+                    depth_noise_contract='metres_miss_preserved_near_clamp_15_including_onset',
                     delay=self.cfg.depth_max_delay_steps, freeze=self.cfg.depth_freeze_probability,
                     freeze_steps=self.cfg.depth_freeze_max_steps,
                     mount_pos=self.cfg.camera_position_error_m,mount_rot=self.cfg.camera_rotation_error_deg,
-                    curriculum='process_anchor', reward_parent='g1_carrybox_v0')
+                    curriculum='shared_piecewise_process_anchor', reward_parent='g1_corrected_common_v2',
+                    reward_weights={name:term.weight for name,term in vars(self.cfg.rewards).items()
+                                    if term is not None and hasattr(term,'weight')},
+                    roll_termination='abs_roll_gt_0.5', action_scale=self.cfg.actions.joint_pos.scale, action_clip=9.,
+                    randomization={name:{k:v for k,v in getattr(self.cfg.events,name).params.items() if k!='asset_cfg'}
+                                   for name in ('box_material','box_mass','default_joint_pos','torso_com','push_robot')},
+                    box_mass_kg=self.cfg.scene.box.spawn.mass_props.mass,
+                    com_body='torso_link', push_interval=list(self.cfg.events.push_robot.interval_range_s),
+                    hand_forces='g1_rubber_hands_box_filtered', standup_success='instant_x2',
+                    strict_success_metric='g1_contact_clearance_hold0.5s')
 
     def _reset_idx(self, env_ids):
-        success = state(self).achieved[env_ids].float().mean() if len(env_ids) else 0.
+        s = state(self)
+        success = s.achieved[env_ids].float().mean() if len(env_ids) else 0.
+        record_episode_metrics(self, env_ids)
         super()._reset_idx(env_ids)
         if self.cfg.depth_backend == 'warp':
             # RTX used render()->forward() here. Pure Warp needs the same
@@ -283,3 +432,12 @@ class WalledCarryBoxEnv(base.CarryBoxEnv):
             self.sim.forward()
         self.extras.setdefault('log',{})['Curriculum/box_yaw_range_deg'] = state(self).curriculum.degrees
         self.extras['log']['Metrics/episode_lift_success'] = success
+        for skill, name in enumerate(('loco','pickup','hold')):
+            count = s.episode_counts[skill].clamp_min(1)
+            self.extras['log'][f'Skill/{name}_episodes'] = s.episode_counts[skill].float()
+            self.extras['log'][f'Skill/{name}_success_fraction'] = s.success_counts[skill]/count
+            self.extras['log'][f'Skill/{name}_successes'] = s.success_counts[skill].float()
+            self.extras['log'][f'Skill/{name}_tipped_fraction'] = s.tipped_counts[skill]/count
+            self.extras['log'][f'Skill/{name}_fell_fraction'] = s.fell_counts[skill]/count
+            self.extras['log'][f'Skill/{name}_mean_steps'] = s.episode_steps[skill]/count
+            self.extras['log'][f'Skill/{name}_valid_amp_steps'] = s.valid_amp_steps[skill].float()

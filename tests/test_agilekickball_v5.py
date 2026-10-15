@@ -34,7 +34,8 @@ class V5Tests(unittest.TestCase):
     def test_profile_rejects_unverified_conventions(self):
         p=load_profile(PROFILE)
         for changes in ({'rectified':False}, {'quaternion_wxyz_world':[1.,1.,0.,0.]},
-                        {'calibration_status':'calibrated'}, {'crop_xywh':[0,0,99,27]}, {'depth_unit_m':0.}):
+                        {'calibration_status':'calibrated'}, {'crop_xywh':[0,0,99,27]}, {'depth_unit_m':0.},
+                        {'update_period_s':1./30.}):
             with tempfile.TemporaryDirectory() as d:
                 path=Path(d)/'p.json';path.write_text(json.dumps(dict(p,**changes)))
                 with self.assertRaises(ValueError):load_profile(path)

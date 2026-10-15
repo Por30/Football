@@ -1,0 +1,26 @@
+[
+  {
+    "file": "pick_up/pick_up_01.pt",
+    "contact_index": 107,
+    "box_z_min": 0.3502458287474444,
+    "box_z_max": 0.8769629263816893,
+    "contact_box_z": 0.3683237168185242,
+    "implied_support_top": 0.24332371681852422
+  },
+  {
+    "file": "pick_up/pick_up_02.pt",
+    "contact_index": 100,
+    "box_z_min": 0.21437114477157593,
+    "box_z_max": 0.8788069299368614,
+    "contact_box_z": 0.42492414517313565,
+    "implied_support_top": 0.29992414517313565
+  },
+  {
+    "file": "pick_up/pick_up_03.pt",
+    "contact_index": 42,
+    "box_z_min": 0.12612911126698545,
+    "box_z_max": 0.8702342634507618,
+    "contact_box_z": 0.12970708752072035,
+    "implied_support_top": 0.004707087520720354
+  }
+]

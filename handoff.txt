@@ -1,89 +1,964 @@
-FindBox walled3 / walled4 复现说明
+【本地G1适配说明，2026-10-14】
+下文主体是用户提供的X2复现参考，不是本地G1代码的逐项现状声明。G1适配差异、验证与训练切换记录见 docs/carrybox/handoff_20261014/README.md。保留G1相机安装、4帧无特权actor/critic、纯本体AMP；本地Gym ID及命令以projects/findbox/README.md为准。
 
-本文只描述 x2_findbox_depth_v2_5_random_finetune_walled3 与 ...walled4。复现时应以仓库对应任务代码为准；wall3 和 wall4 是基于 FindBox finetune 任务逐层继承的配置/环境变体，不是独立重写的环境。
-共同基础（从父任务继承）
-- 控制：X2 29 自由度位置目标控制，仿真 `dt=0.005s`、decimation=4，即 200Hz 物理仿真、50Hz policy 控制。
-- 相机：头部深度相机 48×27，垂直视场角 58°，有效距离 0.1–3.0m，每 0.02s 更新；从 v2.5 起还带相机安装误差、深度噪声、随机延迟与短时冻结等传感器扰动。wall3/wall4 没有改变相机分辨率或观测维度。
-- 箱子：loco 初始化时箱子在前方 ±45°、距离 0.7–2.0m；finetune 版取消尺寸随机化，保留姿态随机化，倾斜最大 30°，并计算箱体倾斜后的最低点以保证贴地。
-- 策略观测：actor 使用本体感知+深度图历史；critic 额外获得特权状态。墙和圆柱加入深度 ray target 列表，因此可见且可碰撞，但不引入专门的避障奖励。
-- AMP 初始化技能概率：`loco=0.8, pickUp=0.15, carryWith=0.05, putDown=0.0`；`putDown` 参考片段仍可作为判别器专家数据。
-- ** episode/终止**：每回合上限 20s（约1000个policy步）。继承的失败条件包括超时、roll>0.5、|pitch|>1.1、root z<0.2m、head z<0.4m；成功判定用于奖励/统计，不会因为找到箱子立即重置。wall3/wall4 没有额外终止条件。
-wall3 实现
-场景和 reset
-1. 继承 wall2 的一面运动学墙：尺寸 0.2×8.0×3.0m，可碰撞、禁重力；每回合距机器人 3–4m，bearing 全圆随机，长面朝向机器人。
-2. 新增 3 个圆柱（person-sized 静态代理）：半径 0.15m、高 1.8m，运动学刚体、禁重力、可碰撞；地面中心高度 z=0.9m。它们不会主动移动。
-3. 每个圆柱独立采样中心：相对机器人 root 的半径 U[2.2,3.2)m、bearing U[0,2π)；朝向单位四元数，线/角速度清零。圆柱距离下限高于正常箱子最大初始距离，降低与箱子重叠的概率。
-4. 三个圆柱和墙都加入 depth_wall_prim_exprs，使 ray-cast 深度传感器可见这些障碍。
-5. reset 顺序：父类先重置机器人、箱子/平台和 wall2 墙；随后 wall3 放置圆柱。不要在父类 reset 之前生成圆柱，否则机器人/箱子的本回合位置可能尚未更新。
-箱子 yaw 难度课程
-- tilt 保持 finetune 的最大 ±30°。
-- yaw 随有效训练迭代线性增大：10° → 180°，课程长度 8000 iter；之后保持 180°。
-- 初始化阶段（runner 尚无 training iteration）用 10°。首次获得真实训练迭代时记录课程锚点，再从锚点开始计 8000 iter。warm-start 时也从当前训练进程的锚点重新走课程，而非直接按 checkpoint 的绝对迭代数跳级。
-- _reset_boxes 每次记录当前 yaw range 到 Curriculum/box_yaw_range_deg。
-奖励变化
-wall3 继承 FindBox finetune 奖励，并新增以下项；同时把继承的 torque_limits 设为 None，因此基础的 applied-torque-limit 惩罚不再启用。
 
-奖励项
-配置
-计算/门控
-held_hand_speed
-weight -2e-2，阈值 1.0 rad/s
-对双臂关节超阈速度的平方 excess 取均值；仅 held phase 生效
-held_hand_acc
-weight -2e-5，阈值 20.0 rad/s²
-对双臂关节超阈加速度的平方 excess 取均值；仅 held phase 生效
-waist_yaw_penalty
-weight -0.5
-waist_yaw_joint 相对默认角度的 L1 偏差
+本文是给实现者看的复现说明，覆盖：
 
-双臂关节集合沿用父配置的 shoulder/elbow/wrist 关节名模式。held phase 定义为箱子高度 >0.55m 且双手中心到箱子距离 <0.15m。这只是奖励门控，不等同于任务成功判定。
+x2_findbox_depth_v2_5_random_finetune_walled3
+x2_findbox_depth_v2_5_random_finetune_walled4
+目标是在本仓库中用相同的继承链、reset 时序、奖励公式和配置复现这两个任务。不要把它们当作从零写的独立环境：wall3/wall4 只覆写了少量 config 和 env hook，其他行为来自父类。
 
-注意：代码里虽然定义了 applied_torque_over_limit_widened 函数，但没有任何 RewTerm 接入它；wall3/wall4 实际没有所谓的“放宽到 1.5 倍力矩阈值”。复现时不要把未注册的函数当作有效奖励。
-wall4 继承 wall3 的墙、圆柱、箱子姿态、相机、held-phase 惩罚及全部终止逻辑，只增加三项：
-1. 视野外箱子初始化
+所有路径都相对于仓库根目录 /home/cel/agibot_x2_box。下文的“当前实现”均已对照源码核实。
 
-- search_prob=0.02，只对本回合初始化技能为 loco 的环境抽样；其他技能不参与。
-- 被抽中的箱子 bearing 相对机器人朝向取 ±U[60°,180°)，左右符号各半，确保初始位置在相机 ±45°水平视场之外。
-- 距离取 U[0.9,2.0)m。箱子移到该位置后同步更新 platform 的 XY，保持平台和箱子状态一致。
-- 未被抽中的环境沿用 wall3 的普通箱子初始化。每回合清空并重新采样 search 标记。
-- 搜索箱子进入视野/接近箱子后仍用原 FindBox walk/pickup 奖励；没有独立的“搜索状态机”或额外终止条件。
-2.`search_turn` 奖励
+0. 复现验收标准
 
-配置 weight +0.5。仅当该环境被标记为 search、箱子 bearing error>45°、且机器人到箱距离>0.7m 时启用。
+完成后应满足：
 
-bearing_error = abs(wrap_to_pi(target_heading - robot_heading))
-heading_reward = exp(-0.75 * bearing_error)
-desired_dir = sign(wrap_to_pi(target_heading - robot_heading))
-turn_reward = clamp(desired_dir * body_yaw_rate, min=0)
-search_turn = 0.7 * heading_reward + 0.3 * tanh(turn_reward)
+两个任务名能在 legged_lab/envs/__init__.py 中注册，且 train.py --task=... 可构建环境。
+Actor/critic 观测维度与父任务 x2_findbox_depth_v2_5_random_finetune 完全一致；墙和圆柱只改变深度图内容，不新增观测维度。
+每次 reset 后：
+wall3：墙距离机器人 root 3.0–4.0m；3 个圆柱均距离 root 2.2–3.2m。
+wall4：除 wall3 行为外，约 2% 的 loco 回合会把箱子移到相机视野外。
+TensorBoard/日志中可看到 Curriculum/box_yaw_range_deg：
+wall3：新训练进程中从 10° 线性升到 180°（8000 iter）。
+wall4：0→10°→30°→180°（0/10k/20k/30k iter），随后保持 180°。
+Reward manager 中启用的 wall3 新项为 held_hand_speed、held_hand_acc、waist_yaw_penalty，且 torque_limits 被移除；wall4 再额外启用 search_turn。
+1. 文件、注册名与继承链
 
-其他情况奖励为 0。第一项让机器人朝向目标，第二项只奖励朝正确方向的原地转动；0.7m 门控距离沿用 AMP 配置的 thresh_robot2object。
+1.1 需要的文件
 
-3. 分段箱子 yaw 课程
+legged_lab/envs/x2/TASKS/findbox_depth_v2_5_random_finetune_walled3/
+├── __init__.py
+├── x2_config.py
+└── x2_env.py
 
-wall4 替换 wall3 的单段课程，使用分段线性课程：
+legged_lab/envs/x2/TASKS/findbox_depth_v2_5_random_finetune_walled4/
+├── __init__.py
+├── x2_config.py
+└── x2_env.py
 
-有效训练迭代
-yaw 范围上限
+两个 __init__.py 可为空。任务通过中央 registry 注册，而不是在任务目录内部注册。
+
+1.2 注册
+
+在 legged_lab/envs/__init__.py 中导入并注册：
+
+from legged_lab.envs.x2.TASKS.findbox_depth_v2_5_random_finetune_walled3.x2_config import (
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2FlatEnvCfg,
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2FlatAgentCfg,
+)
+from legged_lab.envs.x2.TASKS.findbox_depth_v2_5_random_finetune_walled3.x2_env import (
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2_29DOF_Env,
+)
+from legged_lab.envs.x2.TASKS.findbox_depth_v2_5_random_finetune_walled4.x2_config import (
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2FlatEnvCfg,
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2FlatAgentCfg,
+)
+from legged_lab.envs.x2.TASKS.findbox_depth_v2_5_random_finetune_walled4.x2_env import (
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2_29DOF_Env,
+)
+
+task_registry.register(
+    "x2_findbox_depth_v2_5_random_finetune_walled3",
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2_29DOF_Env,
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2FlatEnvCfg(),
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2FlatAgentCfg(),
+)
+task_registry.register(
+    "x2_findbox_depth_v2_5_random_finetune_walled4",
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2_29DOF_Env,
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2FlatEnvCfg(),
+    TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2FlatAgentCfg(),
+)
+
+1.3 Env 类继承链
+
+TASK_CarryBox_X2_29DOF_Env
+  → ...holdbox depth env...
+  → TASK_HoldBoxDepthV4_X2_29DOF_Env
+  → TASK_FindBoxDepth_X2_29DOF_Env
+  → TASK_FindBoxDepthV2_5_X2_29DOF_Env
+  → TASK_FindBoxDepthV2_5_Random_X2_29DOF_Env
+  → TASK_FindBoxDepthV2_5_Random_Finetune_X2_29DOF_Env
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled2_X2_29DOF_Env
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2_29DOF_Env
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2_29DOF_Env
+
+注意：`pose_stable` 是 finetune config / reward 的父类，但不是 finetune env 的父类。finetune env 直接继承 `TASK_FindBoxDepthV2_5_Random_X2_29DOF_Env`，只从 `pose_stable` 模块导入奖励函数。
+
+1.4 Config 继承链
+
+SceneCfg:
+X2DepthHeadLowResSceneCfg                    (hold_box_depth_v6, 48×27 head depth)
+  → X2DepthHeadLowResNoisySceneCfg           (findbox_depth_v2, add_depth_noise=True)
+  → X2DepthHeadLowResNoisyMountErrSceneCfg   (findbox_depth_v2_5, mount/stereo/latency/dead noise)
+  → X2DepthV2_5RandomFinetuneSceneCfg        (finetune: no size randomization, ground box + tilt)
+  → X2DepthWalled2SceneCfg                   (one wall)
+  → X2DepthWalled3SceneCfg                   (3 cylinders + yaw curriculum params)
+  → X2DepthWalled4SceneCfg                   (search_prob + piecewise yaw params)
+
+RewardCfg:
+X2RewardCfg
+  → X2FindBoxDepthRewardCfg
+  → X2FindBoxDepthPoseStableRewardCfg
+  → X2FindBoxDepthRandomFinetuneRewardCfg
+  → X2FindBoxDepthWalled3RewardCfg
+  → X2FindBoxDepthWalled4RewardCfg
+
+EnvCfg:
+TASK_FindBoxDepthV2_5_Random_Finetune_X2FlatEnvCfg
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled2_X2FlatEnvCfg
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2FlatEnvCfg
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2FlatEnvCfg
+
+AgentCfg:
+TASK_FindBoxDepthV2_5_Random_Finetune_X2FlatAgentCfg
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled2_X2FlatAgentCfg
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled3_X2FlatAgentCfg
+  → TASK_FindBoxDepthV2_5_Random_Finetune_Walled4_X2FlatAgentCfg
+
+wall2 只在 scene 和 env 中新增一面墙；wall3/wall4 的复现要求 wall2 已正确存在。
+
+2. 共同基础：继承来的关键行为
+
+2.1 仿真、动作与 episode
+
+项
+值
+环境数
+4096（父配置默认）
+环境间距
+10m
+物理步长
+sim.dt = 0.005s
+decimation
+4
+policy 控制周期
+0.02s，即 50Hz
+动作
+29 维关节位置目标增量，target = action * 0.25 + default_joint_pos
+每回合最长
+max_episode_length_s = 20，约 1000 个 policy step
+
+Reward manager 计算方式是：
+
+step_reward_term = term_func(env, **params) * weight * step_dt
+step_dt = 0.02
+
+下文所写 weight 均为配置值，最终 reward 还会乘 0.02。
+
+2.2 观测
+
+Actor：
+
+actor_obs = concat(proprio_history_5_frames, depth_history_5_frames)
+
+单帧 actor proprioception：
+
+base_ang_vel * 0.25
+projected_gravity
+(joint_pos - default_joint_pos) * 1.0
+joint_vel * 0.05
+end_effector_pos
+last_action * 1.0
+
+单帧深度：48×27，flatten 后为 1296 维。5 帧历史在 reset 后用第一帧有效观测填满，避免混入零帧或上一回合帧。
+
+Critic：
+
+critic_obs = concat(
+    current_actor_proprio,
+    base_lin_vel * 2.0,
+    box_pos_local(3),
+    box_rot_6d_local(6),
+    box_size(3),
+)
+
+box_pos_local 和 `box_rot_6d_local` 都在 upper body 坐标系中表示。墙、圆柱和 search 状态都不加入 actor/critic 向量观测。
+
+2.3 深度相机
+
+项
+值
+挂载 link
+head_pitch_link
+位置
+(0.05761, -0.011183, -0.04837)
+旋转
+(0.90261, 0.0, 0.43046, 0.0)，world convention，wxyz
+分辨率
+48×27
+垂直 FOV
+58°
+距离范围
+0.1–3.0m
+输出
+distance_to_image_plane，原始米制，depth_normalize=False
+更新周期
+0.02s
+
+深度处理顺序：
+
+NaN/±inf 填为 3.0m；
+clamp 到 [0.1, 3.0]；
+v2 基础噪声：
+像素高斯 std = 0.02 * 3.0m
+边缘丢失：梯度大于 0.05 * 3.0m 的像素以 0.05 概率置为 3.0m
+随机孔洞：每像素 0.02 概率置为 3.0m
+v2.5 额外噪声：
+每回合相机安装位置偏移：随机方向，模长固定 0.01m
+距离相关立体噪声：sigma = (0.008 + (0.03 - 0.008) * depth/3.0) * 3.0，即近处约 0.024m、3m 处约 0.09m；加噪后 clamp 到 [0, 3.0]
+latency：每步 10% 概率输出上一帧
+sensor dead：每步 0.2% 概率冻结 15 帧
+墙和圆柱是否进入深度由 depth_wall_prim_exprs 决定。legged_lab/utils/env_utils/scene.py 会把这些 prim 加入 MultiMeshRayCasterCameraCfg.mesh_prim_paths，参数为：
+
+RaycastTargetCfg(prim_expr=wall_expr, track_mesh_transforms=True, is_shared=True)
+
+除墙/圆柱外，深度目标还包括 /World/ground、{ENV_REGEX_NS}/Box，以及默认开启的机器人自遮挡 link。
+
+2.4 AMP 与初始化技能
+
+FindBox depth 使用：
+
+legged_lab/assets/agibot/datasets/config/findboxstill_noturn.yaml
+
+技能初始化概率实际值：
+
+skill_init_prob = {"loco": 0.8, "pickUp": 0.0, "carryWith": 0.2}
+
+pickUp 片段仍在 YAML 中，用作 AMP 判别器专家数据，但不会作为回合初始状态。
+
+AMP 一帧观测为：
+
+base_height(1) + dof_pos(29) + end_effector_pos(15) + base_lin_vel(3)
++ base_ang_vel(3) + root_rot_6d(6) + box_pos_local(3) = 60
+
+窗口长度 10，总维度 600。thresh_robot2object = 0.7m。
+
+2.5 Reset 时序
+
+基类 reset(env_ids) 中 task-specific 部分的顺序是：
+
+_reset_actors(env_ids)   # AMP RSI，写机器人 root/joint；记录 _reset_ref_skill_idx
+_reset_boxes(env_ids)    # FindBox/finetune/wall2/wall3/wall4 依次叠加
+_reset_task(env_ids)
+清空 obs/action history
+episode_length_buf[env_ids] = 0
+scene.write_data_to_sim()
+_update_task_buffers()
+
+所以 wall/cylinder/search box 都可以使用当前回合已经写入的机器人 root pose 和 heading。
+
+2.6 FindBox 箱子初始化（wall3/wall4 都继承）
+
+普通 loco 回合：
+
+findbox_depth 把箱子放在机器人前方：
+距离 U[0.7, 2.0)m
+bearing 相对 heading 为 U[-45°, 45°)
+platform XY 与箱子同步
+finetune 再覆写箱子姿态：
+只对 loco 回合生效
+box_pose_randomize_probability = 1.0
+yaw：U[-yaw_range, yaw_range]，yaw_range 由 _box_pose_yaw_range_deg() 提供
+tilt：roll/pitch 各自 U[-30°, 30°]
+box_quat = quat_mul(yaw_quat, tilt_quat)
+根据倾斜后长方体在世界 z 方向的半高度，把箱子底部放在地面上
+箱子速度清零
+platform 移到箱子 XY，z 为 ground_z - 0.025
+倾斜长方体的世界 z 半高度：
+
+half_height_z = |R[z, x]| * size_x/2
+              + |R[z, y]| * size_y/2
+              + |R[z, z]| * size_z/2
+
+finetune 关闭了 v2.5 random 的箱子尺寸随机化，场景使用 replicate_physics=True。箱子默认尺寸 0.3 × 0.3 × 0.25m。箱子质量/摩擦随机化仍继承父类。
+
+非 loco（实际只有 carryWith）回合使用 motion reference 给出的箱子状态，finetune 不改它的姿态。
+
+2.7 域随机化（wall3/wall4 都继承）
+
+事件
+时机
+实际参数
+| `physics_material` | startup | 作用于箱子：static friction `U[0.3, 2.0]`，dynamic friction `U[0.4, 1.5]`，restitution `U[0.0, 0.2]`，64 buckets |
+| randomize_box_mass | reset | 箱子质量缩放 U[0.1, 1.5]，基础质量 0.8kg |
+| add_joint_default_pos | startup | 所有关节默认位置加 U[-0.01, 0.01] rad |
+| base_com | startup | waist_roll_link 质心偏移：x ±0.025m，y/z ±0.05m |
+| push_robot | 每 1–3s | 设置速度：x/y ±0.5，z ±0.2，roll/pitch ±0.52，yaw ±0.78 |
+| reset_base | reset | root pose：x/y ±0.5m、yaw ±3.14；root velocity：xyz 与 rpy 各 ±0.5 |
+
+注意：carry_box/x2_config.py 的 X2EventCfg 中 physics_material 被定义了两次。第二次定义（箱子材质）覆盖了第一次（机器人材质），所以当前实际不会随机化机器人刚体材质。findbox_depth_v2_5_random 的 __post_init__ 再把箱子摩擦上限放宽到上表数值。
+
+reset_base 后，_reset_actors 中的 AMP RSI 会再次写入机器人 root/joint 状态，所以复现时应保留现有事件和 reset 调用顺序，不要自行合并或重排。
+
+2.8 终止与成功
+
+wall3/wall4 都没有覆写 check_reset，沿用 findbox_depth：
+
+reset_buf =
+    time_out
+ OR |roll| > 0.5
+ OR |pitch| > 1.1
+ OR root_z < 0.2
+ OR head_z < 0.4
+
+success_buf：
+
+box_z > 0.6
+AND norm(projected_gravity_xy) < 0.2
+AND head_z > 0.75
+AND hand_center_to_box < 0.3
+AND head_z > 0.80
+
+success_buf 仅用于 standup 奖励和日志，不会单独导致 reset。碰到墙或圆柱也不会终止。
+
+3. wall2 前置：单面墙
+
+wall3 依赖 wall2，复现时先实现这一层。
+
+3.1 Scene
+
+_WALL_T = 0.2
+_WALL_LEN = 8.0
+_WALL_H = 3.0
+_WALL_COLOR = (0.45, 0.45, 0.5)
+
+wall = RigidObjectCfg(
+    prim_path="{ENV_REGEX_NS}/Wall",
+    spawn=CuboidCfg(
+        size=(0.2, 8.0, 3.0),
+        rigid_props=RigidBodyPropertiesCfg(kinematic_enabled=True, disable_gravity=True),
+        mass_props=MassPropertiesCfg(mass=1000.0),
+        collision_props=CollisionPropertiesCfg(),
+        visual_material=PreviewSurfaceCfg(diffuse_color=_WALL_COLOR),
+    ),
+    init_state=RigidObjectCfg.InitialStateCfg(pos=(2.6, 0.0, 1.5)),
+)
+depth_wall_prim_exprs = ["{ENV_REGEX_NS}/Wall"]
+wall_dist_min = 3.0
+wall_dist_max = 4.0
+wall_height = 3.0
+
+3.2 Reset
+
+在父类 _reset_boxes 后执行，对全部 reset env：
+
+d ~ U[3.0, 4.0)
+theta ~ U[0, 2π)
+wall_xy = robot_root_xy + d * [cos(theta), sin(theta)]
+wall_z = env_origin_z + 1.5
+wall_quat = quat_from_euler_xyz(0, 0, theta)
+wall_velocity = 0
+
+墙的局部 x 轴是 0.2m 厚度方向，yaw 设为 theta 后墙面朝向机器人。墙只是一面，其他三侧开放。
+
+4. wall3 实现
+
+4.1 新增场景：3 个圆柱干扰物
+
+_CYL_COUNT = 3
+_CYL_RADIUS = 0.15
+_CYL_HEIGHT = 1.8
+_CYL_COLOR = (0.6, 0.42, 0.35)
+
+def _cylinder(i):
+    return RigidObjectCfg(
+        prim_path="{ENV_REGEX_NS}/Cylinder" + str(i),
+        spawn=CylinderCfg(
+            radius=0.15,
+            height=1.8,
+            rigid_props=RigidBodyPropertiesCfg(kinematic_enabled=True, disable_gravity=True),
+            mass_props=MassPropertiesCfg(mass=1000.0),
+            collision_props=CollisionPropertiesCfg(),
+            visual_material=PreviewSurfaceCfg(diffuse_color=_CYL_COLOR),
+        ),
+        init_state=RigidObjectCfg.InitialStateCfg(pos=(0.0, 0.0, 0.9)),
+    )
+
+Scene 字段：
+
+cylinder0 = _cylinder(0)
+cylinder1 = _cylinder(1)
+cylinder2 = _cylinder(2)
+
+depth_wall_prim_exprs = [
+    "{ENV_REGEX_NS}/Wall",
+    "{ENV_REGEX_NS}/Cylinder0",
+    "{ENV_REGEX_NS}/Cylinder1",
+    "{ENV_REGEX_NS}/Cylinder2",
+]
+
+cyl_count = 3
+cyl_height = 1.8
+cyl_dist_min = 2.2
+cyl_dist_max = 3.2
+
+box_yaw_min_deg = 10.0
+box_yaw_curriculum_iters = 8000.0
+
+必须使用完整列表覆盖 `depth_wall_prim_exprs`。如果只追加圆柱而丢掉 `Wall`，墙会有碰撞但不会出现在深度图中。
+
+“人干扰圆柱”只是静态 kinematic 圆柱，不会移动，也没有行人运动模型或动态 reset 中途扰动。
+
+4.2 圆柱 reset
+
+_reset_boxes(env_ids) 必须按以下顺序：
+
+调用 super()._reset_boxes(env_ids)，让 FindBox/finetune 放箱子、wall2 放墙；
+记录 yaw 课程日志；
+对每个圆柱独立放置。
+for i in 0..2:
+    d ~ U[2.2, 3.2)
+    theta ~ U[0, 2π)
+    pos.xy = robot_root_xy + d * [cos(theta), sin(theta)]
+    pos.z  = env_origin_z + 0.9
+    quat   = (1, 0, 0, 0)
+    write pose
+    write zero velocity
+
+三个圆柱之间、圆柱与墙之间都没有额外避碰检查；它们可能接近或相交。正常箱子距离不超过 2.0m，所以 2.2m 下限避免圆柱生成在普通箱子上。
+
+4.3 wall3 箱子 yaw 课程
+
+覆写 finetune 的 _box_pose_yaw_range_deg()：
+
+def _box_pose_yaw_range_deg(self) -> float:
+    yaw_min = float(getattr(self.cfg.scene, "box_yaw_min_deg", 10.0))
+    if not hasattr(self, "current_learning_iteration"):
+        return yaw_min
+    it = float(self.current_learning_iteration)
+    if getattr(self, "_yaw_curr_anchor_iter", None) is None:
+        self._yaw_curr_anchor_iter = it
+    span = max(1.0, float(getattr(self.cfg.scene, "box_yaw_curriculum_iters", 8000.0)))
+    f = min(1.0, max(0.0, (it - self._yaw_curr_anchor_iter) / span))
+    return yaw_min + f * (180.0 - yaw_min)
+
+要点：
+
+OnPolicyRunner.learn() 每个训练 iteration 开始时设置 env.current_learning_iteration = it。
+- 环境构造时的初始 reset 还没有这个属性，所以返回 10°，且不能在这里建立锚点。
+第一次真实训练 reset 时，用当前 iteration 作为 _yaw_curr_anchor_iter。
+从 checkpoint resume 时，课程从本次训练进程的起点重新开始，不会直接跳到 checkpoint 绝对 iteration 对应的难度。
+这里返回的是半范围；实际 yaw 为 U[-range, range]。
+只影响普通 loco 箱子。tilt 仍为 ±30°。
+在 wall3 的 _reset_boxes 中，super() 后写日志：
+
+if isinstance(self.extras.get("log"), dict):
+    self.extras["log"]["Curriculum/box_yaw_range_deg"] = torch.tensor(
+        self._box_pose_yaw_range_deg(), device=self.device
+    )
+
+4.4 wall3 奖励
+
+4.4.1 完整启用的奖励项
+
+wall3 的实际 reward 集合如下：
+
+名称
+weight
+来源
+dof_acc
+-1e-7
+carry_box
+action_rate
+-0.03
+carry_box
+torques
+-1e-4
+carry_box
+dof_vel
+-2e-4
+carry_box
+dof_pos_limits
+-5.0
+carry_box
+dof_vel_limits
+-1e-3，soft_ratio=1.0
+carry_box
+undesired_contacts
+-1.0，hip/knee，阈值 1.0
+carry_box
+walk_task
+1.0
+findbox
+carryup_task
+1.0
+findbox
+standup_task
+0.4
+findbox v5
+slow_pickup
+-5e-4
+findbox v1
+stable_grasp
+0.2
+pose_stable
+arm_speed_pickup
+-2e-2，阈值 1.0
+finetune 覆写
+arm_acc_pickup
+-2e-5，阈值 20.0
+finetune 覆写
+grip_force_cap
+-2e-2
+finetune
+| `held_hand_speed` | `-2e-2`，阈值 1.0 | wall3 新增 |
+| `held_hand_acc` | `-2e-5`，阈值 20.0 | wall3 新增 |
+| `waist_yaw_penalty` | `-0.5` | wall3 新增 |
+
+移除项：
+
+名称
+wall3 值
+relocation_task
+None（FindBox 没有搬运到目标阶段）
+torque_limits
+None（wall3 删除继承的 applied-torque-limit 惩罚）
+
+注意：torques=-1e-4 仍然启用；wall3 删除的是 torque_limits=-0.03。
+
+4.4.2 FindBox 基础奖励公式
+
+walk_task：
+
+v_to_box = dot(normalize(robot2object_dir_xy), upper_body_lin_vel_world_xy)
+speed = exp(-5 * (0.85 - v_to_box)^2)
+heading_err = abs(wrap_to_pi(atan2(box - root) - robot_heading))
+heading = exp(-0.75 * heading_err)
+walk = speed + 0.5 * heading
+if robot2object_dist < 0.7:
+    walk = 1.5
+
+carryup_task：
+
+hand_center = mean(left_wrist_roll, right_wrist_roll)
+hand_err_sq = ||hand_center - box_pos||^2
+hand_pos = exp(-3 * hand_err_sq)
+
+box_height = exp(-3 * max(0.64 - box_z, 0))
+if box_z > 0.64: box_height = 1
+
+contact_each_hand = 1 - exp(-0.5 * ||hand_contact_force||)
+hand_contact = mean(contact_each_hand)
+if hand_err_sq > 0.3: hand_contact = 0
+
+carryup = 0.7 * hand_pos + 1.5 * hand_contact + 1.5 * box_height
+if robot2object_dist > 0.7: carryup = 0
+
+standup_task（v5，仅 success_buf 为真时）：
+
+base_h = exp(-8 * abs(root_z - 0.66)); root_z > 0.66 时为 1
+head_h = exp(-8 * abs(head_z - 0.85)); head_z > 0.85 时为 1
+gate = clamp((root_z - 0.50) / 0.16, 0, 1)
+
+stand_still = exp(-0.3 * sum(abs(base_lin_vel))) * gate
+ang_still   = exp(-0.3 * sum(abs(base_ang_vel))) * gate
+box_still   = exp(-1.0 * ||box_lin_vel||) * exp(-0.3 * ||box_ang_vel||) * gate
+
+standup = base_h + head_h + stand_still + ang_still + box_still
+
+slow_pickup：
+
+pickup_phase = robot2object_dist < 0.7 AND box_z < 0.55
+cost = sum(joint_vel^2) * pickup_phase
+
+4.4.3 pose_stable / finetune 抓取奖励
+
+ARM 关节匹配：
+
+ARM_JOINTS = [".*_shoulder_.*", ".*_elbow_.*", ".*_wrist_.*"]
+
+蹲姿抓取阶段：
+
+crouched_grasp =
+    robot2object_dist < 0.7
+    AND root_z < 0.60
+    AND box_z < 0.58
+
+stable_grasp：
+
+smooth = exp(-0.5 * mean(arm_vel^2) - 2e-4 * mean(arm_acc^2))
+hand_dist = ||hand_center - box_pos||
+proximity = exp(-20 * hand_dist^2)
+both_contact = product_over_hands(1 - exp(-0.5 * hand_force))
+engagement = 0.5 * proximity + 0.5 * both_contact * proximity
+reward = smooth * engagement * crouched_grasp
+
+arm_speed_pickup / arm_acc_pickup：
+
+speed_cost = mean(max(abs(arm_vel) - 1.0, 0)^2) * crouched_grasp
+acc_cost   = mean(max(abs(arm_acc) - 20.0, 0)^2) * crouched_grasp
+
+grip_force_cap：
+
+excess = max(hand_contact_force - 7.0N, 0)
+cost = mean(excess over two hands)
+if hand_center_to_box > 0.3:
+    cost = 0
+
+4.4.4 wall3 新奖励函数
+
+持箱阶段：
+
+_HELD_BOX_Z = 0.55
+_HELD_HAND_DIST = 0.15
+
+def _box_held_phase(env):
+    hand_center = env.robot.data.body_pos_w[:, env.hand_pos_indices, :].mean(dim=1)
+    dist = torch.norm(hand_center - env.box_states[:, :3], dim=-1)
+    return (env.box_states[:, 2] > 0.55) & (dist < 0.15)
+
+手部速度惩罚：
+
+def held_arm_speed_penalty(env, max_speed, asset_cfg):
+    asset = env.scene[asset_cfg.name]
+    arm_vel = asset.data.joint_vel[:, asset_cfg.joint_ids]
+    cost = torch.mean(torch.square(torch.clamp(arm_vel.abs() - max_speed, min=0.0)), dim=1)
+    return cost * _box_held_phase(env).float()
+
+手部加速度惩罚：
+
+def held_arm_acceleration_penalty(env, max_acceleration, asset_cfg):
+    asset = env.scene[asset_cfg.name]
+    arm_acc = asset.data.joint_acc[:, asset_cfg.joint_ids]
+    cost = torch.mean(torch.square(torch.clamp(arm_acc.abs() - max_acceleration, min=0.0)), dim=1)
+    return cost * _box_held_phase(env).float()
+
+Reward config：
+
+torque_limits = None
+
+held_hand_speed = RewTerm(
+    func=walled3_env.held_arm_speed_penalty,
+    weight=-2.0e-2,
+    params={"max_speed": 1.0, "asset_cfg": SceneEntityCfg("robot", joint_names=ARM_JOINTS)},
+)
+held_hand_acc = RewTerm(
+    func=walled3_env.held_arm_acceleration_penalty,
+    weight=-2.0e-5,
+    params={"max_acceleration": 20.0, "asset_cfg": SceneEntityCfg("robot", joint_names=ARM_JOINTS)},
+)
+waist_yaw_penalty = RewTerm(
+    func=mdp.joint_deviation_l1,
+    weight=-0.5,
+    params={"asset_cfg": SceneEntityCfg("robot", joint_names=["waist_yaw_joint"])},
+)
+
+waist_yaw_penalty 是 waist_yaw_joint 相对默认关节角的 L1 偏差，全程生效，不受持箱阶段门控。
+
+4.4.5 未启用的力矩函数
+
+wall3 x2_env.py 中有 applied_torque_over_limit_widened(env, scale, asset_cfg)：
+
+cost = sum(max(abs(computed_torque) - scale * joint_effort_limit, 0))
+
+但 wall3/wall4 reward config 都没有注册它，因此不参与训练。当前实现中没有“1.5 倍力矩阈值”的生效奖励，也没有修改 actuator effort limit 或动作缩放。复现当前行为时不要启用它。
+
+4.5 wall3 Agent 配置
+
+wall3 只覆写：
+
+run_name = "walled3"
+
+其余继承 finetune：
+
+experiment_name = "TASK_FindBoxDepthV2_x2_flat"
+wandb_project = "TASK_FindBoxDepthV2_x2_flat"
+resume = False
+
+日志目录因此在：
+
+logs/TASK_FindBoxDepthV2_x2_flat/<timestamp>_walled3/
+
+继承的网络和算法：
+
+policy = RslRlPpoActorCriticDepthCfg(
+    class_name="ActorCriticDepthAux",
+    init_noise_std=1.0,
+    noise_std_type="scalar",
+    actor_hidden_dims=[512, 256, 256],
+    critic_hidden_dims=[512, 256, 256],
+    activation="elu",
+    camera_height=27,
+    camera_width=48,
+    depth_num_frames=5,
+    depth_conv_channels=(16, 32, 64),
+    depth_conv_kernels=(5, 3, 3),
+    depth_conv_strides=(2, 2, 2),
+    depth_conv_paddings=(2, 1, 1),
+    depth_use_maxpool=True,
+    depth_head_hidden=(256,),
+    depth_latent_dim=128,
+)
+
+algorithm = RslRlPpoAlgorithmAuxCfg(
+    class_name="AMPPPO",
+    value_loss_coef=1.0,
+    use_clipped_value_loss=True,
+    clip_param=0.2,
+    entropy_coef=0.01,
+    num_learning_epochs=5,
+    num_mini_batches=4,
+    learning_rate=1.0e-3,
+    schedule="adaptive",
+    gamma=0.99,
+    lam=0.95,
+    desired_kl=0.01,
+    max_grad_norm=1.0,
+    normalize_advantage_per_mini_batch=False,
+    symmetry_cfg=None,
+    rnd_cfg=None,
+    aux_loss_coef=1.0,
+)
+
+AMP 相关继承值：
+
+amp_flag = True
+amp_motionlib_flag = True
+amp_coef = 0.25
+amp_discr_hidden_dims = [1024, 512]
+amp_motion_files = [findboxstill_noturn.yaml]
+save_interval = 500
+
+5. wall4 实现
+
+wall4 继承 wall3 的所有场景、奖励、课程框架和终止规则，仅新增“视野外箱子搜索”和新的分段 yaw 课程。
+
+5.1 Scene 新字段
+
+search_prob = 0.02
+box_yaw_curr_iters = (0.0, 10000.0, 20000.0, 30000.0)
+box_yaw_curr_degs = (0.0, 10.0, 30.0, 180.0)
+
+wall3 的 box_yaw_min_deg 和 box_yaw_curriculum_iters 仍会继承，但 wall4 覆写后的 _box_pose_yaw_range_deg() 不再使用它们。
+
+5.2 分段 yaw 课程
+
+def _box_pose_yaw_range_deg(self) -> float:
+    iters = [float(x) for x in getattr(self.cfg.scene, "box_yaw_curr_iters", (0, 10000, 20000, 30000))]
+    degs = [float(x) for x in getattr(self.cfg.scene, "box_yaw_curr_degs", (0, 10, 30, 180))]
+    if not hasattr(self, "current_learning_iteration"):
+        return degs[0]
+    it = float(self.current_learning_iteration)
+    if getattr(self, "_yaw_curr_anchor_iter", None) is None:
+        self._yaw_curr_anchor_iter = it
+    e = it - self._yaw_curr_anchor_iter
+    if e <= iters[0]:
+        return degs[0]
+    if e >= iters[-1]:
+        return degs[-1]
+    for i in range(1, len(iters)):
+        if e <= iters[i]:
+            t = (e - iters[i - 1]) / max(1.0, iters[i] - iters[i - 1])
+            return degs[i - 1] + t * (degs[i] - degs[i - 1])
+    return degs[-1]
+
+有效 iteration 到 yaw 半范围：
+
+有效 iteration
+yaw 半范围
 0
 0°
+5,000
+5°
 10,000
 10°
+15,000
+20°
 20,000
 30°
-30,000 及以后
-40°
+25,000
+105°
+≥30,000
+180°
 
-相邻锚点之间线性插值，两端 clamp。构造/初始化阶段返回 0°；首次真实训练迭代建立锚点。tilt 仍为 ±30°。
+和 wall3 一样，锚点建立在第一次真实训练 reset，而不是 env 构造或 checkpoint 中保存的绝对 iteration。
 
-未改变的部分
+5.3 视野外 search 箱子
 
-wall4 不改变 wall3 的障碍物尺寸/采样、depth targets、held-hand speed/acc 阈值与权重、waist yaw 惩罚、torque 配置、episode 时长或 reset 终止规则。
+常量：
 
-- 两个任务的 agent config 只覆写 run_name（walled3 / walled4）；experiment_name 继承 finetune 配置，默认都不是独立的实验目录。复现者需要通过 CLI 明确指定正确的 resume/load_run/checkpoint，避免误加载另一变体的 checkpoint。
-- 主要源文件：
-  - wall3：legged_lab/envs/x2/TASKS/findbox_depth_v2_5_random_finetune_walled3/
-  - wall4：legged_lab/envs/x2/TASKS/findbox_depth_v2_5_random_finetune_walled4/
-  - 父场景：.../findbox_depth_v2_5_random_finetune_walled2/
-  - 箱子初始化与 finetune 奖励：.../findbox_depth_v2_5_random_finetune/
-  - 深度相机基线：legged_lab/envs/x2/TASKS/hold_box_depth_v6/x2_config.py
+_HALF_FOV = math.radians(45.0)
+_OOV_MIN = math.radians(60.0)
+_OOV_DIST_MIN = 0.9
+_OOV_DIST_MAX = 2.0
+
+_reset_boxes(env_ids)：
+
+def _reset_boxes(self, env_ids):
+    super()._reset_boxes(env_ids)
+
+    if not hasattr(self, "_search_env"):
+        self._search_env = torch.zeros(self.num_envs, device=self.device, dtype=torch.bool)
+    if len(env_ids) == 0:
+        return
+
+    self._search_env[env_ids] = False
+    skill_names = list(self.cfg.amp_cfg.skill_init_prob.keys())
+    if "loco" not in skill_names:
+        return
+    loco_idx = skill_names.index("loco")
+    loco_mask = self._reset_ref_skill_idx[env_ids] == loco_idx
+
+    p = float(getattr(self.cfg.scene, "search_prob", 0.05))
+    pick = loco_mask & (torch.rand(len(env_ids), device=self.device) < p)
+    if not pick.any():
+        return
+    sub = env_ids[pick]
+    count = len(sub)
+
+    forward = quat_apply(self.robot.data.root_link_quat_w[sub], self.forward_vec[sub])
+    heading = torch.atan2(forward[:, 1], forward[:, 0])
+    mag = torch.rand(count, device=self.device) * (math.pi - _OOV_MIN) + _OOV_MIN
+    sign = torch.where(torch.rand(count, device=self.device) < 0.5, 1.0, -1.0)
+    angle = heading + sign * mag
+    dist = torch.rand(count, device=self.device) * (_OOV_DIST_MAX - _OOV_DIST_MIN) + _OOV_DIST_MIN
+
+    root_xy = self.robot.data.root_pos_w[sub, :2]
+    box_xy = torch.stack((
+        root_xy[:, 0] + dist * torch.cos(angle),
+        root_xy[:, 1] + dist * torch.sin(angle),
+    ), dim=-1)
+    self.box_states[sub, :2] = box_xy
+    self.platform_pos[sub, :2] = box_xy
+    self._search_env[sub] = True
+
+    platform_rot = torch.tensor([1.0, 0.0, 0.0, 0.0], device=self.device).repeat(count, 1)
+    self.platform.write_root_pose_to_sim(
+        torch.cat([self.platform_pos[sub], platform_rot], dim=-1), sub
+    )
+    self.box.write_root_pose_to_sim(
+        torch.cat([self.box_states[sub, :3], self.box_states[sub, 3:7]], dim=-1), sub
+    )
+
+行为细节：
+
+只有 loco 回合参与抽样。由于 loco 初始化概率为 0.8，配置 search_prob=0.02 对全部 reset 回合的期望 search 比例约为 1.6%。
+search 箱子 bearing 幅值在 [60°, 180°)，左右各半，因此初始在 ±45° 水平视场之外。
+只改箱子/platform XY；箱子的 z、四元数和此前已清零的速度保留 finetune 结果。
+- search 箱子重新放置后不会重新调用墙或圆柱 reset。墙距离机器人 3–4m，因此箱子不会在墙后；圆柱距离2.2–3.2m，而search箱子中心最多2.0m；这只分离中心半径区间，考虑箱体半尺寸、倾斜和圆柱半径后，不能保证表面绝不相交。
+_search_env 只在 reset 时清零/重采样，回合中不会因箱子进入视野而改成 False；search_turn 自身用 bearing 门控关闭。
+5.4`search_turn` 奖励
+
+def _box_bearing_error(env):
+    forward = quat_apply(env.robot.data.root_link_quat_w, env.forward_vec)
+    heading = torch.atan2(forward[:, 1], forward[:, 0])
+    to_box = env.box_states[:, :2] - env.robot.data.root_pos_w[:, :2]
+    target_heading = torch.atan2(to_box[:, 1], to_box[:, 0])
+    return torch.abs(wrap_to_pi(target_heading - heading))
+
+
+def search_turn_reward(env):
+    if not hasattr(env, "_search_env"):
+        return torch.zeros(env.num_envs, device=env.device)
+
+    bearing_err = _box_bearing_error(env)
+    heading_reward = torch.exp(-0.75 * bearing_err)
+
+    forward = quat_apply(env.robot.data.root_link_quat_w, env.forward_vec)
+    heading = torch.atan2(forward[:, 1], forward[:, 0])
+    to_box = env.box_states[:, :2] - env.robot.data.root_pos_w[:, :2]
+    target_heading = torch.atan2(to_box[:, 1], to_box[:, 0])
+    desired_dir = torch.sign(wrap_to_pi(target_heading - heading))
+    yaw_rate = env.base_ang_vel[:, 2]
+    turn_reward = torch.clamp(desired_dir * yaw_rate, min=0.0)
+
+    reward = 0.7 * heading_reward + 0.3 * torch.tanh(turn_reward)
+    active = (
+        env._search_env
+        & (bearing_err > math.radians(45.0))
+        & (env.robot2object_dist > env.cfg.amp_cfg.thresh_robot2object)
+    )
+    return reward * active.float()
+
+Config：
+
+search_turn = RewTerm(func=walled4_env.search_turn_reward, weight=0.5)
+
+说明：
+
+env.base_ang_vel 是 upper body 坐标系下的角速度，不是 root link 的世界角速度。
+仅转向分量奖励朝减小 bearing error 的方向转动；反方向转动时 turn_reward 为0，但朝向分量0.7 * heading_reward仍为正（active门控为真时）。
+箱子一旦进入 ±45° 或机器人到箱距离不超过 0.7m，该项为 0；普通 walk_task 和抓取奖励一直生效。
+没有 search 成功、search 超时或 search 失败的独立终止条件。
+5.5 wall4 Agent 配置
+
+只覆写：
+
+run_name = "walled4"
+
+其余与 wall3 相同，日志仍在 logs/TASK_FindBoxDepthV2_x2_flat/ 下。
+
+6. 训练与 resume
+
+从零启动：
+
+python legged_lab/scripts/train.py \
+  --task=x2_findbox_depth_v2_5_random_finetune_walled3 \
+  --headless --logger=tensorboard
+
+python legged_lab/scripts/train.py \
+  --task=x2_findbox_depth_v2_5_random_finetune_walled4 \
+  --headless --logger=tensorboard
+
+从已有 checkpoint 继续：
+
+python legged_lab/scripts/train.py \
+  --task=x2_findbox_depth_v2_5_random_finetune_walled4 \
+  --headless --logger=tensorboard \
+  --resume True --load_run <run_dir_name> --checkpoint model_<iter>.pt
+
+所有 FindBox finetune/walled 变体都共享 experiment_name=TASK_FindBoxDepthV2_x2_flat，因此 --load_run 必须写清楚。不要依赖默认的最新 run 匹配，否则可能误加载 walled2/walled3/walled5 等其他变体。
+
+因为观测和输出维度没有改变，wall3/wall4 可以从同维度的 FindBox finetune 系列 checkpoint warm-start。
+
+7. 复现检查清单
+
+7.1 配置检查
+
+X2DepthWalled3SceneCfg.depth_wall_prim_exprs 包含 Wall 与 Cylinder0/1/2，共 4 项。
+圆柱为 kinematic、禁重力、可碰撞，半径 0.15m，高 1.8m。
+wall3 torque_limits=None，但 torques 仍为 -1e-4。
+wall3 新增三项奖励的 weight 分别为 -2e-2、-2e-5、-0.5。
+wall4 search_prob=0.02，search_turn.weight=0.5。
+wall4 yaw 课程断点为 (0, 10000, 20000, 30000) / (0, 10, 30, 180)。
+7.2 Reset 数值检查
+
+在 reset 后读取 world pose：
+
+wall3/wall4:
+  3.0 <= ||wall_xy - root_xy|| < 4.0
+  2.2 <= ||cylinder_i_xy - root_xy|| < 3.2, i=0,1,2
+
+wall3 普通 loco 箱子:
+  0.7 <= ||box_xy - root_xy|| < 2.0
+  abs(bearing(box, heading)) <= 45°
+
+wall4 search 箱子:
+  0.9 <= ||box_xy - root_xy|| < 2.0
+  60° <= abs(bearing(box, heading)) <= 180°
+  _search_env == True
+
+7.3 奖励检查
+
+手动构造 box_z=0.56、手中心到箱 0.10m：held_hand_* 应启用。
+构造 box_z=0.54 或手中心距离 0.16m：held_hand_* 应为 0。
+手臂速度全部 ≤1.0 rad/s 时 held_hand_speed=0；手臂加速度全部 ≤20 时 held_hand_acc=0。
+search env 且 bearing error 为 90°、距离 1.5m、正确方向角速度 >0 时，search_turn > 0。
+search env 但 bearing error 为 30° 或距离 0.6m 时，search_turn=0。
+7.4 视觉检查
+
+渲染 depth 时，墙和三个圆柱都应出现在深度图中。
+在第三视角中，wall3 每次 reset 墙和三个圆柱位置都会变化。
+wall4 中少量回合箱子起始在机器人背后或侧后方，机器人应通过转身把箱子带入视野。
+8. 常见复现错误
+
+1. **在 `super()._reset_boxes()` 之前放墙/圆柱。** 这会读取旧的或未完成更新的机器人/箱子状态。
+2. 在 env 构造时建立 curriculum 锚点。 这会使 warm-start 从绝对 iteration 计算，直接跳到高难度。
+3. **把 `search_prob` 应用于所有回合。** 当前实现只作用于 `loco` 回合。
+4. **以为 skill 概率包含 `pickUp=0.15`。** FindBox depth 实际是 `loco=0.8, pickUp=0.0, carryWith=0.2`。
+5. **只把圆柱加进 scene，未加入 `depth_wall_prim_exprs`。** 物理上会碰撞，但 actor 看不到。
+6. 启用未注册的 widened torque 函数。 当前 wall3/wall4 没有这个奖励。
+7. **忘记 reward 会乘 `dt=0.02`。** 对比 reward 日志时不能直接用配置 weight 推算单步数值。
+8. 新增观测维度。 wall3/wall4 不应为墙、圆柱或 search 标记增加 actor/critic 观测。

@@ -1,5 +1,21 @@
 # 找箱与搬箱子项目 · findbox
 
+2026-10-15 13:10 JST：[G1站立reset排查、接地修复与wall4正式重启](../../docs/carrybox/g1_reset_20261015/README.md)：旧model_14000真实横滚超限（1600回合均3步）；另修复G1参考初始化脚底穿地，wall3/wall4共同revision8按实际足部碰撞几何补足5mm间隙。G1相机位姿/身体与障碍遮挡、44项CPU、16环境更新恢复导出、4096验收通过。新wall4 PID2660033，4096环境fresh、核验iteration12，正式热身平均4.238秒/轮、最慢4.33秒；训练进行中，未证明收敛。
+
+2026-10-15：新增[旧wall4模型显式仅权重播放](../../docs/carrybox/play_v6_20261015/README.md)，model_14000在当前revision7环境的4环境命令已提供；实际权重CPU兼容检查通过，未启动GUI或训练。默认严格恢复规则保留。
+
+2026-10-15：[wall3/wall4公共修复与正式命令](../../docs/carrybox/wall_parity_20261015/README.md)：revision7统一实际头部COM、膝限位惩罚、物理动作目标裁剪、RSI60/30/10、搜索/yaw/推扰课程及训练配方。默认wall3仅墙，wall4墙加3圆柱，其他行为一致；41项CPU及两任务4环境更新/恢复/导出通过。未启动新版正式训练，未证明收敛；旧wall4 PID2448113仍使用revision6。
+
+2026-10-15：[wall4不收敛诊断](../../docs/carrybox/convergence_20261015/README.md)：13691轮快照及16环境纯推理确认行走起点约3步倾倒，保持reset角约39步；直接抱箱轨迹占有效样本；发现head_link腰部原点误作头部高度及专家膝角与软限位惩罚冲突。仅关闭push未修复，AMP训练style近零。已完成诊断，生产修复待做；PID2448113保持运行，未修改或重启训练。
+
+2026-10-14 21:13 JST：[wall4 handoff修订与新版AMP重启](../../docs/carrybox/handoff_20261014/README.md)：完整X2奖励/G1适配、RSI80/0/20、双向roll、深度/物理随机化及wall动作范围修复完成；35项CPU、4环境更新/恢复/导出及4096完整更新通过（平均4.295秒、最慢4.318秒）。旧PID2348537已停止，新PID2448113已核验到iteration30，正式热身后平均4.230秒、最慢4.300秒，首个checkpoint schema2/revision6及15段AMP身份一致；15段AMP，旧model_4200仅作权重迁移。未证明收敛。
+
+2026-10-14 20:46 JST：[新AMP默认配置复核](../../docs/carrybox/amp_default_20261014/README.md)通过：CarryBox基线/wall3/wall4及RSI默认均为规范15段数据，两组CPU检查PASS。实际PID2348537的model_4000.pt仍为旧17段缓存；本次未重启训练，后续切换需显式weights-only warm-start，不能完整resume旧AMP。
+
+2026-10-14目录规范化：当前默认数据为[`assets/motions/findbox/`](../../source/perceptual_ball/perceptual_ball/assets/motions/findbox/README.md)，与足球`kick/`并列；使用`locomotion/`、`pick_up/`、`hold/`与小写下划线文件名。15段内容逐字节不变，抱箱仍5秒；AMP/RSI默认路径同步，旧根findbox保留兼容。schema=1、dataset_revision=3，迁移检查与CPU初始化通过，未切换训练。[迁移说明](../../docs/carrybox/amp_layout_20261014/README.md)。
+
+2026-10-14数据修订：按用户要求将有效AMP整理为15段（行走11、拾箱3、抱箱1）；carrywith1保留原0–20帧并重复第20帧至5秒，carrywith2/3归档。schema=1、dataset_revision=2；旧17段全量备份保留。当前训练缓存不热切换，旧checkpoint不能直接完整恢复到新数据。详见[变更与兼容说明](../../docs/carrybox/amp_hold_20261014/README.md)。
+
 2026-10-14 16:01 JST：Warp迁移完成，正式训练PID2348537已核验到iteration18；4096环境×24步、PPO 4 epochs×4 minibatches及完整AMP保持，热身后平均4.023秒、最慢4.078秒，达到6秒目标。新model_0.pt为schema2/revision5/warp，策略和AMP参数有限。尚未完成长训或证明拾箱收敛。[迁移与日志](../../docs/carrybox/warp_20261014/README.md)。下方为历史快照。
 
 2026-10-14 15:12 JST：[G1/X2深度后端与分项耗时核对](../../docs/carrybox/depth_timing_20261014/README.md)：当前G1仍为RTX，X2的Warp多网格后端尚未迁移；复读同源码实测render调用占81.4%，正式最近10轮17.255秒。训练保持运行，未改teacher/critic/相机频率。
@@ -22,7 +38,7 @@
 
 本目录是`findbox`项目的统一入口，与[football](../football/README.md)并列。已有`CarryBox` Gym ID、`carrybox_*`源码和`carrybox-*`工程记录属于本项目，保留原名称与路径。旧入口`projects/carrybox/`兼容指向本目录。
 
-根目录[`findbox/`](../../findbox/)是原始动作数据；[`docs/carrybox/`](../../docs/carrybox/)保存本项目设计与验证；[`scripts/rsl_rl/`](../../scripts/rsl_rl/)中的`*carrybox*`为本项目脚本。G1资产和通用train/play由两个项目共享。
+当前数据入口为[`assets/motions/findbox/`](../../source/perceptual_ball/perceptual_ball/assets/motions/findbox/README.md)；根目录[`findbox/`](../../findbox/)保留旧命名兼容快照。完整原始数据见[原17段备份](../../docs/carrybox/amp_hold_20261014/original_dataset/)。[`docs/carrybox/`](../../docs/carrybox/)保存本项目设计与验证；[`scripts/rsl_rl/`](../../scripts/rsl_rl/)中的`*carrybox*`为本项目脚本。G1资产和通用train/play由两个项目共享。
 
 ## Walled迁移（2026-10-13）
 
@@ -63,8 +79,9 @@ actor/critic只读取深度与本体观测。箱子真值仅用于监督、奖�
 
 | 路径（仓库根目录起） | 用途 |
 |---|---|
-| `findbox/` | 当前实际使用的17段AMP数据：行走11、拾起3、持箱3 |
-| `findbox/amp_manifest.json` | 60Hz/xyzw/29关节顺序、采样权重、片段hash |
+| `source/perceptual_ball/perceptual_ball/assets/motions/findbox/` | 当前15段规范AMP/RSI数据：行走11、拾起3、抱箱1；dataset_revision=3 |
+| `source/perceptual_ball/perceptual_ball/assets/motions/findbox/amp_manifest.json` | 60Hz/xyzw/29关节顺序、采样权重、显式group、片段hash |
+| `findbox/` | 修订2旧命名15段兼容快照；显式指定仍可加载 |
 | `source/perceptual_ball/perceptual_ball/assets/motions/carrybox/pickUp/` | 最初移植的参考归档，当前AMP不读取 |
 | `logs/rsl_rl/g1_carrybox_depth/` | 正式训练输出；首次训练时创建 |
 | `docs/carrybox/` | 设计与验证记录、临时smoke产物 |
@@ -113,6 +130,8 @@ smoke脚本使用当前开发机Isaac安装路径，可通过`ISAAC_SIM_PATH`、
 schema=1无AMP模型属于历史实现，不能直接恢复为当前完整AMP训练状态；足球checkpoint也不适用于本任务。
 
 ## 数据集可视化
+
+2026-10-14抱箱修订版：[15段逐PT独立60fps视频](../../outputs/carrybox/findbox_hold_20261014/README.md)，抱箱段300帧/5秒，完整数据4155帧/69.25秒。下方17段录像属于修改前数据，源文件已完整备份。
 
 2026-10-14后续：[逐PT直接独立录制17段60fps视频](../../outputs/carrybox/findbox_individual/README.md)，画面标注源帧号/时间，同名MP4、PNG和JSON便于数据调整。全4628源帧解码及hash校验通过；原数据未修改。此前30fps合辑及切片继续保留。
 

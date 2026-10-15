@@ -1,0 +1,34 @@
+{
+  "affected_call_path": [
+    "v4 checkpoint -> KickballSim -> control/physics -> recovery",
+    "UI -> apply_ball_command"
+  ],
+  "critical_interfaces": [
+    "training final curriculum reaches 6m/s",
+    "fast speed changes arrival time and impact phase together",
+    "UI Apply now and Re-serve differ from normal auto serve"
+  ],
+  "invariants": [
+    "same checkpoint/model/pose/dt",
+    "v4 inherits v1 balanced override: no joint RMS gate mismatch",
+    "separate events across resets"
+  ],
+  "smallest_change_locus": [
+    "standalone diagnose_kickball_speed.py"
+  ],
+  "mandatory_safeguards": [
+    "retain all speed cases including nonmonotonic failures",
+    "preserve ball perception and floor contact in ghost test",
+    "record actual nonzero force/contact bodies",
+    "raw action replay through original PD; no cross-reset causal claims",
+    "no production actuator or asset changes"
+  ],
+  "minimal_tests": [
+    "original 8 contract checks",
+    "frozen CPU diagnostic including event traces and contrasts"
+  ],
+  "blockers": [
+    "No execution blocker; user actual button usage unknown",
+    "Single-scene evidence cannot uniquely attribute every model/control/contact difference"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-16T13:49:05.307910+09:00",
+  "pid": 2996727,
+  "command": "/home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-CarryBox-Walled5-v0 --num_envs 128 --device cuda:0 --headless --seed 42 --num_envs 4096 --max_iterations 40000 --run_name wall5_amp_stage_a",
+  "log": "logs/rsl_rl/g1_carrybox_depth/walled5/launch_20261016_134504.log",
+  "run": "logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-16_13-45-09_wall5_amp_stage_a",
+  "completed_iteration": 12,
+  "num_envs": 4096,
+  "max_iterations": 40000,
+  "checkpoint": "logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-16_13-45-09_wall5_amp_stage_a/model_0.pt",
+  "schema": 2,
+  "revision": 9,
+  "amp_frame_dim": 35,
+  "amp_clip_count": 15,
+  "amp_valid_fraction": 1.0,
+  "finite_policy_and_amp": true,
+  "nonempty_optimizers": true,
+  "timing_iterations": [
+    [
+      3,
+      4.31
+    ],
+    [
+      4,
+      4.21
+    ],
+    [
+      5,
+      4.2
+    ],
+    [
+      6,
+      4.36
+    ],
+    [
+      7,
+      4.24
+    ],
+    [
+      8,
+      4.34
+    ],
+    [
+      9,
+      4.26
+    ],
+    [
+      10,
+      4.13
+    ],
+    [
+      11,
+      4.13
+    ],
+    [
+      12,
+      4.26
+    ]
+  ],
+  "average_seconds": 4.244000000000001,
+  "maximum_seconds": 4.36,
+  "under_6_seconds": true,
+  "training_finished": false,
+  "convergence": "not_evaluated"
+}

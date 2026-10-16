@@ -1,0 +1,35 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "env LIBGL_ALWAYS_SOFTWARE=1 /home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p 'test_kickball*.py' -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "54088826cc775f5337a85d7f626376715997030251596ebd06be9583245a6206",
+      "stdout_sha256": "9789a6d7183996f65aeecb45519794127133a28d516800bd976a7bdfca7f89ff",
+      "stderr_sha256": "b630e9aed64b772755f40f35e97c5a6bae667922bd9f5bb9782937f95f368527",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/umr/bin/python scripts/sim2sim/kickball_mujoco.py --headless --duration 2 --physics-dt 0.005 --depth-output docs/agilekickball_v5/official_g1_camera_20261016/depth --output docs/agilekickball_v5/official_g1_camera_20261016/smoke.json",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "f71b9b5c20ca45144b8cd2c435a819faeb42d8833edae580ac14f7ccfcd2ae4a",
+      "stdout_sha256": "52375d24f5d583c5c7885cc8c6616ae40461786f96f6965bb7925b601c79ad53",
+      "stderr_sha256": "8d6176a440c8ba0460a3441c55619a5360c9b151b8711572da2f27b563101920",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/umr/bin/python docs/agilekickball_v5/official_g1_camera_20261016/audit_official_camera.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "02ec8bfb657b7226559a1836b46cb2d4fb688ef7ff25cca7a5c860815eb721ec",
+      "stdout_sha256": "3162da1bb67b2a7b709365cd0b4dc35372878148207b9802707d44a61f144e57",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

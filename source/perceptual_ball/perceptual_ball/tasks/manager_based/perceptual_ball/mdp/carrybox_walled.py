@@ -371,7 +371,7 @@ def record_episode_metrics(env, env_ids):
             s.success_counts[skill] += s.achieved[ids].sum()
             lengths = s.actual_episode_steps[ids]
             s.episode_steps[skill] += lengths.sum()
-            s.valid_amp_steps[skill] += (lengths-8).clamp_min(0).sum()
+            s.valid_amp_steps[skill] += (lengths-getattr(env, 'amp_warmup_steps', 8)).clamp_min(0).sum()
             s.tipped_counts[skill] += env.termination_manager.get_term('tipped')[ids].sum()
             s.fell_counts[skill] += env.termination_manager.get_term('fell')[ids].sum()
     s.actual_episode_steps[env_ids] = 0

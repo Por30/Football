@@ -1,0 +1,54 @@
+{
+  "checked_date_jst": "2026-10-16",
+  "robot_variant": "G1_29dof_rev_1_0",
+  "official_urdf": {
+    "url": "https://raw.githubusercontent.com/unitreerobotics/unitree_ros/5994d4faef0a9cadd3287f8de0199a67eeb2a259/robots/g1_description/g1_29dof_rev_1_0.urdf",
+    "commit": "5994d4faef0a9cadd3287f8de0199a67eeb2a259",
+    "sha256": "c0ae739c640c3e2c00d1bdd8810b5d6e59601487bd1a3995859f9543269ee5c8",
+    "joint": "d435_joint",
+    "parent": "torso_link",
+    "child": "d435_link",
+    "position_m": [
+      0.0576235,
+      0.01753,
+      0.42987
+    ],
+    "rpy_rad": [
+      0.0,
+      0.8307767239493009,
+      0.0
+    ]
+  },
+  "official_routine": {
+    "page_url": "https://support.unitree.com/home/en/G1_developer/depth_camera_instruction",
+    "cdn_url": "https://doc-cdn.unitree.com/11/267/en/11_267_en",
+    "sha256": "8622ba11304a9e18eeafb041154bfb247f31e21d0ac212d96696a6b87fbc614b",
+    "camera_model": "RealSense D435i",
+    "example_depth_width": 640,
+    "example_depth_height": 480,
+    "example_depth_format": "Z16",
+    "example_depth_fps": 60,
+    "intrinsics_source": "rs2::video_stream_profile::get_intrinsics()",
+    "universal_numeric_intrinsics_published": false
+  },
+  "official_fov_diagram": {
+    "page_url": "https://support.unitree.com/home/en/G1_developer/about_G1",
+    "image_url": "https://doc-cdn.unitree.com/static/2024/10/15/ff0591fcc6bc476bab77ebca2f92f198_1715x2363.png",
+    "sha256": "46e4d5f4dd2e5e5294fbd80abab4cf3e101a931ee284771be235fb6c123c7630",
+    "vertical_fov_deg": 55.2,
+    "optical_axis_from_vertical_deg": 42.4
+  },
+  "field_sources": {
+    "mount": "official_rev_1_0_urdf",
+    "sensor_and_stream": "official_routine_example",
+    "vertical_fov": "official_g1_diagram",
+    "focal_length": "nominal_pinhole_derived_from_vertical_fov_and_square_source_pixels",
+    "principal_point": "nominal_image_center",
+    "depth_unit": "nominal_0.001_m_device_scale_must_be_read_at_runtime",
+    "policy_resolution": "project_48x27_full_frame_resize",
+    "near_far": "project_policy_bounds_0.1_3m",
+    "control_hz": "project_50Hz",
+    "capture_timing": "60Hz_absolute_phase_sampled_on_fixed_physics_ticks"
+  },
+  "legacy_profile_sha256": "52c3e187bc4c1901a7b936577f9f3dafffbe4d6088a2e648e0c01355073300c1"
+}

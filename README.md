@@ -1,5 +1,13 @@
 # Perceptual Ball：FindBox 与 Football
 
+2026-10-16：[Kickball s2s按官方G1资料对齐相机](docs/agilekickball_v5/official_g1_camera_20261016/README.md)：D435i、官方示例640×480 Z16/60fps、官方图示55.2°垂直视场与rev_1_0安装，策略保持50Hz。31项检查、100步闭环和121次采集时序审计通过；内参仍是名义推导，旧模型/训练契约保留。
+
+2026-10-16：Kickball MuJoCo s2s已默认使用[完整场景光轴深度](docs/agilekickball_v5/sim2sim_scene_20261016/README.md)，包含机身可见网格、球、地面及其他静动态物体遮挡。28项检查及100步闭环/深度视频通过；默认v4权重有输入分布变化，未验证任务稳定性或实机标定。
+
+2026-10-16 13:49 JST：[wall5正式训练启动核验](docs/carrybox/wall5_start_20261016/README.md)：用户启动PID2996727，4096环境、40000轮、fresh；已完成第12轮，热身后10轮平均4.244秒、最慢4.36秒。model_0为schema2/revision9/35维AMP/15段数据，策略与D有限且优化器有更新，AMP有效率100%；训练进行中，未证明收敛。
+
+2026-10-16：[新增wall5：X2/G1差异文档的AMP阶段A](docs/carrybox/wall5_20261016/README.md)。基于wall4 revision8，AMP改为每步上限0.125、35维原始本体特征、D正则化与较低学习率、reset首步参与奖励和更新。PPO/深度/任务几何保持；50项CPU、4环境3＋1轮恢复导出通过。未正式训练或验证收敛/4096耗时；12:35 JST原wall4 PID2660033仍运行。
+
 2026-10-15 13:10 JST：[G1站立reset排查、接地修复与wall4正式重启](docs/carrybox/g1_reset_20261015/README.md)：旧model_14000真实横滚超限（1600回合均3步）；另修复G1参考初始化脚底穿地，wall3/wall4共同revision8按实际足部碰撞几何补足5mm间隙。G1相机位姿/身体与障碍遮挡、44项CPU、16环境更新恢复导出、4096验收通过。新wall4 PID2660033，4096环境fresh、核验iteration12，正式热身平均4.238秒/轮、最慢4.33秒；训练进行中，未证明收敛。
 
 2026-10-15：[wall3/wall4公共修复与正式命令](docs/carrybox/wall_parity_20261015/README.md)：revision7统一实际头部COM、膝限位惩罚、物理动作目标裁剪、RSI60/30/10、搜索/yaw/推扰课程及训练配方。默认wall3仅墙，wall4墙加3圆柱，其他行为一致；41项CPU及两任务4环境更新/恢复/导出通过。未启动新版正式训练，未证明收敛；旧wall4 PID2448113仍使用revision6。
@@ -21,7 +29,7 @@
 | 任务 | 当前主线 | 状态快照（2026-10-15） | 项目入口 |
 |---|---|---|---|
 | 足球 `football` | AgileKickball v4：接球、回传给发球者、恢复站稳 | 正式50000轮已结束，最终 `model_49999.pt` 已核验，独立评估待做 | [足球项目](projects/football/README.md) |
-| 搬箱子 `findbox` | CarryBox v0：深度找箱、双手抬起保持、位姿辅助监督、FindBox AMP | revision8 wall4已正式从头启动，4096环境约4.24秒/轮；未证明收敛 | [搬箱子项目](projects/findbox/README.md) |
+| 搬箱子 `findbox` | CarryBox v0：深度找箱、双手抬起保持、位姿辅助监督、FindBox AMP | wall5已由用户正式从头启动，4096环境核验到第12轮，约4.24秒/轮；未证明收敛 | [搬箱子项目](projects/findbox/README.md) |
 
 搬箱子新增的[walled3/walled4迁移](docs/carrybox/walled/README.md)已完成[运行修复](docs/carrybox/wall4_repair/README.md)，两变体4环境持续短训通过；128环境50＋2轮运行验收曾通过，但正式训练未收敛并已停止；最新[根因与任务设计](docs/carrybox/convergence_20261014/README.md)区分运行稳定性和学习有效性。CarryBox-v0基线仍保留。2026-10-14 12:54按用户新指令[重新启动wall4](docs/carrybox/restart_20261014/README.md)，使用独立新run与日志。
 

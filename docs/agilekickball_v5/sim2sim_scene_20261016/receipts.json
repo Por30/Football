@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "env LIBGL_ALWAYS_SOFTWARE=1 /home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p 'test_kickball*.py' -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "54088826cc775f5337a85d7f626376715997030251596ebd06be9583245a6206",
+      "stdout_sha256": "61c157763c568adc93eb1acae012db877ffa515ff0020d9fd672aaace087c01c",
+      "stderr_sha256": "114f0345c6c61f13b66bc62998a2bec4a05b1e0b8eb112ec89915ecc875dc857",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/umr/bin/python scripts/sim2sim/kickball_mujoco.py --headless --duration 2 --physics-dt 0.005 --depth-output docs/agilekickball_v5/sim2sim_scene_20261016/depth --output docs/agilekickball_v5/sim2sim_scene_20261016/smoke.json",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "ba6127773b99906f7d43767c58517a6f46d3fd5807e4a4dbc95116da60a5c0fe",
+      "stdout_sha256": "b55156759e1e3eee183e03230c3b3e1f5cb5b44d4abb6b3163eb42eeb3feadc1",
+      "stderr_sha256": "8d6176a440c8ba0460a3441c55619a5360c9b151b8711572da2f27b563101920",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

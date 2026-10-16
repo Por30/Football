@@ -1,5 +1,17 @@
 # 项目看板
 
+2026-10-16：[Kickball / CarryBox相机交叉核对](../docs/carrybox/camera_crosscheck_20261016/README.md)：两训练线名义安装匹配官方G1 rev_1_0，但足球v4/v5与wall3–5仍是58°垂直FOV；官方图示55.2°目前仅在足球部分MuJoCo路径应用。v4无自遮挡，v5/wall有现有场景遮挡；实机标定、训练/s2s profile和时序对齐待完成。本次仅审计，未改生产配置或进程。
+
+2026-10-16：[足球s2s官方G1相机对齐](../docs/agilekickball_v5/official_g1_camera_20261016/README.md)完成：官方D435i例程640×480 Z16/60fps、图示55.2°/下俯47.6°，物理tick绝对相位采集，50Hz策略取最新帧。31项检查、2秒100控制步/121采集与独立审计通过，漏采0；旧v5训练profile及checkpoint契约保留，名义K不标实测。
+
+2026-10-16：[足球s2s完整场景深度](../docs/agilekickball_v5/sim2sim_scene_20261016/README.md)完成：默认scene光轴Z、完整机身/地面/环境最近表面，复用v5相机profile与严格契约；28项检查（含GUI、遮挡/动态物体/采集保持）及100步CPU闭环/20帧视频通过。旧v4权重仅作分布变化诊断；实机标定和任务稳定性待验证，未启动训练。
+
+2026-10-16：[wall5早期AMP占比核对](../docs/carrybox/wall5_start_20261016/README.md#amp早期占比核对第5574轮)：第55–74轮AMP占净混合奖励约47.3%，style0.098、D expert/policy loss0.0198/0.0669、有效率100%，量级符合差异文档X2参考；仍以倾倒结束、拾箱成功0，尚不能判断收敛；只读检查，未改参或重启。
+
+2026-10-16 13:49 JST：[wall5正式训练启动核验](../docs/carrybox/wall5_start_20261016/README.md)：用户启动PID2996727，4096环境、40000轮、fresh；已完成第12轮，热身后10轮平均4.244秒、最慢4.36秒。model_0为schema2/revision9/35维AMP/15段数据，策略与D有限且优化器有更新，AMP有效率100%；训练进行中，未证明收敛。
+
+2026-10-16：[新增wall5：X2/G1差异文档的AMP阶段A](../docs/carrybox/wall5_20261016/README.md)。基于wall4 revision8，AMP改为每步上限0.125、35维原始本体特征、D正则化与较低学习率、reset首步参与奖励和更新。PPO/深度/任务几何保持；50项CPU、4环境3＋1轮恢复导出通过。未正式训练或验证收敛/4096耗时；12:35 JST原wall4 PID2660033仍运行。
+
 2026-10-15：[足球快球跌倒诊断](../docs/agilekickball_v4/speed_fall_20261015/README.md)完成：固定场景4/6m/s复现；4m/s无球机器人碰撞仍1.60秒跌倒，单独恢复训练hip-roll上限也未修复。接触前抬腿限幅及踢后支撑恢复失稳已取证；训练速度课程已到6m/s。8项接口检查与CPU诊断通过，不等于策略稳定；未改生产控制器或训练。
 
 2026-10-15 13:10 JST：[G1站立reset排查、接地修复与wall4正式重启](../docs/carrybox/g1_reset_20261015/README.md)：旧model_14000真实横滚超限（1600回合均3步）；另修复G1参考初始化脚底穿地，wall3/wall4共同revision8按实际足部碰撞几何补足5mm间隙。G1相机位姿/身体与障碍遮挡、44项CPU、16环境更新恢复导出、4096验收通过。新wall4 PID2660033，4096环境fresh、核验iteration12，正式热身平均4.238秒/轮、最慢4.33秒；训练进行中，未证明收敛。
@@ -48,7 +60,7 @@
 | FB-003 | 足球 | 固定球速和固定±0.2m目标门的独立评估 | 待开始 | 分开报告回传命中、恢复站稳及失败情况 |
 | CB-001 | [搬箱子](findbox/README.md) | 真实深度拾箱、无特权actor/critic、位姿辅助头 | 完成 | CPU与真实仿真管线通过 |
 | CB-002 | 搬箱子 | FindBox动作数据接入AMP | 完成 | 初次17段接入及PPO/AMP更新、恢复/导出已通过；当前15段修订见CB-016 |
-| CB-003 | 搬箱子 | 正式训练 | revision8运行中 | [G1适配修复后fresh启动](../docs/carrybox/g1_reset_20261015/README.md)，PID2660033、4096环境、iteration12快照，约4.24秒/轮；未证明收敛 |
+| CB-003 | 搬箱子 | 正式训练 | wall5运行中 | [2026-10-16 13:49核验](../docs/carrybox/wall5_start_20261016/README.md)：PID2996727、4096环境、第12轮，热身平均4.244秒/轮；未证明收敛 |
 | CB-011 | 搬箱子 | 不收敛根因诊断与跌倒奖励修复 | 完成 | [历史终止标记跨回合漏罚已修，21项CPU与真实回放通过；新重训见CB-003](../docs/carrybox/convergence_20261014/README.md) |
 | CB-015 | 搬箱子 | G1/X2深度后端与计时核对 | 完成 | [同源码profile分项](../docs/carrybox/depth_timing_20261014/README.md)：本地为RTX，Warp后端未迁移；无新增GPU试验，正式训练继续 |
 | CB-014 | 搬箱子 | 4096完整迭代≤6秒 | 完成 | [Warp动态43几何迁移](../docs/carrybox/warp_20261014/README.md)：RTX差异≤0.164mm，24项CPU/碰撞/完整更新恢复通过；正式热身后均值4.023秒、最慢4.078秒 |
@@ -57,6 +69,7 @@
 | CB-018 | 搬箱子 | wall4分技能失败与AMP/奖励冲突诊断 | 诊断完成；修复见CB-019 | [日志、纯推理、实际USD软限位证据](../docs/carrybox/convergence_20261015/README.md)；未改变正式训练 |
 | CB-019 | 搬箱子 | wall3/wall4共用修复、仅障碍不同 | 实现与短测完成 | [revision7与4096环境正式命令](../docs/carrybox/wall_parity_20261015/README.md)；41项CPU、两任务更新恢复导出通过；未启动新版正式训练、未验证收敛 |
 | CB-020 | 搬箱子 | G1站立reset/相机/构型复核与正式重启 | 实现/验收/启动完成 | [revision8接地适配](../docs/carrybox/g1_reset_20261015/README.md)，旧策略倾倒与脚底穿地分别取证；实机光心标定及独立收敛评估待做 |
+| CB-021 | 搬箱子 | wall5 AMP阶段A对照任务 | 实现/短测完成 | [50项CPU、4环境3＋1轮更新恢复及导出通过](../docs/carrybox/wall5_20261016/README.md)；保留wall4，wall5未正式启动、未验证收敛或4096速度 |
 | CB-004 | 搬箱子 | 独立拾箱成功率评估 | 待开始 | 使用双手接触+离地+持续保持的任务成功判据 |
 | CB-008 | findbox / football | 深度安装与遮挡管线核对 | 完成 | [FindBox三变体RTX遮挡通过；Football解析深度无场景遮挡；实机标定待提供](../docs/carrybox/depth_audit/README.md) |
 | CB-006 | 搬箱子 | G1 FindBox walled3/walled4迁移 | 完成 | [19项CPU、两变体4环境20＋2轮、wall4 128环境50＋2轮及真实碰撞/遮挡通过](../docs/carrybox/wall4_repair/README.md) |

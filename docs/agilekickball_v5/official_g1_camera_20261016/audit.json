@@ -1,0 +1,24 @@
+{
+  "official_profile_checks": "PASS",
+  "sensor": "D435i",
+  "stream": "640x480 Z16 60fps (official example)",
+  "vertical_fov_deg": 55.20000000000001,
+  "mount_pitch_deg": 47.6,
+  "policy_resolution": [
+    48,
+    27
+  ],
+  "policy_hz": 50,
+  "actual_captures": 121,
+  "endpoint": "t=0 and t=2 included",
+  "policy_consumptions": 100,
+  "unique_consumed_frames": 100,
+  "overwritten_before_consumption": 20,
+  "pending_final_frame": 1,
+  "missed_scheduled_frames": 0,
+  "max_physics_quantization_delay_s": 0.0033333333333340764,
+  "max_policy_frame_age_s": 0.010000000000000009,
+  "legacy_profile_unchanged": true,
+  "calibration_status": "nominal_unverified",
+  "intrinsics": "nominal derived K; hardware get_intrinsics() still required"
+}

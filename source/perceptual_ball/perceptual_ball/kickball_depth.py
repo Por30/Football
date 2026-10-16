@@ -10,8 +10,14 @@ from pathlib import Path
 import torch
 
 
-def load_profile(path):
-    profile = json.loads(Path(path).read_text())
+def load_profile(path, *, allow_subpolicy_capture=False):
+    return validate_profile(json.loads(Path(path).read_text()), allow_subpolicy_capture=allow_subpolicy_capture)
+
+
+def validate_profile(profile, *, allow_subpolicy_capture=False):
+    """Validate both a calibration file and a profile embedded in an export."""
+    if not isinstance(profile, dict):
+        raise ValueError('Camera profile must be an object')
     required = {'schema', 'calibration_status', 'parent_link', 'position_m', 'quaternion_wxyz_world',
                 'source_width', 'source_height', 'source_intrinsics', 'crop_xywh', 'width', 'height',
                 'near_m', 'far_m', 'update_period_s', 'depth_unit_m', 'rectified', 'resize', 'invalid',
@@ -44,7 +50,8 @@ def load_profile(path):
     if profile['near_m'] != .1 or profile['far_m'] != 3.:
         raise ValueError('V5 feedback bounds require 0.1-3.0 m')
     ticks = profile['update_period_s']/.02
-    if ticks < 1. or abs(ticks-round(ticks)) > 1.e-6:
+    asynchronous = allow_subpolicy_capture and profile.get('capture_timing') == 'absolute_phase_physics_ticks'
+    if not asynchronous and (ticks < 1. or abs(ticks-round(ticks)) > 1.e-6):
         raise ValueError('Lazy v5 capture requires a multiple of 20 ms; other frame rates need explicit timing support')
     if profile['calibration_status'] == 'calibrated' and not profile.get('calibration_evidence'):
         raise ValueError('Calibrated profile requires calibration_evidence')

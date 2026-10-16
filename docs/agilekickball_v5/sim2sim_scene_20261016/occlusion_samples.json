@@ -1,0 +1,43 @@
+{
+  "shape": [
+    3,
+    27,
+    48
+  ],
+  "camera_calibration": "nominal_unverified",
+  "owner_codes": {
+    "0": "far",
+    "1": "ground",
+    "2": "robot",
+    "3": "ball",
+    "4": "environment"
+  },
+  "pixel_counts": [
+    {
+      "far": 96,
+      "ground": 1195,
+      "robot": 0,
+      "ball": 5,
+      "environment": 0
+    },
+    {
+      "far": 89,
+      "ground": 1041,
+      "robot": 161,
+      "ball": 5,
+      "environment": 0
+    },
+    {
+      "far": 78,
+      "ground": 973,
+      "robot": 0,
+      "ball": 0,
+      "environment": 245
+    }
+  ],
+  "hidden_ball_test": {
+    "actual_robot_occluded_pixels": 161,
+    "max_depth_difference_m": 0.0
+  },
+  "limitation": "Static snapshots, not task success or real-camera calibration evidence"
+}

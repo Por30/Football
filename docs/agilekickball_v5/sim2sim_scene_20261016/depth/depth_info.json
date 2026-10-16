@@ -1,0 +1,26 @@
+{
+  "frames": 20,
+  "video_fps": 10,
+  "video_duration_s": 2.0,
+  "video_size": [
+    1200,
+    700
+  ],
+  "decoded_frames": 20,
+  "raw_shape": [
+    20,
+    8,
+    27,
+    48
+  ],
+  "policy_hz": 50,
+  "history_step_s": 0.02,
+  "sampled_valid_depth_frames": 20,
+  "preview_time_s": 1.2999999999999943,
+  "preview_hit_pixels": 1236,
+  "min_hit_depth_m": 0.32876503467559814,
+  "depth_semantics": "scene optical Z in metres; full visible-surface occlusion; 3m=far/no return",
+  "video": "depth.mp4",
+  "preview": "depth_preview.png",
+  "raw": "depth_raw.npz"
+}

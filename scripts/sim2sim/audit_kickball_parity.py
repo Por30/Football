@@ -187,7 +187,7 @@ def physical_audit(sim):
 
 def rollout(depth_function, duration=10):
     """Paired CPU diagnostic; everything except the depth arithmetic is held fixed."""
-    sim = s2s.KickballSim(physics_dt=.005)
+    sim = s2s.KickballSim(physics_dt=.005,depth_mode='analytic')
     heights, contacts, falls, visible, resets, displacement = [],0,0,0,0,0.
     for _ in range(round(duration/sim.control_dt)):
         flat,_ = sim.observe()
@@ -225,7 +225,7 @@ def rollout(depth_function, duration=10):
 
 
 def audit(output):
-    sim = s2s.KickballSim(physics_dt=.005)
+    sim = s2s.KickballSim(physics_dt=.005,depth_mode='analytic')
     positions,quats,balls = samples()
     reference = training_depth(positions,quats,balls)
     legacy = np.stack([legacy_depth(*sample) for sample in zip(positions,quats,balls)])

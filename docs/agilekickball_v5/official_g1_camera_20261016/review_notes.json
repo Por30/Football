@@ -1,0 +1,10 @@
+{
+  "read_only_expert_review": "PASS",
+  "critical_omissions": [],
+  "statistics": "121 captures = 100 consumed + 20 overwritten + 1 pending, endpoints included",
+  "limitations": [
+    "official example stream is not a statement about every factory service",
+    "K/depth scale/optical centre remain nominal, not per-device calibrated",
+    "existing v5 training profile and export contracts preserved; 60 Hz new profile is s2s-only until training scheduling is extended"
+  ]
+}

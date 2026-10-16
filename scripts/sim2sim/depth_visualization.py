@@ -1,4 +1,4 @@
-"""Render copies of the exact v4 policy depth input, without a GPU renderer."""
+"""Display copies of the exact policy depth input with its actual semantics."""
 import json
 from pathlib import Path
 
@@ -23,8 +23,9 @@ class LiveDepthWindow:
         self.frames = 0
         self.commands = []
         self.cmap = colormaps['turbo_r']
-        tk.Label(self.root,text='LIVE POLICY DEPTH  |  48 x 27  |  ray distance [m]',
-                 font=('Sans',15,'bold'),bg='#f5f7fa').grid(row=0,column=0,columnspan=8,pady=10)
+        self.depth_header = tk.Label(self.root,text='LIVE POLICY DEPTH  |  48 x 27  |  ray distance [m]',
+                                    font=('Sans',15,'bold'),bg='#f5f7fa')
+        self.depth_header.grid(row=0,column=0,columnspan=8,pady=10)
         self.latest = tk.Label(self.root,bg='#dce3eb')
         self.latest.grid(row=1,column=0,columnspan=5,padx=8)
         self.info = tk.Label(self.root,font=('Sans',12),justify='left',bg='#f5f7fa')
@@ -41,8 +42,9 @@ class LiveDepthWindow:
             label = tk.Label(self.root,bg='#dce3eb')
             label.grid(row=5,column=h,padx=3,pady=3)
             self.history.append(label)
-        tk.Label(self.root,text='Grey: no hit (3 m). v4 analytic ball only; no ground/body occlusion.',
-                 bg='#f5f7fa',fg='#765129').grid(row=6,column=0,columnspan=8,pady=10)
+        self.depth_note = tk.Label(self.root,text='Grey: no hit (3 m). v4 analytic ball only; no ground/body occlusion.',
+                                   bg='#f5f7fa',fg='#765129')
+        self.depth_note.grid(row=6,column=0,columnspan=8,pady=10)
         controls = tk.LabelFrame(self.root,text='Ball speed [m/s]',bg='#f5f7fa',padx=10,pady=6)
         controls.grid(row=7,column=0,columnspan=8,sticky='ew',padx=8,pady=(0,10))
         self.speed_slider = tk.Scale(controls,from_=min(.1,speed),to=max(6.,speed),resolution=-1,
@@ -59,6 +61,15 @@ class LiveDepthWindow:
         tk.Label(controls,text='Slider: next serve. Apply now: keep direction. Re-serve: reset ball only.',
                  bg='#f5f7fa').grid(row=2,column=0,columnspan=3,sticky='w')
         self.root.update_idletasks()
+
+    def set_depth_mode(self, mode):
+        if mode not in ('scene', 'analytic'):
+            raise ValueError('Unknown depth display mode')
+        label = 'optical Z [m]' if mode == 'scene' else 'ray distance [m]'
+        detail = ('Scene depth: robot, ball, ground and environment; nearest visible surface.' if mode == 'scene'
+                  else 'v4 analytic ball only; no ground/body occlusion.')
+        self.depth_header.configure(text='LIVE POLICY DEPTH  |  48 x 27  |  '+label)
+        self.depth_note.configure(text='Grey: no return / far (3 m). '+detail)
 
     def _queue_speed(self, action):
         self.commands.append((action,float(self.speed_slider.get())))
@@ -104,7 +115,11 @@ class LiveDepthWindow:
             self.root.destroy()
 
 
-def export_depth_video(directory, samples, fps=10):
+def export_depth_video(directory, samples, fps=10, depth_mode='analytic'):
+    if depth_mode not in ('scene', 'analytic'):
+        raise ValueError('Unknown depth capture mode')
+    scene = depth_mode == 'scene'
+    label = 'optical Z [m]' if scene else 'ray distance [m]'
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
     times = np.asarray([t for t, _ in samples], dtype=np.float64)
@@ -112,7 +127,7 @@ def export_depth_video(directory, samples, fps=10):
     if stacks.ndim != 4 or stacks.shape[1:] != (8, 27, 48) or not np.isfinite(stacks).all():
         raise ValueError('Expected finite [frames,8,27,48] depth samples')
     if not len(times) or np.any(stacks < .1) or np.any(stacks > 3):
-        raise ValueError('Empty or out-of-range v4 depth capture')
+        raise ValueError('Empty or out-of-range depth capture')
     if len(times) > 1 and not np.allclose(np.diff(times), 1/fps, atol=1e-8):
         raise ValueError('Video timestamps do not match requested frame rate')
     np.savez_compressed(directory/'depth_raw.npz', time_s=times, depth_m=stacks)
@@ -126,7 +141,7 @@ def export_depth_video(directory, samples, fps=10):
     canvas = FigureCanvasAgg(fig)
     fig.text(.045,.955,'KICKBALL / POLICY DEPTH',fontsize=20,weight='bold',color='#172b46')
     timestamp = fig.text(.955,.96,'',ha='right',fontsize=14,color='#172b46')
-    fig.text(.045,.918,'Actual network input  |  48 x 27 pixels  |  distance along each ray [m]',
+    fig.text(.045,.918,'Actual network input  |  48 x 27 pixels  |  '+label,
              fontsize=11,color='#52647a')
     cmap = colormaps['turbo_r'].copy()
     cmap.set_bad('#dce3eb')
@@ -138,10 +153,12 @@ def export_depth_video(directory, samples, fps=10):
     ax.set_title('Latest frame',loc='left',fontsize=12)
     cax = fig.add_axes([.635,.36,.016,.46])
     bar = fig.colorbar(image,cax=cax,ticks=[.1,.5,1,1.5,2,2.5,3])
-    bar.set_label('ray distance [m]',fontsize=10)
+    bar.set_label(label,fontsize=10)
     info = fig.text(.745,.79,'',fontsize=13,color='#172b46',linespacing=1.4,va='top')
-    fig.text(.745,.405,'Grey = no ray hit\n(stored value: 3.0 m)',fontsize=11,color='#52647a')
-    fig.text(.745,.30,'v4 analytic sphere depth\nGround / body occlusion absent',fontsize=10,color='#765129')
+    fig.text(.745,.405,'Grey = no return / far\n(stored value: 3.0 m)',fontsize=11,color='#52647a')
+    detail = ('Scene optical depth\nRobot / ground / environment\nNearest visible surface' if scene else
+              'v4 analytic sphere depth\nGround / body occlusion absent')
+    fig.text(.745,.30,detail,fontsize=10,color='#765129')
     fig.text(.045,.245,'8-FRAME INPUT HISTORY  /  oldest to newest, 20 ms per step',fontsize=11,weight='bold',color='#172b46')
     history_images = []
     for h in range(8):
@@ -176,10 +193,13 @@ def export_depth_video(directory, samples, fps=10):
     result = {'frames':len(times),'video_fps':fps,'video_duration_s':len(times)/fps,
               'video_size':list(video_meta['size']),'decoded_frames':decoded_frames,
               'raw_shape':list(stacks.shape),'policy_hz':50,'history_step_s':.02,
-              'sampled_visible_frames':int(np.count_nonzero(counts)),
+              'sampled_valid_depth_frames':int(np.count_nonzero(counts)),
               'preview_time_s':float(times[preview_index]),'preview_hit_pixels':int(counts[preview_index]),
               'min_hit_depth_m':float(nearest.min()) if hits.any() else None,
-              'depth_semantics':'v4 analytic ball-only ray distance in metres; 3m=no hit',
+              'depth_semantics':('scene optical Z in metres; full visible-surface occlusion; 3m=far/no return' if scene else
+                                 'v4 analytic ball-only ray distance in metres; 3m=no hit'),
               'video':'depth.mp4','preview':'depth_preview.png','raw':'depth_raw.npz'}
+    if not scene:
+        result['sampled_visible_frames'] = result['sampled_valid_depth_frames']
     (directory/'depth_info.json').write_text(json.dumps(result,indent=2)+'\n')
     return result

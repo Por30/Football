@@ -5,7 +5,7 @@ import torch
 
 class YawCurriculum:
     def __init__(self, variant):
-        if variant not in ('walled3', 'walled4'):
+        if variant not in ('walled3', 'walled4', 'walled5'):
             raise ValueError(variant)
         self.variant, self.anchor, self.iteration = variant, None, None
 

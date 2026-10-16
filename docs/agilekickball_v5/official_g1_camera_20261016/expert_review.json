@@ -1,0 +1,42 @@
+{
+  "affected_call_path": [
+    "独立官方profile → select_profile → physics tick绝对相位采集 → policy50Hz取最新帧",
+    "mj_step后到期时更新几何采集；官方来源审计"
+  ],
+  "critical_interfaces": [
+    "D435i官方例程640x480 Z16 60fps；get_intrinsics设备读取",
+    "官方图VFOV55.2度、光轴对竖直42.4度；rev1_0 URDF安装",
+    "allow_subpolicy_capture默认False，仅s2s显式True",
+    "640x480完整nearest-exact缩放48x27，fx/fy和主点同步变换"
+  ],
+  "invariants": [
+    "固定physics_dt、50Hz控制、动作/力矩与完整遮挡保持",
+    "旧camera_nominal/v5checkpoint契约和analytic保持",
+    "v5优先源profile且覆盖不一致拒绝",
+    "光轴米制float32，历史20ms滚动"
+  ],
+  "smallest_change_locus": [
+    "新增官方profile和证据",
+    "kickball_depth验证能力参数",
+    "scene_depth绝对相位缓存日志",
+    "kickball_mujoco物理tick采集和统计；原场景测试补充"
+  ],
+  "mandatory_safeguards": [
+    "官方示例/图示参数与名义K/主点/单位假设、项目分辨率/裁剪/历史分开记录，保持nominal_unverified",
+    "URDF安装不是已标定深度光心外参",
+    "采集按t0+n*period绝对相位，禁止上次实际采集时间加period漂移",
+    "采集用第一个不早于计划的physics tick，实际/计划/量化延迟记录，正常延迟不超过physics_dt",
+    "拒绝physics_dt>采集周期；跳时记录缺失帧，不补造或改时间戳",
+    "分开实际采集数、policy消费数、覆盖未消费帧与漏采帧",
+    "policy仅用实际时间<=当前的最新帧并记录帧龄；重复observe不额外采集；reset重设相位而serve保持",
+    "非policy物理tick用积分后几何；验证mj_kinematics与同状态mj_forward射线深度一致",
+    "明确2秒端点是否计入60Hz采集统计",
+    "旧20msprofile/严格契约/v4分布标记/遮挡/物理不变回归保持"
+  ],
+  "minimal_tests": [
+    "env LIBGL_ALWAYS_SOFTWARE=1 /home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p 'test_kickball*.py' -v",
+    "/home/cao/ENTER/envs/umr/bin/python scripts/sim2sim/kickball_mujoco.py --headless --duration 2 --physics-dt 0.005 --depth-output docs/agilekickball_v5/official_g1_camera_20261016/depth --output docs/agilekickball_v5/official_g1_camera_20261016/smoke.json",
+    "/home/cao/ENTER/envs/umr/bin/python docs/agilekickball_v5/official_g1_camera_20261016/audit_official_camera.py"
+  ],
+  "blockers": []
+}

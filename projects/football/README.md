@@ -1,5 +1,11 @@
 # 足球项目 · football
 
+2026-10-16：[与CarryBox交叉核对相机](../../docs/carrybox/camera_crosscheck_20261016/README.md)：v4/v5训练仍为89.16°×58°/50Hz，名义安装匹配G1 rev_1_0；v4仅球体射线距离，v5为含自遮挡的光轴米制。MuJoCo官方参考profile不自动替换训练或v5模型内嵌profile；60Hz官方profile当前不能直接用于50Hz lazy训练。实机内参/光心仍未验证，本次未改生产配置。
+
+2026-10-16：[s2s相机按官方G1文档对齐](../../docs/agilekickball_v5/official_g1_camera_20261016/README.md)：默认独立D435i profile为官方示例640×480 Z16/60fps、官方图示垂直55.2°和rev_1_0安装。60Hz物理tick采集与50Hz策略分开，31项检查/100步闭环/121次采集审计通过；旧camera_nominal及v5训练/模型源契约保留。
+
+2026-10-16：[s2s已默认切换完整场景深度](../../docs/agilekickball_v5/sim2sim_scene_20261016/README.md)：相机对完整机身可见网格、地面、球和模型内所有静动态环境表面求最近交点，输出光轴Z米制；支持v5 profile/导出契约，旧解析模式显式`--depth-mode analytic`保留。28项检查及100控制步/20帧视频通过。当前默认v4权重仍是旧球体深度训练，场景输入会改变分布；未启动v5正式训练，未声称实机标定或稳定迁移完成。
+
 2026-10-15：[足球快球跌倒诊断](../../docs/agilekickball_v4/speed_fall_20261015/README.md)完成：固定场景4/6m/s复现；4m/s无球机器人碰撞仍1.60秒跌倒，单独恢复训练hip-roll上限也未修复。接触前抬腿限幅及踢后支撑恢复失稳已取证；训练速度课程已到6m/s。8项接口检查与CPU诊断通过，不等于策略稳定；未改生产控制器或训练。
 
 2026-10-15：[足球s2s球/深度一致性核对](../../docs/agilekickball_v4/sim2sim_parity_20261015/README.md)完成：球0.43kg/0.11m一致；相机非单位四元数逆变换已修，384姿态命中mask零差异、最大误差0.0166mm，12项检查与两次10秒闭环通过。球阻尼/接触及G1质量、力矩、相机基准仍有差异，未证明接球改善或稳定迁移。
@@ -53,7 +59,8 @@ tail -n 100 logs/rsl_rl/agilekickball_v4/train_20261012.log
 | v4环境和PPO配置 | `tasks/manager_based/perceptual_ball/agilekickball_v4_env_cfg.py` |
 | v4回传奖励和课程 | `tasks/manager_based/perceptual_ball/mdp/agilekickball_v4.py` |
 | 继承的v3网络/环境 | `agilekickball_v3_env_cfg.py`、`rsl_rl_extensions/state_feedback.py` |
-| 深度与任务状态 | `mdp/depth_v3.py`、`mdp/kickball_state.py`及各版本MDP |
+| 训练深度与任务状态 | `mdp/perception.py`（v4）、`mdp/agilekickball_v5.py`、`mdp/kickball_state.py` |
+| MuJoCo场景深度与相机契约 | `scripts/sim2sim/scene_depth.py`、`scripts/sim2sim/kickball_mujoco.py`、`kickball_depth.py`（路径相对仓库/包） |
 | 足球runner与checkpoint | `rsl_rl_extensions/runner.py` |
 | AMP动作参考 | `assets/motions/kick/` |
 

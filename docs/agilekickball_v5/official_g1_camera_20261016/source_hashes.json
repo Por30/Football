@@ -1,0 +1,7 @@
+{
+  "docs/agilekickball_v5/camera_unitree_g1_d435i.json": "2ba4fcb3b92266eff3b522f1e9473523c9f5e9e72a3259e76ec0ba767b5413e5",
+  "scripts/sim2sim/scene_depth.py": "a7d8feab43a548ac36aac58277df18bee91a01f35dc54c77d573624e2bb33cd0",
+  "scripts/sim2sim/kickball_mujoco.py": "3655f41be89c4a13329ce9c27bd336ac6893a3c8c91441851821c36bcb05a534",
+  "source/perceptual_ball/perceptual_ball/kickball_depth.py": "712f72c6501b6faf708145e2fd9c01203d23647f9d004dc9df6a98e5c8801ff9",
+  "tests/test_kickball_scene_depth.py": "febd792d9dc4522b97197ea90e52476ab092bbe9ad9579bfcdb8bb0ecc6cd53e"
+}

@@ -1,5 +1,13 @@
 # 找箱与搬箱子项目 · findbox
 
+2026-10-16：[与Kickball交叉核对相机](../../docs/carrybox/camera_crosscheck_20261016/README.md)：wall3–5名义安装匹配G1 rev_1_0，当前正式wall5仍为89.16°×58°/50Hz/4帧、光轴深度除以3；官方垂直图示55.2°，实机K与光学外参未标定。原CarryBox-v0为48×32、79.61°×58.11°。仅核对，未改训练。
+
+2026-10-16：[wall5早期AMP占比核对](../../docs/carrybox/wall5_start_20261016/README.md#amp早期占比核对第5574轮)：第55–74轮AMP占净混合奖励约47.3%，style0.098、D expert/policy loss0.0198/0.0669、有效率100%，量级符合差异文档X2参考；仍以倾倒结束、拾箱成功0，尚不能判断收敛；只读检查，未改参或重启。
+
+2026-10-16 13:49 JST：[wall5正式训练启动核验](../../docs/carrybox/wall5_start_20261016/README.md)：用户启动PID2996727，4096环境、40000轮、fresh；已完成第12轮，热身后10轮平均4.244秒、最慢4.36秒。model_0为schema2/revision9/35维AMP/15段数据，策略与D有限且优化器有更新，AMP有效率100%；训练进行中，未证明收敛。
+
+2026-10-16：[新增wall5：X2/G1差异文档的AMP阶段A](../../docs/carrybox/wall5_20261016/README.md)。基于wall4 revision8，AMP改为每步上限0.125、35维原始本体特征、D正则化与较低学习率、reset首步参与奖励和更新。PPO/深度/任务几何保持；50项CPU、4环境3＋1轮恢复导出通过。未正式训练或验证收敛/4096耗时；12:35 JST原wall4 PID2660033仍运行。
+
 2026-10-15 13:10 JST：[G1站立reset排查、接地修复与wall4正式重启](../../docs/carrybox/g1_reset_20261015/README.md)：旧model_14000真实横滚超限（1600回合均3步）；另修复G1参考初始化脚底穿地，wall3/wall4共同revision8按实际足部碰撞几何补足5mm间隙。G1相机位姿/身体与障碍遮挡、44项CPU、16环境更新恢复导出、4096验收通过。新wall4 PID2660033，4096环境fresh、核验iteration12，正式热身平均4.238秒/轮、最慢4.33秒；训练进行中，未证明收敛。
 
 2026-10-15：新增[旧wall4模型显式仅权重播放](../../docs/carrybox/play_v6_20261015/README.md)，model_14000在当前revision7环境的4环境命令已提供；实际权重CPU兼容检查通过，未启动GUI或训练。默认严格恢复规则保留。
@@ -54,9 +62,9 @@
 
 ## 当前状态与下一步
 
-2026-10-13检查：深度环境、无特权actor/critic、位姿辅助头和FindBox AMP已经实现；9项CPU测试及4个真实RTX环境的2次PPO/AMP更新、12个timeout、checkpoint恢复和JIT/ONNX导出通过。尚无正式长训run，也未测量拾箱成功率。
+截至2026-10-16 13:49 JST，wall5正式训练PID2996727运行中，4096环境、40000轮、从头初始化，已完成第12轮；热身后10轮平均4.244秒、最慢4.36秒，AMP有效率100%，checkpoint契约与有限值核验通过。[正式启动记录](../../docs/carrybox/wall5_start_20261016/README.md)。此前wall4进程已不在运行，本轮核对时只发现新的wall5训练进程。
 
-当前按用户最新指令使用奖励修复版从头训练；RSI/动作目标范围一致性与基础技能验证仍待处理。旧队列保持停止，新训练独立运行。`docs/carrybox/smoke_model.pt`是验证模型。
+后续监控AMP与分技能寿命/倾倒曲线，独立评估完整地面拾箱流程。P1/P2建议尚未实现；启动成功和当前速度正常不等于收敛。docs下模型仍只作短测工件，正式wall5模型位于对应logs目录。
 
 ## 配置与代码地图
 
@@ -67,6 +75,7 @@
 | 环境、观测、奖励、PPO/AMP参数 | `tasks/manager_based/perceptual_ball/carrybox_env_cfg.py` |
 | 深度、标签、奖励和terminal历史 | `tasks/manager_based/perceptual_ball/mdp/carrybox.py` |
 | wall3/wall4继承配置 | `tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py` |
+| wall5阶段A配置与AMP | `tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py`、`mdp/carrybox_wall5.py`、`carrybox_wall5.py`、`rsl_rl_extensions/carrybox_wall5.py` |
 | wall场景、参考初始化、奖励和深度扰动 | `tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py` |
 | yaw课程、帧/标签配对缓存 | `carrybox_walled.py` |
 | 抬起保持判据 | `tasks/manager_based/perceptual_ball/mdp/carrybox_state.py` |

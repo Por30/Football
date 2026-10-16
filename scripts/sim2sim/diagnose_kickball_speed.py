@@ -22,7 +22,7 @@ def snapshot(sim):
 
 
 def diagnose(speed, directory, mode='policy', duration=20., replay=None):
-    sim = s2s.KickballSim(physics_dt=.005,speed=speed)
+    sim = s2s.KickballSim(physics_dt=.005,speed=speed,depth_mode='analytic')
     m,d = sim.model,sim.data
     if mode == 'training_hip_roll_limit':
         # Diagnostic only: restore the measured training USD capacity in this process.

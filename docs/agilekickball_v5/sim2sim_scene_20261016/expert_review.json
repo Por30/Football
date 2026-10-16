@@ -1,0 +1,44 @@
+{
+  "affected_call_path": [
+    "run → KickballSim契约 → observe → 场景深度 → History → policy",
+    "reset/serve → mj_forward → live几何位姿",
+    "窗口/视频读取同一策略深度；历史审计显式analytic"
+  ],
+  "critical_interfaces": [
+    "v5 world约定+X光轴/+Y左/+Z上，torso link相对wxyz外参，target_intrinsics整数像素中心",
+    "float32[27,48]光轴米制0.1–3；[1,8,27,48]旧到新；不归一化",
+    "独立感知model与live data的geom/mesh/BVH/位姿索引相同",
+    "严格验证完整v5源契约和profile，MuJoCo运行后端单独记录"
+  ],
+  "invariants": [
+    "50Hz控制、本体顺序、29关节、动作/力矩/finite/恢复保持",
+    "不向策略额外输入球真值或分割/可见性",
+    "v4解析数值及非单位四元数重放保留",
+    "不修改live动力学模型",
+    "完整可见机身、球、地面及静动态场景求最近表面"
+  ],
+  "smallest_change_locus": [
+    "scene_depth.py局部封装",
+    "kickball_mujoco.py接入与契约/时序",
+    "depth_visualization.py按实际模式标记",
+    "历史审计显式analytic；新增场景测试"
+  ],
+  "mandatory_safeguards": [
+    "cutoff覆盖far/min(ray_forward)，最终按光轴Z裁剪",
+    "首交点Z<near从near平面重投，保留闭合物体near后的出口",
+    "包含静态几何且不排除torso；仅排机器人重复碰撞代理，不排环境表面",
+    "感知模型仅改geom分组；capture读取mj_forward后最新位姿，验证索引",
+    "profile采集周期为20ms整数倍，期间保持上一帧；history每policy tick滚动；reset清缓存重复首帧；保存采集时序",
+    "v5默认使用导出profile；覆盖不一致/缺失profile/契约字段错误/选择analytic均拒绝",
+    "v4 scene允许诊断但启动和结果标明分布变化；历史审计显式analytic",
+    "scene有效深度不称球可见性；窗口/视频/JSON语义一致",
+    "GUI测试输出临时目录并使用可用显示与软件渲染",
+    "验证离轴Z、near后表面、隐藏球遮挡、静动态物体、姿态、时序/reset、契约拒绝与物理不变",
+    "名义profile未标定，记录MuJoCo实际几何/后端，不声称实机一致或Warp数值等同"
+  ],
+  "minimal_tests": [
+    "env LIBGL_ALWAYS_SOFTWARE=1 /home/cao/ENTER/envs/umr/bin/python -m unittest discover -s tests -p 'test_kickball*.py' -v",
+    "/home/cao/ENTER/envs/umr/bin/python scripts/sim2sim/kickball_mujoco.py --headless --duration 2 --physics-dt 0.005 --depth-output docs/agilekickball_v5/sim2sim_scene_20261016/depth --output docs/agilekickball_v5/sim2sim_scene_20261016/smoke.json"
+  ],
+  "blockers": []
+}

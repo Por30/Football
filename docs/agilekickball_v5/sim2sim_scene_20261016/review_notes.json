@@ -1,0 +1,9 @@
+{
+  "review": "bounded P+L expert read-only followup",
+  "critical_omissions": [],
+  "evidence_limitations": [
+    "v5 inference temporary manifest combines actual validation weights/contract with existing same-G1 joint/action metadata",
+    "nominal camera profile is not hardware calibration",
+    "runtime official MuJoCo geometry differs from training USD and sphere tessellation"
+  ]
+}

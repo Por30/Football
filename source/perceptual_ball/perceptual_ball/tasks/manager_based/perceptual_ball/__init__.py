@@ -145,3 +145,13 @@ for _wall in (3, 4):
             "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_walled_env_cfg:CarryBoxWalled{_wall}PPORunnerCfg",
         },
     )
+
+gym.register(
+    id="Template-Perceptual-Ball-CarryBox-Walled5-v0",
+    entry_point=f"{__name__}.mdp.carrybox_wall5:Wall5CarryBoxEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.carrybox_wall5_env_cfg:CarryBoxWalled5EnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_wall5_env_cfg:CarryBoxWalled5PPORunnerCfg",
+    },
+)

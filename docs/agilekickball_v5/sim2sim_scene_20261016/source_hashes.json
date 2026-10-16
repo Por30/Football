@@ -1,0 +1,11 @@
+{
+  "scripts/sim2sim/kickball_mujoco.py": "6048cc896c1e0e7155b76ddb448e66081138767164e803e218b347ed4d522e53",
+  "scripts/sim2sim/scene_depth.py": "519611c94a076f939100dfea931f1d4a4c6bc1153a070460a8442ad7d795a1e0",
+  "scripts/sim2sim/depth_visualization.py": "7c3f77d5246185a4ae210f0d68643a290de49c94aa12439d2b6bb1f4bc094bc0",
+  "scripts/sim2sim/audit_kickball_parity.py": "6bde37769587fc1a190f97a24aa9031070cb7dcf28fd67f63ad1c6a7bae0cd4b",
+  "scripts/sim2sim/diagnose_kickball_speed.py": "8886027d271bc57499abc6d6a479e93b84dd9471dc3a472cb01a470af76a9b46",
+  "source/perceptual_ball/perceptual_ball/kickball_depth.py": "48b88e50b8a30e7d81f3ccdc8a6ce51050c05d108fe1a6fbb874c30d42dd8be5",
+  "tests/test_kickball_scene_depth.py": "38d3ac836883500d29ca69576795a4ab651391143841c3ddcd2df5cbdfd3a167",
+  "tests/test_kickball_parity.py": "ef56a8dc7a21a9abc0fcd50d3253fb01df33d854ce073f604b67cfe5b2331d2b",
+  "tests/test_kickball_ball_speed.py": "75c33960d8f28b4c5567521a1cfa299f2214122f3da8b3e7cf1ba2dfc8f99cb2"
+}

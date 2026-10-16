@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 import sys
+import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
@@ -74,12 +75,14 @@ class BallSpeed(unittest.TestCase):
 
     def test_real_gui_controls_in_s2s(self):
         windows = []
+        labels = []
 
         def window_factory(speed):
             window = LiveDepthWindow(speed)
             windows.append(window)
 
             def apply():
+                labels.append(window.depth_header.cget('text'))
                 window.speed_slider.set(3.)
                 window.apply_button.invoke()
 
@@ -93,13 +96,14 @@ class BallSpeed(unittest.TestCase):
             window.root.after(1200,window.close)
             return window
 
-        output = s2s.ROOT/'docs/agilekickball_v4/sim2sim_20261014/ball_speed_20261015/gui_smoke.json'
-        args = SimpleNamespace(export_dir=s2s.RUN/'exported',robot_xml=s2s.ROBOT_XML,
-            physics_dt=.005,speed=2.,duration=2.,headless=False,no_depth_window=False,
-            serve_mode='recovery',depth_output=None,output=output)
-        with patch('depth_visualization.LiveDepthWindow',side_effect=window_factory):
-            self.assertEqual(s2s.run(args),0)
-        result = json.loads(output.read_text())
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)/'gui_smoke.json'
+            args = SimpleNamespace(export_dir=s2s.RUN/'exported',robot_xml=s2s.ROBOT_XML,
+                physics_dt=.005,speed=2.,duration=2.,headless=False,no_depth_window=False,
+                serve_mode='recovery',depth_output=None,output=output)
+            with patch('depth_visualization.LiveDepthWindow',side_effect=window_factory):
+                self.assertEqual(s2s.run(args),0)
+            result = json.loads(output.read_text())
         events = result['ball_speed_commands']
         self.assertTrue(any(e['action']=='apply' and e['speed_m_s']==3 for e in events))
         self.assertTrue(any(e['action']=='serve' and e['speed_m_s']==1.5 for e in events))
@@ -107,6 +111,7 @@ class BallSpeed(unittest.TestCase):
         self.assertEqual(result['steps'],100)
         self.assertEqual(result['errors'],[])
         self.assertGreater(result['depth_window_frames'],0)
+        self.assertIn('optical Z', labels[0])
         self.assertTrue(windows[0].closed)
 
 

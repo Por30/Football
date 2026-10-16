@@ -1,0 +1,28 @@
+{
+  "interface_smoke_pass": true,
+  "stable_for_full_duration": false,
+  "steps": 100,
+  "falls": 0,
+  "recovery_timeouts": 0,
+  "depth_mode": "scene",
+  "depth_semantics": "optical_z_metres",
+  "depth_distribution_shift": true,
+  "depth_captures": 100,
+  "depth_hit_pixel_steps": {
+    "robot": 1090,
+    "ground": 115932,
+    "ball": 513,
+    "environment": 0
+  },
+  "errors": [],
+  "test_counts": {
+    "interface": 8,
+    "legacy_parity": 4,
+    "gui_and_ball_speed": 4,
+    "scene_depth": 12,
+    "total": 28
+  },
+  "calibration_status": "nominal_unverified",
+  "scene_visible_geoms": 38,
+  "source_export_metadata_note": "V5 inference test uses actual validation policy and contract plus same-G1 deployment metadata in a temporary manifest; original validation manifest is not a complete deployment export."
+}

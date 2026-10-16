@@ -1,0 +1,383 @@
+{
+  "checked_at": "2026-10-16T15:54:07.193268+09:00",
+  "method": "read-only source/config audit; no simulator or hardware test",
+  "official_sources": {
+    "checked_date_jst": "2026-10-16",
+    "robot_variant": "G1_29dof_rev_1_0",
+    "official_urdf": {
+      "url": "https://raw.githubusercontent.com/unitreerobotics/unitree_ros/5994d4faef0a9cadd3287f8de0199a67eeb2a259/robots/g1_description/g1_29dof_rev_1_0.urdf",
+      "commit": "5994d4faef0a9cadd3287f8de0199a67eeb2a259",
+      "sha256": "c0ae739c640c3e2c00d1bdd8810b5d6e59601487bd1a3995859f9543269ee5c8",
+      "joint": "d435_joint",
+      "parent": "torso_link",
+      "child": "d435_link",
+      "position_m": [
+        0.0576235,
+        0.01753,
+        0.42987
+      ],
+      "rpy_rad": [
+        0.0,
+        0.8307767239493009,
+        0.0
+      ]
+    },
+    "official_routine": {
+      "page_url": "https://support.unitree.com/home/en/G1_developer/depth_camera_instruction",
+      "cdn_url": "https://doc-cdn.unitree.com/11/267/en/11_267_en",
+      "sha256": "8622ba11304a9e18eeafb041154bfb247f31e21d0ac212d96696a6b87fbc614b",
+      "camera_model": "RealSense D435i",
+      "example_depth_width": 640,
+      "example_depth_height": 480,
+      "example_depth_format": "Z16",
+      "example_depth_fps": 60,
+      "intrinsics_source": "rs2::video_stream_profile::get_intrinsics()",
+      "universal_numeric_intrinsics_published": false
+    },
+    "official_fov_diagram": {
+      "page_url": "https://support.unitree.com/home/en/G1_developer/about_G1",
+      "image_url": "https://doc-cdn.unitree.com/static/2024/10/15/ff0591fcc6bc476bab77ebca2f92f198_1715x2363.png",
+      "sha256": "46e4d5f4dd2e5e5294fbd80abab4cf3e101a931ee284771be235fb6c123c7630",
+      "vertical_fov_deg": 55.2,
+      "optical_axis_from_vertical_deg": 42.4
+    },
+    "field_sources": {
+      "mount": "official_rev_1_0_urdf",
+      "sensor_and_stream": "official_routine_example",
+      "vertical_fov": "official_g1_diagram",
+      "focal_length": "nominal_pinhole_derived_from_vertical_fov_and_square_source_pixels",
+      "principal_point": "nominal_image_center",
+      "depth_unit": "nominal_0.001_m_device_scale_must_be_read_at_runtime",
+      "policy_resolution": "project_48x27_full_frame_resize",
+      "near_far": "project_policy_bounds_0.1_3m",
+      "control_hz": "project_50Hz",
+      "capture_timing": "60Hz_absolute_phase_sampled_on_fixed_physics_ticks"
+    },
+    "legacy_profile_sha256": "52c3e187bc4c1901a7b936577f9f3dafffbe4d6088a2e648e0c01355073300c1"
+  },
+  "wall5_saved_camera": {
+    "class_type": "perceptual_ball.carrybox_warp_camera:WarpDepthCamera",
+    "prim_path": "/World/envs/env_.*/Robot/torso_link",
+    "update_period": "0.02",
+    "history_length": "0",
+    "debug_vis": "false",
+    "width": "48",
+    "height": "27",
+    "near": "0.1",
+    "far": "3.0",
+    "focal_length": "18.0",
+    "horizontal_aperture": "35.475779292977215",
+    "vertical_aperture": "19.955125852299684",
+    "object_names": [
+      "Box",
+      "Wall",
+      "Cylinder0",
+      "Cylinder1",
+      "Cylinder2",
+      "Platform"
+    ],
+    "intrinsics": "null",
+    "offset": {
+      "pos": [
+        "0.0576235",
+        "0.01753",
+        "0.42987"
+      ],
+      "rot": [
+        "0.91495",
+        "0.0",
+        "0.40355",
+        "0.0"
+      ],
+      "convention": "world"
+    }
+  },
+  "wall5_hfov_deg": 89.15957277247843,
+  "wall5_vfov_deg": 58.00000000000001,
+  "kickball_v4_saved_observation": {
+    "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.perception:synthetic_ball_depth_image",
+    "params": {
+      "robot_cfg": {
+        "name": "robot",
+        "joint_names": "null",
+        "joint_ids": [
+          "null",
+          "null",
+          "null"
+        ],
+        "fixed_tendon_names": "null",
+        "fixed_tendon_ids": [
+          "null",
+          "null",
+          "null"
+        ],
+        "body_names": "torso_link",
+        "body_ids": [
+          "null",
+          "null",
+          "null"
+        ],
+        "object_collection_names": "null",
+        "object_collection_ids": [
+          "null",
+          "null",
+          "null"
+        ],
+        "preserve_order": "false"
+      },
+      "ball_cfg": {
+        "name": "ball",
+        "joint_names": "null",
+        "joint_ids": [
+          "null",
+          "null",
+          "null"
+        ],
+        "fixed_tendon_names": "null",
+        "fixed_tendon_ids": [
+          "null",
+          "null",
+          "null"
+        ],
+        "body_names": "null",
+        "body_ids": [
+          "null",
+          "null",
+          "null"
+        ],
+        "object_collection_names": "null",
+        "object_collection_ids": [
+          "null",
+          "null",
+          "null"
+        ],
+        "preserve_order": "false"
+      },
+      "width": "48",
+      "height": "27",
+      "near": "0.1",
+      "far": "3.0",
+      "ball_radius": "0.11",
+      "offset_pos": [
+        "0.0576235",
+        "0.01753",
+        "0.42987"
+      ],
+      "offset_quat": [
+        "0.2557",
+        "-0.6593",
+        "0.6593",
+        "-0.2557"
+      ],
+      "vertical_fov_deg": "58.0"
+    },
+    "modifiers": "null",
+    "noise": "null",
+    "clip": "null",
+    "scale": "null",
+    "history_length": "8",
+    "flatten_history_dim": "false"
+  },
+  "kickball_profiles": {
+    "camera_nominal.json": {
+      "profile": {
+        "schema": 1,
+        "calibration_status": "nominal_unverified",
+        "calibration_evidence": null,
+        "parent_link": "torso_link",
+        "position_m": [
+          0.0576235,
+          0.01753,
+          0.42987
+        ],
+        "quaternion_wxyz_world": [
+          0.9149596678498247,
+          0.0,
+          0.40354529635239006,
+          0.0
+        ],
+        "source_width": 48,
+        "source_height": 27,
+        "source_intrinsics": [
+          24.354644696164222,
+          24.354644696164222,
+          23.5,
+          13.0
+        ],
+        "crop_xywh": [
+          0,
+          0,
+          48,
+          27
+        ],
+        "width": 48,
+        "height": 27,
+        "near_m": 0.1,
+        "far_m": 3.0,
+        "update_period_s": 0.02,
+        "depth_unit_m": 0.001,
+        "rectified": true,
+        "distortion": "rectified_before_input",
+        "resize": "nearest_exact",
+        "invalid": "nonfinite_or_nonpositive_to_far",
+        "depth_semantics": "optical_z_metres",
+        "history_length": 8
+      },
+      "nominal_hfov_deg": 89.15957277247843,
+      "nominal_vfov_deg": 58.00000000000001,
+      "target_intrinsics_opencv": [
+        24.354644696164222,
+        24.354644696164222,
+        23.5,
+        13.0
+      ]
+    },
+    "camera_unitree_g1_d435i.json": {
+      "profile": {
+        "schema": 1,
+        "calibration_status": "nominal_unverified",
+        "calibration_evidence": null,
+        "parent_link": "torso_link",
+        "position_m": [
+          0.0576235,
+          0.01753,
+          0.42987
+        ],
+        "quaternion_wxyz_world": [
+          0.9149596678498247,
+          0.0,
+          0.40354529635239006,
+          0.0
+        ],
+        "source_width": 640,
+        "source_height": 480,
+        "source_intrinsics": [
+          459.07765854388475,
+          459.07765854388475,
+          319.5,
+          239.5
+        ],
+        "crop_xywh": [
+          0,
+          0,
+          640,
+          480
+        ],
+        "width": 48,
+        "height": 27,
+        "near_m": 0.1,
+        "far_m": 3.0,
+        "update_period_s": 0.016666666666666666,
+        "depth_unit_m": 0.001,
+        "rectified": true,
+        "distortion": "rectified_before_input",
+        "resize": "nearest_exact",
+        "invalid": "nonfinite_or_nonpositive_to_far",
+        "depth_semantics": "optical_z_metres",
+        "history_length": 8,
+        "source_camera_model": "Intel RealSense D435i",
+        "source_fps": 60,
+        "source_format": "Z16",
+        "capture_timing": "absolute_phase_physics_ticks",
+        "provenance": {
+          "official_configuration": "Unitree G1 Depth Camera Routine example: 640x480 Z16 60fps",
+          "official_fov_diagram_vertical_deg": 55.2,
+          "official_mount": "unitreerobotics/unitree_ros G1_29dof_rev_1_0 d435_joint",
+          "source_intrinsics": "nominal pinhole from official vertical FOV; square source pixels and centred principal point assumed; replace with get_intrinsics()",
+          "depth_unit_m": "nominal 0.001; read device get_depth_scale() for hardware",
+          "policy_preprocessing": "project full-frame nearest-exact resize 640x480 to 48x27; no crop",
+          "sources": "docs/agilekickball_v5/official_g1_camera_20261016/official_sources.json"
+        }
+      },
+      "nominal_hfov_deg": 69.75683616791946,
+      "nominal_vfov_deg": 55.20000000000001,
+      "target_intrinsics_opencv": [
+        34.43082439079136,
+        25.82311829309352,
+        23.5,
+        13.0
+      ]
+    }
+  },
+  "carrybox_v0_previous_runtime_audit": {
+    "status": "PASS",
+    "variant": "baseline",
+    "physics_device": "cuda:0",
+    "scope": "static RTX render / no PPO",
+    "nominal_mount_torso_m": [
+      0.057623498141765594,
+      0.01752999797463417,
+      0.42987000942230225
+    ],
+    "asset_d435_mount_torso_m": [
+      0.05762350186705589,
+      0.017529994249343872,
+      0.42987000942230225
+    ],
+    "attached_pose_follows_root": true,
+    "intrinsics": [
+      [
+        28.799999237060547,
+        0.0,
+        24.0
+      ],
+      [
+        0.0,
+        28.799999237060547,
+        16.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "resolution": [
+      48,
+      32
+    ],
+    "vfov_deg": 58.10920948686925,
+    "hfov_deg": 79.61114367746794,
+    "observation_matches_rendered_depth": true,
+    "optical_z_verified": true,
+    "occlusion": {
+      "wall": {
+        "clear_center_m": 0.8750001192092896,
+        "blocked_center_m": 0.4500000774860382,
+        "hidden_box_removal_max_change_m": 0.0,
+        "restored_max_error_m": 0.0
+      },
+      "cylinder0": {
+        "clear_center_m": 0.8750001192092896,
+        "blocked_center_m": 0.32849597930908203,
+        "hidden_box_removal_max_change_m": 0.0,
+        "restored_max_error_m": 0.0
+      }
+    },
+    "probe_overrides": "one environment; walled RSI/mount noise/depth noise/delay/freeze disabled for deterministic geometry",
+    "hardware_calibration_verified": false
+  },
+  "hardware_calibration_verified": false,
+  "wall_mount_randomization": "random unit direction times 0.01m per reset; not independent uniform +/-0.01m per axis",
+  "source_sha256": {
+    "logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-16_13-45-09_wall5_amp_stage_a/params/env.yaml": "6ccfdbdfc632705c41e974c7773a3e20a9313d71df72d5065c9d5c04f749c510",
+    "logs/rsl_rl/agilekickball_v4/2026-10-12_13-48-41_return_to_sender_20261012_v3init/params/env.yaml": "5365014973375fcf6ea2df9116f27f7f6830e78827e55c45c08ae4328dde9aaa",
+    "docs/agilekickball_v5/camera_nominal.json": "52c3e187bc4c1901a7b936577f9f3dafffbe4d6088a2e648e0c01355073300c1",
+    "docs/agilekickball_v5/camera_unitree_g1_d435i.json": "2ba4fcb3b92266eff3b522f1e9473523c9f5e9e72a3259e76ec0ba767b5413e5",
+    "scripts/sim2sim/scene_depth.py": "a7d8feab43a548ac36aac58277df18bee91a01f35dc54c77d573624e2bb33cd0",
+    "scripts/sim2sim/kickball_mujoco.py": "3655f41be89c4a13329ce9c27bd336ac6893a3c8c91441851821c36bcb05a534",
+    "scripts/rsl_rl/play.py": "453bc99265a4177d4de8913d5dd64f0a8fe5e23b6760f5408c2586f95b3d6b60",
+    "source/perceptual_ball/perceptual_ball/kickball_depth.py": "712f72c6501b6faf708145e2fd9c01203d23647f9d004dc9df6a98e5c8801ff9",
+    "source/perceptual_ball/perceptual_ball/kickball_randomized_camera.py": "3d4c90be418d41a0dbf5822dc6e9c5ff94f9038e32683e11965a2529448c5faf",
+    "source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py": "eb21c6fc9783f7914f7f9668fb223cb6b6627bcc393c2bdfb43c4c0b8116984d",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/agilekickball_v5_env_cfg.py": "8d2dd41d72546d5c8334adaf73a822382bbdea56fe1563a1368f50134d5ded52",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/perceptual_ball_env_cfg.py": "d66db3e0e6b6b9936a8cb7902414dcaed56b4f51c83ec5da6acd309737ada6b0",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_env_cfg.py": "00530b20fd176d33b1b7c65052da02e668ff7b6b5b5e943ba60a356c814d4de0",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "2e91cb79e21860b2bf8481008330553c79fbe4836f895acfad7d989291656f0b",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/perception.py": "aa78a32fc45f04c6a9a681742635d3ed7f1ffa550a47a06b9b2af4ab1304d6e2",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox.py": "1797d679e5fc8b38ca49392752fb0bc1f6960d185734c0c05022eb535434878e",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "0c1786d40d187493bee4bdd2b030977ab0e5e0a187a1c273373531539ce3e52f",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/agilekickball_v5.py": "7825313991b7472d35a620fd8ed4bbd004c834e6d4ccf52958bcb071ff3484cc"
+  }
+}

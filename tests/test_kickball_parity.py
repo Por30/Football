@@ -22,7 +22,7 @@ class TrainingParity(unittest.TestCase):
         self.assertGreater(audit.depth_metrics(reference,legacy)['hit_mask_mismatches'],0)
 
     def test_compiled_ball_parameters_and_unmatched_contacts(self):
-        sim = s2s.KickballSim(physics_dt=.005)
+        sim = s2s.KickballSim(physics_dt=.005,depth_mode='analytic')
         result = audit.physical_audit(sim)
         for key in ('ball_mass_kg','ball_radius_m','policy_dt_s','physics_dt_s'):
             self.assertAlmostEqual(result[key]['training'],result[key]['mujoco'])
@@ -34,13 +34,13 @@ class TrainingParity(unittest.TestCase):
         self.assertEqual(result['mujoco_ball_floor_contact']['dim'],3)
 
     def test_usd_camera_frame_difference_depends_on_waist_pose(self):
-        cases = audit.geometry_audit(s2s.KickballSim())
+        cases = audit.geometry_audit(s2s.KickballSim(depth_mode='analytic'))
         np.testing.assert_allclose(cases[0]['camera_position_difference_m'],[0,0,.01],atol=1.e-8)
         self.assertGreater(abs(cases[1]['camera_position_difference_m'][1]),.005)
         self.assertGreater(sum(c['depth']['hit_mask_mismatches'] for c in cases),0)
 
     def test_observe_depth_history_is_training_frame_order(self):
-        sim = s2s.KickballSim()
+        sim = s2s.KickballSim(depth_mode='analytic')
         frames = []
         for i in range(10):
             sim.data.qpos[sim.bq] = 2-.05*i

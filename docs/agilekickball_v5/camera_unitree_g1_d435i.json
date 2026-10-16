@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "calibration_status": "nominal_unverified",
+  "calibration_evidence": null,
+  "parent_link": "torso_link",
+  "position_m": [
+    0.0576235,
+    0.01753,
+    0.42987
+  ],
+  "quaternion_wxyz_world": [
+    0.9149596678498247,
+    0.0,
+    0.40354529635239006,
+    0.0
+  ],
+  "source_width": 640,
+  "source_height": 480,
+  "source_intrinsics": [
+    459.07765854388475,
+    459.07765854388475,
+    319.5,
+    239.5
+  ],
+  "crop_xywh": [
+    0,
+    0,
+    640,
+    480
+  ],
+  "width": 48,
+  "height": 27,
+  "near_m": 0.1,
+  "far_m": 3.0,
+  "update_period_s": 0.016666666666666666,
+  "depth_unit_m": 0.001,
+  "rectified": true,
+  "distortion": "rectified_before_input",
+  "resize": "nearest_exact",
+  "invalid": "nonfinite_or_nonpositive_to_far",
+  "depth_semantics": "optical_z_metres",
+  "history_length": 8,
+  "source_camera_model": "Intel RealSense D435i",
+  "source_fps": 60,
+  "source_format": "Z16",
+  "capture_timing": "absolute_phase_physics_ticks",
+  "provenance": {
+    "official_configuration": "Unitree G1 Depth Camera Routine example: 640x480 Z16 60fps",
+    "official_fov_diagram_vertical_deg": 55.2,
+    "official_mount": "unitreerobotics/unitree_ros G1_29dof_rev_1_0 d435_joint",
+    "source_intrinsics": "nominal pinhole from official vertical FOV; square source pixels and centred principal point assumed; replace with get_intrinsics()",
+    "depth_unit_m": "nominal 0.001; read device get_depth_scale() for hardware",
+    "policy_preprocessing": "project full-frame nearest-exact resize 640x480 to 48x27; no crop",
+    "sources": "docs/agilekickball_v5/official_g1_camera_20261016/official_sources.json"
+  }
+}

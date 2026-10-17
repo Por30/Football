@@ -1,5 +1,7 @@
 # 项目看板
 
+2026-10-16 21:57 JST：[wall5回合长度诊断](../docs/carrybox/wall5_length_20261016/README.md)：约7396轮、近100轮290步；model7200的16环境四组纯推理显示，有push时采样/均值动作约277/240步，无push约531/546步。全部loco成功0，无push仍经常远离箱子；AMP约占净混合奖励75%，旧普遍3步reset未复现。两条诊断命令通过，未改参或停止/重启正式训练；短测不代表正式成功率。
+
 2026-10-16：[Kickball / CarryBox相机交叉核对](../docs/carrybox/camera_crosscheck_20261016/README.md)：两训练线名义安装匹配官方G1 rev_1_0，但足球v4/v5与wall3–5仍是58°垂直FOV；官方图示55.2°目前仅在足球部分MuJoCo路径应用。v4无自遮挡，v5/wall有现有场景遮挡；实机标定、训练/s2s profile和时序对齐待完成。本次仅审计，未改生产配置或进程。
 
 2026-10-16：[足球s2s官方G1相机对齐](../docs/agilekickball_v5/official_g1_camera_20261016/README.md)完成：官方D435i例程640×480 Z16/60fps、图示55.2°/下俯47.6°，物理tick绝对相位采集，50Hz策略取最新帧。31项检查、2秒100控制步/121采集与独立审计通过，漏采0；旧v5训练profile及checkpoint契约保留，名义K不标实测。

@@ -1,0 +1,27 @@
+{
+  "affected_call_path": [
+    "Wall5 step -> termination/reward -> reset -> interval push -> obs; strict load does not restore curriculum"
+  ],
+  "critical_interfaces": [
+    "Mean episode length last100 completed; Skill means lifetime; termination logs mean per-env last retained label, not completed-episode fraction",
+    "tipped actual root roll/pitch; fell root/head COM; success does not reset"
+  ],
+  "invariants": [
+    "strict schema2/rev9 load; no optimizer calls; unchanged depth/proprio/RSI/physics except diagnostics push/action sampling",
+    "2x2 groups retain depth noise; separate completed and censored"
+  ],
+  "smallest_change_locus": [
+    "docs-only replay wrapping reset and registered interval event after strict load"
+  ],
+  "mandatory_safeguards": [
+    "anchor0 iteration7200; four cases 1200 steps; exclude artificial case resets",
+    "log push after reset against new episode, pre/post velocity; reset diagnostic counters",
+    "nonpaired seeds after RNG divergence; 16env not formal success evidence",
+    "separate raw action clipping and physical-target saturation; actual predicates vs overwritten log labels"
+  ],
+  "minimal_tests": [
+    "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/wall5_length_20261016/analyze.py",
+    "bash docs/carrybox/wall5_length_20261016/replay.sh"
+  ],
+  "blockers": []
+}

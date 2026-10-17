@@ -1,0 +1,502 @@
+{
+  "status": "PASS",
+  "cases": {
+    "sample_push": {
+      "completed": 57,
+      "mean_completed_steps": 277.0877192982456,
+      "timeouts": 1,
+      "actual_tipped": 41,
+      "actual_fell": 16,
+      "completed_successes": 0,
+      "censored_successes": 0,
+      "censored_ages": [
+        384,
+        30,
+        70,
+        92,
+        159,
+        200,
+        980,
+        284,
+        19,
+        318,
+        56,
+        466,
+        144,
+        127,
+        27,
+        50
+      ],
+      "pushes": 158,
+      "total_steps": 19200,
+      "early_ends": 0,
+      "by_skill": {
+        "loco": {
+          "completed": 39,
+          "mean_completed_steps": 341.6666666666667,
+          "median_completed_steps": 195,
+          "ends_before_first_push": 3,
+          "ended_within_10_steps": 0,
+          "tipped": 30,
+          "fell": 9,
+          "timeouts": 1,
+          "successes": 0,
+          "censored_ages": [
+            384,
+            30,
+            70,
+            92,
+            159,
+            200,
+            980,
+            284,
+            318,
+            56,
+            466,
+            127
+          ],
+          "state_samples": 16491,
+          "state_means": {
+            "style": 0.22056832909584045,
+            "near_box": 0.15675216913223267,
+            "both_contact": 0.00018191740673501045,
+            "box_high": 0.0,
+            "hand_error": 2.252833366394043,
+            "distance_xy": 2.1366665363311768,
+            "root_z": 0.7564272880554199,
+            "raw_action_clip": 0.0015661698998883367,
+            "physical_target_clip": 0.04307885840535164
+          }
+        },
+        "pickup": {
+          "completed": 11,
+          "mean_completed_steps": 127.63636363636364,
+          "median_completed_steps": 123,
+          "ends_before_first_push": 5,
+          "ended_within_10_steps": 0,
+          "tipped": 9,
+          "fell": 2,
+          "timeouts": 0,
+          "successes": 0,
+          "censored_ages": [
+            19,
+            144,
+            27,
+            50
+          ],
+          "state_samples": 1644,
+          "state_means": {
+            "style": 0.12540006637573242,
+            "near_box": 0.9531630277633667,
+            "both_contact": 0.24939173460006714,
+            "box_high": 0.30170315504074097,
+            "hand_error": 0.4542026221752167,
+            "distance_xy": 0.47688379883766174,
+            "root_z": 0.6908373236656189,
+            "raw_action_clip": 0.0002936487435363233,
+            "physical_target_clip": 0.02286268025636673
+          }
+        },
+        "hold": {
+          "completed": 7,
+          "mean_completed_steps": 152.14285714285714,
+          "median_completed_steps": 165,
+          "ends_before_first_push": 1,
+          "ended_within_10_steps": 0,
+          "tipped": 2,
+          "fell": 5,
+          "timeouts": 0,
+          "successes": 0,
+          "censored_ages": [],
+          "state_samples": 1065,
+          "state_means": {
+            "style": 0.04486576467752457,
+            "near_box": 1.0,
+            "both_contact": 0.8197183012962341,
+            "box_high": 0.8610328435897827,
+            "hand_error": 0.09251376986503601,
+            "distance_xy": 0.30945658683776855,
+            "root_z": 0.6816760897636414,
+            "raw_action_clip": 0.0036263528745621443,
+            "physical_target_clip": 0.05413593351840973
+          }
+        }
+      }
+    },
+    "sample_no_push": {
+      "completed": 27,
+      "mean_completed_steps": 531.1111111111111,
+      "timeouts": 12,
+      "actual_tipped": 8,
+      "actual_fell": 7,
+      "completed_successes": 0,
+      "censored_successes": 0,
+      "censored_ages": [
+        776,
+        67,
+        200,
+        54,
+        8,
+        200,
+        200,
+        908,
+        200,
+        807,
+        776,
+        200,
+        34,
+        200,
+        30,
+        200
+      ],
+      "pushes": 0,
+      "total_steps": 19200,
+      "early_ends": 0,
+      "by_skill": {
+        "loco": {
+          "completed": 20,
+          "mean_completed_steps": 633.7,
+          "median_completed_steps": 1000.0,
+          "ends_before_first_push": 20,
+          "ended_within_10_steps": 0,
+          "tipped": 5,
+          "fell": 4,
+          "timeouts": 11,
+          "successes": 0,
+          "censored_ages": [
+            776,
+            200,
+            908,
+            776,
+            200,
+            30,
+            200
+          ],
+          "state_samples": 15764,
+          "state_means": {
+            "style": 0.26757869124412537,
+            "near_box": 0.13480080664157867,
+            "both_contact": 0.00012687135313171893,
+            "box_high": 0.0,
+            "hand_error": 6.555126667022705,
+            "distance_xy": 6.471920013427734,
+            "root_z": 0.7543975710868835,
+            "raw_action_clip": 0.0026905247941613197,
+            "physical_target_clip": 0.04106228053569794
+          }
+        },
+        "pickup": {
+          "completed": 4,
+          "mean_completed_steps": 292.75,
+          "median_completed_steps": 68.0,
+          "ends_before_first_push": 4,
+          "ended_within_10_steps": 0,
+          "tipped": 2,
+          "fell": 1,
+          "timeouts": 1,
+          "successes": 0,
+          "censored_ages": [
+            67,
+            200,
+            54,
+            8,
+            200,
+            807,
+            34
+          ],
+          "state_samples": 2541,
+          "state_means": {
+            "style": 0.12847794592380524,
+            "near_box": 0.9976387023925781,
+            "both_contact": 0.13301849365234375,
+            "box_high": 0.162140890955925,
+            "hand_error": 0.4556198716163635,
+            "distance_xy": 0.45580121874809265,
+            "root_z": 0.6638727784156799,
+            "raw_action_clip": 0.0005292512360028923,
+            "physical_target_clip": 0.011399293318390846
+          }
+        },
+        "hold": {
+          "completed": 3,
+          "mean_completed_steps": 165,
+          "median_completed_steps": 166,
+          "ends_before_first_push": 3,
+          "ended_within_10_steps": 0,
+          "tipped": 1,
+          "fell": 2,
+          "timeouts": 0,
+          "successes": 0,
+          "censored_ages": [
+            200,
+            200
+          ],
+          "state_samples": 895,
+          "state_means": {
+            "style": 0.04583657532930374,
+            "near_box": 1.0,
+            "both_contact": 0.7608938813209534,
+            "box_high": 0.8279329538345337,
+            "hand_error": 0.09923947602510452,
+            "distance_xy": 0.30818629264831543,
+            "root_z": 0.6739876866340637,
+            "raw_action_clip": 0.003583122044801712,
+            "physical_target_clip": 0.05332241952419281
+          }
+        }
+      }
+    },
+    "mean_push": {
+      "completed": 64,
+      "mean_completed_steps": 239.96875,
+      "timeouts": 3,
+      "actual_tipped": 39,
+      "actual_fell": 26,
+      "completed_successes": 6,
+      "censored_successes": 0,
+      "censored_ages": [
+        597,
+        82,
+        23,
+        66,
+        60,
+        23,
+        132,
+        328,
+        435,
+        132,
+        116,
+        47,
+        149,
+        310,
+        975,
+        367
+      ],
+      "pushes": 154,
+      "total_steps": 19200,
+      "early_ends": 0,
+      "by_skill": {
+        "loco": {
+          "completed": 36,
+          "mean_completed_steps": 318.3888888888889,
+          "median_completed_steps": 207.0,
+          "ends_before_first_push": 4,
+          "ended_within_10_steps": 0,
+          "tipped": 24,
+          "fell": 11,
+          "timeouts": 3,
+          "successes": 0,
+          "censored_ages": [
+            597,
+            82,
+            23,
+            60,
+            23,
+            132,
+            328,
+            435,
+            132,
+            116,
+            149,
+            310,
+            975
+          ],
+          "state_samples": 14824,
+          "state_means": {
+            "style": 0.4026610255241394,
+            "near_box": 0.12898002564907074,
+            "both_contact": 0.0004047490656375885,
+            "box_high": 0.0,
+            "hand_error": 2.520695686340332,
+            "distance_xy": 2.4063165187835693,
+            "root_z": 0.7558661699295044,
+            "raw_action_clip": 0.002198215341195464,
+            "physical_target_clip": 0.04225170612335205
+          }
+        },
+        "pickup": {
+          "completed": 21,
+          "mean_completed_steps": 120.28571428571429,
+          "median_completed_steps": 105,
+          "ends_before_first_push": 10,
+          "ended_within_10_steps": 0,
+          "tipped": 14,
+          "fell": 9,
+          "timeouts": 0,
+          "successes": 1,
+          "censored_ages": [
+            66,
+            367
+          ],
+          "state_samples": 2959,
+          "state_means": {
+            "style": 0.21562734246253967,
+            "near_box": 0.92396080493927,
+            "both_contact": 0.3791821599006653,
+            "box_high": 0.36093273758888245,
+            "hand_error": 0.43074148893356323,
+            "distance_xy": 0.47049304842948914,
+            "root_z": 0.6914916634559631,
+            "raw_action_clip": 0.0010255088564008474,
+            "physical_target_clip": 0.027222532778978348
+          }
+        },
+        "hold": {
+          "completed": 7,
+          "mean_completed_steps": 195.71428571428572,
+          "median_completed_steps": 192,
+          "ends_before_first_push": 1,
+          "ended_within_10_steps": 0,
+          "tipped": 1,
+          "fell": 6,
+          "timeouts": 0,
+          "successes": 5,
+          "censored_ages": [
+            47
+          ],
+          "state_samples": 1417,
+          "state_means": {
+            "style": 0.06751643866300583,
+            "near_box": 1.0,
+            "both_contact": 0.8856739401817322,
+            "box_high": 0.8447424173355103,
+            "hand_error": 0.09353809058666229,
+            "distance_xy": 0.2946177124977112,
+            "root_z": 0.6716320514678955,
+            "raw_action_clip": 0.0044533200562000275,
+            "physical_target_clip": 0.04913242161273956
+          }
+        }
+      }
+    },
+    "mean_no_push": {
+      "completed": 30,
+      "mean_completed_steps": 545.6333333333333,
+      "timeouts": 14,
+      "actual_tipped": 9,
+      "actual_fell": 8,
+      "completed_successes": 3,
+      "censored_successes": 2,
+      "censored_ages": [
+        37,
+        901,
+        31,
+        626,
+        89,
+        200,
+        58,
+        9,
+        200,
+        140,
+        69,
+        200,
+        3,
+        66,
+        2,
+        200
+      ],
+      "pushes": 0,
+      "total_steps": 19200,
+      "early_ends": 0,
+      "by_skill": {
+        "loco": {
+          "completed": 22,
+          "mean_completed_steps": 651.8181818181819,
+          "median_completed_steps": 1000.0,
+          "ends_before_first_push": 22,
+          "ended_within_10_steps": 0,
+          "tipped": 5,
+          "fell": 5,
+          "timeouts": 13,
+          "successes": 0,
+          "censored_ages": [
+            37,
+            626,
+            89,
+            58,
+            140,
+            66,
+            2,
+            200
+          ],
+          "state_samples": 15558,
+          "state_means": {
+            "style": 0.47889798879623413,
+            "near_box": 0.13067232072353363,
+            "both_contact": 0.00019282684661448002,
+            "box_high": 0.0,
+            "hand_error": 6.437361717224121,
+            "distance_xy": 6.342711925506592,
+            "root_z": 0.752508282661438,
+            "raw_action_clip": 0.0034708231687545776,
+            "physical_target_clip": 0.03828787803649902
+          }
+        },
+        "pickup": {
+          "completed": 5,
+          "mean_completed_steps": 263.4,
+          "median_completed_steps": 81,
+          "ends_before_first_push": 5,
+          "ended_within_10_steps": 0,
+          "tipped": 3,
+          "fell": 1,
+          "timeouts": 1,
+          "successes": 0,
+          "censored_ages": [
+            901,
+            31,
+            200,
+            9,
+            3
+          ],
+          "state_samples": 2461,
+          "state_means": {
+            "style": 0.4215288758277893,
+            "near_box": 1.0,
+            "both_contact": 0.08939455449581146,
+            "box_high": 0.07882974296808243,
+            "hand_error": 0.5210244655609131,
+            "distance_xy": 0.48376768827438354,
+            "root_z": 0.652283251285553,
+            "raw_action_clip": 0.00039232725976035,
+            "physical_target_clip": 0.007790509145706892
+          }
+        },
+        "hold": {
+          "completed": 3,
+          "mean_completed_steps": 237.33333333333334,
+          "median_completed_steps": 216,
+          "ends_before_first_push": 3,
+          "ended_within_10_steps": 0,
+          "tipped": 1,
+          "fell": 2,
+          "timeouts": 0,
+          "successes": 3,
+          "censored_ages": [
+            200,
+            69,
+            200
+          ],
+          "state_samples": 1181,
+          "state_means": {
+            "style": 0.06384475529193878,
+            "near_box": 1.0,
+            "both_contact": 0.9534292817115784,
+            "box_high": 0.9051651358604431,
+            "hand_error": 0.07570184767246246,
+            "distance_xy": 0.2948444187641144,
+            "root_z": 0.6988064050674438,
+            "raw_action_clip": 0.004438088741153479,
+            "physical_target_clip": 0.04414666071534157
+          }
+        }
+      }
+    }
+  },
+  "production_source_unchanged": true,
+  "training_pid": 2996727,
+  "formal_training_modified": false,
+  "post_replay_checked_at": "2026-10-16T21:57:42.872691",
+  "latest_log_iteration": 7396,
+  "latest_100_log_episode_mean": 290.0049
+}

@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-16T21:51:25.255752",
+  "hashes": {
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "2e91cb79e21860b2bf8481008330553c79fbe4836f895acfad7d989291656f0b",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox.py": "1797d679e5fc8b38ca49392752fb0bc1f6960d185734c0c05022eb535434878e",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "0c1786d40d187493bee4bdd2b030977ab0e5e0a187a1c273373531539ce3e52f",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "dbcd48b2d851aef3d1bd6d6e8812af75425e1dc1fb261cf23ae2c60ff71dbff6",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "8dc506b3a7ac73e14e6654d6396614b0cb318772fec40c0ca05dee054b149626",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_state.py": "e48d3d2706673cbb94dfda8a3a445697d6e6e89b700915288ec2a6057253580f",
+    "source/perceptual_ball/perceptual_ball/carrybox_wall5.py": "b673e644b86a4989ff0ebc409a8e3889654ad8cb836b3cc1ad396e5ab13e546e",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py": "cf7c101cbb375c2d5a5393a4e3652f8e5091375131911c3e4df9f6690ffdc8e3",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py": "0f87737be95301ad0f1f2574df5b3cfab9690071dbef911934a4775f5d6f6cc5"
+  }
+}

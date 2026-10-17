@@ -1,0 +1,28 @@
+{
+  "agent": "/root/wall5_episode_audit",
+  "review": "PASS",
+  "findings": [
+    "四组done数、实际终止OR计数、censored、success、步数守恒、无push事件及策略参数不变均一致",
+    "无新增阻碍；不需修代码或重跑",
+    "同样19200步内跌倒或倾倒56→15、61→16；支持当前模型push敏感",
+    "只去动作采样未改善整体寿命；确定性动作改善部分hold表现",
+    "四组loco成功均0；RSI成功不能视为完整找箱拾取",
+    "未完成回合和非配对随机数序列限制精确效果外推；AMP奖励占比不是梯度贡献"
+  ],
+  "metadata_correction": {
+    "confirmed_by_expert": true,
+    "original_contract_sha256": "dd1819dd4f8ebff4a427c94bcbe762cc9206360ab180569f445f50213c279873",
+    "corrected_contract_sha256": "ead77ad437a93bceb511704e5850b7272a413ea4f145ad505281d9493544e53c",
+    "original_minimal_tests": [
+      "assert finite values, yaw7.2, full push scale before cases",
+      "completed count equals done count; sum completed lengths plus censored ages equals19200 each case",
+      "record initial states/reset samples/push count and raw episodes"
+    ],
+    "original_blockers": [
+      "no direct termination-count bug found; logs alone do not isolate causal factors"
+    ],
+    "executed_commands_unchanged": true,
+    "reason": "brief将断言清单映射回原冻结的两条可执行命令；诊断边界不充当阻碍",
+    "original_task": "task_pre_metadata_correction.md"
+  }
+}

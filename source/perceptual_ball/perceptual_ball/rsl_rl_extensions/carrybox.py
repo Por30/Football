@@ -89,11 +89,13 @@ class CarryBoxPPO(PPO):
     Kept explicit because installed RSL-RL 3.0.1 has no auxiliary-loss hook. Unsupported
     augmentation/distributed options fail loudly rather than silently misaligning labels.
     """
+    supported_schedules = ('fixed',)
+
     def __init__(self, policy, *args, pose_aux_coef=.5, amp_coef=0., amp_reward_scale=2.,
                  amp_lr=1.e-4, amp_data_dir=DEFAULT_DATASET_PATH, control_dt=.02, **kwargs):
         super().__init__(policy, *args, **kwargs)
-        if self.rnd or self.symmetry or self.is_multi_gpu or self.schedule != 'fixed':
-            raise ValueError('CarryBox supports single-device fixed-schedule PPO without RND/symmetry augmentation')
+        if self.rnd or self.symmetry or self.is_multi_gpu or self.schedule not in self.supported_schedules:
+            raise ValueError('Unsupported CarryBox schedule or RND/symmetry/distributed training')
         self.pose_aux_coef = pose_aux_coef
         if not 0. <= amp_coef <= 1. or amp_reward_scale <= 0. or control_dt <= 0.:
             raise ValueError('Invalid AMP reward coefficient or control timestep')
@@ -171,16 +173,26 @@ class CarryBoxPPO(PPO):
             rewards[ids] += self.gamma * values * timeouts[ids].to(self.device)
         super().process_env_step(obs, rewards, dones, extras)
 
+    def _pose_loss(self, prediction, target):
+        return box_pose_loss(prediction, target)
+
+    def _adapt_learning_rate(self, old_mu, old_sigma):
+        pass  # wall3/4 keep their fixed schedule
+
+    def _training_outputs(self, obs):
+        self.policy.act(obs)
+        return self.policy.evaluate(obs), self.policy.predict_box_pose(obs)
+
     def update(self):
         totals = dict(value_function=0., surrogate=0., entropy=0., box_position=0., box_rotation=0.)
         count = 0
         for batch in self.storage.mini_batch_generator(self.num_mini_batches, self.num_learning_epochs):
-            obs, actions, old_values, advantages, returns, old_logp, *_ = batch
+            obs, actions, old_values, advantages, returns, old_logp, old_mu, old_sigma, *_ = batch
             if self.normalize_advantage_per_mini_batch:
                 advantages = (advantages - advantages.mean()) / (advantages.std() + 1.e-8)
-            self.policy.act(obs)
+            values, pose_prediction = self._training_outputs(obs)
+            self._adapt_learning_rate(old_mu, old_sigma)
             logp = self.policy.get_actions_log_prob(actions)
-            values = self.policy.evaluate(obs)
             ratio = (logp - old_logp.squeeze(-1)).exp()
             adv = advantages.squeeze(-1)
             surrogate = torch.maximum(-adv * ratio, -adv * ratio.clamp(1-self.clip_param, 1+self.clip_param)).mean()
@@ -190,7 +202,7 @@ class CarryBoxPPO(PPO):
                 value_loss = torch.maximum(value_loss, (clipped - returns).square())
             value_loss = value_loss.mean()
             entropy = self.policy.entropy.mean()
-            position, rotation = box_pose_loss(self.policy.predict_box_pose(obs), obs['box_pose_target'])
+            position, rotation = self._pose_loss(pose_prediction, obs['box_pose_target'])
             loss = surrogate + self.value_loss_coef * value_loss - self.entropy_coef * entropy
             loss = loss + self.pose_aux_coef * (position + rotation)
             if not torch.isfinite(loss):

@@ -13,7 +13,7 @@ from isaaclab.sensors import SensorBase, SensorBaseCfg, CameraData, TiledCameraC
 from isaaclab.utils import configclass
 from isaaclab.utils.math import quat_apply, quat_apply_inverse, quat_mul, quat_conjugate
 from isaaclab.utils.math import convert_camera_frame_orientation_convention as convert
-from .carrybox_raycast import optical_depth
+from .carrybox_raycast import optical_depth, optical_depth_with_hits
 
 
 def visual_mesh(stage, root_path):
@@ -126,6 +126,9 @@ class WarpDepthCamera(SensorBase):
         self._data.image_shape = self.image_shape
         self._depth = torch.full((self._num_envs, self.cfg.width*self.cfg.height), self.cfg.far, device=self.device)
         self._data.output = {'distance_to_image_plane': self._depth.view(self._num_envs, *self.image_shape, 1)}
+        if self.cfg.output_mesh_hits:
+            self._hits = torch.full(self._depth.shape, -1, device=self.device, dtype=torch.int32)
+            self._data.output['mesh_id'] = self._hits.view(self._num_envs, *self.image_shape, 1)
         fx = self.cfg.focal_length * self.cfg.width / self.cfg.horizontal_aperture
         fy = self.cfg.focal_length * self.cfg.height / self.cfg.vertical_aperture
         cx, cy = self.cfg.width/2, self.cfg.height/2
@@ -154,10 +157,14 @@ class WarpDepthCamera(SensorBase):
         camera = torch.cat((self._data.pos_w, self._data.quat_w_world[:, [1, 2, 3, 0]]), -1).contiguous()
         poses = torch.stack([view if isinstance(view, torch.Tensor) else view.get_transforms() for view in self._views], 1).contiguous()
         with wp.ScopedStream(wp.stream_from_torch(torch.cuda.current_stream(self.device))):
-            wp.launch(optical_depth, dim=(len(env_ids), self.cfg.width*self.cfg.height), inputs=[
-                wp.from_torch(env_ids.to(torch.int32)), wp.from_torch(camera, dtype=wp.transform),
+            inputs = [wp.from_torch(env_ids.to(torch.int32)), wp.from_torch(camera, dtype=wp.transform),
                 wp.from_torch(self._rays, dtype=wp.vec3), self._mesh_ids, wp.from_torch(poses, dtype=wp.transform),
-                self.cfg.near, self.cfg.far, wp.from_torch(self._depth)], device=self.device)
+                self.cfg.near, self.cfg.far, wp.from_torch(self._depth)]
+            kernel = optical_depth
+            if self.cfg.output_mesh_hits:
+                kernel = optical_depth_with_hits
+                inputs.append(wp.from_torch(self._hits))
+            wp.launch(kernel, dim=(len(env_ids), self.cfg.width*self.cfg.height), inputs=inputs, device=self.device)
 
     def set_mount_poses(self, positions, orientations, env_ids):
         self._offset_pos[env_ids] = positions
@@ -189,5 +196,6 @@ class WarpDepthCameraCfg(SensorBaseCfg):
     horizontal_aperture: float = 35.477
     vertical_aperture: float = 19.956
     object_names: tuple[str, ...] = ('Box', 'Wall', 'Cylinder0', 'Cylinder1', 'Cylinder2', 'Platform')
+    output_mesh_hits: bool = False  # auxiliary labels only; never policy input
     intrinsics: tuple[float, float, float, float] | None = None
     offset: TiledCameraCfg.OffsetCfg = TiledCameraCfg.OffsetCfg()

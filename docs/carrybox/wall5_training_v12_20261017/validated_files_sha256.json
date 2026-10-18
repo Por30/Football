@@ -1,0 +1,20 @@
+{
+  "AGENTS.md": "1fce67eba40e3ffda9321a672a57332633ba329c351af1e6ff33125d47d47f19",
+  "projects/README.md": "045ffe386fb97d318713c8b29ee5191077ed1efaf13dc1bda95638a38d720d70",
+  "projects/findbox/README.md": "fedff0b9809a25f9d5dc0dafa35d95dbe3d54fe3ac8bc236345d2391e0cd4506",
+  "source/perceptual_ball/perceptual_ball/carrybox_wall5.py": "52f0c1e491204e5b27db95925aac90f91eace493d4f63f242b100025b714c9ce",
+  "source/perceptual_ball/perceptual_ball/carrybox_raycast.py": "694ca58c162aebf078ae922020b6a9b80e5dbabe72865d0178a4020645e83421",
+  "source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py": "6ae09ebfc08972392db6b1a22867812ed24758de669ac6b7898d3755cfe9e6fb",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py": "fa549d5abac91791163375c2c5e51f8a87d32180e080d64aa505492918864ef0",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py": "34f2d0ed1cffa8af63d467f696370897c5e20af29d68c310bdfdb7f6f982c03d",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "b7c157b01f453346ec5698b477666a222299115023bf63242d65e9d7468dc21a",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "4b6fdb83d62c50ff4664e5c920058d554848abe9c3f079235a1e410dff6d5bf0",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "7cfe2088b89a8af597dfa681458678b4d862f8c68a836dd65916c4f5e44ee0db",
+  "tests/test_carrybox_wall5.py": "55f4bae47227422e3846578b99e6800f493d182412c0744076884abc790b7897",
+  "tests/test_carrybox_ground.py": "50b50a165ff08d7bd5a72c265f75cf512f3e38bbbe715e7b8c262b12b67d41df",
+  "tests/test_carrybox_raycast.py": "731bc812b843cfd2ad207f784d98afb4497dac88b059cd1866f86c93373c385f",
+  "tests/test_carrybox_training_v12.py": "37be89138a3ac69fb7186124e77e7ca35c679074f7c9e214f6a6d13359693b79",
+  "docs/carrybox/wall5_training_v12_20261017/check.sh": "36f32b63bbca818d5d316b94e72d3dc2ba16e99a1b2cfecd3efd985106ed0884",
+  "docs/carrybox/wall5_training_v12_20261017/smoke.sh": "ce5c6bba52ff007f83e717c28b7ae5468ab6433374650eb0a42ca21cc99a342d",
+  "docs/carrybox/wall5_training_v12_20261017/smoke.py": "29ee75fa77b43b71fd665714248bd2c02f85978aab92af51a3d20c10ecd8b6b5"
+}

@@ -1,0 +1,680 @@
+{
+  "status": "PASS",
+  "old_shapes_authored": 30,
+  "new_shapes_authored": 35,
+  "physical_links_covered": 35,
+  "added": [
+    "pelvis",
+    "waist_yaw_link",
+    "waist_roll_link",
+    "head_link",
+    "left_wrist_yaw_link",
+    "right_wrist_yaw_link",
+    "logo_link"
+  ],
+  "replaced": [
+    "left_knee_link",
+    "right_knee_link",
+    "left_shoulder_pitch_link",
+    "right_shoulder_pitch_link",
+    "left_shoulder_roll_link",
+    "right_shoulder_roll_link"
+  ],
+  "preserved": 22,
+  "coverage": "Every physical visual vertex equals a final convex-hull input vertex",
+  "visual_geometry_unchanged": true,
+  "mass_inertia_joints_unchanged": true,
+  "self_collisions": false,
+  "geometry_free_links": [
+    "imu_in_pelvis",
+    "d435_link",
+    "imu_in_torso",
+    "left_palm_link",
+    "mid360_link",
+    "right_palm_link",
+    "temp_link",
+    "d455_link"
+  ],
+  "excluded_visual_marker": "pelvis_contact_link",
+  "links": [
+    {
+      "link": "pelvis",
+      "visual_vertices": 63648,
+      "collision": "/Robot/pelvis/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.04875030368566513,
+          -0.06445247679948807,
+          -0.1474500149488449
+        ],
+        [
+          0.048750508576631546,
+          0.06445247679948807,
+          0.0025000046007335186
+        ]
+      ],
+      "visual_digest": "1022cd6e60ffb7713f8148719475c1680551b7654a130a8803c41466c826e3c8"
+    },
+    {
+      "link": "left_hip_pitch_link",
+      "visual_vertices": 10896,
+      "collision": "/Robot/left_hip_pitch_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.04231603071093559,
+          1.752833850288127e-10,
+          -0.08004375547170639
+        ],
+        [
+          0.04024069383740425,
+          0.09881081432104111,
+          0.03712092339992523
+        ]
+      ],
+      "visual_digest": "16426ba8286d6d55e71aaf13208e21783519f5b32688f42f7368f98720c97a3c"
+    },
+    {
+      "link": "left_hip_roll_link",
+      "visual_vertices": 11526,
+      "collision": "/Robot/left_hip_roll_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.026318851858377457,
+          -0.04911654815077782,
+          -0.12412407994270325
+        ],
+        [
+          0.08016039431095123,
+          0.048774201422929764,
+          0.046484772115945816
+        ]
+      ],
+      "visual_digest": "3c8b34126d66807c096f36a8df9bd5840a5325ae0ee00bda3a3737fe5c8efcb6"
+    },
+    {
+      "link": "left_hip_yaw_link",
+      "visual_vertices": 17772,
+      "collision": "/Robot/left_hip_yaw_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.1272493153810501,
+          -0.045383282005786896,
+          -0.22623078525066376
+        ],
+        [
+          0.05238468199968338,
+          0.0432993583381176,
+          7.070005914044941e-09
+        ]
+      ],
+      "visual_digest": "0c702bf989d4839297de0d148b7769b8a61e73146b65c72a452038638afa4762"
+    },
+    {
+      "link": "left_knee_link",
+      "visual_vertices": 51288,
+      "collision": "/Robot/left_knee_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.03989659249782562,
+          -0.03588641807436943,
+          -0.3150727450847626
+        ],
+        [
+          0.06391961872577667,
+          0.03581269457936287,
+          0.04004927724599838
+        ]
+      ],
+      "visual_digest": "d0fb5359182fc0d60bf954d24447a848be161ec123f2909c9e178410fd70005c"
+    },
+    {
+      "link": "left_ankle_pitch_link",
+      "visual_vertices": 4266,
+      "collision": "/Robot/left_ankle_pitch_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.02449999935925007,
+          -0.006442185025662184,
+          -0.02455790899693966
+        ],
+        [
+          0.01150001771748066,
+          0.006557829678058624,
+          0.012889973819255829
+        ]
+      ],
+      "visual_digest": "84e052b3c72ddefbf136724c8298a8424025f83a76a650bb0fb1b2123e2b5024"
+    },
+    {
+      "link": "left_ankle_roll_link",
+      "visual_vertices": 39198,
+      "collision": "/Robot/left_ankle_roll_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.06584136933088303,
+          -0.03774179145693779,
+          -0.035409145057201385
+        ],
+        [
+          0.14236535131931305,
+          0.03784090280532837,
+          0.023583902046084404
+        ]
+      ],
+      "visual_digest": "f460c1b829d230a25e3df388d860bef5cbfe99c2989a8d9b0ee30ae53eded1af"
+    },
+    {
+      "link": "pelvis_contour_link",
+      "visual_vertices": 108306,
+      "collision": "/Robot/pelvis_contour_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.058128051459789276,
+          -0.06776073575019836,
+          -0.15200547873973846
+        ],
+        [
+          0.061431244015693665,
+          0.0677763894200325,
+          -0.02776389941573143
+        ]
+      ],
+      "visual_digest": "52b0f8cd56e253d31570cbcef61da38bfdab5b217580347693f8a9e14fd1fe4c"
+    },
+    {
+      "link": "right_hip_pitch_link",
+      "visual_vertices": 10872,
+      "collision": "/Robot/right_hip_pitch_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.04231603071093559,
+          -0.09881081432104111,
+          -0.08004375547170639
+        ],
+        [
+          0.04024069383740425,
+          -1.752833850288127e-10,
+          0.03712008520960808
+        ]
+      ],
+      "visual_digest": "77cbee941fd6d7f24fe9c0e3d318f408aa654b37cc4f64ae7ed893e42bd21e78"
+    },
+    {
+      "link": "right_hip_roll_link",
+      "visual_vertices": 11556,
+      "collision": "/Robot/right_hip_roll_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.026318851858377457,
+          -0.048774201422929764,
+          -0.12412407994270325
+        ],
+        [
+          0.08016039431095123,
+          0.04911654815077782,
+          0.046484772115945816
+        ]
+      ],
+      "visual_digest": "e1c9af298277b62db1f3e9159bb5ef5d943886595e6881baca3df9151265beee"
+    },
+    {
+      "link": "right_hip_yaw_link",
+      "visual_vertices": 17772,
+      "collision": "/Robot/right_hip_yaw_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.1272493153810501,
+          -0.0432993583381176,
+          -0.22623078525066376
+        ],
+        [
+          0.05238468199968338,
+          0.045383282005786896,
+          7.070005914044941e-09
+        ]
+      ],
+      "visual_digest": "77d46c1999e80c8fcf443751965b675803cefea576716d27e08631f179d50a7a"
+    },
+    {
+      "link": "right_knee_link",
+      "visual_vertices": 51132,
+      "collision": "/Robot/right_knee_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.03989659249782562,
+          -0.035813167691230774,
+          -0.3150727450847626
+        ],
+        [
+          0.06391961872577667,
+          0.03588281199336052,
+          0.04004927724599838
+        ]
+      ],
+      "visual_digest": "eaa13a7d8c58f82c6d79688680c6252bc6e6e183da3f7626e23944e9cab3e286"
+    },
+    {
+      "link": "right_ankle_pitch_link",
+      "visual_vertices": 4266,
+      "collision": "/Robot/right_ankle_pitch_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.02449999935925007,
+          -0.006557829678058624,
+          -0.02455790899693966
+        ],
+        [
+          0.01150001771748066,
+          0.006442185025662184,
+          0.012889973819255829
+        ]
+      ],
+      "visual_digest": "9de0e9cbb886954e305b9b8bbe049f4c9e76e4e82dcccea087047fb4e0d8686b"
+    },
+    {
+      "link": "right_ankle_roll_link",
+      "visual_vertices": 39222,
+      "collision": "/Robot/right_ankle_roll_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.06584136933088303,
+          -0.03784090280532837,
+          -0.035409145057201385
+        ],
+        [
+          0.14236535131931305,
+          0.03774179145693779,
+          0.023583902046084404
+        ]
+      ],
+      "visual_digest": "77c54d444152a4519890ee6172e1f2fc7aafa2534396a0be2aeeec45b0c093d0"
+    },
+    {
+      "link": "waist_yaw_link",
+      "visual_vertices": 37194,
+      "collision": "/Robot/waist_yaw_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.042499881237745285,
+          -0.04246886819601059,
+          -0.00020057815709151328
+        ],
+        [
+          0.0423685759305954,
+          0.04246227815747261,
+          0.053999822586774826
+        ]
+      ],
+      "visual_digest": "1c3148f195d0729c798d3c2e3233864fa76ad39c3f5503192fd552d70d78f8ac"
+    },
+    {
+      "link": "waist_roll_link",
+      "visual_vertices": 5148,
+      "collision": "/Robot/waist_roll_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.01700076274573803,
+          -0.01000189408659935,
+          -0.011993408203125
+        ],
+        [
+          0.01700076274573803,
+          0.010001895017921925,
+          0.011993393301963806
+        ]
+      ],
+      "visual_digest": "9c77218363f6193fe9be3f03f6bc0c8bd824b4f02682fd4a1d80e6e4cc6a0dda"
+    },
+    {
+      "link": "torso_link",
+      "visual_vertices": 154230,
+      "collision": "/Robot/torso_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.06664276123046875,
+          -0.10771311819553375,
+          -0.008908695541322231
+        ],
+        [
+          0.08362708240747452,
+          0.10771439224481583,
+          0.31161943078041077
+        ]
+      ],
+      "visual_digest": "6c329168e318e83de6306d3187d3b7a8af001be961291a3a6b357d3388e95981"
+    },
+    {
+      "link": "head_link",
+      "visual_vertices": 55962,
+      "collision": "/Robot/head_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.06635621935129166,
+          -0.07777460664510727,
+          0.3247958719730377
+        ],
+        [
+          0.07398402690887451,
+          0.07781664282083511,
+          0.5305725932121277
+        ]
+      ],
+      "visual_digest": "685eafc700fba095c03983a099e31b1c86d47fac18557bb6b862c3bb593704e0"
+    },
+    {
+      "link": "left_shoulder_pitch_link",
+      "visual_vertices": 10602,
+      "collision": "/Robot/left_shoulder_pitch_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.03101241402328015,
+          -7.454270949559344e-09,
+          -0.050329867750406265
+        ],
+        [
+          0.031035970896482475,
+          0.07449751347303393,
+          0.040049511939287186
+        ]
+      ],
+      "visual_digest": "3cab69c4b7ba98c6554403fce5097c72d4bd7c530ec08014581d838c9358af67"
+    },
+    {
+      "link": "left_shoulder_roll_link",
+      "visual_vertices": 24012,
+      "collision": "/Robot/left_shoulder_roll_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.040152646601200104,
+          -0.03291530907154083,
+          -0.10319999605417252
+        ],
+        [
+          0.04103577136993408,
+          0.03994247317314148,
+          0.03342677280306816
+        ]
+      ],
+      "visual_digest": "bc3f2357ac6dd0b399d6a688de4b71baf87f7da3684f6f4664903eb28a9992db"
+    },
+    {
+      "link": "left_shoulder_yaw_link",
+      "visual_vertices": 14946,
+      "collision": "/Robot/left_shoulder_yaw_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.032810695469379425,
+          -0.04141250625252724,
+          -0.11369692534208298
+        ],
+        [
+          0.048374809324741364,
+          0.03310637176036835,
+          0.031574152410030365
+        ]
+      ],
+      "visual_digest": "b0f8f8d95a0c2c9d35a2954c8ef4d9c6f7fba0ded29d056b772d5cb4afc1acba"
+    },
+    {
+      "link": "left_elbow_link",
+      "visual_vertices": 5322,
+      "collision": "/Robot/left_elbow_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.029775112867355347,
+          -0.03125531226396561,
+          -0.04543027654290199
+        ],
+        [
+          0.10000001639127731,
+          0.03477716073393822,
+          0.029775114730000496
+        ]
+      ],
+      "visual_digest": "0040b0250c191b6e6ce9e0a6719da650c909cb48d4b595169ced31ccce1e0799"
+    },
+    {
+      "link": "left_wrist_roll_link",
+      "visual_vertices": 21366,
+      "collision": "/Robot/left_wrist_roll_link/collisions",
+      "bounds_link_m": [
+        [
+          -4.373005372393509e-15,
+          -0.030494267120957375,
+          -0.02999999187886715
+        ],
+        [
+          0.05599305406212807,
+          0.029999999329447746,
+          0.02999999187886715
+        ]
+      ],
+      "visual_digest": "bcd53dd116f111f77743f44ca82dde4d44e7d44ba677c28e61a29f392fa1e35c"
+    },
+    {
+      "link": "left_wrist_pitch_link",
+      "visual_vertices": 5154,
+      "collision": "/Robot/left_wrist_pitch_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.02850000001490116,
+          -0.028490660712122917,
+          -0.028490660712122917
+        ],
+        [
+          0.07450000196695328,
+          0.028490660712122917,
+          0.028490660712122917
+        ]
+      ],
+      "visual_digest": "92bb0918dc0da7167d154b4a2d8c3d333f549941562a7783ea1d05dfed0408c2"
+    },
+    {
+      "link": "left_wrist_yaw_link",
+      "visual_vertices": 19116,
+      "collision": "/Robot/left_wrist_yaw_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.0179926548153162,
+          -0.023864509537816048,
+          -0.030494192615151405
+        ],
+        [
+          0.04150019958615303,
+          0.030000001192092896,
+          0.029999999329447746
+        ]
+      ],
+      "visual_digest": "99125785290deaa67e9ef458e081ce89573de6d6765027a9fece745a1566fe9a"
+    },
+    {
+      "link": "left_rubber_hand",
+      "visual_vertices": 137244,
+      "collision": "/Robot/left_rubber_hand/collisions",
+      "bounds_link_m": [
+        [
+          -2.780881303010574e-08,
+          -0.0479060634970665,
+          -0.043028898537158966
+        ],
+        [
+          0.13182935118675232,
+          0.018651477992534637,
+          0.06344989687204361
+        ]
+      ],
+      "visual_digest": "40445d8f1063cc8e7cd6336882b40182f274eac915c5c05e57772e2429a0fc7c"
+    },
+    {
+      "link": "logo_link",
+      "visual_vertices": 14598,
+      "collision": "/Robot/logo_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.07257411628961563,
+          -0.07450834661722183,
+          0.2569787800312042
+        ],
+        [
+          0.07682295143604279,
+          0.07480008900165558,
+          0.28617292642593384
+        ]
+      ],
+      "visual_digest": "5b3a4784083dbe0cc27940874caed3fbec3bbd4d726bf3ddc17ce63763ffdf5e"
+    },
+    {
+      "link": "right_shoulder_pitch_link",
+      "visual_vertices": 10602,
+      "collision": "/Robot/right_shoulder_pitch_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.03101241402328015,
+          -0.07449751347303393,
+          -0.05032986775040632
+        ],
+        [
+          0.031035970896482475,
+          7.454257626883048e-09,
+          0.04004951193928713
+        ]
+      ],
+      "visual_digest": "f62ed0ab06020598c1af1d146f71ecc396ca12b5ddaa6da384dc61d077189073"
+    },
+    {
+      "link": "right_shoulder_roll_link",
+      "visual_vertices": 24108,
+      "collision": "/Robot/right_shoulder_roll_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.04015251621603966,
+          -0.03994247317314148,
+          -0.10319999605417252
+        ],
+        [
+          0.04103577136993408,
+          0.03291530907154083,
+          0.03342677280306816
+        ]
+      ],
+      "visual_digest": "b5b2a9367ec7fef024a946293fc3730bb94d6cb0a567d91b7803f775248cc393"
+    },
+    {
+      "link": "right_shoulder_yaw_link",
+      "visual_vertices": 14994,
+      "collision": "/Robot/right_shoulder_yaw_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.032810695469379425,
+          -0.03310637176036835,
+          -0.11369692534208298
+        ],
+        [
+          0.048374809324741364,
+          0.04141250625252724,
+          0.031574152410030365
+        ]
+      ],
+      "visual_digest": "70ca825fb507183df33870bce9a91dda6365c185e8792f608d84fedc6aeafdce"
+    },
+    {
+      "link": "right_elbow_link",
+      "visual_vertices": 5322,
+      "collision": "/Robot/right_elbow_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.029775112867355347,
+          -0.03477716073393822,
+          -0.04543027654290199
+        ],
+        [
+          0.10000001639127731,
+          0.03125531226396561,
+          0.029775114730000496
+        ]
+      ],
+      "visual_digest": "e306a7b2f3f62aa6746455cb65eb4d62746c499255eaa05ed7c941b88f5b3100"
+    },
+    {
+      "link": "right_wrist_roll_link",
+      "visual_vertices": 21360,
+      "collision": "/Robot/right_wrist_roll_link/collisions",
+      "bounds_link_m": [
+        [
+          -4.373005372393509e-15,
+          -0.029999999329447746,
+          -0.02999999187886715
+        ],
+        [
+          0.05599305406212807,
+          0.030494267120957375,
+          0.02999999187886715
+        ]
+      ],
+      "visual_digest": "0c6d4999f81a2b7f7eaa3e7109184fe1498f14264609ae40bfc8bf7e1ce4cb24"
+    },
+    {
+      "link": "right_wrist_pitch_link",
+      "visual_vertices": 4770,
+      "collision": "/Robot/right_wrist_pitch_link/collisions",
+      "bounds_link_m": [
+        [
+          -0.02850000187754631,
+          -0.028490660712122917,
+          -0.028490660712122917
+        ],
+        [
+          0.07450000196695328,
+          0.028490660712122917,
+          0.028490660712122917
+        ]
+      ],
+      "visual_digest": "af070c2551daaa1bc163993bbe0f71791483b6e71e4023cc027e8b6ade70b26c"
+    },
+    {
+      "link": "right_wrist_yaw_link",
+      "visual_vertices": 20484,
+      "collision": "/Robot/right_wrist_yaw_link/full_body_collisions",
+      "bounds_link_m": [
+        [
+          -0.0179926548153162,
+          -0.029999999329447746,
+          -0.030494192615151405
+        ],
+        [
+          0.04150019958615303,
+          0.023864509537816048,
+          0.029999999329447746
+        ]
+      ],
+      "visual_digest": "d6673f0cfd684081646962ce78eabe04702c8cf8e7f3ebd01c728f496862955c"
+    },
+    {
+      "link": "right_rubber_hand",
+      "visual_vertices": 131556,
+      "collision": "/Robot/right_rubber_hand/collisions",
+      "bounds_link_m": [
+        [
+          -2.8722640266209964e-08,
+          -0.018651476129889488,
+          -0.043028924614191055
+        ],
+        [
+          0.13182809948921204,
+          0.0479060634970665,
+          0.06344989687204361
+        ]
+      ],
+      "visual_digest": "f4007e18817f19e1ea318d7594b060e015210e37aeb473f77b364506f0159609"
+    }
+  ],
+  "protected_source_sha256": {
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/g1_29dof.usd": "3d758783f76d86afdfd5df6e951a1d521dcebba8fd27120f181cfee588aca132",
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_base.usd": "fb6897abaa287dc547e36ab73c3c955432195200d71948b697968c45ab3222c7",
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_physics.usd": "c4f83d17273ae97b1d4c71feb399bd6cb9c8ba6f607dd64ecb62ae3b6fcd5a52",
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_sensor.usd": "173c9feba7fd9fbafa38f4cefa03859a6f89d6fe6e82ef4a1f464940db95a3a9",
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof.py": "fce7c3aef21f8d848f5333e81b0446676a02aa1552eb1e8ba144ccd7f14072d5",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608"
+  },
+  "visualization": "Authored convex-hull preview at USD reference pose; PhysX may simplify during cooking"
+}

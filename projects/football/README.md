@@ -1,5 +1,7 @@
 # 足球项目 · football
 
+2026-10-17：[v5默认关闭Kp/Kd随机化与深度噪声](../../docs/agilekickball_v5/no_randomization_20261017/README.md)，固定名义增益、输出无噪声场景深度；回传任务、自遮挡、奖励与网络保持。旧带扰动模型需显式恢复原开关。本次仅修改配置及CPU验证，未启动或重启训练。22:35 JST只读复查原PID3429618已退出，无train/play进程；已存在v5正式run `2026-10-17_12-22-23`，下方“未正式训练”属历史快照。
+
 2026-10-16：[与CarryBox交叉核对相机](../../docs/carrybox/camera_crosscheck_20261016/README.md)：v4/v5训练仍为89.16°×58°/50Hz，名义安装匹配G1 rev_1_0；v4仅球体射线距离，v5为含自遮挡的光轴米制。MuJoCo官方参考profile不自动替换训练或v5模型内嵌profile；60Hz官方profile当前不能直接用于50Hz lazy训练。实机内参/光心仍未验证，本次未改生产配置。
 
 2026-10-16：[s2s相机按官方G1文档对齐](../../docs/agilekickball_v5/official_g1_camera_20261016/README.md)：默认独立D435i profile为官方示例640×480 Z16/60fps、官方图示垂直55.2°和rev_1_0安装。60Hz物理tick采集与50Hz策略分开，31项检查/100步闭环/121次采集审计通过；旧camera_nominal及v5训练/模型源契约保留。

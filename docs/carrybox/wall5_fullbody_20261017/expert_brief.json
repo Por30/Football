@@ -1,0 +1,36 @@
+{
+  "affected_call_path": [
+    "wall5専属spawn -> spawn_walled_robot -> USD -> PhysX/contact sensors",
+    "Warp visual_mesh visibility/purpose filtering",
+    "Wall5 checkpoint_contract -> strict load/warm_start"
+  ],
+  "critical_interfaces": [
+    "35 physical visible mesh links; 7 missing colliders + 6 undersized shoulder/knee colliders",
+    "Collision API is on parent Xform; include instance proxies",
+    "Head mesh offset z0.325–0.531m must be preserved"
+  ],
+  "invariants": [
+    "No shared USD/football/wall3/4 changes; preserve DOF,mass,COM,inertia,camera,depth/proprio/AMP interfaces",
+    "Self collision remains false unless user explicitly requests otherwise"
+  ],
+  "smallest_change_locus": [
+    "wall5 spawn + isolated full-body geometry helper",
+    "wall5 checkpoint migration revision10/profile; legacy only explicit weights-only",
+    "PNG and standalone interactive HTML generated from resulting collision definitions"
+  ],
+  "mandatory_safeguards": [
+    "New colliders invisible/proxy/convexHull; per-link visible mesh vertex/face digest unchanged",
+    "All physical visual vertices must be contained in final local collider convex hull",
+    "Disable replaced old shapes; feet geometry and reset support unchanged; source USD hash unchanged",
+    "Small PhysX smoke checks body/joint counts,mass/inertia,new head/knee/wrist contacts and finite states/depth",
+    "If self collision is requested, extend validation to adjacent/fixed filtering and RSI overlap/impulses before claiming support",
+    "No formal train start/stop/restart; inspect processes/resources before smoke",
+    "Internal references target same-link visuals only; set API on instance root, never edit instance proxies",
+    "Visualizations show authored hull previews, not a claim of identical PhysX cooked vertices"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall5_fullbody_20261017/check_geometry.sh",
+    "bash docs/carrybox/wall5_fullbody_20261017/smoke.sh"
+  ],
+  "blockers": []
+}

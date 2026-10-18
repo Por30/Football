@@ -1,5 +1,7 @@
 # Perceptual Ball：FindBox 与 Football
 
+2026-10-17：按用户要求，[kickball v5默认关闭Kp/Kd随机化与深度噪声](docs/agilekickball_v5/no_randomization_20261017/README.md)，保留场景光轴深度及自遮挡；旧带扰动checkpoint恢复需显式保持原开关。本次未启动或重启训练。
+
 2026-10-16：[Kickball s2s按官方G1资料对齐相机](docs/agilekickball_v5/official_g1_camera_20261016/README.md)：D435i、官方示例640×480 Z16/60fps、官方图示55.2°垂直视场与rev_1_0安装，策略保持50Hz。31项检查、100步闭环和121次采集时序审计通过；内参仍是名义推导，旧模型/训练契约保留。
 
 2026-10-16：Kickball MuJoCo s2s已默认使用[完整场景光轴深度](docs/agilekickball_v5/sim2sim_scene_20261016/README.md)，包含机身可见网格、球、地面及其他静动态物体遮挡。28项检查及100步闭环/深度视频通过；默认v4权重有输入分布变化，未验证任务稳定性或实机标定。

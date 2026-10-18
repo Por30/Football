@@ -1,0 +1,9 @@
+{
+  "source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py": "6ae09ebfc08972392db6b1a22867812ed24758de669ac6b7898d3755cfe9e6fb",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "aad20d0034daf1f4925a2a61f3e2b6af37e46abac21e0e43ec08427c66f097c6",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "d4312a1b26b983fc6e623ab84f9975887e38f19085fdc6479d65e3f3407724c7",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/modules.py": "ff99f6c18276bb75279ac01071152bde44c72947fb8dd615b6a7c71dd3bd580b",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/algorithm.py": "8c70d27a1d7b6de647d5f6d52b9571b9e2082bddaafe040e1bc06aa5a37690a0",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/runner.py": "7be4d3cdc235ec35b6951c0c8e55c3fa5a1f4df12b4dd2aa622d901c426ae691",
+  "source/perceptual_ball/perceptual_ball/assets/motions/findbox/ground_pickup/amp_manifest.json": "7ffeea2804bb48f440039fb67666d17513ae26a367fe21b075605ab5810a8153"
+}

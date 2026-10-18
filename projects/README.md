@@ -1,5 +1,25 @@
 # 项目看板
 
+2026-10-18 13:16 JST：[wall5改为从零正式训练](../docs/carrybox/wall5_fresh_20261018/README.md)：按用户明确要求停止恢复运行PID3810947，新PID3812053，4096环境、40000轮、fresh，无resume/warm-start。首checkpoint优化器step20与Normalizer count61440确认全新初始化；检查迭代11→14，最近10轮平均3.801秒、最慢3.830秒。保留性能优化/revision13/RSI80-0-20；旧产物保留，训练进行中，未证明收敛。
+
+2026-10-18 13:08 JST：[wall5性能优化与正式恢复](../docs/carrybox/wall5_perf_20261018/README.md)：RSI合并写入、AMP批量native插值及同批CNN复用，4096同配置平均7.254→3.870秒/轮；31项CPU与4096完整更新/部分reset/恢复通过。新PID3810947，正式最近10轮平均3.902秒、最慢3.940秒，检查迭代12→15。保持revision13/RSI80-0-20/全部遮挡与学习配置，从原正式model0恢复；旧70轮中未落盘部分无法恢复。训练进行中，未证明收敛。
+
+2026-10-18 12:33 JST：[wall5 revision13正式启动核验](../docs/carrybox/wall5_start_20261018/README.md)：用户启动PID3804340，4096环境、fresh；实测迭代8→10，model_0契约/参数/优化器正常，RSI80/0/20及60维AMP已生效。第1–10轮平均7.001秒、最慢7.21秒，未达到6秒目标；仍在训练初期，未证明收敛。只读检查，未操作训练。
+
+2026-10-17：[kickball v5默认关闭Kp/Kd随机化与深度噪声](../docs/agilekickball_v5/no_randomization_20261017/README.md)：复用固定增益和clean-depth路径，保留场景自遮挡及任务学习参数；旧带扰动checkpoint需显式保留原开关。本次未启动或重启训练；22:35 JST只读复查原v5 PID3429618已退出，无train/play进程。
+
+2026-10-17：[wall5 RSI改为80/0/20](../docs/carrybox/wall5_hold_rsi_20261017/README.md)：按用户要求20%改为hold，pickup为0；loco箱子仍贴地，hold保留参考手边箱高。revision13，14项CPU和4环境reset短测通过；未启动/重启训练，未验证持箱稳定性。
+
+2026-10-17：[wall5 revision12训练端修订](../docs/carrybox/wall5_training_v12_20261017/README.md)：60维任务AMP＋running normalization、可见范围pose监督coef0.1、KL自适应PPO/std1/entropy0.01/5 epochs/MLP512-256-256、roll0.8＋一次性失败罚、reset80/20/0；同步修正RSI连杆速度语义。保留13段数据、0–31地面起点、全身碰撞和无特权actor/critic。38项CPU及4环境2＋1轮更新/恢复/导出通过；未正式训练或证明收敛，旧网络不兼容需fresh。
+
+2026-10-17：[wall5地面拾箱数据与全贴地reset](../docs/carrybox/wall5_ground_20261017/README.md)完成：独立ground_pickup profile保留13段（完整地面pickup03，排除高位01/02），原15段不变。reset70/30/0，箱底离地5mm、移除平台；全身碰撞验证后pickup仅采0–31帧。27项CPU、4环境全部32帧物理检查、PPO/AMP 2＋1轮及恢复通过，revision11；未启动正式训练或证明收敛。
+
+2026-10-17 12:49 JST：[wall5拾取失败与reset核对](../docs/carrybox/wall5_pickup_reset_20261017/README.md)：旧revision9日志止于20786轮，近100轮约556步，loco累计成功0；AMP占净混合奖励约91.7%，稳定抓握奖励近零。核对了60/30/10参考初始化、pickup支撑台与地面起点差异、28.65°横滚终止及成功不reset。当前无CarryBox训练进程，revision10全身碰撞尚未正式训练；CPU只读审计通过，未改参或重启。
+
+2026-10-17：[wall5全身碰撞与结构可视化](../docs/carrybox/wall5_fullbody_20261017/README.md)完成：新增7处、替换肩/小腿6处，35个实体连杆全覆盖；PhysX实测shape30→35，13处接触探针、质量/惯量/深度不变及4环境回放/新契约恢复通过。可交互HTML与四视图PNG已保存。wall5升revision10，旧revision9仅显式weights-only迁移；自碰撞仍关闭，未启动正式训练或验证收敛。
+
+2026-10-17：[wall5 G1碰撞体核对](../docs/carrybox/wall5_collision_20261017/README.md)：离线USD＋原生成函数确认28个带碰撞link、26个凸包Mesh＋4个膝部Cube；双手为凸包、头部无独立碰撞体。物理自碰撞关闭，Warp视觉自遮挡保留。仅审计，未改资产/配置/训练。
+
 2026-10-16 21:57 JST：[wall5回合长度诊断](../docs/carrybox/wall5_length_20261016/README.md)：约7396轮、近100轮290步；model7200的16环境四组纯推理显示，有push时采样/均值动作约277/240步，无push约531/546步。全部loco成功0，无push仍经常远离箱子；AMP约占净混合奖励75%，旧普遍3步reset未复现。两条诊断命令通过，未改参或停止/重启正式训练；短测不代表正式成功率。
 
 2026-10-16：[Kickball / CarryBox相机交叉核对](../docs/carrybox/camera_crosscheck_20261016/README.md)：两训练线名义安装匹配官方G1 rev_1_0，但足球v4/v5与wall3–5仍是58°垂直FOV；官方图示55.2°目前仅在足球部分MuJoCo路径应用。v4无自遮挡，v5/wall有现有场景遮挡；实机标定、训练/s2s profile和时序对齐待完成。本次仅审计，未改生产配置或进程。
@@ -57,8 +77,8 @@
 |---|---|---|---|---|
 | FB-001 | [足球](football/README.md) | v4回传任务实现与工程验证 | 完成 | 已有状态回归、真实仿真及4096环境短训记录 |
 | FB-002 | 足球 | v4正式训练至50000次迭代 | 完成 | 最终model_49999.pt、日志49999/50000及进程退出已核验；独立评估待做 |
-| FB-004 | 足球 | v5场景光轴深度与机器人自遮挡 | 仿真通过；实机待标定 | [继承v4回传/AMP，独立ID和深度契约](../docs/agilekickball_v5/README.md)；4环境更新/恢复/导出、18组遮挡对照通过，未正式训练 |
-| FB-007 | 足球 | v5 Kp/Kd与深度训练随机化 | 完成 | [默认开启、CPU/4环境增益同步与噪声时序/PPO恢复导出通过](../docs/agilekickball_v5/randomization/README.md)；未正式训练，范围非实机标定 |
+| FB-004 | 足球 | v5场景光轴深度与机器人自遮挡 | 仿真通过；实机待标定 | [继承v4回传/AMP，独立ID和深度契约](../docs/agilekickball_v5/README.md)；历史4环境更新/恢复/导出、18组遮挡对照通过；10月17日已有正式run，22:35复查进程已退出，未证明训练完成或收敛 |
+| FB-007 | 足球 | v5 Kp/Kd与深度训练随机化 | 已按要求默认关闭 | [10月17日关闭记录](../docs/agilekickball_v5/no_randomization_20261017/README.md)；保留显式开关兼容旧模型，历史随机化短测保留，新默认配方未启动训练 |
 | FB-003 | 足球 | 固定球速和固定±0.2m目标门的独立评估 | 待开始 | 分开报告回传命中、恢复站稳及失败情况 |
 | CB-001 | [搬箱子](findbox/README.md) | 真实深度拾箱、无特权actor/critic、位姿辅助头 | 完成 | CPU与真实仿真管线通过 |
 | CB-002 | 搬箱子 | FindBox动作数据接入AMP | 完成 | 初次17段接入及PPO/AMP更新、恢复/导出已通过；当前15段修订见CB-016 |

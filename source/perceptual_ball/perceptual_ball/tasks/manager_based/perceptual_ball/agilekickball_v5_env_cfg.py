@@ -19,10 +19,10 @@ DEFAULT_PROFILE = str(Path(__file__).resolve().parents[6]/'docs/agilekickball_v5
 class AgileKickballV5EnvCfg(AgileKickballV4EnvCfg):
     camera_profile_path: str = DEFAULT_PROFILE
     camera_profile: dict = {}
-    randomize_gains: bool = True
+    randomize_gains: bool = False
     kp_scale_range: tuple[float, float] = (0.9, 1.1)
     kd_scale_range: tuple[float, float] = (0.9, 1.1)
-    randomize_depth: bool = True
+    randomize_depth: bool = False
     depth_randomization: dict = copy.deepcopy(DEFAULT_DEPTH_RANDOMIZATION)
 
     def __post_init__(self):

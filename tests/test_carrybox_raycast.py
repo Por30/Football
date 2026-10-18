@@ -45,21 +45,27 @@ class RaycastTests(unittest.TestCase):
         camera = np.zeros((2, 7), dtype=np.float32); camera[:, 6] = 1.
         poses = np.zeros((2, 3, 7), dtype=np.float32); poses[:, :, 6] = 1.
         poses[:, :, 0] = [.05, 2., 2.5]  # First surface before near, second nearest valid.
-        def run():
+        def run(with_hits=False):
             depth = wp.array(np.full((2, 2), -1., dtype=np.float32), device='cpu')
-            wp.launch(module.optical_depth, dim=(1, 2), inputs=[
+            hits=wp.array(np.full((2,2),-9,dtype=np.int32),device='cpu')
+            wp.launch(module.optical_depth_with_hits if with_hits else module.optical_depth, dim=(1, 2), inputs=[
                 wp.array([1], dtype=wp.int32, device='cpu'), wp.array(camera, dtype=wp.transform, device='cpu'),
                 wp.array(directions, dtype=wp.vec3, device='cpu'),
                 wp.array([mesh.id]*3, dtype=wp.uint64, device='cpu'),
-                wp.array(poses, dtype=wp.transform, device='cpu'), .1, 3., depth], device='cpu')
+                wp.array(poses, dtype=wp.transform, device='cpu'), .1, 3., depth]+([hits] if with_hits else []), device='cpu')
             result = depth.numpy()
             np.testing.assert_array_equal(result[0], [-1., -1.])
-            return result[1]
+            return (result[1],hits.numpy()) if with_hits else result[1]
         np.testing.assert_allclose(run(), [2., 2.], atol=1e-5)
+        z,ids=run(True)
+        np.testing.assert_allclose(z,run(),atol=0)
+        np.testing.assert_array_equal(ids, [[-9,-9],[1,1]])
         poses[1, 2, 0] = 1.2  # A moving blocker becomes the nearest surface.
         np.testing.assert_allclose(run(), [1.2, 1.2], atol=1e-5)
+        np.testing.assert_array_equal(run(True)[1][1],[2,2])
         poses[1, :, 0] = [.05, 3.5, 4.]
         np.testing.assert_allclose(run(), [3., 3.], atol=1e-5)
+        np.testing.assert_array_equal(run(True)[1][1],[-1,-1])
 
 
 if __name__ == '__main__':

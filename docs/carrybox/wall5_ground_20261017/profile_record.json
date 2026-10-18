@@ -1,0 +1,56 @@
+{
+  "profile": "source/perceptual_ball/perceptual_ball/assets/motions/findbox/ground_pickup",
+  "interpretation": "Complete pickup from ground, with lift frames retained; disclosed assumption, not explicit user confirmation",
+  "original_files_retained": true,
+  "protected_sha256": {
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/amp_manifest.json": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/filename_mapping.json": "a3602aebed835cdd7bd2f0e80567095a9e54acac125b4fa7db8aa60ba67f762c",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/hold/hold_box_01.pt": "ac0e873274b3425925b218ccbd682e59590210363754c39bc78092231be273e8",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_left_045.pt": "dfdf2fe9bf0014327477bed39cd08f5526b6e4e4092613ae463d15fa47524fcb",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_left_135.pt": "f399edac6517b511d277aed64026d1169eb724281f9e386a27d4a162f6021374",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_right_090.pt": "d643da4f4971ab3d78ba272d14a1761ef80e54cb429070bf3a1cc92b85366a33",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_right_045.pt": "9aa45b671abcd29d5d092c6caf0b38367e861b41c8950b98a4a2b2761c9b34fa",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_right_135.pt": "1ca14d346efac52f5f0ebcd9bc52cd1e6eb6a67a73c37a65e78024abec696868",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_around_01.pt": "bbf1bf4b9a6abc7db5a05fc166a6e11f454ecb14ba7371d4aca2476c45fb5cca",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/stand_to_walk_01.pt": "b5183955fe3766bc30901e66c650f3601daf4fd2969125acc5e73e2ba93064bd",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_to_stand_01.pt": "a341d6821635bbbc9cda0ec0711034511e9ddb267be3c9206f8aaf539cb21fec",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_to_stand_02.pt": "78fea9d0b50e521da7e373e7202d5d5c2f625273ef095ae5371249d5a35b762e",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_forward_01.pt": "02cbd97382a70f4e6ac33c03939a98ce723528326b5ea9046802d65f38b039b9",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_left_090.pt": "200d9e22dbff9245d10749173896fd0bb822149491d96fc0d3c7c29d94727bd3",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/pick_up/pick_up_01.pt": "6a44d35afc4912781505615576e7a5ba141ffe3c756db652968c5bb0af31d17a",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/pick_up/pick_up_02.pt": "429cb67521975946fcf930fb5a430bbae9c7495e6d4db1ba2d4b330cdfbf023d",
+    "source/perceptual_ball/perceptual_ball/assets/motions/findbox/pick_up/pick_up_03.pt": "cd54f21376d77ea7d6cccb662b5ea2ae53b68ca7a61528742e40ef0c2cdf30f5",
+    "findbox/loco_direction/B10_-_walk_turn_left_(45)_stageii.pt": "dfdf2fe9bf0014327477bed39cd08f5526b6e4e4092613ae463d15fa47524fcb",
+    "findbox/loco_direction/B15_-_walk_turn_around_(same_direction)_stageii.pt": "bbf1bf4b9a6abc7db5a05fc166a6e11f454ecb14ba7371d4aca2476c45fb5cca",
+    "findbox/loco_direction/B1_-_stand_to_walk_stageii.pt": "b5183955fe3766bc30901e66c650f3601daf4fd2969125acc5e73e2ba93064bd",
+    "findbox/loco_direction/B13_-_walk_turn_right_(45)_stageii.pt": "9aa45b671abcd29d5d092c6caf0b38367e861b41c8950b98a4a2b2761c9b34fa",
+    "findbox/loco_direction/B14_-_walk_turn_right_(135)_stageii.pt": "1ca14d346efac52f5f0ebcd9bc52cd1e6eb6a67a73c37a65e78024abec696868",
+    "findbox/loco_direction/B11_-_walk_turn_left_(135)_stageii.pt": "f399edac6517b511d277aed64026d1169eb724281f9e386a27d4a162f6021374",
+    "findbox/loco_direction/B9_-_walk_turn_left_(90)_stageii.pt": "200d9e22dbff9245d10749173896fd0bb822149491d96fc0d3c7c29d94727bd3",
+    "findbox/loco_direction/B2_-_walk_to_stand_stageii.pt": "a341d6821635bbbc9cda0ec0711034511e9ddb267be3c9206f8aaf539cb21fec",
+    "findbox/loco_direction/B3_-_walk1_stageii.pt": "02cbd97382a70f4e6ac33c03939a98ce723528326b5ea9046802d65f38b039b9",
+    "findbox/loco_direction/B2_-_walk_to_stand_t2_stageii.pt": "78fea9d0b50e521da7e373e7202d5d5c2f625273ef095ae5371249d5a35b762e",
+    "findbox/loco_direction/B12_-_walk_turn_right_(90)_stageii.pt": "d643da4f4971ab3d78ba272d14a1761ef80e54cb429070bf3a1cc92b85366a33",
+    "findbox/pickUp/pickup1.pt": "6a44d35afc4912781505615576e7a5ba141ffe3c756db652968c5bb0af31d17a",
+    "findbox/pickUp/pickup3.pt": "cd54f21376d77ea7d6cccb662b5ea2ae53b68ca7a61528742e40ef0c2cdf30f5",
+    "findbox/pickUp/pickup2.pt": "429cb67521975946fcf930fb5a430bbae9c7495e6d4db1ba2d4b330cdfbf023d",
+    "findbox/carryWith/carrywith1.pt": "ac0e873274b3425925b218ccbd682e59590210363754c39bc78092231be273e8",
+    "findbox/amp_manifest.json": "a6240ca6a4c0991a35860c8f336d48e067bcfd6968930876b8a88177c5dda507"
+  },
+  "excluded_clips": [
+    "pick_up/pick_up_01.pt",
+    "pick_up/pick_up_02.pt"
+  ],
+  "kept_pickup": "pick_up/pick_up_03.pt",
+  "pickup_source_frame_range_inclusive": [
+    0,
+    128
+  ],
+  "pickup_reset_frame_range_inclusive": [
+    0,
+    31
+  ],
+  "clip_count": 13,
+  "total_frames": 3785,
+  "manifest_sha256": "7ffeea2804bb48f440039fb67666d17513ae26a367fe21b075605ab5810a8153"
+}

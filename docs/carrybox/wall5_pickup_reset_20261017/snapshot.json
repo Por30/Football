@@ -1,0 +1,370 @@
+{
+  "checked_at": "2026-10-17T12:49:11.925382+09:00",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_20261016_134504.log",
+  "log_sha256": "987984bc5b341fdd76bce2a65622f340f8850aea51b55cf469700acb53d852ca",
+  "last_iteration": 20786,
+  "latest": {
+    "iteration": 20786,
+    "Mean action noise std": 0.14,
+    "Mean value_function loss": 0.0968,
+    "Mean surrogate loss": 0.0177,
+    "Mean entropy loss": -23.5696,
+    "Mean box_position loss": 2.9566,
+    "Mean box_rotation loss": 0.0616,
+    "Mean amp_loss loss": 0.7123,
+    "Mean amp_expert_loss loss": 0.2538,
+    "Mean amp_policy_loss loss": 0.1868,
+    "Mean amp_valid_samples loss": 98304.0,
+    "Mean reward": 3.27,
+    "Mean episode length": 526.74,
+    "Episode_Reward/dof_acc": -0.0157,
+    "Episode_Reward/action_rate": -0.0591,
+    "Episode_Reward/torques": -0.1874,
+    "Episode_Reward/dof_vel": -0.012,
+    "Episode_Reward/dof_pos_limits": -0.0221,
+    "Episode_Reward/dof_vel_limits": -0.0,
+    "Episode_Reward/undesired_contacts": -0.008,
+    "Episode_Reward/walk_task": 0.2758,
+    "Episode_Reward/carryup_task": 0.1918,
+    "Episode_Reward/standup_task": 0.0417,
+    "Episode_Reward/slow_pickup": -0.008,
+    "Episode_Reward/stable_grasp": 0.0002,
+    "Episode_Reward/arm_speed_pickup": -0.0007,
+    "Episode_Reward/arm_acc_pickup": -0.0045,
+    "Episode_Reward/grip_force_cap": -0.0185,
+    "Episode_Reward/held_hand_speed": -0.0007,
+    "Episode_Reward/held_hand_acc": -0.0026,
+    "Episode_Reward/waist_yaw_penalty": -0.0342,
+    "Episode_Reward/search_turn": 0.0019,
+    "Episode_Termination/time_out": 0.4364,
+    "Episode_Termination/invalid": 0.0,
+    "Episode_Termination/fell": 0.0964,
+    "Episode_Termination/tipped": 0.4672,
+    "Curriculum/box_yaw_range_deg": 41.79,
+    "Metrics/episode_lift_success": 0.0,
+    "Skill/loco_episodes": 4778911.5,
+    "Skill/loco_success_fraction": 0.0,
+    "Skill/loco_successes": 0.0,
+    "Skill/loco_tipped_fraction": 0.6606,
+    "Skill/loco_fell_fraction": 0.1338,
+    "Skill/loco_mean_steps": 337.1726,
+    "Skill/loco_valid_amp_steps": 1611318016.0,
+    "Skill/pickup_episodes": 2392740.0,
+    "Skill/pickup_success_fraction": 0.0004,
+    "Skill/pickup_successes": 1068.0,
+    "Skill/pickup_tipped_fraction": 0.8531,
+    "Skill/pickup_fell_fraction": 0.102,
+    "Skill/pickup_mean_steps": 138.1659,
+    "Skill/pickup_valid_amp_steps": 330595136.0,
+    "Skill/hold_episodes": 797995.875,
+    "Skill/hold_success_fraction": 0.008,
+    "Skill/hold_successes": 6354.0,
+    "Skill/hold_tipped_fraction": 0.7261,
+    "Skill/hold_fell_fraction": 0.2662,
+    "Skill/hold_mean_steps": 125.0457,
+    "Skill/hold_valid_amp_steps": 99785944.0,
+    "Control/physical_target_clipped_fraction": 0.0527,
+    "AMP/style_reward": 0.3183,
+    "AMP/valid_fraction": 1.0,
+    "Reward/task_raw_per_step": 0.0049,
+    "Reward/task_weighted_per_step": 0.0037,
+    "Reward/amp_per_step": 0.0398,
+    "Reward/mixed_per_step": 0.0435,
+    "Total timesteps": 2043445248.0,
+    "Iteration time": 4.07
+  },
+  "last100_iteration_range": [
+    20687,
+    20786
+  ],
+  "last100_means": {
+    "iteration": 20736.5,
+    "Mean action noise std": 0.14,
+    "Mean value_function loss": 0.092463,
+    "Mean surrogate loss": 0.023454,
+    "Mean entropy loss": -23.557029,
+    "Mean box_position loss": 2.841419,
+    "Mean box_rotation loss": 0.061066,
+    "Mean amp_loss loss": 0.713408,
+    "Mean amp_expert_loss loss": 0.25394,
+    "Mean amp_policy_loss loss": 0.189902,
+    "Mean amp_valid_samples loss": 98304.0,
+    "Mean reward": 2.6737,
+    "Mean episode length": 555.9697,
+    "Episode_Reward/dof_acc": -0.015098,
+    "Episode_Reward/action_rate": -0.057147,
+    "Episode_Reward/torques": -0.186932,
+    "Episode_Reward/dof_vel": -0.011465,
+    "Episode_Reward/dof_pos_limits": -0.022588,
+    "Episode_Reward/dof_vel_limits": 0.0,
+    "Episode_Reward/undesired_contacts": -0.006239,
+    "Episode_Reward/walk_task": 0.291056,
+    "Episode_Reward/carryup_task": 0.17878,
+    "Episode_Reward/standup_task": 0.033937,
+    "Episode_Reward/slow_pickup": -0.007078,
+    "Episode_Reward/stable_grasp": 0.000243,
+    "Episode_Reward/arm_speed_pickup": -0.000806,
+    "Episode_Reward/arm_acc_pickup": -0.004375,
+    "Episode_Reward/grip_force_cap": -0.01664,
+    "Episode_Reward/held_hand_speed": -0.000579,
+    "Episode_Reward/held_hand_acc": -0.002217,
+    "Episode_Reward/waist_yaw_penalty": -0.033953,
+    "Episode_Reward/search_turn": 0.00113,
+    "Episode_Termination/time_out": 0.436879,
+    "Episode_Termination/invalid": 0.0,
+    "Episode_Termination/fell": 0.095146,
+    "Episode_Termination/tipped": 0.467985,
+    "Curriculum/box_yaw_range_deg": 41.0475,
+    "Metrics/episode_lift_success": 0.003431,
+    "Skill/loco_episodes": 4773521.555,
+    "Skill/loco_success_fraction": 0.0,
+    "Skill/loco_successes": 0.0,
+    "Skill/loco_tipped_fraction": 0.660935,
+    "Skill/loco_fell_fraction": 0.133967,
+    "Skill/loco_mean_steps": 336.756917,
+    "Skill/loco_valid_amp_steps": 1607517067.52,
+    "Skill/pickup_episodes": 2390114.75,
+    "Skill/pickup_success_fraction": 0.0004,
+    "Skill/pickup_successes": 1048.215013,
+    "Skill/pickup_tipped_fraction": 0.85329,
+    "Skill/pickup_fell_fraction": 0.102,
+    "Skill/pickup_mean_steps": 137.932574,
+    "Skill/pickup_valid_amp_steps": 329674857.6,
+    "Skill/hold_episodes": 797091.28625,
+    "Skill/hold_success_fraction": 0.008,
+    "Skill/hold_successes": 6346.914615,
+    "Skill/hold_tipped_fraction": 0.726452,
+    "Skill/hold_fell_fraction": 0.265808,
+    "Skill/hold_mean_steps": 124.920198,
+    "Skill/hold_valid_amp_steps": 99572841.36,
+    "Control/physical_target_clipped_fraction": 0.051684,
+    "AMP/style_reward": 0.326285,
+    "AMP/valid_fraction": 1.0,
+    "Reward/task_raw_per_step": 0.004921,
+    "Reward/task_weighted_per_step": 0.003692,
+    "Reward/amp_per_step": 0.040781,
+    "Reward/mixed_per_step": 0.044469,
+    "Total timesteps": 2038579200.0,
+    "Iteration time": 3.847,
+    "amp_fraction_of_net_mixed_reward": 0.9170658211338235
+  },
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-16_13-45-09_wall5_amp_stage_a/model_20600.pt",
+  "checkpoint_sha256": "2231082d4c6156df70a656dbde1b8b1dec916f07830dd670899056fde5fb3b63",
+  "checkpoint_environment_contract": {
+    "variant": "walled5",
+    "migration_revision": 9,
+    "depth_backend": "warp",
+    "reference_ground_clearance": "G1_collision_hull_min_5mm_upward_only",
+    "obstacle_cylinders": 3,
+    "head_reference": "head_link_COM",
+    "knee_lower_penalty": "hard_limit_other_limits_soft",
+    "action_targets": "clamp_to_physical_joint_limits",
+    "push_curriculum": [
+      1000,
+      4000
+    ],
+    "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+    "depth_clip": "optical_near_plane_pixel_centers_v1",
+    "failure_reward": "none_x2_recipe",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "convex_hull_32",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.6,
+      0.3,
+      0.1
+    ],
+    "search_prob": 0.02,
+    "noise": 0.06,
+    "depth_edge": [
+      0.15,
+      0.05
+    ],
+    "depth_holes": 0.02,
+    "depth_stereo": [
+      0.024,
+      0.09
+    ],
+    "latency_probability": 0.1,
+    "depth_noise_contract": "metres_miss_preserved_near_clamp_15_including_onset",
+    "delay": 1,
+    "freeze": 0.002,
+    "freeze_steps": 15,
+    "mount_pos": 0.01,
+    "mount_rot": 0.0,
+    "curriculum": "shared_piecewise_process_anchor",
+    "reward_parent": "g1_corrected_common_v2",
+    "reward_weights": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "undesired_contacts": -1.0,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.4,
+      "slow_pickup": -0.0005,
+      "stable_grasp": 0.2,
+      "arm_speed_pickup": -0.02,
+      "arm_acc_pickup": -2e-05,
+      "grip_force_cap": -0.02,
+      "held_hand_speed": -0.02,
+      "held_hand_acc": -2e-05,
+      "waist_yaw_penalty": -0.5,
+      "search_turn": 0.5
+    },
+    "roll_termination": "abs_roll_gt_0.5",
+    "action_scale": 0.25,
+    "action_clip": 9.0,
+    "randomization": {
+      "box_material": {
+        "static_friction_range": [
+          0.3,
+          2.0
+        ],
+        "dynamic_friction_range": [
+          0.4,
+          1.5
+        ],
+        "restitution_range": [
+          0.0,
+          0.2
+        ],
+        "num_buckets": 64
+      },
+      "box_mass": {
+        "mass_distribution_params": [
+          0.1,
+          1.5
+        ],
+        "operation": "scale",
+        "recompute_inertia": true
+      },
+      "default_joint_pos": {},
+      "torso_com": {
+        "com_range": {
+          "x": [
+            -0.025,
+            0.025
+          ],
+          "y": [
+            -0.05,
+            0.05
+          ],
+          "z": [
+            -0.05,
+            0.05
+          ]
+        }
+      },
+      "push_robot": {
+        "velocity_range": {
+          "x": [
+            -0.5,
+            0.5
+          ],
+          "y": [
+            -0.5,
+            0.5
+          ],
+          "z": [
+            -0.2,
+            0.2
+          ],
+          "roll": [
+            -0.52,
+            0.52
+          ],
+          "pitch": [
+            -0.52,
+            0.52
+          ],
+          "yaw": [
+            -0.78,
+            0.78
+          ]
+        }
+      }
+    },
+    "box_mass_kg": 0.8,
+    "com_body": "torso_link",
+    "push_interval": [
+      1.0,
+      3.0
+    ],
+    "hand_forces": "g1_rubber_hands_box_filtered",
+    "standup_success": "instant_x2",
+    "strict_success_metric": "g1_contact_clearance_hold0.5s",
+    "physical_parent": "walled4_revision8",
+    "amp_frame_schema": "joint_pos29_gravity3_angvel3_raw_v1",
+    "amp_shape": [
+      10,
+      35
+    ],
+    "amp_history": "repeat_reset_frame_reward_and_training_from_step1"
+  },
+  "ppo_lr": [
+    0.0003
+  ],
+  "pose_aux_coef": 0.5,
+  "pickup_reference_geometry": [
+    {
+      "file": "pick_up/pick_up_01.pt",
+      "frames": 192,
+      "contact_index": 107,
+      "box_center_z_before_foot_correction_min": 0.3502458333969116,
+      "box_center_z_before_foot_correction_max": 0.8769629001617432,
+      "contact_box_center_z_before_foot_correction": 0.3683237135410309,
+      "support_top_before_foot_correction_and_frame_clamp": 0.24332371354103088,
+      "box_center_z_first_frame": 0.3654962182044983,
+      "sampled_frames_before_contact_fraction": 0.5602094240837696
+    },
+    {
+      "file": "pick_up/pick_up_02.pt",
+      "frames": 178,
+      "contact_index": 100,
+      "box_center_z_before_foot_correction_min": 0.21437114477157593,
+      "box_center_z_before_foot_correction_max": 0.8788069486618042,
+      "contact_box_center_z_before_foot_correction": 0.4249241352081299,
+      "support_top_before_foot_correction_and_frame_clamp": 0.2999241352081299,
+      "box_center_z_first_frame": 0.21479803323745728,
+      "sampled_frames_before_contact_fraction": 0.5649717514124294
+    },
+    {
+      "file": "pick_up/pick_up_03.pt",
+      "frames": 129,
+      "contact_index": 42,
+      "box_center_z_before_foot_correction_min": 0.12612909078598022,
+      "box_center_z_before_foot_correction_max": 0.8702342510223389,
+      "contact_box_center_z_before_foot_correction": 0.12970709800720215,
+      "support_top_before_foot_correction_and_frame_clamp": 0.0047070980072021484,
+      "box_center_z_first_frame": 0.1268720030784607,
+      "sampled_frames_before_contact_fraction": 0.328125
+    }
+  ],
+  "active_train_play_processes": [
+    "3429618 Sat Oct 17 12:22:18 2026 python scripts/rsl_rl/train.py --task Template-Perceptual-Ball-AgileKickball-v5 --num_envs 4096 --device cuda:0 --headless --max_iterations 50000 --seed 42"
+  ],
+  "source_sha256": {
+    "tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "0c1786d40d187493bee4bdd2b030977ab0e5e0a187a1c273373531539ce3e52f",
+    "tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "8dc506b3a7ac73e14e6654d6396614b0cb318772fec40c0ca05dee054b149626",
+    "tasks/manager_based/perceptual_ball/mdp/carrybox.py": "1797d679e5fc8b38ca49392752fb0bc1f6960d185734c0c05022eb535434878e",
+    "tasks/manager_based/perceptual_ball/mdp/carrybox_state.py": "e48d3d2706673cbb94dfda8a3a445697d6e6e89b700915288ec2a6057253580f",
+    "tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "312de0759cc79122455584737de100ef322ff4537a56ba926c76289b3315d980",
+    "tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608",
+    "tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "169ba52f21416344d21a3b72ae7b67954699366ee96912febc77db0404b62b6d"
+  },
+  "caveats": [
+    "Skill counts are cumulative rollout-averaged log snapshots, not exact raw event counts.",
+    "AMP fraction is net reward magnitude, not gradient contribution.",
+    "Reference heights precede live foot correction and per-frame support clamp.",
+    "No new simulator rollout or contact feasibility test performed."
+  ]
+}

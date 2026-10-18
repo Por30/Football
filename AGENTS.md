@@ -15,7 +15,7 @@
 
 优先修改对应任务模块。G1资产、通用CNN/AMP、train/play和export是共享代码，修改前检查两条任务调用路径，并针对实际影响验证。
 
-CarryBox的actor/critic只能使用深度与本体；位姿标签只进入辅助监督，AMP本体窗口只进入判别器/奖励。不得把箱子真值或任务阶段加入策略/价值输入。足球现有critic配置独立，不能因搬箱子要求擅自改变足球训练接口。
+CarryBox的actor/critic只能使用深度与本体；位姿标签只进入辅助监督，AMP窗口只进入判别器/奖励。2026-10-17按用户明确要求，wall5 revision12的训练专用AMP使用60维任务特征（含箱子相对位置/末端位置等）与Normalizer；其他CarryBox沿用原AMP。不得把箱子真值或任务阶段加入策略/价值输入。足球现有critic配置独立，不能因搬箱子要求擅自改变足球训练接口。
 
 保留Gym task ID、已有源码导入路径、数据路径和checkpoint路径，除非用户要求迁移。2026-10-14按用户要求规范命名并迁移后，FindBox AMP与walled参考初始化默认使用`source/perceptual_ball/perceptual_ball/assets/motions/findbox/`，与足球`assets/motions/kick/`并列。根目录`findbox/`保留为旧命名兼容快照，不与项目入口混用；`assets/motions/carrybox/`仍只是旧pickUp归档。数据更改须同步manifest、文件名映射和兼容性说明。
 

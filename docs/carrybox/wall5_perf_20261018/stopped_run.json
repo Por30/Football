@@ -1,0 +1,9 @@
+{
+  "pid": 3804340,
+  "cmd": "/home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-CarryBox-Walled5-v0 --num_envs 4096 --device cuda:0 --headless --seed 42 --max_iterations 40000 --run_name wall5_v13_hold_rsi ",
+  "checkpoints": [
+    "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-18_12-27-37_wall5_v13_hold_rsi/model_0.pt"
+  ],
+  "time": 1792294858.217315,
+  "last_logged_iteration": 70
+}

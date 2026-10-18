@@ -1,0 +1,120 @@
+"""Ground-origin data, pre-lift RSI boundaries and all-ground partial reset."""
+import hashlib
+import json
+from pathlib import Path
+from types import SimpleNamespace as NS
+from unittest.mock import patch
+import unittest
+
+import torch
+import test_carrybox  # Simulator boundary fixtures; production tensor helpers below.
+from isaaclab.utils.math import matrix_from_quat
+from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, DEFAULT_DATASET_PATH, SOURCE_JOINT_NAMES
+from perceptual_ball.carrybox_wall5 import Wall5MotionLibrary, GROUND_DATASET_PATH, ground_pickup_frame_ids
+from perceptual_ball.tasks.manager_based.perceptual_ball.mdp import carrybox_walled as task
+from perceptual_ball.tasks.manager_based.perceptual_ball.mdp import carrybox_wall5 as wall5
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class GroundTests(unittest.TestCase):
+    def test_contract_records_actual_rsi_identity_without_reference_init(self):
+        env=wall5.Wall5CarryBoxEnv.__new__(wall5.Wall5CarryBoxEnv)
+        env.cfg=NS(ground_box_reset=True,ground_pickup_reset_frame_range=(0,32),reset_skill_probabilities=(.8,.2,0.),
+            reference_motion_dataset=GROUND_DATASET_PATH,
+            scene=NS(platform=None,robot=NS(spawn=NS(articulation_props=NS(enabled_self_collisions=False)))))
+        with patch.object(task.WalledCarryBoxEnv,'checkpoint_contract',return_value={}),patch.object(wall5,'state',return_value=NS(library=None)):
+            result=env.checkpoint_contract()
+            expected=hashlib.sha256((Path(GROUND_DATASET_PATH)/'amp_manifest.json').read_bytes()).hexdigest()
+            self.assertEqual(result['reference_manifest_sha256'],expected)
+            self.assertTrue(result['ground_box_reset'])
+        with patch.object(task.WalledCarryBoxEnv,'checkpoint_contract',return_value={}),patch.object(wall5,'state',return_value=NS(library=NS(metadata={'manifest_sha256':'actual_loaded_source'}))):
+            self.assertEqual(env.checkpoint_contract()['reference_manifest_sha256'],'actual_loaded_source')
+
+    def test_profile_preserves_complete_lift_and_legacy_identity(self):
+        record = json.loads((ROOT/'docs/carrybox/wall5_ground_20261017/profile_record.json').read_text())
+        for name, digest in record['protected_sha256'].items():
+            self.assertEqual(hashlib.sha256((ROOT/name).read_bytes()).hexdigest(), digest)
+        old, new = FindBoxMotionLibrary(), Wall5MotionLibrary(GROUND_DATASET_PATH)
+        self.assertEqual(old.num_clips, 15)
+        self.assertEqual(new.num_clips, 13)
+        self.assertEqual(new.metadata['total_frames'], 3785)
+        manifest=json.loads((Path(GROUND_DATASET_PATH)/'amp_manifest.json').read_text())
+        self.assertEqual(manifest['ground_reset']['pickup_frame_range_exclusive'],[0,32])
+        self.assertEqual([n for n,g in zip(new.clip_names,new.clip_groups) if g=='pickUp'], ['pick_up/pick_up_03.pt'])
+        self.assertNotEqual(old.metadata['manifest_sha256'], new.metadata['manifest_sha256'])
+        for name in new.clip_names:
+            self.assertEqual((Path(GROUND_DATASET_PATH)/name).read_bytes(), (Path(DEFAULT_DATASET_PATH)/name).read_bytes())
+        pickup = torch.load(Path(GROUND_DATASET_PATH)/'pick_up/pick_up_03.pt', weights_only=True)
+        self.assertEqual(len(pickup['joint_position']), 129)
+        self.assertGreater(float((pickup['base_height']+.05+pickup['box_pos_local'][:,2]).max()), .8)
+        for group, probability in [('loco_direction',.4),('pickUp',.4),('carryWith',.2)]:
+            self.assertAlmostEqual(float(new.weights[torch.tensor([g==group for g in new.clip_groups])].sum()), probability, places=6)
+        starts = new.lengths.float()-1-9*60/50
+        windows = new.windows(torch.arange(new.num_clips),starts)
+        self.assertEqual(windows.shape,(13,600));self.assertTrue(torch.isfinite(windows).all())
+
+    def test_ground_prefix_rejects_elevated_and_invalid_geometry(self):
+        source = Path(DEFAULT_DATASET_PATH)/'pick_up'
+        for number in (1,2):
+            data=torch.load(source/f'pick_up_0{number}.pt',weights_only=True)
+            self.assertEqual(len(ground_pickup_frame_ids(data)),0)
+        data=torch.load(source/'pick_up_03.pt',weights_only=True)
+        ids=ground_pickup_frame_ids(data)
+        self.assertEqual(ids.tolist(),list(range(61)))
+        self.assertLess(int(ids[-1])+1,len(data['joint_position']))
+        data['base_height'][0]=torch.nan
+        with self.assertRaisesRegex(ValueError,'geometry'): ground_pickup_frame_ids(data)
+
+    def test_no_ground_clip_fails_instead_of_falling_back_to_hold(self):
+        library=NS(clip_groups=['pickUp'],clip_names=['bad.pt'])
+        env=NS(cfg=NS(ground_box_reset=True),scene={'robot':NS(joint_names=list(SOURCE_JOINT_NAMES))},
+            device='cpu',_walled=NS(library=library,skills=torch.ones(1,dtype=torch.long),ground_reference_frames=[torch.empty(0,dtype=torch.long)]))
+        with self.assertRaisesRegex(ValueError,'No ground-pickup'): task.initialize_reference(env,torch.tensor([0]))
+        env._walled.skills[:]=2
+        with self.assertRaisesRegex(ValueError,'held-box'): task.initialize_reference(env,torch.tensor([0]))
+
+    def test_partial_reset_all_box_corners_clear_ground_without_platform(self):
+        class Scene(dict): pass
+        class Object:
+            def __init__(self):
+                p=torch.zeros(3,13);p[:,3]=1.;p[:,:3]=10.;p[:,7:]=2.
+                self.data=NS(root_state_w=p,default_root_state=p.clone())
+            def write_root_state_to_sim(self,value,env_ids=None): self.data.root_state_w[env_ids]=value
+        scene=Scene({n:Object() for n in ['box','wall','cylinder0','cylinder1','cylinder2']})
+        scene.env_origins=torch.tensor([[0.,0.,0.],[5.,6.,1.],[20.,30.,-2.]])
+        robot=NS(root_pos_w=scene.env_origins+torch.tensor([0.,0.,.8]),root_quat_w=torch.tensor([[1.,0.,0.,0.]]).repeat(3,1))
+        scene['robot']=NS(data=robot)
+        s=NS(skills=torch.zeros(3,dtype=torch.long),search=torch.zeros(3,dtype=torch.bool),achieved=torch.ones(3,dtype=torch.bool),curriculum=NS(degrees=180.),paired=None)
+        env=NS(scene=scene,device='cpu',_walled=s,cfg=NS(ground_box_reset=True,reset_skill_probabilities=(1.,0.,0.),reference_init=False,search_prob=.02,obstacle_cylinder_count=3))
+        ids=torch.tensor([0,2]);before=scene['box'].data.root_state_w[1].clone();root_before=robot.root_pos_w.clone()
+        reference=robot.root_pos_w[ids]+torch.tensor([.35,0.,.5])
+        with patch.object(task.base,'reset_box'),patch.object(task,'reset_camera'),patch.object(task,'initialize_reference',return_value=(reference,torch.ones(2))):
+            for pickup in (False,True):
+                env.cfg.reference_init=pickup
+                env.cfg.reset_skill_probabilities=(0.,1.,0.) if pickup else (1.,0.,0.)
+                for _ in range(12):
+                    task.reset_scene(env,ids)
+                    p=scene['box'].data.root_state_w[ids]
+                    extent=(matrix_from_quat(p[:,3:7])[:,2].abs()*torch.tensor([.15,.15,.125])).sum(-1)
+                    torch.testing.assert_close(p[:,2]-scene.env_origins[ids,2]-extent,torch.full((2,),.005),atol=3e-6,rtol=0)
+                    torch.testing.assert_close(p[:,7:],torch.zeros_like(p[:,7:]))
+                    torch.testing.assert_close(p[:,3:7].norm(dim=-1),torch.ones(2))
+                    torch.testing.assert_close(scene['box'].data.root_state_w[1],before)
+                    torch.testing.assert_close(robot.root_pos_w,root_before)
+            env.cfg.reset_skill_probabilities=(0.,0.,1.)
+            with self.assertRaisesRegex(ValueError,'zero held-box'):task.reset_scene(env,ids)
+            env.cfg.held_box_reference_reset=True
+            env.cfg.reference_init=True
+            env.cfg.reset_skill_probabilities=(.8,0.,.2)
+            with patch.object(task.torch,'multinomial',return_value=torch.tensor([0,2])):
+                task.reset_scene(env,ids)
+            pose=scene['box'].data.root_state_w[ids]
+            extent=(matrix_from_quat(pose[:,3:7])[:,2].abs()*torch.tensor([.15,.15,.125])).sum(-1)
+            self.assertAlmostEqual(float(pose[0,2]-scene.env_origins[0,2]-extent[0]),.005,places=5)
+            torch.testing.assert_close(pose[1,:3],reference[1])
+            torch.testing.assert_close(scene['box'].data.root_state_w[1],before)
+            self.assertEqual(s.skills[ids].tolist(),[0,2])
+
+
+if __name__=='__main__': unittest.main()

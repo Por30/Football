@@ -1,0 +1,1770 @@
+{
+  "status": "PASS",
+  "method": "CPU authored USD + unmodified production spawn function on transient stage; no PhysX cooking/simulation",
+  "asset": "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/g1_29dof.usd",
+  "saved_configuration": "logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-16_13-45-09_wall5_amp_stage_a/params/env.yaml",
+  "self_collisions": false,
+  "before_geometry_counts": {
+    "Mesh": 22,
+    "Cube": 4,
+    "Cylinder": 4
+  },
+  "wall5_geometry_counts": {
+    "Mesh": 26,
+    "Cube": 4
+  },
+  "collision_link_count": 28,
+  "shoulder_links_converted": [
+    "left_shoulder_pitch_link",
+    "left_shoulder_roll_link",
+    "right_shoulder_pitch_link",
+    "right_shoulder_roll_link"
+  ],
+  "rigid_links_without_own_collider": [
+    "pelvis",
+    "imu_in_pelvis",
+    "pelvis_contact_link",
+    "waist_yaw_link",
+    "waist_roll_link",
+    "d435_link",
+    "head_link",
+    "imu_in_torso",
+    "left_wrist_yaw_link",
+    "left_palm_link",
+    "logo_link",
+    "mid360_link",
+    "right_wrist_yaw_link",
+    "right_palm_link",
+    "temp_link",
+    "d455_link"
+  ],
+  "source_rows": [
+    {
+      "link": "left_hip_pitch_link",
+      "path": "/g1_29dof/left_hip_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_hip_pitch_link/collisions/left_hip_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 10896,
+          "link_bounds_m": [
+            [
+              -0.04231603071093559,
+              1.752833850288127e-10,
+              -0.08004375547170639
+            ],
+            [
+              0.04024069383740425,
+              0.09881081432104111,
+              0.03712092339992523
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.08255672454833984,
+            0.09881081414575772,
+            0.11716467887163162
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_hip_roll_link",
+      "path": "/g1_29dof/left_hip_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_hip_roll_link/collisions/left_hip_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 11526,
+          "link_bounds_m": [
+            [
+              -0.026318851858377457,
+              -0.04911654815077782,
+              -0.12412407994270325
+            ],
+            [
+              0.08016039431095123,
+              0.048774201422929764,
+              0.046484772115945816
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.10647924616932869,
+            0.09789074957370758,
+            0.17060885205864906
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_hip_yaw_link",
+      "path": "/g1_29dof/left_hip_yaw_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_hip_yaw_link/collisions/left_hip_yaw_link/mesh",
+          "type": "Mesh",
+          "vertices": 17772,
+          "link_bounds_m": [
+            [
+              -0.1272493153810501,
+              -0.045383282005786896,
+              -0.22623078525066376
+            ],
+            [
+              0.05238468199968338,
+              0.0432993583381176,
+              7.070005914044941e-09
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.1796339973807335,
+            0.0886826403439045,
+            0.22623079232066967
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_knee_link",
+      "path": "/g1_29dof/left_knee_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_knee_link/collisions/mesh_0/box",
+          "type": "Cube",
+          "link_bounds_m": [
+            [
+              -0.03500000201165676,
+              -0.03500000014901161,
+              -0.1549999974668026
+            ],
+            [
+              0.055000001564621925,
+              0.03500000014901161,
+              -0.05499999597668648
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.09000000357627869,
+            0.07000000029802322,
+            0.10000000149011612
+          ]
+        },
+        {
+          "path": "/g1_29dof/left_knee_link/collisions/mesh_1/box",
+          "type": "Cube",
+          "link_bounds_m": [
+            [
+              -0.02000000048428774,
+              -0.019999999552965164,
+              -0.25999999418854713
+            ],
+            [
+              0.03000000026077032,
+              0.019999999552965164,
+              -0.15999999269843102
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05000000074505806,
+            0.03999999910593033,
+            0.10000000149011612
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_ankle_pitch_link",
+      "path": "/g1_29dof/left_ankle_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_ankle_pitch_link/collisions/left_ankle_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 4266,
+          "link_bounds_m": [
+            [
+              -0.02449999935925007,
+              -0.006442185025662184,
+              -0.02455790899693966
+            ],
+            [
+              0.01150001771748066,
+              0.006557829678058624,
+              0.012889973819255829
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.03600001707673073,
+            0.013000014703720808,
+            0.03744788281619549
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_ankle_roll_link",
+      "path": "/g1_29dof/left_ankle_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_ankle_roll_link/collisions/left_ankle_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 39198,
+          "link_bounds_m": [
+            [
+              -0.06584136933088303,
+              -0.03774179145693779,
+              -0.035409145057201385
+            ],
+            [
+              0.14236535131931305,
+              0.03784090280532837,
+              0.023583902046084404
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.20820672065019608,
+            0.07558269426226616,
+            0.05899304710328579
+          ]
+        }
+      ]
+    },
+    {
+      "link": "pelvis_contour_link",
+      "path": "/g1_29dof/pelvis_contour_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/pelvis_contour_link/collisions/pelvis_contour_link/mesh",
+          "type": "Mesh",
+          "vertices": 108306,
+          "link_bounds_m": [
+            [
+              -0.058128051459789276,
+              -0.06776073575019836,
+              -0.15200547873973846
+            ],
+            [
+              0.061431244015693665,
+              0.0677763894200325,
+              -0.02776389941573143
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.11955929547548294,
+            0.13553712517023087,
+            0.12424157932400703
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_hip_pitch_link",
+      "path": "/g1_29dof/right_hip_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_hip_pitch_link/collisions/right_hip_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 10872,
+          "link_bounds_m": [
+            [
+              -0.04231603071093559,
+              -0.09881081432104111,
+              -0.08004375547170639
+            ],
+            [
+              0.04024069383740425,
+              -1.752833850288127e-10,
+              0.03712008520960808
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.08255672454833984,
+            0.09881081414575772,
+            0.11716384068131447
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_hip_roll_link",
+      "path": "/g1_29dof/right_hip_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_hip_roll_link/collisions/right_hip_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 11556,
+          "link_bounds_m": [
+            [
+              -0.026318851858377457,
+              -0.048774201422929764,
+              -0.12412407994270325
+            ],
+            [
+              0.08016039431095123,
+              0.04911654815077782,
+              0.046484772115945816
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.10647924616932869,
+            0.09789074957370758,
+            0.17060885205864906
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_hip_yaw_link",
+      "path": "/g1_29dof/right_hip_yaw_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_hip_yaw_link/collisions/right_hip_yaw_link/mesh",
+          "type": "Mesh",
+          "vertices": 17772,
+          "link_bounds_m": [
+            [
+              -0.1272493153810501,
+              -0.0432993583381176,
+              -0.22623078525066376
+            ],
+            [
+              0.05238468199968338,
+              0.045383282005786896,
+              7.070005914044941e-09
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.1796339973807335,
+            0.0886826403439045,
+            0.22623079232066967
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_knee_link",
+      "path": "/g1_29dof/right_knee_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_knee_link/collisions/mesh_0/box",
+          "type": "Cube",
+          "link_bounds_m": [
+            [
+              -0.03500000201165676,
+              -0.03500000014901161,
+              -0.1549999974668026
+            ],
+            [
+              0.055000001564621925,
+              0.03500000014901161,
+              -0.05499999597668648
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.09000000357627869,
+            0.07000000029802322,
+            0.10000000149011612
+          ]
+        },
+        {
+          "path": "/g1_29dof/right_knee_link/collisions/mesh_1/box",
+          "type": "Cube",
+          "link_bounds_m": [
+            [
+              -0.02000000048428774,
+              -0.019999999552965164,
+              -0.25999999418854713
+            ],
+            [
+              0.03000000026077032,
+              0.019999999552965164,
+              -0.15999999269843102
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05000000074505806,
+            0.03999999910593033,
+            0.10000000149011612
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_ankle_pitch_link",
+      "path": "/g1_29dof/right_ankle_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_ankle_pitch_link/collisions/right_ankle_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 4266,
+          "link_bounds_m": [
+            [
+              -0.02449999935925007,
+              -0.006557829678058624,
+              -0.02455790899693966
+            ],
+            [
+              0.01150001771748066,
+              0.006442185025662184,
+              0.012889973819255829
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.03600001707673073,
+            0.013000014703720808,
+            0.03744788281619549
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_ankle_roll_link",
+      "path": "/g1_29dof/right_ankle_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_ankle_roll_link/collisions/right_ankle_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 39222,
+          "link_bounds_m": [
+            [
+              -0.06584136933088303,
+              -0.03784090280532837,
+              -0.035409145057201385
+            ],
+            [
+              0.14236535131931305,
+              0.03774179145693779,
+              0.023583902046084404
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.20820672065019608,
+            0.07558269426226616,
+            0.05899304710328579
+          ]
+        }
+      ]
+    },
+    {
+      "link": "torso_link",
+      "path": "/g1_29dof/torso_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/torso_link/collisions/torso_link_rev_1_0/mesh",
+          "type": "Mesh",
+          "vertices": 154230,
+          "link_bounds_m": [
+            [
+              -0.06664276123046875,
+              -0.10771311819553375,
+              -0.008908695541322231
+            ],
+            [
+              0.08362708240747452,
+              0.10771439224481583,
+              0.31161943078041077
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.15026984363794327,
+            0.21542751044034958,
+            0.320528126321733
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_shoulder_pitch_link",
+      "path": "/g1_29dof/left_shoulder_pitch_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_shoulder_pitch_link/collisions/mesh_0/cylinder",
+          "type": "Cylinder",
+          "radius_m": 0.029999999329447746,
+          "length_m": 0.05000000074505806,
+          "axis": "Z",
+          "link_bounds_m": [
+            [
+              -0.025000001399385244,
+              0.00999999977648261,
+              -0.039999999961643815
+            ],
+            [
+              0.025000001399385244,
+              0.0699999984353781,
+              0.020000000408678758
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05000000279877049,
+            0.05999999865889549,
+            0.060000000370322576
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_shoulder_roll_link",
+      "path": "/g1_29dof/left_shoulder_roll_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_shoulder_roll_link/collisions/mesh_0/cylinder",
+          "type": "Cylinder",
+          "radius_m": 0.029999999329447746,
+          "length_m": 0.029999999329447746,
+          "axis": "Z",
+          "link_bounds_m": [
+            [
+              -0.03399999951943755,
+              -0.023999999277293682,
+              -0.0679999990388751
+            ],
+            [
+              0.02599999913945794,
+              0.03599999938160181,
+              -0.03799999970942736
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05999999865889549,
+            0.05999999865889549,
+            0.029999999329447746
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_shoulder_yaw_link",
+      "path": "/g1_29dof/left_shoulder_yaw_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_shoulder_yaw_link/collisions/left_shoulder_yaw_link/mesh",
+          "type": "Mesh",
+          "vertices": 14946,
+          "link_bounds_m": [
+            [
+              -0.032810695469379425,
+              -0.04141250625252724,
+              -0.11369692534208298
+            ],
+            [
+              0.048374809324741364,
+              0.03310637176036835,
+              0.031574152410030365
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.08118550479412079,
+            0.07451887801289558,
+            0.14527107775211334
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_elbow_link",
+      "path": "/g1_29dof/left_elbow_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_elbow_link/collisions/left_elbow_link/mesh",
+          "type": "Mesh",
+          "vertices": 5322,
+          "link_bounds_m": [
+            [
+              -0.029775112867355347,
+              -0.03125531226396561,
+              -0.04543027654290199
+            ],
+            [
+              0.10000001639127731,
+              0.03477716073393822,
+              0.029775114730000496
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.12977512925863266,
+            0.06603247299790382,
+            0.07520539127290249
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_wrist_roll_link",
+      "path": "/g1_29dof/left_wrist_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_wrist_roll_link/collisions/left_wrist_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 21366,
+          "link_bounds_m": [
+            [
+              -4.373005372393509e-15,
+              -0.030494267120957375,
+              -0.02999999187886715
+            ],
+            [
+              0.05599305406212807,
+              0.029999999329447746,
+              0.02999999187886715
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05599305406213244,
+            0.06049426645040512,
+            0.0599999837577343
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_wrist_pitch_link",
+      "path": "/g1_29dof/left_wrist_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_wrist_pitch_link/collisions/left_wrist_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 5154,
+          "link_bounds_m": [
+            [
+              -0.02850000001490116,
+              -0.028490660712122917,
+              -0.028490660712122917
+            ],
+            [
+              0.07450000196695328,
+              0.028490660712122917,
+              0.028490660712122917
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.10300000198185444,
+            0.056981321424245834,
+            0.056981321424245834
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_rubber_hand",
+      "path": "/g1_29dof/left_rubber_hand/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_rubber_hand/collisions/left_rubber_hand/mesh",
+          "type": "Mesh",
+          "vertices": 137244,
+          "link_bounds_m": [
+            [
+              -2.780881303010574e-08,
+              -0.0479060634970665,
+              -0.043028898537158966
+            ],
+            [
+              0.13182935118675232,
+              0.018651477992534637,
+              0.06344989687204361
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.13182937899556535,
+            0.06655754148960114,
+            0.10647879540920258
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_shoulder_pitch_link",
+      "path": "/g1_29dof/right_shoulder_pitch_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_shoulder_pitch_link/collisions/mesh_0/cylinder",
+          "type": "Cylinder",
+          "radius_m": 0.029999999329447746,
+          "length_m": 0.05000000074505806,
+          "axis": "Z",
+          "link_bounds_m": [
+            [
+              -0.025000001399385244,
+              -0.0699999984353781,
+              -0.03999999996164387
+            ],
+            [
+              0.025000001399385244,
+              -0.00999999977648261,
+              0.020000000408678702
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05000000279877049,
+            0.05999999865889549,
+            0.060000000370322576
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_shoulder_roll_link",
+      "path": "/g1_29dof/right_shoulder_roll_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_shoulder_roll_link/collisions/mesh_0/cylinder",
+          "type": "Cylinder",
+          "radius_m": 0.029999999329447746,
+          "length_m": 0.029999999329447746,
+          "axis": "Z",
+          "link_bounds_m": [
+            [
+              -0.03399999951943755,
+              -0.03599999938160181,
+              -0.0679999990388751
+            ],
+            [
+              0.02599999913945794,
+              0.023999999277293682,
+              -0.03799999970942736
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05999999865889549,
+            0.05999999865889549,
+            0.029999999329447746
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_shoulder_yaw_link",
+      "path": "/g1_29dof/right_shoulder_yaw_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_shoulder_yaw_link/collisions/right_shoulder_yaw_link/mesh",
+          "type": "Mesh",
+          "vertices": 14994,
+          "link_bounds_m": [
+            [
+              -0.032810695469379425,
+              -0.03310637176036835,
+              -0.11369692534208298
+            ],
+            [
+              0.048374809324741364,
+              0.04141250625252724,
+              0.031574152410030365
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.08118550479412079,
+            0.07451887801289558,
+            0.14527107775211334
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_elbow_link",
+      "path": "/g1_29dof/right_elbow_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_elbow_link/collisions/right_elbow_link/mesh",
+          "type": "Mesh",
+          "vertices": 5322,
+          "link_bounds_m": [
+            [
+              -0.029775112867355347,
+              -0.03477716073393822,
+              -0.04543027654290199
+            ],
+            [
+              0.10000001639127731,
+              0.03125531226396561,
+              0.029775114730000496
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.12977512925863266,
+            0.06603247299790382,
+            0.07520539127290249
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_wrist_roll_link",
+      "path": "/g1_29dof/right_wrist_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_wrist_roll_link/collisions/right_wrist_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 21360,
+          "link_bounds_m": [
+            [
+              -4.373005372393509e-15,
+              -0.029999999329447746,
+              -0.02999999187886715
+            ],
+            [
+              0.05599305406212807,
+              0.030494267120957375,
+              0.02999999187886715
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05599305406213244,
+            0.06049426645040512,
+            0.0599999837577343
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_wrist_pitch_link",
+      "path": "/g1_29dof/right_wrist_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_wrist_pitch_link/collisions/right_wrist_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 4770,
+          "link_bounds_m": [
+            [
+              -0.02850000187754631,
+              -0.028490660712122917,
+              -0.028490660712122917
+            ],
+            [
+              0.07450000196695328,
+              0.028490660712122917,
+              0.028490660712122917
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.10300000384449959,
+            0.056981321424245834,
+            0.056981321424245834
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_rubber_hand",
+      "path": "/g1_29dof/right_rubber_hand/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_rubber_hand/collisions/right_rubber_hand/mesh",
+          "type": "Mesh",
+          "vertices": 131556,
+          "link_bounds_m": [
+            [
+              -2.8722640266209964e-08,
+              -0.018651476129889488,
+              -0.043028924614191055
+            ],
+            [
+              0.13182809948921204,
+              0.0479060634970665,
+              0.06344989687204361
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.1318281282118523,
+            0.06655753962695599,
+            0.10647882148623466
+          ]
+        }
+      ]
+    }
+  ],
+  "wall5_rows": [
+    {
+      "link": "left_hip_pitch_link",
+      "path": "/g1_29dof/left_hip_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_hip_pitch_link/collisions/left_hip_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 10896,
+          "link_bounds_m": [
+            [
+              -0.04231603071093559,
+              1.752833850288127e-10,
+              -0.08004375547170639
+            ],
+            [
+              0.04024069383740425,
+              0.09881081432104111,
+              0.03712092339992523
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.08255672454833984,
+            0.09881081414575772,
+            0.11716467887163162
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_hip_roll_link",
+      "path": "/g1_29dof/left_hip_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_hip_roll_link/collisions/left_hip_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 11526,
+          "link_bounds_m": [
+            [
+              -0.026318851858377457,
+              -0.04911654815077782,
+              -0.12412407994270325
+            ],
+            [
+              0.08016039431095123,
+              0.048774201422929764,
+              0.046484772115945816
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.10647924616932869,
+            0.09789074957370758,
+            0.17060885205864906
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_hip_yaw_link",
+      "path": "/g1_29dof/left_hip_yaw_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_hip_yaw_link/collisions/left_hip_yaw_link/mesh",
+          "type": "Mesh",
+          "vertices": 17772,
+          "link_bounds_m": [
+            [
+              -0.1272493153810501,
+              -0.045383282005786896,
+              -0.22623078525066376
+            ],
+            [
+              0.05238468199968338,
+              0.0432993583381176,
+              7.070005914044941e-09
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.1796339973807335,
+            0.0886826403439045,
+            0.22623079232066967
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_knee_link",
+      "path": "/g1_29dof/left_knee_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_knee_link/collisions/mesh_0/box",
+          "type": "Cube",
+          "link_bounds_m": [
+            [
+              -0.03500000201165676,
+              -0.03500000014901161,
+              -0.1549999974668026
+            ],
+            [
+              0.055000001564621925,
+              0.03500000014901161,
+              -0.05499999597668648
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.09000000357627869,
+            0.07000000029802322,
+            0.10000000149011612
+          ]
+        },
+        {
+          "path": "/g1_29dof/left_knee_link/collisions/mesh_1/box",
+          "type": "Cube",
+          "link_bounds_m": [
+            [
+              -0.02000000048428774,
+              -0.019999999552965164,
+              -0.25999999418854713
+            ],
+            [
+              0.03000000026077032,
+              0.019999999552965164,
+              -0.15999999269843102
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05000000074505806,
+            0.03999999910593033,
+            0.10000000149011612
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_ankle_pitch_link",
+      "path": "/g1_29dof/left_ankle_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_ankle_pitch_link/collisions/left_ankle_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 4266,
+          "link_bounds_m": [
+            [
+              -0.02449999935925007,
+              -0.006442185025662184,
+              -0.02455790899693966
+            ],
+            [
+              0.01150001771748066,
+              0.006557829678058624,
+              0.012889973819255829
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.03600001707673073,
+            0.013000014703720808,
+            0.03744788281619549
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_ankle_roll_link",
+      "path": "/g1_29dof/left_ankle_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_ankle_roll_link/collisions/left_ankle_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 39198,
+          "link_bounds_m": [
+            [
+              -0.06584136933088303,
+              -0.03774179145693779,
+              -0.035409145057201385
+            ],
+            [
+              0.14236535131931305,
+              0.03784090280532837,
+              0.023583902046084404
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.20820672065019608,
+            0.07558269426226616,
+            0.05899304710328579
+          ]
+        }
+      ]
+    },
+    {
+      "link": "pelvis_contour_link",
+      "path": "/g1_29dof/pelvis_contour_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/pelvis_contour_link/collisions/pelvis_contour_link/mesh",
+          "type": "Mesh",
+          "vertices": 108306,
+          "link_bounds_m": [
+            [
+              -0.058128051459789276,
+              -0.06776073575019836,
+              -0.15200547873973846
+            ],
+            [
+              0.061431244015693665,
+              0.0677763894200325,
+              -0.02776389941573143
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.11955929547548294,
+            0.13553712517023087,
+            0.12424157932400703
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_hip_pitch_link",
+      "path": "/g1_29dof/right_hip_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_hip_pitch_link/collisions/right_hip_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 10872,
+          "link_bounds_m": [
+            [
+              -0.04231603071093559,
+              -0.09881081432104111,
+              -0.08004375547170639
+            ],
+            [
+              0.04024069383740425,
+              -1.752833850288127e-10,
+              0.03712008520960808
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.08255672454833984,
+            0.09881081414575772,
+            0.11716384068131447
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_hip_roll_link",
+      "path": "/g1_29dof/right_hip_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_hip_roll_link/collisions/right_hip_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 11556,
+          "link_bounds_m": [
+            [
+              -0.026318851858377457,
+              -0.048774201422929764,
+              -0.12412407994270325
+            ],
+            [
+              0.08016039431095123,
+              0.04911654815077782,
+              0.046484772115945816
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.10647924616932869,
+            0.09789074957370758,
+            0.17060885205864906
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_hip_yaw_link",
+      "path": "/g1_29dof/right_hip_yaw_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_hip_yaw_link/collisions/right_hip_yaw_link/mesh",
+          "type": "Mesh",
+          "vertices": 17772,
+          "link_bounds_m": [
+            [
+              -0.1272493153810501,
+              -0.0432993583381176,
+              -0.22623078525066376
+            ],
+            [
+              0.05238468199968338,
+              0.045383282005786896,
+              7.070005914044941e-09
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.1796339973807335,
+            0.0886826403439045,
+            0.22623079232066967
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_knee_link",
+      "path": "/g1_29dof/right_knee_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_knee_link/collisions/mesh_0/box",
+          "type": "Cube",
+          "link_bounds_m": [
+            [
+              -0.03500000201165676,
+              -0.03500000014901161,
+              -0.1549999974668026
+            ],
+            [
+              0.055000001564621925,
+              0.03500000014901161,
+              -0.05499999597668648
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.09000000357627869,
+            0.07000000029802322,
+            0.10000000149011612
+          ]
+        },
+        {
+          "path": "/g1_29dof/right_knee_link/collisions/mesh_1/box",
+          "type": "Cube",
+          "link_bounds_m": [
+            [
+              -0.02000000048428774,
+              -0.019999999552965164,
+              -0.25999999418854713
+            ],
+            [
+              0.03000000026077032,
+              0.019999999552965164,
+              -0.15999999269843102
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05000000074505806,
+            0.03999999910593033,
+            0.10000000149011612
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_ankle_pitch_link",
+      "path": "/g1_29dof/right_ankle_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_ankle_pitch_link/collisions/right_ankle_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 4266,
+          "link_bounds_m": [
+            [
+              -0.02449999935925007,
+              -0.006557829678058624,
+              -0.02455790899693966
+            ],
+            [
+              0.01150001771748066,
+              0.006442185025662184,
+              0.012889973819255829
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.03600001707673073,
+            0.013000014703720808,
+            0.03744788281619549
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_ankle_roll_link",
+      "path": "/g1_29dof/right_ankle_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_ankle_roll_link/collisions/right_ankle_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 39222,
+          "link_bounds_m": [
+            [
+              -0.06584136933088303,
+              -0.03784090280532837,
+              -0.035409145057201385
+            ],
+            [
+              0.14236535131931305,
+              0.03774179145693779,
+              0.023583902046084404
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.20820672065019608,
+            0.07558269426226616,
+            0.05899304710328579
+          ]
+        }
+      ]
+    },
+    {
+      "link": "torso_link",
+      "path": "/g1_29dof/torso_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/torso_link/collisions/torso_link_rev_1_0/mesh",
+          "type": "Mesh",
+          "vertices": 154230,
+          "link_bounds_m": [
+            [
+              -0.06664276123046875,
+              -0.10771311819553375,
+              -0.008908695541322231
+            ],
+            [
+              0.08362708240747452,
+              0.10771439224481583,
+              0.31161943078041077
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.15026984363794327,
+            0.21542751044034958,
+            0.320528126321733
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_shoulder_pitch_link",
+      "path": "/g1_29dof/left_shoulder_pitch_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_shoulder_pitch_link/collisions/mesh_0/cylinder",
+          "type": "Mesh",
+          "approximation": "convexHull",
+          "vertices": 66,
+          "link_bounds_m": [
+            [
+              -0.025000001399385244,
+              0.00999999977648261,
+              -0.039999999961643815
+            ],
+            [
+              0.025000001399385244,
+              0.0699999984353781,
+              0.020000000408678758
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05000000279877049,
+            0.05999999865889549,
+            0.060000000370322576
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_shoulder_roll_link",
+      "path": "/g1_29dof/left_shoulder_roll_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_shoulder_roll_link/collisions/mesh_0/cylinder",
+          "type": "Mesh",
+          "approximation": "convexHull",
+          "vertices": 66,
+          "link_bounds_m": [
+            [
+              -0.03399999951943755,
+              -0.023999999277293682,
+              -0.0679999990388751
+            ],
+            [
+              0.02599999913945794,
+              0.03599999938160181,
+              -0.03799999970942736
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05999999865889549,
+            0.05999999865889549,
+            0.029999999329447746
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_shoulder_yaw_link",
+      "path": "/g1_29dof/left_shoulder_yaw_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_shoulder_yaw_link/collisions/left_shoulder_yaw_link/mesh",
+          "type": "Mesh",
+          "vertices": 14946,
+          "link_bounds_m": [
+            [
+              -0.032810695469379425,
+              -0.04141250625252724,
+              -0.11369692534208298
+            ],
+            [
+              0.048374809324741364,
+              0.03310637176036835,
+              0.031574152410030365
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.08118550479412079,
+            0.07451887801289558,
+            0.14527107775211334
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_elbow_link",
+      "path": "/g1_29dof/left_elbow_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_elbow_link/collisions/left_elbow_link/mesh",
+          "type": "Mesh",
+          "vertices": 5322,
+          "link_bounds_m": [
+            [
+              -0.029775112867355347,
+              -0.03125531226396561,
+              -0.04543027654290199
+            ],
+            [
+              0.10000001639127731,
+              0.03477716073393822,
+              0.029775114730000496
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.12977512925863266,
+            0.06603247299790382,
+            0.07520539127290249
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_wrist_roll_link",
+      "path": "/g1_29dof/left_wrist_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_wrist_roll_link/collisions/left_wrist_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 21366,
+          "link_bounds_m": [
+            [
+              -4.373005372393509e-15,
+              -0.030494267120957375,
+              -0.02999999187886715
+            ],
+            [
+              0.05599305406212807,
+              0.029999999329447746,
+              0.02999999187886715
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05599305406213244,
+            0.06049426645040512,
+            0.0599999837577343
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_wrist_pitch_link",
+      "path": "/g1_29dof/left_wrist_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_wrist_pitch_link/collisions/left_wrist_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 5154,
+          "link_bounds_m": [
+            [
+              -0.02850000001490116,
+              -0.028490660712122917,
+              -0.028490660712122917
+            ],
+            [
+              0.07450000196695328,
+              0.028490660712122917,
+              0.028490660712122917
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.10300000198185444,
+            0.056981321424245834,
+            0.056981321424245834
+          ]
+        }
+      ]
+    },
+    {
+      "link": "left_rubber_hand",
+      "path": "/g1_29dof/left_rubber_hand/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/left_rubber_hand/collisions/left_rubber_hand/mesh",
+          "type": "Mesh",
+          "vertices": 137244,
+          "link_bounds_m": [
+            [
+              -2.780881303010574e-08,
+              -0.0479060634970665,
+              -0.043028898537158966
+            ],
+            [
+              0.13182935118675232,
+              0.018651477992534637,
+              0.06344989687204361
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.13182937899556535,
+            0.06655754148960114,
+            0.10647879540920258
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_shoulder_pitch_link",
+      "path": "/g1_29dof/right_shoulder_pitch_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_shoulder_pitch_link/collisions/mesh_0/cylinder",
+          "type": "Mesh",
+          "approximation": "convexHull",
+          "vertices": 66,
+          "link_bounds_m": [
+            [
+              -0.025000001399385244,
+              -0.0699999984353781,
+              -0.03999999996164387
+            ],
+            [
+              0.025000001399385244,
+              -0.00999999977648261,
+              0.020000000408678702
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05000000279877049,
+            0.05999999865889549,
+            0.060000000370322576
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_shoulder_roll_link",
+      "path": "/g1_29dof/right_shoulder_roll_link/collisions",
+      "approximation": null,
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_shoulder_roll_link/collisions/mesh_0/cylinder",
+          "type": "Mesh",
+          "approximation": "convexHull",
+          "vertices": 66,
+          "link_bounds_m": [
+            [
+              -0.03399999951943755,
+              -0.03599999938160181,
+              -0.0679999990388751
+            ],
+            [
+              0.02599999913945794,
+              0.023999999277293682,
+              -0.03799999970942736
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05999999865889549,
+            0.05999999865889549,
+            0.029999999329447746
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_shoulder_yaw_link",
+      "path": "/g1_29dof/right_shoulder_yaw_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_shoulder_yaw_link/collisions/right_shoulder_yaw_link/mesh",
+          "type": "Mesh",
+          "vertices": 14994,
+          "link_bounds_m": [
+            [
+              -0.032810695469379425,
+              -0.03310637176036835,
+              -0.11369692534208298
+            ],
+            [
+              0.048374809324741364,
+              0.04141250625252724,
+              0.031574152410030365
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.08118550479412079,
+            0.07451887801289558,
+            0.14527107775211334
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_elbow_link",
+      "path": "/g1_29dof/right_elbow_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_elbow_link/collisions/right_elbow_link/mesh",
+          "type": "Mesh",
+          "vertices": 5322,
+          "link_bounds_m": [
+            [
+              -0.029775112867355347,
+              -0.03477716073393822,
+              -0.04543027654290199
+            ],
+            [
+              0.10000001639127731,
+              0.03125531226396561,
+              0.029775114730000496
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.12977512925863266,
+            0.06603247299790382,
+            0.07520539127290249
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_wrist_roll_link",
+      "path": "/g1_29dof/right_wrist_roll_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_wrist_roll_link/collisions/right_wrist_roll_link/mesh",
+          "type": "Mesh",
+          "vertices": 21360,
+          "link_bounds_m": [
+            [
+              -4.373005372393509e-15,
+              -0.029999999329447746,
+              -0.02999999187886715
+            ],
+            [
+              0.05599305406212807,
+              0.030494267120957375,
+              0.02999999187886715
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.05599305406213244,
+            0.06049426645040512,
+            0.0599999837577343
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_wrist_pitch_link",
+      "path": "/g1_29dof/right_wrist_pitch_link/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_wrist_pitch_link/collisions/right_wrist_pitch_link/mesh",
+          "type": "Mesh",
+          "vertices": 4770,
+          "link_bounds_m": [
+            [
+              -0.02850000187754631,
+              -0.028490660712122917,
+              -0.028490660712122917
+            ],
+            [
+              0.07450000196695328,
+              0.028490660712122917,
+              0.028490660712122917
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.10300000384449959,
+            0.056981321424245834,
+            0.056981321424245834
+          ]
+        }
+      ]
+    },
+    {
+      "link": "right_rubber_hand",
+      "path": "/g1_29dof/right_rubber_hand/collisions",
+      "approximation": "convexHull",
+      "geometries": [
+        {
+          "path": "/g1_29dof/right_rubber_hand/collisions/right_rubber_hand/mesh",
+          "type": "Mesh",
+          "vertices": 131556,
+          "link_bounds_m": [
+            [
+              -2.8722640266209964e-08,
+              -0.018651476129889488,
+              -0.043028924614191055
+            ],
+            [
+              0.13182809948921204,
+              0.0479060634970665,
+              0.06344989687204361
+            ]
+          ],
+          "link_axis_extents_m": [
+            0.1318281282118523,
+            0.06655753962695599,
+            0.10647882148623466
+          ]
+        }
+      ]
+    }
+  ],
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/g1_29dof.usd": "3d758783f76d86afdfd5df6e951a1d521dcebba8fd27120f181cfee588aca132",
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_base.usd": "fb6897abaa287dc547e36ab73c3c955432195200d71948b697968c45ab3222c7",
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_physics.usd": "c4f83d17273ae97b1d4c71feb399bd6cb9c8ba6f607dd64ecb62ae3b6fcd5a52",
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/configuration/g1_29dof_sensor.usd": "173c9feba7fd9fbafa38f4cefa03859a6f89d6fe6e82ef4a1f464940db95a3a9",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608",
+    "source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof.py": "fce7c3aef21f8d848f5333e81b0446676a02aa1552eb1e8ba144ccd7f14072d5",
+    "logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-16_13-45-09_wall5_amp_stage_a/params/env.yaml": "6ccfdbdfc632705c41e974c7773a3e20a9313d71df72d5065c9d5c04f749c510"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "phase": "baseline",
+  "threads": 24,
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-18_12-27-37_wall5_v13_hold_rsi/model_0.pt",
+  "num_envs": 4096,
+  "iterations": [
+    {
+      "it": 0,
+      "collection_time": 4.748837232589722,
+      "learn_time": 3.2330002784729004,
+      "instrumented": false
+    },
+    {
+      "it": 1,
+      "collection_time": 5.177937269210815,
+      "learn_time": 2.2089834213256836,
+      "instrumented": false
+    },
+    {
+      "it": 2,
+      "collection_time": 5.034559011459351,
+      "learn_time": 2.2667808532714844,
+      "instrumented": false
+    },
+    {
+      "it": 3,
+      "collection_time": 5.037457704544067,
+      "learn_time": 2.1951093673706055,
+      "instrumented": false
+    },
+    {
+      "it": 4,
+      "collection_time": 5.051013946533203,
+      "learn_time": 2.18808650970459,
+      "instrumented": false
+    },
+    {
+      "it": 5,
+      "collection_time": 5.0852227210998535,
+      "learn_time": 2.157687187194824,
+      "instrumented": false
+    },
+    {
+      "it": 6,
+      "collection_time": 5.118886470794678,
+      "learn_time": 2.175187587738037,
+      "instrumented": true
+    },
+    {
+      "it": 7,
+      "collection_time": 5.139641761779785,
+      "learn_time": 2.2169320583343506,
+      "instrumented": true
+    }
+  ],
+  "synchronized_nested_timings": {
+    "CNN_forward": {
+      "seconds": 1.0265957931987941,
+      "calls": 218
+    },
+    "policy_act": {
+      "seconds": 0.13105656625702977,
+      "calls": 48
+    },
+    "physics_step": {
+      "seconds": 2.9125314028933644,
+      "calls": 192
+    },
+    "camera_update": {
+      "seconds": 0.3738970230333507,
+      "calls": 96
+    },
+    "sim_forward": {
+      "seconds": 0.008379325736314058,
+      "calls": 96
+    },
+    "RSI_initialize": {
+      "seconds": 4.860140954144299,
+      "calls": 48
+    },
+    "reset_total": {
+      "seconds": 5.885787058621645,
+      "calls": 48
+    },
+    "env_step": {
+      "seconds": 10.05984594579786,
+      "calls": 48
+    },
+    "process_env_step": {
+      "seconds": 0.04875316983088851,
+      "calls": 48
+    },
+    "AMP_expert_windows": {
+      "seconds": 0.47339232126250863,
+      "calls": 42
+    },
+    "AMP_update": {
+      "seconds": 0.760940226726234,
+      "calls": 2
+    },
+    "learning_update": {
+      "seconds": 4.3874765313230455,
+      "calls": 2
+    }
+  },
+  "strict_restore": true
+}

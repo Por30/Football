@@ -1,0 +1,11 @@
+{
+  "agent": "/root/wall5_fullbody_review",
+  "result": "PASS",
+  "findings": [
+    "未发现需要修正的生产代码缺陷；保持wall5隔离、内部引用、质量/惯量/视觉不变和revision10契约",
+    "CPU逐点覆盖、runtime形状/接触、三类RSI、旧契约拒绝/权重迁移、新契约恢复覆盖充分"
+  ],
+  "limitations": [
+    "max_shapes和probe证明形状存在及目标点接触，不证明PhysX简化凸包在所有位置包含外观；图示明确为authored hull preview"
+  ]
+}

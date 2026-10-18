@@ -1,0 +1,36 @@
+{
+  "affected_call_path": [
+    "wall5 reset -> common initialize_reference/reset_scene -> PhysX/Warp",
+    "wall5 AMP/RSI -> 独立ground profile -> checkpoint身份"
+  ],
+  "critical_interfaces": [
+    "box .30x.30x.25; reference z=base_height+.05+box_pos_local.z",
+    "原15段必须保留；ground profile独立，三组AMP仍完整",
+    "地面候选按初始20帧中位箱底±.02m和首次抬升5mm前连续帧"
+  ],
+  "invariants": [
+    "所有wall5 reset箱底距各自地面5mm",
+    "机器人脚底修正、partial reset、全身碰撞和无特权策略保持",
+    "wall3/4以及football不切换数据或reset"
+  ],
+  "smallest_change_locus": [
+    "wall5配置/契约与纯张量筛帧helper",
+    "common reset仅默认关闭的ground分支和显式reference dataset入口",
+    "独立ground数据profile及映射/manifest文档"
+  ],
+  "mandatory_safeguards": [
+    "按已明示的可选澄清默认解释保留完整地面拾取；不将未回复视作用户确认；仅新增可逆profile，原15段manifest/PT逐字节保留",
+    "AMP完整拾起片段与RSI离地前连续帧分开处理，不平移高位片段冒充地面动作",
+    "wall5箱底按旋转后extent离地5mm；保留机器人脚底修正，不向下移机器人；partial reset不改存活环境",
+    "hold AMP保留，hold RSI禁用；无有效地面帧时明确失败；不得读取被裁范围外帧",
+    "保留全身碰撞和29DOF、60/50Hz、10帧AMP、深度/本体/监督信息边界；football与wall3/4数据/reset合同不变",
+    "移除wall5平台时同步Warp目标及reset引用",
+    "小环境覆盖全部候选RSI帧的手/前臂/膝/躯干碰撞穿插与初步接触有限值，首reset/自动/partial reset、yaw/tilt、观测历史",
+    "小规模PPO/AMP更新、新checkpoint恢复与旧合同拒绝；不启动正式训练，不停止后台进程"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall5_ground_20261017/check.sh",
+    "bash docs/carrybox/wall5_ground_20261017/smoke.sh"
+  ],
+  "blockers": []
+}

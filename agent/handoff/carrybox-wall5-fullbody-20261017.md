@@ -1,0 +1,18 @@
+---
+task_id: "carrybox-wall5-fullbody-20261017"
+language: "zh-CN"
+axes: ["E", "P", "L"]
+risk_tier: "T2"
+status: "DONE"
+changed_files: ["docs/carrybox/wall5_fullbody_20261017/README.md", "docs/carrybox/wall5_fullbody_20261017/baseline.json", "docs/carrybox/wall5_fullbody_20261017/baseline.log", "docs/carrybox/wall5_fullbody_20261017/browser.log", "docs/carrybox/wall5_fullbody_20261017/check_geometry.py", "docs/carrybox/wall5_fullbody_20261017/check_geometry.sh", "docs/carrybox/wall5_fullbody_20261017/collision_structure.html", "docs/carrybox/wall5_fullbody_20261017/collision_structure.png", "docs/carrybox/wall5_fullbody_20261017/cpu.log", "docs/carrybox/wall5_fullbody_20261017/expert_brief.json", "docs/carrybox/wall5_fullbody_20261017/expert_review.json", "docs/carrybox/wall5_fullbody_20261017/geometry.json", "docs/carrybox/wall5_fullbody_20261017/geometry.log", "docs/carrybox/wall5_fullbody_20261017/geometry_initial_fail.log", "docs/carrybox/wall5_fullbody_20261017/geometry_retry_task.md", "docs/carrybox/wall5_fullbody_20261017/interactive_preview.png", "docs/carrybox/wall5_fullbody_20261017/model.pt", "docs/carrybox/wall5_fullbody_20261017/receipts.json", "docs/carrybox/wall5_fullbody_20261017/receipts_geometry_retry.json", "docs/carrybox/wall5_fullbody_20261017/receipts_initial.json", "docs/carrybox/wall5_fullbody_20261017/runtime.json", "docs/carrybox/wall5_fullbody_20261017/smoke.json", "docs/carrybox/wall5_fullbody_20261017/smoke.log", "docs/carrybox/wall5_fullbody_20261017/smoke.py", "docs/carrybox/wall5_fullbody_20261017/smoke.sh", "docs/carrybox/wall5_fullbody_20261017/visualize.py", "docs/carrybox/wall5_fullbody_20261017/artifact_validation.json", "source/perceptual_ball/perceptual_ball/carrybox_fullbody_collision.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py", "projects/README.md", "projects/findbox/README.md", "agent/plan/carrybox-wall5-fullbody-20261017.md", "agent/task/carrybox-wall5-fullbody-20261017.md", "agent/report/carrybox-wall5-fullbody-20261017.md", "agent/handoff/carrybox-wall5-fullbody-20261017.md"]
+task_contract_sha256: "4b7afb582c87d6973b36232af36316d19ff58fe9be1bfc70acaf16046a9d2ea8"
+tests: [{"command": "bash docs/carrybox/wall5_fullbody_20261017/check_geometry.sh", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "489d89f5b1f3e020f467c2dacc9e1f51ddf13f4ebe96361a098f5b560f694219", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "runner": "run_engineering_tests.py"}, {"command": "bash docs/carrybox/wall5_fullbody_20261017/smoke.sh", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "613b1f7a62c9edda24efaf851a1de12789be6963a4bace4add28029118c91ced", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "runner": "run_engineering_tests.py"}]
+artifact: "HANDOFF"
+resume_command: null
+---
+
+实现/验收完成，无待恢复步骤。入口docs/carrybox/wall5_fullbody_20261017/README.md；geometry.json、smoke.json及receipts.json保存边界和证据，collision_structure.html可离线旋转/隐藏/比较，collision_structure.png用于直接查看。
+
+wall5默认已是revision10/profile g1_visual_convex_hull_full_body_v1；历史revision9的严格play/resume应拒绝，显式--carrybox_weights_only才可在新环境查看旧权重。不要把docs/model.pt当正式训练产物。继续保持actor/critic深度+本体、35x10 AMP、原success口径。
+
+自碰撞仍False；用户若后续要求开启，需要审查邻接/固定关节过滤、三类RSI接触冲击，不能直接声称本次验证已覆盖。35shape运行时已核对，但authored预览不是PhysX cooked顶点导出。正式训练状态需后续操作前重新核对，本次未管理后台训练。

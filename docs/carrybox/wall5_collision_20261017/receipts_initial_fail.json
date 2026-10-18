@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_collision_20261017/inspect.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "7b403f9e5ba8886f01d58f3d5dc7ddde21173524f0b286113050c4c5b78f8d93",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "14651942559491e0f5ab76249f88f3ac731049228188385b3e75554db4d4a05d",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

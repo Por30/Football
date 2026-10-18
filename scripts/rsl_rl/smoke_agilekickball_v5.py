@@ -25,7 +25,8 @@ from perceptual_ball.rsl_rl_extensions.export import export_depth_policy
 def main():
     torch.set_num_threads(2)
     out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
-    cfg,agent=AgileKickballV5EnvCfg(),AgileKickballV5PPORunnerCfg()
+    # This historical smoke explicitly exercises the optional randomization path.
+    cfg,agent=AgileKickballV5EnvCfg(randomize_gains=True,randomize_depth=True),AgileKickballV5PPORunnerCfg()
     old=AgileKickballV4EnvCfg()
     assert old.observations.perception.depth_image.func.__name__=='synthetic_ball_depth_image'
     assert not hasattr(old.scene,'depth_camera')

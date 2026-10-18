@@ -1,0 +1,12 @@
+[
+  {
+    "command": "bash docs/carrybox/wall5_training_v12_20261017/check.sh",
+    "result": "FAIL",
+    "exit_code": 1,
+    "executed": true,
+    "receipt_sha256": "f3dd05c557634c664853c2e8f47253992097dd579208171633e739a45f0974ad",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner": "run_engineering_tests.py"
+  }
+]

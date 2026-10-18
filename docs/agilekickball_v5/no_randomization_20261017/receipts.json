@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p 'test_agilekickball_v5*.py' -v",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "724c177f9bc70f49b1633ce9690c70d45d8305d4b8faa944fe7528161b315529",
+      "stdout_sha256": "9ea65d9c27827305dcb28fe9e3a7d27601d29a048236bccaa56091e3fdfd4dce",
+      "stderr_sha256": "9961046cb5af5081d1544d2f0014316e9e0f351b6ee9733aa4ad58299216a647",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

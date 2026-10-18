@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "fps": 60,
+  "quaternion_order": "xyzw",
+  "joint_names": [
+    "left_hip_pitch_joint",
+    "left_hip_roll_joint",
+    "left_hip_yaw_joint",
+    "left_knee_joint",
+    "left_ankle_pitch_joint",
+    "left_ankle_roll_joint",
+    "right_hip_pitch_joint",
+    "right_hip_roll_joint",
+    "right_hip_yaw_joint",
+    "right_knee_joint",
+    "right_ankle_pitch_joint",
+    "right_ankle_roll_joint",
+    "waist_yaw_joint",
+    "waist_roll_joint",
+    "waist_pitch_joint",
+    "left_shoulder_pitch_joint",
+    "left_shoulder_roll_joint",
+    "left_shoulder_yaw_joint",
+    "left_elbow_joint",
+    "left_wrist_roll_joint",
+    "left_wrist_pitch_joint",
+    "left_wrist_yaw_joint",
+    "right_shoulder_pitch_joint",
+    "right_shoulder_roll_joint",
+    "right_shoulder_yaw_joint",
+    "right_elbow_joint",
+    "right_wrist_roll_joint",
+    "right_wrist_pitch_joint",
+    "right_wrist_yaw_joint"
+  ],
+  "source_schema": "PhysHSI carrybox_config.py dataset.frame_rate=60; resources/config/joint_id.txt",
+  "groups": {
+    "loco_direction": 0.4,
+    "pickUp": 0.4,
+    "carryWith": 0.2
+  },
+  "clips": [
+    {
+      "file": "hold/hold_box_01.pt",
+      "frames": 300,
+      "sha256": "ac0e873274b3425925b218ccbd682e59590210363754c39bc78092231be273e8",
+      "group": "carryWith",
+      "source_file": "carryWith/carrywith1.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_left_045.pt",
+      "frames": 253,
+      "sha256": "dfdf2fe9bf0014327477bed39cd08f5526b6e4e4092613ae463d15fa47524fcb",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B10_-_walk_turn_left_(45)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_left_135.pt",
+      "frames": 289,
+      "sha256": "f399edac6517b511d277aed64026d1169eb724281f9e386a27d4a162f6021374",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B11_-_walk_turn_left_(135)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_right_090.pt",
+      "frames": 263,
+      "sha256": "d643da4f4971ab3d78ba272d14a1761ef80e54cb429070bf3a1cc92b85366a33",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B12_-_walk_turn_right_(90)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_right_045.pt",
+      "frames": 256,
+      "sha256": "9aa45b671abcd29d5d092c6caf0b38367e861b41c8950b98a4a2b2761c9b34fa",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B13_-_walk_turn_right_(45)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_right_135.pt",
+      "frames": 321,
+      "sha256": "1ca14d346efac52f5f0ebcd9bc52cd1e6eb6a67a73c37a65e78024abec696868",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B14_-_walk_turn_right_(135)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_around_01.pt",
+      "frames": 329,
+      "sha256": "bbf1bf4b9a6abc7db5a05fc166a6e11f454ecb14ba7371d4aca2476c45fb5cca",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B15_-_walk_turn_around_(same_direction)_stageii.pt"
+    },
+    {
+      "file": "locomotion/stand_to_walk_01.pt",
+      "frames": 342,
+      "sha256": "b5183955fe3766bc30901e66c650f3601daf4fd2969125acc5e73e2ba93064bd",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B1_-_stand_to_walk_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_to_stand_01.pt",
+      "frames": 340,
+      "sha256": "a341d6821635bbbc9cda0ec0711034511e9ddb267be3c9206f8aaf539cb21fec",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B2_-_walk_to_stand_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_to_stand_02.pt",
+      "frames": 293,
+      "sha256": "78fea9d0b50e521da7e373e7202d5d5c2f625273ef095ae5371249d5a35b762e",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B2_-_walk_to_stand_t2_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_forward_01.pt",
+      "frames": 456,
+      "sha256": "02cbd97382a70f4e6ac33c03939a98ce723528326b5ea9046802d65f38b039b9",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B3_-_walk1_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_left_090.pt",
+      "frames": 214,
+      "sha256": "200d9e22dbff9245d10749173896fd0bb822149491d96fc0d3c7c29d94727bd3",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B9_-_walk_turn_left_(90)_stageii.pt"
+    },
+    {
+      "file": "pick_up/pick_up_03.pt",
+      "frames": 129,
+      "sha256": "cd54f21376d77ea7d6cccb662b5ea2ae53b68ca7a61528742e40ef0c2cdf30f5",
+      "group": "pickUp",
+      "source_file": "pickUp/pickup3.pt"
+    }
+  ],
+  "dataset_revision": 4,
+  "dataset_version": "findbox_ground_pickup_v1",
+  "provenance": {
+    "source_dataset": "source/perceptual_ball/perceptual_ball/assets/motions/findbox",
+    "source_manifest_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "excluded_clips": [
+      "pick_up/pick_up_01.pt",
+      "pick_up/pick_up_02.pt"
+    ],
+    "selection": "Keep complete native ground-origin pickup03; no frame edits",
+    "record": "docs/carrybox/wall5_ground_20261017/profile_record.json"
+  },
+  "ground_reset": {
+    "collision_profile": "g1_visual_convex_hull_full_body_v1",
+    "pickup_frame_range_exclusive": [
+      0,
+      32
+    ],
+    "evidence": "docs/carrybox/wall5_ground_20261017/reset_geometry_initial_fail.json"
+  }
+}

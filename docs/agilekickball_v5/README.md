@@ -1,5 +1,7 @@
 # AgileKickball v5 · 场景深度与自遮挡
 
+2026-10-17更新：按用户要求，默认关闭Kp/Kd随机化和全部深度噪声（`randomize_gains=False`、`randomize_depth=False`）；保留场景光轴深度和自遮挡。旧带扰动模型不能直接按新默认值精确恢复，详见[关闭记录与兼容说明](no_randomization_20261017/README.md)。下方2026-10-14训练状态与默认开关为历史记录。
+
 2026-10-14更新：默认开启[Kp/Kd与深度随机化](randomization/README.md)，revision更新为`scene_depth_gain_noise_20261014`。4环境更新/恢复/导出及随机化隔离验收通过。以下初版深度证据保留为历史；旧验证模型不能直接恢复到新合同。
 
 2026-10-14：新增 `Template-Perceptual-Ball-AgileKickball-v5`，继承 v4 的接球、回传给发球者、恢复站稳、速度/方向课程及 AMP。v4 ID、模型、奖励和观测接口保留。v5 尚未启动正式训练；4环境短测已通过，实机标定验收待完成。
@@ -38,9 +40,11 @@ bash scripts/rsl_rl/train_agilekickball_v5.sh env.camera_profile_path=/absolute/
 bash scripts/rsl_rl/train_agilekickball_v5.sh --resume --checkpoint /absolute/path/v5/model.pt
 ```
 
-正式产物独立写入 `logs/rsl_rl/agilekickball_v5/`；v4原目录保留。运行前核对GPU资源，当前Wall4正在同一GPU训练。本次4环境短测允许短暂资源竞争，不将并发短测耗时作为4096环境速度结论。
+正式产物独立写入 `logs/rsl_rl/agilekickball_v5/`；v4原目录保留。运行前核对GPU资源。2026-10-14验收时Wall4正在同一GPU训练，4环境短测允许短暂资源竞争，不将并发短测耗时作为4096环境速度结论。
 
 验证命令：
+
+下方GPU smoke保留历史随机化验收场景，显式开启两个开关；它不代表当前默认无扰动配方。
 
 ```bash
 /home/cao/ENTER/envs/ball/bin/python -m unittest discover -s tests -p test_agilekickball_v5.py -v

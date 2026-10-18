@@ -1,0 +1,128 @@
+{
+  "phase": "candidate",
+  "threads": 24,
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-18_12-27-37_wall5_v13_hold_rsi/model_0.pt",
+  "num_envs": 4096,
+  "iterations": [
+    {
+      "it": 0,
+      "collection_time": 3.9353203773498535,
+      "learn_time": 1.9586162567138672,
+      "instrumented": false
+    },
+    {
+      "it": 1,
+      "collection_time": 3.1494390964508057,
+      "learn_time": 0.895606279373169,
+      "instrumented": false
+    },
+    {
+      "it": 2,
+      "collection_time": 3.0013468265533447,
+      "learn_time": 0.8839738368988037,
+      "instrumented": false
+    },
+    {
+      "it": 3,
+      "collection_time": 2.985565662384033,
+      "learn_time": 0.8710117340087891,
+      "instrumented": false
+    },
+    {
+      "it": 4,
+      "collection_time": 2.9771854877471924,
+      "learn_time": 0.8572773933410645,
+      "instrumented": false
+    },
+    {
+      "it": 5,
+      "collection_time": 3.0156872272491455,
+      "learn_time": 0.8883359432220459,
+      "instrumented": false
+    },
+    {
+      "it": 6,
+      "collection_time": 3.0596330165863037,
+      "learn_time": 0.8935403823852539,
+      "instrumented": true
+    },
+    {
+      "it": 7,
+      "collection_time": 3.044769287109375,
+      "learn_time": 0.8968853950500488,
+      "instrumented": true
+    }
+  ],
+  "synchronized_nested_timings": {
+    "CNN_forward": {
+      "seconds": 0.39466385124251246,
+      "calls": 138
+    },
+    "policy_act": {
+      "seconds": 0.1437105154618621,
+      "calls": 48
+    },
+    "physics_step": {
+      "seconds": 2.9321038527414203,
+      "calls": 192
+    },
+    "camera_update": {
+      "seconds": 0.38926001684740186,
+      "calls": 96
+    },
+    "sim_forward": {
+      "seconds": 0.008530689869076014,
+      "calls": 96
+    },
+    "RSI_initialize": {
+      "seconds": 0.6548887994140387,
+      "calls": 48
+    },
+    "reset_total": {
+      "seconds": 1.6832292242906988,
+      "calls": 48
+    },
+    "env_step": {
+      "seconds": 5.891503757797182,
+      "calls": 48
+    },
+    "process_env_step": {
+      "seconds": 0.04760845331475139,
+      "calls": 48
+    },
+    "AMP_expert_windows": {
+      "seconds": 0.06354944035410881,
+      "calls": 42
+    },
+    "AMP_update": {
+      "seconds": 0.35214351397007704,
+      "calls": 2
+    },
+    "learning_update": {
+      "seconds": 1.7858889559283853,
+      "calls": 2
+    }
+  },
+  "strict_restore": true,
+  "rsi_equivalence": {
+    "max_abs_errors": {
+      "root": 0.0,
+      "link_velocity": 0.0,
+      "link_angular": 0.0,
+      "joint": 0.0,
+      "joint_velocity": 0.0,
+      "ends": 0.0,
+      "box": 0.0,
+      "wall": 0.0,
+      "cylinder0": 0.0,
+      "cylinder1": 0.0,
+      "cylinder2": 0.0
+    },
+    "rng_equal": true,
+    "partial_reset_unchanged": true,
+    "feet_clear": true,
+    "loco_count": 413,
+    "hold_count": 99,
+    "hold_min_box_bottom": 0.7299520373344421
+  }
+}

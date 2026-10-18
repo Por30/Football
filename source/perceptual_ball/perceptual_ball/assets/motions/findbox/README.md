@@ -1,5 +1,7 @@
 # FindBox AMP 数据集
 
+2026-10-17：wall5专用[ground_pickup](ground_pickup/README.md)新增地面拾取profile（13段、3785帧），拾取只使用完整`pick_up_03`；本目录15段及其manifest保持原样，继续供CarryBox基线、wall3/wall4使用。wall5的AMP与RSI均显式切换到子目录，旧模型需要显式weights-only迁移。
+
 这是整理后的正式数据目录，与同级`../kick/`足球AMP数据并列。15段、4155帧、60Hz；抱箱片段5秒。AMP与walled参考初始化默认使用本目录。
 
 ```text

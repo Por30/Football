@@ -1,5 +1,23 @@
 # 找箱与搬箱子项目 · findbox
 
+2026-10-18 13:16 JST：[wall5改为从零正式训练](../../docs/carrybox/wall5_fresh_20261018/README.md)：按用户明确要求停止恢复运行PID3810947，新PID3812053，4096环境、40000轮、fresh，无resume/warm-start。首checkpoint优化器step20与Normalizer count61440确认全新初始化；检查迭代11→14，最近10轮平均3.801秒、最慢3.830秒。保留性能优化/revision13/RSI80-0-20；旧产物保留，训练进行中，未证明收敛。
+
+2026-10-18 13:08 JST：[wall5性能优化与正式恢复](../../docs/carrybox/wall5_perf_20261018/README.md)：RSI合并写入、AMP批量native插值及同批CNN复用，4096同配置平均7.254→3.870秒/轮；31项CPU与4096完整更新/部分reset/恢复通过。新PID3810947，正式最近10轮平均3.902秒、最慢3.940秒，检查迭代12→15。保持revision13/RSI80-0-20/全部遮挡与学习配置，从原正式model0恢复；旧70轮中未落盘部分无法恢复。训练进行中，未证明收敛。
+
+2026-10-18 12:33 JST：[wall5 revision13正式启动核验](../../docs/carrybox/wall5_start_20261018/README.md)：用户启动PID3804340，4096环境、fresh；实测迭代8→10，model_0契约/参数/优化器正常，RSI80/0/20及60维AMP已生效。第1–10轮平均7.001秒、最慢7.21秒，未达到6秒目标；仍在训练初期，未证明收敛。只读检查，未操作训练。
+
+2026-10-17：[wall5 RSI改为80/0/20](../../docs/carrybox/wall5_hold_rsi_20261017/README.md)：按用户要求20%改为hold，pickup为0；loco箱子仍贴地，hold保留参考手边箱高。revision13，14项CPU和4环境reset短测通过；未启动/重启训练，未验证持箱稳定性。
+
+2026-10-17：[wall5 revision12训练端修订](../../docs/carrybox/wall5_training_v12_20261017/README.md)：60维任务AMP＋running normalization、可见范围pose监督coef0.1、KL自适应PPO/std1/entropy0.01/5 epochs/MLP512-256-256、roll0.8＋一次性失败罚、reset80/20/0；同步修正RSI连杆速度语义。保留13段数据、0–31地面起点、全身碰撞和无特权actor/critic。38项CPU及4环境2＋1轮更新/恢复/导出通过；未正式训练或证明收敛，旧网络不兼容需fresh。
+
+2026-10-17：[wall5地面拾箱数据与全贴地reset](../../docs/carrybox/wall5_ground_20261017/README.md)完成：独立ground_pickup profile保留13段（完整地面pickup03，排除高位01/02），原15段不变。reset70/30/0，箱底离地5mm、移除平台；全身碰撞验证后pickup仅采0–31帧。27项CPU、4环境全部32帧物理检查、PPO/AMP 2＋1轮及恢复通过，revision11；未启动正式训练或证明收敛。
+
+2026-10-17 12:49 JST：[wall5拾取失败与reset核对](../../docs/carrybox/wall5_pickup_reset_20261017/README.md)：旧revision9日志止于20786轮，近100轮约556步，loco累计成功0；AMP占净混合奖励约91.7%，稳定抓握奖励近零。核对了60/30/10参考初始化、pickup支撑台与地面起点差异、28.65°横滚终止及成功不reset。当前无CarryBox训练进程，revision10全身碰撞尚未正式训练；CPU只读审计通过，未改参或重启。
+
+2026-10-17：[wall5全身碰撞与结构可视化](../../docs/carrybox/wall5_fullbody_20261017/README.md)完成：新增7处、替换肩/小腿6处，35个实体连杆全覆盖；PhysX实测shape30→35，13处接触探针、质量/惯量/深度不变及4环境回放/新契约恢复通过。可交互HTML与四视图PNG已保存。wall5升revision10，旧revision9仅显式weights-only迁移；自碰撞仍关闭，未启动正式训练或验证收敛。
+
+2026-10-17：[wall5 G1碰撞体核对](../../docs/carrybox/wall5_collision_20261017/README.md)：离线USD＋原生成函数确认28个带碰撞link、26个凸包Mesh＋4个膝部Cube；双手为凸包、头部无独立碰撞体。物理自碰撞关闭，Warp视觉自遮挡保留。仅审计，未改资产/配置/训练。
+
 2026-10-16 21:57 JST：[wall5平均回合长度诊断](../../docs/carrybox/wall5_length_20261016/README.md)完成：正式PID2996727保持，检查到7396轮、近100轮约290步；16环境四组推理确认当前策略对push敏感，关闭后已完成回合均值约531–546步，但loco仍远离箱子且成功0。AMP仍有效，PPO lr=3e-4，未发现旧立即reset重现；任务接近/拾取学习及推扰课程需后续改进。本次仅诊断，生产训练未修改。
 
 2026-10-16：[与Kickball交叉核对相机](../../docs/carrybox/camera_crosscheck_20261016/README.md)：wall3–5名义安装匹配G1 rev_1_0，当前正式wall5仍为89.16°×58°/50Hz/4帧、光轴深度除以3；官方垂直图示55.2°，实机K与光学外参未标定。原CarryBox-v0为48×32、79.61°×58.11°。仅核对，未改训练。
@@ -64,9 +82,9 @@
 
 ## 当前状态与下一步
 
-截至2026-10-16 13:49 JST，wall5正式训练PID2996727运行中，4096环境、40000轮、从头初始化，已完成第12轮；热身后10轮平均4.244秒、最慢4.36秒，AMP有效率100%，checkpoint契约与有限值核验通过。[正式启动记录](../../docs/carrybox/wall5_start_20261016/README.md)。此前wall4进程已不在运行，本轮核对时只发现新的wall5训练进程。
+截至2026-10-17 12:49 JST，没有CarryBox训练或play进程；旧wall5 revision9正式日志最后完成20786/40000轮，未完成预定训练。近100轮平均回合约556步，但loco累计拾箱成功仍0；pickup/hold的少量成功不代表完整地面流程。[最新诊断与reset逻辑](../../docs/carrybox/wall5_pickup_reset_20261017/README.md)。
 
-后续监控AMP与分技能寿命/倾倒曲线，独立评估完整地面拾箱流程。P1/P2建议尚未实现；启动成功和当前速度正常不等于收敛。docs下模型仍只作短测工件，正式wall5模型位于对应logs目录。
+当前wall5代码为revision13，用户已于2026-10-18启动4096环境fresh正式训练。12:33 JST PID3804340连续推进到第10轮，model_0确认RSI80/0/20、60维AMP/Normalizer及新版PPO已生效；第1–10轮平均7.001秒，超过6秒目标，尚未证明收敛。本次只读核验，没有修改或重启训练。历史短测模型仍仅作工程验证。
 
 ## 配置与代码地图
 
@@ -77,20 +95,21 @@
 | 环境、观测、奖励、PPO/AMP参数 | `tasks/manager_based/perceptual_ball/carrybox_env_cfg.py` |
 | 深度、标签、奖励和terminal历史 | `tasks/manager_based/perceptual_ball/mdp/carrybox.py` |
 | wall3/wall4继承配置 | `tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py` |
-| wall5阶段A配置与AMP | `tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py`、`mdp/carrybox_wall5.py`、`carrybox_wall5.py`、`rsl_rl_extensions/carrybox_wall5.py` |
+| wall5配置与任务AMP | `tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py`、`mdp/carrybox_wall5.py`、`carrybox_wall5.py`、`rsl_rl_extensions/carrybox_wall5.py` |
 | wall场景、参考初始化、奖励和深度扰动 | `tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py` |
 | yaw课程、帧/标签配对缓存 | `carrybox_walled.py` |
 | 抬起保持判据 | `tasks/manager_based/perceptual_ball/mdp/carrybox_state.py` |
 | FindBox加载与AMP特征schema | `carrybox_amp.py` |
 | actor/critic、位姿头、PPO/AMP及checkpoint | `rsl_rl_extensions/carrybox.py` |
 
-actor/critic只读取深度与本体观测。箱子真值仅用于监督、奖励及成功判定；AMP也是纯本体运动输入，不读取箱子真值。持箱参考动作只提供动作先验，不增加搬运目标点或放下阶段。
+actor/critic只读取深度与本体观测。箱子真值用于监督、奖励及成功判定；wall5 revision12按用户要求也将有界箱相对位置加入训练专用60维AMP，基线/wall3/4仍用原本体AMP。上述信息都不进入actor/critic。持箱参考动作只提供动作先验，不增加搬运目标点或放下阶段。
 
 ## 数据与产物
 
 | 路径（仓库根目录起） | 用途 |
 |---|---|
-| `source/perceptual_ball/perceptual_ball/assets/motions/findbox/` | 当前15段规范AMP/RSI数据：行走11、拾起3、抱箱1；dataset_revision=3 |
+| `source/perceptual_ball/perceptual_ball/assets/motions/findbox/` | 基线及wall3/wall4的15段规范AMP/RSI数据：行走11、拾起3、抱箱1；dataset_revision=3 |
+| `source/perceptual_ball/perceptual_ball/assets/motions/findbox/ground_pickup/` | wall5专用13段：行走11、地面拾起1、抱箱1；dataset_revision=4；reset只用loco/离地前pickup |
 | `source/perceptual_ball/perceptual_ball/assets/motions/findbox/amp_manifest.json` | 60Hz/xyzw/29关节顺序、采样权重、显式group、片段hash |
 | `findbox/` | 修订2旧命名15段兼容快照；显式指定仍可加载 |
 | `source/perceptual_ball/perceptual_ball/assets/motions/carrybox/pickUp/` | 最初移植的参考归档，当前AMP不读取 |

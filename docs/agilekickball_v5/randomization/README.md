@@ -1,6 +1,8 @@
 # v5 Kp/Kd 与深度随机化
 
-2026-10-14完成实现与短测。v5默认开启；仅修改v5专属配置与传感器，v4、Wall4、共享G1资产、奖励、动作和足球critic保持。没有启动v5正式训练。
+2026-10-17：按用户要求，v5默认关闭Kp/Kd随机化与全部深度噪声，固定名义增益并输出无噪声场景深度。[关闭记录、验证与旧checkpoint兼容说明](../no_randomization_20261017/README.md)。以下范围在显式开启时生效。
+
+历史：2026-10-14完成实现与短测，当时v5默认开启；仅修改v5专属配置与传感器，v4、Wall4、共享G1资产、奖励、动作和足球critic保持。当次工作没有启动v5正式训练。
 
 | 参数 | 默认范围 | 采样时机 |
 |---|---|---|
@@ -23,21 +25,22 @@ G1名义Kp/Kd为髋150/2、膝300/4、踝40/1、腰300/4、肩200/3、肘100/1�
 
 随机化合同独立于真实`camera_profile`，放在checkpoint/export的`depth_contract.training_randomization`，包含nominal关节名称/Kp/Kd、范围和采样规则。新revision为`scene_depth_gain_noise_20261014`；旧无噪声v5验证模型、不同范围/开关不能当作相同实验精确恢复。模型恢复不保存进行中回合的物理现场或噪声帧，也不声称逐帧完全重演。
 
-`training_only=True`表示扰动不进入导出的实机预处理/策略；**默认play仍使用随机化仿真，并不会因为load_optimizer=False自动关闭**。实机输入仍用原米制预处理，控制器使用核定的固定增益，不在实机上额外随机采样。
+`training_only=True`表示扰动不进入导出的实机预处理/策略；play是否使用扰动由环境开关决定，不会因为`load_optimizer=False`自动改变。2026-10-17起默认关闭；播放旧带扰动模型需显式恢复原开关以匹配合同。实机输入仍用原米制预处理，控制器使用核定的固定增益，不在实机上额外随机采样。
 
-启动新实验仍使用：
+启动新实验默认无扰动：
 
 ```bash
 bash scripts/rsl_rl/train_agilekickball_v5.sh
 ```
 
-按需调整新实验的增益范围，或创建无扰动对照：
+显式重现历史带扰动配方，或调整已开启实验的增益范围：
 
 ```bash
 bash scripts/rsl_rl/train_agilekickball_v5.sh \
-  'env.kp_scale_range=[0.95,1.05]' 'env.kd_scale_range=[0.95,1.05]'
+  env.randomize_gains=True env.randomize_depth=True
 bash scripts/rsl_rl/train_agilekickball_v5.sh \
-  env.randomize_gains=False env.randomize_depth=False
+  env.randomize_gains=True env.randomize_depth=True \
+  'env.kp_scale_range=[0.95,1.05]' 'env.kd_scale_range=[0.95,1.05]'
 ```
 
 深度范围位于`AgileKickballV5EnvCfg.depth_randomization`，可通过如`'env.depth_randomization.bias_m_range=[-0.003,0.003]'`覆盖。精确resume/play需与模型训练合同相同的参数。正式产物仍在`logs/rsl_rl/agilekickball_v5/`。

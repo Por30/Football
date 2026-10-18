@@ -1,0 +1,260 @@
+{
+  "status": "PASS",
+  "num_envs": 4,
+  "contact_peak_force_n": {
+    "pelvis": [
+      0.6629413962364197,
+      0.6628118753433228,
+      0.6629201769828796,
+      0.6625276803970337
+    ],
+    "waist_yaw_link": [
+      68.7928237915039,
+      60.59419631958008,
+      68.58556365966797,
+      68.27874755859375
+    ],
+    "waist_roll_link": [
+      3.5907208919525146,
+      3.701594591140747,
+      3.845407009124756,
+      4.364914894104004
+    ],
+    "head_link": [
+      0.09786582738161087,
+      0.09906967729330063,
+      0.09892209619283676,
+      0.10070796310901642
+    ],
+    "left_wrist_yaw_link": [
+      318.2937316894531,
+      318.6801452636719,
+      318.79608154296875,
+      77.55061340332031
+    ],
+    "right_wrist_yaw_link": [
+      319.4034118652344,
+      117.55709838867188,
+      118.90299224853516,
+      127.78945922851562
+    ],
+    "logo_link": [
+      1.6257174015045166,
+      1.6225870847702026,
+      1.6254684925079346,
+      1.1974008083343506
+    ],
+    "left_knee_link": [
+      0.19854173064231873,
+      0.1999117136001587,
+      0.1971520185470581,
+      0.19398999214172363
+    ],
+    "right_knee_link": [
+      0.19601978361606598,
+      0.19842177629470825,
+      0.1958666294813156,
+      0.1914723664522171
+    ],
+    "left_shoulder_pitch_link": [
+      0.026271063834428787,
+      0.022889455780386925,
+      0.018143614754080772,
+      0.02668045274913311
+    ],
+    "right_shoulder_pitch_link": [
+      0.024605432525277138,
+      0.020528731867671013,
+      0.025501277297735214,
+      0.022873608395457268
+    ],
+    "left_shoulder_roll_link": [
+      276.63067626953125,
+      319.921142578125,
+      176.2809600830078,
+      320.40008544921875
+    ],
+    "right_shoulder_roll_link": [
+      250.70277404785156,
+      319.38818359375,
+      176.18984985351562,
+      318.3185729980469
+    ]
+  },
+  "body_count": 44,
+  "dof_count": 29,
+  "old_shapes": 30,
+  "new_shapes": 35,
+  "mass_inertia_match": true,
+  "all_three_rsi_finite": true,
+  "policy_steps": 200,
+  "resets": 2,
+  "old_contract_rejected": true,
+  "explicit_weights_transfer": true,
+  "new_contract_roundtrip": true,
+  "policy_parameters_unchanged": true,
+  "training_updates": 0,
+  "environment_contract": {
+    "variant": "walled5",
+    "migration_revision": 10,
+    "depth_backend": "warp",
+    "reference_ground_clearance": "G1_collision_hull_min_5mm_upward_only",
+    "obstacle_cylinders": 3,
+    "head_reference": "head_link_COM",
+    "knee_lower_penalty": "hard_limit_other_limits_soft",
+    "action_targets": "clamp_to_physical_joint_limits",
+    "push_curriculum": [
+      1000,
+      4000
+    ],
+    "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+    "depth_clip": "optical_near_plane_pixel_centers_v1",
+    "failure_reward": "none_x2_recipe",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "visual_mesh_convex_hull",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.6,
+      0.3,
+      0.1
+    ],
+    "search_prob": 0.02,
+    "noise": 0.06,
+    "depth_edge": [
+      0.15,
+      0.05
+    ],
+    "depth_holes": 0.02,
+    "depth_stereo": [
+      0.024,
+      0.09
+    ],
+    "latency_probability": 0.1,
+    "depth_noise_contract": "metres_miss_preserved_near_clamp_15_including_onset",
+    "delay": 1,
+    "freeze": 0.002,
+    "freeze_steps": 15,
+    "mount_pos": 0.01,
+    "mount_rot": 0.0,
+    "curriculum": "shared_piecewise_process_anchor",
+    "reward_parent": "g1_corrected_common_v2",
+    "reward_weights": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "undesired_contacts": -1.0,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.4,
+      "slow_pickup": -0.0005,
+      "stable_grasp": 0.2,
+      "arm_speed_pickup": -0.02,
+      "arm_acc_pickup": -2e-05,
+      "grip_force_cap": -0.02,
+      "held_hand_speed": -0.02,
+      "held_hand_acc": -2e-05,
+      "waist_yaw_penalty": -0.5,
+      "search_turn": 0.5
+    },
+    "roll_termination": "abs_roll_gt_0.5",
+    "action_scale": 0.25,
+    "action_clip": 9.0,
+    "randomization": {
+      "box_material": {
+        "static_friction_range": [
+          0.3,
+          2.0
+        ],
+        "dynamic_friction_range": [
+          0.4,
+          1.5
+        ],
+        "restitution_range": [
+          0.0,
+          0.2
+        ],
+        "num_buckets": 64
+      },
+      "box_mass": {
+        "mass_distribution_params": [
+          0.1,
+          1.5
+        ],
+        "operation": "scale",
+        "recompute_inertia": true
+      },
+      "default_joint_pos": {},
+      "torso_com": {
+        "com_range": {
+          "x": [
+            -0.025,
+            0.025
+          ],
+          "y": [
+            -0.05,
+            0.05
+          ],
+          "z": [
+            -0.05,
+            0.05
+          ]
+        }
+      },
+      "push_robot": {
+        "velocity_range": {
+          "x": [
+            -0.5,
+            0.5
+          ],
+          "y": [
+            -0.5,
+            0.5
+          ],
+          "z": [
+            -0.2,
+            0.2
+          ],
+          "roll": [
+            -0.52,
+            0.52
+          ],
+          "pitch": [
+            -0.52,
+            0.52
+          ],
+          "yaw": [
+            -0.78,
+            0.78
+          ]
+        }
+      }
+    },
+    "box_mass_kg": 0.8,
+    "com_body": "torso_link",
+    "push_interval": [
+      1.0,
+      3.0
+    ],
+    "hand_forces": "g1_rubber_hands_box_filtered",
+    "standup_success": "instant_x2",
+    "strict_success_metric": "g1_contact_clearance_hold0.5s",
+    "physical_parent": "walled4_revision8_plus_full_body_collision_v1",
+    "collision_profile": "g1_visual_convex_hull_full_body_v1",
+    "self_collisions": false,
+    "amp_frame_schema": "joint_pos29_gravity3_angvel3_raw_v1",
+    "amp_shape": [
+      10,
+      35
+    ],
+    "amp_history": "repeat_reset_frame_reward_and_training_from_step1"
+  },
+  "limitations": "Contact/interface smoke only; no convergence or 4096 throughput conclusion"
+}

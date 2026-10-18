@@ -1,0 +1,35 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_perf_20261018/check.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "d846ff637f020ac2eb8189609e1e57d1f6d99cc0b6b51e4dbabbcc1f1a5c8d91",
+      "stdout_sha256": "f403dea516fb9787722cc8e47e5b44eeb205076d934675444023e26fac3ab5e8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash docs/carrybox/wall5_perf_20261018/benchmark.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "f8824964b2da4662677db73a696dfed7a2d9ebbd5e92f34ca3742f216b653259",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/wall5_perf_20261018/verify_restart.py",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "808caae263c2433d8bb27ee1cfef06db00f5f0f118faa121827538baefc3b991",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ec3d2fc98a23a3cda5e31771e26a0c3a707a4a26083d4e2cbe80df9942da6d6d",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

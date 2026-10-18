@@ -39,12 +39,15 @@ def captured_pair(env):
         return s.paired.output_depth, s.paired.output_pose
     depth = base.depth_image(env)
     pose = base.box_pose_target(env)
-    if s.paired is None:
-        s.paired = PairedDepthBuffer(depth, pose, env.cfg.depth_max_delay_steps)
     depth = corrupt_depth_m(depth*3., gaussian_std=env.cfg.depth_noise_std_m,
         edge_threshold=env.cfg.depth_edge_threshold_m, edge_probability=env.cfg.depth_edge_probability,
         hole_probability=env.cfg.depth_hole_probability,
         stereo_near=env.cfg.depth_stereo_near_m, stereo_far=env.cfg.depth_stereo_far_m) / 3.
+    if getattr(env.cfg, 'pose_visibility_supervision', False):
+        from .carrybox_wall5 import pose_visible
+        pose = torch.cat((pose, pose_visible(env, depth, pose)[:, None].float()), -1)
+    if s.paired is None:
+        s.paired = PairedDepthBuffer(depth, pose, env.cfg.depth_max_delay_steps)
     delays = (torch.rand(env.num_envs, device=env.device) < env.cfg.depth_delay_probability).long()
     # Count the onset image as frame 1, then hold it for fourteen more frames.
     freezes = (torch.rand(env.num_envs, device=env.device) < env.cfg.depth_freeze_probability).long()
@@ -67,8 +70,14 @@ def heading(quat):
 def initialize_reference(env, ids):
     """RSI root/joints use verified G1 data; box orientation is unavailable in source."""
     s, robot = state(env), env.scene['robot']
+    ground_only = getattr(getattr(env, 'cfg', None), 'ground_box_reset', False)
+    link_velocity = getattr(getattr(env, 'cfg', None), 'reference_link_velocity', False)
+    held_reference = getattr(getattr(env, 'cfg', None), 'held_box_reference_reset', False)
+    if ground_only and not held_reference and (s.skills[ids] == 2).any():
+        raise ValueError('Ground-box reset does not support held-box RSI')
     if s.library is None:
-        s.library = FindBoxMotionLibrary(device=env.device)
+        s.library = FindBoxMotionLibrary(
+            getattr(getattr(env, 'cfg', None), 'reference_motion_dataset', None), device=env.device)
         s.references = []
         for name in s.library.clip_names:
             data = torch.load(s.library.root/name, map_location=env.device, weights_only=True)
@@ -79,12 +88,31 @@ def initialize_reference(env, ids):
                 if data[key].shape != shape or not torch.isfinite(data[key]).all():
                     raise ValueError(f'Invalid RSI {name}: {key}')
             s.references.append(data)
+        if ground_only:
+            from perceptual_ball.carrybox_wall5 import ground_pickup_frame_ids
+            start, end = env.cfg.ground_pickup_reset_frame_range
+            if start < 0 or end <= start:
+                raise ValueError('Invalid collision-checked ground-pickup frame range')
+            s.ground_reference_frames = [ground_pickup_frame_ids(data) if group == 'pickUp' else None
+                for data, group in zip(s.references, s.library.clip_groups)]
+            s.ground_reference_frames = [frames[(frames >= start) & (frames < end)] if frames is not None else None
+                for frames in s.ground_reference_frames]
     inverse = torch.argsort(torch.tensor(joint_mapping(robot.joint_names), device=env.device))
     box_positions = torch.zeros((len(ids),3), device=env.device)
     support_tops = torch.zeros(len(ids), device=env.device)
+    if link_velocity:
+        root_batch = torch.empty((len(ids), 13), device=env.device)
+        joint_batch = torch.empty((len(ids), len(inverse)), device=env.device)
+        velocity_batch = torch.empty_like(joint_batch)
     for skill, group in enumerate(('loco_direction','pickUp','carryWith')):
         rows = (s.skills[ids] == skill).nonzero().flatten()
+        if not len(rows):
+            continue
         clips = [i for i,g in enumerate(s.library.clip_groups) if g == group]
+        if ground_only and group == 'pickUp':
+            clips = [i for i in clips if len(s.ground_reference_frames[i])]
+            if not clips:
+                raise ValueError('No ground-pickup frames available for RSI')
         selection = torch.randint(len(clips), (len(rows),), device=env.device)
         for slot, clip in enumerate(clips):
             selected = rows[selection == slot]
@@ -93,7 +121,11 @@ def initialize_reference(env, ids):
             env_ids = ids[selected]
             data = s.references[clip]
             joints, velocity, quaternion, angular = s.library.clips[clip]
-            frames = torch.randint(len(joints)-1, (len(selected),), device=env.device)
+            if ground_only and group == 'pickUp':
+                pool = s.ground_reference_frames[clip]
+                frames = pool[torch.randint(len(pool), (len(selected),), device=env.device)]
+            else:
+                frames = torch.randint(len(joints)-1, (len(selected),), device=env.device)
             q = quaternion[frames]
             undo_yaw = quat_conjugate(yaw_quat(q))
             root = robot.data.default_root_state[env_ids].clone()
@@ -101,17 +133,29 @@ def initialize_reference(env, ids):
             root[:, 2] += data['base_height'][frames] + .05
             root[:, 3:7] = quat_mul(undo_yaw,q)
             linear = (data['base_position'][frames+1]-data['base_position'][frames])*60.
-            linear[:,2] = (data['base_height'][frames+1]-data['base_height'][frames])*60.
+            if not link_velocity:
+                linear[:,2] = (data['base_height'][frames+1]-data['base_height'][frames])*60.
             root[:,7:10] = quat_apply(undo_yaw, linear)
             root[:,10:13] = quat_apply(root[:,3:7], angular[frames])
-            robot.write_root_state_to_sim(root, env_ids=env_ids)
-            robot.write_joint_state_to_sim(joints[frames][:,inverse], velocity[frames][:,inverse], env_ids=env_ids)
+            # Wall5 task AMP compares pelvis-link velocity, not root COM velocity.
+            if link_velocity:
+                # Keep native sampling/RNG order; submit one PhysX write after all
+                # clips, avoiding repeated whole-articulation buffer refreshes.
+                root_batch[selected] = root
+                joint_batch[selected] = joints[frames][:, inverse]
+                velocity_batch[selected] = velocity[frames][:, inverse]
+            else:
+                robot.write_root_state_to_sim(root, env_ids=env_ids)
+                robot.write_joint_state_to_sim(joints[frames][:,inverse], velocity[frames][:,inverse], env_ids=env_ids)
             box_positions[selected] = root[:,:3]+quat_apply(undo_yaw,data['box_pos_local'][frames])
-            if group == 'pickUp':
+            if group == 'pickUp' and not ground_only:
                 contact = int(data['contact_index'])
                 # Proxy support: source provides no platform geometry or box orientation.
                 top = data['base_height'][contact]+.05+data['box_pos_local'][contact,2]-base.BOX_SIZE[2]/2
                 support_tops[selected] = top.clamp_min(0.)
+    if link_velocity:
+        robot.write_root_link_state_to_sim(root_batch, env_ids=ids)
+        robot.write_joint_state_to_sim(joint_batch, velocity_batch, env_ids=ids)
     # base_height is a reference-frame height, not the bottom of the G1 foot
     # collider. Refresh the written articulation before resolving penetration.
     env.sim.forward()
@@ -185,6 +229,10 @@ def reset_scene(env, env_ids):
     probs = torch.tensor(env.cfg.reset_skill_probabilities, device=device)
     if probs.shape != (3,) or (probs < 0).any() or abs(float(probs.sum())-1.) > 1e-6:
         raise ValueError('RSI probabilities must sum to one (loco,pickUp,carryWith)')
+    ground_only = getattr(env.cfg, 'ground_box_reset', False)
+    held_reference = getattr(env.cfg, 'held_box_reference_reset', False)
+    if ground_only and not held_reference and probs[2] != 0:
+        raise ValueError('Ground-box reset requires zero held-box RSI probability')
     s.skills[env_ids] = torch.multinomial(probs, n, replacement=True) if env.cfg.reference_init else 0
     reference_box = support = None
     if env.cfg.reference_init:
@@ -218,8 +266,14 @@ def reset_scene(env, env_ids):
         pose[reference,3:7] = quat_from_euler_xyz(zeros[reference],zeros[reference],yaw_robot[reference])
     extent = (matrix_from_quat(pose[:,3:7])[:,2].abs()*torch.tensor(base.BOX_SIZE,device=device)/2).sum(-1)
     ground_z = env.scene.env_origins[env_ids,2]
-    pose[loco,2] = ground_z[loco]+extent[loco]+.005
-    pose[:,2] = torch.maximum(pose[:,2],ground_z+extent+.005)
+    if ground_only:
+        on_ground = (s.skills[env_ids] != 2) if held_reference else torch.ones_like(loco)
+        pose[on_ground,2] = (ground_z+extent+.005)[on_ground]
+        # Hold RSI retains the paired reference box pose; never place it below ground.
+        pose[:,2] = torch.maximum(pose[:,2],ground_z+extent+.005)
+    else:
+        pose[loco,2] = ground_z[loco]+extent[loco]+.005
+        pose[:,2] = torch.maximum(pose[:,2],ground_z+extent+.005)
     pose[:,7:] = 0.
     box.write_root_state_to_sim(pose, env_ids=env_ids)
     platform_state = torch.zeros((n,7),device=device)
@@ -231,7 +285,8 @@ def reset_scene(env, env_ids):
         top[pickup] = torch.minimum(support[pickup],pose[pickup,2]-ground_z[pickup]-extent[pickup]-.005).clamp_min(0.)
     platform_state[:,2] = ground_z+top-.4
     platform_state[:,3:7] = torch.tensor([1.,0.,0.,0.],device=device)
-    write_obstacle_pose(env, 'platform', platform_state, env_ids)
+    if not ground_only:
+        write_obstacle_pose(env, 'platform', platform_state, env_ids)
     # Parent robot/box/platform first; wall then independently sampled columns.
     for name, low, high, z in [('wall',3.,4.,1.5)]+[(f'cylinder{i}',2.2,3.2,.9) for i in range(env.cfg.obstacle_cylinder_count)]:
         p = torch.zeros((n,7),device=device)

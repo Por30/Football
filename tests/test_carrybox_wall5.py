@@ -10,7 +10,7 @@ import torch
 import test_carrybox as base
 import test_carrybox_amp as legacy
 from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, SOURCE_JOINT_NAMES
-from perceptual_ball.carrybox_wall5 import Wall5MotionLibrary, project_frame
+from perceptual_ball.carrybox_wall5 import Wall5MotionLibrary, pack_task_frame, AMP_BODY_NAMES
 from perceptual_ball.carrybox_walled import YawCurriculum
 from perceptual_ball.rsl_rl_extensions.carrybox import CarryBoxOnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.carrybox_wall5 import CarryBoxWall5PPO, CarryBoxWall5OnPolicyRunner, Wall5AMP
@@ -24,7 +24,8 @@ CircularBuffer = base.fixtures.module('wall5_test_circular_buffer',
 
 def algorithm(steps=4, dt=.02):
     obs = base.observations()
-    obs['amp'] = torch.zeros(4, 350)
+    obs['amp'] = torch.zeros(4, 600)
+    obs['box_pose_target'] = torch.cat((obs['box_pose_target'], torch.ones(4, 1)), -1)
     alg = CarryBoxWall5PPO(base.policy(obs), device='cpu', amp_coef=.25, control_dt=dt,
                           num_learning_epochs=1, num_mini_batches=1, schedule='fixed')
     alg.init_storage('rl', 4, steps, obs, [29])
@@ -44,49 +45,52 @@ class Wall5Tests(unittest.TestCase):
     def test_online_expert_features_and_original_data_unchanged(self):
         old, new = FindBoxMotionLibrary(), Wall5MotionLibrary()
         ids = torch.arange(old.num_clips)
-        a = old.windows(ids, torch.zeros(len(ids))).reshape(-1, 10, 64)
         b = new.windows(ids, torch.zeros(len(ids)))
-        self.assertEqual(b.shape, (15, 350))
-        torch.testing.assert_close(b, project_frame(a).flatten(1), rtol=0, atol=0)
+        self.assertEqual(b.shape, (15, 600))
         self.assertEqual(old.metadata['manifest_sha256'], new.metadata['manifest_sha256'])
         self.assertNotEqual(old.metadata['feature_schema'], new.metadata['feature_schema'])
         for x, y in zip(old.clips, new.clips):
             for xx, yy in zip(x, y):
-                torch.testing.assert_close(xx, yy, rtol=0, atol=0)  # RSI velocities preserved.
-        frame = a[:, 0]
-        robot = NS(joint_names=list(reversed(SOURCE_JOINT_NAMES)), data=NS(
-            joint_pos=frame[:, :29].flip(-1), joint_vel=frame[:, 29:58].flip(-1),
-            projected_gravity_b=frame[:, 58:61], root_ang_vel_b=frame[:, 61:]))
-        env = NS(scene={'robot': robot})
-        torch.testing.assert_close(task.amp_frame(env), b.reshape(-1, 10, 35)[:, 0], rtol=0, atol=0)
-        altered = frame.clone(); altered[:, 29:58] += 10000
-        torch.testing.assert_close(project_frame(altered), project_frame(frame), rtol=0, atol=0)
-        for column in (0, 58, 61):
-            altered = frame.clone(); altered[:, column] += 1
-            self.assertFalse(torch.equal(project_frame(altered), project_frame(frame)))
+                torch.testing.assert_close(xx, yy, rtol=0, atol=0)
+        for i, name in enumerate(new.clip_names):
+            data = {k:(v.float() if isinstance(v,torch.Tensor) else v) for k,v in torch.load(new.root / name, weights_only=True).items()}
+            q = data['base_quat'][:1, [3,0,1,2]]
+            j = data['joint_position'][:1]
+            root = data['base_position'][:1]
+            linear = (data['base_position'][1:2]-root)*60
+            angular = new.clips[i][3][:1]
+            robot = NS(joint_names=list(reversed(SOURCE_JOINT_NAMES)),
+                find_bodies=lambda names, preserve_order: (list(range(5)), names), data=NS(
+                joint_pos=j.flip(-1), root_link_pos_w=root, root_link_quat_w=q,
+                body_link_pos_w=root[:,None]+data['link_position'][:1,:5],
+                root_link_lin_vel_w=linear, root_link_ang_vel_b=angular))
+            env = NS(scene={'robot':robot, 'box':NS(data=NS(root_pos_w=root+data['box_pos_local'][:1]))})
+            torch.testing.assert_close(task.amp_frame(env)[0], b.reshape(-1,10,60)[i,0], atol=2e-6,rtol=1e-5)
+            self.assertLessEqual(float(b.reshape(-1,10,60)[i,:,57:59].norm(dim=-1).max()), .700001)
 
-    def test_raw_discriminator_and_complete_disjoint_optimizer_groups(self):
+    def test_normalized_discriminator_and_complete_disjoint_optimizer_groups(self):
         alg, obs = algorithm()
         d = alg.amp
-        x = torch.full((4, 350), 20.)
-        with torch.no_grad():
-            expected = d.amp_linear(d.trunk(x))
-            d.obs_mean.fill_(999); d.obs_std.fill_(999)
-            torch.testing.assert_close(d(x), expected, rtol=0, atol=0)
-            self.assertFalse(torch.equal(d(x), d(x.clamp(-10, 10))))
-        with self.assertRaises(RuntimeError): d.set_statistics(x)
-        groups = alg.amp_optimizer.param_groups
-        self.assertEqual([g['weight_decay'] for g in groups], [.001, .1])
-        self.assertEqual([g['lr'] for g in groups], [5e-5, 5e-5])
-        first, second = ({id(p) for p in g['params']} for g in groups)
+        x = torch.randn(4, 600)*3+20
+        d.set_statistics(x)
+        normalized = ((x-d.obs_mean)/d.obs_std).clamp(-10,10)
+        torch.testing.assert_close(d(x), d.amp_linear(d.trunk(normalized)), rtol=0, atol=0)
+        before = d.running_count.clone()
+        d.predict_reward(x)
+        torch.testing.assert_close(d.running_count,before)
+        with self.assertRaises(RuntimeError):d.set_statistics(x)
+        d.update_statistics(torch.empty(0,600))
+        torch.testing.assert_close(d.running_count,before)
+        groups=alg.amp_optimizer.param_groups
+        self.assertEqual([g['weight_decay'] for g in groups],[.001,.1])
+        first,second=({id(p) for p in g['params']} for g in groups)
         self.assertFalse(first & second)
-        self.assertEqual(first | second, {id(p) for p in d.parameters()})
-        self.assertEqual(d.trunk[0].in_features, 350)
-        self.assertEqual(alg.learning_rate, 1e-3)  # factory default, production cfg tested in sim.
-        expected = alg.policy.act_inference(obs), alg.policy.evaluate(obs)
-        changed = obs.clone(); changed['amp'] += 1000; changed['box_pose_target'] += 1000
-        torch.testing.assert_close(alg.policy.act_inference(changed), expected[0], rtol=0, atol=0)
-        torch.testing.assert_close(alg.policy.evaluate(changed), expected[1], rtol=0, atol=0)
+        self.assertEqual(first | second,{id(p) for p in d.parameters()})
+        self.assertEqual(d.trunk[0].in_features,600)
+        expected=alg.policy.act_inference(obs),alg.policy.evaluate(obs)
+        changed=obs.clone();changed['amp']+=1000;changed['box_pose_target']+=1000
+        torch.testing.assert_close(alg.policy.act_inference(changed),expected[0],rtol=0,atol=0)
+        torch.testing.assert_close(alg.policy.evaluate(changed),expected[1],rtol=0,atol=0)
 
     def test_reward_endpoints_first_step_and_dt_invariance(self):
         for dt in (.01, .02, .04):
@@ -105,7 +109,7 @@ class Wall5Tests(unittest.TestCase):
     def test_short_terminal_partial_reset_update_and_roundtrip(self):
         alg, obs = algorithm()
         history = CircularBuffer(10, 4, 'cpu')
-        initial = torch.arange(4.)[:, None].expand(-1, 35).clone() / 10
+        initial = torch.arange(4.)[:, None].expand(-1, 60).clone() / 10
         history.append(initial)
         obs['amp'] = history.buffer.flatten(1)
         before_policy = copy.deepcopy(alg.policy.state_dict())
@@ -131,7 +135,7 @@ class Wall5Tests(unittest.TestCase):
                 torch.testing.assert_close(alg.amp_rollout[step], terminal_motion.flatten(1))
                 self.assertTrue(alg.amp_valid[step].all())
                 for env_id in ids:
-                    torch.testing.assert_close(history.buffer[env_id], reset_frame[env_id].expand(10, 35))
+                    torch.testing.assert_close(history.buffer[env_id], reset_frame[env_id].expand(10, 60))
                 obs = next_obs
             alg.compute_returns(obs)
         losses = alg.update()

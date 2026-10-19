@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/cao/perceptual_ball/docs/carrybox/wall5_loco_early_20261019/replay.py", line 150, in <module>
+    try:main()
+  File "/home/cao/perceptual_ball/docs/carrybox/wall5_loco_early_20261019/replay.py", line 117, in main
+    for k in ('proprio','perception'):torch.testing.assert_close(obs[k],initial_obs[k],atol=1e-5,rtol=1e-5,msg=lambda msg:k+': '+msg)
+  File "/home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/testing/_comparison.py", line 1519, in assert_close
+    raise error_metas[0].to_error(msg)
+AssertionError: perception: Tensor-likes are not close!
+
+Mismatched elements: 7396 / 82944 (8.9%)
+Greatest absolute difference: 6.0558319091796875e-05 at index (9, 0, 1, 22) (up to 1e-05 allowed)
+Greatest relative difference: 9.760028478922322e-05 at index (5, 0, 10, 15) (up to 1e-05 allowed)

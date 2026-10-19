@@ -1,0 +1,88 @@
+{
+  "reset_checks": [
+    {
+      "iteration": 0,
+      "reference_fraction": 0.0,
+      "standing": 16,
+      "hold_unchanged": true
+    },
+    {
+      "iteration": 2000,
+      "reference_fraction": 0.0,
+      "standing": 16,
+      "hold_unchanged": true
+    },
+    {
+      "iteration": 5000,
+      "reference_fraction": 0.5,
+      "standing": 4,
+      "hold_unchanged": true
+    },
+    {
+      "iteration": 8000,
+      "reference_fraction": 1.0,
+      "standing": 0,
+      "hold_unchanged": true
+    }
+  ],
+  "first_end": [
+    106,
+    161,
+    145,
+    139,
+    124,
+    null,
+    127,
+    166,
+    128,
+    123,
+    152,
+    169,
+    195,
+    183,
+    151,
+    167,
+    64,
+    65,
+    68,
+    71
+  ],
+  "seconds": 5.0,
+  "loco_env_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "max_abs_roll_pitch": 1.097686529159546,
+  "mean_final_foot_force": 373.88787841796875,
+  "max_loco_xy_displacement": 0.639350175857544,
+  "transition_counts": [
+    4000,
+    0,
+    1000
+  ],
+  "max_abs_ankle_torque": 32.548885345458984,
+  "ankle_saturation_fraction": 0.0,
+  "max_abs_ankle_speed": 1.4609770774841309,
+  "final_mean_abs_ankle_error": 0.027391701936721802,
+  "ankle_effort_limit": 35.0,
+  "ankle_velocity_limit": 30.0,
+  "ankle_pd": [
+    200.0,
+    5.0
+  ],
+  "status": "RUNNING"
+}

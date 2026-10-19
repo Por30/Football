@@ -1,0 +1,7 @@
+{
+  "checked_at": "2026-10-19T00:37:06.359274+09:00",
+  "free_mib": 23128,
+  "initial_preflight_free_mib": 9366,
+  "initial_preflight_launched": false,
+  "reason": "GPU release lagged process exit; independently rechecked after cleanup"
+}

@@ -1,0 +1,52 @@
+{
+  "expert": "/root/wall5_loco_fix_review",
+  "brief": {
+    "affected_call_path": [
+      "wall5 reset_scene→initialize_reference→PhysX→forward→foot hull修正→箱/障碍/相机→观察与AMP历史。",
+      "raw Gaussian→wrapper±9→0.25action+每环境default offset→物理限位→PD。",
+      "wall5 PPO→公共update同一loss/backward/step；独立critic108与深度actor/aux/60维AMP保持。"
+    ],
+    "critical_interfaces": [
+      "固定3277/0/819环境配额保障transition而不是独立reset概率；部分reset不得重新分组，小环境报告实际比例。",
+      "默认静止q必须与startup±0.01随机化offset一致；root直立、root6维/joint速度零；hold完整保留原参考。",
+      "静止落地使用真实foot hull有符号修正5mm并刷新，公共默认upward-only保持。",
+      "只逐渐增大loco原运动RSI采样概率，不插值不相容步态；构造期为静止，课程0–2000静止、2000–8000线性恢复。",
+      "原始均值bounds=(joint limits-offset)/0.25与±9交集，随rollout保存每环境58维训练标签，minibatch配对。",
+      "std cap1即每optimizer.step后log_std≤0；公共默认log_std≤1保持。",
+      "正则/std/课程/分组写入revision16契约；正式fresh禁止resume/warm-start。"
+    ],
+    "invariants": [
+      "actor372+4x27x48，critic108；bounds/skill/课程不进入网络输入或导出。",
+      "13段AMP、数据hash、60维与Normalizer和40/40/20专家采样保持。",
+      "dt .005/.02、joint mapping、wrapper±9/物理限位/终止保持。",
+      "继承rev15增量push及1/multiply；不改PD、碰撞、奖励、深度噪声/网络；football/wall3/4默认不变。",
+      "Gaussian sample/logp/PPO ratio/KL一致，不裁剪/detach均值后求正则。"
+    ],
+    "smallest_change_locus": [
+      "wall5 cfg/mdp/learning专属实现；公共reset和PPO只增默认旧行为的可选入口和hook。",
+      "新增实际transition计数/起点比例/均值越界/std日志，保留原回合统计。"
+    ],
+    "mandatory_safeguards": [
+      "默认静止零action零初速多环境至少数秒物理基线，保留PD/碰撞/观察；基线失败不得launch。",
+      "全/部分reset、课程起中末、hold，验证脚5mm/速度/q-offset/地面箱/hold手箱关系及历史。",
+      "CPU正则验证界内零loss梯度、越界方向、膝非对称限位/offset/wrapper交集/finite失败，真实PPO正则到actor且critic无泄漏。",
+      "正则及std限制通过不代表已学会行走；看loco存活/朝箱位移/真实成功。",
+      "有界pilot保留完整PPO/AMP/aux/深度，检查finite/Normalizer/实际80-20份额/分技能长度/每膝饱和，设超时。",
+      "更新保存恢复导出验证新契约optimizer，actor原输入；针对性检查football与wall3/4默认路径。",
+      "4096完整配置热身稳定轮≤6秒，不减少遮挡/epochs/AMP。",
+      "正式前核对真实进程/GPU，独立fresh run记录PID命令源码数据，并观察连续迭代checkpoint更新。"
+    ],
+    "minimal_tests": [
+      "bash docs/carrybox/wall5_loco_fix_20261019/check.sh",
+      "bash docs/carrybox/wall5_loco_fix_20261019/smoke.sh",
+      "bash docs/carrybox/wall5_loco_fix_20261019/launch.sh"
+    ],
+    "blockers": [
+      "默认静止零action仍立即倒下，先解决PD/默认姿态/接触，不启动。",
+      "静止覆盖若迟于箱/相机/历史或upward-only悬空则reset验收失败。",
+      "bounds与offset不配对、仅约束±9或梯度clamp/detach截断则修复不成立。",
+      "固定分组被multinomial覆盖或transition仍严重偏hold则不宣称配额保障。",
+      "非finite/契约数据不一致/共享回归/持续轮时>6秒未解决或检查两次修复后仍失败，停止正式启动。"
+    ]
+  }
+}

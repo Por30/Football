@@ -1,0 +1,58 @@
+{
+  "iteration": 199,
+  "seconds": 1.9036822319030762,
+  "episode_counts": [
+    79903,
+    0,
+    15133
+  ],
+  "episode_steps": [
+    1960801,
+    0,
+    486871
+  ],
+  "tipped": [
+    79892,
+    0,
+    15133
+  ],
+  "fell": [
+    4,
+    0,
+    0
+  ],
+  "loss": {
+    "value_function": 0.011602407600730658,
+    "surrogate": -0.01675101718865335,
+    "entropy": 34.79789485931396,
+    "box_position": 0.13680329397320748,
+    "box_rotation": 0.049260018207132814,
+    "action_bounds": 0.00418073374312371,
+    "amp_loss": 0.042241692543029785,
+    "amp_expert_loss": 0.0020684516057372093,
+    "amp_policy_loss": 0.014518866315484047,
+    "amp_valid_samples": 12288.0,
+    "amp_normalizer_count": 8212480.0,
+    "amp_normalizer_min_std": 0.009999999776482582,
+    "box_visible_fraction": 0.8998209834098816,
+    "box_visible_distance": 1.3417489528656006,
+    "ppo_kl": 0.013432599604129791,
+    "ppo_learning_rate": 0.00011390625000000006,
+    "action_std_max": 0.9118778705596924
+  },
+  "metrics": {
+    "Control/physical_target_clipped_fraction": 0.061818089646597706,
+    "Sampling/loco_transition_fraction": 0.80078125,
+    "Reward/loco_task_per_step": -0.037419153532634176,
+    "Reward/loco_walk_task_per_step": 0.013913970401821038,
+    "Reward/loco_locomotion_stability_per_step": 0.029948584192122023,
+    "Reward/loco_action_rate_per_step": -0.02083619179514547,
+    "Reward/loco_torques_per_step": -0.01882281790797909,
+    "Reward/loco_early_failure_per_step": -0.029369918823552627,
+    "Motion/loco_survivor_speed_mps": 0.8371290042996407,
+    "Motion/loco_survivor_box_distance_m": 1.193558727701505,
+    "Sampling/pickup_transition_fraction": 0.0,
+    "Sampling/hold_transition_fraction": 0.19921875,
+    "Reward/hold_task_per_step": 0.005955211745458655
+  }
+}

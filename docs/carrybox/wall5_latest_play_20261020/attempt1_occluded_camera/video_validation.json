@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "frames": 500,
+  "fps": 25.0,
+  "duration": 20.0,
+  "resolution": [
+    1280,
+    720
+  ],
+  "video_sha256": "2a3f0ece6cb18adae000ec539775b9f531bf36fcded37199f3cd6ed4e4c15d32",
+  "file_bytes": 2801611,
+  "full_decode": true,
+  "max_frame_change": 55.75457139756944,
+  "source_checkpoint_sha256": "b0defd62509af3b7fd0bedc6f896301824deb62b293f3f7efbc245af10ac7619"
+}

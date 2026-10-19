@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/wall5_physhsi_reset_20261019/check.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "a0859c30e10d980854e30b10458f34ba140c2323e4a961820340090016bbe586",
+      "stdout_sha256": "d723fd3b8fc46803e437ea6ac3709f46ed9ff9be6f4ca95a05c7fc1c7833d4a6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

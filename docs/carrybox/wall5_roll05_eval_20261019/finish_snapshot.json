@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-19T20:16:40.984335+09:00",
+  "training_pid": 114186,
+  "training_alive": true,
+  "latest_iteration": 5495,
+  "latest_checkpoint_now": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_14-25-38_wall5_v15_roll05_fresh_20261019_142533/model_5400.pt",
+  "evaluated_checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_14-25-38_wall5_v15_roll05_fresh_20261019_142533/model_5200.pt",
+  "cases": {
+    "mean": {
+      "mean_seconds": 0.45375,
+      "roll_only": 12,
+      "pitch_only": 13,
+      "both": 7
+    },
+    "sample": {
+      "mean_seconds": 0.42,
+      "roll_only": 12,
+      "pitch_only": 16,
+      "both": 4
+    }
+  },
+  "note": "Model5200 was latest at selection; concurrent training subsequently created a newer checkpoint. This result does not evaluate the newer model."
+}

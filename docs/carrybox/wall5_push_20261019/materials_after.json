@@ -1,0 +1,461 @@
+{
+  "materials": [
+    {
+      "path": "/physicsScene/defaultMaterial",
+      "static": 1.0,
+      "dynamic": 1.0,
+      "restitution": 0.0,
+      "friction_combine": "multiply"
+    },
+    {
+      "path": "/World/envs/env_0/Box/geometry/material",
+      "static": 1.0,
+      "dynamic": 0.800000011920929,
+      "restitution": 0.0,
+      "friction_combine": "average"
+    },
+    {
+      "path": "/World/envs/env_1/Box/geometry/material",
+      "static": 1.0,
+      "dynamic": 0.800000011920929,
+      "restitution": 0.0,
+      "friction_combine": "average"
+    },
+    {
+      "path": "/World/envs/env_2/Box/geometry/material",
+      "static": 1.0,
+      "dynamic": 0.800000011920929,
+      "restitution": 0.0,
+      "friction_combine": "average"
+    },
+    {
+      "path": "/World/envs/env_3/Box/geometry/material",
+      "static": 1.0,
+      "dynamic": 0.800000011920929,
+      "restitution": 0.0,
+      "friction_combine": "average"
+    },
+    {
+      "path": "/World/ground/physicsMaterial",
+      "static": 1.0,
+      "dynamic": 1.0,
+      "restitution": 0.0,
+      "friction_combine": "multiply"
+    }
+  ],
+  "bindings": [
+    {
+      "collider": "/World/ground/GroundPlane/CollisionPlane",
+      "material": "/World/ground/physicsMaterial"
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/pelvis/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_hip_pitch_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_hip_roll_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_hip_yaw_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_knee_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_ankle_pitch_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/pelvis_contour_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_hip_pitch_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_hip_roll_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_hip_yaw_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_knee_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_ankle_pitch_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/waist_yaw_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/waist_roll_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/torso_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/head_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_shoulder_pitch_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_shoulder_roll_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_shoulder_yaw_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_elbow_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_wrist_roll_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_wrist_pitch_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_wrist_yaw_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/left_rubber_hand/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/logo_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_shoulder_pitch_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_shoulder_roll_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_shoulder_yaw_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_elbow_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_wrist_roll_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_wrist_pitch_link/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_wrist_yaw_link/full_body_collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Robot/right_rubber_hand/collisions",
+      "material": null
+    },
+    {
+      "collider": "/World/envs/env_0/Box/geometry/mesh",
+      "material": "/World/envs/env_0/Box/geometry/material"
+    }
+  ],
+  "robot_shape": [
+    4,
+    35,
+    3
+  ],
+  "robot_env0_coefficients": [
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0,
+      0.0
+    ]
+  ],
+  "robot_unique": [
+    [
+      1.0,
+      1.0,
+      0.0
+    ]
+  ],
+  "box_coefficients": [
+    [
+      [
+        0.4790353775024414,
+        0.6964443325996399,
+        0.07176252454519272
+      ]
+    ],
+    [
+      [
+        1.5077290534973145,
+        1.4410521984100342,
+        0.15780596435070038
+      ]
+    ],
+    [
+      [
+        1.5077290534973145,
+        1.4410521984100342,
+        0.15780596435070038
+      ]
+    ],
+    [
+      [
+        0.48499080538749695,
+        0.5800210237503052,
+        0.14050401747226715
+      ]
+    ]
+  ],
+  "body_names": [
+    "pelvis",
+    "imu_in_pelvis",
+    "left_hip_pitch_link",
+    "pelvis_contact_link",
+    "pelvis_contour_link",
+    "right_hip_pitch_link",
+    "waist_yaw_link",
+    "left_hip_roll_link",
+    "right_hip_roll_link",
+    "waist_roll_link",
+    "left_hip_yaw_link",
+    "right_hip_yaw_link",
+    "torso_link",
+    "left_knee_link",
+    "right_knee_link",
+    "d435_link",
+    "head_link",
+    "imu_in_torso",
+    "left_shoulder_pitch_link",
+    "logo_link",
+    "mid360_link",
+    "right_shoulder_pitch_link",
+    "temp_link",
+    "left_ankle_pitch_link",
+    "right_ankle_pitch_link",
+    "left_shoulder_roll_link",
+    "right_shoulder_roll_link",
+    "d455_link",
+    "left_ankle_roll_link",
+    "right_ankle_roll_link",
+    "left_shoulder_yaw_link",
+    "right_shoulder_yaw_link",
+    "left_elbow_link",
+    "right_elbow_link",
+    "left_wrist_roll_link",
+    "right_wrist_roll_link",
+    "left_wrist_pitch_link",
+    "right_wrist_pitch_link",
+    "left_wrist_yaw_link",
+    "right_wrist_yaw_link",
+    "left_rubber_hand",
+    "right_rubber_hand",
+    "left_palm_link",
+    "right_palm_link"
+  ]
+}

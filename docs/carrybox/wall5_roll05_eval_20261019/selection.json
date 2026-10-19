@@ -1,0 +1,41 @@
+{
+  "selected_at": "2026-10-19T20:09:27.749716+09:00",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_14-25-38_wall5_v15_roll05_fresh_20261019_142533/model_5200.pt",
+  "checkpoint_sha256": "9b812a21b6f76444825239f3688de5a8956959539dc6c56073984f38a7126cdc",
+  "checkpoint_iteration": 5200,
+  "run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_14-25-38_wall5_v15_roll05_fresh_20261019_142533",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v15_roll05_fresh_20261019_142533.log",
+  "training_pid": 114186,
+  "training_command": [
+    "/home/cao/ENTER/envs/ball/bin/python",
+    "-u",
+    "scripts/rsl_rl/train.py",
+    "--task",
+    "Template-Perceptual-Ball-CarryBox-Walled5-v0",
+    "--num_envs",
+    "4096",
+    "--device",
+    "cuda:0",
+    "--headless",
+    "--seed",
+    "42",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall5_v15_roll05_fresh_20261019_142533"
+  ],
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "7254bd92e9f703c321423200d0bb9ebcf1e687a76af3329e930e563252f32ece",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "af77ece93564acf5f750cb6dd88076f0c6842b751d521a273e142ea19baddafb",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "57b7e8e86c77f9348797688cc3cedc52ed034358075994ce1816750d5d7d3778",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py": "83262e13e5c6006f4aba34820b44a34f4ea99e698a17ea787cd389e22b21ab33",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py": "55a6ad5ba9044485452e1024e6ddd0544d5c9ed7084fe19377a47bf6a035396f",
+    "source/perceptual_ball/perceptual_ball/carrybox_wall5.py": "68627e47908a0971bc4fa5d3c1fe3101edc7557efcf10fba98951ad885737308",
+    "scripts/rsl_rl/train.py": "9f53cc72b8c1b54e534384738b6eae290af2ff4a95336ceabe7b14f163c818e4",
+    "scripts/rsl_rl/cli_args.py": "cfdd05fe23c239e231a30099328d8016ac3758a365ed619e84780e2aad94cfd3"
+  },
+  "manifest_sha256": "7ffeea2804bb48f440039fb67666d17513ae26a367fe21b075605ab5810a8153",
+  "gpu_before": "memory.free [MiB], utilization.gpu [%]\n9228 MiB, 75 %\n",
+  "checkpoint_size_bytes": 15981867,
+  "checkpoint_mtime_ns": 1792407440963615655
+}

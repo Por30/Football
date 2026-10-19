@@ -1,0 +1,30 @@
+{
+  "affected_call_path": [
+    "wall5 cfg→增量push→root COM PhysX setter；环境checkpoint严格契约；GroundPlane独立材质与physicsScene默认材质"
+  ],
+  "critical_interfaces": [
+    "root_vel_w/write_root_velocity_to_sim均为COM世界6D；rev13为对称网络，当前108维critic不兼容；EventManager每回合重采样1–3s推扰，终止reset先于interval事件"
+  ],
+  "invariants": [
+    "只改变wall5推扰语义和材质，保留随机范围/间隔/1000+4000课程/RSI/学习/部署；同rev13 model10600/16env/1200步/seed42/有效10600/yaw11.2；当前正式rev14保持运行"
+  ],
+  "smallest_change_locus": [
+    "仅mdp/carrybox_wall5.py及carrybox_wall5_env_cfg.py生产代码、定向测试和记录；revision15记录物理契约"
+  ],
+  "mandatory_safeguards": [
+    "独立预生成动作/推扰随机流；无推扰保留事件机会；断言初始物理状态一致，之后reset分叉不称严格成对轨迹",
+    "记录回放每次事件的env/skill/age/COM世界速度前值/增量/缓存后值；独立smoke用PhysX get_root_velocities核验set/increment/none与零半满课程、partial IDs和缓存一致，不称回放逐次实测读回",
+    "完成回合与删失年龄按技能分开，总步数每组19200；记录首次push前结束和事件在reset之后的时序",
+    "严格使用原rev13对称网络及完整模型权重和旧环境契约，诊断不运行optimizer或AMP判别器更新",
+    "三组保持旧摩擦，新材质单独smoke；USD地面/default/手脚绑定与PhysX机器人/箱子系数联合核对，默认材质只作用于未绑定形状，不称所有接触系数都为1",
+    "资源检查至少4GiB空闲；只管理诊断子进程；正式PID4038923不停止/重启；保留失败证据"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall5_push_20261019/check.sh",
+    "bash docs/carrybox/wall5_push_20261019/replay.sh",
+    "bash docs/carrybox/wall5_push_20261019/smoke.sh"
+  ],
+  "blockers": [
+    "checkpoint身份或严格加载失败、资源不足、需要改动生产训练时停止相关验证；随机流不匹配时不得宣称成对因果"
+  ]
+}

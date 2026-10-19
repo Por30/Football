@@ -1,0 +1,4 @@
+{
+  "status": "FAIL",
+  "reason": "Following viewer moved behind the wall; RGB scene occluded although video decoding passed. Keep data and rerender identical seed/model with viewer on robot side of wall."
+}

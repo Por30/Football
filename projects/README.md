@@ -1,5 +1,31 @@
 # 项目看板
 
+2026-10-20：[wall5最新model2800的20秒play录像](../docs/carrybox/wall5_latest_play_20261020/README.md)：revision17、单环境loco配额、均值动作、原课程yaw2.8°/推扰0.45，严格契约/权重核对、500帧完整解码及关键帧检查通过。已检查0.04、1、2、5、10、15、19.96和20秒画面，机器人与箱子清晰可见。此段空手起点回放能向箱子移动，前两秒接近后主要在箱旁站立；第999步相对首步水平位移约1.33m，距箱约0.41m。箱子仍在地面，没有完成抱起。整段没有倾倒/低高度终止，唯一reset发生在第1000步，是20秒超时；这不能代替多起点稳定行走评估。 正式训练进程保持，视频不作成功率结论。
+
+2026-10-19：[PhysHSI与wall5 reset只读对照](../docs/carrybox/wall5_physhsi_reset_20261019/README.md)：PhysHSI实际20%默认站姿＋80% RSI，RSI根速度覆盖为±0.2；当前wall5保留参考速度，11段相同loco数据的起始水平速度均值0.743m/s、P95 1.071m/s。动作缓存预填仅影响最初0–20ms，两边roll0.5/pitch1.1相同。CPU来源/数据核验通过；未改生产或重启训练，因果尚需物理对照。
+
+2026-10-19：[wall5 revision17空手倾倒修复与重启](../docs/carrybox/wall5_reset_bug_20261019/README.md)：旧6600均值/采样各32回合全部约0.27秒倾倒；新增平衡反馈、walk姿态门控、std≤1/动作均值界正则和固定80/20环境配额，原PD/roll0.5/深度/AMP保持。39项CPU、4环境更新恢复导出及512×200短训通过；正式4096 fresh PID254358，检查17轮、平均3.919秒/轮。训练进行中，尚未验证稳定行走/地面拾箱。
+
+2026-10-19：[wall5 roll0.5 model5200站走回放](../docs/carrybox/wall5_roll05_eval_20261019/README.md)：检查时最新模型，均值/采样各32个loco首回合均在1秒内倾倒reset，平均0.454/0.420秒，全部在首次push前；尚未学会稳定行走。近期250轮loco约19.7步、hold约700步，完成步数约90%来自hold。严格契约/权重/初态核对及诊断两项PASS；PID114186继续训练，过程中已生成model5400，本结果仅针对5200。
+
+2026-10-19：[wall5 roll0.5正式重启](../docs/carrybox/wall5_roll05_start_20261019/README.md)：4096环境fresh、roll0.5，PID114186，检查迭代16，最近10轮平均3.802秒/最慢3.900秒；首checkpoint确认revision15、非对称AC、RSI80/0/20及13段60维AMP。用户明确重启，原控制候选保持撤回；训练进行中，未证明收敛。
+
+2026-10-19：[wall5 roll阈值0.8→0.5rad](../docs/carrybox/wall5_roll05_20261019/README.md)：按用户要求收紧为双向侧倾28.65°，pitch仍1.1rad；同步checkpoint契约，14项CPU检查通过。仅revision15基础单参数变更，未恢复已撤回的loco控制候选，未启动训练或证明站走修复。
+
+2026-10-19 13:23 JST：[wall5空手起点修复候选未通过](../docs/carrybox/wall5_loco_fix_20261019/README.md)：固定80/0/20环境配额、静止起点课程及动作范围正则候选通过39项CPU检查；物理检查初始0/16、两次修正后仍仅1/16撑满5秒。PPO短训/4096性能未执行，启动门禁阻止正式run。候选完整归档，5个源码按hash恢复本次修改前revision15，原有改动保留；未启动新训练，未修复完成。
+
+2026-10-19：[wall5空手起点立即倾倒诊断](../docs/carrybox/wall5_loco_early_20261019/README.md)：rev14 model11200同初态五组16环境回放通过，策略首回合9–11步全部pitch超限，参考/默认控制平均40–53步，均未稳定行走。首步左膝16/16、右膝14/16目标限位；近期loco约10.6步、hold约936步，已完成回合步数约96%来自hold。仅诊断；原PID4038923检查时已退出、日志止于11304轮，原因未知，本次未停止或重启，revision15尚未正式训练。
+
+2026-10-19：[wall5 rev14专用play命令](../docs/carrybox/wall5_rev14_play_20261019/README.md)：新增独立归档播放入口，model11200严格权重加载、环境契约及既有录像源码hash检查通过；默认4环境、均值动作、原rev14推扰/摩擦。仅CPU验证，未启动GUI/GPU仿真或操作正式训练。
+
+2026-10-19：[wall5 revision14 model11000的20秒play录像](../docs/carrybox/wall5_play11000_20261019/README.md)：单环境均值动作、原rev14物理/噪声、满推扰/yaw12°；严格模型/环境契约匹配，500帧25fps完整解码通过。开头loco倾倒重置后进入hold参考起点，未展示地面拾箱成功；原正式PID4038923保持运行。
+
+2026-10-19 12:08 JST：[wall5推扰/摩擦核验与revision15](../docs/carrybox/wall5_push_20261019/README.md)：rev13实际10637轮；model10600三组回放loco均约13步且首次push前pitch超限，hold原推扰/增量/无推扰约886/970/1000步。仅wall5改增量push和地面/default摩擦1.0/multiply，21项CPU、三组回放及4环境2＋1轮更新恢复导出通过。当前正式PID4038923仍为revision14、检查10779轮，未重启；revision15尚未正式训练，未证明拾箱收敛。
+
+2026-10-19 00:42 JST：[wall5非对称AC与4096从零重启](../docs/carrybox/wall5_asymmetric_20261019/README.md)：revision14仅critic使用108维本体/线速度/箱位姿尺寸真值，独立MLP；actor仍372维本体＋4帧深度。31项CPU、4环境2＋1轮更新恢复导出及正式启动核验通过；旧PID3812053已停止，新PID4038923，检查至15轮，最近10轮平均3.813秒/最慢3.830秒。AMP13段/RSI80-0-20保持，训练进行中，未证明收敛。
+
+2026-10-18 21:59 JST：[当前wall5 AMP数据集可视化](../docs/carrybox/wall5_amp_visualization_20261018/README.md)：实际run与model_0确认ground_pickup的13段（11行走/1地面拾箱/1持箱）；完整63.08秒MP4、13个分段及HTML浏览页已生成，3785帧/60fps和源hash对应检查通过。复用hash一致的G1录像，仅CPU处理；AMP40/40/20，RSI80/0/20，训练PID3812053保持运行。
+
 2026-10-18 13:16 JST：[wall5改为从零正式训练](../docs/carrybox/wall5_fresh_20261018/README.md)：按用户明确要求停止恢复运行PID3810947，新PID3812053，4096环境、40000轮、fresh，无resume/warm-start。首checkpoint优化器step20与Normalizer count61440确认全新初始化；检查迭代11→14，最近10轮平均3.801秒、最慢3.830秒。保留性能优化/revision13/RSI80-0-20；旧产物保留，训练进行中，未证明收敛。
 
 2026-10-18 13:08 JST：[wall5性能优化与正式恢复](../docs/carrybox/wall5_perf_20261018/README.md)：RSI合并写入、AMP批量native插值及同批CNN复用，4096同配置平均7.254→3.870秒/轮；31项CPU与4096完整更新/部分reset/恢复通过。新PID3810947，正式最近10轮平均3.902秒、最慢3.940秒，检查迭代12→15。保持revision13/RSI80-0-20/全部遮挡与学习配置，从原正式model0恢复；旧70轮中未落盘部分无法恢复。训练进行中，未证明收敛。
@@ -82,7 +108,7 @@
 | FB-003 | 足球 | 固定球速和固定±0.2m目标门的独立评估 | 待开始 | 分开报告回传命中、恢复站稳及失败情况 |
 | CB-001 | [搬箱子](findbox/README.md) | 真实深度拾箱、无特权actor/critic、位姿辅助头 | 完成 | CPU与真实仿真管线通过 |
 | CB-002 | 搬箱子 | FindBox动作数据接入AMP | 完成 | 初次17段接入及PPO/AMP更新、恢复/导出已通过；当前15段修订见CB-016 |
-| CB-003 | 搬箱子 | 正式训练 | wall5运行中 | [2026-10-16 13:49核验](../docs/carrybox/wall5_start_20261016/README.md)：PID2996727、4096环境、第12轮，热身平均4.244秒/轮；未证明收敛 |
+| CB-003 | 搬箱子 | 正式训练 | revision14已退出，未完成 | 2026-10-19核验PID4038923已不存在，日志止于11304轮；[loco约10.6步倾倒诊断](../docs/carrybox/wall5_loco_early_20261019/README.md)完成，控制/训练修复待做，revision15未正式训练；退出原因未知 |
 | CB-011 | 搬箱子 | 不收敛根因诊断与跌倒奖励修复 | 完成 | [历史终止标记跨回合漏罚已修，21项CPU与真实回放通过；新重训见CB-003](../docs/carrybox/convergence_20261014/README.md) |
 | CB-015 | 搬箱子 | G1/X2深度后端与计时核对 | 完成 | [同源码profile分项](../docs/carrybox/depth_timing_20261014/README.md)：本地为RTX，Warp后端未迁移；无新增GPU试验，正式训练继续 |
 | CB-014 | 搬箱子 | 4096完整迭代≤6秒 | 完成 | [Warp动态43几何迁移](../docs/carrybox/warp_20261014/README.md)：RTX差异≤0.164mm，24项CPU/碰撞/完整更新恢复通过；正式热身后均值4.023秒、最慢4.078秒 |
@@ -95,7 +121,7 @@
 | CB-004 | 搬箱子 | 独立拾箱成功率评估 | 待开始 | 使用双手接触+离地+持续保持的任务成功判据 |
 | CB-008 | findbox / football | 深度安装与遮挡管线核对 | 完成 | [FindBox三变体RTX遮挡通过；Football解析深度无场景遮挡；实机标定待提供](../docs/carrybox/depth_audit/README.md) |
 | CB-006 | 搬箱子 | G1 FindBox walled3/walled4迁移 | 完成 | [19项CPU、两变体4环境20＋2轮、wall4 128环境50＋2轮及真实碰撞/遮挡通过](../docs/carrybox/wall4_repair/README.md) |
-| CB-005 | 搬箱子 | FindBox全部动作可视化录制 | 完成 | [当前15段逐PT独立60fps视频](../outputs/carrybox/findbox_hold_20261014/README.md)；4155帧/69.25秒及hash校验通过；旧17段视频保留 |
+| CB-005 | 搬箱子 | FindBox动作可视化 | 完成 | [当前wall5的13段/63.08秒/60fps](../outputs/carrybox/wall5_amp_20261018/index.html)，源hash/完整解码通过；[其他变体的15段录像](../outputs/carrybox/findbox_hold_20261014/README.md)和旧17段保留 |
 | CB-016 | 搬箱子 | carrywith1开头抱箱延长与AMP整理 | 完成 | [原0–20帧保留、重复第20帧至5秒](../docs/carrybox/amp_hold_20261014/README.md)；有效11/3/1共15段，旧17段全量备份，AMP/RSI检查通过；未切换正式训练 |
 | CB-017 | 搬箱子 | AMP数据规范命名与kick并列存放 | 完成 | [assets/motions/findbox规范目录](../source/perceptual_ball/perceptual_ball/assets/motions/findbox/README.md)；15段字节不变，AMP/RSI默认一致、CPU检查通过；旧路径保留，未切换训练 |
 

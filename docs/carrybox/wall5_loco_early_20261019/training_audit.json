@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_00-37-11_wall5_v14_asymmetric_fresh_20261019_003706/model_11200.pt",
+  "checkpoint_sha256": "05e97532bc898b95873afd744c6511b3c0ce7678f8779317697b4c20f9d900f0",
+  "source_hashes": {
+    "/home/cao/perceptual_ball/docs/carrybox/wall5_push_20261019/before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "5a66f2b694d7560bbad99b660c04b8806ee2682d61edd9bd5f0b9ccff9621741",
+    "/home/cao/perceptual_ball/docs/carrybox/wall5_push_20261019/before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "ed524bb162c967a5ac7a8c604051dd673a579f54e9ad5d22f8e654cbb44de1d1"
+  },
+  "log_snapshot_sha256": "c954d67220bea18fb9cf48912399ce83814d9597facc0234bc10a2f0b019929e",
+  "last_iteration": 11304,
+  "first_recent": 11055,
+  "recent_means": {
+    "Mean episode length": 200.87468,
+    "Control/physical_target_clipped_fraction": 0.2933992,
+    "Reward/task_weighted_per_step": 0.0631852,
+    "Reward/amp_per_step": 0.0025864,
+    "Mean box_position loss": 0.0020908,
+    "Iteration time": 4.0926
+  },
+  "skill_window": {
+    "loco": {
+      "completed_episodes_approx": 99648.0,
+      "completed_steps_approx": 1056664.0,
+      "mean_steps_approx": 10.603965960179833,
+      "success_delta_approx": 0.0,
+      "completed_step_fraction_approx": 0.0430500993604233
+    },
+    "hold": {
+      "completed_episodes_approx": 25084.25,
+      "completed_steps_approx": 23488320.0,
+      "mean_steps_approx": 936.3772088063226,
+      "success_delta_approx": 3.9167000000000005,
+      "completed_step_fraction_approx": 0.9569499006395767
+    }
+  },
+  "policy_std": [
+    0.35448867082595825,
+    0.3530685603618622,
+    0.23139719665050507,
+    0.4325784742832184,
+    0.42886877059936523,
+    0.21776387095451355,
+    0.6493552327156067,
+    0.6626906991004944,
+    0.1749652922153473,
+    2.7182817459106445,
+    2.7182817459106445,
+    1.1258583068847656,
+    0.3370787799358368,
+    1.0188359022140503,
+    0.9501016139984131,
+    2.7182817459106445,
+    2.7182817459106445,
+    2.7182817459106445,
+    2.7182817459106445,
+    1.0093920230865479,
+    0.32316482067108154,
+    0.23734304308891296,
+    0.3142883777618408,
+    0.5012513399124146,
+    0.5440449118614197,
+    0.9461641907691956,
+    0.933229923248291,
+    2.7182817459106445,
+    2.7182817459106445
+  ],
+  "training_pid4038923_exists": false,
+  "limits": [
+    "Skill deltas from rollout-averaged/rounded cumulative logs; approximate completed-step share, not exact rollout allocation",
+    "Exit reason unknown; no process stopped here"
+  ]
+}

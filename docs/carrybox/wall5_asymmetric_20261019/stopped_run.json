@@ -1,0 +1,31 @@
+{
+  "pid": 3812053,
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v13_perf_fresh_20261018_131037.log",
+  "run_name": "wall5_v13_perf_fresh_20261018_131037",
+  "command": [
+    "/home/cao/ENTER/envs/ball/bin/python",
+    "-u",
+    "scripts/rsl_rl/train.py",
+    "--task",
+    "Template-Perceptual-Ball-CarryBox-Walled5-v0",
+    "--num_envs",
+    "4096",
+    "--device",
+    "cuda:0",
+    "--headless",
+    "--seed",
+    "42",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall5_v13_perf_fresh_20261018_131037"
+  ],
+  "initialization": "fresh",
+  "started_at": "2026-10-18T13:10:37.590911+09:00",
+  "stopping_at": "2026-10-19T00:35:53.476935+09:00",
+  "signal": "SIGINT",
+  "proc_start_ticks": "301370876",
+  "stopped_at": "2026-10-19T00:35:54.478319+09:00",
+  "last_checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-18_13-10-42_wall5_v13_perf_fresh_20261018_131037/model_10600.pt",
+  "last_checkpoint_sha256": "b1ade2daf39e8d7f14338ff94501433a825a0f481e0bfff2955d23acb053f4fd"
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_roll05_eval_20261019/replay.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "91c7feb75c870606847ce376e87a0dd75f65e9d182a839e224f19fffe5f6cd1d",
+      "stdout_sha256": "b9fe7d44fd5e50e2676e66975fc2cd729be01885e68846cf2edd1ddb223a0346",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

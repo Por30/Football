@@ -1,0 +1,154 @@
+{
+  "status": "PARTIAL",
+  "recorded_at": "2026-10-19T13:25:47.809951+09:00",
+  "formal_launched": false,
+  "physical_results": [
+    {
+      "condition": "initial",
+      "source": "physical.json.attempt1",
+      "loco_count": 16,
+      "survived_250_steps": 0,
+      "failed_first_end_steps": [
+        59,
+        55,
+        57,
+        57,
+        59,
+        55,
+        59,
+        57,
+        58,
+        59,
+        58,
+        59,
+        56,
+        59,
+        58,
+        59
+      ],
+      "failed_range_steps": [
+        55,
+        59
+      ],
+      "failed_range_seconds": [
+        1.1,
+        1.18
+      ],
+      "final_result": "FAIL",
+      "raw_status_is_pre_assertion_snapshot": "RUNNING"
+    },
+    {
+      "condition": "correction_1",
+      "source": "physical.json.attempt2",
+      "loco_count": 16,
+      "survived_250_steps": 0,
+      "failed_first_end_steps": [
+        84,
+        73,
+        78,
+        72,
+        81,
+        74,
+        80,
+        74,
+        79,
+        80,
+        78,
+        77,
+        76,
+        77,
+        78,
+        78
+      ],
+      "failed_range_steps": [
+        72,
+        84
+      ],
+      "failed_range_seconds": [
+        1.44,
+        1.68
+      ],
+      "final_result": "FAIL",
+      "raw_status_is_pre_assertion_snapshot": "RUNNING"
+    },
+    {
+      "condition": "correction_2",
+      "source": "physical.json",
+      "loco_count": 16,
+      "survived_250_steps": 1,
+      "failed_first_end_steps": [
+        106,
+        161,
+        145,
+        139,
+        124,
+        127,
+        166,
+        128,
+        123,
+        152,
+        169,
+        195,
+        183,
+        151,
+        167
+      ],
+      "failed_range_steps": [
+        106,
+        195
+      ],
+      "failed_range_seconds": [
+        2.12,
+        3.9
+      ],
+      "final_result": "FAIL",
+      "raw_status_is_pre_assertion_snapshot": "RUNNING"
+    }
+  ],
+  "corrections_used": 2,
+  "allowed_corrections": 2,
+  "production_state": "restored_pre_task_revision15_bytes",
+  "cpu_tests": 39,
+  "cpu_pass_scope": "Initial candidate logic; not a post-correction or post-restoration re-run",
+  "ppo_update_restore_export": "NOT_RUN",
+  "full_4096_pilot": "NOT_RUN",
+  "new_iteration_latency_seconds": null,
+  "tests": {
+    "check": [
+      {
+        "command": "bash docs/carrybox/wall5_loco_fix_20261019/check.sh",
+        "result": "PASS",
+        "exit_code": 0,
+        "executed": true,
+        "receipt_sha256": "4043df2e84b2600d8d790f622f956fcdb90789c72d3323682670864b79e92747",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runner": "run_engineering_tests.py"
+      }
+    ],
+    "smoke": [
+      {
+        "command": "bash docs/carrybox/wall5_loco_fix_20261019/smoke.sh",
+        "result": "FAIL",
+        "exit_code": 1,
+        "executed": true,
+        "receipt_sha256": "785d2d214f46d28b31a266ee44f1fe484b9aa861347a7f2271dc2334274806a1",
+        "stdout_sha256": "5b5219954d38b8245d6083467c9471169a66e4dd94a1a76bacdbdf21758a9ee6",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runner": "run_engineering_tests.py"
+      }
+    ],
+    "launch": [
+      {
+        "command": "bash docs/carrybox/wall5_loco_fix_20261019/launch.sh",
+        "result": "FAIL",
+        "exit_code": 1,
+        "executed": true,
+        "receipt_sha256": "0ca634f5fd32d7cd199c8b17e3877783459533c51195c121c9eb29a63805e00a",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "a7813590d42413401bb4d3cfb2b0525cd640b579827c1b0e84f3850f712f2f6d",
+        "runner": "run_engineering_tests.py"
+      }
+    ]
+  }
+}

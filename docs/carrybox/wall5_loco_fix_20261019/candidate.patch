@@ -1,0 +1,355 @@
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
++++ candidate/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
+@@ -1,7 +1,7 @@
+ """Wall5 AMP stage A with full-body external collisions for the G1 shell."""
+ from isaaclab.utils import configclass
+ from .carrybox_walled_env_cfg import CarryBoxWalled4EnvCfg, CarryBoxWalled4PPORunnerCfg, spawn_walled_robot
+-from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment
++from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment, action_bounds, reset_scene
+ from .carrybox_env_cfg import CarryBoxObservationsCfg
+ from .mdp.carrybox_walled import failure_event
+ from isaaclab.managers import RewardTermCfg as RewTerm
+@@ -31,6 +31,16 @@
+ 
+     critic_state: CriticCfg = CriticCfg()
+ 
++    @configclass
++    class ActionBoundsCfg(ObsGroup):
++        bounds = ObsTerm(func=action_bounds)
++
++        def __post_init__(self):
++            self.enable_corruption = False
++            self.concatenate_terms = True
++
++    action_bounds: ActionBoundsCfg = ActionBoundsCfg()
++
+ 
+ @configclass
+ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
+@@ -42,12 +52,27 @@
+     held_box_reference_reset: bool = True  # hold keeps its reference box at hand height
+     reference_motion_dataset: str = GROUND_DATASET_PATH
+     reset_skill_probabilities: tuple = (.8, 0., .2)
++    loco_standing_warmup_iterations: int = 2000
++    loco_reference_ramp_iterations: int = 6000
+     # Frames 32+ cause knee/box contact impulses; 34+ visibly intersect.
+     ground_pickup_reset_frame_range: tuple = (0, 32)  # exclusive end
+ 
+     def __post_init__(self):
+         super().__post_init__()
+         self.scene.robot.spawn.func = spawn_wall5_full_body_robot
++        # The zero-action G1 stance diverged with 40/1 ankle gains even after
++        # centering its COM. Keep this control adaptation local to wall5.
++        self.scene.robot.actuators['feet'].stiffness = 200.
++        self.scene.robot.actuators['feet'].damping = 5.
++        # Explicitly retain the source joint ratings instead of relying on
++        # degree/radian roundoff in the USD-imported defaults.
++        self.scene.robot.actuators['feet'].effort_limit_sim = 35.
++        self.scene.robot.actuators['feet'].velocity_limit_sim = 30.
++        # Pair hip/ankle shifts to preserve level soles while centering the
++        # standing COM over the ankles; knee flexion remains 0.3 rad.
++        self.scene.robot.init_state.joint_pos['.*_hip_pitch_joint'] = -.18
++        self.scene.robot.init_state.joint_pos['.*_ankle_pitch_joint'] = -.12
++        self.events.reset_box.func = reset_scene
+         self.events.push_robot.func = push_velocity_increment
+         # Unbound robot shapes inherit the simulation default; the ground has
+         # its own material. Box material randomization remains independent.
+@@ -71,7 +96,7 @@
+ class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
+     class_name = 'CarryBoxWall5OnPolicyRunner'
+     experiment_name = 'g1_carrybox_depth/walled5'
+-    run_name = 'walled5_increment_push_v15'
++    run_name = 'walled5_loco_fix_v16'
+ 
+     def __post_init__(self):
+         super().__post_init__()
+@@ -90,3 +115,5 @@
+         self.algorithm.amp_reward_scale = .5
+         self.algorithm.amp_lr = 5.e-5
+         self.algorithm.amp_data_dir = GROUND_DATASET_PATH
++        self.algorithm.action_bound_coef = .01
++        self.algorithm.max_action_std = 1.
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
++++ candidate/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
+@@ -1,5 +1,6 @@
+ """Wall5 AMP observation contract and versioned full-body collision geometry."""
+ import hashlib
++import math
+ import torch
+ from isaaclab.utils.math import (euler_xyz_from_quat, wrap_to_pi, quat_apply_inverse,
+                                quat_mul, quat_conjugate, matrix_from_quat)
+@@ -9,6 +10,62 @@
+ from perceptual_ball.carrybox_fullbody_collision import FULL_BODY_COLLISION_PROFILE
+ from . import carrybox as base
+ from .carrybox_walled import WalledCarryBoxEnv, state
++from . import carrybox_walled as parent
++
++
++def fixed_skill_ids(env_ids, num_envs, probabilities):
++    """Midpoint allocation: 4096 environments -> 3277 loco / 0 pickup / 819 hold."""
++    if (len(probabilities) != 3 or any(not math.isfinite(p) or p < 0 for p in probabilities)
++            or abs(sum(probabilities) - 1.) > 1.e-6 or num_envs < 1):
++        raise ValueError('Invalid fixed skill allocation')
++    edges = env_ids.new_tensor(probabilities, dtype=torch.float64).cumsum(0)[:-1]
++    return torch.bucketize((env_ids.double() + .5) / num_envs, edges)
++
++
++def loco_reference_fraction(env):
++    curriculum = state(env).curriculum
++    effective = 0 if curriculum.anchor is None else max(0, curriculum.iteration - curriculum.anchor)
++    return max(0., min(1., (effective - env.cfg.loco_standing_warmup_iterations)
++                          / env.cfg.loco_reference_ramp_iterations))
++
++
++def initialize_wall5_reference(env, ids):
++    """Keep reference hold; introduce moving loco RSI only after the standing warmup."""
++    boxes, support = parent.initialize_reference(env, ids)
++    s, robot = state(env), env.scene['robot']
++    if not hasattr(s, 'standing_start'):
++        s.standing_start = torch.zeros(env.num_envs, device=env.device, dtype=torch.bool)
++    stationary = (s.skills[ids] == 0) & (torch.rand(len(ids), device=env.device) >= loco_reference_fraction(env))
++    s.standing_start[ids] = stationary
++    selected = ids[stationary]
++    if len(selected):
++        root = robot.data.default_root_state[selected].clone()
++        root[:, :3] += env.scene.env_origins[selected]
++        root[:, 3:7] = root.new_tensor([1., 0., 0., 0.])
++        root[:, 7:] = 0.
++        q = robot.data.default_joint_pos[selected].clone()
++        robot.write_root_link_state_to_sim(root, env_ids=selected)
++        robot.write_joint_state_to_sim(q, torch.zeros_like(q), env_ids=selected)
++        env.sim.forward()
++        root[:, 2] += parent.reference_ground_correction(env, selected, allow_lowering=True)
++        robot.write_root_link_state_to_sim(root, env_ids=selected)
++        env.sim.forward()
++    # The parent places loco boxes from the FINAL robot state; only hold consumes boxes.
++    return boxes, support
++
++
++def reset_scene(env, env_ids):
++    skills = fixed_skill_ids(env_ids, env.num_envs, env.cfg.reset_skill_probabilities)
++    parent.reset_scene(env, env_ids, skill_ids=skills, reference_initializer=initialize_wall5_reference)
++
++
++def action_bounds(env):
++    """Training label only: raw Gaussian action bounds, paired with each environment."""
++    term = env.action_manager.get_term('joint_pos')
++    limits = env.scene['robot'].data.joint_pos_limits[:, term._joint_ids]
++    low = ((limits[..., 0] - term._offset) / term._scale).clamp_min(-9.)
++    high = ((limits[..., 1] - term._offset) / term._scale).clamp_max(9.)
++    return torch.cat((low, high), -1).detach()
+ 
+ 
+ def push_velocity_increment(env, env_ids, velocity_range):
+@@ -78,6 +135,21 @@
+ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
+     amp_warmup_steps = 0
+ 
++    def step(self, action):
++        result = super().step(action)
++        s = state(self)
++        if not hasattr(s, 'transition_counts'):
++            s.transition_counts = torch.zeros(3, device=self.device, dtype=torch.long)
++        counts = torch.bincount(s.skills, minlength=3)
++        s.transition_counts += counts
++        log = result[-1].setdefault('log', {})
++        for i, name in enumerate(('loco', 'pickup', 'hold')):
++            log[f'Sampling/{name}_transition_fraction'] = counts[i].float() / self.num_envs
++            log[f'Sampling/{name}_transitions'] = s.transition_counts[i].clone()
++        log['Curriculum/loco_reference_fraction'] = loco_reference_fraction(self)
++        log['Sampling/standing_start_fraction'] = s.standing_start.float().mean()
++        return result
++
+     def _reset_idx(self, env_ids):
+         # Capture BEFORE the parent resets physics; timeout values must describe
+         # the terminated state, never the newly sampled reference initialization.
+@@ -95,7 +167,7 @@
+         library = state(self).library
+         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
+                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
+-        contract.update(migration_revision=15, physical_parent='wall5_full_body_mixed_reset_v1',
++        contract.update(migration_revision=16, physical_parent='wall5_full_body_mixed_reset_v1',
+                         collision_profile=FULL_BODY_COLLISION_PROFILE,
+                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
+                         shoulder_colliders='visual_mesh_convex_hull',
+@@ -119,6 +191,18 @@
+                         critic_terminal='pre_reset_current_state',
+                         box_rotation6='first_two_columns_of_pelvis_inverse_times_box')
+         contract['push_velocity_semantics'] = 'current_world_com_velocity_plus_curriculum_scaled_increment_v1'
++        contract.update(reset_assignment='fixed_env_midpoint_skill_quota_v1',
++                        loco_reset_curriculum={'warmup': self.cfg.loco_standing_warmup_iterations,
++                                               'ramp': self.cfg.loco_reference_ramp_iterations,
++                                               'anchor': 'process_first_training_iteration',
++                                               'standing': 'default_q_zero_velocity_upright_signed_foot_hull_5mm'},
++                        action_bounds_supervision='paired_raw_physical_limits_offset_scale_intersect_wrapper9_58_v1')
++        contract['actuator_gains'] = {
++            name: {'stiffness': actuator.stiffness, 'damping': actuator.damping,
++                   'effort_limit_sim': actuator.effort_limit_sim,
++                   'velocity_limit_sim': actuator.velocity_limit_sim}
++            for name, actuator in self.cfg.scene.robot.actuators.items()}
++        contract['default_joint_pose'] = dict(self.cfg.scene.robot.init_state.joint_pos)
+         contract['contact_materials'] = {
+             name: {key: getattr(material, key) for key in
+                    ('static_friction', 'dynamic_friction', 'restitution',
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py
++++ candidate/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py
+@@ -168,7 +168,7 @@
+     return box_positions, support_tops
+ 
+ 
+-def reference_ground_correction(env, ids):
++def reference_ground_correction(env, ids, allow_lowering=False):
+     """Lift penetrating RSI feet to 5 mm clearance using the G1 collision hulls."""
+     s, robot = state(env), env.scene['robot']
+     if not hasattr(s, 'foot_support_points'):
+@@ -208,7 +208,8 @@
+         q = robot.data.body_link_quat_w[ids, foot, None].expand(-1, len(points), -1)
+         world = quat_apply(q.reshape(-1, 4), points[None].expand(len(ids), -1, -1).reshape(-1, 3)).reshape(len(ids), -1, 3)
+         lowest.append(world[:, :, 2].amin(-1) + robot.data.body_link_pos_w[ids, foot, 2])
+-    return (env.scene.env_origins[ids, 2] + .005 - torch.stack(lowest, -1).amin(-1)).clamp_min(0.)
++    correction = env.scene.env_origins[ids, 2] + .005 - torch.stack(lowest, -1).amin(-1)
++    return correction if allow_lowering else correction.clamp_min(0.)
+ 
+ 
+ def obstacle_pose(env, name):
+@@ -222,7 +223,7 @@
+     env.scene[name].write_root_state_to_sim(torch.cat((pose, velocity), -1), env_ids=env_ids)
+ 
+ 
+-def reset_scene(env, env_ids):
++def reset_scene(env, env_ids, skill_ids=None, reference_initializer=None):
+     s = state(env)
+     s.reward_step = None
+     n, device = len(env_ids), env.device
+@@ -233,10 +234,15 @@
+     held_reference = getattr(env.cfg, 'held_box_reference_reset', False)
+     if ground_only and not held_reference and probs[2] != 0:
+         raise ValueError('Ground-box reset requires zero held-box RSI probability')
+-    s.skills[env_ids] = torch.multinomial(probs, n, replacement=True) if env.cfg.reference_init else 0
++    if skill_ids is not None:
++        if skill_ids.shape != (n,) or skill_ids.dtype != torch.long or ((skill_ids < 0) | (skill_ids > 2)).any():
++            raise ValueError('Explicit RSI skills must be one valid integer per reset environment')
++        s.skills[env_ids] = skill_ids if env.cfg.reference_init else 0
++    else:
++        s.skills[env_ids] = torch.multinomial(probs, n, replacement=True) if env.cfg.reference_init else 0
+     reference_box = support = None
+     if env.cfg.reference_init:
+-        reference_box, support = initialize_reference(env,env_ids)
++        reference_box, support = (reference_initializer or initialize_reference)(env,env_ids)
+     base.reset_box(env,env_ids)  # initialize/reset success cache, after the final robot reset
+     s.achieved[env_ids] = False
+     s.search[env_ids] = False
+--- before/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py
++++ candidate/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py
+@@ -183,8 +183,15 @@
+         self.policy.act(obs)
+         return self.policy.evaluate(obs), self.policy.predict_box_pose(obs)
+ 
++    def _policy_regularization(self, obs):
++        return self.policy.log_std.new_zeros(())
++
++    @torch.no_grad()
++    def _project_policy_parameters(self):
++        self.policy.log_std.clamp_(-5., 1.)
++
+     def update(self):
+-        totals = dict(value_function=0., surrogate=0., entropy=0., box_position=0., box_rotation=0.)
++        totals = dict(value_function=0., surrogate=0., entropy=0., box_position=0., box_rotation=0., action_bounds=0.)
+         count = 0
+         for batch in self.storage.mini_batch_generator(self.num_mini_batches, self.num_learning_epochs):
+             obs, actions, old_values, advantages, returns, old_logp, old_mu, old_sigma, *_ = batch
+@@ -205,15 +212,16 @@
+             position, rotation = self._pose_loss(pose_prediction, obs['box_pose_target'])
+             loss = surrogate + self.value_loss_coef * value_loss - self.entropy_coef * entropy
+             loss = loss + self.pose_aux_coef * (position + rotation)
++            regularization = self._policy_regularization(obs)
++            loss = loss + regularization
+             if not torch.isfinite(loss):
+                 raise FloatingPointError('Non-finite CarryBox training loss')
+             self.optimizer.zero_grad(set_to_none=True)
+             loss.backward()
+             nn.utils.clip_grad_norm_(self.policy.parameters(), self.max_grad_norm, error_if_nonfinite=True)
+             self.optimizer.step()
+-            with torch.no_grad():
+-                self.policy.log_std.clamp_(-5., 1.)
+-            for key, value in zip(totals, (value_loss, surrogate, entropy, position, rotation)):
++            self._project_policy_parameters()
++            for key, value in zip(totals, (value_loss, surrogate, entropy, position, rotation, regularization)):
+                 totals[key] += value.item()
+             count += 1
+         self.storage.clear()
+--- before/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py
++++ candidate/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py
+@@ -1,4 +1,5 @@
+ """Wall5 task AMP, running normalization, visibility-masked pose and adaptive PPO."""
++import math
+ import torch
+ from rsl_rl.networks import MLP
+ from rsl_rl.algorithms import PPO
+@@ -33,6 +34,16 @@
+         zero = prediction.sum() * 0.
+         return zero, zero
+     return box_pose_loss(prediction[valid], target[valid, :9])
++
++
++def action_mean_bound_loss(mean, bounds):
++    """Keep Gaussian likelihood unchanged; give infeasible means an inward gradient."""
++    if bounds.shape != (*mean.shape[:-1], 2 * mean.shape[-1]):
++        raise ValueError('Action bounds must pair with every raw policy mean')
++    low, high = bounds.detach().chunk(2, dim=-1)
++    if not torch.isfinite(bounds).all() or not torch.isfinite(mean).all() or (low > high).any():
++        raise FloatingPointError('Invalid action mean/bounds')
++    return ((low - mean).clamp_min(0).square() + (mean - high).clamp_min(0).square()).sum(-1).mean()
+ 
+ 
+ class Wall5AMP(AMP):
+@@ -88,8 +99,20 @@
+ 
+ class CarryBoxWall5PPO(CarryBoxPPO):
+     supported_schedules = ('fixed', 'adaptive')
+-    def __init__(self, policy, *args, amp_reward_scale=.5, amp_lr=5.e-5, **kwargs):
++    def __init__(self, policy, *args, amp_reward_scale=.5, amp_lr=5.e-5,
++                 action_bound_coef=0., max_action_std=None, **kwargs):
+         super().__init__(policy, *args, amp_reward_scale=amp_reward_scale, amp_lr=amp_lr, **kwargs)
++        if (not math.isfinite(action_bound_coef) or action_bound_coef < 0
++                or (max_action_std is not None and (not math.isfinite(max_action_std) or max_action_std <= 0))):
++            raise ValueError('Invalid Wall5 action regularization')
++        self.action_bound_coef = action_bound_coef
++        self.max_action_std = max_action_std
++        if action_bound_coef or max_action_std is not None:
++            self.amp_config['action_regularization'] = dict(
++                mean_bounds_coef=action_bound_coef, max_std=max_action_std,
++                bounds='per_transition_physical_offset_scale_intersect_wrapper9',
++                loss='sum_joint_squared_raw_mean_excess_batch_mean', projection='after_each_optimizer_step')
++        self._project_policy_parameters()
+         self.amp_config.update(
+             schema=3, frame_dim=WALL5_FRAME_DIM, feature_schema=WALL5_FEATURE_SCHEMA,
+             reward_time_scale='per_policy_step_no_dt', normalization='running_raw_frame60_shared_time', input_clip=10., normalization_epsilon=1.e-4,
+@@ -145,6 +168,17 @@
+     def _pose_loss(self, prediction, target):
+         return visible_box_pose_loss(prediction, target)
+ 
++    def _policy_regularization(self, obs):
++        if not self.action_bound_coef:
++            return super()._policy_regularization(obs)
++        return self.action_bound_coef * action_mean_bound_loss(self.policy.action_mean, obs['action_bounds'])
++
++    @torch.no_grad()
++    def _project_policy_parameters(self):
++        if self.max_action_std is None:
++            return super()._project_policy_parameters()
++        self.policy.log_std.clamp_(-5., math.log(self.max_action_std))
++
+     @torch.no_grad()
+     def _adapt_learning_rate(self, old_mu, old_sigma):
+         if self.schedule != 'adaptive' or self.desired_kl is None:
+@@ -169,7 +203,8 @@
+         visible_distance = targets[..., :3][valid].norm(dim=-1).mean().item() if valid.any() else 0.
+         result = super().update()
+         result.update(box_visible_fraction=visible_fraction, box_visible_distance=visible_distance,
+-                      ppo_kl=getattr(self, 'last_kl', 0.), ppo_learning_rate=self.learning_rate)
++                      ppo_kl=getattr(self, 'last_kl', 0.), ppo_learning_rate=self.learning_rate,
++                      action_std_max=self.policy.log_std.exp().max().item())
+         return result
+ 
+     def _update_amp(self):

@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-10-19T21:36:36.470127+09:00",
+  "prior_pid": 114186,
+  "process_already_absent": true,
+  "signal_sent": false,
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_14-25-38_wall5_v15_roll05_fresh_20261019_142533/model_6600.pt",
+  "checkpoint_sha256": "1f30f5eb8d47caa455a06a02ef7bc657e21bcf851edd8fbff4414a485ed80c40",
+  "checkpoint_iteration": 6600,
+  "old_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v15_roll05_fresh_20261019_142533.log",
+  "last_logged_iteration": 6708,
+  "old_log_bytes": 24614228,
+  "old_log_sha256": "b234d577046b0fd7e33eea1465147a43e8c56016e3c1cb0427f293f5b7ecb4bd",
+  "exit_cause": "not determined; no process existed at inspection"
+}

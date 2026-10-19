@@ -222,7 +222,7 @@ def write_obstacle_pose(env, name, pose, env_ids=None):
     env.scene[name].write_root_state_to_sim(torch.cat((pose, velocity), -1), env_ids=env_ids)
 
 
-def reset_scene(env, env_ids):
+def reset_scene(env, env_ids, skill_ids=None):
     s = state(env)
     s.reward_step = None
     n, device = len(env_ids), env.device
@@ -233,7 +233,12 @@ def reset_scene(env, env_ids):
     held_reference = getattr(env.cfg, 'held_box_reference_reset', False)
     if ground_only and not held_reference and probs[2] != 0:
         raise ValueError('Ground-box reset requires zero held-box RSI probability')
-    s.skills[env_ids] = torch.multinomial(probs, n, replacement=True) if env.cfg.reference_init else 0
+    if skill_ids is not None:
+        if skill_ids.shape != (n,) or skill_ids.dtype != torch.long or ((skill_ids < 0) | (skill_ids > 2)).any():
+            raise ValueError('Explicit RSI skills must be one valid integer per reset environment')
+        s.skills[env_ids] = skill_ids if env.cfg.reference_init else 0
+    else:
+        s.skills[env_ids] = torch.multinomial(probs, n, replacement=True) if env.cfg.reference_init else 0
     reference_box = support = None
     if env.cfg.reference_init:
         reference_box, support = initialize_reference(env,env_ids)

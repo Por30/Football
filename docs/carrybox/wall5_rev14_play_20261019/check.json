@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_00-37-11_wall5_v14_asymmetric_fresh_20261019_003706/model_11200.pt",
+  "iteration": 11200,
+  "revision": 14,
+  "strict_model_load": true,
+  "actor_output_shape": [
+    4,
+    29
+  ],
+  "archived_files_hash_matched_to_prior_20s_video": true,
+  "checkpoint_contract_matches_prior_20s_video": true,
+  "syntax": true,
+  "gpu_simulation_run": false,
+  "gui_run": false
+}

@@ -1,0 +1,38 @@
+{
+  "first_static_failure_steps": [
+    59,
+    55,
+    57,
+    57,
+    59,
+    55,
+    59,
+    57,
+    58,
+    59,
+    58,
+    59,
+    56,
+    59,
+    58,
+    59
+  ],
+  "posture_probe": "posture_probe.json",
+  "before": {
+    "kp": 40,
+    "kd": 1
+  },
+  "after": {
+    "kp": 200,
+    "kd": 5
+  },
+  "scope": "wall5 feet actuator only",
+  "unchanged": [
+    "rest PD",
+    "joint pose",
+    "collisions",
+    "termination thresholds",
+    "frozen test assertions"
+  ],
+  "fix_attempt": 1
+}

@@ -1,10 +1,29 @@
 """Wall5 task AMP, running normalization, visibility-masked pose and adaptive PPO."""
+import math
 import torch
+from rsl_rl.networks import MLP
 from rsl_rl.algorithms import PPO
 from .amp import AMP
 from .carrybox import CarryBoxActorCritic, CarryBoxPPO, CarryBoxOnPolicyRunner, box_pose_loss
 from perceptual_ball.carrybox_amp import AMP_WINDOW
 from perceptual_ball.carrybox_wall5 import WALL5_FRAME_DIM, WALL5_FEATURE_SCHEMA, Wall5MotionLibrary
+
+
+class CarryBoxWall5ActorCritic(CarryBoxActorCritic):
+    """Depth/proprio actor with a separate training-only privileged value MLP."""
+    def __init__(self, obs, obs_groups, num_actions, critic_hidden_dims=(512, 256, 256),
+                 activation='elu', **kwargs):
+        expected = {'policy': ['proprio', 'perception'], 'critic': ['critic_state']}
+        if obs_groups != expected or obs['critic_state'].ndim != 2 or obs['critic_state'].shape[-1] != 108:
+            raise ValueError('Wall5 requires depth/proprio actor and independent critic_state108')
+        # Reuse the unchanged actor/encoder/pose initialization and export interface.
+        super().__init__(obs, {'policy': ['proprio', 'perception'], 'critic': ['proprio', 'perception']},
+                         num_actions, critic_hidden_dims=critic_hidden_dims, activation=activation, **kwargs)
+        self.obs_groups = expected
+        self.critic = MLP(108, 1, list(critic_hidden_dims), activation)
+
+    def evaluate(self, obs, **kwargs):
+        return self.critic(obs['critic_state'])
 
 
 def visible_box_pose_loss(prediction, target):
@@ -15,6 +34,16 @@ def visible_box_pose_loss(prediction, target):
         zero = prediction.sum() * 0.
         return zero, zero
     return box_pose_loss(prediction[valid], target[valid, :9])
+
+
+def action_mean_bound_loss(mean, bounds):
+    """Keep Gaussian likelihood unchanged; give infeasible means an inward gradient."""
+    if bounds.shape != (*mean.shape[:-1], 2 * mean.shape[-1]):
+        raise ValueError('Action bounds must pair with every raw policy mean')
+    low, high = bounds.detach().chunk(2, dim=-1)
+    if not torch.isfinite(bounds).all() or not torch.isfinite(mean).all() or (low > high).any():
+        raise FloatingPointError('Invalid action mean/bounds')
+    return ((low - mean).clamp_min(0).square() + (mean - high).clamp_min(0).square()).sum(-1).mean()
 
 
 class Wall5AMP(AMP):
@@ -70,8 +99,20 @@ class Wall5AMP(AMP):
 
 class CarryBoxWall5PPO(CarryBoxPPO):
     supported_schedules = ('fixed', 'adaptive')
-    def __init__(self, policy, *args, amp_reward_scale=.5, amp_lr=5.e-5, **kwargs):
+    def __init__(self, policy, *args, amp_reward_scale=.5, amp_lr=5.e-5,
+                 action_bound_coef=0., max_action_std=None, **kwargs):
         super().__init__(policy, *args, amp_reward_scale=amp_reward_scale, amp_lr=amp_lr, **kwargs)
+        if (not math.isfinite(action_bound_coef) or action_bound_coef < 0
+                or (max_action_std is not None and (not math.isfinite(max_action_std) or max_action_std <= 0))):
+            raise ValueError('Invalid Wall5 action regularization')
+        self.action_bound_coef = action_bound_coef
+        self.max_action_std = max_action_std
+        if action_bound_coef or max_action_std is not None:
+            self.amp_config['action_regularization'] = dict(
+                mean_bounds_coef=action_bound_coef, max_std=max_action_std,
+                bounds='per_transition_physical_offset_scale_intersect_wrapper9',
+                loss='sum_joint_squared_raw_mean_excess_batch_mean', projection='after_each_optimizer_step')
+        self._project_policy_parameters()
         self.amp_config.update(
             schema=3, frame_dim=WALL5_FRAME_DIM, feature_schema=WALL5_FEATURE_SCHEMA,
             reward_time_scale='per_policy_step_no_dt', normalization='running_raw_frame60_shared_time', input_clip=10., normalization_epsilon=1.e-4,
@@ -113,18 +154,30 @@ class CarryBoxWall5PPO(CarryBoxPPO):
             self.amp_statistics_initialized = True
 
     def _training_outputs(self, obs):
-        # The encoder has no dropout/BatchNorm. All three losses backpropagate
-        # through this same latent in this optimizer step; never detach/cache it.
+        # Reuse one CNN pass for the actor and auxiliary head. The asymmetric
+        # value loss only reaches its independent MLP, never the depth encoder.
         policy = self.policy
         latent = policy.perception_encoder(obs['perception'])
         features = torch.cat((obs['proprio'], latent), -1)
         mean = policy.actor(features)
         policy.distribution = torch.distributions.Normal(mean, policy.log_std.exp().expand_as(mean))
         policy.distribution.sample()  # preserve the former act() RNG consumption
-        return policy.critic(features), policy.pose_head(latent)
+        critic_features = obs['critic_state'] if isinstance(policy, CarryBoxWall5ActorCritic) else features
+        return policy.critic(critic_features), policy.pose_head(latent)
 
     def _pose_loss(self, prediction, target):
         return visible_box_pose_loss(prediction, target)
+
+    def _policy_regularization(self, obs):
+        if not self.action_bound_coef:
+            return super()._policy_regularization(obs)
+        return self.action_bound_coef * action_mean_bound_loss(self.policy.action_mean, obs['action_bounds'])
+
+    @torch.no_grad()
+    def _project_policy_parameters(self):
+        if self.max_action_std is None:
+            return super()._project_policy_parameters()
+        self.policy.log_std.clamp_(-5., math.log(self.max_action_std))
 
     @torch.no_grad()
     def _adapt_learning_rate(self, old_mu, old_sigma):
@@ -150,7 +203,8 @@ class CarryBoxWall5PPO(CarryBoxPPO):
         visible_distance = targets[..., :3][valid].norm(dim=-1).mean().item() if valid.any() else 0.
         result = super().update()
         result.update(box_visible_fraction=visible_fraction, box_visible_distance=visible_distance,
-                      ppo_kl=getattr(self, 'last_kl', 0.), ppo_learning_rate=self.learning_rate)
+                      ppo_kl=getattr(self, 'last_kl', 0.), ppo_learning_rate=self.learning_rate,
+                      action_std_max=self.policy.log_std.exp().max().item())
         return result
 
     def _update_amp(self):
@@ -198,17 +252,26 @@ class CarryBoxWall5PPO(CarryBoxPPO):
 
 
 class CarryBoxWall5OnPolicyRunner(CarryBoxOnPolicyRunner):
+    def warm_start(self, path):
+        super().warm_start(path)
+        # Explicit weights-only migration may come from a wider old Gaussian.
+        self.alg._project_policy_parameters()
+        self.warm_start_info['action_std_projection_max'] = self.alg.max_action_std
+
     def load(self, path, load_optimizer=True, map_location=None):
         result = super().load(path, load_optimizer, map_location)
+        maximum = self.alg.max_action_std
+        if maximum is not None and (self.alg.policy.log_std > math.log(maximum) + 1.e-6).any():
+            raise ValueError('Restored Wall5 policy exceeds its action standard-deviation contract')
         if load_optimizer:
             self.alg.learning_rate = self.alg.optimizer.param_groups[0]['lr']
         return result
 
     def _construct_algorithm(self, obs):
-        if (self.policy_cfg.pop('class_name') != 'CarryBoxActorCritic'
+        if (self.policy_cfg.pop('class_name') != 'CarryBoxWall5ActorCritic'
                 or self.alg_cfg.pop('class_name') != 'CarryBoxWall5PPO'):
             raise ValueError('Invalid Wall5 learning classes')
-        policy = CarryBoxActorCritic(obs, self.cfg['obs_groups'], self.env.num_actions, **self.policy_cfg).to(self.device)
+        policy = CarryBoxWall5ActorCritic(obs, self.cfg['obs_groups'], self.env.num_actions, **self.policy_cfg).to(self.device)
         alg = CarryBoxWall5PPO(policy, device=self.device, multi_gpu_cfg=self.multi_gpu_cfg,
                               control_dt=self.env.unwrapped.step_dt, **self.alg_cfg)
         alg.init_storage('rl', self.env.num_envs, self.num_steps_per_env, obs, [self.env.num_actions])

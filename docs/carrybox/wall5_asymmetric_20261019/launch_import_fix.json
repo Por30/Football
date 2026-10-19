@@ -1,0 +1,6 @@
+{
+  "cause": "Missing Isaac Sim setup in detached launch environment",
+  "failed_pid": 4038811,
+  "fix": "Explicitly source /home/cao/isaacsim/setup_conda_env.sh before launch; import path preflight; preserve failed run log",
+  "automatic_retry": false
+}

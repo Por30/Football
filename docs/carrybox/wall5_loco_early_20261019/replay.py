@@ -1,0 +1,161 @@
+"""Five bounded physical controller comparisons from identical loco RSI states."""
+import argparse
+from isaaclab.app import AppLauncher
+parser=argparse.ArgumentParser();parser.add_argument('--case',required=True,choices=('policy','hold_reference','default_pose','follow_reference','hold_reference_zero_velocity'));AppLauncher.add_app_launcher_args(parser);args=parser.parse_args();app=AppLauncher(args).app
+import importlib.util,sys,json,hashlib,math
+from pathlib import Path
+from unittest.mock import patch
+import torch
+import perceptual_ball.tasks
+from isaaclab_rl.rsl_rl import RslRlVecEnvWrapper
+from isaaclab.utils.math import euler_xyz_from_quat,wrap_to_pi,quat_apply
+from perceptual_ball.rsl_rl_extensions.carrybox_wall5 import CarryBoxWall5ActorCritic
+from perceptual_ball.tasks.manager_based.perceptual_ball.mdp import carrybox_walled as common
+from perceptual_ball.carrybox_amp import joint_mapping
+DOC=Path(__file__).resolve().parent;ROOT=DOC.parents[2];N=16;STEPS=100
+ARCHIVE=ROOT/'docs/carrybox/wall5_push_20261019/before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball'
+CHECKPOINT=ROOT/'logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_00-37-11_wall5_v14_asymmetric_fresh_20261019_003706/model_11200.pt'
+
+def load(name,path):
+ spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);sys.modules[name]=m;spec.loader.exec_module(m);return m
+
+def main():
+ torch.set_num_threads(2);pkg='perceptual_ball.tasks.manager_based.perceptual_ball'
+ config=load(pkg+'.loco_diagnostic_cfg',ARCHIVE/'carrybox_wall5_env_cfg.py');task=load(pkg+'.mdp.loco_diagnostic_mdp',ARCHIVE/'mdp/carrybox_wall5.py')
+ cfg=config.CarryBoxWalled5EnvCfg();agent=config.CarryBoxWalled5PPORunnerCfg();cfg.scene.num_envs=N;cfg.seed=42;cfg.sim.device=args.device
+ for k in ('gpu_found_lost_pairs_capacity','gpu_found_lost_aggregate_pairs_capacity','gpu_total_aggregate_pairs_capacity'):setattr(cfg.sim.physx,k,262144)
+ env=task.Wall5CarryBoxEnv(cfg=cfg)
+ try:
+  checkpoint=torch.load(CHECKPOINT,map_location=args.device,weights_only=False);assert env.checkpoint_contract()==checkpoint['environment_contract'];original_contract=env.checkpoint_contract()
+  w=RslRlVecEnvWrapper(env,clip_actions=agent.clip_actions);obs,_=w.reset();pc=agent.policy.to_dict();pc.pop('class_name')
+  p=CarryBoxWall5ActorCritic(obs,agent.obs_groups,29,**pc).to(args.device);p.load_state_dict(checkpoint['model_state_dict'],strict=True);p.eval();saved={k:v.clone() for k,v in p.state_dict().items()}
+  env.set_training_iteration(0);env.set_training_iteration(11200);s=common.state(env);assert abs(s.curriculum.degrees-12.4)<1e-5
+  robot=env.scene['robot'];r=robot.data;term=env.action_manager.get_term('joint_pos');joint_ids=term._joint_ids
+  assert term._joint_names==robot.joint_names and term._scale==.25
+  sensor=env.scene['body_contacts'];foot_sensor=sensor.find_bodies(['left_ankle_roll_link','right_ankle_roll_link'],preserve_order=True)[0]
+  inverse=torch.argsort(torch.tensor(joint_mapping(robot.joint_names),device=env.device))
+  # Trace the REAL randint results within the unchanged initialization function.
+  original_reference=common.initialize_reference;sampled={}
+  def traced_reference(e,ids):
+   calls=[];randint=torch.randint
+   def capture(*a,**kw):
+    value=randint(*a,**kw);calls.append(value.clone());return value
+   with patch.object(torch,'randint',capture):result=original_reference(e,ids)
+   assert (s.skills[ids]==0).all()
+   clips=[i for i,g in enumerate(s.library.clip_groups) if g=='loco_direction'];selection=calls.pop(0)
+   for slot,clip in enumerate(clips):
+    rows=(selection==slot).nonzero().flatten()
+    if len(rows):
+     frames=calls.pop(0)
+     for row,frame in zip(rows.tolist(),frames.tolist()):sampled[int(ids[row])]=(clip,frame)
+   assert not calls
+   return result
+  common.initialize_reference=traced_reference
+  cfg.reset_skill_probabilities=(1.,0.,0.)  # diagnostic focus only, after strict contract check
+  result=dict(status='RUNNING',checkpoint=str(CHECKPOINT),checkpoint_sha256=hashlib.sha256(CHECKPOINT.read_bytes()).hexdigest(),original_contract=original_contract,
+   diagnostic_overrides={'reset_skill_probabilities':[1.,0.,0.]},num_envs=N,steps=STEPS,control_dt=.02,seed=123,
+   action_clip=agent.clip_actions,action_scale=term._scale,joint_names=robot.joint_names,action_joint_names=term._joint_names,
+   reward_names=env.reward_manager._term_names,reward_weights=[x.weight for x in env.reward_manager._term_cfgs],
+   pd_stiffness=r.joint_stiffness.tolist(),pd_damping=r.joint_damping.tolist(),physical_joint_limits=r.joint_pos_limits.tolist(),
+   cases={},limits=['Only initial states paired; random draws diverge after different automatic resets','Frozen reference q with original walking velocities is not static balance','No discriminator loaded: reward is raw task, not mixed reward','100-step survivors are censored; reference end is held and explicitly marked'])
+  active=None;step=0;current_action=None;policy_action=None;first=None;alive=torch.ones(N,device=env.device,dtype=torch.bool);initial=None;initial_obs=None
+  masses=robot.root_physx_view.get_masses().to(env.device)
+  def snapshot():
+   roll,pitch,_=euler_xyz_from_quat(r.root_quat_w);mins=[]
+   for foot,points in zip(s.feet,s.foot_support_points):
+    q=r.body_link_quat_w[:,foot,None].expand(-1,len(points),-1)
+    world=quat_apply(q.reshape(-1,4),points[None].expand(N,-1,-1).reshape(-1,3)).reshape(N,-1,3)+r.body_link_pos_w[:,foot,None]
+    mins.append(world[:,:,2].amin(-1)-env.scene.env_origins[:,2])
+   return dict(roll=wrap_to_pi(roll).tolist(),pitch=wrap_to_pi(pitch).tolist(),root_link=r.root_link_state_w.tolist(),root_com_velocity=r.root_vel_w.tolist(),
+    head_height=common.head_height(env).tolist(),joint_pos=r.joint_pos.tolist(),joint_vel=r.joint_vel.tolist(),torque=r.applied_torque.tolist(),
+    foot_force_w=sensor.data.net_forces_w[:,foot_sensor].tolist(),foot_lowest_z=torch.stack(mins,-1).tolist(),feet_pos=r.body_link_pos_w[:,s.feet].tolist(),
+    body_com=(r.body_com_pos_w*masses[:,:,None]).sum(1).div(masses.sum(1)[:,None]).tolist(),box=env.scene['box'].data.root_state_w.tolist(),
+    box_distance=(env.scene['box'].data.root_pos_w[:,:2]-r.root_pos_w[:,:2]).norm(dim=-1).tolist(),
+    tipped=task.tipped(env).tolist(),fell=common.fallen(env).tolist())
+  original_compute=env.reward_manager.compute
+  def reward_capture(dt):
+   reward=original_compute(dt)
+   if active is not None:
+    frame=snapshot();frame.update(step=step+1,alive_before_step=alive.tolist(),raw_policy=policy_action.tolist(),input_action=current_action.tolist(),
+     clipped_action=env.action_manager.action.tolist(),target_before_limits=(env.action_manager.action*.25+term._offset).tolist(),
+     physical_target=term.processed_actions.tolist(),target_saturation=term.target_saturation.tolist(),task_reward=reward.tolist(),
+     weighted_task_terms=(env.reward_manager._step_reward*dt).tolist(),terminated=env.termination_manager.terminated.tolist())
+    active['frames'].append(frame)
+   return reward
+  env.reward_manager.compute=reward_capture
+  original_reset=env._reset_idx
+  def reset_capture(ids):
+   if active is not None and getattr(env,'_carrybox_in_step',False):
+    for i in ids.tolist():
+     if alive[i]:
+      f=active['frames'][-1];active['first_episodes'][i]=dict(steps=step+1,tipped=f['tipped'][i],fell=f['fell'][i],pitch=f['pitch'][i],roll=f['roll'][i],push_count=sum(i in e['ids'] for e in active['pushes']))
+      alive[i]=False
+   original_reset(ids)
+  env._reset_idx=reset_capture
+  event=env.event_manager.get_term_cfg('push_robot');original_push=event.func
+  def push_capture(e,ids,**kw):
+   if active is not None:active['pushes'].append(dict(step=step+1,ids=ids.tolist(),first_episode=alive[ids].tolist()))
+   original_push(e,ids,**kw)
+  event.func=push_capture;env.event_manager.set_term_cfg('push_robot',event)
+  if args.case!='policy':
+   fixture=torch.load(DOC/'initial_fixture.pt',map_location=env.device,weights_only=False)
+   initial,initial_obs,first=fixture['physics'],fixture['observations'],fixture['references']
+  with torch.inference_mode():
+   for mode in (args.case,):
+    active=None;torch.manual_seed(123);obs,_=w.reset();alive.fill_(True)
+    refs=[sampled[i] for i in range(N)];q0=r.joint_pos.clone()
+    physics=dict(root_link=r.root_link_state_w.clone(),root_com=r.root_vel_w.clone(),q=r.joint_pos.clone(),dq=r.joint_vel.clone(),offset=term._offset.clone(),
+     box=env.scene['box'].data.root_state_w.clone(),camera_pos=env.scene['depth_camera'].data.pos_w.clone(),camera_quat=env.scene['depth_camera'].data.quat_w_ros.clone())
+    for name in ('wall','cylinder0','cylinder1','cylinder2'):physics[name]=env.scene[name].data.root_state_w.clone()
+    for i,(clip,frame) in enumerate(refs):
+     torch.testing.assert_close(q0[i],s.library.clips[clip][0][frame,inverse],rtol=0,atol=1e-6)
+     torch.testing.assert_close(r.joint_vel[i],s.library.clips[clip][1][frame,inverse],rtol=0,atol=1e-6)
+    torch.testing.assert_close(robot.root_physx_view.get_dof_positions(),r.joint_pos)
+    torch.testing.assert_close(robot.root_physx_view.get_dof_velocities(),r.joint_vel)
+    torch.testing.assert_close(robot.root_physx_view.get_root_velocities(),r.root_vel_w)
+    if initial is None:
+     initial={k:v.clone() for k,v in physics.items()};initial_obs={k:v.clone() for k,v in obs.items()};first=refs
+     torch.save(dict(physics=initial,observations=initial_obs,references=first),DOC/'initial_fixture.pt')
+    else:
+     assert refs==first
+     for k in physics:torch.testing.assert_close(physics[k],initial[k],atol=1e-5,rtol=1e-5,msg=lambda msg:k+': '+msg)
+     for k in ('proprio','perception'):torch.testing.assert_close(obs[k],initial_obs[k],atol=1e-5,rtol=1e-5,msg=lambda msg:k+': '+msg)
+    if mode=='hold_reference_zero_velocity':
+     robot.write_root_velocity_to_sim(torch.zeros(N,6,device=env.device));robot.write_joint_state_to_sim(q0,torch.zeros_like(q0));env.sim.forward()
+     assert robot.root_physx_view.get_root_velocities().abs().max()<1e-6 and robot.root_physx_view.get_dof_velocities().abs().max()<1e-6
+     env.observation_manager.reset();obs=env.observation_manager.compute(update_history=True)
+    active=dict(initial=snapshot(),physics_before_override={k:v.tolist() for k,v in physics.items()},references=[dict(clip=s.library.clip_names[c],frame=f,remaining_source_frames=len(s.library.clips[c][0])-1-f,
+     ground_lift=float(r.root_link_pos_w[i,2]-env.scene.env_origins[i,2]-s.references[c]['base_height'][f]-.05),source_base_height=float(s.references[c]['base_height'][f]),source_position=s.references[c]['base_position'][f].tolist()) for i,(c,f) in enumerate(refs)],
+     first_episodes=[None]*N,frames=[],pushes=[],reference_end_reached=[False]*N)
+    for step in range(STEPS):
+     policy_action=p.act_inference(obs)
+     if mode=='policy':current_action=policy_action
+     elif mode=='default_pose':current_action=torch.zeros_like(policy_action)
+     else:
+      target=q0.clone()
+      if mode=='follow_reference':
+       for i,(clip,frame) in enumerate(refs):
+        joints=s.library.clips[clip][0];time=frame+(step+1)*60*.02  # target at NEXT policy time
+        active['reference_end_reached'][i] |= time>len(joints)-1
+        time=min(time,len(joints)-1);lo=int(math.floor(time));hi=min(lo+1,len(joints)-1);a=time-lo
+        target[i]=((1-a)*joints[lo]+a*joints[hi])[inverse]
+      current_action=(target-term._offset)/term._scale
+     assert torch.isfinite(current_action).all()
+     obs,reward,done,_=w.step(current_action);assert torch.isfinite(reward).all()
+    active['censored']=[i for i,x in enumerate(active['first_episodes']) if x is None]
+    active['final']=snapshot();result['cases'][mode]=active
+    (DOC/('case_'+args.case+'.json')).write_text(json.dumps(result)+'\n')
+    print('CASE_DONE',mode,'first deaths',sum(x is not None for x in active['first_episodes']),
+     'first20',sum(x is not None and x['steps']<=20 for x in active['first_episodes']),
+     'steps',[x['steps'] if x else 100 for x in active['first_episodes']],flush=True)
+  assert all(torch.equal(saved[k],v) for k,v in p.state_dict().items())
+  result.update(status='PASS',initial_states_equal=True,initial_observations_equal=True,physx_initial_readback=True,policy_parameters_unchanged=True)
+  (DOC/('case_'+args.case+'.json')).write_text(json.dumps(result)+'\n');print('LOCO_REPLAY_PASS',flush=True)
+ finally:env.close()
+try:main()
+except BaseException as error:
+ import traceback
+ traceback.print_exc()
+ (DOC/'exception.txt').write_text(traceback.format_exc())
+ raise
+finally:app.close(wait_for_replicator=False)

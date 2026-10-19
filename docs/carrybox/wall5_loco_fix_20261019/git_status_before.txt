@@ -1,0 +1,40 @@
+ M AGENTS.md
+ M docs/agilekickball_v4/sim2sim_20261014/run.json
+ M projects/README.md
+ M projects/findbox/README.md
+ M source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py
+ M source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
+ M source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
+?? agent/handoff/carrybox-wall5-amp-visualization-20261018.md
+?? agent/handoff/carrybox-wall5-asymmetric-20261019.md
+?? agent/handoff/carrybox-wall5-loco-early-20261019.md
+?? agent/handoff/carrybox-wall5-play11000-20261019.md
+?? agent/handoff/carrybox-wall5-push-20261019.md
+?? agent/handoff/carrybox-wall5-rev14-play-command-20261019.md
+?? agent/plan/carrybox-wall5-amp-visualization-20261018.md
+?? agent/plan/carrybox-wall5-asymmetric-20261019.md
+?? agent/plan/carrybox-wall5-loco-early-20261019.md
+?? agent/plan/carrybox-wall5-play11000-20261019.md
+?? agent/plan/carrybox-wall5-push-20261019.md
+?? agent/plan/carrybox-wall5-rev14-play-command-20261019.md
+?? agent/report/carrybox-wall5-amp-visualization-20261018.md
+?? agent/report/carrybox-wall5-asymmetric-20261019.md
+?? agent/report/carrybox-wall5-loco-early-20261019.md
+?? agent/report/carrybox-wall5-play11000-20261019.md
+?? agent/report/carrybox-wall5-push-20261019.md
+?? agent/report/carrybox-wall5-rev14-play-command-20261019.md
+?? agent/task/carrybox-wall5-amp-visualization-20261018.md
+?? agent/task/carrybox-wall5-asymmetric-20261019.md
+?? agent/task/carrybox-wall5-loco-early-20261019.md
+?? agent/task/carrybox-wall5-play11000-20261019.md
+?? agent/task/carrybox-wall5-push-20261019.md
+?? agent/task/carrybox-wall5-rev14-play-command-20261019.md
+?? docs/carrybox/wall5_amp_visualization_20261018/
+?? docs/carrybox/wall5_asymmetric_20261019/
+?? docs/carrybox/wall5_loco_early_20261019/
+?? docs/carrybox/wall5_loco_fix_20261019/
+?? docs/carrybox/wall5_play11000_20261019/
+?? docs/carrybox/wall5_push_20261019/
+?? docs/carrybox/wall5_rev14_play_20261019/
+?? tests/test_carrybox_asymmetric.py
+?? tests/test_carrybox_push.py

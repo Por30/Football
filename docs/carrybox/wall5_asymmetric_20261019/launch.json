@@ -1,0 +1,25 @@
+{
+  "pid": 4038923,
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v14_asymmetric_fresh_20261019_003706.log",
+  "command": [
+    "/home/cao/ENTER/envs/ball/bin/python",
+    "-u",
+    "scripts/rsl_rl/train.py",
+    "--task",
+    "Template-Perceptual-Ball-CarryBox-Walled5-v0",
+    "--num_envs",
+    "4096",
+    "--device",
+    "cuda:0",
+    "--headless",
+    "--seed",
+    "42",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall5_v14_asymmetric_fresh_20261019_003706"
+  ],
+  "run_name": "wall5_v14_asymmetric_fresh_20261019_003706",
+  "initialization": "fresh",
+  "started_at": "2026-10-19T00:37:06.359627+09:00"
+}

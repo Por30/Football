@@ -1,0 +1,86 @@
+{
+  "weight2": {
+    "first_25": {
+      "loco": {
+        "completed": 8686,
+        "mean_steps": 27.62733133778494,
+        "tipped": 0.9991941054570573,
+        "fell": 0.0
+      },
+      "hold": {
+        "completed": 1879,
+        "mean_steps": 31.60191591271953,
+        "tipped": 1.0,
+        "fell": 0.0
+      },
+      "seconds": 1.8952110290527344,
+      "loco_task_per_step": -0.09370622344315052,
+      "loco_task_excluding_failure": -0.05843386612599716,
+      "saturation": 0.028368242516492805,
+      "surviving_loco_speed": 0.921816342373689,
+      "surviving_loco_box_distance": 1.1840192659695943
+    },
+    "last_25": {
+      "loco": {
+        "completed": 7947,
+        "mean_steps": 30.816786208632188,
+        "tipped": 0.9997483327041651,
+        "fell": 0.00025166729583490623
+      },
+      "hold": {
+        "completed": 1221,
+        "mean_steps": 49.73791973791974,
+        "tipped": 1.0,
+        "fell": 0.0
+      },
+      "seconds": 1.9000490665435792,
+      "loco_task_per_step": -0.042130566211417315,
+      "loco_task_excluding_failure": -0.009825688237324354,
+      "saturation": 0.06120004900420705,
+      "surviving_loco_speed": 0.8429445192217827,
+      "surviving_loco_box_distance": 1.1718555068969727
+    }
+  },
+  "weight5": {
+    "first_25": {
+      "loco": {
+        "completed": 8408,
+        "mean_steps": 28.479900095147478,
+        "tipped": 0.9990485252140818,
+        "fell": 0.00011893434823977165
+      },
+      "hold": {
+        "completed": 1831,
+        "mean_steps": 32.52211906062261,
+        "tipped": 1.0,
+        "fell": 0.0
+      },
+      "seconds": 1.8946845436096191,
+      "loco_task_per_step": -0.062012313152469384,
+      "loco_task_excluding_failure": -0.027870037071988915,
+      "saturation": 0.028675691320871312,
+      "surviving_loco_speed": 0.9240163775285085,
+      "surviving_loco_box_distance": 1.1745880726973217
+    },
+    "last_25": {
+      "loco": {
+        "completed": 5283,
+        "mean_steps": 46.487980314215406,
+        "tipped": 0.989399962142722,
+        "fell": 0.010600037857278062
+      },
+      "hold": {
+        "completed": 1061,
+        "mean_steps": 57.45334590009425,
+        "tipped": 0.9896324222431668,
+        "fell": 0.010367577756833177
+      },
+      "seconds": 1.8596664333343507,
+      "loco_task_per_step": 0.004634276266656343,
+      "loco_task_excluding_failure": 0.026109886194870643,
+      "saturation": 0.067441293609639,
+      "surviving_loco_speed": 0.8499128170808157,
+      "surviving_loco_box_distance": 1.1340522332986196
+    }
+  }
+}

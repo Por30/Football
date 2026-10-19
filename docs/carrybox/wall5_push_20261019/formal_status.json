@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-10-19T12:08:52.697724+09:00",
+  "pid": 4038923,
+  "alive": true,
+  "command": "/home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-CarryBox-Walled5-v0 --num_envs 4096 --device cuda:0 --headless --seed 42 --max_iterations 40000 --run_name wall5_v14_asymmetric_fresh_20261019_003706 ",
+  "log": "logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v14_asymmetric_fresh_20261019_003706.log",
+  "running_revision": 14,
+  "source_revision": 15,
+  "last_iteration": 10779,
+  "recent_iterations": [
+    {
+      "iteration": 10770,
+      "seconds": 6.82
+    },
+    {
+      "iteration": 10771,
+      "seconds": 4.03
+    },
+    {
+      "iteration": 10772,
+      "seconds": 3.99
+    },
+    {
+      "iteration": 10773,
+      "seconds": 4.01
+    },
+    {
+      "iteration": 10774,
+      "seconds": 4.02
+    },
+    {
+      "iteration": 10775,
+      "seconds": 4.07
+    },
+    {
+      "iteration": 10776,
+      "seconds": 3.99
+    },
+    {
+      "iteration": 10777,
+      "seconds": 4.03
+    },
+    {
+      "iteration": 10778,
+      "seconds": 4.0
+    },
+    {
+      "iteration": 10779,
+      "seconds": 4.08
+    }
+  ],
+  "recent_mean_seconds": 4.304,
+  "changed_running_process": false,
+  "diagnostic_processes_finished": true
+}

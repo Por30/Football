@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-19T14:31:55.348542+09:00",
+  "pid": 114186,
+  "run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_14-25-38_wall5_v15_roll05_fresh_20261019_142533",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v15_roll05_fresh_20261019_142533.log",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_14-25-38_wall5_v15_roll05_fresh_20261019_142533/model_0.pt",
+  "initialization": "fresh",
+  "progress_from": 1,
+  "progress_to": 16,
+  "mean_iteration_seconds": 3.8019999999999996,
+  "max_iteration_seconds": 3.9,
+  "num_envs": 4096,
+  "max_iterations": 40000,
+  "seed": 42,
+  "revision": 15,
+  "roll_limit": 0.5,
+  "rsi": [
+    0.8,
+    0.0,
+    0.2
+  ],
+  "amp_clips": 13,
+  "amp_frame_dim": 60,
+  "critic_dim": 108,
+  "initial_optimizer_steps": 20,
+  "initial_amp_normalizer_count": 61440,
+  "finite_parameters_and_optimizers": true,
+  "source_unchanged": true,
+  "latest_logged_metrics": {
+    "Skill/loco_mean_steps": 27.7255,
+    "Skill/hold_mean_steps": 31.5421,
+    "Skill/loco_success_fraction": 0.0,
+    "Skill/hold_success_fraction": 0.0,
+    "AMP/style_reward": 0.179,
+    "Reward/amp_per_step": 0.0224,
+    "Mean episode length": 27.35
+  },
+  "convergence_evaluated": false,
+  "previous_control_candidate_applied": false
+}

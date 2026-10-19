@@ -1,0 +1,144 @@
+{
+  "status": "PASS",
+  "scope": "CPU static/data audit only; no physical rollouts",
+  "source_hashes": {
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/__init__.py": "546af72c8239cc6a23f26cc7fe863258d289876981a476bdcc57418024efd9ba",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox.py": "c37e7c5ff4884baba2a40ddfde5b9d91f01b427fea7bf9812da26231c35630b7",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox_config.py": "dcb44bb88c7bdcb204ae8beab0d4bd480cd26a8c15a8b819cb76d05511d00a9b",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox_resume_config.py": "0d033399933aaf582266f46e889b28b2d78865d78494b979008a688bb5b0326f",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/motionlib/motionlib_carrybox.py": "c88409cd1a1f2f797af80fa56d21dfb302ac6e4bdd2a0001a9d10b1ab746d862",
+    "/home/cao/PhysHSI/legged_gym/resources/config/carrybox.yaml": "dd2898e872d3ea80f48c35f19e3ebbc09232791e31cdb42076c21b0ecfe75bbc",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_amp.py": "2156aef8eb3833522e0b0c4adf98f3dfa308e15b548ea860c85230f349523e24",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox.py": "1797d679e5fc8b38ca49392752fb0bc1f6960d185734c0c05022eb535434878e",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "a9c785fa8a28c57a6597c3af83e5f227d06962d08243f0dcc2385b0f165ce637",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "7d2e589c55663c627bd4833692edbc1de20c6bbd6e18f560ca83341a98262c95",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_env_cfg.py": "00530b20fd176d33b1b7c65052da02e668ff7b6b5b5e943ba60a356c814d4de0",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "6cd5ffd221878860b850a80a0fb5fe20a874d3e42318870b42b3504a19a5b35a",
+    "/home/cao/IsaacLab/source/isaaclab/isaaclab/envs/manager_based_rl_env.py": "8ec2759541c8320ed725411d49564f5617b3ab6b9d340c860bededee13d557d4",
+    "/home/cao/IsaacLab/source/isaaclab/isaaclab/envs/mdp/actions/joint_actions.py": "1b3dcb55d969d886cee500e660f12331e49f8638fec98cde30d2b818a1ca1692",
+    "/home/cao/IsaacLab/source/isaaclab/isaaclab/managers/action_manager.py": "a95d7c45048b08d8c7b526ba5ab88d40087b4bcbacb248d6e9b039c5f3b9afb9",
+    "/home/cao/IsaacLab/source/isaaclab/isaaclab/managers/observation_manager.py": "468ed890539f2de29dc0c27024b0ad74667209b884e0431456e1455c860cafae",
+    "/home/cao/IsaacLab/source/isaaclab/isaaclab/utils/buffers/circular_buffer.py": "60d47f0e324559c51a0b843bffda6c05f644aa2dd7058e8679e463aa911df8ca"
+  },
+  "physhsi_reset_fractions": {
+    "default": 0.19999999999999996,
+    "loco": 0.5333333333333334,
+    "pickUp": 0.13333333333333336,
+    "carryWith": 0.13333333333333336,
+    "putDown": 0.0
+  },
+  "wall5_loco_root_speed": {
+    "sampling": "uniform over clips; uniform native frames 0..N-2 inside each clip",
+    "num_clips": 11,
+    "num_candidate_frames": 3345,
+    "mean_mps": 0.7425623326110681,
+    "quantiles_mps": {
+      "0.5": 0.7876469706262469,
+      "0.9": 1.0260005727972414,
+      "0.95": 1.070907367595027,
+      "0.99": 1.1291798697290458
+    },
+    "max_mps": 1.2895946702911325,
+    "fraction_above_physhsi_rsi_xy_max": 0.9154437638491257,
+    "physhsi_rsi_xy_max_mps": 0.28284271247461906,
+    "physhsi_rsi_xy_rms_mps": 0.16329931618554522
+  },
+  "clips": [
+    {
+      "file": "locomotion/walk_turn_left_045.pt",
+      "reset_frames": 252,
+      "mean_speed_xy_mps": 0.8897045419707155,
+      "max_speed_xy_mps": 1.2895946702911325,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_turn_left_135.pt",
+      "reset_frames": 288,
+      "mean_speed_xy_mps": 0.7611936970229599,
+      "max_speed_xy_mps": 1.1523264872764953,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_turn_right_090.pt",
+      "reset_frames": 262,
+      "mean_speed_xy_mps": 0.8534809282908977,
+      "max_speed_xy_mps": 1.1360603836556582,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_turn_right_045.pt",
+      "reset_frames": 255,
+      "mean_speed_xy_mps": 0.907515737139283,
+      "max_speed_xy_mps": 1.1582828320653007,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_turn_right_135.pt",
+      "reset_frames": 320,
+      "mean_speed_xy_mps": 0.779949123778804,
+      "max_speed_xy_mps": 1.168160517582525,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_turn_around_01.pt",
+      "reset_frames": 328,
+      "mean_speed_xy_mps": 0.6907850122658706,
+      "max_speed_xy_mps": 1.1087882233753574,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/stand_to_walk_01.pt",
+      "reset_frames": 341,
+      "mean_speed_xy_mps": 0.5000260571365068,
+      "max_speed_xy_mps": 0.9223352329468292,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_to_stand_01.pt",
+      "reset_frames": 339,
+      "mean_speed_xy_mps": 0.5343133262605427,
+      "max_speed_xy_mps": 1.0132190399002863,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_to_stand_02.pt",
+      "reset_frames": 292,
+      "mean_speed_xy_mps": 0.5753396740842064,
+      "max_speed_xy_mps": 1.055141864770668,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_forward_01.pt",
+      "reset_frames": 455,
+      "mean_speed_xy_mps": 0.8678971098871361,
+      "max_speed_xy_mps": 1.1219204285931281,
+      "physhsi_source_equal": true
+    },
+    {
+      "file": "locomotion/walk_turn_left_090.pt",
+      "reset_frames": 213,
+      "mean_speed_xy_mps": 0.8079804508848262,
+      "max_speed_xy_mps": 1.1351390558617487,
+      "physhsi_source_equal": true
+    }
+  ],
+  "training_snapshot": {
+    "checked_at": "2026-10-19T22:12:47.023229+09:00",
+    "pid": 254358,
+    "cmd": "/home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-CarryBox-Walled5-v0 --num_envs 4096 --device cuda:0 --headless --seed 42 --max_iterations 40000 --run_name wall5_v17_loco_feedback_fresh_20261019_215857 ",
+    "latest_iteration": 134,
+    "recent_10_iteration_seconds": [
+      3.8,
+      3.83,
+      3.84,
+      3.85,
+      3.83,
+      3.8,
+      3.82,
+      3.81,
+      3.87,
+      3.84
+    ]
+  }
+}

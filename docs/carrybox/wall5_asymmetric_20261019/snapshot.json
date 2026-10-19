@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-19T00:42:58.492209+09:00",
+  "pid": 4038923,
+  "run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_00-37-11_wall5_v14_asymmetric_fresh_20261019_003706",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v14_asymmetric_fresh_20261019_003706.log",
+  "initialization": "fresh",
+  "loaded_checkpoint": null,
+  "revision": 14,
+  "actor_input": [
+    372,
+    4,
+    27,
+    48
+  ],
+  "critic_dim": 108,
+  "progress_from": 0,
+  "progress_to": 15,
+  "mean_iteration_seconds": 3.813,
+  "max_iteration_seconds": 3.83,
+  "initial_optimizer_steps": 20,
+  "initial_amp_normalizer_count": 61440,
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-19_00-37-11_wall5_v14_asymmetric_fresh_20261019_003706/model_0.pt",
+  "finite_parameters_and_optimizers": true,
+  "amp_clips": 13,
+  "amp_frame_dim": 60,
+  "rsi": [
+    0.8,
+    0.0,
+    0.2
+  ],
+  "convergence_evaluated": false
+}

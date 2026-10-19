@@ -51,7 +51,7 @@ class TrainingTests(unittest.TestCase):
         self.assertAlmostEqual(a[1,57:59].norm().item(),.7,places=6);self.assertEqual(a[1,59],0)
 
     def test_roll_boundary_and_failure_event_no_timeout_leak(self):
-        roll=torch.tensor([.799,.801,-.799,-.801,0.]);z=torch.zeros(5)
+        roll=torch.tensor([.499,.501,-.499,-.501,0.]);z=torch.zeros(5)
         q=quat_from_euler_xyz(roll,z,z);env=NS(scene={'robot':NS(data=NS(root_quat_w=q))})
         self.assertEqual(task.tipped(env).tolist(),[False,True,False,True,False])
         env.termination_manager=NS(terminated=torch.tensor([False,True,False,True,True]),time_outs=torch.tensor([False,False,False,True,False]),get_term=lambda k:torch.tensor([True,True,True,True,False]))

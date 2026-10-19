@@ -1,0 +1,33 @@
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
++++ after/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
+@@ -72,7 +72,7 @@
+ 
+ def tipped(env):
+     roll, pitch, _ = euler_xyz_from_quat(env.scene['robot'].data.root_quat_w)
+-    return (wrap_to_pi(roll).abs() > .8) | (wrap_to_pi(pitch).abs() > 1.1)
++    return (wrap_to_pi(roll).abs() > .5) | (wrap_to_pi(pitch).abs() > 1.1)
+ 
+ 
+ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
+@@ -110,8 +110,8 @@
+                         reference_dataset_profile='findbox_ground_pickup_v1',
+                         reference_manifest_sha256=reference_hash)
+         contract.update(reference_velocity='source_position_difference_pelvis_link', failure_reward='current_fell_or_tipped_exclude_timeout_dt_scaled',
+-                        roll_termination='abs_roll_gt_0.8', aux_supervision='visible_box_hit_and_optical_range_paired_mask_v1',
+-                        aux_target_shape=10, early_failure_penalty_weight=-10., roll_limit=.8,
++                        roll_termination='abs_roll_gt_0.5', aux_supervision='visible_box_hit_and_optical_range_paired_mask_v1',
++                        aux_target_shape=10, early_failure_penalty_weight=-10., roll_limit=.5,
+                         reset_skill_probabilities=list(self.cfg.reset_skill_probabilities))
+         contract.update(actor_observations='proprio93x4_depth4x27x48_no_privileged',
+                         critic_observations='current_proprio93_pelvis_link_linvel3_box_local_xyz3_rot6_size3_v1',
+--- before/tests/test_carrybox_training_v12.py
++++ after/tests/test_carrybox_training_v12.py
+@@ -51,7 +51,7 @@
+         self.assertAlmostEqual(a[1,57:59].norm().item(),.7,places=6);self.assertEqual(a[1,59],0)
+ 
+     def test_roll_boundary_and_failure_event_no_timeout_leak(self):
+-        roll=torch.tensor([.799,.801,-.799,-.801,0.]);z=torch.zeros(5)
++        roll=torch.tensor([.499,.501,-.499,-.501,0.]);z=torch.zeros(5)
+         q=quat_from_euler_xyz(roll,z,z);env=NS(scene={'robot':NS(data=NS(root_quat_w=q))})
+         self.assertEqual(task.tipped(env).tolist(),[False,True,False,True,False])
+         env.termination_manager=NS(terminated=torch.tensor([False,True,False,True,True]),time_outs=torch.tensor([False,False,False,True,False]),get_term=lambda k:torch.tensor([True,True,True,True,False]))

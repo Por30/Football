@@ -183,8 +183,15 @@ class CarryBoxPPO(PPO):
         self.policy.act(obs)
         return self.policy.evaluate(obs), self.policy.predict_box_pose(obs)
 
+    def _policy_regularization(self, obs):
+        return self.policy.log_std.new_zeros(())
+
+    @torch.no_grad()
+    def _project_policy_parameters(self):
+        self.policy.log_std.clamp_(-5., 1.)
+
     def update(self):
-        totals = dict(value_function=0., surrogate=0., entropy=0., box_position=0., box_rotation=0.)
+        totals = dict(value_function=0., surrogate=0., entropy=0., box_position=0., box_rotation=0., action_bounds=0.)
         count = 0
         for batch in self.storage.mini_batch_generator(self.num_mini_batches, self.num_learning_epochs):
             obs, actions, old_values, advantages, returns, old_logp, old_mu, old_sigma, *_ = batch
@@ -205,15 +212,16 @@ class CarryBoxPPO(PPO):
             position, rotation = self._pose_loss(pose_prediction, obs['box_pose_target'])
             loss = surrogate + self.value_loss_coef * value_loss - self.entropy_coef * entropy
             loss = loss + self.pose_aux_coef * (position + rotation)
+            regularization = self._policy_regularization(obs)
+            loss = loss + regularization
             if not torch.isfinite(loss):
                 raise FloatingPointError('Non-finite CarryBox training loss')
             self.optimizer.zero_grad(set_to_none=True)
             loss.backward()
             nn.utils.clip_grad_norm_(self.policy.parameters(), self.max_grad_norm, error_if_nonfinite=True)
             self.optimizer.step()
-            with torch.no_grad():
-                self.policy.log_std.clamp_(-5., 1.)
-            for key, value in zip(totals, (value_loss, surrogate, entropy, position, rotation)):
+            self._project_policy_parameters()
+            for key, value in zip(totals, (value_loss, surrogate, entropy, position, rotation, regularization)):
                 totals[key] += value.item()
             count += 1
         self.storage.clear()

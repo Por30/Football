@@ -1,0 +1,18 @@
+{
+  "repair": 1,
+  "initial_failure": "CPU fixture omitted required fixed schedule; all 4-env and 512-env integration tests passed",
+  "changes": [
+    "explicit fixed schedule in legacy compatibility test",
+    "wall5 weights-only warm-start projects std before rollout and records migration; strict resume still rejects invalid std",
+    "single reward-group adjustment: stability weight2 ->5 based on first pilot negative continuing task rewards"
+  ],
+  "unchanged": [
+    "all frozen test commands/assertions",
+    "PD and source motion RSI",
+    "std max1 and all other reward coefficients",
+    "512 env/200 iteration/seed42 protocol"
+  ],
+  "old_artifacts": "attempt1/",
+  "behavior_not_proven": true,
+  "attempt1_source_note": "Snapshot captured after the unused warm_start boundary fix; first pilot was fresh and did not execute load/warm_start. The actual checkpoint contract records stability weight2."
+}

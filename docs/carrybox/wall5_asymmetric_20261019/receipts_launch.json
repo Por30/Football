@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/wall5_asymmetric_20261019/verify_launch.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "e567430e6e46418caf129335461b8e76e62a2c463057ca486d7a76699c43f1de",
+      "stdout_sha256": "b6501bce0a1fc064d9cff57893545784b82f09f968ed8c070ea713da42fafe09",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

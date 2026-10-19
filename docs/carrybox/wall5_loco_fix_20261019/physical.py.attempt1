@@ -1,0 +1,75 @@
+"""Check the real standing reset and first-episode physics, without a learned controller."""
+import argparse
+from isaaclab.app import AppLauncher
+parser=argparse.ArgumentParser();AppLauncher.add_app_launcher_args(parser)
+args=parser.parse_args();app=AppLauncher(args).app
+import json,traceback
+from pathlib import Path
+import torch
+import perceptual_ball.tasks
+from isaaclab_rl.rsl_rl import RslRlVecEnvWrapper
+from isaaclab.utils.math import euler_xyz_from_quat,wrap_to_pi
+from perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_wall5_env_cfg import CarryBoxWalled5EnvCfg,CarryBoxWalled5PPORunnerCfg
+from perceptual_ball.tasks.manager_based.perceptual_ball.mdp import carrybox_wall5 as task,carrybox_walled as parent
+DOC=Path(__file__).resolve().parent
+
+def main():
+    torch.set_num_threads(2);cfg=CarryBoxWalled5EnvCfg();agent=CarryBoxWalled5PPORunnerCfg()
+    cfg.scene.num_envs=20;cfg.seed=42;cfg.sim.device=args.device
+    for k in ('gpu_found_lost_pairs_capacity','gpu_found_lost_aggregate_pairs_capacity','gpu_total_aggregate_pairs_capacity'):setattr(cfg.sim.physx,k,262144)
+    env=task.Wall5CarryBoxEnv(cfg=cfg)
+    try:
+        w=RslRlVecEnvWrapper(env,clip_actions=agent.clip_actions);robot=env.scene['robot'];r=robot.data
+        s=parent.state(env);env.set_training_iteration(0);hold=None;reset_checks=[]
+        with torch.inference_mode():
+            for iteration in (0,2000,5000,8000):
+                env.set_training_iteration(iteration);torch.manual_seed(123);obs,_=w.reset()
+                assert torch.bincount(s.skills,minlength=3).tolist()==[16,0,4]
+                loco=(s.skills==0).nonzero().flatten();held=(s.skills==2).nonzero().flatten();ids=s.standing_start.nonzero().flatten()
+                assert abs(task.loco_reference_fraction(env)-max(0.,min(1.,(iteration-2000)/6000)))<1e-8
+                if iteration<=2000:assert len(ids)==16
+                if iteration==8000:assert len(ids)==0
+                if len(ids):
+                    torch.testing.assert_close(r.joint_pos[ids],r.default_joint_pos[ids],atol=1e-6,rtol=0)
+                    assert robot.root_physx_view.get_dof_velocities()[ids].abs().max()<1e-6
+                    assert robot.root_physx_view.get_root_velocities()[ids].abs().max()<1e-6
+                    assert parent.reference_ground_correction(env,ids,allow_lowering=True).abs().max()<1e-5
+                paired=(r.root_link_state_w[held].clone(),r.joint_pos[held].clone(),r.joint_vel[held].clone(),env.scene['box'].data.root_state_w[held].clone())
+                if hold is None:hold=paired
+                else:
+                    for a,b in zip(paired,hold):torch.testing.assert_close(a,b,atol=2e-5,rtol=1e-5)
+                for name,frames in (('proprio',obs['proprio'].reshape(20,4,93)),('perception',obs['perception'])):
+                    for i in range(1,4):torch.testing.assert_close(frames[:,0],frames[:,i],atol=1e-6,rtol=0)
+                saved=r.root_link_state_w.clone();env._reset_idx(torch.tensor([1,18],device=env.device))
+                untouched=torch.tensor([i for i in range(20) if i not in (1,18)],device=env.device)
+                torch.testing.assert_close(r.root_link_state_w[untouched],saved[untouched],atol=1e-5,rtol=1e-5)
+                assert torch.bincount(s.skills,minlength=3).tolist()==[16,0,4]
+                reset_checks.append(dict(iteration=iteration,reference_fraction=task.loco_reference_fraction(env),standing=len(ids),hold_unchanged=True))
+            # Restore the fresh-training curriculum; no pushes are active before warmup.
+            env.set_training_iteration(0);obs,_=w.reset();loco=(s.skills==0).nonzero().flatten()
+            term=env.action_manager.get_term('joint_pos');action=(r.joint_pos-term._offset)/term._scale
+            initial_root=r.root_link_pos_w.clone();first_end=[None]*20;angles=[];forces=[]
+            foot_ids=env.scene['body_contacts'].find_bodies(['left_ankle_roll_link','right_ankle_roll_link'],preserve_order=True)[0]
+            for step in range(250):
+                obs,reward,done,extras=w.step(action)
+                assert all(torch.isfinite(x).all() for x in obs.values()) and torch.isfinite(reward).all()
+                for i in done.nonzero().flatten().tolist():
+                    if first_end[i] is None:first_end[i]=step+1
+                roll,pitch,_=euler_xyz_from_quat(r.root_quat_w)
+                angles.append(torch.stack((wrap_to_pi(roll)[loco],wrap_to_pi(pitch)[loco]),-1).tolist())
+                forces.append(env.scene['body_contacts'].data.net_forces_w[loco][:,foot_ids].norm(dim=-1).sum(-1).tolist())
+            outcome=dict(reset_checks=reset_checks,first_end=first_end,seconds=5.,loco_env_ids=loco.tolist(),
+                         max_abs_roll_pitch=float(torch.tensor(angles).abs().max()),mean_final_foot_force=float(torch.tensor(forces[-20:]).mean()),
+                         max_loco_xy_displacement=float((r.root_link_pos_w[loco,:2]-initial_root[loco,:2]).norm(dim=-1).max()),
+                         transition_counts=s.transition_counts.tolist(),status='RUNNING')
+            (DOC/'physical.json').write_text(json.dumps(outcome,indent=2)+'\n')
+            assert all(first_end[i] is None for i in loco.tolist()),first_end
+            assert outcome['max_abs_roll_pitch']<.3,outcome
+            assert torch.tensor(forces[-20:]).mean(0).min()>10.
+            outcome['status']='PASS';(DOC/'physical.json').write_text(json.dumps(outcome,indent=2)+'\n')
+            print('LOCO_PHYSICAL_PASS',json.dumps(outcome),flush=True)
+    finally:env.close()
+try:main()
+except BaseException:
+    traceback.print_exc();raise
+finally:app.close(wait_for_replicator=False)

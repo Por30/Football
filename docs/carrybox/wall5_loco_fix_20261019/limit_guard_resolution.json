@@ -1,0 +1,9 @@
+{
+  "failure": "New exact nominal-velocity guard before the second standing repair could run",
+  "actual": "actual_limits.json",
+  "effort_unchanged": 35.0,
+  "velocity_before": 29.999998092651367,
+  "nominal_velocity_after": 30.0,
+  "resolution": "Explicit wall5 feet source ratings in actuator cfg and checkpoint; assertions unchanged",
+  "standing_repair_budget": "second repair not yet evaluated; no further standing parameter changes allowed"
+}

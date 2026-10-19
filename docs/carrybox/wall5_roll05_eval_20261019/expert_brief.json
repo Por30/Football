@@ -1,0 +1,42 @@
+{
+  "affected_call_path": [
+    "CarryBoxWalled5EnvCfg → Wall5CarryBoxEnv → RSI/物理step → RslRlVecEnvWrapper → CarryBoxWall5ActorCritic",
+    "Walled step前actual_episode_steps递增；原_reset_idx调用前采集真实终态"
+  ],
+  "critical_interfaces": [
+    "完整原环境contract精确匹配且strict=True加载后，才覆盖诊断实例loco=1",
+    "actor372+4x27x48深度、独立critic108，原agent.obs_groups与动作链",
+    "先set_iteration(0)再5200再reset，回读有效课程与push/yaw",
+    "首次年龄与actual_episode_steps一致，终止前记录roll/pitch/root/head/XY及多标签"
+  ],
+  "invariants": [
+    "生产代码/训练PID/checkpoint/optimizer不变；eval/inference_mode，逐tensor权重前后相同",
+    "保留revision15增量push/摩擦/roll0.5/pitch1.1/运动RSI速度/深度/全身碰撞",
+    "均值为play，sample使用checkpoint log_std和独立generator",
+    "每环境只计第一回合，alive限制push/存活/移动，reset后不计"
+  ],
+  "smallest_change_locus": [
+    "只新增docs诊断及工程/项目记录",
+    "近250轮用累计steps/episodes差分，不把累计mean当近期均值",
+    "两种模式各32环境最多1000步，不扩展PD/推扰调参对照"
+  ],
+  "mandatory_safeguards": [
+    "锁定完整model5200路径大小SHA/iter/契约；不追逐训练中新文件",
+    "两模式独立进程、同构造/reset种子，物理与actor观察比较；动作独立generator，后续随机流可能因reset分叉",
+    "reset前alive掩码抓终态与足端轨迹/接触，不能累计后续回合位移",
+    "存活不等于会走，结合移动/向箱改善/足端证据；箱旁停下不算失败",
+    "GPU不足/OOM/NaN/契约错/训练异常停止诊断，不停止正式训练；并发回放可能暂时减速",
+    "诊断PASS不等于行走成功；即便0/32也保留完整结果",
+    "每模式报告1/5/10/20秒存活、首次失败分布、roll/pitch/fell/timeout/censored及push前失败",
+    "20秒自然timeout与窗口右删失分开，不把删失当完成成功"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall5_roll05_eval_20261019/check.sh",
+    "bash docs/carrybox/wall5_roll05_eval_20261019/replay.sh"
+  ],
+  "blockers": [
+    "checkpoint或source契约不匹配",
+    "GPU余量不足、NaN/OOM或原训练异常",
+    "初态/权重不一致或首回合步数统计不守恒"
+  ]
+}

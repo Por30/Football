@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_loco_fix_20261019/launch.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "0ca634f5fd32d7cd199c8b17e3877783459533c51195c121c9eb29a63805e00a",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "a7813590d42413401bb4d3cfb2b0525cd640b579827c1b0e84f3850f712f2f6d",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

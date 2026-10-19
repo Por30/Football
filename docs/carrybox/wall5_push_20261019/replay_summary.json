@@ -1,0 +1,227 @@
+{
+  "set": {
+    "by_skill": {
+      "loco": {
+        "completed": 112,
+        "mean_completed_steps": 12.839285714285714,
+        "median_completed_steps": 13.0,
+        "before_first_push": 112,
+        "under_50_steps": 112,
+        "tipped": 112,
+        "fell": 0,
+        "timeouts": 0,
+        "successes": 0,
+        "censored_ages": [
+          9
+        ],
+        "total_sampled_steps": 1447,
+        "sampled_fraction": 0.07536458333333333,
+        "positive_pitch_termination": 112,
+        "roll_exceeded": 1
+      },
+      "pickup": {
+        "completed": 0,
+        "mean_completed_steps": null,
+        "median_completed_steps": null,
+        "before_first_push": 0,
+        "under_50_steps": 0,
+        "tipped": 0,
+        "fell": 0,
+        "timeouts": 0,
+        "successes": 0,
+        "censored_ages": [],
+        "total_sampled_steps": 0,
+        "sampled_fraction": 0.0,
+        "positive_pitch_termination": 0,
+        "roll_exceeded": 0
+      },
+      "hold": {
+        "completed": 15,
+        "mean_completed_steps": 886.4666666666667,
+        "median_completed_steps": 1000,
+        "before_first_push": 0,
+        "under_50_steps": 0,
+        "tipped": 4,
+        "fell": 2,
+        "timeouts": 9,
+        "successes": 0,
+        "censored_ages": [
+          229,
+          187,
+          885,
+          227,
+          134,
+          63,
+          109,
+          207,
+          139,
+          615,
+          81,
+          164,
+          148,
+          375,
+          893
+        ],
+        "total_sampled_steps": 17753,
+        "sampled_fraction": 0.9246354166666667,
+        "positive_pitch_termination": 3,
+        "roll_exceeded": 1
+      }
+    },
+    "completed": 127,
+    "mean_completed_steps": 116.02362204724409,
+    "scheduled_pushes": 164,
+    "applied_pushes": 164,
+    "cached_velocity_max_formula_error": 0.0
+  },
+  "increment": {
+    "by_skill": {
+      "loco": {
+        "completed": 139,
+        "mean_completed_steps": 12.676258992805755,
+        "median_completed_steps": 13,
+        "before_first_push": 139,
+        "under_50_steps": 139,
+        "tipped": 139,
+        "fell": 0,
+        "timeouts": 0,
+        "successes": 0,
+        "censored_ages": [
+          2,
+          9
+        ],
+        "total_sampled_steps": 1773,
+        "sampled_fraction": 0.09234375,
+        "positive_pitch_termination": 139,
+        "roll_exceeded": 2
+      },
+      "pickup": {
+        "completed": 0,
+        "mean_completed_steps": null,
+        "median_completed_steps": null,
+        "before_first_push": 0,
+        "under_50_steps": 0,
+        "tipped": 0,
+        "fell": 0,
+        "timeouts": 0,
+        "successes": 0,
+        "censored_ages": [],
+        "total_sampled_steps": 0,
+        "sampled_fraction": 0.0,
+        "positive_pitch_termination": 0,
+        "roll_exceeded": 0
+      },
+      "hold": {
+        "completed": 15,
+        "mean_completed_steps": 969.5333333333333,
+        "median_completed_steps": 1000,
+        "before_first_push": 0,
+        "under_50_steps": 0,
+        "tipped": 2,
+        "fell": 0,
+        "timeouts": 13,
+        "successes": 0,
+        "censored_ages": [
+          173,
+          135,
+          648,
+          176,
+          569,
+          103,
+          262,
+          164,
+          149,
+          99,
+          22,
+          72,
+          188,
+          124
+        ],
+        "total_sampled_steps": 17427,
+        "sampled_fraction": 0.90765625,
+        "positive_pitch_termination": 2,
+        "roll_exceeded": 0
+      }
+    },
+    "completed": 154,
+    "mean_completed_steps": 105.87662337662337,
+    "scheduled_pushes": 160,
+    "applied_pushes": 160,
+    "cached_velocity_max_formula_error": 2.384185791015625e-07
+  },
+  "none": {
+    "by_skill": {
+      "loco": {
+        "completed": 130,
+        "mean_completed_steps": 12.7,
+        "median_completed_steps": 13.0,
+        "before_first_push": 130,
+        "under_50_steps": 130,
+        "tipped": 130,
+        "fell": 0,
+        "timeouts": 0,
+        "successes": 0,
+        "censored_ages": [
+          11
+        ],
+        "total_sampled_steps": 1662,
+        "sampled_fraction": 0.0865625,
+        "positive_pitch_termination": 130,
+        "roll_exceeded": 2
+      },
+      "pickup": {
+        "completed": 0,
+        "mean_completed_steps": null,
+        "median_completed_steps": null,
+        "before_first_push": 0,
+        "under_50_steps": 0,
+        "tipped": 0,
+        "fell": 0,
+        "timeouts": 0,
+        "successes": 0,
+        "censored_ages": [],
+        "total_sampled_steps": 0,
+        "sampled_fraction": 0.0,
+        "positive_pitch_termination": 0,
+        "roll_exceeded": 0
+      },
+      "hold": {
+        "completed": 15,
+        "mean_completed_steps": 1000,
+        "median_completed_steps": 1000,
+        "before_first_push": 15,
+        "under_50_steps": 0,
+        "tipped": 0,
+        "fell": 0,
+        "timeouts": 15,
+        "successes": 0,
+        "censored_ages": [
+          173,
+          164,
+          648,
+          98,
+          188,
+          140,
+          163,
+          175,
+          79,
+          98,
+          187,
+          129,
+          77,
+          96,
+          123
+        ],
+        "total_sampled_steps": 17538,
+        "sampled_fraction": 0.9134375,
+        "positive_pitch_termination": 0,
+        "roll_exceeded": 0
+      }
+    },
+    "completed": 145,
+    "mean_completed_steps": 114.8344827586207,
+    "scheduled_pushes": 160,
+    "applied_pushes": 0,
+    "cached_velocity_max_formula_error": 0.0
+  }
+}

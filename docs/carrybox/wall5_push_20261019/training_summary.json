@@ -1,0 +1,1060 @@
+{
+  "checked_at": "2026-10-19T11:58:45.195263+09:00",
+  "runs": {
+    "rev13": {
+      "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v13_perf_fresh_20261018_131037.log",
+      "log_snapshot_sha256": "80fdc83db1b4c559bf0ea0868e401ef4376a68649c06104b03b5d04944f27139",
+      "last_iteration": 10637,
+      "windows": [
+        {
+          "first": 0,
+          "last": 13,
+          "means": {
+            "Mean episode length": 30.98,
+            "Mean box_position loss": 0.1756714285714286,
+            "AMP/style_reward": 0.2634571428571429,
+            "Reward/task_weighted_per_step": -0.05247857142857143,
+            "Reward/amp_per_step": 0.03293571428571428,
+            "Episode_Termination/time_out": 0.0029,
+            "Episode_Termination/tipped": 0.9084071428571429,
+            "Episode_Termination/fell": 0.0005785714285714285,
+            "Iteration time": 3.9585714285714286,
+            "Skill/loco_episodes": 16322.634685714285,
+            "Skill/loco_mean_steps": 28.650635714285713,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 3985.0626214285717,
+            "Skill/hold_mean_steps": 30.23462142857143,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 32737.794199999997,
+              "mean_steps_approx": 30.6620968740426,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 8018.125300000001,
+              "mean_steps_approx": 32.65990635596827,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 0,
+          "last": 249,
+          "means": {
+            "Mean episode length": 22.14956,
+            "Mean box_position loss": 0.0766552,
+            "AMP/style_reward": 0.0690288,
+            "Reward/task_weighted_per_step": -0.0117304,
+            "Reward/amp_per_step": 0.008628,
+            "Episode_Termination/time_out": 0.0001624,
+            "Episode_Termination/tipped": 0.9941332,
+            "Episode_Termination/fell": 0.00077,
+            "Iteration time": 3.78036,
+            "Skill/loco_episodes": 525556.8854696,
+            "Skill/loco_mean_steps": 18.0287688,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 129727.8623252,
+            "Skill/hold_mean_steps": 31.160674,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 974200.8333,
+              "mean_steps_approx": 14.161253963976659,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 241109.7083,
+              "mean_steps_approx": 43.947181056987,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 750,
+          "last": 999,
+          "means": {
+            "Mean episode length": 201.41536,
+            "Mean box_position loss": 0.0109952,
+            "AMP/style_reward": 0.0230144,
+            "Reward/task_weighted_per_step": 0.0519464,
+            "Reward/amp_per_step": 0.0028756,
+            "Episode_Termination/time_out": 0.1289476,
+            "Episode_Termination/tipped": 0.8580792,
+            "Episode_Termination/fell": 0.0129656,
+            "Iteration time": 3.7512,
+            "Skill/loco_episodes": 1510856.3595,
+            "Skill/loco_mean_steps": 16.0111644,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 374234.010764,
+            "Skill/hold_mean_steps": 160.3810936,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 97038.75,
+              "mean_steps_approx": 29.094586436603944,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 24680.906200000027,
+              "mean_steps_approx": 874.0698725276022,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 1000,
+          "last": 1249,
+          "means": {
+            "Mean episode length": 214.62868,
+            "Mean box_position loss": 0.0123356,
+            "AMP/style_reward": 0.0236408,
+            "Reward/task_weighted_per_step": 0.0559992,
+            "Reward/amp_per_step": 0.0029556,
+            "Episode_Termination/time_out": 0.1594628,
+            "Episode_Termination/tipped": 0.8267124,
+            "Episode_Termination/fell": 0.0138216,
+            "Iteration time": 3.82696,
+            "Skill/loco_episodes": 1605090.0475,
+            "Skill/loco_mean_steps": 16.9565196,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 397889.92264239996,
+            "Skill/hold_mean_steps": 204.9712008,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.031125
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 92695.5,
+              "mean_steps_approx": 34.996641063482,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 22911.718799999973,
+              "mean_steps_approx": 932.1498809469214,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 1750,
+          "last": 1999,
+          "means": {
+            "Mean episode length": 234.62076,
+            "Mean box_position loss": 0.0165504,
+            "AMP/style_reward": 0.0250376,
+            "Reward/task_weighted_per_step": 0.0598484,
+            "Reward/amp_per_step": 0.0031272,
+            "Episode_Termination/time_out": 0.182994,
+            "Episode_Termination/tipped": 0.7707344,
+            "Episode_Termination/fell": 0.0462728,
+            "Iteration time": 3.8102,
+            "Skill/loco_episodes": 1865273.6805,
+            "Skill/loco_mean_steps": 20.7807772,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 463154.9600172,
+            "Skill/hold_mean_steps": 310.5183796,
+            "Skill/hold_successes": 13.1066672,
+            "push_scale": 0.218625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 83963.0,
+              "mean_steps_approx": 51.59343568357489,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 21050.031200000027,
+              "mean_steps_approx": 962.0790376198737,
+              "success_delta_approx": 24.0
+            }
+          }
+        },
+        {
+          "first": 2250,
+          "last": 2499,
+          "means": {
+            "Mean episode length": 243.78752,
+            "Mean box_position loss": 0.0170964,
+            "AMP/style_reward": 0.0251012,
+            "Reward/task_weighted_per_step": 0.059594,
+            "Reward/amp_per_step": 0.003138,
+            "Episode_Termination/time_out": 0.182744,
+            "Episode_Termination/tipped": 0.7747516,
+            "Episode_Termination/fell": 0.0425116,
+            "Iteration time": 3.8081199999999997,
+            "Skill/loco_episodes": 2031161.333,
+            "Skill/loco_mean_steps": 23.4896508,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 504672.697766,
+            "Skill/hold_mean_steps": 364.6803688,
+            "Skill/hold_successes": 114.0546668,
+            "push_scale": 0.343625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 82820.5,
+              "mean_steps_approx": 55.88694406879936,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 20550.843700000027,
+              "mean_steps_approx": 971.366334023104,
+              "success_delta_approx": 36.0
+            }
+          }
+        },
+        {
+          "first": 2750,
+          "last": 2999,
+          "means": {
+            "Mean episode length": 236.08948,
+            "Mean box_position loss": 0.0180784,
+            "AMP/style_reward": 0.0247288,
+            "Reward/task_weighted_per_step": 0.0572908,
+            "Reward/amp_per_step": 0.0030912,
+            "Episode_Termination/time_out": 0.1750616,
+            "Episode_Termination/tipped": 0.7841852,
+            "Episode_Termination/fell": 0.0407516,
+            "Iteration time": 3.8082,
+            "Skill/loco_episodes": 2196360.785,
+            "Skill/loco_mean_steps": 26.074124,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 545821.99375,
+            "Skill/hold_mean_steps": 409.7744896,
+            "Skill/hold_successes": 153.2438332,
+            "push_scale": 0.468625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 82166.25,
+              "mean_steps_approx": 58.450488229656294,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 20531.75,
+              "mean_steps_approx": 961.4024980469263,
+              "success_delta_approx": 2.8333000000000084
+            }
+          }
+        },
+        {
+          "first": 3250,
+          "last": 3499,
+          "means": {
+            "Mean episode length": 237.55404,
+            "Mean box_position loss": 0.0172776,
+            "AMP/style_reward": 0.0241824,
+            "Reward/task_weighted_per_step": 0.0570888,
+            "Reward/amp_per_step": 0.0030248,
+            "Episode_Termination/time_out": 0.1758768,
+            "Episode_Termination/tipped": 0.7972092,
+            "Episode_Termination/fell": 0.0269164,
+            "Iteration time": 3.8021599999999998,
+            "Skill/loco_episodes": 2361584.698,
+            "Skill/loco_mean_steps": 28.2069172,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 587370.8325,
+            "Skill/hold_mean_steps": 448.55826,
+            "Skill/hold_successes": 166.8286672,
+            "push_scale": 0.593625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 82525.5,
+              "mean_steps_approx": 55.48661005325614,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 20987.4375,
+              "mean_steps_approx": 955.55175258741,
+              "success_delta_approx": 8.0
+            }
+          }
+        },
+        {
+          "first": 4750,
+          "last": 4999,
+          "means": {
+            "Mean episode length": 202.77956,
+            "Mean box_position loss": 0.0141148,
+            "AMP/style_reward": 0.0252708,
+            "Reward/task_weighted_per_step": 0.053152,
+            "Reward/amp_per_step": 0.0031584,
+            "Episode_Termination/time_out": 0.11154,
+            "Episode_Termination/tipped": 0.8640616,
+            "Episode_Termination/fell": 0.024398800000000002,
+            "Iteration time": 3.83072,
+            "Skill/loco_episodes": 2891747.249,
+            "Skill/loco_mean_steps": 32.3780272,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 719783.22175,
+            "Skill/hold_mean_steps": 533.5401472,
+            "Skill/hold_successes": 196.753,
+            "push_scale": 0.968625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 97631.0,
+              "mean_steps_approx": 44.47672195101968,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 24485.125,
+              "mean_steps_approx": 829.1707354950221,
+              "success_delta_approx": 2.0
+            }
+          }
+        },
+        {
+          "first": 6750,
+          "last": 6999,
+          "means": {
+            "Mean episode length": 147.81464,
+            "Mean box_position loss": 0.0078796,
+            "AMP/style_reward": 0.024098,
+            "Reward/task_weighted_per_step": 0.04942,
+            "Reward/amp_per_step": 0.003012,
+            "Episode_Termination/time_out": 0.0491204,
+            "Episode_Termination/tipped": 0.930312,
+            "Episode_Termination/fell": 0.0205684,
+            "Iteration time": 3.88584,
+            "Skill/loco_episodes": 3763346.806,
+            "Skill/loco_mean_steps": 32.4404692,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 937333.3565,
+            "Skill/hold_mean_steps": 589.3072112,
+            "Skill/hold_successes": 202.0,
+            "push_scale": 1.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 132722.0,
+              "mean_steps_approx": 23.020798464459556,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 32984.4375,
+              "mean_steps_approx": 652.3014048193207,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 10000,
+          "last": 10249,
+          "means": {
+            "Mean episode length": 168.25556,
+            "Mean box_position loss": 0.0035264,
+            "AMP/style_reward": 0.0218584,
+            "Reward/task_weighted_per_step": 0.0574012,
+            "Reward/amp_per_step": 0.0027344,
+            "Episode_Termination/time_out": 0.0878832,
+            "Episode_Termination/tipped": 0.8968712,
+            "Episode_Termination/fell": 0.0152488,
+            "Iteration time": 3.78012,
+            "Skill/loco_episodes": 5384997.776,
+            "Skill/loco_mean_steps": 27.0724592,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 1342167.067,
+            "Skill/hold_mean_steps": 631.72202,
+            "Skill/hold_successes": 202.0,
+            "push_scale": 1.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 118595.5,
+              "mean_steps_approx": 11.844842600689063,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 29754.375,
+              "mean_steps_approx": 779.2249805637821,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 10388,
+          "last": 10637,
+          "means": {
+            "Mean episode length": 186.61904,
+            "Mean box_position loss": 0.0028248,
+            "AMP/style_reward": 0.0214048,
+            "Reward/task_weighted_per_step": 0.060504,
+            "Reward/amp_per_step": 0.0026748,
+            "Episode_Termination/time_out": 0.1332652,
+            "Episode_Termination/tipped": 0.8541012,
+            "Episode_Termination/fell": 0.0126296,
+            "Iteration time": 3.88376,
+            "Skill/loco_episodes": 5560361.878,
+            "Skill/loco_mean_steps": 26.5951424,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 1386097.7625,
+            "Skill/hold_mean_steps": 637.5898948,
+            "Skill/hold_successes": 202.0,
+            "push_scale": 1.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 105133.0,
+              "mean_steps_approx": 12.243783001531408,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 26232.25,
+              "mean_steps_approx": 885.726314557461,
+              "success_delta_approx": 0.0
+            }
+          }
+        }
+      ]
+    },
+    "rev14": {
+      "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v14_asymmetric_fresh_20261019_003706.log",
+      "log_snapshot_sha256": "13ec5ba47211eac81cd65426dbc847c5610590cb3071848829d245738e85bc4b",
+      "last_iteration": 10672,
+      "windows": [
+        {
+          "first": 0,
+          "last": 13,
+          "means": {
+            "Mean episode length": 31.082142857142856,
+            "Mean box_position loss": 0.16915714285714287,
+            "AMP/style_reward": 0.26922142857142856,
+            "Reward/task_weighted_per_step": -0.05240714285714286,
+            "Reward/amp_per_step": 0.03365714285714286,
+            "Episode_Termination/time_out": 0.0028857142857142857,
+            "Episode_Termination/tipped": 0.9086,
+            "Episode_Termination/fell": 0.00040714285714285717,
+            "Iteration time": 3.9971428571428573,
+            "Skill/loco_episodes": 16186.411242857142,
+            "Skill/loco_mean_steps": 28.744285714285713,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 4027.3840142857143,
+            "Skill/hold_mean_steps": 30.334492857142855,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 32450.0013,
+              "mean_steps_approx": 30.827788365136062,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 8102.375300000001,
+              "mean_steps_approx": 32.744946737226556,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 0,
+          "last": 249,
+          "means": {
+            "Mean episode length": 24.42428,
+            "Mean box_position loss": 0.0735676,
+            "AMP/style_reward": 0.0719256,
+            "Reward/task_weighted_per_step": -0.0097308,
+            "Reward/amp_per_step": 0.0089884,
+            "Episode_Termination/time_out": 0.0001616,
+            "Episode_Termination/tipped": 0.9921252,
+            "Episode_Termination/fell": 0.0027792,
+            "Iteration time": 3.77744,
+            "Skill/loco_episodes": 472628.8166296,
+            "Skill/loco_mean_steps": 19.3621328,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 117281.8444512,
+            "Skill/hold_mean_steps": 33.2076728,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 869430.5833,
+              "mean_steps_approx": 16.376088032971992,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 215567.0833,
+              "mean_steps_approx": 47.132566317268626,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 750,
+          "last": 999,
+          "means": {
+            "Mean episode length": 163.39344,
+            "Mean box_position loss": 0.0138312,
+            "AMP/style_reward": 0.0241468,
+            "Reward/task_weighted_per_step": 0.0445068,
+            "Reward/amp_per_step": 0.0030172,
+            "Episode_Termination/time_out": 0.06996959999999999,
+            "Episode_Termination/tipped": 0.9058068,
+            "Episode_Termination/fell": 0.0242252,
+            "Iteration time": 3.79112,
+            "Skill/loco_episodes": 1472168.517,
+            "Skill/loco_mean_steps": 18.8833028,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 364730.6665164,
+            "Skill/hold_mean_steps": 155.3223968,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 121046.0,
+              "mean_steps_approx": 29.502949806891632,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 30133.093799999973,
+              "mean_steps_approx": 695.128051037293,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 1000,
+          "last": 1249,
+          "means": {
+            "Mean episode length": 176.95156,
+            "Mean box_position loss": 0.013682,
+            "AMP/style_reward": 0.023812,
+            "Reward/task_weighted_per_step": 0.0475116,
+            "Reward/amp_per_step": 0.0029764,
+            "Episode_Termination/time_out": 0.0920152,
+            "Episode_Termination/tipped": 0.8947056,
+            "Episode_Termination/fell": 0.013278,
+            "Iteration time": 3.7923999999999998,
+            "Skill/loco_episodes": 1587245.2065,
+            "Skill/loco_mean_steps": 19.7747412,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 393360.295268,
+            "Skill/hold_mean_steps": 197.2535856,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.031125
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 111470.375,
+              "mean_steps_approx": 32.50053003656797,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 27672.531200000027,
+              "mean_steps_approx": 754.5451529487142,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 1750,
+          "last": 1999,
+          "means": {
+            "Mean episode length": 196.63524,
+            "Mean box_position loss": 0.0117584,
+            "AMP/style_reward": 0.0238268,
+            "Reward/task_weighted_per_step": 0.0522208,
+            "Reward/amp_per_step": 0.00298,
+            "Episode_Termination/time_out": 0.1165368,
+            "Episode_Termination/tipped": 0.8606944,
+            "Episode_Termination/fell": 0.0227704,
+            "Iteration time": 3.78888,
+            "Skill/loco_episodes": 1905925.598,
+            "Skill/loco_mean_steps": 22.1645868,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 472950.82438999997,
+            "Skill/hold_mean_steps": 296.9106668,
+            "Skill/hold_successes": 0.0,
+            "push_scale": 0.218625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 100285.625,
+              "mean_steps_approx": 36.23759739818151,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 25189.25,
+              "mean_steps_approx": 828.9427533776806,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 2250,
+          "last": 2499,
+          "means": {
+            "Mean episode length": 198.53572,
+            "Mean box_position loss": 0.0117092,
+            "AMP/style_reward": 0.0241268,
+            "Reward/task_weighted_per_step": 0.05426,
+            "Reward/amp_per_step": 0.0030172,
+            "Episode_Termination/time_out": 0.1227296,
+            "Episode_Termination/tipped": 0.8640712,
+            "Episode_Termination/fell": 0.0131996,
+            "Iteration time": 3.78192,
+            "Skill/loco_episodes": 2104134.355,
+            "Skill/loco_mean_steps": 23.5349504,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 522614.541884,
+            "Skill/hold_mean_steps": 348.8007708,
+            "Skill/hold_successes": 0.9613336,
+            "push_scale": 0.343625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 99865.625,
+              "mean_steps_approx": 36.66939958419125,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 24909.5625,
+              "mean_steps_approx": 841.1586103032728,
+              "success_delta_approx": 2.0
+            }
+          }
+        },
+        {
+          "first": 2750,
+          "last": 2999,
+          "means": {
+            "Mean episode length": 187.653,
+            "Mean box_position loss": 0.0103504,
+            "AMP/style_reward": 0.0242548,
+            "Reward/task_weighted_per_step": 0.0536204,
+            "Reward/amp_per_step": 0.0030304,
+            "Episode_Termination/time_out": 0.1081708,
+            "Episode_Termination/tipped": 0.8759172,
+            "Episode_Termination/fell": 0.0159116,
+            "Iteration time": 3.7812799999999998,
+            "Skill/loco_episodes": 2306519.945,
+            "Skill/loco_mean_steps": 24.6393152,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 573053.90925,
+            "Skill/hold_mean_steps": 391.1924272,
+            "Skill/hold_successes": 2.4645,
+            "push_scale": 0.468625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 105163.0,
+              "mean_steps_approx": 34.39145311278687,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 26176.5625,
+              "mean_steps_approx": 803.3944210204744,
+              "success_delta_approx": 2.0
+            }
+          }
+        },
+        {
+          "first": 3250,
+          "last": 3499,
+          "means": {
+            "Mean episode length": 160.4768,
+            "Mean box_position loss": 0.0089492,
+            "AMP/style_reward": 0.0247688,
+            "Reward/task_weighted_per_step": 0.0520256,
+            "Reward/amp_per_step": 0.0030968,
+            "Episode_Termination/time_out": 0.069048,
+            "Episode_Termination/tipped": 0.9110184,
+            "Episode_Termination/fell": 0.0199308,
+            "Iteration time": 3.77528,
+            "Skill/loco_episodes": 2533013.635,
+            "Skill/loco_mean_steps": 25.2326592,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 630107.40825,
+            "Skill/hold_mean_steps": 422.7595316,
+            "Skill/hold_successes": 4.0,
+            "push_scale": 0.593625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 123745.5,
+              "mean_steps_approx": 28.002546489569287,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 31137.75,
+              "mean_steps_approx": 682.0485529084482,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 4750,
+          "last": 4999,
+          "means": {
+            "Mean episode length": 83.53452,
+            "Mean box_position loss": 0.006804,
+            "AMP/style_reward": 0.0253132,
+            "Reward/task_weighted_per_step": 0.0423508,
+            "Reward/amp_per_step": 0.00316,
+            "Episode_Termination/time_out": 0.008316,
+            "Episode_Termination/tipped": 0.9740048,
+            "Episode_Termination/fell": 0.0176832,
+            "Iteration time": 3.8063599999999997,
+            "Skill/loco_episodes": 3551591.984,
+            "Skill/loco_mean_steps": 23.1205412,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 884919.99475,
+            "Skill/hold_mean_steps": 447.7178064,
+            "Skill/hold_successes": 4.0,
+            "push_scale": 0.968625
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 235889.75,
+              "mean_steps_approx": 11.923653504232368,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 58414.9375,
+              "mean_steps_approx": 375.0712971723841,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 6750,
+          "last": 6999,
+          "means": {
+            "Mean episode length": 142.5774,
+            "Mean box_position loss": 0.0028848,
+            "AMP/style_reward": 0.0214076,
+            "Reward/task_weighted_per_step": 0.0485064,
+            "Reward/amp_per_step": 0.002676,
+            "Episode_Termination/time_out": 0.0667416,
+            "Episode_Termination/tipped": 0.919864,
+            "Episode_Termination/fell": 0.0133948,
+            "Iteration time": 3.78936,
+            "Skill/loco_episodes": 5145184.486,
+            "Skill/loco_mean_steps": 19.0004036,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 1282975.2485,
+            "Skill/hold_mean_steps": 449.3281848,
+            "Skill/hold_successes": 5.0,
+            "push_scale": 1.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 136137.5,
+              "mean_steps_approx": 9.325862118079199,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 34137.5,
+              "mean_steps_approx": 677.961648042477,
+              "success_delta_approx": 0.0
+            }
+          }
+        },
+        {
+          "first": 10000,
+          "last": 10249,
+          "means": {
+            "Mean episode length": 195.94044,
+            "Mean box_position loss": 0.0021135999999999998,
+            "AMP/style_reward": 0.020871999999999998,
+            "Reward/task_weighted_per_step": 0.0607856,
+            "Reward/amp_per_step": 0.002608,
+            "Episode_Termination/time_out": 0.1581328,
+            "Episode_Termination/tipped": 0.8375012,
+            "Episode_Termination/fell": 0.0043711999999999996,
+            "Iteration time": 3.75364,
+            "Skill/loco_episodes": 6623768.348,
+            "Skill/loco_mean_steps": 16.9345696,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 1652336.1315,
+            "Skill/hold_mean_steps": 533.3437156,
+            "Skill/hold_successes": 10.4408332,
+            "push_scale": 1.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 102002.5,
+              "mean_steps_approx": 10.286041531335115,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 25444.25,
+              "mean_steps_approx": 921.721660996099,
+              "success_delta_approx": 2.875
+            }
+          }
+        },
+        {
+          "first": 10423,
+          "last": 10672,
+          "means": {
+            "Mean episode length": 194.27996,
+            "Mean box_position loss": 0.0021284,
+            "AMP/style_reward": 0.0209636,
+            "Reward/task_weighted_per_step": 0.0615796,
+            "Reward/amp_per_step": 0.0026196,
+            "Episode_Termination/time_out": 0.157746,
+            "Episode_Termination/tipped": 0.8368312,
+            "Episode_Termination/fell": 0.0054228,
+            "Iteration time": 3.80072,
+            "Skill/loco_episodes": 6795815.426,
+            "Skill/loco_mean_steps": 16.7681856,
+            "Skill/loco_successes": 0.0,
+            "Skill/hold_episodes": 1695324.366,
+            "Skill/hold_mean_steps": 543.2953752,
+            "Skill/hold_successes": 11.0,
+            "push_scale": 1.0
+          },
+          "skill_window_estimates": {
+            "loco": {
+              "episodes_approx": 101866.5,
+              "mean_steps_approx": 10.464394941909253,
+              "success_delta_approx": 0.0
+            },
+            "hold": {
+              "episodes_approx": 25462.0,
+              "mean_steps_approx": 924.5214895255698,
+              "success_delta_approx": 0.0
+            }
+          }
+        }
+      ]
+    }
+  },
+  "checkpoint": {
+    "path": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-18_13-10-42_wall5_v13_perf_fresh_20261018_131037/model_10600.pt",
+    "sha256": "b1ade2daf39e8d7f14338ff94501433a825a0f481e0bfff2955d23acb053f4fd",
+    "iteration": 10600,
+    "environment_contract": {
+      "variant": "walled5",
+      "migration_revision": 13,
+      "depth_backend": "warp",
+      "reference_ground_clearance": "G1_collision_hull_min_5mm_upward_only",
+      "obstacle_cylinders": 3,
+      "head_reference": "head_link_COM",
+      "knee_lower_penalty": "hard_limit_other_limits_soft",
+      "action_targets": "clamp_to_physical_joint_limits",
+      "push_curriculum": [
+        1000,
+        4000
+      ],
+      "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+      "depth_clip": "optical_near_plane_pixel_centers_v1",
+      "failure_reward": "current_fell_or_tipped_exclude_timeout_dt_scaled",
+      "obstacle_backend": "locked_rigid_6dof",
+      "shoulder_colliders": "visual_mesh_convex_hull",
+      "depth_shape": [
+        4,
+        27,
+        48
+      ],
+      "reference_init": true,
+      "reset_probs": [
+        0.8,
+        0.0,
+        0.2
+      ],
+      "search_prob": 0.02,
+      "noise": 0.06,
+      "depth_edge": [
+        0.15,
+        0.05
+      ],
+      "depth_holes": 0.02,
+      "depth_stereo": [
+        0.024,
+        0.09
+      ],
+      "latency_probability": 0.1,
+      "depth_noise_contract": "metres_miss_preserved_near_clamp_15_including_onset",
+      "delay": 1,
+      "freeze": 0.002,
+      "freeze_steps": 15,
+      "mount_pos": 0.01,
+      "mount_rot": 0.0,
+      "curriculum": "shared_piecewise_process_anchor",
+      "reward_parent": "g1_corrected_common_v2",
+      "reward_weights": {
+        "dof_acc": -1e-07,
+        "action_rate": -0.03,
+        "torques": -0.0001,
+        "dof_vel": -0.0002,
+        "dof_pos_limits": -5.0,
+        "dof_vel_limits": -0.001,
+        "undesired_contacts": -1.0,
+        "walk_task": 1.0,
+        "carryup_task": 1.0,
+        "standup_task": 0.4,
+        "slow_pickup": -0.0005,
+        "stable_grasp": 0.2,
+        "arm_speed_pickup": -0.02,
+        "arm_acc_pickup": -2e-05,
+        "grip_force_cap": -0.02,
+        "held_hand_speed": -0.02,
+        "held_hand_acc": -2e-05,
+        "waist_yaw_penalty": -0.5,
+        "search_turn": 0.5,
+        "early_failure": -10.0
+      },
+      "roll_termination": "abs_roll_gt_0.8",
+      "action_scale": 0.25,
+      "action_clip": 9.0,
+      "randomization": {
+        "box_material": {
+          "static_friction_range": [
+            0.3,
+            2.0
+          ],
+          "dynamic_friction_range": [
+            0.4,
+            1.5
+          ],
+          "restitution_range": [
+            0.0,
+            0.2
+          ],
+          "num_buckets": 64
+        },
+        "box_mass": {
+          "mass_distribution_params": [
+            0.1,
+            1.5
+          ],
+          "operation": "scale",
+          "recompute_inertia": true
+        },
+        "default_joint_pos": {},
+        "torso_com": {
+          "com_range": {
+            "x": [
+              -0.025,
+              0.025
+            ],
+            "y": [
+              -0.05,
+              0.05
+            ],
+            "z": [
+              -0.05,
+              0.05
+            ]
+          }
+        },
+        "push_robot": {
+          "velocity_range": {
+            "x": [
+              -0.5,
+              0.5
+            ],
+            "y": [
+              -0.5,
+              0.5
+            ],
+            "z": [
+              -0.2,
+              0.2
+            ],
+            "roll": [
+              -0.52,
+              0.52
+            ],
+            "pitch": [
+              -0.52,
+              0.52
+            ],
+            "yaw": [
+              -0.78,
+              0.78
+            ]
+          }
+        }
+      },
+      "box_mass_kg": 0.8,
+      "com_body": "torso_link",
+      "push_interval": [
+        1.0,
+        3.0
+      ],
+      "hand_forces": "g1_rubber_hands_box_filtered",
+      "standup_success": "instant_x2",
+      "strict_success_metric": "g1_contact_clearance_hold0.5s",
+      "physical_parent": "wall5_full_body_mixed_reset_v1",
+      "collision_profile": "g1_visual_convex_hull_full_body_v1",
+      "self_collisions": false,
+      "amp_frame_schema": "height1_joints29_ends15_lin3_ang3_rot6_box3_pelvis_v2",
+      "amp_shape": [
+        10,
+        60
+      ],
+      "amp_history": "repeat_reset_frame_reward_and_training_from_step1",
+      "box_reset_profile": "ground_box_5mm_pickup_prefix_rise5mm_v1_except_reference_hold_v1",
+      "held_box_reference_reset": true,
+      "ground_box_reset": true,
+      "ground_pickup_reset_frame_range": [
+        0,
+        32
+      ],
+      "support_platform": false,
+      "reference_dataset_profile": "findbox_ground_pickup_v1",
+      "reference_manifest_sha256": "7ffeea2804bb48f440039fb67666d17513ae26a367fe21b075605ab5810a8153",
+      "reference_velocity": "source_position_difference_pelvis_link",
+      "aux_supervision": "visible_box_hit_and_optical_range_paired_mask_v1",
+      "aux_target_shape": 10,
+      "early_failure_penalty_weight": -10.0,
+      "roll_limit": 0.8,
+      "reset_skill_probabilities": [
+        0.8,
+        0.0,
+        0.2
+      ]
+    },
+    "action_std": [
+      0.3645315170288086,
+      0.3579086363315582,
+      0.24644333124160767,
+      0.44901591539382935,
+      0.4467203617095947,
+      0.22131748497486115,
+      0.6459286212921143,
+      0.6485855579376221,
+      0.19808097183704376,
+      2.7182817459106445,
+      2.4013187885284424,
+      0.3692912757396698,
+      0.35474535822868347,
+      0.9956943988800049,
+      0.935549795627594,
+      2.7182817459106445,
+      2.7182817459106445,
+      2.2393620014190674,
+      2.7182817459106445,
+      0.4627494812011719,
+      0.28241434693336487,
+      0.28239500522613525,
+      0.3173775374889374,
+      0.5508263111114502,
+      0.5465017557144165,
+      0.7907185554504395,
+      0.8248728513717651,
+      2.7182817459106445,
+      2.7182817459106445
+    ]
+  },
+  "caveats": [
+    "Training curves show correlation, not isolated causation",
+    "Mean episode length is recent completed episodes, not skill-matched survival",
+    "Skill differences use rounded/rollout-averaged cumulative logs; approximate only",
+    "Termination labels are retained last labels over environments, not new-episode fractions"
+  ]
+}

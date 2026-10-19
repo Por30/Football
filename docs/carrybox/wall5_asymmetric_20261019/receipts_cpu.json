@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_asymmetric_20261019/check.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "aa85f3ad133be7a97c049363a5f67a4fd5f14abd6482a7b14f47356358e14aae",
+      "stdout_sha256": "a4ca10a009c8b1a9075a74ed6cb2ccae867a4ede5d32e48b1c588693b2ef0a9e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

@@ -47,6 +47,7 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
     walled_variant: str = 'walled5'
     pose_visibility_supervision: bool = True
     reference_link_velocity: bool = True
+    task_box_distance_3d: bool = True  # X2 root-to-box-centre reward gates, threshold 0.7 m
     ground_box_reset: bool = True
     held_box_reference_reset: bool = True  # hold keeps its reference box at hand height
     reference_motion_dataset: str = GROUND_DATASET_PATH
@@ -83,7 +84,7 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
 class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
     class_name = 'CarryBoxWall5OnPolicyRunner'
     experiment_name = 'g1_carrybox_depth/walled5'
-    run_name = 'walled5_loco_feedback_v17'
+    run_name = 'walled5_distance3d_v18'
 
     def __post_init__(self):
         super().__post_init__()

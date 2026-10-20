@@ -1,0 +1,11 @@
+{
+  "source": "docs/carrybox/wall5_play14200_20261020/trajectory.json",
+  "source_sha256": "6ec9161a1bd05ffd22296decdc1e18638e6aa736583cb7669a5347b03190401e",
+  "frame_count": 999,
+  "xy_lt_07": 974,
+  "xyz_lt_07": 182,
+  "last_step": 999,
+  "last_xy": 0.3303707473498305,
+  "last_xyz": 0.74015787395799,
+  "note": "Existing rev17 trajectory geometry only; not revision18 behavior evaluation."
+}

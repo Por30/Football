@@ -67,6 +67,17 @@ def heading(quat):
     return euler_xyz_from_quat(quat)[2]
 
 
+def task_box_distance(env, delta):
+    """Root-link to box-centre distance in metres for task reward gates.
+
+    Wall5 opts into X2's XYZ norm. Older variants retain their XY gates.
+    Heading, horizontal approach velocity and AMP feature caps are separate.
+    """
+    if getattr(getattr(env, 'cfg', None), 'task_box_distance_3d', False):
+        return delta.norm(dim=-1)
+    return delta[:, :2].norm(dim=-1)
+
+
 def initialize_reference(env, ids):
     """RSI root/joints use verified G1 data; box orientation is unavailable in source."""
     s, robot = state(env), env.scene['robot']
@@ -346,7 +357,7 @@ def search_turn(env):
     angle = wrap_to_pi(torch.atan2(delta[:,1],delta[:,0])-heading(robot.root_quat_w))
     torso = state(env).torso
     angular = quat_apply_inverse(robot.body_quat_w[:,torso], robot.body_ang_vel_w[:,torso])
-    return search_reward(state(env).search,angle,delta[:,:2].norm(dim=-1),angular[:,2])
+    return search_reward(state(env).search,angle,task_box_distance(env, delta),angular[:,2])
 
 
 def success_pulse(env):

@@ -41,7 +41,7 @@ def locomotion_stability(env):
     All geometry is physical current state, independent of the reset skill.
     """
     robot = env.scene['robot'].data
-    distance = (env.scene['box'].data.root_pos_w[:, :2] - robot.root_link_pos_w[:, :2]).norm(dim=-1)
+    distance = parent.task_box_distance(env, env.scene['box'].data.root_pos_w - robot.root_link_pos_w)
     gravity = robot.projected_gravity_b
     upright = torch.exp(-10. * gravity[:, :2].square().sum(-1)) * (-gravity[:, 2]).clamp(0., 1.)
     height = robot.root_link_pos_w[:, 2] - env.scene.env_origins[:, 2]
@@ -52,9 +52,11 @@ def locomotion_stability(env):
 def walk_task(env):
     """Reward balanced pelvis translation towards the box, not torso tipping speed."""
     robot = env.scene['robot'].data
-    delta = env.scene['box'].data.root_pos_w[:, :2] - robot.root_link_pos_w[:, :2]
-    distance = delta.norm(dim=-1)
-    towards = (delta / distance.clamp_min(1.e-6)[:, None] * robot.root_link_lin_vel_w[:, :2]).sum(-1)
+    delta = env.scene['box'].data.root_pos_w - robot.root_link_pos_w
+    distance = parent.task_box_distance(env, delta)
+    delta_xy = delta[:, :2]
+    distance_xy = delta_xy.norm(dim=-1)
+    towards = (delta_xy / distance_xy.clamp_min(1.e-6)[:, None] * robot.root_link_lin_vel_w[:, :2]).sum(-1)
     bearing = wrap_to_pi(torch.atan2(delta[:, 1], delta[:, 0]) - parent.heading(robot.root_link_quat_w)).abs()
     reward = torch.exp(-5. * (.85 - towards).square()) + .5 * torch.exp(-.75 * bearing)
     return torch.where(distance < .7, 1.5, reward) * locomotion_stability(env)
@@ -147,9 +149,11 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
                 active = mask * (~(result[2] | result[3])).float()
                 denominator = active.sum().clamp_min(1.)
                 speed = robot.root_link_lin_vel_w[:, :2].norm(dim=-1)
-                distance = (self.scene['box'].data.root_pos_w[:, :2] - robot.root_link_pos_w[:, :2]).norm(dim=-1)
+                delta = self.scene['box'].data.root_pos_w - robot.root_link_pos_w
+                distance = parent.task_box_distance(self, delta)
                 log['Motion/loco_survivor_speed_mps'] = (speed * active).sum() / denominator
                 log['Motion/loco_survivor_box_distance_m'] = (distance * active).sum() / denominator
+                log['Motion/loco_survivor_box_distance_xy_m'] = (delta[:, :2].norm(dim=-1) * active).sum() / denominator
         return result
 
     def _reset_idx(self, env_ids):
@@ -169,7 +173,7 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
         library = state(self).library
         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
-        contract.update(migration_revision=17, physical_parent='wall5_full_body_mixed_reset_v1',
+        contract.update(migration_revision=18, physical_parent='wall5_full_body_mixed_reset_v1',
                         collision_profile=FULL_BODY_COLLISION_PROFILE,
                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
                         shoulder_colliders='visual_mesh_convex_hull',
@@ -196,6 +200,11 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
                         action_bounds_supervision='paired_raw_physical_limits_offset_scale_intersect_wrapper9_58_v1',
                         locomotion_feedback='pelvis_link_velocity_upright_far_height_v1',
                         stability_parameters={'upright_exp':10., 'height_floor_m':.65, 'height_exp':20., 'near_distance_m':.7})
+        contract['task_box_distance'] = {
+            'metric': 'xyz_l2' if self.cfg.task_box_distance_3d else 'xy_l2',
+            'points': 'pelvis_link_origin_to_box_center', 'threshold_m': .7,
+            'approach_velocity_direction': 'normalized_xy', 'amp_box_cap': 'unchanged_xy_0.7',
+        }
         contract['push_velocity_semantics'] = 'current_world_com_velocity_plus_curriculum_scaled_increment_v1'
         contract['contact_materials'] = {
             name: {key: getattr(material, key) for key in

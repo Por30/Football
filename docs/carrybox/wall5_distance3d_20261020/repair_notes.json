@@ -1,0 +1,4 @@
+{
+  "attempt1": "Smoke failed at stationary walk check; Kit shutdown hid traceback. Added exception logging only.",
+  "attempt2": "Same assertion identified. IsaacLab write_root_state_to_sim writes COM velocity without refreshing already-read link velocity. Test should use write_root_link_state_to_sim for its explicitly stationary link state. Production is unchanged; all assertions retained."
+}

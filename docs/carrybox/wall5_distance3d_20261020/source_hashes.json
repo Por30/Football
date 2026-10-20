@@ -1,0 +1,6 @@
+{
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "01e6fb053862097a32c13f7814cd79bb2bd737887668a3e34ecf6f4fd0daeb5d",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "60eb4507bdc21aa45f4938c4eb881f804904f2efc3261457e7389cae0b6569a1",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "b085b4b9ee8fbeafd14f4b76fd1bfa4f38b8982f4331af43e83123ea88021a58",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "b94067cf3b30d14ac06301346c9086d8dfd652704292dd958c7f731b2a314a21"
+}

@@ -9,20 +9,22 @@ from . import carrybox as base
 
 
 def reward_terms(env):
-    from .carrybox_walled import state, heading, head_height
+    from .carrybox_walled import state, heading, head_height, task_box_distance
     s = state(env)
     if getattr(s, 'reward_step', None) == env.common_step_counter:
         return s.reward_terms
     robot, box = env.scene['robot'].data, env.scene['box'].data
     ground = env.scene.env_origins[:, 2]
-    delta = box.root_pos_w[:, :2] - robot.root_pos_w[:, :2]
-    distance = delta.norm(dim=-1)
+    delta = box.root_pos_w - robot.root_pos_w
+    distance = task_box_distance(env, delta)
+    delta_xy = delta[:, :2]
+    distance_xy = delta_xy.norm(dim=-1)
     torso_q = robot.body_quat_w[:, s.torso]
     linear_w = robot.body_lin_vel_w[:, s.torso]
     linear_b = quat_apply_inverse(torso_q, linear_w)
     angular_b = quat_apply_inverse(torso_q, robot.body_ang_vel_w[:, s.torso])
     gravity = quat_apply_inverse(torso_q, robot.GRAVITY_VEC_W)
-    towards = (delta / distance.clamp_min(1.e-6)[:, None] * linear_w[:, :2]).sum(-1)
+    towards = (delta_xy / distance_xy.clamp_min(1.e-6)[:, None] * linear_w[:, :2]).sum(-1)
     bearing = wrap_to_pi(torch.atan2(delta[:, 1], delta[:, 0]) - heading(robot.root_quat_w)).abs()
     walk = torch.exp(-5 * (.85 - towards).square()) + .5 * torch.exp(-.75 * bearing)
     walk = torch.where(distance < .7, 1.5, walk)

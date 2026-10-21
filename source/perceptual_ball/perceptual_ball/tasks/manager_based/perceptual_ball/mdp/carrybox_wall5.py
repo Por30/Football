@@ -8,13 +8,14 @@ from perceptual_ball.carrybox_amp import joint_mapping
 from pathlib import Path
 from perceptual_ball.carrybox_wall5 import pack_task_frame, AMP_BODY_NAMES, WALL5_FEATURE_SCHEMA, GROUND_RESET_PROFILE
 from perceptual_ball.carrybox_fullbody_collision import FULL_BODY_COLLISION_PROFILE
+from perceptual_ball.carrybox_reward_geometry import reward_geometry, G1_ANCHORS
 from . import carrybox as base
 from .carrybox_walled import WalledCarryBoxEnv, state
 from . import carrybox_walled as parent
 
 
 def fixed_skill_ids(env_ids, num_envs, probabilities):
-    """Midpoint allocation: 4096 environments -> 3277 loco / 0 pickup / 819 hold."""
+    """Persistent skill quotas from cumulative probabilities and environment midpoints."""
     if (len(probabilities) != 3 or any(not math.isfinite(p) or p < 0 for p in probabilities)
             or abs(sum(probabilities) - 1.) > 1.e-6 or num_envs < 1):
         raise ValueError('Invalid fixed skill allocation')
@@ -35,7 +36,7 @@ def reset_scene(env, env_ids):
 
 
 def locomotion_stability(env):
-    """Continuous balance feedback, with no horizontal anchor or zero-speed target.
+    """Legacy revision17/18 diagnostic; not registered or used by revision19.
 
     The height factor is removed near the box so reaching down remains possible.
     All geometry is physical current state, independent of the reset skill.
@@ -50,7 +51,7 @@ def locomotion_stability(env):
 
 
 def walk_task(env):
-    """Reward balanced pelvis translation towards the box, not torso tipping speed."""
+    """Pelvis approach velocity and heading; no independent balance multiplier."""
     robot = env.scene['robot'].data
     delta = env.scene['box'].data.root_pos_w - robot.root_link_pos_w
     distance = parent.task_box_distance(env, delta)
@@ -59,7 +60,7 @@ def walk_task(env):
     towards = (delta_xy / distance_xy.clamp_min(1.e-6)[:, None] * robot.root_link_lin_vel_w[:, :2]).sum(-1)
     bearing = wrap_to_pi(torch.atan2(delta[:, 1], delta[:, 0]) - parent.heading(robot.root_link_quat_w)).abs()
     reward = torch.exp(-5. * (.85 - towards).square()) + .5 * torch.exp(-.75 * bearing)
-    return torch.where(distance < .7, 1.5, reward) * locomotion_stability(env)
+    return torch.where(distance < reward_geometry(env)['near_distance'], 1.5, reward)
 
 
 def push_velocity_increment(env, env_ids, velocity_range):
@@ -142,7 +143,7 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
             log[f'Reward/{name}_task_per_step'] = (result[1] * mask).sum() / count
             if skill == 0:
                 terms = (self.reward_manager._step_reward * mask[:, None]).sum(0) / count * self.step_dt
-                for key in ('walk_task', 'locomotion_stability', 'action_rate', 'torques', 'early_failure'):
+                for key in ('walk_task', 'carryup_task', 'standup_task', 'action_rate', 'torques', 'early_failure'):
                     log[f'Reward/loco_{key}_per_step'] = terms[names.index(key)]
                 robot = self.scene['robot'].data
                 # Post-reset kinematics are excluded from these continuous diagnostics.
@@ -173,7 +174,7 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
         library = state(self).library
         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
-        contract.update(migration_revision=18, physical_parent='wall5_full_body_mixed_reset_v1',
+        contract.update(migration_revision=19, physical_parent='wall5_full_body_mixed_reset_v1',
                         collision_profile=FULL_BODY_COLLISION_PROFILE,
                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
                         shoulder_colliders='visual_mesh_convex_hull',
@@ -198,11 +199,20 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
                         box_rotation6='first_two_columns_of_pelvis_inverse_times_box')
         contract.update(reset_assignment='fixed_env_midpoint_skill_quota_v1',
                         action_bounds_supervision='paired_raw_physical_limits_offset_scale_intersect_wrapper9_58_v1',
-                        locomotion_feedback='pelvis_link_velocity_upright_far_height_v1',
-                        stability_parameters={'upright_exp':10., 'height_floor_m':.65, 'height_exp':20., 'near_distance_m':.7})
+                        locomotion_feedback='pelvis_link_approach_velocity_heading_no_stability_v19')
+        contract['reward_geometry'] = dict(reward_geometry(self))
+        contract['reward_geometry_calibration'] = {
+            'g1_anchors_m': dict(G1_ANCHORS), 'x2_anchors_m': {'pelvis': .669, 'head': .823, 'box': .729},
+            'ground_box_center_m': .125,
+            'method': 'grounded_foot_hull_reference_fk_equal_clip_medians_gravity_xy_lt_0.2',
+            'height_frame': 'world_minus_environment_ground',
+            'standup_velocity': 'pelvis_com_in_pelvis_frame', 'search_yaw_rate': 'pelvis_frame',
+            'height_exponents': 'inverse_length_scale',
+            'strict_lift_hold_metric': 'unchanged_contact_clearance_upright_speed_0.5s',
+        }
         contract['task_box_distance'] = {
             'metric': 'xyz_l2' if self.cfg.task_box_distance_3d else 'xy_l2',
-            'points': 'pelvis_link_origin_to_box_center', 'threshold_m': .7,
+            'points': 'pelvis_link_origin_to_box_center', 'threshold_m': reward_geometry(self)['near_distance'],
             'approach_velocity_direction': 'normalized_xy', 'amp_box_cap': 'unchanged_xy_0.7',
         }
         contract['push_velocity_semantics'] = 'current_world_com_velocity_plus_curriculum_scaled_increment_v1'

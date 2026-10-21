@@ -1,0 +1,7 @@
+{
+  "reason": "Isaac Sim annotator.detach(list[HydraTexture]) did not convert to paths; error after complete recording; shutdown blocked",
+  "stopped_recording_pid": 679979,
+  "signal": "SIGTERM",
+  "training_pid_untouched": 570043,
+  "first_video": "/home/cao/perceptual_ball/outputs/carrybox/wall5_play4_high_20261020/attempt1_cleanup_error/wall5_rev19_model5600_4robots_high20s.mp4"
+}

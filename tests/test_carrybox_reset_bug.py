@@ -81,7 +81,7 @@ class ResetBugTests(unittest.TestCase):
 
 
 
-    def test_stability_separates_tipping_without_blocking_crouch_or_translation(self):
+    def test_walk_drops_legacy_balance_multiplier_and_keeps_failure_penalty(self):
         from isaaclab.utils.math import quat_from_euler_xyz, quat_apply_inverse
         from perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled import failure_event
         class Scene(dict): pass
@@ -97,7 +97,9 @@ class ResetBugTests(unittest.TestCase):
         balance=task.locomotion_stability(env);walk=task.walk_task(env)
         self.assertEqual(balance[0],1.);self.assertLess(balance[1],.01)
         self.assertLess(balance[2],.1);self.assertEqual(balance[3],1.)
-        self.assertGreater(walk[0],100*walk[1])
+        # Revision19 removes this multiplier, while the historical diagnostic
+        # above still distinguishes tipping. Termination/one-off failure remain.
+        torch.testing.assert_close(walk, torch.full_like(walk, 1.5))
         self.assertAlmostEqual(walk[0].item(),1.5,places=6)
         scene.env_origins+=torch.tensor([100.,200.,5.]);root+=scene.env_origins;box+=scene.env_origins
         torch.testing.assert_close(task.locomotion_stability(env),balance)

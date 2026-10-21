@@ -1,0 +1,41 @@
+{
+  "pid": 553495,
+  "command": [
+    "/home/cao/ENTER/envs/ball/bin/python",
+    "-u",
+    "scripts/rsl_rl/train.py",
+    "--task",
+    "Template-Perceptual-Ball-CarryBox-Walled5-v0",
+    "--num_envs",
+    "4096",
+    "--device",
+    "cuda:0",
+    "--headless",
+    "--seed",
+    "42",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall5_v18_distance3d_fresh_20261020_124832"
+  ],
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v18_distance3d_fresh_20261020_124832.log",
+  "run_name": "wall5_v18_distance3d_fresh_20261020_124832",
+  "initialization": "fresh",
+  "loaded_checkpoint": null,
+  "started_at": "2026-10-20T12:48:32.034748+09:00",
+  "free_mib_before": 23066,
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py": "b1a4030937bbdcbeb37811119b2cbdf24825c87d00a00e1ca33aff974e282061",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py": "07e4b6f7f843819827285767bad78b82cfd1a96ce4aed7ab63902d30d8daec2a",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "01e6fb053862097a32c13f7814cd79bb2bd737887668a3e34ecf6f4fd0daeb5d",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "b085b4b9ee8fbeafd14f4b76fd1bfa4f38b8982f4331af43e83123ea88021a58",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "b94067cf3b30d14ac06301346c9086d8dfd652704292dd958c7f731b2a314a21",
+    "source/perceptual_ball/perceptual_ball/carrybox_wall5.py": "68627e47908a0971bc4fa5d3c1fe3101edc7557efcf10fba98951ad885737308",
+    "scripts/rsl_rl/train.py": "9f53cc72b8c1b54e534384738b6eae290af2ff4a95336ceabe7b14f163c818e4",
+    "scripts/rsl_rl/cli_args.py": "cfdd05fe23c239e231a30099328d8016ac3758a365ed619e84780e2aad94cfd3",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "60eb4507bdc21aa45f4938c4eb881f804904f2efc3261457e7389cae0b6569a1"
+  },
+  "dataset": "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/ground_pickup",
+  "manifest_sha256": "7ffeea2804bb48f440039fb67666d17513ae26a367fe21b075605ab5810a8153",
+  "user_authorization": "Explicit stop current training and restart from scratch; revision18 XYZ distance, 4096 envs, no resume or warm-start"
+}

@@ -6,6 +6,7 @@ from isaaclab.utils.math import (quat_apply, quat_apply_inverse, quat_mul, quat_
     quat_from_euler_xyz, matrix_from_quat, yaw_quat, euler_xyz_from_quat, wrap_to_pi)
 from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, joint_mapping
 from perceptual_ball.carrybox_walled import YawCurriculum, PairedDepthBuffer, search_reward, corrupt_depth_m
+from perceptual_ball.carrybox_reward_geometry import reward_geometry
 from . import carrybox as base
 
 
@@ -340,7 +341,7 @@ def reset_camera(env, ids):
 def held_joint_excess(env, acceleration=False, threshold=1.):
     s, robot, box = state(env),env.scene['robot'].data,env.scene['box'].data
     hands = robot.body_pos_w[:,s.hands].mean(1)
-    held = ((box.root_pos_w[:,2]-env.scene.env_origins[:,2])>.55) & ((hands-box.root_pos_w).norm(dim=-1)<.15)
+    held = ((box.root_pos_w[:,2]-env.scene.env_origins[:,2])>reward_geometry(env)['held_box']) & ((hands-box.root_pos_w).norm(dim=-1)<.15)
     value = robot.joint_acc if acceleration else robot.joint_vel
     return (value[:,s.arm_ids].abs()-threshold).clamp_min(0).square().mean(-1)*held
 
@@ -355,9 +356,14 @@ def search_turn(env):
     robot, box = env.scene['robot'].data,env.scene['box'].data
     delta = box.root_pos_w-robot.root_pos_w
     angle = wrap_to_pi(torch.atan2(delta[:,1],delta[:,0])-heading(robot.root_quat_w))
-    torso = state(env).torso
-    angular = quat_apply_inverse(robot.body_quat_w[:,torso], robot.body_ang_vel_w[:,torso])
-    return search_reward(state(env).search,angle,task_box_distance(env, delta),angular[:,2])
+    g = reward_geometry(env)
+    if g['body_frame'] == 'pelvis':
+        angular = quat_apply_inverse(robot.root_link_quat_w, robot.root_com_ang_vel_w)
+    else:
+        torso = state(env).torso
+        angular = quat_apply_inverse(robot.body_quat_w[:,torso], robot.body_ang_vel_w[:,torso])
+    return search_reward(state(env).search,angle,task_box_distance(env, delta),angular[:,2],
+                         threshold=g['near_distance'])
 
 
 def success_pulse(env):
@@ -429,7 +435,8 @@ def reference_joint_pos_limits(env):
 def fallen(env):
     robot = env.scene['robot'].data
     z = env.scene.env_origins[:,2]
-    return (robot.root_pos_w[:,2]-z<.2) | (head_height(env)<.4)
+    g = reward_geometry(env)
+    return (robot.root_pos_w[:,2]-z<g['fallen_pelvis']) | (head_height(env)<g['fallen_head'])
 
 
 def record_episode_metrics(env, env_ids):

@@ -27,9 +27,9 @@ class YawCurriculum:
         return 180.
 
 
-def search_reward(marked, signed_error, distance, yaw_rate):
+def search_reward(marked, signed_error, distance, yaw_rate, threshold=.7):
     error = signed_error.abs()
-    gate = marked & (error > math.pi / 4) & (distance > .7)
+    gate = marked & (error > math.pi / 4) & (distance > threshold)
     value = .7 * torch.exp(-.75 * error) + .3 * torch.tanh((signed_error.sign()*yaw_rate).clamp_min(0))
     return torch.where(gate, value, 0.)
 

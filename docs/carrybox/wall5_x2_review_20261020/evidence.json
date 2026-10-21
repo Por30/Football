@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-20T13:18:25.360840+09:00",
+  "attachment": "/home/cao/.codex/attachments/6dbd0199-765e-4ca9-90d1-c1e5444854b2/pasted-text.txt",
+  "attachment_sha256": "a95faa49eb05bfe80023e211f4fda3f13314c23b68ddcdac077b0e5bb0b3aacb",
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py": "b1a4030937bbdcbeb37811119b2cbdf24825c87d00a00e1ca33aff974e282061",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py": "07e4b6f7f843819827285767bad78b82cfd1a96ce4aed7ab63902d30d8daec2a",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "01e6fb053862097a32c13f7814cd79bb2bd737887668a3e34ecf6f4fd0daeb5d",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "b085b4b9ee8fbeafd14f4b76fd1bfa4f38b8982f4331af43e83123ea88021a58",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "b94067cf3b30d14ac06301346c9086d8dfd652704292dd958c7f731b2a314a21",
+    "source/perceptual_ball/perceptual_ball/carrybox_wall5.py": "68627e47908a0971bc4fa5d3c1fe3101edc7557efcf10fba98951ad885737308",
+    "scripts/rsl_rl/train.py": "9f53cc72b8c1b54e534384738b6eae290af2ff4a95336ceabe7b14f163c818e4",
+    "scripts/rsl_rl/cli_args.py": "cfdd05fe23c239e231a30099328d8016ac3758a365ed619e84780e2aad94cfd3",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "60eb4507bdc21aa45f4938c4eb881f804904f2efc3261457e7389cae0b6569a1"
+  },
+  "current_run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-20_12-48-36_wall5_v18_distance3d_fresh_20261020_124832",
+  "pid": 553495,
+  "sampled_complete_iteration": 416,
+  "current_metrics": {
+    "Mean episode length": 961.57,
+    "Episode_Termination/time_out": 0.9249,
+    "Skill/loco_mean_steps": 101.3087,
+    "Skill/loco_success_fraction": 0.0,
+    "Reward/loco_locomotion_stability_per_step": 0.0969,
+    "Reward/loco_walk_task_per_step": 0.0072,
+    "Reward/loco_task_per_step": 0.0676,
+    "Motion/loco_survivor_speed_mps": 0.3857,
+    "Motion/loco_survivor_box_distance_xy_m": 1.2043,
+    "Motion/loco_survivor_box_distance_m": 1.408,
+    "Reward/task_weighted_per_step": 0.0512,
+    "Reward/amp_per_step": 0.0023,
+    "AMP/style_reward": 0.0187,
+    "Iteration time": 3.65
+  },
+  "stability_to_walk_raw_step_reward_ratio": 13.458333333333334,
+  "theoretical_max_raw_per_step": {
+    "stability": 0.1,
+    "walk": 0.03,
+    "carryup": 0.07400000000000001
+  },
+  "theoretical_max_after_task_mix": {
+    "stability": 0.075,
+    "walk": 0.0225,
+    "carryup": 0.05550000000000001
+  },
+  "geometry": {
+    "source": "Heights supplied in attachment, not new simulator calibration",
+    "x2_pelvis_m": 0.669,
+    "g1_pelvis_m": 0.775,
+    "box_center_m": 0.125,
+    "x2_xy_radius_m": 0.44052695717742396,
+    "g1_xy_radius_m": 0.2598076211353314,
+    "g1_equivalent_xyz_gate_m": 0.7852158938788746
+  },
+  "historical_head_source": "docs/carrybox/g1_reset_20261015/probe.json",
+  "historical_head_source_sha256": "a92903a6b541d5922706bae8fb22e7b824b43fdbec60f6131b8dc296bbb90786",
+  "historical_reset_head_heights": {
+    "default_stand": {
+      "root_z": {
+        "n": 16,
+        "mean": 0.800000011920929,
+        "min": 0.800000011920929,
+        "max": 0.800000011920929
+      },
+      "head_z": {
+        "n": 16,
+        "mean": 1.249879851937294,
+        "min": 1.249805212020874,
+        "max": 1.2499308586120605
+      }
+    },
+    "hold_rsi_loco": {
+      "root_z": {
+        "n": 16,
+        "mean": 0.7630845196545124,
+        "min": 0.7373396158218384,
+        "max": 0.7788681387901306
+      },
+      "head_z": {
+        "n": 16,
+        "mean": 1.2075957879424095,
+        "min": 1.1810669898986816,
+        "max": 1.227358102798462
+      }
+    }
+  },
+  "limits": [
+    "X2 source and training params not independently available here",
+    "No new G1 settled-height or foot-clearance measurement",
+    "Reward magnitudes and a single trajectory do not establish causal failure",
+    "Skill/loco_mean_steps is cumulative; Mean episode length is a different logging statistic"
+  ],
+  "production_changed": false,
+  "training_stopped_or_restarted": false
+}

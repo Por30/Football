@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_play4_high_20261020/record_and_check.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "5d8e303909de1e3d5b4640a4c0712df0d7b9cf5939fe911e7f33e55959a38506",
+      "stdout_sha256": "5b5219954d38b8245d6083467c9471169a66e4dd94a1a76bacdbdf21758a9ee6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

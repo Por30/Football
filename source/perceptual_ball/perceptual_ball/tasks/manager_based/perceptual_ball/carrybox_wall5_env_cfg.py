@@ -1,12 +1,13 @@
 """Wall5 AMP stage A with full-body external collisions for the G1 shell."""
 from isaaclab.utils import configclass
 from .carrybox_walled_env_cfg import CarryBoxWalled4EnvCfg, CarryBoxWalled4PPORunnerCfg, spawn_walled_robot
-from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment, action_bounds, reset_scene, locomotion_stability, walk_task
+from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment, action_bounds, reset_scene, walk_task
 from .carrybox_env_cfg import CarryBoxObservationsCfg
 from .mdp.carrybox_walled import failure_event
 from isaaclab.managers import RewardTermCfg as RewTerm
 from isaaclab.managers import ObservationGroupCfg as ObsGroup, ObservationTermCfg as ObsTerm
 from perceptual_ball.carrybox_wall5 import GROUND_DATASET_PATH
+from perceptual_ball.carrybox_reward_geometry import g1_reward_geometry
 
 
 def spawn_wall5_full_body_robot(prim_path, cfg, **kwargs):
@@ -47,11 +48,12 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
     walled_variant: str = 'walled5'
     pose_visibility_supervision: bool = True
     reference_link_velocity: bool = True
-    task_box_distance_3d: bool = True  # X2 root-to-box-centre reward gates, threshold 0.7 m
+    task_box_distance_3d: bool = True
+    reward_geometry: dict = g1_reward_geometry()
     ground_box_reset: bool = True
     held_box_reference_reset: bool = True  # hold keeps its reference box at hand height
     reference_motion_dataset: str = GROUND_DATASET_PATH
-    reset_skill_probabilities: tuple = (.8, 0., .2)
+    reset_skill_probabilities: tuple = (.75, .05, .2)  # loco / ground pickup / hold
     # Frames 32+ cause knee/box contact impulses; 34+ visibly intersect.
     ground_pickup_reset_frame_range: tuple = (0, 32)  # exclusive end
 
@@ -71,7 +73,6 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
         self.terminations.tipped.func = tipped
         self.rewards.early_failure = RewTerm(func=failure_event, weight=-50.)
         self.rewards.walk_task = RewTerm(func=walk_task, weight=1.)
-        self.rewards.locomotion_stability = RewTerm(func=locomotion_stability, weight=5.)
         if self.depth_backend != 'warp':
             raise ValueError('Wall5 visible-pose supervision requires Warp nearest-hit IDs')
         self.scene.depth_camera.output_mesh_hits = True
@@ -84,7 +85,7 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
 class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
     class_name = 'CarryBoxWall5OnPolicyRunner'
     experiment_name = 'g1_carrybox_depth/walled5'
-    run_name = 'walled5_distance3d_v18'
+    run_name = 'walled5_g1_semantic_v19'
 
     def __post_init__(self):
         super().__post_init__()

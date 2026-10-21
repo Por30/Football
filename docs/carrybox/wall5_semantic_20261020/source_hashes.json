@@ -1,0 +1,15 @@
+{
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py": "b1a4030937bbdcbeb37811119b2cbdf24825c87d00a00e1ca33aff974e282061",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py": "07e4b6f7f843819827285767bad78b82cfd1a96ce4aed7ab63902d30d8daec2a",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "7a962cc341d0db8dc3115e7b611e5ec137953cd1d17c23613541720477a9e408",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "6295c2d55c9c29a2d5e159c026f49011cc38ec1415ed410f1e18e48fd40f54dd",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "2b21a5d0776623e3f3dc67fb2d60cf7873227ea410e24e5039c272d986041d8e",
+  "source/perceptual_ball/perceptual_ball/carrybox_wall5.py": "68627e47908a0971bc4fa5d3c1fe3101edc7557efcf10fba98951ad885737308",
+  "scripts/rsl_rl/train.py": "9f53cc72b8c1b54e534384738b6eae290af2ff4a95336ceabe7b14f163c818e4",
+  "scripts/rsl_rl/cli_args.py": "cfdd05fe23c239e231a30099328d8016ac3758a365ed619e84780e2aad94cfd3",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": "e3ad1681f2ab3718ef6c0cf17ec588ffdf7973cbafa4719a52db65e0ed925183",
+  "source/perceptual_ball/perceptual_ball/carrybox_reward_geometry.py": "9d5c6a0cad5a858a34dcbca49ab99d5bfc6283c78702a02e6ab623699e3adf9d",
+  "source/perceptual_ball/perceptual_ball/carrybox_walled.py": "2a5e1543ce93b6bd0fd0adc66b51e0a959e57e0612ed336e85d524a004f3906b",
+  "tests/test_carrybox_reward_geometry.py": "6c57b0a27f401b1de7cd415f59ffbb3fc7a809ede6c49fb2993e3f34faacb3f6",
+  "tests/test_carrybox_reset_bug.py": "e1630334c7c59a9d33669ce359b828aa2cd4633016848f53271b31679bf71138"
+}

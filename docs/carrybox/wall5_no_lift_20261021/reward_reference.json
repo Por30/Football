@@ -1,0 +1,14 @@
+{
+  "pickup_clip": "ground_pickup/pick_up/pick_up_03.pt",
+  "native_fps": 60,
+  "reset_frames_exclusive": [
+    0,
+    32
+  ],
+  "contact_index": 42,
+  "crouch_pelvis_m": 0.6934111962938522,
+  "ground_box_center_m": 0.125,
+  "carryup_ground_height_reward": 0.3199678063392639,
+  "near_walk_reward": 1.5,
+  "note": "Unweighted reward rates before weight*0.02 policy timestep; contact_index is a dataset annotation, not a new measured contact event."
+}

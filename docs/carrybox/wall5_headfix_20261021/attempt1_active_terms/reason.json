@@ -1,0 +1,4 @@
+{
+  "reason": "Smoke expected active-term set omitted the existing invalid/non-finite guard. Keep that guard, require it explicitly; no production or threshold change.",
+  "fix_attempt": 1
+}

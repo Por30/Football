@@ -8,7 +8,7 @@ from perceptual_ball.carrybox_amp import joint_mapping
 from pathlib import Path
 from perceptual_ball.carrybox_wall5 import pack_task_frame, AMP_BODY_NAMES, WALL5_FEATURE_SCHEMA, GROUND_RESET_PROFILE
 from perceptual_ball.carrybox_fullbody_collision import FULL_BODY_COLLISION_PROFILE
-from perceptual_ball.carrybox_reward_geometry import reward_geometry, G1_ANCHORS
+from perceptual_ball.carrybox_reward_geometry import reward_geometry, G1_ANCHORS, X2_ANCHORS
 from . import carrybox as base
 from .carrybox_walled import WalledCarryBoxEnv, state
 from . import carrybox_walled as parent
@@ -82,12 +82,18 @@ def push_velocity_increment(env, env_ids, velocity_range):
 
 
 def critic_state(env):
-    """Training-only current state: proprio93, pelvis velocity3, box xyz3/rot6/size3.
+    """Training-only state: proprio93, velocity3, box xyz3/rot6/size3, endpoints15.
 
     Velocity (m/s) and box pose are expressed in the pelvis link frame, not COM
     or camera coordinates. Size is the box's full local side lengths in metres.
     No visibility mask, sensor delay, AMP distance cap, or depth enters the critic.
+    The final 15 values are the ordered palm/ankle/mid360 link origins relative
+    to the pelvis link origin, in pelvis coordinates and metres (same as AMP).
     """
+    if not hasattr(env, '_wall5_critic_bodies'):
+        env._wall5_critic_bodies = env.scene['robot'].find_bodies(list(AMP_BODY_NAMES), preserve_order=True)[0]
+        if len(env._wall5_critic_bodies) != 5:
+            raise ValueError('Wall5 critic requires all five named link origins')
     robot, box = env.scene['robot'].data, env.scene['box'].data
     q = robot.root_link_quat_w
     linear = quat_apply_inverse(q, robot.root_link_lin_vel_w)
@@ -95,7 +101,9 @@ def critic_state(env):
     rotation = matrix_from_quat(quat_mul(quat_conjugate(q), box.root_quat_w))
     rot6 = rotation[..., :2].transpose(-1, -2).flatten(-2)
     size = xyz.new_tensor(env.cfg.scene.box.spawn.size).expand_as(xyz)
-    return torch.cat((base.proprioception(env), linear, xyz, rot6, size), -1).detach()
+    relative_ends = robot.body_link_pos_w[:, env._wall5_critic_bodies] - robot.root_link_pos_w[:, None]
+    ends = quat_apply_inverse(q[:, None].expand(-1, 5, -1), relative_ends).flatten(1)
+    return torch.cat((base.proprioception(env), linear, xyz, rot6, size, ends), -1).detach()
 
 
 def amp_frame(env):
@@ -118,7 +126,9 @@ def pose_visible(env, depth, pose):
     if not hasattr(env, '_wall5_box_mesh'):
         env._wall5_box_mesh = next(i for i, m in enumerate(camera.mesh_manifest) if m['root'].endswith('/Box'))
     hits = camera.data.output['mesh_id'][..., 0]
-    visible = ((hits == env._wall5_box_mesh) & (depth < 1.) & (depth >= .1/3.)).flatten(1).any(-1)
+    metres = getattr(getattr(env, 'cfg', None), 'depth_in_metres', False)
+    near, far = (.1, 3.) if metres else (.1/3., 1.)
+    visible = ((hits == env._wall5_box_mesh) & (depth < far) & (depth >= near)).flatten(1).any(-1)
     return visible & (pose[:, 2] >= .1) & (pose[:, 2] < 3.) & torch.isfinite(pose).all(-1)
 
 
@@ -129,6 +139,21 @@ def tipped(env):
 
 class Wall5CarryBoxEnv(WalledCarryBoxEnv):
     amp_warmup_steps = 0
+
+    @property
+    def depth_contract(self):
+        """The actor and exported policy consume the same depth units."""
+        metres = self.cfg.depth_in_metres
+        return dict(schema=1, output='optical_z_metres' if metres else 'optical_z_over3',
+                    units='metres' if metres else 'normalized',
+                    normalization='none' if metres else 'divide_by_3',
+                    clip_range_m=[.1, 3.], invalid_depth_m=3.,
+                    input_range=[.1, 3.] if metres else [.1/3., 1.],
+                    missing_value=3. if metres else 1.,
+                    shape=[4, 27, 48], history_order='oldest_to_newest',
+                    gaussian_std_m=self.cfg.depth_noise_std_m,
+                    stereo_sigma_m=[self.cfg.depth_stereo_near_m, self.cfg.depth_stereo_far_m],
+                    label_timing='capture_then_paired_delay_freeze_reset')
 
     def step(self, action):
         # Attribute terminal transitions to their old skill, before any reset.
@@ -143,7 +168,7 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
             log[f'Reward/{name}_task_per_step'] = (result[1] * mask).sum() / count
             if skill == 0:
                 terms = (self.reward_manager._step_reward * mask[:, None]).sum(0) / count * self.step_dt
-                for key in ('walk_task', 'carryup_task', 'standup_task', 'action_rate', 'torques', 'early_failure'):
+                for key in ('walk_task', 'carryup_task', 'standup_task', 'action_rate', 'torques'):
                     log[f'Reward/loco_{key}_per_step'] = terms[names.index(key)]
                 robot = self.scene['robot'].data
                 # Post-reset kinematics are excluded from these continuous diagnostics.
@@ -174,7 +199,7 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
         library = state(self).library
         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
-        contract.update(migration_revision=19, physical_parent='wall5_full_body_mixed_reset_v1',
+        contract.update(migration_revision=22, physical_parent='wall5_full_body_mixed_reset_v1',
                         collision_profile=FULL_BODY_COLLISION_PROFILE,
                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
                         shoulder_colliders='visual_mesh_convex_hull',
@@ -188,21 +213,27 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
                         support_platform=self.cfg.scene.platform is not None,
                         reference_dataset_profile='findbox_ground_pickup_v1',
                         reference_manifest_sha256=reference_hash)
-        contract.update(reference_velocity='source_position_difference_pelvis_link', failure_reward='current_fell_or_tipped_exclude_timeout_dt_scaled',
-                        roll_termination='abs_roll_gt_0.5', aux_supervision='visible_box_hit_and_optical_range_paired_mask_v1',
-                        aux_target_shape=10, early_failure_penalty_weight=-50., roll_limit=.5,
+        contract.update(reference_velocity='source_position_difference_pelvis_link', failure_reward='none_x2_recipe',
+                        roll_termination='abs_roll_gt_0.5', aux_supervision='all_paired_frames_xyz_rot6_visibility_diagnostic_only_v1',
+                        aux_target_shape=10, early_failure_penalty_weight=0., roll_limit=.5,
+                        height_termination_terms=list(self.cfg.height_termination_terms),
+                        failure_diagnostics='pre_reset_physical_causes_per_completed_skill_episode_multi_label_v20',
                         reset_skill_probabilities=list(self.cfg.reset_skill_probabilities))
         contract.update(actor_observations='proprio93x4_depth4x27x48_no_privileged',
-                        critic_observations='current_proprio93_pelvis_link_linvel3_box_local_xyz3_rot6_size3_v1',
-                        critic_shape=108, critic_network='independent_mlp_512_256_256_no_depth',
+                        critic_observations='current_proprio93_pelvis_link_linvel3_box_local_xyz3_rot6_size3_ends15_v2',
+                        critic_shape=123, critic_network='independent_mlp_512_256_256_no_depth',
+                        critic_endpoint_names=list(AMP_BODY_NAMES),
+                        critic_endpoint_frame='pelvis_link_origin_relative_positions_metres',
                         critic_terminal='pre_reset_current_state',
                         box_rotation6='first_two_columns_of_pelvis_inverse_times_box')
         contract.update(reset_assignment='fixed_env_midpoint_skill_quota_v1',
                         action_bounds_supervision='paired_raw_physical_limits_offset_scale_intersect_wrapper9_58_v1',
                         locomotion_feedback='pelvis_link_approach_velocity_heading_no_stability_v19')
         contract['reward_geometry'] = dict(reward_geometry(self))
+        contract['depth_observation'] = self.depth_contract
         contract['reward_geometry_calibration'] = {
-            'g1_anchors_m': dict(G1_ANCHORS), 'x2_anchors_m': {'pelvis': .669, 'head': .823, 'box': .729},
+            'g1_anchors_m': dict(G1_ANCHORS), 'x2_anchors_m': dict(X2_ANCHORS),
+            'x2_anchor_source': 'user_corrected_head_yaw_link_reference_20261021_not_local_fk',
             'ground_box_center_m': .125,
             'method': 'grounded_foot_hull_reference_fk_equal_clip_medians_gravity_xy_lt_0.2',
             'height_frame': 'world_minus_environment_ground',

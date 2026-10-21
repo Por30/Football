@@ -22,12 +22,14 @@ X2_REWARD_GEOMETRY = {
 
 G1_ANCHORS = {'pelvis': .7731534838676453, 'head': 1.2196258306503296,
               'box': .8507904410362244}
+# User-corrected head_yaw_link anchor; motion endpoint 5 was the waist origin.
+X2_ANCHORS = {'pelvis': .669, 'head': 1.112, 'box': .729}
 
 
 def g1_reward_geometry():
     """Preserve X2's standing XY reach and normalized height reward curves."""
-    g = dict(X2_REWARD_GEOMETRY, profile='g1_reference_geometry_v19', body_frame='pelvis')
-    pelvis_scale, head_scale = G1_ANCHORS['pelvis'] / .669, G1_ANCHORS['head'] / .823
+    g = dict(X2_REWARD_GEOMETRY, profile='g1_reference_geometry_v20', body_frame='pelvis')
+    pelvis_scale, head_scale = G1_ANCHORS['pelvis'] / X2_ANCHORS['pelvis'], G1_ANCHORS['head'] / X2_ANCHORS['head']
     box_scale = (G1_ANCHORS['box'] - .125) / (.729 - .125)
     g['near_distance'] = math.sqrt(.7**2 - (.669-.125)**2 + (G1_ANCHORS['pelvis']-.125)**2)
     for key in ('stand_pelvis', 'stand_gate_low', 'stand_gate_span', 'crouch_pelvis', 'fallen_pelvis'):

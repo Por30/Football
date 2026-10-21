@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_depth_metres_20261021/validate_and_restart.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "442393f5ec1e400f788931f2642883c7517ab841c888bc84a05ccb451b9b31fa",
+      "stdout_sha256": "455e4d3523f0cbaf03e48ffdd34c2df919b5e95aec573bf7d8733d4f9e7abb63",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

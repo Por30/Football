@@ -38,12 +38,19 @@ def captured_pair(env):
     s = state(env)
     if s.paired is not None and (s.paired.last_step == env.common_step_counter).all():
         return s.paired.output_depth, s.paired.output_pose
-    depth = base.depth_image(env)
+    metres = getattr(env.cfg, 'depth_in_metres', False)
+    if metres:
+        depth = env.scene['depth_camera'].data.output['distance_to_image_plane'][..., 0]
+        depth = torch.nan_to_num(depth, nan=3., posinf=3., neginf=3.).clamp(.1, 3.)
+    else:
+        depth = base.depth_image(env) * 3.
     pose = base.box_pose_target(env)
-    depth = corrupt_depth_m(depth*3., gaussian_std=env.cfg.depth_noise_std_m,
+    depth = corrupt_depth_m(depth, gaussian_std=env.cfg.depth_noise_std_m,
         edge_threshold=env.cfg.depth_edge_threshold_m, edge_probability=env.cfg.depth_edge_probability,
         hole_probability=env.cfg.depth_hole_probability,
-        stereo_near=env.cfg.depth_stereo_near_m, stereo_far=env.cfg.depth_stereo_far_m) / 3.
+        stereo_near=env.cfg.depth_stereo_near_m, stereo_far=env.cfg.depth_stereo_far_m)
+    if not metres:
+        depth = depth / 3.
     if getattr(env.cfg, 'pose_visibility_supervision', False):
         from .carrybox_wall5 import pose_visible
         pose = torch.cat((pose, pose_visible(env, depth, pose)[:, None].float()), -1)
@@ -432,17 +439,37 @@ def reference_joint_pos_limits(env):
             + (robot.joint_pos-robot.soft_joint_pos_limits[..., 1]).clamp_min(0)).sum(-1)
 
 
-def fallen(env):
+def fallen_pelvis(env):
     robot = env.scene['robot'].data
     z = env.scene.env_origins[:,2]
-    g = reward_geometry(env)
-    return (robot.root_pos_w[:,2]-z<g['fallen_pelvis']) | (head_height(env)<g['fallen_head'])
+    return robot.root_pos_w[:,2]-z < reward_geometry(env)['fallen_pelvis']
+
+
+def fallen_head(env):
+    return head_height(env) < reward_geometry(env)['fallen_head']
+
+
+def fallen(env):
+    """Legacy aggregate; wall5 registers the two causes separately."""
+    return fallen_pelvis(env) | fallen_head(env)
 
 
 def record_episode_metrics(env, env_ids):
     """Count executed transitions, independent of runner-randomized timeout ages."""
     s = state(env)
     if getattr(env, '_carrybox_in_step', False):
+        height_flags = {}
+        if getattr(getattr(env, 'cfg', None), 'height_termination_terms', None):
+            # This IsaacLab manager retains only the last triggering cause.
+            # Read physical state before reset to retain simultaneous causes.
+            height_flags = {'fell_pelvis': fallen_pelvis(env), 'fell_head': fallen_head(env)}
+            if not hasattr(s, 'height_failure_counts'):
+                s.height_failure_counts = {key: torch.zeros_like(s.episode_counts) for key in height_flags}
+            fell = height_flags['fell_pelvis'] | height_flags['fell_head']
+            tipped_flag = tipped(env)
+        else:
+            fell = env.termination_manager.get_term('fell')
+            tipped_flag = env.termination_manager.get_term('tipped')
         for skill in range(3):
             ids = env_ids[s.skills[env_ids] == skill]
             s.episode_counts[skill] += len(ids)
@@ -450,8 +477,10 @@ def record_episode_metrics(env, env_ids):
             lengths = s.actual_episode_steps[ids]
             s.episode_steps[skill] += lengths.sum()
             s.valid_amp_steps[skill] += (lengths-getattr(env, 'amp_warmup_steps', 8)).clamp_min(0).sum()
-            s.tipped_counts[skill] += env.termination_manager.get_term('tipped')[ids].sum()
-            s.fell_counts[skill] += env.termination_manager.get_term('fell')[ids].sum()
+            s.tipped_counts[skill] += tipped_flag[ids].sum()
+            s.fell_counts[skill] += fell[ids].sum()
+            for key, flag in height_flags.items():
+                s.height_failure_counts[key][skill] += flag[ids].sum()
     s.actual_episode_steps[env_ids] = 0
 
 
@@ -517,5 +546,7 @@ class WalledCarryBoxEnv(base.CarryBoxEnv):
             self.extras['log'][f'Skill/{name}_successes'] = s.success_counts[skill].float()
             self.extras['log'][f'Skill/{name}_tipped_fraction'] = s.tipped_counts[skill]/count
             self.extras['log'][f'Skill/{name}_fell_fraction'] = s.fell_counts[skill]/count
+            for key, counts in getattr(s, 'height_failure_counts', {}).items():
+                self.extras['log'][f'Skill/{name}_{key}_fraction'] = counts[skill]/count
             self.extras['log'][f'Skill/{name}_mean_steps'] = s.episode_steps[skill]/count
             self.extras['log'][f'Skill/{name}_valid_amp_steps'] = s.valid_amp_steps[skill].float()

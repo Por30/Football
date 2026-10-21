@@ -1,0 +1,64 @@
+{
+  "status": "VERIFIED_LOCAL_G1_AND_ARITHMETIC_X2_ANCHOR_USER_SUPPLIED",
+  "x2_standing_head_m": 1.112,
+  "x2_local_fk_verified": false,
+  "x2_search_roots": [
+    "/home/cao/PhysHSI",
+    "/home/cao/phsi",
+    "/home/cao/TienKung-Lab",
+    "/home/cao/humanoid_amp",
+    "/home/cao/robot_lab",
+    "/home/cao/training_data"
+  ],
+  "g1_reference_evidence": "docs/carrybox/wall5_semantic_20261020/geometry.json",
+  "g1_reference_evidence_sha256": "b0d85d10967652cd31453a1e340140c5efeb008a2870eb51ed86c8c5d076bb7b",
+  "g1_head_anchor_m": 1.2196258306503296,
+  "head_scale": 1.0967858189301525,
+  "before": {
+    "fallen_head": 0.5927707560876451,
+    "success_head": 1.1855415121752901,
+    "stand_head": 1.2596378566862456,
+    "stand_head_exp": 5.398376973115825
+  },
+  "after": {
+    "fallen_head": 0.438714327572061,
+    "success_head": 0.877428655144122,
+    "stand_head": 0.9322679460906296,
+    "stand_head_exp": 7.294040333055647
+  },
+  "pickup_reference_min_head_m": 0.6621002554893494,
+  "old_head_clearance_m": 0.0693294994017043,
+  "new_head_clearance_m": 0.22338592791728834,
+  "unchanged_geometry": {
+    "body_frame": "pelvis",
+    "near_distance": 0.7836880365615937,
+    "carryup_box": 0.7438444985656549,
+    "success_box": 0.6957789064440506,
+    "held_box": 0.6356969162920453,
+    "crouch_box": 0.6717461103832484,
+    "slow_pickup_box": 0.6356969162920453,
+    "stand_pelvis": 0.7627523159232374,
+    "stand_gate_low": 0.5778426635782101,
+    "stand_gate_span": 0.18490965234502724,
+    "crouch_pelvis": 0.6934111962938522,
+    "fallen_pelvis": 0.23113706543128407,
+    "carryup_height_exp": 2.4965884056188097,
+    "stand_pelvis_exp": 6.9222995325934535
+  },
+  "early_failure_weight_before": -50,
+  "policy_dt_s": 0.02,
+  "failure_transition_reward_before_mix": -1.0,
+  "failure_transition_reward_after": 0.0,
+  "roll_limit_rad": 0.5,
+  "rsi": [
+    0.75,
+    0.05,
+    0.2
+  ],
+  "limitations": [
+    "X2原始资产未在所列本地目录找到；1.112仅采用用户FK更正，不声称本机复算",
+    "高于参考中位数不等于物理上永远达不到",
+    "改动解除已确认阈值偏差，不证明它是未拾箱的唯一原因",
+    "Episode_Termination沿用manager最后原因；准确多原因诊断用Skill/*_fell_pelvis_fraction及fell_head_fraction，以已完成回合为分母"
+  ]
+}

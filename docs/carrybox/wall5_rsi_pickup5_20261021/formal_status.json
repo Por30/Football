@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-10-21T12:42:49.157757+09:00",
+  "pid": 570043,
+  "same_process_running": true,
+  "process_modified": false,
+  "loaded_rsi_probabilities": [
+    0.8,
+    0.0,
+    0.2
+  ]
+}

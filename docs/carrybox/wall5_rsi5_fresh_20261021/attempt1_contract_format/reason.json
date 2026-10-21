@@ -1,0 +1,8 @@
+{
+  "reason": "torch checkpoint preserves tuple-valued randomization ranges; JSON smoke record converts them to lists. All contract values match after JSON normalization.",
+  "raw_differing_keys": [
+    "randomization"
+  ],
+  "normalized_differing_keys": [],
+  "production_training_modified": false
+}

@@ -3,8 +3,8 @@ from isaaclab.utils import configclass
 from .carrybox_walled_env_cfg import CarryBoxWalled4EnvCfg, CarryBoxWalled4PPORunnerCfg, spawn_walled_robot
 from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment, action_bounds, reset_scene, walk_task
 from .carrybox_env_cfg import CarryBoxObservationsCfg
-from .mdp.carrybox_walled import failure_event
-from isaaclab.managers import RewardTermCfg as RewTerm
+from .mdp.carrybox_walled import fallen_pelvis, fallen_head
+from isaaclab.managers import RewardTermCfg as RewTerm, TerminationTermCfg as DoneTerm
 from isaaclab.managers import ObservationGroupCfg as ObsGroup, ObservationTermCfg as ObsTerm
 from perceptual_ball.carrybox_wall5 import GROUND_DATASET_PATH
 from perceptual_ball.carrybox_reward_geometry import g1_reward_geometry
@@ -46,10 +46,16 @@ class Wall5ObservationsCfg(CarryBoxObservationsCfg):
 class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
     observations: Wall5ObservationsCfg = Wall5ObservationsCfg()
     walled_variant: str = 'walled5'
+    # Keep the paired visibility flag for diagnostics; revision22 supervises all frames.
     pose_visibility_supervision: bool = True
+    depth_in_metres: bool = True
+    depth_noise_std_m: float = .02
+    depth_stereo_near_m: float = .008
+    depth_stereo_far_m: float = .03
     reference_link_velocity: bool = True
     task_box_distance_3d: bool = True
     reward_geometry: dict = g1_reward_geometry()
+    height_termination_terms: tuple = ('fell_pelvis', 'fell_head')
     ground_box_reset: bool = True
     held_box_reference_reset: bool = True  # hold keeps its reference box at hand height
     reference_motion_dataset: str = GROUND_DATASET_PATH
@@ -71,7 +77,10 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
         self.observations.amp.motion.func = amp_frame
         self.scene.platform = None
         self.terminations.tipped.func = tipped
-        self.rewards.early_failure = RewTerm(func=failure_event, weight=-50.)
+        self.terminations.fell = None
+        self.terminations.fell_pelvis = DoneTerm(func=fallen_pelvis)
+        self.terminations.fell_head = DoneTerm(func=fallen_head)
+        self.rewards.early_failure = None
         self.rewards.walk_task = RewTerm(func=walk_task, weight=1.)
         if self.depth_backend != 'warp':
             raise ValueError('Wall5 visible-pose supervision requires Warp nearest-hit IDs')
@@ -85,7 +94,7 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
 class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
     class_name = 'CarryBoxWall5OnPolicyRunner'
     experiment_name = 'g1_carrybox_depth/walled5'
-    run_name = 'walled5_g1_semantic_v19'
+    run_name = 'walled5_critic123_aux1_v22'
 
     def __post_init__(self):
         super().__post_init__()
@@ -94,7 +103,7 @@ class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
         self.policy.actor_hidden_dims = [512, 256, 256]
         self.policy.critic_hidden_dims = [512, 256, 256]
         self.policy.init_noise_std = 1.
-        self.algorithm.pose_aux_coef = .1
+        self.algorithm.pose_aux_coef = 1.0
         self.algorithm.learning_rate = 3.e-4
         self.algorithm.schedule = 'adaptive'
         self.algorithm.desired_kl = .01

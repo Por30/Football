@@ -1,0 +1,60 @@
+{
+  "change": "wall5 optical depth metres and noise revision21",
+  "old_depth_input": "optical_z_metres / 3",
+  "new_depth_input": "optical_z_metres",
+  "range_m": [
+    0.1,
+    3.0
+  ],
+  "miss_value": 3.0,
+  "old_noise_m": {
+    "gaussian": 0.06,
+    "stereo": [
+      0.024,
+      0.09
+    ]
+  },
+  "new_noise_m": {
+    "gaussian": 0.02,
+    "stereo": [
+      0.008,
+      0.03
+    ]
+  },
+  "noise_source": "latest user correction; old handoff.txt lines205/210 had explicit multiplier3, superseded only for wall5",
+  "critic": {
+    "dim": 108,
+    "composition": {
+      "proprio": 93,
+      "pelvis_linear_velocity": 3,
+      "box_local_position": 3,
+      "box_local_rotation_columns": 6,
+      "box_dimensions": 3
+    },
+    "x2_reported_dim": 123,
+    "x2_extra": "15 end-effector position entries appear in handoff actor proprio and therefore critic; original X2 source unavailable",
+    "rotation6": "first_two_columns_column_major; decoder_cross_product_reconstructs_same_rotation",
+    "changed": false
+  },
+  "aux": {
+    "coefficient": 0.1,
+    "visible_only": true,
+    "target_frame": "camera optical xyz metres plus rotation6",
+    "target_mask": "nearest Box pixel survived dropout and optical centre inside [0.1,3)",
+    "changed": false
+  },
+  "decision": "User explicitly requested metres; optional clarification unanswered, announced recommended metre+noise scope, preserved G1 critic and bounded visible supervision.",
+  "legacy_wall3_wall4": "normalized depth and .06/.024/.09 unchanged",
+  "geometry_revision20_preserved": true,
+  "rsi": [
+    0.75,
+    0.05,
+    0.2
+  ],
+  "original_x2_fk_or_source_verified": false,
+  "scope_limits": [
+    "未将critic补齐至123维或改rot6列",
+    "未对不可见或超出深度范围的目标启用全部帧监督，未把辅助系数改为1.0",
+    "未改相机安装/FOV/分辨率/遮挡/物理/数据集/其他训练参数"
+  ]
+}

@@ -1,0 +1,1175 @@
+{
+  "status": "PASS",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-20_13-49-44_wall5_v19_g1_semantic_fresh_20261020_134939/model_23000.pt",
+  "checkpoint_sha256": "4ebfd841d23ba47b636b422edcde4a637a5a6eedbcd12bd5afdf818f1f99ba74",
+  "num_envs": 20,
+  "steps_per_case": 1000,
+  "contract": {
+    "variant": "walled5",
+    "migration_revision": 19,
+    "depth_backend": "warp",
+    "reference_ground_clearance": "G1_collision_hull_min_5mm_upward_only",
+    "obstacle_cylinders": 3,
+    "head_reference": "head_link_COM",
+    "knee_lower_penalty": "hard_limit_other_limits_soft",
+    "action_targets": "clamp_to_physical_joint_limits",
+    "push_curriculum": [
+      1000,
+      4000
+    ],
+    "depth_geometry": "all_visible_link_meshes_ground2000_v1",
+    "depth_clip": "optical_near_plane_pixel_centers_v1",
+    "failure_reward": "current_fell_or_tipped_exclude_timeout_dt_scaled",
+    "obstacle_backend": "locked_rigid_6dof",
+    "shoulder_colliders": "visual_mesh_convex_hull",
+    "depth_shape": [
+      4,
+      27,
+      48
+    ],
+    "reference_init": true,
+    "reset_probs": [
+      0.8,
+      0.0,
+      0.2
+    ],
+    "search_prob": 0.02,
+    "noise": 0.06,
+    "depth_edge": [
+      0.15,
+      0.05
+    ],
+    "depth_holes": 0.02,
+    "depth_stereo": [
+      0.024,
+      0.09
+    ],
+    "latency_probability": 0.1,
+    "depth_noise_contract": "metres_miss_preserved_near_clamp_15_including_onset",
+    "delay": 1,
+    "freeze": 0.002,
+    "freeze_steps": 15,
+    "mount_pos": 0.01,
+    "mount_rot": 0.0,
+    "curriculum": "shared_piecewise_process_anchor",
+    "reward_parent": "g1_corrected_common_v2",
+    "reward_weights": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "undesired_contacts": -1.0,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.4,
+      "slow_pickup": -0.0005,
+      "stable_grasp": 0.2,
+      "arm_speed_pickup": -0.02,
+      "arm_acc_pickup": -2e-05,
+      "grip_force_cap": -0.02,
+      "held_hand_speed": -0.02,
+      "held_hand_acc": -2e-05,
+      "waist_yaw_penalty": -0.5,
+      "search_turn": 0.5,
+      "early_failure": -50.0
+    },
+    "roll_termination": "abs_roll_gt_0.5",
+    "action_scale": 0.25,
+    "action_clip": 9.0,
+    "randomization": {
+      "box_material": {
+        "static_friction_range": [
+          0.3,
+          2.0
+        ],
+        "dynamic_friction_range": [
+          0.4,
+          1.5
+        ],
+        "restitution_range": [
+          0.0,
+          0.2
+        ],
+        "num_buckets": 64
+      },
+      "box_mass": {
+        "mass_distribution_params": [
+          0.1,
+          1.5
+        ],
+        "operation": "scale",
+        "recompute_inertia": true
+      },
+      "default_joint_pos": {},
+      "torso_com": {
+        "com_range": {
+          "x": [
+            -0.025,
+            0.025
+          ],
+          "y": [
+            -0.05,
+            0.05
+          ],
+          "z": [
+            -0.05,
+            0.05
+          ]
+        }
+      },
+      "push_robot": {
+        "velocity_range": {
+          "x": [
+            -0.5,
+            0.5
+          ],
+          "y": [
+            -0.5,
+            0.5
+          ],
+          "z": [
+            -0.2,
+            0.2
+          ],
+          "roll": [
+            -0.52,
+            0.52
+          ],
+          "pitch": [
+            -0.52,
+            0.52
+          ],
+          "yaw": [
+            -0.78,
+            0.78
+          ]
+        }
+      }
+    },
+    "box_mass_kg": 0.8,
+    "com_body": "torso_link",
+    "push_interval": [
+      1.0,
+      3.0
+    ],
+    "hand_forces": "g1_rubber_hands_box_filtered",
+    "standup_success": "instant_x2",
+    "strict_success_metric": "g1_contact_clearance_hold0.5s",
+    "physical_parent": "wall5_full_body_mixed_reset_v1",
+    "collision_profile": "g1_visual_convex_hull_full_body_v1",
+    "self_collisions": false,
+    "amp_frame_schema": "height1_joints29_ends15_lin3_ang3_rot6_box3_pelvis_v2",
+    "amp_shape": [
+      10,
+      60
+    ],
+    "amp_history": "repeat_reset_frame_reward_and_training_from_step1",
+    "box_reset_profile": "ground_box_5mm_pickup_prefix_rise5mm_v1_except_reference_hold_v1",
+    "held_box_reference_reset": true,
+    "ground_box_reset": true,
+    "ground_pickup_reset_frame_range": [
+      0,
+      32
+    ],
+    "support_platform": false,
+    "reference_dataset_profile": "findbox_ground_pickup_v1",
+    "reference_manifest_sha256": "7ffeea2804bb48f440039fb67666d17513ae26a367fe21b075605ab5810a8153",
+    "reference_velocity": "source_position_difference_pelvis_link",
+    "aux_supervision": "visible_box_hit_and_optical_range_paired_mask_v1",
+    "aux_target_shape": 10,
+    "early_failure_penalty_weight": -50.0,
+    "roll_limit": 0.5,
+    "reset_skill_probabilities": [
+      0.8,
+      0.0,
+      0.2
+    ],
+    "actor_observations": "proprio93x4_depth4x27x48_no_privileged",
+    "critic_observations": "current_proprio93_pelvis_link_linvel3_box_local_xyz3_rot6_size3_v1",
+    "critic_shape": 108,
+    "critic_network": "independent_mlp_512_256_256_no_depth",
+    "critic_terminal": "pre_reset_current_state",
+    "box_rotation6": "first_two_columns_of_pelvis_inverse_times_box",
+    "reset_assignment": "fixed_env_midpoint_skill_quota_v1",
+    "action_bounds_supervision": "paired_raw_physical_limits_offset_scale_intersect_wrapper9_58_v1",
+    "locomotion_feedback": "pelvis_link_approach_velocity_heading_no_stability_v19",
+    "reward_geometry": {
+      "profile": "g1_reference_geometry_v19",
+      "body_frame": "pelvis",
+      "near_distance": 0.7836880365615937,
+      "carryup_box": 0.7438444985656549,
+      "success_box": 0.6957789064440506,
+      "held_box": 0.6356969162920453,
+      "crouch_box": 0.6717461103832484,
+      "slow_pickup_box": 0.6356969162920453,
+      "stand_pelvis": 0.7627523159232374,
+      "stand_gate_low": 0.5778426635782101,
+      "stand_gate_span": 0.18490965234502724,
+      "crouch_pelvis": 0.6934111962938522,
+      "fallen_pelvis": 0.23113706543128407,
+      "stand_head": 1.2596378566862456,
+      "success_head": 1.1855415121752901,
+      "fallen_head": 0.5927707560876451,
+      "carryup_height_exp": 2.4965884056188097,
+      "stand_pelvis_exp": 6.9222995325934535,
+      "stand_head_exp": 5.398376973115825
+    },
+    "reward_geometry_calibration": {
+      "g1_anchors_m": {
+        "pelvis": 0.7731534838676453,
+        "head": 1.2196258306503296,
+        "box": 0.8507904410362244
+      },
+      "x2_anchors_m": {
+        "pelvis": 0.669,
+        "head": 0.823,
+        "box": 0.729
+      },
+      "ground_box_center_m": 0.125,
+      "method": "grounded_foot_hull_reference_fk_equal_clip_medians_gravity_xy_lt_0.2",
+      "height_frame": "world_minus_environment_ground",
+      "standup_velocity": "pelvis_com_in_pelvis_frame",
+      "search_yaw_rate": "pelvis_frame",
+      "height_exponents": "inverse_length_scale",
+      "strict_lift_hold_metric": "unchanged_contact_clearance_upright_speed_0.5s"
+    },
+    "task_box_distance": {
+      "metric": "xyz_l2",
+      "points": "pelvis_link_origin_to_box_center",
+      "threshold_m": 0.7836880365615937,
+      "approach_velocity_direction": "normalized_xy",
+      "amp_box_cap": "unchanged_xy_0.7"
+    },
+    "push_velocity_semantics": "current_world_com_velocity_plus_curriculum_scaled_increment_v1",
+    "contact_materials": {
+      "simulation_default": {
+        "static_friction": 1.0,
+        "dynamic_friction": 1.0,
+        "restitution": 0.0,
+        "friction_combine_mode": "multiply",
+        "restitution_combine_mode": "average"
+      },
+      "ground": {
+        "static_friction": 1.0,
+        "dynamic_friction": 1.0,
+        "restitution": 0.0,
+        "friction_combine_mode": "multiply",
+        "restitution_combine_mode": "average"
+      }
+    }
+  },
+  "yaw_degrees": 75.0,
+  "policy_updates": 0,
+  "cases": {
+    "mean": {
+      "by_skill": {
+        "loco": {
+          "samples": 15984,
+          "means": {
+            "near": 0.9368743896484375,
+            "distance3d_m": 0.7090981602668762,
+            "distance_xy_m": 0.2731212079524994,
+            "root_z_m": 0.7607144713401794,
+            "hand_center_error_m": 0.5982793569564819,
+            "crouched": 0.0,
+            "any_contact": 0.0,
+            "both_contact": 0.0,
+            "box_bottom_m": 3.313039997010492e-05,
+            "clearance12cm": 0.0,
+            "box_z_m": 0.1294974535703659,
+            "above_success_height": 0.0,
+            "left_force_N": 0.0,
+            "right_force_N": 0.0,
+            "walk": 1.4807662963867188,
+            "carry_hand": 0.254304975271225,
+            "carry_contact": 0.0,
+            "carry_height": 0.3027765452861786,
+            "standup": 0.0,
+            "stable_grasp": 0.0,
+            "raw_task_per_step": 0.03768187761306763
+          },
+          "near_samples": 14975,
+          "near_means": {
+            "near": 1.0,
+            "distance3d_m": 0.6742725968360901,
+            "distance_xy_m": 0.2219545990228653,
+            "root_z_m": 0.7602171301841736,
+            "hand_center_error_m": 0.5632228255271912,
+            "crouched": 0.0,
+            "any_contact": 0.0,
+            "both_contact": 0.0,
+            "box_bottom_m": 1.1225813068449497e-05,
+            "clearance12cm": 0.0,
+            "box_z_m": 0.12887299060821533,
+            "above_success_height": 0.0,
+            "left_force_N": 0.0,
+            "right_force_N": 0.0,
+            "walk": 1.5,
+            "carry_hand": 0.2714397609233856,
+            "carry_contact": 0.0,
+            "carry_height": 0.3231772780418396,
+            "standup": 0.0,
+            "stable_grasp": 0.0,
+            "raw_task_per_step": 0.03927266225218773
+          },
+          "hand_distance_quantiles_m": [
+            0.5072846412658691,
+            0.5653042793273926,
+            0.842455267906189
+          ],
+          "max_box_bottom_m": 0.0622105598449707,
+          "completed": 16,
+          "successes": 0,
+          "tipped": 0,
+          "fell": 0,
+          "timeouts": 16
+        },
+        "hold": {
+          "samples": 3996,
+          "means": {
+            "near": 1.0,
+            "distance3d_m": 0.3689168691635132,
+            "distance_xy_m": 0.36840540170669556,
+            "root_z_m": 0.7873005270957947,
+            "hand_center_error_m": 0.11356377601623535,
+            "crouched": 0.0,
+            "any_contact": 1.0,
+            "both_contact": 0.9987487196922302,
+            "box_bottom_m": 0.5814357399940491,
+            "clearance12cm": 1.0,
+            "box_z_m": 0.7857699990272522,
+            "above_success_height": 0.9992492198944092,
+            "left_force_N": 30.732078552246094,
+            "right_force_N": 27.8521728515625,
+            "walk": 1.5,
+            "carry_hand": 0.6707075238227844,
+            "carry_contact": 1.4990464448928833,
+            "carry_height": 1.4986227750778198,
+            "standup": 4.48051643371582,
+            "stable_grasp": 0.0,
+            "raw_task_per_step": 0.12582655251026154
+          },
+          "near_samples": 3996,
+          "near_means": {
+            "near": 1.0,
+            "distance3d_m": 0.3689168691635132,
+            "distance_xy_m": 0.36840540170669556,
+            "root_z_m": 0.7873005270957947,
+            "hand_center_error_m": 0.11356377601623535,
+            "crouched": 0.0,
+            "any_contact": 1.0,
+            "both_contact": 0.9987487196922302,
+            "box_bottom_m": 0.5814357399940491,
+            "clearance12cm": 1.0,
+            "box_z_m": 0.7857699990272522,
+            "above_success_height": 0.9992492198944092,
+            "left_force_N": 30.732078552246094,
+            "right_force_N": 27.8521728515625,
+            "walk": 1.5,
+            "carry_hand": 0.6707075238227844,
+            "carry_contact": 1.4990464448928833,
+            "carry_height": 1.4986227750778198,
+            "standup": 4.48051643371582,
+            "stable_grasp": 0.0,
+            "raw_task_per_step": 0.12582655251026154
+          },
+          "hand_distance_quantiles_m": [
+            0.060454078018665314,
+            0.10987203568220139,
+            0.16822566092014313
+          ],
+          "max_box_bottom_m": 0.7247165441513062,
+          "completed": 4,
+          "successes": 3,
+          "tipped": 0,
+          "fell": 0,
+          "timeouts": 4
+        }
+      },
+      "episodes": [
+        {
+          "env_id": 0,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 1,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 2,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 3,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 4,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 5,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 6,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 7,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 8,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 9,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 10,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 11,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 12,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 13,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 14,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 15,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 16,
+          "skill": 2,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 17,
+          "skill": 2,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": true
+        },
+        {
+          "env_id": 18,
+          "skill": 2,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": true
+        },
+        {
+          "env_id": 19,
+          "skill": 2,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": true
+        }
+      ],
+      "censored": [
+        {
+          "env_id": 0,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 1,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 2,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 3,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 4,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 5,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 6,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 7,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 8,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 9,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 10,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 11,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 12,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 13,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 14,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 15,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 16,
+          "skill": 2,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 17,
+          "skill": 2,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 18,
+          "skill": 2,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 19,
+          "skill": 2,
+          "steps": 0,
+          "success": false
+        }
+      ]
+    },
+    "sample": {
+      "by_skill": {
+        "loco": {
+          "samples": 15984,
+          "means": {
+            "near": 0.9241741895675659,
+            "distance3d_m": 0.698001503944397,
+            "distance_xy_m": 0.27333611249923706,
+            "root_z_m": 0.7514713406562805,
+            "hand_center_error_m": 0.5947684049606323,
+            "crouched": 0.010573073290288448,
+            "any_contact": 0.0,
+            "both_contact": 0.0,
+            "box_bottom_m": 0.00011402300151530653,
+            "clearance12cm": 0.0001251251233043149,
+            "box_z_m": 0.13271500170230865,
+            "above_success_height": 0.0,
+            "left_force_N": 0.0,
+            "right_force_N": 0.0,
+            "walk": 1.4691345691680908,
+            "carry_hand": 0.2559025287628174,
+            "carry_contact": 0.0,
+            "carry_height": 0.3010108470916748,
+            "standup": 0.0,
+            "stable_grasp": 2.0804368716653698e-07,
+            "raw_task_per_step": 0.025999601930379868
+          },
+          "near_samples": 14772,
+          "near_means": {
+            "near": 1.0,
+            "distance3d_m": 0.6612752079963684,
+            "distance_xy_m": 0.21873529255390167,
+            "root_z_m": 0.7503757476806641,
+            "hand_center_error_m": 0.5575636625289917,
+            "crouched": 0.011440563015639782,
+            "any_contact": 0.0,
+            "both_contact": 0.0,
+            "box_bottom_m": 9.853676601778716e-05,
+            "clearance12cm": 0.0001353912812191993,
+            "box_z_m": 0.13187673687934875,
+            "above_success_height": 0.0,
+            "left_force_N": 0.0,
+            "right_force_N": 0.0,
+            "walk": 1.5,
+            "carry_hand": 0.276898592710495,
+            "carry_contact": 0.0,
+            "carry_height": 0.32570791244506836,
+            "standup": 0.0,
+            "stable_grasp": 2.2511311215112073e-07,
+            "raw_task_per_step": 0.028103115037083626
+          },
+          "hand_distance_quantiles_m": [
+            0.4933266043663025,
+            0.5592964291572571,
+            0.8265439867973328
+          ],
+          "max_box_bottom_m": 0.13652582466602325,
+          "completed": 16,
+          "successes": 0,
+          "tipped": 0,
+          "fell": 0,
+          "timeouts": 16
+        },
+        "hold": {
+          "samples": 3996,
+          "means": {
+            "near": 1.0,
+            "distance3d_m": 0.43199223279953003,
+            "distance_xy_m": 0.4309080243110657,
+            "root_z_m": 0.7859420776367188,
+            "hand_center_error_m": 0.1898147016763687,
+            "crouched": 0.0,
+            "any_contact": 0.9877377152442932,
+            "both_contact": 0.934184193611145,
+            "box_bottom_m": 0.5865303874015808,
+            "clearance12cm": 1.0,
+            "box_z_m": 0.7752232551574707,
+            "above_success_height": 0.9977477192878723,
+            "left_force_N": 25.384286880493164,
+            "right_force_N": 24.535690307617188,
+            "walk": 1.5,
+            "carry_hand": 0.6272450685501099,
+            "carry_contact": 1.4366027116775513,
+            "carry_height": 1.4930428266525269,
+            "standup": 3.7023911476135254,
+            "stable_grasp": 0.0,
+            "raw_task_per_step": 0.10839591175317764
+          },
+          "near_samples": 3996,
+          "near_means": {
+            "near": 1.0,
+            "distance3d_m": 0.43199223279953003,
+            "distance_xy_m": 0.4309080243110657,
+            "root_z_m": 0.7859420776367188,
+            "hand_center_error_m": 0.1898147016763687,
+            "crouched": 0.0,
+            "any_contact": 0.9877377152442932,
+            "both_contact": 0.934184193611145,
+            "box_bottom_m": 0.5865303874015808,
+            "clearance12cm": 1.0,
+            "box_z_m": 0.7752232551574707,
+            "above_success_height": 0.9977477192878723,
+            "left_force_N": 25.384286880493164,
+            "right_force_N": 24.535690307617188,
+            "walk": 1.5,
+            "carry_hand": 0.6272450685501099,
+            "carry_contact": 1.4366027116775513,
+            "carry_height": 1.4930428266525269,
+            "standup": 3.7023911476135254,
+            "stable_grasp": 0.0,
+            "raw_task_per_step": 0.10839591175317764
+          },
+          "hand_distance_quantiles_m": [
+            0.14885364472866058,
+            0.19416296482086182,
+            0.21553315222263336
+          ],
+          "max_box_bottom_m": 0.727740466594696,
+          "completed": 4,
+          "successes": 0,
+          "tipped": 0,
+          "fell": 0,
+          "timeouts": 4
+        }
+      },
+      "episodes": [
+        {
+          "env_id": 0,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 1,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 2,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 3,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 4,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 5,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 6,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 7,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 8,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 9,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 10,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 11,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 12,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 13,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 14,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 15,
+          "skill": 0,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 16,
+          "skill": 2,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 17,
+          "skill": 2,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 18,
+          "skill": 2,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        },
+        {
+          "env_id": 19,
+          "skill": 2,
+          "steps": 1000,
+          "end_step": 1000,
+          "timeout": true,
+          "tipped": false,
+          "fell": false,
+          "success": false
+        }
+      ],
+      "censored": [
+        {
+          "env_id": 0,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 1,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 2,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 3,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 4,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 5,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 6,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 7,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 8,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 9,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 10,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 11,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 12,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 13,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 14,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 15,
+          "skill": 0,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 16,
+          "skill": 2,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 17,
+          "skill": 2,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 18,
+          "skill": 2,
+          "steps": 0,
+          "success": false
+        },
+        {
+          "env_id": 19,
+          "skill": 2,
+          "steps": 0,
+          "success": false
+        }
+      ]
+    }
+  },
+  "weights_unchanged": true,
+  "source_unchanged": true,
+  "caveats": [
+    "One seed and 20 environments; not a population success estimate.",
+    "State statistics exclude reset transitions; completed and censored episodes are separate.",
+    "Mean and sampled actions are separate cases; RNG trajectories are not paired.",
+    "No reward ablation or causal training experiment; hold starts are not ground pickups."
+  ]
+}

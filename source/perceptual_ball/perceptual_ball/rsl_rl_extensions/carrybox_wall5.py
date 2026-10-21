@@ -1,4 +1,4 @@
-"""Wall5 task AMP, running normalization, visibility-masked pose and adaptive PPO."""
+"""Wall5 task AMP, running normalization, all-frame pose supervision and adaptive PPO."""
 import math
 import torch
 from rsl_rl.networks import MLP
@@ -14,19 +14,20 @@ class CarryBoxWall5ActorCritic(CarryBoxActorCritic):
     def __init__(self, obs, obs_groups, num_actions, critic_hidden_dims=(512, 256, 256),
                  activation='elu', **kwargs):
         expected = {'policy': ['proprio', 'perception'], 'critic': ['critic_state']}
-        if obs_groups != expected or obs['critic_state'].ndim != 2 or obs['critic_state'].shape[-1] != 108:
-            raise ValueError('Wall5 requires depth/proprio actor and independent critic_state108')
+        if obs_groups != expected or obs['critic_state'].ndim != 2 or obs['critic_state'].shape[-1] != 123:
+            raise ValueError('Wall5 requires depth/proprio actor and independent critic_state123')
         # Reuse the unchanged actor/encoder/pose initialization and export interface.
         super().__init__(obs, {'policy': ['proprio', 'perception'], 'critic': ['proprio', 'perception']},
                          num_actions, critic_hidden_dims=critic_hidden_dims, activation=activation, **kwargs)
         self.obs_groups = expected
-        self.critic = MLP(108, 1, list(critic_hidden_dims), activation)
+        self.critic = MLP(123, 1, list(critic_hidden_dims), activation)
 
     def evaluate(self, obs, **kwargs):
         return self.critic(obs['critic_state'])
 
 
 def visible_box_pose_loss(prediction, target):
+    """Historical masked objective; revision22 PPO uses all_box_pose_loss instead."""
     if target.shape[-1] != 10:
         raise ValueError('Wall5 pose supervision requires xyz/rotation6/paired visibility')
     valid = target[:, 9] > .5
@@ -34,6 +35,17 @@ def visible_box_pose_loss(prediction, target):
         zero = prediction.sum() * 0.
         return zero, zero
     return box_pose_loss(prediction[valid], target[valid, :9])
+
+
+def all_box_pose_loss(prediction, target):
+    """Supervise every captured/delayed pair, including hidden or out-of-range boxes.
+
+    Column 9 remains a diagnostic visibility flag, never a loss gate. Targets
+    retain their physical camera-frame metres and the existing box symmetries.
+    """
+    if target.shape[-1] != 10:
+        raise ValueError('Wall5 pose supervision requires xyz/rotation6/paired visibility')
+    return box_pose_loss(prediction, target[..., :9].detach())
 
 
 def action_mean_bound_loss(mean, bounds):
@@ -121,7 +133,7 @@ class CarryBoxWall5PPO(CarryBoxPPO):
             gradient_penalty=.5, max_grad_norm=10.,
             statistics_flag='running_mean_variance_count_checkpointed',
             normalization_update='equal_expert_policy_before_discriminator_once',
-            gradient_penalty_coordinates='normalized', pose_target='visible_paired_xyz_rot6_mask',
+            gradient_penalty_coordinates='normalized', pose_target='all_paired_xyz_rot6_visibility_diagnostic_only',
             ppo=dict(schedule=self.schedule, desired_kl=self.desired_kl, initial_lr=self.learning_rate,
                      entropy=self.entropy_coef, epochs=self.num_learning_epochs, mini_batches=self.num_mini_batches))
         if self.amp is not None:
@@ -166,7 +178,7 @@ class CarryBoxWall5PPO(CarryBoxPPO):
         return policy.critic(critic_features), policy.pose_head(latent)
 
     def _pose_loss(self, prediction, target):
-        return visible_box_pose_loss(prediction, target)
+        return all_box_pose_loss(prediction, target)
 
     def _policy_regularization(self, obs):
         if not self.action_bound_coef:
@@ -201,8 +213,11 @@ class CarryBoxWall5PPO(CarryBoxPPO):
         valid = targets[..., 9] > .5
         visible_fraction = valid.float().mean().item()
         visible_distance = targets[..., :3][valid].norm(dim=-1).mean().item() if valid.any() else 0.
+        supervised_distance = targets[..., :3].norm(dim=-1).mean().item()
         result = super().update()
         result.update(box_visible_fraction=visible_fraction, box_visible_distance=visible_distance,
+                      box_supervised_fraction=1., box_supervised_distance=supervised_distance,
+                      box_aux_weighted=self.pose_aux_coef * (result['box_position'] + result['box_rotation']),
                       ppo_kl=getattr(self, 'last_kl', 0.), ppo_learning_rate=self.learning_rate,
                       action_std_max=self.policy.log_std.exp().max().item())
         return result

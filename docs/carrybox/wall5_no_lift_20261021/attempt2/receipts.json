@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_no_lift_20261021/check.sh",
+      "result": "FAIL",
+      "exit_code": 137,
+      "executed": true,
+      "receipt_sha256": "1b96de74b2b7fefe09abb65efe2d0b7812f2cc29c8acbb2b2e8dab94b2691d9a",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "bc9699cb084c1a8bbb20273b8f2161916c2b4631b283a2dce44bcf931a66df1c",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "affected_call_path": [
+    "wall5 cfg → Warp depth/mesh_id → captured_pair → metre noise → pose_visible → paired buffer → history → actor/aux",
+    "checkpoint save/load; env.depth_contract → existing play export → manifest.metadata.depth_contract"
+  ],
+  "critical_interfaces": [
+    "raw N×27×48×1 metres; policy N×4×27×48",
+    "visibility pixel thresholds must match selected units; pose optical z remains metres",
+    "cfg-less CPU fixtures retain legacy normalization",
+    "depth_contract JSON-serializable; existing play already exports it",
+    "strict load compares full environment contract; explicit weights-only bypass is not compatible replay"
+  ],
+  "invariants": [
+    "wall5 only metres/noise .02/.008/.03; legacy wall3/4 unchanged",
+    "critic108/rot6 and visible coef.1 unchanged",
+    "depth/pose/mask captured once and paired through delay/freeze/partial reset",
+    "revision20 geometry/RSI75/5/20 and football unchanged"
+  ],
+  "smallest_change_locus": [
+    "wall5 cfg flags/noise",
+    "walled captured_pair unit branch",
+    "wall5 pose_visible/depth_contract/checkpoint revision21",
+    "scoped CPU and smoke scripts; no shared export/play edits"
+  ],
+  "mandatory_safeguards": [
+    "米制直接读raw深度，nan/正负inf映射3，clamp[.1,3]；不先除3再乘3或重复归一化",
+    "噪声前后miss保持3，孔洞/边缘丢弃的Box mesh_id不能使visibility为真，nearest-hit障碍遮挡阻断监督",
+    "当前捕获depth/pose先算visibility再共同缓存；不得以当前hit重算延迟帧标签",
+    "CPU验证1.5m仍1.5、非有限/miss、near/far、遮挡/孔洞、两种单位、延迟/冻结/同step部分reset",
+    "manifest记录optical metres/[.1,3]/miss3/no divide/history order；验证导出推理等价且无critic/标签",
+    "strict restore/default play拒绝revision20旧尺度；正式fresh，不以weights-only绕过兼容检查",
+    "20env更新恢复导出通过后才停止身份匹配旧PID；核对4096新契约/有限/持续更新/首模型/6秒性能，保留旧产物"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall5_depth_metres_20261021/validate_and_restart.sh"
+  ],
+  "blockers": []
+}

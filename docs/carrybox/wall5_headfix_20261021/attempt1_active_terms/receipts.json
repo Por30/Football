@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_headfix_20261021/validate_and_restart.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "4f827de8467e8d678216e94c360e1e332052d0160d3d22177a9926a5a46e96ae",
+      "stdout_sha256": "31425cf34611b2450e023484febd0117f7b1f24b2664f511d2dceea20d556238",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

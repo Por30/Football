@@ -1,0 +1,22 @@
+---
+task_id: "carrybox-wall5-depth-metres-20261021"
+language: "zh-CN"
+axes: ["P", "L"]
+risk_tier: "T2"
+artifact: "TASK"
+status: "FROZEN"
+allowed_paths: ["source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py", "tests/test_carrybox_depth_metres.py", "docs/carrybox/wall5_depth_metres_20261021", "logs/rsl_rl/g1_carrybox_depth/walled5", "projects/README.md", "projects/findbox/README.md", "agent/plan/carrybox-wall5-depth-metres-20261021.md", "agent/task/carrybox-wall5-depth-metres-20261021.md", "agent/report/carrybox-wall5-depth-metres-20261021.md", "agent/handoff/carrybox-wall5-depth-metres-20261021.md"]
+original_request: "同时深度也改为米；深度：X2用米制，G1除以3归一化，G1噪声约3倍；critic X2 123/G1 108及rot6列不同；辅助监督X2 1.0所有帧/G1 0.1只可见。延续已授权的修复后重新启动正式训练。"
+development_modes: ["ML_DATA_PIPELINE", "ML_TRAINING", "MODEL_DEPLOYMENT"]
+forbidden_scope: ["不更换G1资产/相机外参/分辨率/遮挡物/控制或数据集", "不修改足球或wall3/4深度语义", "未明确要求不改变critic维数/坐标系/rot6列和辅助监督目标范围或系数", "保留revision20头高校正、RSI75/5/20及其他奖励/PPO设置；不删除历史文件"]
+steps: ["核对深度单位与噪声、critic维数和监督定义，冻结明确变更", "仅wall5改米制及噪声，同步可见性/延迟缓存/checkpoint与导出契约", "CPU单位/噪声/遮挡与标签配对回归及20环境更新恢复导出", "通过后停止身份匹配的旧run，从头启动4096环境修正版", "检查正式持续更新/首模型/6秒性能并更新工程记录"]
+tests: [{"command": "bash docs/carrybox/wall5_depth_metres_20261021/validate_and_restart.sh"}]
+stop_conditions: ["CPU/仿真检查不通过不停止旧训练，范围内修复最多两次", "旧PID身份不符、源码数据变动或可用显存不足不启动", "新训练非有限/契约不符停止验收，不重复启动"]
+safeguards: ["旧wall3/4路径和缺省保持归一化；米制仅wall5明确选择", "可见性near/far及未命中须与米制同步；深度与标签延迟/冻结/部分reset保持配对", "导出模型直接吃米制且不含critic/标签；manifest写明单位/裁剪/无除3", "checkpoint升revision21并严格拒绝旧尺度模型，正式新run从头训练", "先CPU+20环境，再按cmdline/start_ticks停止旧PID并核验4096正式迭代", "不运行真实设备", "米制直接读raw深度，nan/正负inf映射3，clamp[.1,3]；不先除3再乘3或重复归一化", "噪声前后miss保持3，孔洞/边缘丢弃的Box mesh_id不能使visibility为真，nearest-hit障碍遮挡阻断监督", "当前捕获depth/pose先算visibility再共同缓存；不得以当前hit重算延迟帧标签", "CPU验证1.5m仍1.5、非有限/miss、near/far、遮挡/孔洞、两种单位、延迟/冻结/同step部分reset", "manifest记录optical metres/[.1,3]/miss3/no divide/history order；验证导出推理等价且无critic/标签", "strict restore/default play拒绝revision20旧尺度；正式fresh，不以weights-only绕过兼容检查", "20env更新恢复导出通过后才停止身份匹配旧PID；核对4096新契约/有限/持续更新/首模型/6秒性能，保留旧产物"]
+expert_required: true
+expert_brief: {"affected_call_path": ["wall5 cfg → Warp depth/mesh_id → captured_pair → metre noise → pose_visible → paired buffer → history → actor/aux", "checkpoint save/load; env.depth_contract → existing play export → manifest.metadata.depth_contract"], "critical_interfaces": ["raw N×27×48×1 metres; policy N×4×27×48", "visibility pixel thresholds must match selected units; pose optical z remains metres", "cfg-less CPU fixtures retain legacy normalization", "depth_contract JSON-serializable; existing play already exports it", "strict load compares full environment contract; explicit weights-only bypass is not compatible replay"], "invariants": ["wall5 only metres/noise .02/.008/.03; legacy wall3/4 unchanged", "critic108/rot6 and visible coef.1 unchanged", "depth/pose/mask captured once and paired through delay/freeze/partial reset", "revision20 geometry/RSI75/5/20 and football unchanged"], "smallest_change_locus": ["wall5 cfg flags/noise", "walled captured_pair unit branch", "wall5 pose_visible/depth_contract/checkpoint revision21", "scoped CPU and smoke scripts; no shared export/play edits"], "mandatory_safeguards": ["米制直接读raw深度，nan/正负inf映射3，clamp[.1,3]；不先除3再乘3或重复归一化", "噪声前后miss保持3，孔洞/边缘丢弃的Box mesh_id不能使visibility为真，nearest-hit障碍遮挡阻断监督", "当前捕获depth/pose先算visibility再共同缓存；不得以当前hit重算延迟帧标签", "CPU验证1.5m仍1.5、非有限/miss、near/far、遮挡/孔洞、两种单位、延迟/冻结/同step部分reset", "manifest记录optical metres/[.1,3]/miss3/no divide/history order；验证导出推理等价且无critic/标签", "strict restore/default play拒绝revision20旧尺度；正式fresh，不以weights-only绕过兼容检查", "20env更新恢复导出通过后才停止身份匹配旧PID；核对4096新契约/有限/持续更新/首模型/6秒性能，保留旧产物"], "minimal_tests": ["bash docs/carrybox/wall5_depth_metres_20261021/validate_and_restart.sh"], "blockers": []}
+device_actions: []
+real_device_authorized: false
+---
+
+wall5光轴深度由除以3的归一化值改为米；依据用户最新对照把Gaussian和立体噪声降至0.02/0.008–0.03m。保留critic108/rot6前两列、可见监督coef0.1，已异步询问用户其他对齐范围并给出此默认方案。保护延迟/冻结配对、未命中、遮挡、actor与部署一致性；修复后从零重启4096环境，不恢复旧输入尺度模型。

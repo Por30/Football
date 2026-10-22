@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_grasp_20261022/validate_and_restart.sh",
+      "result": "FAIL",
+      "exit_code": 143,
+      "executed": true,
+      "receipt_sha256": "cc129f36c899be054f023df288a910a53d70926e9b373f071353fbd4cb2a51b3",
+      "stdout_sha256": "35a0c6f959f0da7c75e152b534080852dda6b8304b8b7298c30c39fd6adf655c",
+      "stderr_sha256": "b4a6c06672677cf0e25ec72bec83beae33305cee4b8087f168962014373b02bb",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

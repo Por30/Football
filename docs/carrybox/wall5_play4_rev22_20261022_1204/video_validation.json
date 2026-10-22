@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "frames": 500,
+  "fps": 25.0,
+  "duration": 20.0,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "full_decode": true,
+  "min_scene_contrast_per_panel": [
+    38.16408242838891,
+    37.303607048179714,
+    38.09821289223431,
+    37.4531438090398
+  ],
+  "max_frame_change": 22.51193618774414,
+  "source_checkpoint_sha256": "64291a44797ce21fadcdcb95acc14c56243286fe2fde145436dcac63a013ecda",
+  "video_sha256": "0f91809a0a7965077298e52daea468b8ba0923916e6ba1630359f7566b2f1078",
+  "file_bytes": 14579570,
+  "four_synchronized_views": true,
+  "camera_height_at_least_m": 5.7999
+}

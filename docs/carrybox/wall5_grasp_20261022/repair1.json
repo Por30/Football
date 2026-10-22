@@ -1,0 +1,6 @@
+{
+  "reason": "Diagnostic PhysX contact-view overload accepts a string with flat filter list; list patterns require nested lists.",
+  "change": "Use the same wildcard string already verified by audit.py",
+  "production_change": false,
+  "assertions_unchanged": true
+}

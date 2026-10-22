@@ -1,0 +1,33 @@
+{
+  "affected_call_path": [
+    "Wall5 runner -> full FindBox AMP",
+    "ground_pickup -> ground-only RSI",
+    "wall5 spawn -> fullbody hull -> PhysX self collision",
+    "wall5 rewards -> PPO task/style mixture"
+  ],
+  "critical_interfaces": [
+    "three pickups192/178/129 frames,60Hz ->50Hz; sha256 fixed",
+    "Box .30/.30/.25m; real palm link origins vs rubber-hand COM",
+    "Box-filtered hand forces, oriented bottom clearance"
+  ],
+  "invariants": [
+    "actor unchanged,critic123,aux1,depth metres",
+    "RSI75/5/20 ground03 prefix0:32; full AMP independent",
+    "wall3/4 and football unchanged"
+  ],
+  "smallest_change_locus": [
+    "wall5 config + tensor helper + mdp",
+    "wall5-only explicit three joint-shell overlap pairs"
+  ],
+  "mandatory_safeguards": [
+    "per-hand oriented-box distance, no averaged-hand cheat",
+    "stand/reach/single/bilateral/lift weighted reward increasing",
+    "bilateral Box contact required for lift, force saturation",
+    "self collision physical readback; no blanket limb filtering",
+    "fresh4096 single launch after tests; schema23 and source identity"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall5_grasp_20261022/validate_and_restart.sh"
+  ],
+  "blockers": []
+}

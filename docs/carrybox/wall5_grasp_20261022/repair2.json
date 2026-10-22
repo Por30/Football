@@ -1,0 +1,6 @@
+{
+  "reason": "Static reward audit found positive stationary far-heading bonus larger than near-box preparation reward",
+  "change": "Gate far heading by positive approach velocity and add inequality regression; no reward threshold relaxed",
+  "stopped_unaccepted_launch_pid": 1587359,
+  "old_formal_run_preserved": true
+}

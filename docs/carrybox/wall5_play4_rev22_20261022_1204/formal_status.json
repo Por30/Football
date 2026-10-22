@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-10-22T12:07:32.288922+09:00",
+  "training_pid": 1052074,
+  "command": [
+    "/home/cao/ENTER/envs/ball/bin/python",
+    "-u",
+    "scripts/rsl_rl/train.py",
+    "--task",
+    "Template-Perceptual-Ball-CarryBox-Walled5-v0",
+    "--num_envs",
+    "4096",
+    "--device",
+    "cuda:0",
+    "--headless",
+    "--seed",
+    "42",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall5_v22_critic123_aux1_fresh_20261021_140925"
+  ],
+  "same_process_running": true,
+  "process_modified": false
+}

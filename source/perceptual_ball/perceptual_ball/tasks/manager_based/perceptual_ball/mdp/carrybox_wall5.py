@@ -6,8 +6,9 @@ from isaaclab.utils.math import (euler_xyz_from_quat, wrap_to_pi, quat_apply_inv
                                quat_mul, quat_conjugate, matrix_from_quat)
 from perceptual_ball.carrybox_amp import joint_mapping
 from pathlib import Path
-from perceptual_ball.carrybox_wall5 import pack_task_frame, AMP_BODY_NAMES, WALL5_FEATURE_SCHEMA, GROUND_RESET_PROFILE
-from perceptual_ball.carrybox_fullbody_collision import FULL_BODY_COLLISION_PROFILE
+from perceptual_ball.carrybox_wall5 import (pack_task_frame, AMP_BODY_NAMES, WALL5_FEATURE_SCHEMA,
+    GROUND_RESET_PROFILE, grasp_components, AMP_DATASET_PATH)
+from perceptual_ball.carrybox_fullbody_collision import FULL_BODY_COLLISION_PROFILE, SELF_COLLISION_FILTER_PAIRS
 from perceptual_ball.carrybox_reward_geometry import reward_geometry, G1_ANCHORS, X2_ANCHORS
 from . import carrybox as base
 from .carrybox_walled import WalledCarryBoxEnv, state
@@ -31,6 +32,7 @@ def action_bounds(env):
     return torch.cat((low, high), -1).detach()
 
 def reset_scene(env, env_ids):
+    state(env).grasp_step = None
     skills = fixed_skill_ids(env_ids, env.num_envs, env.cfg.reset_skill_probabilities)
     parent.reset_scene(env, env_ids, skill_ids=skills)
 
@@ -51,16 +53,49 @@ def locomotion_stability(env):
 
 
 def walk_task(env):
-    """Pelvis approach velocity and heading; no independent balance multiplier."""
+    return grasp_state(env)['walk_task']
+
+
+def grasp_state(env):
+    """Cache reward geometry once per control step; no policy observations."""
+    s = state(env)
+    if getattr(s, 'grasp_step', None) == env.common_step_counter:
+        return s.grasp_terms
+    if not hasattr(s, 'grasp_palms'):
+        s.grasp_palms = env.scene['robot'].find_bodies(
+            ['left_palm_link', 'right_palm_link'], preserve_order=True)[0]
+        if len(s.grasp_palms) != 2:
+            raise ValueError('Wall5 grasp rewards require both G1 palm link origins')
     robot = env.scene['robot'].data
-    delta = env.scene['box'].data.root_pos_w - robot.root_link_pos_w
-    distance = parent.task_box_distance(env, delta)
+    box = env.scene['box'].data
+    delta = box.root_pos_w - robot.root_link_pos_w
     delta_xy = delta[:, :2]
     distance_xy = delta_xy.norm(dim=-1)
     towards = (delta_xy / distance_xy.clamp_min(1.e-6)[:, None] * robot.root_link_lin_vel_w[:, :2]).sum(-1)
     bearing = wrap_to_pi(torch.atan2(delta[:, 1], delta[:, 0]) - parent.heading(robot.root_link_quat_w)).abs()
-    reward = torch.exp(-5. * (.85 - towards).square()) + .5 * torch.exp(-.75 * bearing)
-    return torch.where(distance < reward_geometry(env)['near_distance'], 1.5, reward)
+    palms = robot.body_link_pos_w[:, s.grasp_palms] - box.root_pos_w[:, None]
+    palms = quat_apply_inverse(box.root_quat_w[:, None].expand(-1, 2, -1), palms)
+    force = torch.stack([env.scene[f'{side}_box_contact'].data.force_matrix_w
+                         .flatten(1, -2).norm(dim=-1).amax(-1) for side in ('left', 'right')], -1)
+    bottom, _, _ = base.lift_geometry(env)
+    s.grasp_terms = grasp_components(delta, towards, bearing, palms,
+        delta.new_tensor(env.cfg.scene.box.spawn.size) / 2, force, bottom, env.cfg.grasp_geometry)
+    s.grasp_step = env.common_step_counter
+    return s.grasp_terms
+
+
+def grasp_task_reward(env, name):
+    from .carrybox_x2_rewards import reward_terms
+    g = grasp_state(env)
+    if name == 'carryup_task':
+        return g[name]
+    if name == 'stable_grasp':
+        s, robot = state(env), env.scene['robot'].data
+        smooth = torch.exp(-.5 * robot.joint_vel[:, s.arm_ids].square().mean(-1)
+                           - 2.e-4 * robot.joint_acc[:, s.arm_ids].square().mean(-1))
+        return g['bilateral'] * smooth
+    # Stabilize the arms AFTER bilateral grasp; do not punish the initial reach.
+    return reward_terms(env)[name] * g['both_contacts']
 
 
 def push_velocity_increment(env, env_ids, velocity_range):
@@ -180,6 +215,14 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
                 log['Motion/loco_survivor_speed_mps'] = (speed * active).sum() / denominator
                 log['Motion/loco_survivor_box_distance_m'] = (distance * active).sum() / denominator
                 log['Motion/loco_survivor_box_distance_xy_m'] = (delta[:, :2].norm(dim=-1) * active).sum() / denominator
+                # The reward cache describes the pre-reset transition; use the
+                # old-skill mask so final contacts are not replaced by RSI.
+                grasp = getattr(state(self), 'grasp_terms', None)
+                if grasp is not None:
+                    for key in ('reach', 'bilateral', 'lift', 'crowding'):
+                        log[f'Grasp/loco_{key}'] = (grasp[key] * mask).sum() / count
+                    log['Grasp/loco_both_contact_fraction'] = (grasp['both_contacts'] * mask).sum() / count
+                    log['Grasp/loco_palm_surface_distance_m'] = (grasp['surface_distance'].mean(-1) * mask).sum() / count
         return result
 
     def _reset_idx(self, env_ids):
@@ -199,12 +242,19 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
         library = state(self).library
         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
-        contract.update(migration_revision=22, physical_parent='wall5_full_body_mixed_reset_v1',
+        contract.update(migration_revision=23, physical_parent='wall5_full_body_self_collision_v2',
                         collision_profile=FULL_BODY_COLLISION_PROFILE,
                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
                         shoulder_colliders='visual_mesh_convex_hull',
                         amp_frame_schema=WALL5_FEATURE_SCHEMA, amp_shape=[10, 60],
                         amp_history='repeat_reset_frame_reward_and_training_from_step1')
+        contract['self_collision_filter_pairs'] = [list(pair) for pair in SELF_COLLISION_FILTER_PAIRS]
+        contract['grasp_reward'] = dict(self.cfg.grasp_geometry)
+        contract['grasp_reward']['hand_points'] = 'left_right_palm_link_origins_in_oriented_box_frame'
+        contract['grasp_reward']['contact_source'] = 'rubber_hand_force_filtered_to_Box_only'
+        contract['grasp_reward']['arm_smoothing_gate'] = 'bilateral_box_contact'
+        contract['amp_dataset_profile'] = 'full_three_pickups_192_178_129_no_trimming'
+        contract['amp_manifest_sha256'] = hashlib.sha256((Path(AMP_DATASET_PATH) / 'amp_manifest.json').read_bytes()).hexdigest()
         held_reference = getattr(self.cfg, 'held_box_reference_reset', False)
         contract.update(box_reset_profile=(GROUND_RESET_PROFILE + '_except_reference_hold_v1' if held_reference else GROUND_RESET_PROFILE),
                         held_box_reference_reset=held_reference,
@@ -228,7 +278,7 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
                         box_rotation6='first_two_columns_of_pelvis_inverse_times_box')
         contract.update(reset_assignment='fixed_env_midpoint_skill_quota_v1',
                         action_bounds_supervision='paired_raw_physical_limits_offset_scale_intersect_wrapper9_58_v1',
-                        locomotion_feedback='pelvis_link_approach_velocity_heading_no_stability_v19')
+                        locomotion_feedback='approach_then_0.52m_stance_no_near_bonus_v23')
         contract['reward_geometry'] = dict(reward_geometry(self))
         contract['depth_observation'] = self.depth_contract
         contract['reward_geometry_calibration'] = {

@@ -1,5 +1,7 @@
 # Wall5 地面拾箱数据 profile
 
+**2026-10-22当前用途：wall5 revision23仅用本目录做RSI，不再作为AMP目录。** AMP恢复上级全部15段（完整三段拾箱）；本目录manifest/张量不变。RSI当前75%loco、5%地面拾箱03的0–31帧、20%hold参考箱高；箱子只有loco/pickup贴地，hold保持手中参考。下文70/30/0、hold0与revision11是2026-10-17的历史说明。
+
 从上级revision3数据筛选，原数据原路径保留。此profile为schema1、dataset_revision4、`findbox_ground_pickup_v1`：13段、3785帧、60Hz。
 
 - 行走：原11段，字节不变。

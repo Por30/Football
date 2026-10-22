@@ -1,22 +1,24 @@
 """Wall5 AMP stage A with full-body external collisions for the G1 shell."""
 from isaaclab.utils import configclass
 from .carrybox_walled_env_cfg import CarryBoxWalled4EnvCfg, CarryBoxWalled4PPORunnerCfg, spawn_walled_robot
-from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment, action_bounds, reset_scene, walk_task
+from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment, action_bounds, reset_scene, walk_task, grasp_task_reward
 from .carrybox_env_cfg import CarryBoxObservationsCfg
 from .mdp.carrybox_walled import fallen_pelvis, fallen_head
 from isaaclab.managers import RewardTermCfg as RewTerm, TerminationTermCfg as DoneTerm
 from isaaclab.managers import ObservationGroupCfg as ObsGroup, ObservationTermCfg as ObsTerm
-from perceptual_ball.carrybox_wall5 import GROUND_DATASET_PATH
+from perceptual_ball.carrybox_wall5 import GROUND_DATASET_PATH, AMP_DATASET_PATH, grasp_reward_geometry
 from perceptual_ball.carrybox_reward_geometry import g1_reward_geometry
 
 
 def spawn_wall5_full_body_robot(prim_path, cfg, **kwargs):
     import isaaclab.sim as sim_utils
-    from perceptual_ball.carrybox_fullbody_collision import add_full_body_collisions
+    from perceptual_ball.carrybox_fullbody_collision import add_full_body_collisions, configure_wall5_self_collision
 
     prim = spawn_walled_robot(prim_path, cfg, **kwargs)
     for root in sim_utils.find_matching_prims(prim_path):
         add_full_body_collisions(root)
+        if cfg.articulation_props.enabled_self_collisions:
+            configure_wall5_self_collision(root)
     return prim
 
 
@@ -54,7 +56,8 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
     depth_stereo_far_m: float = .03
     reference_link_velocity: bool = True
     task_box_distance_3d: bool = True
-    reward_geometry: dict = g1_reward_geometry()
+    reward_geometry: dict = dict(g1_reward_geometry(), near_distance=.90, profile='g1_grasp_geometry_v23')
+    grasp_geometry: dict = grasp_reward_geometry()
     height_termination_terms: tuple = ('fell_pelvis', 'fell_head')
     ground_box_reset: bool = True
     held_box_reference_reset: bool = True  # hold keeps its reference box at hand height
@@ -66,6 +69,7 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
     def __post_init__(self):
         super().__post_init__()
         self.scene.robot.spawn.func = spawn_wall5_full_body_robot
+        self.scene.robot.spawn.articulation_props.enabled_self_collisions = True
         self.events.reset_box.func = reset_scene
         self.events.push_robot.func = push_velocity_increment
         # Unbound robot shapes inherit the simulation default; the ground has
@@ -82,6 +86,8 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
         self.terminations.fell_head = DoneTerm(func=fallen_head)
         self.rewards.early_failure = None
         self.rewards.walk_task = RewTerm(func=walk_task, weight=1.)
+        for name in ('carryup_task', 'stable_grasp', 'slow_pickup', 'arm_speed_pickup', 'arm_acc_pickup'):
+            getattr(self.rewards, name).func = grasp_task_reward
         if self.depth_backend != 'warp':
             raise ValueError('Wall5 visible-pose supervision requires Warp nearest-hit IDs')
         self.scene.depth_camera.output_mesh_hits = True
@@ -94,7 +100,7 @@ class CarryBoxWalled5EnvCfg(CarryBoxWalled4EnvCfg):
 class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
     class_name = 'CarryBoxWall5OnPolicyRunner'
     experiment_name = 'g1_carrybox_depth/walled5'
-    run_name = 'walled5_critic123_aux1_v22'
+    run_name = 'walled5_grasp_selfcollision_v23'
 
     def __post_init__(self):
         super().__post_init__()
@@ -112,6 +118,6 @@ class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
         self.algorithm.class_name = 'CarryBoxWall5PPO'
         self.algorithm.amp_reward_scale = .5
         self.algorithm.amp_lr = 5.e-5
-        self.algorithm.amp_data_dir = GROUND_DATASET_PATH
+        self.algorithm.amp_data_dir = AMP_DATASET_PATH
         self.algorithm.action_bound_coef = .01
         self.algorithm.max_action_std = 1.

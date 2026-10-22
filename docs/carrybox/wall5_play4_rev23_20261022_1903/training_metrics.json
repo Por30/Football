@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-22T19:03:57.791418+09:00",
+  "iteration": 6249,
+  "source": "formal training log; training metrics are not independent evaluation",
+  "metrics": {
+    "Mean episode length": 81.17,
+    "Skill/loco_mean_steps": 32.727,
+    "Skill/loco_success_fraction": 0.0,
+    "Skill/hold_success_fraction": 0.0004,
+    "Skill/loco_tipped_fraction": 0.9959,
+    "Grasp/loco_reach": 0.0127,
+    "Grasp/loco_bilateral": 0.0001,
+    "Grasp/loco_lift": 0.0,
+    "Grasp/loco_both_contact_fraction": 0.0001,
+    "Grasp/loco_palm_surface_distance_m": 0.9533,
+    "Reward/loco_walk_task_per_step": 0.021,
+    "Reward/loco_carryup_task_per_step": 0.0004,
+    "Reward/amp_per_step": 0.005
+  }
+}

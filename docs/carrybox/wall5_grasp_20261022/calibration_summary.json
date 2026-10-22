@@ -1,0 +1,59 @@
+[
+  {
+    "clip": "pick_up/pick_up_01.pt",
+    "frames": 192,
+    "contact_index": 107,
+    "metadata_contact_window_xy_m": [
+      0.5474998950958252,
+      0.5581567287445068
+    ],
+    "fk_error_max_m": 2.0265579223632812e-06,
+    "first_both_palms_within_8cm_frame": 104,
+    "close_palms_xy_m": [
+      0.431660532951355,
+      0.5580430626869202
+    ],
+    "close_palms_surface_m": [
+      0.0,
+      0.07731923460960388
+    ]
+  },
+  {
+    "clip": "pick_up/pick_up_02.pt",
+    "frames": 178,
+    "contact_index": 100,
+    "metadata_contact_window_xy_m": [
+      0.4917857050895691,
+      0.5264514684677124
+    ],
+    "fk_error_max_m": 1.6689300537109375e-06,
+    "first_both_palms_within_8cm_frame": 78,
+    "close_palms_xy_m": [
+      0.368217796087265,
+      0.5532903671264648
+    ],
+    "close_palms_surface_m": [
+      0.03304967284202576,
+      0.07833489775657654
+    ]
+  },
+  {
+    "clip": "pick_up/pick_up_03.pt",
+    "frames": 129,
+    "contact_index": 42,
+    "metadata_contact_window_xy_m": [
+      0.48672059178352356,
+      0.48877188563346863
+    ],
+    "fk_error_max_m": 1.5497207641601562e-06,
+    "first_both_palms_within_8cm_frame": 57,
+    "close_palms_xy_m": [
+      0.41492608189582825,
+      0.48785683512687683
+    ],
+    "close_palms_surface_m": [
+      0.04853066802024841,
+      0.0791994035243988
+    ]
+  }
+]

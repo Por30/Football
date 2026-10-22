@@ -1,0 +1,13 @@
+{
+  "reason": "Normalize expert descriptive checks to the same frozen executable command; inherit original expert safeguard strings verbatim for validator",
+  "expert_check_descriptions": [
+    "CPU complete dataset and reward counterexamples",
+    "20env actual collision/default+allRSI probes and PPO/AMP update/restore/export",
+    "4096 finite updates, buffer checks and <=6s warm iterations"
+  ],
+  "unchanged_executed_command": [
+    "bash docs/carrybox/wall5_grasp_20261022/validate_and_restart.sh"
+  ],
+  "scope_and_assertions_unchanged": true,
+  "production_unchanged": true
+}

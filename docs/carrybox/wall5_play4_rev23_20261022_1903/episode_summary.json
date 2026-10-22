@@ -1,0 +1,69 @@
+{
+  "robots": [
+    {
+      "robot": 1,
+      "completed_episodes": 23,
+      "mean_seconds": 0.8408695652173913,
+      "min_seconds": 0.24,
+      "max_seconds": 1.62,
+      "termination_counts_overlapping": {
+        "tipped": 23,
+        "fell": 0,
+        "fell_pelvis": 0,
+        "fell_head": 0,
+        "timeout": 0
+      },
+      "roll_threshold_count": 17,
+      "pitch_threshold_count": 8
+    },
+    {
+      "robot": 2,
+      "completed_episodes": 30,
+      "mean_seconds": 0.6506666666666667,
+      "min_seconds": 0.18,
+      "max_seconds": 1.36,
+      "termination_counts_overlapping": {
+        "tipped": 30,
+        "fell": 2,
+        "fell_pelvis": 0,
+        "fell_head": 2,
+        "timeout": 0
+      },
+      "roll_threshold_count": 22,
+      "pitch_threshold_count": 13
+    },
+    {
+      "robot": 3,
+      "completed_episodes": 33,
+      "mean_seconds": 0.5854545454545454,
+      "min_seconds": 0.2,
+      "max_seconds": 1.36,
+      "termination_counts_overlapping": {
+        "tipped": 33,
+        "fell": 3,
+        "fell_pelvis": 0,
+        "fell_head": 3,
+        "timeout": 0
+      },
+      "roll_threshold_count": 24,
+      "pitch_threshold_count": 11
+    },
+    {
+      "robot": 4,
+      "completed_episodes": 1,
+      "mean_seconds": 19.96,
+      "min_seconds": 19.96,
+      "max_seconds": 19.96,
+      "termination_counts_overlapping": {
+        "tipped": 0,
+        "fell": 1,
+        "fell_pelvis": 1,
+        "fell_head": 1,
+        "timeout": 0
+      },
+      "roll_threshold_count": 0,
+      "pitch_threshold_count": 0
+    }
+  ],
+  "excludes_right_censored_final_episodes": true
+}

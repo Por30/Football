@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_walk_diagnosis_20261022/check.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "2e3bc223b99c31b806c2738862d136394c285dc8cc2cfcc051ff274cf82c5486",
+      "stdout_sha256": "2bccd0a3591d0c1ec0c666e0fdd1d3fb1cdf141fcf8e492df767ef06aefdc789",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

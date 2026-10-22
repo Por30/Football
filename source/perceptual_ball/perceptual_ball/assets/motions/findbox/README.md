@@ -1,5 +1,7 @@
 # FindBox AMP 数据集
 
+2026-10-22：wall5 revision23恢复本目录完整15段AMP，pick_up_01/02/03分别192/178/129帧，均不裁剪；组权重40/40/20保持，三段拾箱各占总采样约13.33%。复用现有dataset_revision3 manifest和文件名映射，原张量/hash不变。前两段是较高起箱，仅用于AMP；wall5地面RSI继续独立使用ground_pickup目录的03前缀0–31帧，比例75/5/20（hold保留参考箱高）。奖励与自碰撞的契约revision23不兼容旧模型完整恢复；新正式run从头训练。
+
 2026-10-17：wall5专用[ground_pickup](ground_pickup/README.md)新增地面拾取profile（13段、3785帧），拾取只使用完整`pick_up_03`；本目录15段及其manifest保持原样，继续供CarryBox基线、wall3/wall4使用。wall5的AMP与RSI均显式切换到子目录，旧模型需要显式weights-only迁移。
 
 这是整理后的正式数据目录，与同级`../kick/`足球AMP数据并列。15段、4155帧、60Hz；抱箱片段5秒。AMP与walled参考初始化默认使用本目录。

@@ -1,6 +1,25 @@
 """Wall5-only full-body external collision coverage; shared USD stays immutable."""
 
 FULL_BODY_COLLISION_PROFILE = 'g1_visual_convex_hull_full_body_v1'
+# These non-adjacent links surround the same joint assembly. Their convex
+# shells overlap even in the nominal pose (2026-10-22 physical contact audit).
+# Keep all other non-adjacent pairs, including hands/arms against the torso.
+SELF_COLLISION_FILTER_PAIRS = (
+    ('waist_yaw_link', 'torso_link'),
+    ('left_knee_link', 'left_ankle_roll_link'),
+    ('right_knee_link', 'right_ankle_roll_link'),
+)
+
+
+def configure_wall5_self_collision(robot_prim):
+    """Exclude only audited joint-shell overlaps; never filter robot vs box."""
+    from pxr import UsdPhysics
+    for first, second in SELF_COLLISION_FILTER_PAIRS:
+        a, b = robot_prim.GetChild(first), robot_prim.GetChild(second)
+        if not a or not b:
+            raise ValueError(f'Missing G1 self-collision pair: {first}, {second}')
+        UsdPhysics.FilteredPairsAPI.Apply(a).CreateFilteredPairsRel().AddTarget(b.GetPath())
+
 ADDED_COLLISION_LINKS = (
     'pelvis', 'waist_yaw_link', 'waist_roll_link', 'head_link',
     'left_wrist_yaw_link', 'right_wrist_yaw_link', 'logo_link',

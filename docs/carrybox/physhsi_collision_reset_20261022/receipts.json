@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/physhsi_collision_reset_20261022/audit.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "790f51593d4a090818101729ea5111d6fbb6068fba42c1c81c35bac514136b4b",
+      "stdout_sha256": "b54cb3bec2fa2c1f83a6d0c5808e1616b8eb13ee00ab00dc92becbd3b65ab5fd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

@@ -241,7 +241,7 @@ def write_obstacle_pose(env, name, pose, env_ids=None):
     env.scene[name].write_root_state_to_sim(torch.cat((pose, velocity), -1), env_ids=env_ids)
 
 
-def reset_scene(env, env_ids, skill_ids=None):
+def reset_scene(env, env_ids, skill_ids=None, reference_initializer=None):
     s = state(env)
     s.reward_step = None
     n, device = len(env_ids), env.device
@@ -260,7 +260,7 @@ def reset_scene(env, env_ids, skill_ids=None):
         s.skills[env_ids] = torch.multinomial(probs, n, replacement=True) if env.cfg.reference_init else 0
     reference_box = support = None
     if env.cfg.reference_init:
-        reference_box, support = initialize_reference(env,env_ids)
+        reference_box, support = (reference_initializer or initialize_reference)(env,env_ids)
     base.reset_box(env,env_ids)  # initialize/reset success cache, after the final robot reset
     s.achieved[env_ids] = False
     s.search[env_ids] = False
@@ -462,10 +462,11 @@ def record_episode_metrics(env, env_ids):
         if getattr(getattr(env, 'cfg', None), 'height_termination_terms', None):
             # This IsaacLab manager retains only the last triggering cause.
             # Read physical state before reset to retain simultaneous causes.
-            height_flags = {'fell_pelvis': fallen_pelvis(env), 'fell_head': fallen_head(env)}
+            height_flags = {key: getattr(env.cfg.terminations, key).func(
+                env, **getattr(env.cfg.terminations, key).params) for key in env.cfg.height_termination_terms}
             if not hasattr(s, 'height_failure_counts'):
                 s.height_failure_counts = {key: torch.zeros_like(s.episode_counts) for key in height_flags}
-            fell = height_flags['fell_pelvis'] | height_flags['fell_head']
+            fell = torch.stack(list(height_flags.values())).any(0)
             tipped_flag = tipped(env)
         else:
             fell = env.termination_manager.get_term('fell')

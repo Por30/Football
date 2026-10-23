@@ -16,11 +16,14 @@ data=json.loads((D/'on.json').read_text())
 for name,label,color in [('previous_no_push','rev22 model6400','#2075b4'),('current_no_push','rev23 model6200','#d34b3e')]:
  case=data['cases'][name];trace=case['env0_trace'];trace=[t for t in trace if t['steps']<50]
  x=[t['steps']*.02 for t in trace]
- axes[1].plot(x,[t['roll'] for t in trace],color=color,label=label)
+ end=case['episodes'][0]
+ roll_x=x+([end['steps']*.02] if end['steps']<50 else [])
+ roll_y=[t['roll'] for t in trace]+([end['roll']] if end['steps']<50 else [])
+ axes[1].plot(roll_x,roll_y,color=color,label=label)
  j=case['joint_names'].index('left_knee_joint')
  axes[2].plot(x,[t['target'][j] for t in trace],color=color,label=label)
 axes[1].axhline(-.5,color='gray',linestyle='--');axes[1].axhline(.5,color='gray',linestyle='--')
 axes[1].set(title='Same RSI start, self collision on, no push',xlabel='Time (s)',ylabel='Pelvis roll (rad)')
-axes[2].set(title='Commanded left knee angle, env0',xlabel='Time (s)',ylabel='Joint target (rad)')
+axes[2].set(title='Raw left knee target before limit clipping, env0',xlabel='Time (s)',ylabel='Joint target (rad)')
 for a in axes:a.grid(alpha=.2);a.legend(fontsize=8)
 fig.tight_layout();fig.savefig(D/'evidence.png',dpi=150);plt.close(fig)

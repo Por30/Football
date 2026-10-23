@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-22T22:17:45.034302+09:00",
+  "pid": 1796143,
+  "run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-22_22-13-48_wall5_v26_groundfix_fresh_20261022_221344",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v26_groundfix_fresh_20261022_221344.log",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-22_22-13-48_wall5_v26_groundfix_fresh_20261022_221344/model_0.pt",
+  "revision": 26,
+  "num_envs": 4096,
+  "initialization": "fresh",
+  "iteration": 17,
+  "progress_from": 1,
+  "mean_iteration_seconds": 3.839,
+  "max_iteration_seconds": 3.85,
+  "metrics": {
+    "Reset/default_fraction": 0.1982,
+    "Reset/loco_rsi_fraction": 0.5324,
+    "Reset/pickup_rsi_fraction": 0.1361,
+    "Reset/hold_rsi_fraction": 0.1333,
+    "Mean episode length": 32.23,
+    "Skill/loco_mean_steps": 36.4874,
+    "Skill/pickup_mean_steps": 27.981,
+    "Skill/hold_mean_steps": 28.2095,
+    "AMP/style_reward": 0.0852,
+    "Reward/amp_per_step": 0.0106,
+    "Reset/ground_correction_mean_m": 0.016,
+    "Reset/ground_correction_max_m": 0.0567
+  },
+  "finite_parameters": true,
+  "initial_optimizer_step": 20,
+  "convergence_evaluated": false
+}

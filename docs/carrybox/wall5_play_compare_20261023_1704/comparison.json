@@ -1,0 +1,231 @@
+{
+  "status": "PASS",
+  "previous_model": 2800,
+  "latest_model": 4200,
+  "same_initial_state": true,
+  "curriculum_iteration": 2200,
+  "push_scale": 0.3,
+  "yaw_degrees": 2.2,
+  "joint_names": [
+    "left_hip_pitch_joint",
+    "right_hip_pitch_joint",
+    "waist_yaw_joint",
+    "left_hip_roll_joint",
+    "right_hip_roll_joint",
+    "waist_roll_joint",
+    "left_hip_yaw_joint",
+    "right_hip_yaw_joint",
+    "waist_pitch_joint",
+    "left_knee_joint",
+    "right_knee_joint",
+    "left_shoulder_pitch_joint",
+    "right_shoulder_pitch_joint",
+    "left_ankle_pitch_joint",
+    "right_ankle_pitch_joint",
+    "left_shoulder_roll_joint",
+    "right_shoulder_roll_joint",
+    "left_ankle_roll_joint",
+    "right_ankle_roll_joint",
+    "left_shoulder_yaw_joint",
+    "right_shoulder_yaw_joint",
+    "left_elbow_joint",
+    "right_elbow_joint",
+    "left_wrist_roll_joint",
+    "right_wrist_roll_joint",
+    "left_wrist_pitch_joint",
+    "right_wrist_pitch_joint",
+    "left_wrist_yaw_joint",
+    "right_wrist_yaw_joint"
+  ],
+  "paired_global_stop_step": 1000,
+  "analysis_window_seconds": [
+    2.0,
+    20.0
+  ],
+  "enough_common_samples": true,
+  "metrics": {
+    "previous": [
+      {
+        "robot": 1,
+        "first_episode_steps": 1000,
+        "joint_velocity_rms_rad_s": 0.9789730008066561,
+        "joint_acceleration_rms_rad_s2": 92.96129429089018,
+        "action_step_rms": 0.09234265983104706,
+        "knee_target_clipped_fraction": [
+          0.9511111111111111,
+          0.9755555555555555
+        ],
+        "velocity_power_fraction_ge8hz": 0.30542478645637633,
+        "self_contact_fraction_gt1n": 0.10083333333333333,
+        "root_xy_speed_mean_mps": 0.1262480914592743,
+        "root_xy_net_displacement_m": 0.26685014367103577
+      },
+      {
+        "robot": 2,
+        "first_episode_steps": 1000,
+        "joint_velocity_rms_rad_s": 0.4470489318681764,
+        "joint_acceleration_rms_rad_s2": 39.982770486860204,
+        "action_step_rms": 0.05907909572124481,
+        "knee_target_clipped_fraction": [
+          1.0,
+          1.0
+        ],
+        "velocity_power_fraction_ge8hz": 0.3794052249901095,
+        "self_contact_fraction_gt1n": 0.0011111111111111111,
+        "root_xy_speed_mean_mps": 0.0747608095407486,
+        "root_xy_net_displacement_m": 0.0368986502289772
+      },
+      {
+        "robot": 3,
+        "first_episode_steps": 1000,
+        "joint_velocity_rms_rad_s": 0.7658266417302045,
+        "joint_acceleration_rms_rad_s2": 52.57186721535885,
+        "action_step_rms": 0.08302775770425797,
+        "knee_target_clipped_fraction": [
+          0.9766666666666667,
+          0.9866666666666667
+        ],
+        "velocity_power_fraction_ge8hz": 0.3069910913977299,
+        "self_contact_fraction_gt1n": 0.38,
+        "root_xy_speed_mean_mps": 0.11159355938434601,
+        "root_xy_net_displacement_m": 0.3639019727706909
+      },
+      {
+        "robot": 4,
+        "first_episode_steps": 1000,
+        "joint_velocity_rms_rad_s": 1.3676029807495038,
+        "joint_acceleration_rms_rad_s2": 126.44158252469195,
+        "action_step_rms": 0.19988106191158295,
+        "knee_target_clipped_fraction": [
+          1.0,
+          1.0
+        ],
+        "velocity_power_fraction_ge8hz": 0.477152954483589,
+        "self_contact_fraction_gt1n": 1.0,
+        "root_xy_speed_mean_mps": 0.15801019966602325,
+        "root_xy_net_displacement_m": 1.468126654624939
+      }
+    ],
+    "latest": [
+      {
+        "robot": 1,
+        "first_episode_steps": 1000,
+        "joint_velocity_rms_rad_s": 0.9596906088939002,
+        "joint_acceleration_rms_rad_s2": 92.14397922511473,
+        "action_step_rms": 0.08001581579446793,
+        "knee_target_clipped_fraction": [
+          0.9233333333333333,
+          0.9755555555555555
+        ],
+        "velocity_power_fraction_ge8hz": 0.3589758029594173,
+        "self_contact_fraction_gt1n": 0.0275,
+        "root_xy_speed_mean_mps": 0.08628831803798676,
+        "root_xy_net_displacement_m": 0.350645512342453
+      },
+      {
+        "robot": 2,
+        "first_episode_steps": 1000,
+        "joint_velocity_rms_rad_s": 0.39448454652498843,
+        "joint_acceleration_rms_rad_s2": 40.392764022792726,
+        "action_step_rms": 0.05255308747291565,
+        "knee_target_clipped_fraction": [
+          1.0,
+          1.0
+        ],
+        "velocity_power_fraction_ge8hz": 0.29607143865146357,
+        "self_contact_fraction_gt1n": 0.0,
+        "root_xy_speed_mean_mps": 0.05573033541440964,
+        "root_xy_net_displacement_m": 0.08464474231004715
+      },
+      {
+        "robot": 3,
+        "first_episode_steps": 1000,
+        "joint_velocity_rms_rad_s": 0.67929305536078,
+        "joint_acceleration_rms_rad_s2": 50.58762275692113,
+        "action_step_rms": 0.06992233544588089,
+        "knee_target_clipped_fraction": [
+          0.9766666666666667,
+          0.9511111111111111
+        ],
+        "velocity_power_fraction_ge8hz": 0.28930547153727804,
+        "self_contact_fraction_gt1n": 0.6936111111111111,
+        "root_xy_speed_mean_mps": 0.0961289182305336,
+        "root_xy_net_displacement_m": 0.47327539324760437
+      },
+      {
+        "robot": 4,
+        "first_episode_steps": 1000,
+        "joint_velocity_rms_rad_s": 0.6971197487459888,
+        "joint_acceleration_rms_rad_s2": 74.76929976023587,
+        "action_step_rms": 0.11294727027416229,
+        "knee_target_clipped_fraction": [
+          1.0,
+          1.0
+        ],
+        "velocity_power_fraction_ge8hz": 0.5552783527750311,
+        "self_contact_fraction_gt1n": 1.0,
+        "root_xy_speed_mean_mps": 0.0689854770898819,
+        "root_xy_net_displacement_m": 0.20754893124103546
+      }
+    ]
+  },
+  "latest_behavior": [
+    {
+      "robot": 1,
+      "distance_xy_start_m": 0.8987662274487211,
+      "distance_xy_end_m": 0.6792925118762175,
+      "distance_xy_min_m": 0.5897110114709694,
+      "root_xy_net_displacement_m": 0.3315641676257329,
+      "any_hand_contact_steps": 0,
+      "bilateral_contact_steps": 0,
+      "initial_box_bottom_m": 0.0025475025177001953,
+      "final_box_bottom_m": -1.0207295417785645e-06
+    },
+    {
+      "robot": 2,
+      "distance_xy_start_m": 1.4069353418945432,
+      "distance_xy_end_m": 0.701848893690391,
+      "distance_xy_min_m": 0.6261789140457756,
+      "root_xy_net_displacement_m": 0.7982103579381187,
+      "any_hand_contact_steps": 0,
+      "bilateral_contact_steps": 0,
+      "initial_box_bottom_m": 0.0025475025177001953,
+      "final_box_bottom_m": -1.1846423149108887e-06
+    },
+    {
+      "robot": 3,
+      "distance_xy_start_m": 1.4345788434097058,
+      "distance_xy_end_m": 0.4855560417950964,
+      "distance_xy_min_m": 0.4642204029423492,
+      "root_xy_net_displacement_m": 0.894244251811636,
+      "any_hand_contact_steps": 0,
+      "bilateral_contact_steps": 0,
+      "initial_box_bottom_m": 0.0025475025177001953,
+      "final_box_bottom_m": 5.960464477539062e-07
+    },
+    {
+      "robot": 4,
+      "distance_xy_start_m": 0.33710247807193505,
+      "distance_xy_end_m": 0.24063896119436345,
+      "distance_xy_min_m": 0.22985582456007717,
+      "root_xy_net_displacement_m": 0.4301772319545101,
+      "any_hand_contact_steps": 999,
+      "bilateral_contact_steps": 995,
+      "initial_box_bottom_m": 0.7358803749084473,
+      "final_box_bottom_m": 0.5913920402526855
+    }
+  ],
+  "limitations": [
+    "One seed, four starts; no general convergence or success-rate claim.",
+    "Curriculum fixed at2200 for comparison, not current formal training iteration.",
+    "Acceleration RMS includes contact impacts and changed movement; not a pure jitter score.",
+    "Knee saturation is command clipping, not a measurement of joint-limit contact.",
+    "Metrics exclude startup2s and stop before any reset changes the shared random stream."
+  ],
+  "acceleration_change_percent": [
+    -0.8791993183936753,
+    1.0254255293971282,
+    -3.7743465536602128,
+    -40.8665264485798
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "reason": "Reset joint-angle noise clipping must match PhysHSI soft_dof_pos_limit=0.9, not hard physics limits. Candidate startup stopped; use native soft_joint_pos_limits for reset and retain physical-limit clipping on action targets. Add live readback boundary assertion and contract field.",
+  "candidate_pid": 1759807,
+  "production_paths": [
+    "mdp/carrybox_physhsi.py",
+    "mdp/carrybox_wall5.py"
+  ]
+}

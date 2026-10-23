@@ -1,0 +1,23 @@
+---
+task_id: "carrybox-wall5-groundfix-20261022"
+language: "zh-CN"
+axes: ["E", "L"]
+risk_tier: "T2"
+artifact: "TASK"
+status: "FROZEN"
+original_request: "如果phsi有的话也也相同的实现式式 排查好1bug后启动练练"
+development_modes: ["SIMULATOR_EXTENSION", "ML_TRAINING"]
+allowed_paths: ["source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_physhsi.py", "docs/carrybox/wall5_groundfix_20261022", "projects/README.md", "projects/findbox/README.md", "logs/rsl_rl/g1_carrybox_depth/walled5", "agent/plan/carrybox-wall5-groundfix-20261022.md", "agent/task/carrybox-wall5-groundfix-20261022.md", "agent/report/carrybox-wall5-groundfix-20261022.md", "agent/handoff/carrybox-wall5-groundfix-20261022.md"]
+forbidden_scope: ["不改PhysHSI源代码、共享资产、wall3/wall4/football", "不混入奖励/PD/AMP网络/数据或RSI采样分布改动", "不删旧模型和数据，不操作真实设备"]
+steps: ["记录实时进程和源身份，按技能取得一次组合审查", "恢复PhysHSI倾斜终止，并复用G1碰撞几何修复最终reset足底穿地", "验证640个初态、部分reset、配对箱台、速度/缓存、终止边界和PPO/AMP恢复", "验证后停止匹配旧进程，4096从头启动并核验日志和模型", "保存结果、限制、命令并更新入口与四工件"]
+tests: [{"command": "bash docs/carrybox/wall5_groundfix_20261022/smoke.sh"}, {"command": "bash docs/carrybox/wall5_groundfix_20261022/start_and_verify.sh"}]
+stop_conditions: ["确认需要扩大范围时停止相关改动", "进程身份不符或出现非有限/严重物理错误不启动正式训练", "冻结测试失败最多两次原范围修复，保留回执"]
+safeguards: ["实际脚部convex hull与环境地面坐标；只上移不下压，所有默认和参考起点都检查", "校正顺序在最终扰动/限位/FK之后；参考箱子及活动平台同步平移", "保持根COM速度、关节位置速度、延迟缓存及partial reset幸存环境", "PhysHSI严格大于roll0.5/pitch1.1与原高度/箱速/超时保留", "新契约revision26，旧模型严格恢复拒绝，正式从零启动", "区分即时穿地修复与稳定行走/拾箱学习结论", "sim.forward refreshes FK without physics stepping; finite correction and existing geometry checks must fail on bad data", "support_active indexed by reset ids; inactive platform remains buried", "check final box/platform after parent ground clamp, not only returned initializer values", "revision26 tracks angle and ground changes; reject old strict restore and start fresh only after smoke", "preserve velocities, partial reset, and source identities; do not infer convergence from launch"]
+expert_required: true
+expert_brief_path: "docs/carrybox/wall5_groundfix_20261022/expert_brief.json"
+device_actions: []
+real_device_authorized: false
+expert_brief: {"affected_call_path": ["wall5 event -> PhysHSI initializer final random q/velocity writes -> FK -> existing foot hull helper -> parent box/platform placement", "wall5 termination config -> existing tipped; checkpoint revision26"], "critical_interfaces": ["helper uses actual convexHull support in body_link/world ground frames", "support_active uses global ids but support uses local reset rows", "root pose is link origin; velocity is world COM, so correction uses pose-only write", "action manager reset occurs after event and fills delay with final q"], "invariants": ["keep20/80 hybrid, full three pickups, continuous samples, q noise/clamp, root and joint velocities", "all default/reference initializations use final FK before nonnegative upward shift", "paired reference box and active support shift together; ordinary loco box remains grounded", "partial reset preserves survivors and delay", "roll>.5/pitch>1.1 strict, keep height/speed/timeout and all learning settings"], "smallest_change_locus": ["mdp/carrybox_physhsi.py initializer; reuse parent.reference_ground_correction without shared edits", "wall5 config registers tipped and run_name", "wall5 checkpoint final overrides and diagnostics"], "mandatory_safeguards": ["sim.forward refreshes FK without physics stepping; finite correction and existing geometry checks must fail on bad data", "support_active indexed by reset ids; inactive platform remains buried", "check final box/platform after parent ground clamp, not only returned initializer values", "revision26 tracks angle and ground changes; reject old strict restore and start fresh only after smoke", "preserve velocities, partial reset, and source identities; do not infer convergence from launch"], "minimal_tests": ["bash docs/carrybox/wall5_groundfix_20261022/smoke.sh", "bash docs/carrybox/wall5_groundfix_20261022/start_and_verify.sh"], "blockers": []}
+---
+
+恢复PhysHSI的绝对roll>0.5、pitch>1.1终止；修复已确认的当前G1 reset足底穿地，保持采样和控制/奖励配方。复用已有foot hull helper，在最终随机关节角写入并刷新FK后只向上校正到5mm，参考箱子和活动支撑台同步上移。角度阈值变化与接地适配分别记录，不认定为收敛充分条件。通过64环境几何/部分reset/更新恢复短测再停止当前身份匹配进程，从头启动4096正式训练。

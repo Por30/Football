@@ -1,0 +1,618 @@
+{
+  "status": "PASS",
+  "mode": "CPU source/config/URDF only; no PhysHSI simulation",
+  "physhsi": {
+    "self_collisions_enabled": true,
+    "collision_reward_registered": false,
+    "active_rewards": {
+      "action_rate": -0.03,
+      "carryup_task": 1.0,
+      "dof_acc": -1e-07,
+      "dof_pos_limits": -5.0,
+      "dof_vel": -0.0002,
+      "dof_vel_limits": -0.001,
+      "relocation_task": 1.0,
+      "standup_task": 0.2,
+      "torque_limits": -0.03,
+      "torques": -0.0001,
+      "walk_task": 1.0
+    },
+    "contact_termination_bodies": [],
+    "collision_links": 28,
+    "urdf_collision_elements": 30,
+    "collider_shapes": {
+      "pelvis": [],
+      "pelvis_contour_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/pelvis_contour_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "pelvis_contact_link": [],
+      "left_hip_pitch_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_hip_pitch_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_hip_roll_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_hip_roll_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_hip_yaw_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_hip_yaw_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_knee_link": [
+        {
+          "type": "box",
+          "parameters": {
+            "size": "0.09 0.07 0.1"
+          },
+          "origin": {
+            "xyz": "0.01 0.00 -0.105",
+            "rpy": "0 0 0"
+          }
+        },
+        {
+          "type": "box",
+          "parameters": {
+            "size": "0.05 0.04 0.1"
+          },
+          "origin": {
+            "xyz": "0.005 0.00 -0.21",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_ankle_pitch_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_ankle_pitch_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_ankle_roll_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_ankle_roll_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_hip_pitch_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_hip_pitch_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_hip_roll_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_hip_roll_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_hip_yaw_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_hip_yaw_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_knee_link": [
+        {
+          "type": "box",
+          "parameters": {
+            "size": "0.09 0.07 0.1"
+          },
+          "origin": {
+            "xyz": "0.01 0.00 -0.105",
+            "rpy": "0 0 0"
+          }
+        },
+        {
+          "type": "box",
+          "parameters": {
+            "size": "0.05 0.04 0.1"
+          },
+          "origin": {
+            "xyz": "0.005 0.00 -0.21",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_ankle_pitch_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_ankle_pitch_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_ankle_roll_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_ankle_roll_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "waist_yaw_link": [],
+      "waist_roll_link": [],
+      "torso_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/torso_link_rev_1_0.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "logo_link": [],
+      "head_link": [],
+      "imu_in_torso": [],
+      "imu_in_pelvis": [],
+      "d435_link": [],
+      "temp_link": [],
+      "d455_link": [],
+      "mid360_link": [],
+      "left_shoulder_pitch_link": [
+        {
+          "type": "cylinder",
+          "parameters": {
+            "radius": "0.03",
+            "length": "0.05"
+          },
+          "origin": {
+            "xyz": "0 0.04 -0.01",
+            "rpy": "0 1.5707963267948966 0"
+          }
+        }
+      ],
+      "left_shoulder_roll_link": [
+        {
+          "type": "cylinder",
+          "parameters": {
+            "radius": "0.03",
+            "length": "0.03"
+          },
+          "origin": {
+            "xyz": "-0.004 0.006 -0.053",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_shoulder_yaw_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_shoulder_yaw_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_elbow_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_elbow_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_wrist_roll_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_wrist_roll_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_wrist_pitch_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_wrist_pitch_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_wrist_yaw_link": [],
+      "left_rubber_hand": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/left_rubber_hand.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "left_palm_link": [],
+      "right_shoulder_pitch_link": [
+        {
+          "type": "cylinder",
+          "parameters": {
+            "radius": "0.03",
+            "length": "0.05"
+          },
+          "origin": {
+            "xyz": "0 -0.04 -0.01",
+            "rpy": "0 1.5707963267948966 0"
+          }
+        }
+      ],
+      "right_shoulder_roll_link": [
+        {
+          "type": "cylinder",
+          "parameters": {
+            "radius": "0.03",
+            "length": "0.03"
+          },
+          "origin": {
+            "xyz": "-0.004 -0.006 -0.053",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_shoulder_yaw_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_shoulder_yaw_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_elbow_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_elbow_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_wrist_roll_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_wrist_roll_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_wrist_pitch_link": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_wrist_pitch_link.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_wrist_yaw_link": [],
+      "right_rubber_hand": [
+        {
+          "type": "mesh",
+          "parameters": {
+            "filename": "../meshes/right_rubber_hand.STL"
+          },
+          "origin": {
+            "xyz": "0 0 0",
+            "rpy": "0 0 0"
+          }
+        }
+      ],
+      "right_palm_link": []
+    },
+    "replace_cylinder_with_capsule": true,
+    "rsi_fraction": 0.8,
+    "default_fraction": 0.2,
+    "conditional_rsi_weights": [
+      0.8,
+      0.2,
+      0.2,
+      0.0
+    ],
+    "conditional_rsi_probabilities": [
+      0.6666666666666667,
+      0.16666666666666669,
+      0.16666666666666669,
+      0.0
+    ],
+    "total_reset_probabilities": {
+      "default": 0.2,
+      "loco": 0.5333333333333334,
+      "pickUp": 0.13333333333333336,
+      "carryWith": 0.13333333333333336,
+      "putDown": 0.0
+    },
+    "rsi_root_linear_each_axis_mps": [
+      -0.2,
+      0.2
+    ],
+    "rsi_root_angular_each_axis_radps": [
+      -0.2,
+      0.2
+    ],
+    "rsi_root_xy_max_mps": 0.28284271247461906,
+    "default_root_velocity_each_axis": [
+      -0.5,
+      0.5
+    ],
+    "reference_joint_noise_rad": [
+      -0.1,
+      0.1
+    ],
+    "action_delay_seconds": [
+      0,
+      0.02
+    ],
+    "delay_updates_per_policy_step": 4,
+    "box_termination_carrybox": false,
+    "box_termination_resume": true,
+    "velocity_push_enabled": false,
+    "disturbance_enabled": true,
+    "force_disturbance_interval_policy_steps": 8,
+    "force_disturbance_each_axis_n": [
+      -50,
+      50
+    ]
+  },
+  "wall5": {
+    "self_collisions_enabled": true,
+    "derived_collision_shapes": 35,
+    "added_links": [
+      "pelvis",
+      "waist_yaw_link",
+      "waist_roll_link",
+      "head_link",
+      "left_wrist_yaw_link",
+      "right_wrist_yaw_link",
+      "logo_link"
+    ],
+    "replaced_links": [
+      "left_knee_link",
+      "right_knee_link",
+      "left_shoulder_pitch_link",
+      "right_shoulder_pitch_link",
+      "left_shoulder_roll_link",
+      "right_shoulder_roll_link"
+    ],
+    "collision_filter_pairs": [
+      [
+        "waist_yaw_link",
+        "torso_link"
+      ],
+      [
+        "left_knee_link",
+        "left_ankle_roll_link"
+      ],
+      [
+        "right_knee_link",
+        "right_ankle_roll_link"
+      ]
+    ],
+    "reset_probs": [
+      0.75,
+      0.05,
+      0.2
+    ],
+    "fixed_env_quota": true,
+    "pickup_reset_frames": [
+      0,
+      32
+    ],
+    "reference_root_xy_speed": {
+      "equal_clip_mean_mps": 0.7425623329741464,
+      "p95_mps": 1.0709073543548584,
+      "max_mps": 1.2895946502685547
+    },
+    "action_delay": false,
+    "ground_correction_clearance_m": 0.005
+  },
+  "matching_loco_clips": [
+    {
+      "file": "locomotion/walk_turn_left_045.pt",
+      "frames": 252,
+      "mean_speed_mps": 0.8897045254707336,
+      "sha256": "dfdf2fe9bf0014327477bed39cd08f5526b6e4e4092613ae463d15fa47524fcb"
+    },
+    {
+      "file": "locomotion/walk_turn_left_135.pt",
+      "frames": 288,
+      "mean_speed_mps": 0.7611937522888184,
+      "sha256": "f399edac6517b511d277aed64026d1169eb724281f9e386a27d4a162f6021374"
+    },
+    {
+      "file": "locomotion/walk_turn_right_090.pt",
+      "frames": 262,
+      "mean_speed_mps": 0.8534809350967407,
+      "sha256": "d643da4f4971ab3d78ba272d14a1761ef80e54cb429070bf3a1cc92b85366a33"
+    },
+    {
+      "file": "locomotion/walk_turn_right_045.pt",
+      "frames": 255,
+      "mean_speed_mps": 0.9075157642364502,
+      "sha256": "9aa45b671abcd29d5d092c6caf0b38367e861b41c8950b98a4a2b2761c9b34fa"
+    },
+    {
+      "file": "locomotion/walk_turn_right_135.pt",
+      "frames": 320,
+      "mean_speed_mps": 0.7799491286277771,
+      "sha256": "1ca14d346efac52f5f0ebcd9bc52cd1e6eb6a67a73c37a65e78024abec696868"
+    },
+    {
+      "file": "locomotion/walk_turn_around_01.pt",
+      "frames": 328,
+      "mean_speed_mps": 0.6907850503921509,
+      "sha256": "bbf1bf4b9a6abc7db5a05fc166a6e11f454ecb14ba7371d4aca2476c45fb5cca"
+    },
+    {
+      "file": "locomotion/stand_to_walk_01.pt",
+      "frames": 341,
+      "mean_speed_mps": 0.5000260472297668,
+      "sha256": "b5183955fe3766bc30901e66c650f3601daf4fd2969125acc5e73e2ba93064bd"
+    },
+    {
+      "file": "locomotion/walk_to_stand_01.pt",
+      "frames": 339,
+      "mean_speed_mps": 0.5343133211135864,
+      "sha256": "a341d6821635bbbc9cda0ec0711034511e9ddb267be3c9206f8aaf539cb21fec"
+    },
+    {
+      "file": "locomotion/walk_to_stand_02.pt",
+      "frames": 292,
+      "mean_speed_mps": 0.5753396153450012,
+      "sha256": "78fea9d0b50e521da7e373e7202d5d5c2f625273ef095ae5371249d5a35b762e"
+    },
+    {
+      "file": "locomotion/walk_forward_01.pt",
+      "frames": 455,
+      "mean_speed_mps": 0.867897093296051,
+      "sha256": "02cbd97382a70f4e6ac33c03939a98ce723528326b5ea9046802d65f38b039b9"
+    },
+    {
+      "file": "locomotion/walk_turn_left_090.pt",
+      "frames": 213,
+      "mean_speed_mps": 0.807980477809906,
+      "sha256": "200d9e22dbff9245d10749173896fd0bb822149491d96fc0d3c7c29d94727bd3"
+    }
+  ],
+  "source_sha256": {
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/base/base_config.py": "c2789af5409c82337862d78d99f82ef262d393af5dc810df6afe221d37ed2677",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/base/legged_robot_config.py": "5162a4241c3da2d5410c594d57d0f561a5f84463cebe1870259cb9f3c2f55697",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox_config.py": "dcb44bb88c7bdcb204ae8beab0d4bd480cd26a8c15a8b819cb76d05511d00a9b",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox_resume_config.py": "0d033399933aaf582266f46e889b28b2d78865d78494b979008a688bb5b0326f",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox.py": "c37e7c5ff4884baba2a40ddfde5b9d91f01b427fea7bf9812da26231c35630b7",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/motionlib/motionlib_carrybox.py": "c88409cd1a1f2f797af80fa56d21dfb302ac6e4bdd2a0001a9d10b1ab746d862",
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/__init__.py": "546af72c8239cc6a23f26cc7fe863258d289876981a476bdcc57418024efd9ba",
+    "/home/cao/PhysHSI/legged_gym/resources/config/carrybox.yaml": "dd2898e872d3ea80f48c35f19e3ebbc09232791e31cdb42076c21b0ecfe75bbc",
+    "/home/cao/PhysHSI/legged_gym/resources/robots/g1/urdf/g1_29dof.urdf": "427c3b69c2f3f3bfb16e1bfdecd564326a505642efba33198c8d33db44ac974e",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_fullbody_collision.py": "2dc251e2de546b6d1ad2ef5cb205f67b14b181eca2dd66af130eb9f84ad4f6f1",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_wall5.py": "b9a43ece11bc87e50033eabfa08369c5f11748bcae61f9fe34e49af77197c476",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_reward_geometry.py": "9ab270b74216de3206514ea38beff0adcf5b1aa22d6c0816189c292c4bd51a07",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof.py": "fce7c3aef21f8d848f5333e81b0446676a02aa1552eb1e8ba144ccd7f14072d5",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/config.yaml": "707afdd528d204129ba229c0d5b08793b2cbe501d090a068a2bf2889038f793d",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": "e1ecb7cfd5e75836283d8e5753234347ca70d5fc60597d6d57a1d35a72899a0b",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": "8a34e999cba3f4b55e7c2589d748db4d80aaea9c448cb7ad9a3b0c64a2f88608",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": "c49389e916d4e5c416b681fd734f9f6e5b3ae1e4cc6d278aa151db14e9808c5a",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": "186f5360bbb02d687ad7073cd9cee68eac94648583193be0b4da42fb307eb7bf",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/amp_manifest.json": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_left_045.pt": "dfdf2fe9bf0014327477bed39cd08f5526b6e4e4092613ae463d15fa47524fcb",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B10_-_walk_turn_left_(45)_stageii.pt": "dfdf2fe9bf0014327477bed39cd08f5526b6e4e4092613ae463d15fa47524fcb",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_left_135.pt": "f399edac6517b511d277aed64026d1169eb724281f9e386a27d4a162f6021374",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B11_-_walk_turn_left_(135)_stageii.pt": "f399edac6517b511d277aed64026d1169eb724281f9e386a27d4a162f6021374",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_right_090.pt": "d643da4f4971ab3d78ba272d14a1761ef80e54cb429070bf3a1cc92b85366a33",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B12_-_walk_turn_right_(90)_stageii.pt": "d643da4f4971ab3d78ba272d14a1761ef80e54cb429070bf3a1cc92b85366a33",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_right_045.pt": "9aa45b671abcd29d5d092c6caf0b38367e861b41c8950b98a4a2b2761c9b34fa",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B13_-_walk_turn_right_(45)_stageii.pt": "9aa45b671abcd29d5d092c6caf0b38367e861b41c8950b98a4a2b2761c9b34fa",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_right_135.pt": "1ca14d346efac52f5f0ebcd9bc52cd1e6eb6a67a73c37a65e78024abec696868",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B14_-_walk_turn_right_(135)_stageii.pt": "1ca14d346efac52f5f0ebcd9bc52cd1e6eb6a67a73c37a65e78024abec696868",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_around_01.pt": "bbf1bf4b9a6abc7db5a05fc166a6e11f454ecb14ba7371d4aca2476c45fb5cca",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B15_-_walk_turn_around_(same_direction)_stageii.pt": "bbf1bf4b9a6abc7db5a05fc166a6e11f454ecb14ba7371d4aca2476c45fb5cca",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/stand_to_walk_01.pt": "b5183955fe3766bc30901e66c650f3601daf4fd2969125acc5e73e2ba93064bd",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B1_-_stand_to_walk_stageii.pt": "b5183955fe3766bc30901e66c650f3601daf4fd2969125acc5e73e2ba93064bd",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_to_stand_01.pt": "a341d6821635bbbc9cda0ec0711034511e9ddb267be3c9206f8aaf539cb21fec",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B2_-_walk_to_stand_stageii.pt": "a341d6821635bbbc9cda0ec0711034511e9ddb267be3c9206f8aaf539cb21fec",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_to_stand_02.pt": "78fea9d0b50e521da7e373e7202d5d5c2f625273ef095ae5371249d5a35b762e",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B2_-_walk_to_stand_t2_stageii.pt": "78fea9d0b50e521da7e373e7202d5d5c2f625273ef095ae5371249d5a35b762e",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_forward_01.pt": "02cbd97382a70f4e6ac33c03939a98ce723528326b5ea9046802d65f38b039b9",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B3_-_walk1_stageii.pt": "02cbd97382a70f4e6ac33c03939a98ce723528326b5ea9046802d65f38b039b9",
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox/locomotion/walk_turn_left_090.pt": "200d9e22dbff9245d10749173896fd0bb822149491d96fc0d3c7c29d94727bd3",
+    "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B9_-_walk_turn_left_(90)_stageii.pt": "200d9e22dbff9245d10749173896fd0bb822149491d96fc0d3c7c29d94727bd3"
+  }
+}

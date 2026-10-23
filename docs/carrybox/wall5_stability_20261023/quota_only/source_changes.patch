@@ -1,0 +1,133 @@
+--- before/source/perceptual_ball/perceptual_ball/carrybox_physhsi.py
++++ after/source/perceptual_ball/perceptual_ball/carrybox_physhsi.py
+@@ -1,10 +1,35 @@
+ """Wall5 PhysHSI G1 reset/control contracts. No simulation dependency."""
++import math
+ import torch
+ 
+ COLLISION_PROFILE = 'g1_original_urdf_shoulders_capsules_v24'
+-RESET_PROFILE = 'physhsi_hybrid_continuous_full_pickups_v24'
++RESET_PROFILE = 'physhsi_physical_reset_fixed_four_way_quota_v27'
+ HYBRID_REFERENCE_PROBABILITY = .8
+ RSI_SKILL_PROBABILITIES = (2/3, 1/6, 1/6)
++
++
++def hybrid_probabilities(reference_probability, skill_probabilities):
++    """Four initialization sources; the three skill probabilities are conditional."""
++    if (not math.isfinite(reference_probability) or not 0 <= reference_probability <= 1
++            or len(skill_probabilities) != 3
++            or any(not math.isfinite(p) or p < 0 for p in skill_probabilities)
++            or abs(sum(skill_probabilities)-1.) > 1.e-6):
++        raise ValueError('Invalid hybrid reset probabilities')
++    return (1-reference_probability, *(reference_probability*p for p in skill_probabilities))
++
++
++def fixed_hybrid(env_ids, num_envs, reference_probability, skill_probabilities):
++    """Reserve transition quotas despite different episode lengths.
++
++    Only the initialization source is fixed. Reference frame, noise and box
++    placement are resampled, and the robot can progress through every task phase.
++    """
++    probabilities = hybrid_probabilities(reference_probability, skill_probabilities)
++    if num_envs < 1:
++        raise ValueError('Invalid environment count')
++    edges = env_ids.new_tensor(probabilities, dtype=torch.float64).cumsum(0)[:-1]
++    source = torch.bucketize((env_ids.double()+.5)/num_envs, edges, right=True)
++    return (source-1).clamp_min(0), source == 0
+ 
+ 
+ def sample_hybrid(count, device='cpu'):
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
++++ after/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
+@@ -1,4 +1,4 @@
+-"""Wall5 revision26: PhysHSI terminations with collision-grounded G1 resets."""
++"""Wall5 revision27: preserve empty-hand training quotas with PhysHSI physics."""
+ from isaaclab.utils import configclass
+ from .carrybox_walled_env_cfg import CarryBoxWalled4EnvCfg, CarryBoxWalled4PPORunnerCfg, spawn_walled_robot
+ from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment, action_bounds, reset_scene, walk_task, grasp_task_reward
+@@ -66,6 +66,7 @@
+     held_box_reference_reset: bool = True  # hold keeps its reference box at hand height
+     reference_motion_dataset: str = AMP_DATASET_PATH
+     reset_skill_probabilities: tuple = RSI_SKILL_PROBABILITIES  # conditional on 80% reference branch
++    reset_reference_probability: float = .8
+     # Legacy field is unused by the continuous PhysHSI initializer.
+     ground_pickup_reset_frame_range: tuple = (0, 32)  # exclusive end
+ 
+@@ -105,7 +106,7 @@
+ class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
+     class_name = 'CarryBoxWall5OnPolicyRunner'
+     experiment_name = 'g1_carrybox_depth/walled5'
+-    run_name = 'walled5_physhsi_grounded_v26'
++    run_name = 'walled5_physhsi_fixed_quota_v27'
+ 
+     def __post_init__(self):
+         super().__post_init__()
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_physhsi.py
++++ after/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_physhsi.py
+@@ -3,7 +3,7 @@
+ from isaaclab.envs.mdp import JointPositionAction
+ from isaaclab.utils.math import quat_apply, quat_conjugate, quat_mul, yaw_quat
+ from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, joint_mapping
+-from perceptual_ball.carrybox_physhsi import sample_hybrid, interpolate, PhysicalActionDelay
++from perceptual_ball.carrybox_physhsi import fixed_hybrid, interpolate, PhysicalActionDelay
+ from . import carrybox_walled as parent
+ 
+ 
+@@ -127,7 +127,8 @@
+     if not hasattr(s, 'default_reset'):
+         s.default_reset = torch.zeros(env.num_envs, device=env.device, dtype=torch.bool)
+         s.reset_counts = torch.zeros(4, device=env.device, dtype=torch.long)
+-    skills, defaults = sample_hybrid(len(env_ids), env.device)
++    skills, defaults = fixed_hybrid(env_ids, env.num_envs,
++        env.cfg.reset_reference_probability, env.cfg.reset_skill_probabilities)
+     s.default_reset[env_ids] = defaults
+     s.reset_counts += torch.bincount(torch.where(defaults, 0, skills+1), minlength=4)
+     s.grasp_step = None
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
++++ after/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
+@@ -193,13 +193,14 @@
+     def step(self, action):
+         # Attribute terminal transitions to their old skill, before any reset.
+         skills = state(self).skills.clone()
++        defaults = state(self).default_reset.clone()
+         result = super().step(action)
+         log = result[-1].setdefault('log', {})
+         reset_state = state(self)
+         if hasattr(reset_state, 'reset_counts'):
+             for i, name in enumerate(('default', 'loco_rsi', 'pickup_rsi', 'hold_rsi')):
+                 log[f'Reset/{name}_fraction'] = reset_state.reset_counts[i] / reset_state.reset_counts.sum().clamp_min(1)
+-            log['Sampling/default_transition_fraction'] = reset_state.default_reset.float().mean()
++            log['Sampling/default_transition_fraction'] = defaults.float().mean()
+         names = self.reward_manager.active_terms
+         for skill, name in enumerate(('loco', 'pickup', 'hold')):
+             mask = (skills == skill).float()
+@@ -256,7 +257,7 @@
+         library = state(self).library
+         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
+                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
+-        contract.update(migration_revision=26, physical_parent='physhsi_g1_collision_hybrid_reset_v24',
++        contract.update(migration_revision=27, physical_parent='physhsi_g1_collision_hybrid_reset_v24',
+                         collision_profile=FULL_BODY_COLLISION_PROFILE,
+                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
+                         shoulder_colliders='visual_mesh_convex_hull',
+@@ -318,15 +319,17 @@
+             for name, material in (('simulation_default', self.cfg.sim.physics_material),
+                                    ('ground', self.cfg.scene.ground.spawn.physics_material))
+         }
+-        from perceptual_ball.carrybox_physhsi import COLLISION_PROFILE, RESET_PROFILE
++        from perceptual_ball.carrybox_physhsi import COLLISION_PROFILE, RESET_PROFILE, hybrid_probabilities
++        probabilities = hybrid_probabilities(self.cfg.reset_reference_probability, self.cfg.reset_skill_probabilities)
+         contract.update(collision_profile=COLLISION_PROFILE, shoulder_colliders='original_urdf_capsules',
+                         self_collision_filter_pairs=[], reference_ground_clearance='G1_collision_hull_min_5mm_upward_only_after_randomized_joint_reset',
+                         paired_reference_ground_shift='robot_box_active_support_same_dz',
+                         head_reference='mid360_link_origin', reference_velocity='world_com_uniform_rsi0.2_default0.5',
+                         reset_assignment=RESET_PROFILE, box_reset_profile='findbox_ground_loco_full_reference_pickup_hold',
+                         reference_dataset_profile='findbox_full_three_pickups_v1', ground_pickup_reset_frame_range=None,
+-                        reset_default_probability=.2, reset_reference_probability=.8,
+-                        reset_total_probabilities=[.2, 8/15, 2/15, 2/15],
++                        reset_default_probability=probabilities[0], reset_reference_probability=self.cfg.reset_reference_probability,
++                        reset_total_probabilities=list(probabilities),
++                        reset_quota_scope='fixed_global_env_id_default_loco_pickup_hold_initialization_only',
+                         reference_time='continuous_uniform_full_clip', joint_reset_noise_rad=.1,
+                         joint_reset_velocity='source_joint_velocity', joint_reset_limits='0.9_urdf_range_soft_limits', collision_reward='disabled_physhsi',
+                         physics_action_delay={'physics_dt': self.physics_dt, 'slots': 5, 'range_s': [0., .02],

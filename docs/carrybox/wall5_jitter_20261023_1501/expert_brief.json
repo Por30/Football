@@ -1,0 +1,33 @@
+{
+  "affected_call_path": [
+    "Checkpoint→act_inference→物理目标裁剪→五槽物理延迟→ImplicitActuator→PhysX；scene.update后采样"
+  ],
+  "critical_interfaces": [
+    "50Hz原始action、processed_actions与200Hz实际joint_pos_target分别记录",
+    "零延迟是index4；applied_torque是PD估计，不是求解器实测力矩",
+    "每env独立RigidContactView机器人内部body×body过滤，dt=.005"
+  ],
+  "invariants": [
+    "同model/hash、均值策略、源不变；全部初态/对象/材质/PD/延迟缓存/事件时钟/观测匹配",
+    "固定default/loco/loco/hold；持箱起点不能算拾箱"
+  ],
+  "smallest_change_locus": [
+    "只改本次docs录像和回放脚本，生产不变"
+  ],
+  "mandatory_safeguards": [
+    "scene.update后采样并核验时间戳；立即复制tensor，50Hz和200Hz分开",
+    "内部pair按body匹配、排除对角线、汇总去重；净合力为零不绝对证明无几何接触",
+    "按共同首回合前缀比较，排除前2秒启动和跨reset差分/FFT",
+    "关闭碰撞内部pair应为零；若两边都零检查映射和有效性，保留量测限制",
+    "频率来自200Hz记录；25fps可能混叠，不能当步态频率",
+    "记录PD估计力矩语义，闭环差异不等于唯一根因"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall5_jitter_20261023_1501/record_and_check.sh",
+    "bash docs/carrybox/wall5_jitter_20261023_1501/compare_and_check.sh"
+  ],
+  "blockers": [
+    "初态不匹配、接触映射/零值有效性不明、时间戳错误或非有限值时停止对应配对归因",
+    "冻结测试最多两次范围内修复并保留失败证据"
+  ]
+}

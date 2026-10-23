@@ -1,0 +1,15 @@
+{
+  "descriptive_requirements": [
+    "existing depth/push CPU coverage plus single-slot repeated/partial-reset checks",
+    "actual depth/pose raw equality and nominal extrinsics",
+    "nonzero anchor push0/5000/10000/15000,write arguments and isolation",
+    "64env2+1 PPO/AMP updates,strict restore/rev27 rejection;formal4096 model0 identity"
+  ],
+  "executed_commands": [
+    "bash docs/carrybox/wall5_clean_camera_20261023/validate.sh",
+    "bash docs/carrybox/wall5_clean_camera_20261023/start_and_verify.sh"
+  ],
+  "coverage": "validate.sh: CPU plus 64env smoke; start_and_verify.sh: identity-matched stop/fresh4096 and checkpoint verification",
+  "metadata_correction_only": true,
+  "tests_changed": false
+}

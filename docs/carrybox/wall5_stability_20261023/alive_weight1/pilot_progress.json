@@ -1,0 +1,38 @@
+{
+  "iteration": 127,
+  "loss": {
+    "value_function": 0.02804219741374254,
+    "surrogate": -0.01509290325557231,
+    "entropy": 40.1927978515625,
+    "box_position": 0.10275188945233822,
+    "box_rotation": 0.03974269554018974,
+    "action_bounds": 0.005484211863949895,
+    "amp_loss": 0.026770753785967827,
+    "amp_expert_loss": 0.0009369946201331913,
+    "amp_policy_loss": 0.008208679035305977,
+    "amp_valid_samples": 12288.0,
+    "amp_normalizer_count": 5263360.0,
+    "amp_normalizer_min_std": 0.009999999776482582,
+    "box_visible_fraction": 0.9642741084098816,
+    "box_visible_distance": 1.3702584505081177,
+    "box_supervised_fraction": 1.0,
+    "box_supervised_distance": 1.3868616819381714,
+    "box_aux_weighted": 0.14249458499252796,
+    "ppo_kl": 0.012497994117438793,
+    "ppo_learning_rate": 3.3750000000000014e-05,
+    "action_std_max": 0.9993020296096802
+  },
+  "elapsed_s": 246.01796597288921,
+  "recent_completed_steps": {
+    "default": 11.425,
+    "loco": 9.7,
+    "pickup": 9.455,
+    "hold": 11.605
+  },
+  "transition_counts": [
+    102,
+    273,
+    69,
+    68
+  ]
+}

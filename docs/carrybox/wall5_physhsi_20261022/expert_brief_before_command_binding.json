@@ -1,0 +1,36 @@
+{
+  "affected_call_path": [
+    "wall5 config -> original USD spawn / hybrid reset / per-physics-step action; parent optional initializer preserves legacy callers",
+    "manager reset events precede action_manager.reset; terminal critic/AMP captured before reset"
+  ],
+  "critical_interfaces": [
+    "root_state is link pose plus COM world velocity; random velocity uses write_root_velocity_to_sim",
+    "native USD four Z shoulder cylinders radius.03 height.05/.03; preserve transform and update capsule extent",
+    "action.reset must reset processed target and five-slot buffer after final robot reset"
+  ],
+  "invariants": [
+    "20% default and 80% reference with conditional2/3,1/6,1/6; distinguish default from locoRSI",
+    "recorded joint_velocity retained; root ±.2 RSI / ±.5 default; joint ±.1 then clamp",
+    "partial unsorted reset preserves other environments; 4 delay updates per policy step; slots0..4 correspond20..0ms",
+    "mid360<.6,root<.2,hip_yaw<.15,box_xy_speed>3,roll.5,pitch1.1; no box tilt/success reset",
+    "actor unchanged, critic123, AMP60 and strict revision24 checkpoint"
+  ],
+  "smallest_change_locus": [
+    "new carrybox_physhsi pure and mdp helpers",
+    "wall5 config/contract; parent optional initializer and configured height diagnostics"
+  ],
+  "mandatory_safeguards": [
+    "shared USD and URDF immutable; inspect live stage capsule/pairs/selfcollisions",
+    "continuous interpolation and quaternion shortest arc; native root height+.05 no accidental reference velocity reinjection",
+    "full pickup paired with source box height and contact-prefix platform; normal FindBox front ground box retained explicitly",
+    "CPU and sim update/restore/export pass before stopping identity-matched old run; fresh4096 only"
+  ],
+  "minimal_tests": [
+    "CPU probabilities/resampling, deterministic delay extremes and partial reset, interpolation/termination thresholds",
+    "GPU live collider and hybrid state readback, partial reset, per-physics-step delay, PPO/AMP/restore/export and old contract rejection",
+    "formal4096 fresh verified through first checkpoint and advancing log with timing"
+  ],
+  "blockers": [
+    "No missing interface found; native capsules require dynamic smoke. Pickup default scope declared to user."
+  ]
+}

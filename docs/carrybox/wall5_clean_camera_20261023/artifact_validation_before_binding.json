@@ -1,0 +1,7 @@
+{
+  "valid": false,
+  "errors": [
+    "Task frozen tests must exactly inherit expert_brief.minimal_tests",
+    "Task safeguards must inherit every expert mandatory safeguard"
+  ]
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "robot": 1,
+    "window_s": [
+      2,
+      20
+    ],
+    "knees": [
+      {
+        "side": "left",
+        "clipped_fraction": 0.9222222222222223,
+        "clamped_target_deg": -5.0,
+        "measured_q_median_deg": -5.001195137651213
+      },
+      {
+        "side": "right",
+        "clipped_fraction": 0.9744444444444444,
+        "clamped_target_deg": -5.0,
+        "measured_q_median_deg": -5.001641661268202
+      }
+    ],
+    "ankles": [
+      {
+        "side": "left",
+        "target_20ms_change_rms_deg": 3.0143985491398158,
+        "velocity_peak_in_2_25hz": 5.833333333333333,
+        "q_std_deg": 8.637144743243597
+      },
+      {
+        "side": "right",
+        "target_20ms_change_rms_deg": 4.057302267943178,
+        "velocity_peak_in_2_25hz": 5.833333333333333,
+        "q_std_deg": 7.711272473886995
+      }
+    ]
+  },
+  {
+    "robot": 2,
+    "window_s": [
+      2,
+      20
+    ],
+    "knees": [
+      {
+        "side": "left",
+        "clipped_fraction": 1.0,
+        "clamped_target_deg": -5.0,
+        "measured_q_median_deg": -5.001638246173617
+      },
+      {
+        "side": "right",
+        "clipped_fraction": 0.9711111111111111,
+        "clamped_target_deg": -5.0,
+        "measured_q_median_deg": -5.001173793310056
+      }
+    ],
+    "ankles": [
+      {
+        "side": "left",
+        "target_20ms_change_rms_deg": 2.825124829172065,
+        "velocity_peak_in_2_25hz": 4.5,
+        "q_std_deg": 3.4191305864756183
+      },
+      {
+        "side": "right",
+        "target_20ms_change_rms_deg": 2.6617001735616395,
+        "velocity_peak_in_2_25hz": 3.6666666666666665,
+        "q_std_deg": 4.479294406755015
+      }
+    ]
+  },
+  {
+    "robot": 3,
+    "window_s": [
+      2,
+      20
+    ],
+    "knees": [
+      {
+        "side": "left",
+        "clipped_fraction": 0.9077777777777778,
+        "clamped_target_deg": -5.0,
+        "measured_q_median_deg": -5.001330887660966
+      },
+      {
+        "side": "right",
+        "clipped_fraction": 0.9044444444444445,
+        "clamped_target_deg": -5.0,
+        "measured_q_median_deg": -5.001609217869645
+      }
+    ],
+    "ankles": [
+      {
+        "side": "left",
+        "target_20ms_change_rms_deg": 3.19621476975097,
+        "velocity_peak_in_2_25hz": 6.055555555555555,
+        "q_std_deg": 7.383532676753103
+      },
+      {
+        "side": "right",
+        "target_20ms_change_rms_deg": 3.139375216138593,
+        "velocity_peak_in_2_25hz": 9.0,
+        "q_std_deg": 6.147760210601036
+      }
+    ]
+  },
+  {
+    "robot": 4,
+    "window_s": [
+      2,
+      20
+    ],
+    "knees": [
+      {
+        "side": "left",
+        "clipped_fraction": 0.8577777777777778,
+        "clamped_target_deg": -5.0,
+        "measured_q_median_deg": -4.99930744411935
+      },
+      {
+        "side": "right",
+        "clipped_fraction": 0.9788888888888889,
+        "clamped_target_deg": -5.0,
+        "measured_q_median_deg": -5.000265378150445
+      }
+    ],
+    "ankles": [
+      {
+        "side": "left",
+        "target_20ms_change_rms_deg": 5.319891764324008,
+        "velocity_peak_in_2_25hz": 4.277777777777778,
+        "q_std_deg": 3.7601476310257804
+      },
+      {
+        "side": "right",
+        "target_20ms_change_rms_deg": 4.787598046831989,
+        "velocity_peak_in_2_25hz": 4.0,
+        "q_std_deg": 4.072145122783262
+      }
+    ]
+  }
+]

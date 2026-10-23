@@ -1,0 +1,31 @@
+{
+  "affected_call_path": [
+    "wall5 cfg → WarpDepthCamera → captured_pair → corrupt_depth_m → PairedDepthBuffer → actor/paired labels",
+    "reset_camera, additive push curriculum, checkpoint strict restore"
+  ],
+  "critical_interfaces": [
+    "11 camera perturbation controls covered; max_delay0 single slot, freeze_max1 count0",
+    "full contract checked before load; schema2/revision28"
+  ],
+  "invariants": [
+    "metres optical .1–3m,48×27,50Hz,4frames,real occlusion unchanged",
+    "actor depth/proprio,critic123,AMP15/60 and labels unchanged",
+    "additive COM pushes,interval/final amplitude and other physical randomization unchanged",
+    "curriculum process anchor retained"
+  ],
+  "smallest_change_locus": [
+    "only wall5 cfg parameter overrides and wall5 contract revision"
+  ],
+  "mandatory_safeguards": [
+    "keep shared helper/RNG draws unchanged",
+    "diff against this task before_source, preserve existing dirty edits",
+    "validate before identity-matched stop; fresh launch no resume/warm-start"
+  ],
+  "minimal_tests": [
+    "existing depth/push CPU coverage plus single-slot repeated/partial-reset checks",
+    "actual depth/pose raw equality and nominal extrinsics",
+    "nonzero anchor push0/5000/10000/15000,write arguments and isolation",
+    "64env2+1 PPO/AMP updates,strict restore/rev27 rejection;formal4096 model0 identity"
+  ],
+  "blockers": []
+}

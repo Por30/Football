@@ -1,0 +1,38 @@
+{
+  "default": {
+    "count": 122,
+    "before_below_1mm": 10,
+    "after_below_1mm": 0,
+    "before_min_m": -0.005697164684534073,
+    "after_min_m": 0.004999946802854538,
+    "shift_median_m": 0.0,
+    "shift_max_m": 0.010697164572775364
+  },
+  "loco": {
+    "count": 350,
+    "before_below_1mm": 303,
+    "after_below_1mm": 0,
+    "before_min_m": -0.06555484980344772,
+    "after_min_m": 0.004999905824661255,
+    "shift_median_m": 0.01627408154308796,
+    "shift_max_m": 0.07055485248565674
+  },
+  "pickup": {
+    "count": 88,
+    "before_below_1mm": 80,
+    "after_below_1mm": 0,
+    "before_min_m": -0.04082063212990761,
+    "after_min_m": 0.004999909549951553,
+    "shift_median_m": 0.019505158066749573,
+    "shift_max_m": 0.045820631086826324
+  },
+  "hold": {
+    "count": 80,
+    "before_below_1mm": 80,
+    "after_below_1mm": 0,
+    "before_min_m": -0.032059840857982635,
+    "after_min_m": 0.004999913275241852,
+    "shift_median_m": 0.02542918361723423,
+    "shift_max_m": 0.03705983981490135
+  }
+}

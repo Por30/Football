@@ -1,0 +1,5 @@
+{
+  "pipeline_passed": true,
+  "behavior_accepted_for_formal": false,
+  "reason": "Empty-hand recent completed episodes deteriorated to default8.185/loco6.55 steps; preserve this failed behavioral pilot and validate a separate dense-survival reward change."
+}

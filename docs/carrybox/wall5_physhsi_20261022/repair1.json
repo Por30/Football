@@ -1,0 +1,4 @@
+{
+  "reason": "Test incorrectly treated empty pelvis/collisions Xform as an active collider; inspect CollisionAPI and enabled state instead, including descendants. Preserve no-pelvis-collider invariant; original failed test/log/receipts retained.",
+  "production_code_changed": false
+}

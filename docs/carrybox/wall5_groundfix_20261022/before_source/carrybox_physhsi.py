@@ -1,0 +1,149 @@
+"""Wall5-only PhysHSI hybrid robot reset, original collision and action delay."""
+import torch
+from isaaclab.envs.mdp import JointPositionAction
+from isaaclab.utils.math import quat_apply, quat_conjugate, quat_mul, yaw_quat
+from perceptual_ball.carrybox_amp import FindBoxMotionLibrary, joint_mapping
+from perceptual_ball.carrybox_physhsi import sample_hybrid, interpolate, PhysicalActionDelay
+from . import carrybox_walled as parent
+
+
+class PhysHSIJointPositionAction(JointPositionAction):
+    def __init__(self, cfg, env):
+        super().__init__(cfg, env)
+        self.delay = PhysicalActionDelay(self._asset.data.joint_pos[:, self._joint_ids])
+        self.target_saturation = torch.zeros_like(self._processed_actions, dtype=torch.bool)
+
+    def process_actions(self, actions):
+        super().process_actions(actions)
+        limits = self._asset.data.joint_pos_limits[:, self._joint_ids]
+        self.target_saturation = (self._processed_actions < limits[..., 0]) | (self._processed_actions > limits[..., 1])
+        self._processed_actions.clamp_(min=limits[..., 0], max=limits[..., 1])
+
+    def apply_actions(self):
+        target = self.delay.advance(self._processed_actions)
+        self._asset.set_joint_position_target(target, joint_ids=self._joint_ids)
+
+    def reset(self, env_ids=None):
+        super().reset(env_ids)
+        ids = self.delay.rows if env_ids is None else env_ids
+        target = self._asset.data.joint_pos[ids][:, self._joint_ids]
+        self.delay.reset(ids, target)
+        self._processed_actions[ids] = target
+        self.target_saturation[ids] = False
+        # Event reset ran before manager reset: use the final sampled joint pose.
+        self._asset.set_joint_position_target(target, joint_ids=self._joint_ids, env_ids=ids)
+
+
+def initialize_reference(env, ids):
+    s, robot = parent.state(env), env.scene['robot']
+    if s.library is None:
+        s.library = FindBoxMotionLibrary(env.cfg.reference_motion_dataset, device=env.device)
+        s.references = [torch.load(s.library.root/name, map_location=env.device, weights_only=True)
+                        for name in s.library.clip_names]
+        for data in s.references:
+            if not torch.isfinite(data['joint_velocity']).all():
+                raise ValueError('Nonfinite PhysHSI reference joint velocity')
+        s.reference_clip = torch.full((env.num_envs,), -1, device=env.device, dtype=torch.long)
+        s.reference_time = torch.zeros(env.num_envs, device=env.device)
+        s.support_active = torch.zeros(env.num_envs, device=env.device, dtype=torch.bool)
+        s.reset_root_velocity = torch.zeros(env.num_envs, 6, device=env.device)
+        s.reset_joint_position = torch.zeros_like(robot.data.joint_pos)
+        s.reset_joint_velocity = torch.zeros_like(robot.data.joint_vel)
+    n = len(ids)
+    inverse = torch.argsort(torch.tensor(joint_mapping(robot.joint_names), device=env.device))
+    root = robot.data.default_root_state[ids].clone()
+    root[:, :3] = env.scene.env_origins[ids]
+    root[:, 2] += .8
+    # The original default heading pi and XY offset are a scene-frame choice;
+    # FindBox re-centres every robot, with all paired objects transformed with it.
+    root[:, 3:7] = root.new_tensor([1., 0., 0., 0.])
+    joint = robot.data.default_joint_pos[ids].clone()
+    velocity = torch.zeros_like(joint)
+    box_positions = root[:, :3].clone()
+    support = torch.zeros(n, device=env.device)
+    s.reference_clip[ids] = -1
+    s.reference_time[ids] = 0
+    s.support_active[ids] = False
+    defaults = s.default_reset[ids]
+    for skill, group in enumerate(('loco_direction', 'pickUp', 'carryWith')):
+        rows = ((s.skills[ids] == skill) & ~defaults).nonzero().flatten()
+        if not len(rows):
+            continue
+        clips = [i for i, g in enumerate(s.library.clip_groups) if g == group]
+        choices = torch.randint(len(clips), (len(rows),), device=env.device)
+        for slot, clip in enumerate(clips):
+            selected = rows[choices == slot]
+            if not len(selected):
+                continue
+            data = s.references[clip]
+            times = torch.rand(len(selected), device=env.device)*(len(data['joint_position'])-1)
+            q = interpolate(data['base_quat'].float()[:, [3, 0, 1, 2]], times, quaternion=True)
+            unyaw = quat_conjugate(yaw_quat(q))
+            root[selected, 2] = env.scene.env_origins[ids[selected], 2] + interpolate(data['base_height'].float(), times) + .05
+            root[selected, 3:7] = quat_mul(unyaw, q)
+            joint[selected] = interpolate(data['joint_position'].float(), times)[:, inverse]
+            # PhysHSI uses the recorded joint_velocity, not finite differences.
+            velocity[selected] = interpolate(data['joint_velocity'].float(), times)[:, inverse]
+            offset = quat_apply(unyaw, interpolate(data['box_pos_local'].float(), times))
+            box_positions[selected] = root[selected, :3] + offset
+            if group == 'pickUp':
+                before_contact = times < int(data['contact_index'])
+                s.support_active[ids[selected]] = before_contact
+                support[selected] = torch.where(before_contact,
+                    (box_positions[selected, 2]-env.scene.env_origins[ids[selected], 2]-.125-.005).clamp_min(0.), 0.)
+            s.reference_clip[ids[selected]] = clip
+            s.reference_time[ids[selected]] = times
+    joint += torch.empty_like(joint).uniform_(-.1, .1)
+    limits = robot.data.soft_joint_pos_limits[ids]  # PhysHSI soft_dof_pos_limit=0.9
+    joint.clamp_(min=limits[..., 0], max=limits[..., 1])
+    bounds = torch.where(defaults, .5, .2)
+    root[:, 7:] = (2*torch.rand(n, 6, device=env.device)-1)*bounds[:, None]
+    # Pose is pelvis link origin; velocity is COM world as in Gym root state.
+    # No foot-hull offset: PhysHSI uses reference base_height + 5cm exactly.
+    robot.write_root_pose_to_sim(root[:, :7], env_ids=ids)
+    robot.write_root_velocity_to_sim(root[:, 7:], env_ids=ids)
+    robot.write_joint_state_to_sim(joint, velocity, env_ids=ids)
+    s.reset_root_velocity[ids] = root[:, 7:]
+    s.reset_joint_position[ids] = joint
+    s.reset_joint_velocity[ids] = velocity
+    return box_positions, support
+
+
+def reset_scene(env, env_ids):
+    s = parent.state(env)
+    if not hasattr(s, 'default_reset'):
+        s.default_reset = torch.zeros(env.num_envs, device=env.device, dtype=torch.bool)
+        s.reset_counts = torch.zeros(4, device=env.device, dtype=torch.long)
+    skills, defaults = sample_hybrid(len(env_ids), env.device)
+    s.default_reset[env_ids] = defaults
+    s.reset_counts += torch.bincount(torch.where(defaults, 0, skills+1), minlength=4)
+    s.grasp_step = None
+    parent.reset_scene(env, env_ids, skill_ids=skills, reference_initializer=initialize_reference)
+    # Remove inactive platforms completely, instead of leaving a flush top at z=0.
+    inactive = env_ids[~s.support_active[env_ids]]
+    if len(inactive):
+        pose = env.scene['platform'].data.root_state_w[inactive, :7].clone()
+        pose[:, 2] = env.scene.env_origins[inactive, 2]-5.
+        parent.write_obstacle_pose(env, 'platform', pose, inactive)
+
+
+def fallen_pelvis(env):
+    return env.scene['robot'].data.root_link_pos_w[:, 2]-env.scene.env_origins[:, 2] < .2
+
+
+def fallen_head(env):
+    robot = env.scene['robot']
+    if not hasattr(env, '_physhsi_mid360'):
+        env._physhsi_mid360 = robot.find_bodies('mid360_link')[0][0]
+    return robot.data.body_link_pos_w[:, env._physhsi_mid360, 2]-env.scene.env_origins[:, 2] < .6
+
+
+def fallen_hip(env):
+    robot = env.scene['robot']
+    if not hasattr(env, '_physhsi_hips'):
+        env._physhsi_hips = robot.find_bodies(['left_hip_yaw_link', 'right_hip_yaw_link'], preserve_order=True)[0]
+    return (robot.data.body_link_pos_w[:, env._physhsi_hips, 2]-env.scene.env_origins[:, None, 2] < .15).any(-1)
+
+
+def box_speed(env):
+    return env.scene['box'].data.root_lin_vel_w[:, :2].norm(dim=-1) > 3.

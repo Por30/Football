@@ -1,0 +1,256 @@
+{
+  "modes": {
+    "current": {
+      "groups": {
+        "default": {
+          "n": 32,
+          "mean_steps": 8.78125,
+          "min_steps": 5,
+          "max_steps": 39,
+          "censored": 0,
+          "causes": {
+            "time_out": 0,
+            "invalid": 0,
+            "tipped": 32,
+            "fell_pelvis": 0,
+            "fell_head": 0,
+            "fell_hip": 0,
+            "box_speed": 0
+          }
+        },
+        "loco": {
+          "n": 32,
+          "mean_steps": 7.8125,
+          "min_steps": 5,
+          "max_steps": 33,
+          "censored": 0,
+          "causes": {
+            "time_out": 0,
+            "invalid": 0,
+            "tipped": 32,
+            "fell_pelvis": 0,
+            "fell_head": 0,
+            "fell_hip": 0,
+            "box_speed": 0
+          }
+        }
+      },
+      "mean_first_episode_seconds": 0.16593750000000002,
+      "mean_raw_task_reward_per_step": -0.00204377405316669,
+      "mean_raw_task_discounted_return": -0.017675339119556488,
+      "mean_raw_task_discounted_common_prefix_return": -0.017675339119556488,
+      "raw_reward_terms_per_step": {
+        "dof_acc": -0.00275054024797241,
+        "action_rate": -0.00270067008823766,
+        "torques": -0.008904965718311895,
+        "dof_vel": -0.0019541042123568295,
+        "dof_pos_limits": -0.0011248724990200842,
+        "dof_vel_limits": 0.0,
+        "walk_task": 0.01634302588303977,
+        "carryup_task": 3.745298733790652e-05,
+        "standup_task": 0.0,
+        "slow_pickup": 0.0,
+        "stable_grasp": 0.0,
+        "arm_speed_pickup": 0.0,
+        "arm_acc_pickup": 0.0,
+        "grip_force_cap": 0.0,
+        "held_hand_speed": 0.0,
+        "held_hand_acc": 0.0,
+        "waist_yaw_penalty": -0.0010305675127642343,
+        "search_turn": 4.146735511874524e-05
+      }
+    },
+    "rev22": {
+      "groups": {
+        "default": {
+          "n": 32,
+          "mean_steps": 550.84375,
+          "min_steps": 39,
+          "max_steps": 1000,
+          "censored": 0,
+          "causes": {
+            "time_out": 16,
+            "invalid": 0,
+            "tipped": 15,
+            "fell_pelvis": 0,
+            "fell_head": 1,
+            "fell_hip": 0,
+            "box_speed": 0
+          }
+        },
+        "loco": {
+          "n": 32,
+          "mean_steps": 532.09375,
+          "min_steps": 33,
+          "max_steps": 1000,
+          "censored": 0,
+          "causes": {
+            "time_out": 16,
+            "invalid": 0,
+            "tipped": 13,
+            "fell_pelvis": 0,
+            "fell_head": 3,
+            "fell_hip": 0,
+            "box_speed": 0
+          }
+        }
+      },
+      "mean_first_episode_seconds": 10.829375,
+      "mean_raw_task_reward_per_step": -0.004151504925024548,
+      "mean_raw_task_discounted_return": -0.2991361798813822,
+      "mean_raw_task_discounted_common_prefix_return": -0.06756102967059424,
+      "raw_reward_terms_per_step": {
+        "dof_acc": -0.00021511329350127554,
+        "action_rate": -0.0001309315519627024,
+        "torques": -0.002143694867715556,
+        "dof_vel": -7.561232985003245e-05,
+        "dof_pos_limits": -0.00015231285023427344,
+        "dof_vel_limits": 0.0,
+        "walk_task": -0.004125220413051198,
+        "carryup_task": 0.0030171485720095342,
+        "standup_task": 0.0,
+        "slow_pickup": 0.0,
+        "stable_grasp": 0.0,
+        "arm_speed_pickup": 0.0,
+        "arm_acc_pickup": 0.0,
+        "grip_force_cap": 0.0,
+        "held_hand_speed": 0.0,
+        "held_hand_acc": 0.0,
+        "waist_yaw_penalty": -0.00039030450213016124,
+        "search_turn": 6.453631141111698e-05
+      }
+    },
+    "hold_reset_target": {
+      "groups": {
+        "default": {
+          "n": 32,
+          "mean_steps": 53.46875,
+          "min_steps": 27,
+          "max_steps": 88,
+          "censored": 0,
+          "causes": {
+            "time_out": 0,
+            "invalid": 0,
+            "tipped": 25,
+            "fell_pelvis": 0,
+            "fell_head": 7,
+            "fell_hip": 0,
+            "box_speed": 0
+          }
+        },
+        "loco": {
+          "n": 32,
+          "mean_steps": 51.25,
+          "min_steps": 18,
+          "max_steps": 119,
+          "censored": 0,
+          "causes": {
+            "time_out": 0,
+            "invalid": 0,
+            "tipped": 27,
+            "fell_pelvis": 0,
+            "fell_head": 5,
+            "fell_hip": 0,
+            "box_speed": 0
+          }
+        }
+      },
+      "mean_first_episode_seconds": 1.0471875,
+      "mean_raw_task_reward_per_step": -0.00032902207444299983,
+      "mean_raw_task_discounted_return": -0.0245136714772494,
+      "mean_raw_task_discounted_common_prefix_return": -0.010872696168723727,
+      "raw_reward_terms_per_step": {
+        "dof_acc": -0.0003149074381416049,
+        "action_rate": -0.0001438035746000794,
+        "torques": -0.0026668866199315907,
+        "dof_vel": -4.921397687745368e-05,
+        "dof_pos_limits": -0.0018311188378389207,
+        "dof_vel_limits": 0.0,
+        "walk_task": 0.005647482808781964,
+        "carryup_task": 0.00020405709373673588,
+        "standup_task": 0.0,
+        "slow_pickup": 0.0,
+        "stable_grasp": 0.0,
+        "arm_speed_pickup": 0.0,
+        "arm_acc_pickup": 0.0,
+        "grip_force_cap": -1.0908283104259055e-06,
+        "held_hand_speed": 0.0,
+        "held_hand_acc": 0.0,
+        "waist_yaw_penalty": -0.0011918223941110103,
+        "search_turn": 1.8281692849381563e-05
+      }
+    },
+    "current_no_delay": {
+      "groups": {
+        "default": {
+          "n": 32,
+          "mean_steps": 8.40625,
+          "min_steps": 5,
+          "max_steps": 38,
+          "censored": 0,
+          "causes": {
+            "time_out": 0,
+            "invalid": 0,
+            "tipped": 32,
+            "fell_pelvis": 0,
+            "fell_head": 0,
+            "fell_hip": 0,
+            "box_speed": 0
+          }
+        },
+        "loco": {
+          "n": 32,
+          "mean_steps": 7.03125,
+          "min_steps": 4,
+          "max_steps": 32,
+          "censored": 0,
+          "causes": {
+            "time_out": 0,
+            "invalid": 0,
+            "tipped": 32,
+            "fell_pelvis": 0,
+            "fell_head": 0,
+            "fell_hip": 0,
+            "box_speed": 0
+          }
+        }
+      },
+      "mean_first_episode_seconds": 0.154375,
+      "mean_raw_task_reward_per_step": 0.002045671361292234,
+      "mean_raw_task_discounted_return": 0.014055868360310943,
+      "mean_raw_task_discounted_common_prefix_return": 0.014510790813624958,
+      "raw_reward_terms_per_step": {
+        "dof_acc": -0.0016480300795894422,
+        "action_rate": -0.002890453460346504,
+        "torques": -0.006577120915947007,
+        "dof_vel": -0.0018984349179816137,
+        "dof_pos_limits": -0.001111109363386236,
+        "dof_vel_limits": 0.0,
+        "walk_task": 0.017090723832736396,
+        "carryup_task": 3.571063875787799e-05,
+        "standup_task": 0.0,
+        "slow_pickup": 0.0,
+        "stable_grasp": 0.0,
+        "arm_speed_pickup": 0.0,
+        "arm_acc_pickup": 0.0,
+        "grip_force_cap": 0.0,
+        "held_hand_speed": 0.0,
+        "held_hand_acc": 0.0,
+        "waist_yaw_penalty": -0.000996716499535087,
+        "search_turn": 4.110212658384913e-05
+      }
+    }
+  },
+  "before_training_metrics": {
+    "Sampling/default_transition_fraction": 0.0129,
+    "Sampling/loco_transition_fraction": 0.0438,
+    "Sampling/pickup_transition_fraction": 0.303,
+    "Sampling/hold_transition_fraction": 0.6532,
+    "Reset/default_fraction": 0.2,
+    "Reset/loco_rsi_fraction": 0.5333,
+    "Reset/pickup_rsi_fraction": 0.1333,
+    "Reset/hold_rsi_fraction": 0.1334
+  },
+  "reward_limitation": "Raw task only; full PPO uses .75*task+.125*style. Frozen discriminator comparison was not recorded. Do not infer mixed-return ordering.",
+  "interpretation": "Current learned actions accelerate failure. Four-source random-reset duration bias removes most empty-hand transitions. Rev23 regression predates this sampler; not a single-cause proof."
+}

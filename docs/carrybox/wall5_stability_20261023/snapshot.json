@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-23T12:54:05.364864+09:00",
+  "pid": 2143205,
+  "run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_12-44-38_wall5_v27_stability_fresh_20261023_124434",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v27_stability_fresh_20261023_124434.log",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_12-44-38_wall5_v27_stability_fresh_20261023_124434/model_0.pt",
+  "revision": 27,
+  "num_envs": 4096,
+  "initialization": "fresh",
+  "iteration": 100,
+  "progress_from": 1,
+  "mean_iteration_seconds": 3.8760000000000003,
+  "max_iteration_seconds": 3.9,
+  "metrics": {
+    "Reset/default_fraction": 0.1902,
+    "Reset/loco_rsi_fraction": 0.4947,
+    "Reset/pickup_rsi_fraction": 0.1626,
+    "Reset/hold_rsi_fraction": 0.1526,
+    "Mean episode length": 40.8,
+    "Skill/loco_mean_steps": 37.7006,
+    "Skill/pickup_mean_steps": 28.8065,
+    "Skill/hold_mean_steps": 30.7181,
+    "AMP/style_reward": 0.0385,
+    "Reward/amp_per_step": 0.0048,
+    "Reset/ground_correction_mean_m": 0.0164,
+    "Reset/ground_correction_max_m": 0.0562,
+    "Sampling/default_transition_fraction": 0.2,
+    "Sampling/loco_transition_fraction": 0.7334,
+    "Sampling/pickup_transition_fraction": 0.1333,
+    "Sampling/hold_transition_fraction": 0.1333
+  },
+  "recent25_completed_episode_steps": {
+    "loco": 41.059700997735575,
+    "pickup": 30.52004316121349,
+    "hold": 33.64826234435539
+  },
+  "finite_parameters": true,
+  "initial_optimizer_step": 20,
+  "convergence_evaluated": false
+}

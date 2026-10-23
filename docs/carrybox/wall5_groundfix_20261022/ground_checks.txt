@@ -1,0 +1,79 @@
+def check_ground(b,w):
+ s=common.state(b);robot=b.scene['robot'];all_ids=torch.arange(b.num_envs,device=b.device)
+ term=b.action_manager.get_term('joint_pos');box=b.scene['box'];platform=b.scene['platform']
+ original=common.reference_ground_correction;capture={}
+ def clearance(ids):
+  heights=[]
+  for body,points in zip(s.feet,s.foot_support_points):
+   q=robot.data.body_link_quat_w[ids,body,None].expand(-1,len(points),-1)
+   z=quat_apply(q,points[None].expand(len(ids),-1,-1))[:,:,2]+robot.data.body_link_pos_w[ids,body,None,2]
+   heights.append(z.amin(-1)-b.scene.env_origins[ids,2])
+  return torch.stack(heights,-1).amin(-1)
+ def measured(e,ids):
+  result=original(e,ids)
+  capture.update(ids=ids.clone(),before=clearance(ids).clone(),root=robot.data.root_state_w[ids].clone(),
+                 joint=robot.data.joint_pos[ids].clone(),joint_velocity=robot.data.joint_vel[ids].clone())
+  return result
+ common.reference_ground_correction=measured
+ rows=[];seen=set()
+ try:
+  for batch in range(10):
+   w.reset();after=clearance(all_ids);before=capture['before'];shift=s.reset_ground_correction
+   assert torch.isfinite(after).all() and torch.isfinite(shift).all()
+   assert (shift>=0).all() and (after>=.005-2e-5).all(),(batch,float(after.min()))
+   torch.testing.assert_close(after,before+shift,atol=2e-5,rtol=0)
+   expected=capture['root'].clone();expected[:,2]+=shift
+   torch.testing.assert_close(robot.data.root_state_w,expected,atol=2e-5,rtol=1e-5)
+   torch.testing.assert_close(robot.data.root_vel_w,s.reset_root_velocity,atol=2e-5,rtol=1e-5)
+   torch.testing.assert_close(robot.data.joint_pos,capture['joint'])
+   torch.testing.assert_close(robot.data.joint_vel,capture['joint_velocity'])
+   q=robot.data.joint_pos[:,term._joint_ids]
+   torch.testing.assert_close(term.delay.buffer,q[None].expand(5,-1,-1))
+   torch.testing.assert_close(term.processed_actions,q)
+   # Verify final paired box and support geometry, after parent clamps.
+   loco=s.skills==0;z=b.scene.env_origins[:,2]
+   from isaaclab.utils.math import matrix_from_quat
+   extent=(matrix_from_quat(box.data.root_quat_w)[:,2].abs()*box.data.root_pos_w.new_tensor([.4,.4,.25])/2).sum(-1)
+   # Fetch actual box dimensions rather than guessing from the visible mesh.
+   from perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox import BOX_SIZE
+   extent=(matrix_from_quat(box.data.root_quat_w)[:,2].abs()*box.data.root_pos_w.new_tensor(BOX_SIZE)/2).sum(-1)
+   torch.testing.assert_close(box.data.root_pos_w[loco,2]-z[loco]-extent[loco],torch.full_like(z[loco],.005),atol=2e-5,rtol=0)
+   for clip in s.reference_clip.unique().tolist():
+    if clip<0:continue
+    ids=((s.reference_clip==clip)&~loco).nonzero().flatten()
+    if not len(ids):continue
+    data=s.references[clip];times=s.reference_time[ids]
+    if int(s.skills[ids[0]])==1:seen.add(clip)
+    nativeq=interpolate(data['base_quat'].float()[:,[3,0,1,2]],times,True)
+    offset=quat_apply(quat_conjugate(yaw_quat(nativeq)),interpolate(data['box_pos_local'].float(),times))
+    rawbox=capture['root'][ids,:3]+offset
+    expected_box=rawbox.clone();expected_box[:,2]+=shift[ids]
+    expected_box[:,2]=torch.maximum(expected_box[:,2],z[ids]+extent[ids]+.005)
+    torch.testing.assert_close(box.data.root_pos_w[ids],expected_box,atol=2e-5,rtol=1e-5)
+    active=s.support_active[ids]
+    if active.any():
+     top=(rawbox[:,2]-z[ids]-.125-.005).clamp_min(0.)+shift[ids]
+     top=torch.minimum(top,box.data.root_pos_w[ids,2]-z[ids]-extent[ids]-.005).clamp_min(0.)
+     actual_top=platform.data.root_pos_w[ids,2]-z[ids]+.4
+     torch.testing.assert_close(actual_top[active],top[active],atol=2e-5,rtol=0)
+     assert (actual_top[active]<=box.data.root_pos_w[ids[active],2]-z[ids[active]]-extent[ids[active]]+2e-5).all()
+   inactive=~s.support_active
+   torch.testing.assert_close(platform.data.root_pos_w[inactive,2]-z[inactive],torch.full_like(z[inactive],-5.),atol=2e-5,rtol=0)
+   immediate={k:int(getattr(b.cfg.terminations,k).func(b).sum()) for k in ('tipped','fell_pelvis','fell_head','fell_hip','box_speed')}
+   assert not any(immediate.values()),immediate
+   for i in range(b.num_envs):
+    rows.append(dict(batch=batch,env_id=i,kind='default' if bool(s.default_reset[i]) else ('loco','pickup','hold')[int(s.skills[i])],clip=int(s.reference_clip[i]),frame=float(s.reference_time[i]),before_m=float(before[i]),after_m=float(after[i]),shift_m=float(shift[i]),support=bool(s.support_active[i])))
+  assert len(seen)==3,seen
+  ids=torch.tensor([61,3,29,5,47,12,31],device=b.device)
+  survivors=torch.tensor([0,1,2,4,6],device=b.device)
+  oldroot=robot.data.root_state_w[survivors].clone();oldq=robot.data.joint_pos[survivors].clone()
+  oldv=robot.data.joint_vel[survivors].clone();oldbuf=term.delay.buffer[:,survivors].clone()
+  oldbox=box.data.root_state_w[survivors].clone();oldplatform=platform.data.root_state_w[survivors].clone()
+  b._reset_idx(ids)
+  for a,c in [(robot.data.root_state_w[survivors],oldroot),(robot.data.joint_pos[survivors],oldq),(robot.data.joint_vel[survivors],oldv),(term.delay.buffer[:,survivors],oldbuf),(box.data.root_state_w[survivors],oldbox),(platform.data.root_state_w[survivors],oldplatform)]:torch.testing.assert_close(a,c,atol=2e-5,rtol=1e-5)
+  assert (clearance(ids)>=.005-2e-5).all()
+  print('GROUND_CHECK_PASS',len(rows),'minimum',min(r['after_m'] for r in rows),flush=True)
+ finally:common.reference_ground_correction=original
+ return rows
+
+

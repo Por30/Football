@@ -1,0 +1,4 @@
+{
+  "scope": "Diagnostic only; preserve initial group/clip/frame and physical-state equality within floating-point 1e-5, explicitly print mismatch and exception before simulator closes; save completed cases incrementally.",
+  "production_modified": false
+}

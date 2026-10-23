@@ -1,0 +1,28 @@
+/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox.py
+sha256=c37e7c5ff4884baba2a40ddfde5b9d91f01b427fea7bf9812da26231c35630b7
+    def check_termination(self):
+        """ Check if environments need to be reset
+        """
+        self.reset_buf = torch.any(torch.norm(self.contact_forces[:, self.termination_contact_indices, :], dim=-1) > 10., dim=1)
+        self.time_out_buf = self.episode_length_buf > self.max_episode_length # no terminal reward for time-outs
+        self.gravity_termination_buf = torch.any(torch.norm(self.projected_gravity[:, 0:2], dim=-1, keepdim=True) > 0.8, dim=1)
+
+        if self.test:
+            non_tilt = torch.norm(self.projected_gravity_box[:, 0:2], dim=-1) < 0.2
+            place_pos = self.object2goal_dist_xyz < 0.1
+        else:
+            non_tilt = torch.norm(self.projected_gravity_box[:, 0:2], dim=-1) < 0.1
+            place_pos = self.object2goal_dist_xyz < self.cfg.rewards.thresh_object2goal
+        self.success_buf = non_tilt & place_pos
+
+        self.reset_buf |= self.time_out_buf
+        self.reset_buf |= self.rigid_body_states[:, self.head_index, 2] < 0.6
+        self.reset_buf |= self.root_states[:, 2] < 0.2
+        self.reset_buf |= torch.logical_or(torch.abs(self.roll)>0.5, torch.abs(self.pitch)>1.1)
+        self.reset_buf |= torch.norm(self.rigid_body_states[:, 2, 7:9], dim=-1) > 3.0
+
+        self.reset_buf |= torch.any(self.rigid_body_states[:, self.hip_yaw_indices, 2] < 0.15, dim=1)
+
+        if self.box_cfg.box_termination:
+            self.reset_buf |= (self.projected_gravity_box[:, 2] > -0.05)
+

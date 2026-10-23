@@ -1,0 +1,37 @@
+{
+  "pid": 2143205,
+  "command": [
+    "/home/cao/ENTER/envs/ball/bin/python",
+    "-u",
+    "scripts/rsl_rl/train.py",
+    "--task",
+    "Template-Perceptual-Ball-CarryBox-Walled5-v0",
+    "--num_envs",
+    "4096",
+    "--device",
+    "cuda:0",
+    "--headless",
+    "--seed",
+    "42",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall5_v27_stability_fresh_20261023_124434"
+  ],
+  "process_start_ticks": "344414518",
+  "stopped_at": "2026-10-23T17:35:11.918825+09:00",
+  "status": "exited",
+  "signals": [
+    {
+      "signal": "SIGINT",
+      "sent_at": "2026-10-23T17:35:11.392991+09:00"
+    }
+  ],
+  "old_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/launch_wall5_v27_stability_fresh_20261023_124434.log",
+  "old_run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_12-44-38_wall5_v27_stability_fresh_20261023_124434",
+  "last_log_iteration": 4820,
+  "last_saved_checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_12-44-38_wall5_v27_stability_fresh_20261023_124434/model_4800.pt",
+  "last_saved_checkpoint_size": 16079659,
+  "checkpoint_sha256": "c4fa0b0185802aab924d5e533941541cb2c60118c4ee01edd3ebed75739746ef",
+  "authorization": "User explicitly requested stopping current training and starting a new run"
+}

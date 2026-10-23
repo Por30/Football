@@ -1,0 +1,35 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall5_physhsi_20261022/cpu.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "58b2860936482697898bf69458c16af61b29c538ccdcb4f6f573881941109ee9",
+      "stdout_sha256": "bcfc3441fdb4cc6ca5e2bf97afa7899bb42048ac9c8d0b9e14954201bd26a78f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash docs/carrybox/wall5_physhsi_20261022/smoke.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "9ebeae60646dbb6578084d8af94144a9c67805897dc179199b27b8d16235513d",
+      "stdout_sha256": "bcfc3441fdb4cc6ca5e2bf97afa7899bb42048ac9c8d0b9e14954201bd26a78f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash docs/carrybox/wall5_physhsi_20261022/start_and_verify.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "4a902860aaa0f0481c9e7aa4c8944db10eb9f0b0ad91ae555876898415774f71",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

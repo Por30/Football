@@ -1,0 +1,53 @@
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
++++ source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
+@@ -1,4 +1,4 @@
+-"""Wall5 revision27: empty-hand training quotas and dense survival feedback."""
++"""Wall5 revision28: clean depth and a gentler early push curriculum."""
+ from isaaclab.utils import configclass
+ from isaaclab.envs.mdp import is_alive
+ from .carrybox_walled_env_cfg import CarryBoxWalled4EnvCfg, CarryBoxWalled4PPORunnerCfg, spawn_walled_robot
+@@ -54,9 +54,21 @@
+     # Keep the paired visibility flag for diagnostics; revision22 supervises all frames.
+     pose_visibility_supervision: bool = True
+     depth_in_metres: bool = True
+-    depth_noise_std_m: float = .02
+-    depth_stereo_near_m: float = .008
+-    depth_stereo_far_m: float = .03
++    # Clean optical depth for this training stage; geometric occlusion remains.
++    depth_noise_std_m: float = 0.
++    depth_stereo_near_m: float = 0.
++    depth_stereo_far_m: float = 0.
++    depth_edge_probability: float = 0.
++    depth_hole_probability: float = 0.
++    depth_max_delay_steps: int = 0
++    depth_delay_probability: float = 0.
++    depth_freeze_probability: float = 0.
++    depth_freeze_max_steps: int = 1
++    camera_position_error_m: float = 0.
++    camera_rotation_error_deg: float = 0.
++    # Preserve additive pushes and final amplitude; defer and slow their onset.
++    push_warmup_iterations: int = 5000
++    push_ramp_iterations: int = 10000
+     reference_link_velocity: bool = True
+     task_box_distance_3d: bool = True
+     reward_geometry: dict = dict(g1_reward_geometry(), near_distance=.90, profile='g1_grasp_geometry_v23')
+@@ -110,7 +122,7 @@
+ class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
+     class_name = 'CarryBoxWall5OnPolicyRunner'
+     experiment_name = 'g1_carrybox_depth/walled5'
+-    run_name = 'walled5_physhsi_stability_v27'
++    run_name = 'walled5_clean_depth_gentle_push_v28'
+ 
+     def __post_init__(self):
+         super().__post_init__()
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
++++ source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
+@@ -257,7 +257,7 @@
+         library = state(self).library
+         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
+                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
+-        contract.update(migration_revision=27, physical_parent='physhsi_g1_collision_hybrid_reset_v24',
++        contract.update(migration_revision=28, physical_parent='physhsi_g1_collision_hybrid_reset_v24',
+                         collision_profile=FULL_BODY_COLLISION_PROFILE,
+                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
+                         shoulder_colliders='visual_mesh_convex_hull',

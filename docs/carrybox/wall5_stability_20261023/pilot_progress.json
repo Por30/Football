@@ -1,0 +1,61 @@
+{
+  "iteration": 127,
+  "loss": {
+    "value_function": 0.028680055867880583,
+    "surrogate": -0.018648777567432263,
+    "entropy": 39.97132263183594,
+    "box_position": 0.1352882891893387,
+    "box_rotation": 0.05216374099254608,
+    "action_bounds": 0.0036357468576170503,
+    "amp_loss": 0.03031173348426819,
+    "amp_expert_loss": 0.0012079274747520685,
+    "amp_policy_loss": 0.009039132855832577,
+    "amp_valid_samples": 12288.0,
+    "amp_normalizer_count": 5263360.0,
+    "amp_normalizer_min_std": 0.009999999776482582,
+    "box_visible_fraction": 0.9043782949447632,
+    "box_visible_distance": 1.3549370765686035,
+    "box_supervised_fraction": 1.0,
+    "box_supervised_distance": 1.3868017196655273,
+    "box_aux_weighted": 0.18745203018188478,
+    "ppo_kl": 0.013846862129867077,
+    "ppo_learning_rate": 7.593750000000002e-05,
+    "action_std_max": 1.0
+  },
+  "elapsed_s": 242.010672589764,
+  "recent_completed_steps": {
+    "default": 24.985,
+    "loco": 19.525,
+    "pickup": 19.535,
+    "hold": 22.14
+  },
+  "transition_counts": [
+    102,
+    273,
+    69,
+    68
+  ],
+  "reward_terms_per_step": {
+    "dof_acc": -0.02066044881939888,
+    "action_rate": -0.029211532324552536,
+    "torques": -0.037383679300546646,
+    "dof_vel": -0.005655219312757254,
+    "dof_pos_limits": -0.0018992237746715546,
+    "dof_vel_limits": -2.2045050229735352e-08,
+    "walk_task": 0.005589834880083799,
+    "carryup_task": 0.0032612793147563934,
+    "standup_task": 0.00092804100131616,
+    "slow_pickup": -1.5109390005818568e-05,
+    "stable_grasp": 8.221475127356825e-07,
+    "arm_speed_pickup": -1.000092743197456e-05,
+    "arm_acc_pickup": -0.00021309591829776764,
+    "grip_force_cap": -0.0004884168738499284,
+    "held_hand_speed": -0.0007560366066172719,
+    "held_hand_acc": -0.004024269059300423,
+    "waist_yaw_penalty": -0.001798067707568407,
+    "search_turn": 4.032009746879339e-05,
+    "alive": 0.05716308578848839
+  },
+  "mixed_reward_per_step": -0.02230309508740902,
+  "style_per_step": 0.03236567756781975
+}

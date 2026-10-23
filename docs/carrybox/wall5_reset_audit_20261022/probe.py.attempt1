@@ -1,0 +1,105 @@
+"""Read-only reset-state audit and first-episode control comparison."""
+import argparse
+from isaaclab.app import AppLauncher
+p=argparse.ArgumentParser();AppLauncher.add_app_launcher_args(p);args=p.parse_args();app=AppLauncher(args).app
+from pathlib import Path
+import json,hashlib,statistics
+import torch
+from isaaclab_rl.rsl_rl import RslRlVecEnvWrapper
+from isaaclab.utils.math import quat_apply,euler_xyz_from_quat,wrap_to_pi
+from perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_wall5_env_cfg import CarryBoxWalled5EnvCfg,CarryBoxWalled5PPORunnerCfg
+from perceptual_ball.tasks.manager_based.perceptual_ball.mdp import carrybox_walled as common,carrybox_wall5 as task,carrybox_physhsi as phy
+from perceptual_ball.rsl_rl_extensions.carrybox_wall5 import CarryBoxWall5ActorCritic
+D=Path(__file__).resolve().parent;S=json.loads((D/'selection.json').read_text());N=64
+
+
+def main():
+ torch.set_num_threads(2);cfg,agent=CarryBoxWalled5EnvCfg(),CarryBoxWalled5PPORunnerCfg()
+ cfg.scene.num_envs=N;cfg.seed=42;cfg.sim.device=args.device
+ for key in ('gpu_found_lost_pairs_capacity','gpu_found_lost_aggregate_pairs_capacity','gpu_total_aggregate_pairs_capacity'):setattr(cfg.sim.physx,key,262144)
+ ck=torch.load(S['checkpoint'],map_location=args.device,weights_only=False)
+ env=task.Wall5CarryBoxEnv(cfg=cfg)
+ try:
+  assert env.checkpoint_contract()==ck['environment_contract']
+  w=RslRlVecEnvWrapper(env,clip_actions=agent.clip_actions);obs,_=w.reset()
+  pc=agent.policy.to_dict();pc.pop('class_name');policy=CarryBoxWall5ActorCritic(obs,agent.obs_groups,29,**pc).to(args.device);policy.load_state_dict(ck['model_state_dict'],strict=True);policy.eval()
+  saved={k:v.clone() for k,v in policy.state_dict().items()}
+  env.set_training_iteration(0);env.set_training_iteration(int(ck['iter']))
+  s=common.state(env);robot=env.scene['robot'];term=env.action_manager.get_term('joint_pos')
+  head=robot.find_bodies('mid360_link')[0][0];hips=robot.find_bodies(['left_hip_yaw_link','right_hip_yaw_link'],preserve_order=True)[0]
+  knee_ids=robot.find_joints(['left_knee_joint','right_knee_joint'],preserve_order=True)[0]
+  # Compute actual foot hull support; never apply its correction.
+  common.reference_ground_correction(env,torch.arange(N,device=env.device))
+  def foot_height():
+   values=[]
+   for body,points in zip(s.feet,s.foot_support_points):
+    q=robot.data.body_link_quat_w[:,body,None].expand(-1,len(points),-1)
+    z=quat_apply(q,points[None].expand(N,-1,-1))[:,:,2]+robot.data.body_link_pos_w[:,body,None,2]
+    values.append(z.amin(-1)-env.scene.env_origins[:,2])
+   return torch.stack(values,-1).amin(-1)
+  def labels():return ['default' if bool(s.default_reset[i]) else ('loco','pickup','hold')[int(s.skills[i])] for i in range(N)]
+  def physical():
+   roll,pitch,_=euler_xyz_from_quat(robot.data.root_link_quat_w);origin=env.scene.env_origins[:,2]
+   return dict(roll=wrap_to_pi(roll),pitch=wrap_to_pi(pitch),root_height=robot.data.root_link_pos_w[:,2]-origin,
+    mid360_height=robot.data.body_link_pos_w[:,head,2]-origin,hip_height=(robot.data.body_link_pos_w[:,hips,2]-origin[:,None]).amin(-1),
+    root_xy_speed=robot.data.root_vel_w[:,:2].norm(dim=-1),box_xy_speed=env.scene['box'].data.root_lin_vel_w[:,:2].norm(dim=-1),
+    foot_clearance=foot_height(),tipped=task.tipped(env),fell_pelvis=phy.fallen_pelvis(env),fell_head=phy.fallen_head(env),fell_hip=phy.fallen_hip(env),box_speed=phy.box_speed(env))
+  reset_rows=[]
+  with torch.inference_mode():
+   for batch in range(10):
+    obs,_=w.reset();values=physical();kind=labels()
+    torch.testing.assert_close(robot.data.root_vel_w,s.reset_root_velocity,atol=2e-5,rtol=1e-5)
+    torch.testing.assert_close(term.delay.buffer,robot.data.joint_pos[:,term._joint_ids][None].expand(5,-1,-1))
+    for i in range(N):
+     row={k:v[i].item() for k,v in values.items()};row.update(batch=batch,env_id=i,kind=kind[i],clip=int(s.reference_clip[i]),frame=float(s.reference_time[i]),joint_speed_max=float(robot.data.joint_vel[i].abs().max()),delay_steps=int(4-term.delay.index[i]),support=bool(s.support_active[i]))
+     reset_rows.append(row)
+  ended={};active=False;initial=[];step=0;push_counts=torch.zeros(N,dtype=torch.long,device=env.device);trace=[]
+  oldreset=env._reset_idx
+  def reset_hook(ids):
+   if active and getattr(env,'_carrybox_in_step',False):
+    values=physical()
+    for i in ids.tolist():
+     if i not in ended:
+      row={k:v[i].item() for k,v in values.items()};row.update(env_id=i,kind=initial[i]['kind'],clip=initial[i]['clip'],frame=initial[i]['frame'],steps=int(s.actual_episode_steps[i]),timeout=bool(env.termination_manager.time_outs[i]),censored=False,push_events=int(push_counts[i]))
+      ended[i]=row
+   oldreset(ids)
+  env._reset_idx=reset_hook
+  event=env.event_manager.get_term_cfg('push_robot');oldpush=event.func
+  def push(e,ids,**kw):
+   oldpush(e,ids,**kw)
+   if active:push_counts[ids]+=1
+  event.func=push;env.event_manager.set_term_cfg('push_robot',event)
+  cases={}
+  with torch.inference_mode():
+   for mode in ('mean','sample','reset_target'):
+    active=False;torch.manual_seed(42);obs,_=w.reset();kind=labels();v=physical()
+    initial=[dict(env_id=i,kind=kind[i],clip=int(s.reference_clip[i]),frame=float(s.reference_time[i]),**{k:x[i].item() for k,x in v.items()}) for i in range(N)]
+    if cases:assert initial==cases['mean']['initial']
+    held=((robot.data.joint_pos[:,term._joint_ids]-term._offset)/term._scale).clone()
+    ended.clear();push_counts.zero_();trace=[];active=True
+    for step in range(1000):
+     survivors=[i for i in range(N) if i not in ended]
+     if not survivors:break
+     action=policy.act(obs) if mode=='sample' else policy.act_inference(obs)
+     if mode=='reset_target':action=held
+     if step<30:
+      values=physical();target=(action*term._scale+term._offset)
+      for i in survivors:
+       trace.append(dict(step=step,env_id=i,kind=kind[i],roll=float(values['roll'][i]),pitch=float(values['pitch'][i]),root_height=float(values['root_height'][i]),
+        knee_q=robot.data.joint_pos[i,knee_ids].tolist(),knee_target=target[i,knee_ids].tolist(),action_abs_max=float(action[i].abs().max()),
+        net_contact_max_n=float(env.scene['body_contacts'].data.net_forces_w[i].norm(dim=-1).max())))
+     obs,reward,done,extra=w.step(action)
+     assert torch.isfinite(reward).all() and all(torch.isfinite(t).all() for t in obs.values())
+     if step%200==199:print('PROGRESS',mode,step+1,len(ended),flush=True)
+    active=False;v=physical()
+    for i in range(N):
+     if i not in ended:ended[i]=dict(env_id=i,kind=kind[i],clip=initial[i]['clip'],frame=initial[i]['frame'],steps=int(s.actual_episode_steps[i]),censored=True,timeout=False,push_events=int(push_counts[i]),**{k:x[i].item() for k,x in v.items()})
+    cases[mode]=dict(initial=initial,episodes=[ended[i] for i in range(N)],trace=trace)
+    print('CASE',mode,{k:statistics.mean(e['steps'] for e in ended.values() if e['kind']==k) for k in set(kind)},flush=True)
+  assert all(torch.equal(v,saved[k]) for k,v in policy.state_dict().items())
+  out=dict(status='PASS',checkpoint=S['checkpoint'],checkpoint_iteration=int(ck['iter']),contract_matched=True,reset_rows=reset_rows,cases=cases,weights_unchanged=True,policy_dt=.02,
+   joint_names=robot.joint_names,knee_ids=knee_ids,push_curriculum_scale=max(0.,min(1.,(int(ck['iter'])-cfg.push_warmup_iterations)/cfg.push_ramp_iterations)))
+  (D/'probe.json').write_text(json.dumps(out,indent=2)+'\n');print('RESET_PROBE_PASS',flush=True)
+ finally:env.close()
+try:main()
+finally:app.close(wait_for_replicator=False)

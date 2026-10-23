@@ -193,8 +193,14 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
     def step(self, action):
         # Attribute terminal transitions to their old skill, before any reset.
         skills = state(self).skills.clone()
+        defaults = state(self).default_reset.clone()
         result = super().step(action)
         log = result[-1].setdefault('log', {})
+        reset_state = state(self)
+        if hasattr(reset_state, 'reset_counts'):
+            for i, name in enumerate(('default', 'loco_rsi', 'pickup_rsi', 'hold_rsi')):
+                log[f'Reset/{name}_fraction'] = reset_state.reset_counts[i] / reset_state.reset_counts.sum().clamp_min(1)
+            log['Sampling/default_transition_fraction'] = defaults.float().mean()
         names = self.reward_manager.active_terms
         for skill, name in enumerate(('loco', 'pickup', 'hold')):
             mask = (skills == skill).float()
@@ -203,7 +209,7 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
             log[f'Reward/{name}_task_per_step'] = (result[1] * mask).sum() / count
             if skill == 0:
                 terms = (self.reward_manager._step_reward * mask[:, None]).sum(0) / count * self.step_dt
-                for key in ('walk_task', 'carryup_task', 'standup_task', 'action_rate', 'torques'):
+                for key in ('walk_task', 'carryup_task', 'standup_task', 'action_rate', 'torques', 'alive'):
                     log[f'Reward/loco_{key}_per_step'] = terms[names.index(key)]
                 robot = self.scene['robot'].data
                 # Post-reset kinematics are excluded from these continuous diagnostics.
@@ -231,6 +237,15 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
         terminal = (critic_state(self)[env_ids].clone()
                     if getattr(self, '_carrybox_in_step', False) else None)
         super()._reset_idx(env_ids)
+        # Multiple causes may coincide; this is physical tilt at episode end,
+        # not an exclusive attribution of the reset to a single cause.
+        log = self.extras['log']
+        for name in ('loco', 'pickup', 'hold'):
+            log[f'Skill/{name}_tilt_at_episode_end_fraction'] = log.pop(f'Skill/{name}_tipped_fraction')
+        if len(env_ids) and hasattr(state(self), 'reset_ground_correction'):
+            shift = state(self).reset_ground_correction[env_ids]
+            log['Reset/ground_correction_mean_m'] = shift.mean()
+            log['Reset/ground_correction_max_m'] = shift.max()
         if terminal is not None:
             self._carrybox_terminal['obs']['critic_state'] = terminal
 
@@ -242,7 +257,7 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
         library = state(self).library
         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
-        contract.update(migration_revision=23, physical_parent='wall5_full_body_self_collision_v2',
+        contract.update(migration_revision=28, physical_parent='physhsi_g1_collision_hybrid_reset_v24',
                         collision_profile=FULL_BODY_COLLISION_PROFILE,
                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
                         shoulder_colliders='visual_mesh_convex_hull',
@@ -278,7 +293,9 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
                         box_rotation6='first_two_columns_of_pelvis_inverse_times_box')
         contract.update(reset_assignment='fixed_env_midpoint_skill_quota_v1',
                         action_bounds_supervision='paired_raw_physical_limits_offset_scale_intersect_wrapper9_58_v1',
-                        locomotion_feedback='approach_then_0.52m_stance_no_near_bonus_v23')
+                        locomotion_feedback='approach_then_0.52m_stance_plus_survival_v27')
+        contract['survival_reward'] = dict(weight=self.cfg.rewards.alive.weight, units='per_second',
+            gating='not_terminated_timeouts_alive', posture_target=None)
         contract['reward_geometry'] = dict(reward_geometry(self))
         contract['depth_observation'] = self.depth_contract
         contract['reward_geometry_calibration'] = {
@@ -304,4 +321,23 @@ class Wall5CarryBoxEnv(WalledCarryBoxEnv):
             for name, material in (('simulation_default', self.cfg.sim.physics_material),
                                    ('ground', self.cfg.scene.ground.spawn.physics_material))
         }
+        from perceptual_ball.carrybox_physhsi import COLLISION_PROFILE, RESET_PROFILE, hybrid_probabilities
+        probabilities = hybrid_probabilities(self.cfg.reset_reference_probability, self.cfg.reset_skill_probabilities)
+        contract.update(collision_profile=COLLISION_PROFILE, shoulder_colliders='original_urdf_capsules',
+                        self_collision_filter_pairs=[], reference_ground_clearance='G1_collision_hull_min_5mm_upward_only_after_randomized_joint_reset',
+                        paired_reference_ground_shift='robot_box_active_support_same_dz',
+                        head_reference='mid360_link_origin', reference_velocity='world_com_uniform_rsi0.2_default0.5',
+                        reset_assignment=RESET_PROFILE, box_reset_profile='findbox_ground_loco_full_reference_pickup_hold',
+                        reference_dataset_profile='findbox_full_three_pickups_v1', ground_pickup_reset_frame_range=None,
+                        reset_default_probability=probabilities[0], reset_reference_probability=self.cfg.reset_reference_probability,
+                        reset_total_probabilities=list(probabilities),
+                        reset_quota_scope='fixed_global_env_id_default_loco_pickup_hold_initialization_only',
+                        reference_time='continuous_uniform_full_clip', joint_reset_noise_rad=.1,
+                        joint_reset_velocity='source_joint_velocity', joint_reset_limits='0.9_urdf_range_soft_limits', collision_reward='disabled_physhsi',
+                        physics_action_delay={'physics_dt': self.physics_dt, 'slots': 5, 'range_s': [0., .02],
+                                              'reset_fill': 'final_reset_joint_position', 'update': 'each_physics_step'},
+                        termination_profile={'root_height_m': .2, 'mid360_height_m': .6, 'hip_yaw_height_m': .15,
+                                             'box_xy_speed_mps': 3., 'roll_rad': .5, 'pitch_rad': 1.1,
+                                             'box_tilt': False, 'success_reset': False},
+                        failure_diagnostics='pre_reset_height_causes_and_tilt_at_episode_end_v26')
         return contract

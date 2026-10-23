@@ -1,0 +1,4 @@
+{
+  "change": "Bind seven-field read-only expert review to Task metadata; map its minimal checks to the original three frozen commands. Commands, allowed scope and acceptance thresholds unchanged. Pending platform/capsule validation cleared by declared scope and passing live smoke.",
+  "test_commands_changed": false
+}

@@ -1,0 +1,127 @@
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
++++ source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py
+@@ -1,7 +1,7 @@
+-"""Wall5 revision25: PhysHSI initialization with angle termination disabled."""
++"""Wall5 revision26: PhysHSI terminations with collision-grounded G1 resets."""
+ from isaaclab.utils import configclass
+ from .carrybox_walled_env_cfg import CarryBoxWalled4EnvCfg, CarryBoxWalled4PPORunnerCfg, spawn_walled_robot
+-from .mdp.carrybox_wall5 import amp_frame, critic_state, push_velocity_increment, action_bounds, reset_scene, walk_task, grasp_task_reward
++from .mdp.carrybox_wall5 import amp_frame, tipped, critic_state, push_velocity_increment, action_bounds, reset_scene, walk_task, grasp_task_reward
+ from .carrybox_env_cfg import CarryBoxObservationsCfg
+ from .mdp.carrybox_physhsi import (reset_scene, PhysHSIJointPositionAction,
+     fallen_pelvis, fallen_head, fallen_hip, box_speed)
+@@ -84,9 +84,8 @@
+             material.dynamic_friction = 1.
+             material.friction_combine_mode = 'multiply'
+         self.observations.amp.motion.func = amp_frame
+-        # Explicit user override: large roll/pitch alone must not end an episode.
+-        # Local PhysHSI also checks angles; its height/speed checks remain below.
+-        self.terminations.tipped = None
++        # Match local PhysHSI: abs(roll)>0.5 or abs(pitch)>1.1 radians.
++        self.terminations.tipped = DoneTerm(func=tipped)
+         self.terminations.fell = None
+         self.terminations.fell_pelvis = DoneTerm(func=fallen_pelvis)
+         self.terminations.fell_head = DoneTerm(func=fallen_head)
+@@ -106,7 +105,7 @@
+ class CarryBoxWalled5PPORunnerCfg(CarryBoxWalled4PPORunnerCfg):
+     class_name = 'CarryBoxWall5OnPolicyRunner'
+     experiment_name = 'g1_carrybox_depth/walled5'
+-    run_name = 'walled5_physhsi_no_tilt_v25'
++    run_name = 'walled5_physhsi_grounded_v26'
+ 
+     def __post_init__(self):
+         super().__post_init__()
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
++++ source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py
+@@ -236,11 +236,15 @@
+         terminal = (critic_state(self)[env_ids].clone()
+                     if getattr(self, '_carrybox_in_step', False) else None)
+         super()._reset_idx(env_ids)
+-        # Parent counters describe physical tilt at episode end, even when no
+-        # angle termination is registered. Name the wall5 diagnostic accordingly.
++        # Multiple causes may coincide; this is physical tilt at episode end,
++        # not an exclusive attribution of the reset to a single cause.
+         log = self.extras['log']
+         for name in ('loco', 'pickup', 'hold'):
+             log[f'Skill/{name}_tilt_at_episode_end_fraction'] = log.pop(f'Skill/{name}_tipped_fraction')
++        if len(env_ids) and hasattr(state(self), 'reset_ground_correction'):
++            shift = state(self).reset_ground_correction[env_ids]
++            log['Reset/ground_correction_mean_m'] = shift.mean()
++            log['Reset/ground_correction_max_m'] = shift.max()
+         if terminal is not None:
+             self._carrybox_terminal['obs']['critic_state'] = terminal
+ 
+@@ -252,7 +256,7 @@
+         library = state(self).library
+         reference_hash = (library.metadata['manifest_sha256'] if library is not None else
+                           hashlib.sha256((Path(self.cfg.reference_motion_dataset) / 'amp_manifest.json').read_bytes()).hexdigest())
+-        contract.update(migration_revision=25, physical_parent='physhsi_g1_collision_hybrid_reset_v24',
++        contract.update(migration_revision=26, physical_parent='physhsi_g1_collision_hybrid_reset_v24',
+                         collision_profile=FULL_BODY_COLLISION_PROFILE,
+                         self_collisions=self.cfg.scene.robot.spawn.articulation_props.enabled_self_collisions,
+                         shoulder_colliders='visual_mesh_convex_hull',
+@@ -274,8 +278,8 @@
+                         reference_dataset_profile='findbox_ground_pickup_v1',
+                         reference_manifest_sha256=reference_hash)
+         contract.update(reference_velocity='source_position_difference_pelvis_link', failure_reward='none_x2_recipe',
+-                        roll_termination='disabled_by_user', aux_supervision='all_paired_frames_xyz_rot6_visibility_diagnostic_only_v1',
+-                        aux_target_shape=10, early_failure_penalty_weight=0., roll_limit=None,
++                        roll_termination='abs_roll_gt_0.5', aux_supervision='all_paired_frames_xyz_rot6_visibility_diagnostic_only_v1',
++                        aux_target_shape=10, early_failure_penalty_weight=0., roll_limit=.5,
+                         height_termination_terms=list(self.cfg.height_termination_terms),
+                         failure_diagnostics='pre_reset_physical_causes_per_completed_skill_episode_multi_label_v20',
+                         reset_skill_probabilities=list(self.cfg.reset_skill_probabilities))
+@@ -316,7 +320,8 @@
+         }
+         from perceptual_ball.carrybox_physhsi import COLLISION_PROFILE, RESET_PROFILE
+         contract.update(collision_profile=COLLISION_PROFILE, shoulder_colliders='original_urdf_capsules',
+-                        self_collision_filter_pairs=[], reference_ground_clearance='native_base_height_plus_0.05',
++                        self_collision_filter_pairs=[], reference_ground_clearance='G1_collision_hull_min_5mm_upward_only_after_randomized_joint_reset',
++                        paired_reference_ground_shift='robot_box_active_support_same_dz',
+                         head_reference='mid360_link_origin', reference_velocity='world_com_uniform_rsi0.2_default0.5',
+                         reset_assignment=RESET_PROFILE, box_reset_profile='findbox_ground_loco_full_reference_pickup_hold',
+                         reference_dataset_profile='findbox_full_three_pickups_v1', ground_pickup_reset_frame_range=None,
+@@ -327,7 +332,7 @@
+                         physics_action_delay={'physics_dt': self.physics_dt, 'slots': 5, 'range_s': [0., .02],
+                                               'reset_fill': 'final_reset_joint_position', 'update': 'each_physics_step'},
+                         termination_profile={'root_height_m': .2, 'mid360_height_m': .6, 'hip_yaw_height_m': .15,
+-                                             'box_xy_speed_mps': 3., 'roll_rad': None, 'pitch_rad': None,
++                                             'box_xy_speed_mps': 3., 'roll_rad': .5, 'pitch_rad': 1.1,
+                                              'box_tilt': False, 'success_reset': False},
+-                        failure_diagnostics='pre_reset_height_causes_and_nonterminal_tilt_at_episode_end_v25')
++                        failure_diagnostics='pre_reset_height_causes_and_tilt_at_episode_end_v26')
+         return contract
+--- before/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_physhsi.py
++++ source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_physhsi.py
+@@ -49,6 +49,7 @@
+         s.reset_root_velocity = torch.zeros(env.num_envs, 6, device=env.device)
+         s.reset_joint_position = torch.zeros_like(robot.data.joint_pos)
+         s.reset_joint_velocity = torch.zeros_like(robot.data.joint_vel)
++        s.reset_ground_correction = torch.zeros(env.num_envs, device=env.device)
+     n = len(ids)
+     inverse = torch.argsort(torch.tensor(joint_mapping(robot.joint_names), device=env.device))
+     root = robot.data.default_root_state[ids].clone()
+@@ -99,10 +100,22 @@
+     bounds = torch.where(defaults, .5, .2)
+     root[:, 7:] = (2*torch.rand(n, 6, device=env.device)-1)*bounds[:, None]
+     # Pose is pelvis link origin; velocity is COM world as in Gym root state.
+-    # No foot-hull offset: PhysHSI uses reference base_height + 5cm exactly.
+     robot.write_root_pose_to_sim(root[:, :7], env_ids=ids)
+     robot.write_root_velocity_to_sim(root[:, 7:], env_ids=ids)
+     robot.write_joint_state_to_sim(joint, velocity, env_ids=ids)
++    # Reference height + 5cm does not clear the current G1 foot hull after
++    # joint randomization. Refresh final FK, then translate only upwards.
++    env.sim.forward()
++    correction = parent.reference_ground_correction(env, ids)
++    if not torch.isfinite(correction).all():
++        raise FloatingPointError('Non-finite G1 reset ground correction')
++    root[:, 2] += correction
++    robot.write_root_pose_to_sim(root[:, :7], env_ids=ids)
++    # Preserve paired hand/box geometry and pre-contact support; inactive
++    # platforms remain inactive. Ordinary loco boxes are grounded downstream.
++    box_positions[:, 2] += correction
++    support += torch.where(s.support_active[ids], correction, 0.)
++    s.reset_ground_correction[ids] = correction
+     s.reset_root_velocity[ids] = root[:, 7:]
+     s.reset_joint_position[ids] = joint
+     s.reset_joint_velocity[ids] = velocity

@@ -1,0 +1,480 @@
+{
+  "status": "PASS",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_12-44-38_wall5_v27_stability_fresh_20261023_124434/model_2200.pt",
+  "conditions": {
+    "baseline": [
+      {
+        "env_id": 0,
+        "initial_kind": "default",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 1.3051041371721241,
+        "joint_acceleration_rms_rad_s2": 126.56411203399111,
+        "action_step_rms": 0.11968649923801422,
+        "actual_target_step_rms_rad": 0.014630286954343319,
+        "joint_velocity_power_fraction_ge8hz": 0.39030891659082967,
+        "highest_velocity_power_joint": "right_ankle_pitch_joint",
+        "dominant_frequency_hz": 5.833333333333333,
+        "self_contact_peak_n": 139.4080810546875,
+        "self_contact_fraction_gt1n": 0.0022222222222222222,
+        "estimated_pd_torque_rms_nm": 7.819573402404785,
+        "root_xy_net_displacement_m": 0.3747917413711548,
+        "root_xy_speed_mean_mps": 0.11112872511148453,
+        "saturation_fraction": 0.2063888888888889
+      },
+      {
+        "env_id": 1,
+        "initial_kind": "loco",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 0.7360534054120452,
+        "joint_acceleration_rms_rad_s2": 62.08444381999957,
+        "action_step_rms": 0.08767187595367432,
+        "actual_target_step_rms_rad": 0.010739404708147049,
+        "joint_velocity_power_fraction_ge8hz": 0.17356359185124465,
+        "highest_velocity_power_joint": "right_knee_joint",
+        "dominant_frequency_hz": 3.0,
+        "self_contact_peak_n": 79.68094635009766,
+        "self_contact_fraction_gt1n": 0.0005555555555555556,
+        "estimated_pd_torque_rms_nm": 7.268061637878418,
+        "root_xy_net_displacement_m": 0.17059627175331116,
+        "root_xy_speed_mean_mps": 0.10968480259180069,
+        "saturation_fraction": 0.17972222222222223
+      },
+      {
+        "env_id": 2,
+        "initial_kind": "loco",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 0.9390979592726897,
+        "joint_acceleration_rms_rad_s2": 76.32918186277826,
+        "action_step_rms": 0.11063343286514282,
+        "actual_target_step_rms_rad": 0.013552527874708176,
+        "joint_velocity_power_fraction_ge8hz": 0.2363097574955867,
+        "highest_velocity_power_joint": "left_knee_joint",
+        "dominant_frequency_hz": 2.611111111111111,
+        "self_contact_peak_n": 116.32217407226562,
+        "self_contact_fraction_gt1n": 0.05388888888888889,
+        "estimated_pd_torque_rms_nm": 9.333921432495117,
+        "root_xy_net_displacement_m": 0.732729971408844,
+        "root_xy_speed_mean_mps": 0.1397584080696106,
+        "saturation_fraction": 0.18166666666666667
+      },
+      {
+        "env_id": 3,
+        "initial_kind": "hold",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 1.1153730970395692,
+        "joint_acceleration_rms_rad_s2": 106.23612455072919,
+        "action_step_rms": 0.15888282656669617,
+        "actual_target_step_rms_rad": 0.019424067810177803,
+        "joint_velocity_power_fraction_ge8hz": 0.4062237927339832,
+        "highest_velocity_power_joint": "left_ankle_pitch_joint",
+        "dominant_frequency_hz": 4.277777777777778,
+        "self_contact_peak_n": 493.9386291503906,
+        "self_contact_fraction_gt1n": 1.0,
+        "estimated_pd_torque_rms_nm": 8.238107681274414,
+        "root_xy_net_displacement_m": 0.3187877833843231,
+        "root_xy_speed_mean_mps": 0.14414653182029724,
+        "saturation_fraction": 0.23842592592592593
+      }
+    ],
+    "no_self": [
+      {
+        "env_id": 0,
+        "initial_kind": "default",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 0.9097939498673967,
+        "joint_acceleration_rms_rad_s2": 84.07771927065917,
+        "action_step_rms": 0.09113295376300812,
+        "actual_target_step_rms_rad": 0.011272161267697811,
+        "joint_velocity_power_fraction_ge8hz": 0.42948293664242315,
+        "highest_velocity_power_joint": "right_ankle_pitch_joint",
+        "dominant_frequency_hz": 4.944444444444444,
+        "self_contact_peak_n": 0.0,
+        "self_contact_fraction_gt1n": 0.0,
+        "estimated_pd_torque_rms_nm": 7.219525337219238,
+        "root_xy_net_displacement_m": 0.5898392200469971,
+        "root_xy_speed_mean_mps": 0.13598789274692535,
+        "saturation_fraction": 0.16824074074074075
+      },
+      {
+        "env_id": 1,
+        "initial_kind": "loco",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 0.7941703587475539,
+        "joint_acceleration_rms_rad_s2": 79.29361573909706,
+        "action_step_rms": 0.0911487489938736,
+        "actual_target_step_rms_rad": 0.011257891543209553,
+        "joint_velocity_power_fraction_ge8hz": 0.3725157952672431,
+        "highest_velocity_power_joint": "left_ankle_pitch_joint",
+        "dominant_frequency_hz": 8.277777777777777,
+        "self_contact_peak_n": 0.0,
+        "self_contact_fraction_gt1n": 0.0,
+        "estimated_pd_torque_rms_nm": 7.508256435394287,
+        "root_xy_net_displacement_m": 0.03024834766983986,
+        "root_xy_speed_mean_mps": 0.13220147788524628,
+        "saturation_fraction": 0.1812037037037037
+      },
+      {
+        "env_id": 2,
+        "initial_kind": "loco",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 0.8946282202316952,
+        "joint_acceleration_rms_rad_s2": 78.12916749650415,
+        "action_step_rms": 0.09646862000226974,
+        "actual_target_step_rms_rad": 0.011716184206306934,
+        "joint_velocity_power_fraction_ge8hz": 0.18800078904390846,
+        "highest_velocity_power_joint": "left_knee_joint",
+        "dominant_frequency_hz": 2.611111111111111,
+        "self_contact_peak_n": 0.0,
+        "self_contact_fraction_gt1n": 0.0,
+        "estimated_pd_torque_rms_nm": 9.445636749267578,
+        "root_xy_net_displacement_m": 0.6869878768920898,
+        "root_xy_speed_mean_mps": 0.10203883051872253,
+        "saturation_fraction": 0.1836111111111111
+      },
+      {
+        "env_id": 3,
+        "initial_kind": "hold",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 0.7345745617407814,
+        "joint_acceleration_rms_rad_s2": 61.7390749777487,
+        "action_step_rms": 0.07503220438957214,
+        "actual_target_step_rms_rad": 0.009260490536689758,
+        "joint_velocity_power_fraction_ge8hz": 0.22945152118539747,
+        "highest_velocity_power_joint": "right_knee_joint",
+        "dominant_frequency_hz": 3.0,
+        "self_contact_peak_n": 0.0,
+        "self_contact_fraction_gt1n": 0.0,
+        "estimated_pd_torque_rms_nm": 8.327549934387207,
+        "root_xy_net_displacement_m": 0.05037113279104233,
+        "root_xy_speed_mean_mps": 0.061214957386255264,
+        "saturation_fraction": 0.2821296296296296
+      }
+    ],
+    "no_delay": [
+      {
+        "env_id": 0,
+        "initial_kind": "default",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 1.0574786658971798,
+        "joint_acceleration_rms_rad_s2": 101.42556932071562,
+        "action_step_rms": 0.11292561888694763,
+        "actual_target_step_rms_rad": 0.013986639678478241,
+        "joint_velocity_power_fraction_ge8hz": 0.4240369913479903,
+        "highest_velocity_power_joint": "right_ankle_pitch_joint",
+        "dominant_frequency_hz": 5.5,
+        "self_contact_peak_n": 182.9891357421875,
+        "self_contact_fraction_gt1n": 0.005555555555555556,
+        "estimated_pd_torque_rms_nm": 7.84965705871582,
+        "root_xy_net_displacement_m": 0.7356826663017273,
+        "root_xy_speed_mean_mps": 0.14300626516342163,
+        "saturation_fraction": 0.17064814814814816
+      },
+      {
+        "env_id": 1,
+        "initial_kind": "loco",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 0.6306539418926276,
+        "joint_acceleration_rms_rad_s2": 50.15869350366105,
+        "action_step_rms": 0.07404191792011261,
+        "actual_target_step_rms_rad": 0.009099830873310566,
+        "joint_velocity_power_fraction_ge8hz": 0.16583414220597764,
+        "highest_velocity_power_joint": "left_ankle_pitch_joint",
+        "dominant_frequency_hz": 5.5,
+        "self_contact_peak_n": 0.0,
+        "self_contact_fraction_gt1n": 0.0,
+        "estimated_pd_torque_rms_nm": 7.134153842926025,
+        "root_xy_net_displacement_m": 0.11822126060724258,
+        "root_xy_speed_mean_mps": 0.13281872868537903,
+        "saturation_fraction": 0.19611111111111112
+      },
+      {
+        "env_id": 2,
+        "initial_kind": "loco",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 0.8833145712608524,
+        "joint_acceleration_rms_rad_s2": 76.59918272245646,
+        "action_step_rms": 0.10055756568908691,
+        "actual_target_step_rms_rad": 0.012291841208934784,
+        "joint_velocity_power_fraction_ge8hz": 0.24325717175555614,
+        "highest_velocity_power_joint": "right_knee_joint",
+        "dominant_frequency_hz": 3.1666666666666665,
+        "self_contact_peak_n": 88.29004669189453,
+        "self_contact_fraction_gt1n": 0.008333333333333333,
+        "estimated_pd_torque_rms_nm": 9.193451881408691,
+        "root_xy_net_displacement_m": 0.7019643783569336,
+        "root_xy_speed_mean_mps": 0.1115008220076561,
+        "saturation_fraction": 0.1751851851851852
+      },
+      {
+        "env_id": 3,
+        "initial_kind": "hold",
+        "first_episode_steps": 1000,
+        "paired_window_seconds": [
+          2.0,
+          20.0
+        ],
+        "joint_velocity_rms_rad_s": 1.076511686935204,
+        "joint_acceleration_rms_rad_s2": 86.74940090593817,
+        "action_step_rms": 0.14696143567562103,
+        "actual_target_step_rms_rad": 0.017894277349114418,
+        "joint_velocity_power_fraction_ge8hz": 0.36371303253195814,
+        "highest_velocity_power_joint": "left_ankle_pitch_joint",
+        "dominant_frequency_hz": 5.0,
+        "self_contact_peak_n": 621.0322875976562,
+        "self_contact_fraction_gt1n": 1.0,
+        "estimated_pd_torque_rms_nm": 9.022192001342773,
+        "root_xy_net_displacement_m": 0.11298753321170807,
+        "root_xy_speed_mean_mps": 0.14424552023410797,
+        "saturation_fraction": 0.23972222222222223
+      }
+    ]
+  },
+  "internal_contact_pairs": {
+    "baseline": [
+      {
+        "env_id": 0,
+        "a": "right_hip_yaw_link",
+        "b": "right_rubber_hand",
+        "peak_n": 1441.0303955078125
+      },
+      {
+        "env_id": 3,
+        "a": "right_shoulder_roll_link",
+        "b": "torso_link",
+        "peak_n": 1090.55810546875
+      },
+      {
+        "env_id": 0,
+        "a": "right_hip_roll_link",
+        "b": "right_rubber_hand",
+        "peak_n": 954.231689453125
+      },
+      {
+        "env_id": 1,
+        "a": "right_hip_roll_link",
+        "b": "right_wrist_pitch_link",
+        "peak_n": 488.1112365722656
+      },
+      {
+        "env_id": 3,
+        "a": "left_shoulder_yaw_link",
+        "b": "torso_link",
+        "peak_n": 364.3856506347656
+      },
+      {
+        "env_id": 1,
+        "a": "right_hip_roll_link",
+        "b": "right_rubber_hand",
+        "peak_n": 361.5930480957031
+      },
+      {
+        "env_id": 3,
+        "a": "right_wrist_roll_link",
+        "b": "torso_link",
+        "peak_n": 285.8521423339844
+      },
+      {
+        "env_id": 3,
+        "a": "right_elbow_link",
+        "b": "torso_link",
+        "peak_n": 276.7082214355469
+      },
+      {
+        "env_id": 3,
+        "a": "right_shoulder_yaw_link",
+        "b": "torso_link",
+        "peak_n": 268.8902893066406
+      },
+      {
+        "env_id": 3,
+        "a": "right_rubber_hand",
+        "b": "right_shoulder_pitch_link",
+        "peak_n": 177.20912170410156
+      },
+      {
+        "env_id": 0,
+        "a": "left_hip_roll_link",
+        "b": "left_rubber_hand",
+        "peak_n": 139.4080810546875
+      },
+      {
+        "env_id": 2,
+        "a": "left_hip_roll_link",
+        "b": "left_rubber_hand",
+        "peak_n": 116.32217407226562
+      },
+      {
+        "env_id": 1,
+        "a": "right_hip_yaw_link",
+        "b": "right_rubber_hand",
+        "peak_n": 79.68094635009766
+      },
+      {
+        "env_id": 2,
+        "a": "left_hip_yaw_link",
+        "b": "left_rubber_hand",
+        "peak_n": 53.225364685058594
+      },
+      {
+        "env_id": 0,
+        "a": "left_hip_yaw_link",
+        "b": "left_rubber_hand",
+        "peak_n": 50.028053283691406
+      }
+    ],
+    "no_self": [],
+    "no_delay": [
+      {
+        "env_id": 0,
+        "a": "right_hip_yaw_link",
+        "b": "right_rubber_hand",
+        "peak_n": 1042.787109375
+      },
+      {
+        "env_id": 0,
+        "a": "right_hip_roll_link",
+        "b": "right_rubber_hand",
+        "peak_n": 782.1155395507812
+      },
+      {
+        "env_id": 3,
+        "a": "right_shoulder_roll_link",
+        "b": "torso_link",
+        "peak_n": 739.2237548828125
+      },
+      {
+        "env_id": 1,
+        "a": "right_hip_roll_link",
+        "b": "right_wrist_pitch_link",
+        "peak_n": 459.59161376953125
+      },
+      {
+        "env_id": 3,
+        "a": "left_shoulder_yaw_link",
+        "b": "torso_link",
+        "peak_n": 360.89825439453125
+      },
+      {
+        "env_id": 3,
+        "a": "right_wrist_roll_link",
+        "b": "torso_link",
+        "peak_n": 290.8345947265625
+      },
+      {
+        "env_id": 3,
+        "a": "right_shoulder_yaw_link",
+        "b": "torso_link",
+        "peak_n": 287.1865234375
+      },
+      {
+        "env_id": 3,
+        "a": "right_elbow_link",
+        "b": "torso_link",
+        "peak_n": 280.74481201171875
+      },
+      {
+        "env_id": 0,
+        "a": "left_hip_roll_link",
+        "b": "left_rubber_hand",
+        "peak_n": 182.9891357421875
+      },
+      {
+        "env_id": 3,
+        "a": "right_rubber_hand",
+        "b": "right_shoulder_pitch_link",
+        "peak_n": 169.53648376464844
+      },
+      {
+        "env_id": 1,
+        "a": "right_hip_roll_link",
+        "b": "right_rubber_hand",
+        "peak_n": 162.3992462158203
+      },
+      {
+        "env_id": 2,
+        "a": "left_hip_roll_link",
+        "b": "left_wrist_pitch_link",
+        "peak_n": 88.29004669189453
+      },
+      {
+        "env_id": 2,
+        "a": "right_hip_roll_link",
+        "b": "right_rubber_hand",
+        "peak_n": 82.29002380371094
+      },
+      {
+        "env_id": 1,
+        "a": "left_hip_pitch_link",
+        "b": "left_rubber_hand",
+        "peak_n": 50.82121276855469
+      },
+      {
+        "env_id": 2,
+        "a": "left_hip_roll_link",
+        "b": "left_rubber_hand",
+        "peak_n": 36.64091110229492
+      },
+      {
+        "env_id": 1,
+        "a": "left_hip_roll_link",
+        "b": "left_rubber_hand",
+        "peak_n": 21.199275970458984
+      }
+    ]
+  },
+  "paired_global_stop_control_step": 1000,
+  "fft_window_seconds": 18.0,
+  "frequency_resolution_hz": 0.05555555555555555,
+  "limitations": [
+    "4env single-seed diagnostic, not overall success-rate evidence.",
+    "All comparisons use common first-episode prefix, exclude first2s startup and never cross reset.",
+    "Closed-loop trajectories may diverge under overrides; smaller RMS alone does not prove a sole cause.",
+    "25fps video can alias motion above12.5Hz; motion spectra use200Hz physical telemetry.",
+    "Implicit actuator applied_torque is a PD estimate, not solver-measured motor torque.",
+    "Pair forces are vector sums and do not enumerate individual contact points."
+  ]
+}

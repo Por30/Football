@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-10-22T22:17:58.507231+09:00",
+  "pid": 1796143,
+  "command": [
+    "/home/cao/ENTER/envs/ball/bin/python",
+    "-u",
+    "scripts/rsl_rl/train.py",
+    "--task",
+    "Template-Perceptual-Ball-CarryBox-Walled5-v0",
+    "--num_envs",
+    "4096",
+    "--device",
+    "cuda:0",
+    "--headless",
+    "--seed",
+    "42",
+    "--max_iterations",
+    "40000",
+    "--run_name",
+    "wall5_v26_groundfix_fresh_20261022_221344"
+  ],
+  "source_unchanged": true
+}

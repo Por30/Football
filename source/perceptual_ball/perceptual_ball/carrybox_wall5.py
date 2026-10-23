@@ -6,7 +6,7 @@ from .carrybox_amp import AMP_WINDOW, FindBoxMotionLibrary, DEFAULT_DATASET_PATH
 WALL5_FRAME_DIM = 60
 WALL5_FEATURE_SCHEMA = 'height1_joints29_ends15_lin3_ang3_rot6_box3_pelvis_v2'
 GROUND_DATASET_PATH = str(Path(__file__).resolve().parent / 'assets/motions/findbox/ground_pickup')
-AMP_DATASET_PATH = DEFAULT_DATASET_PATH  # all three complete pickups; RSI remains ground-only
+AMP_DATASET_PATH = DEFAULT_DATASET_PATH  # all three complete pickups; revision24 also uses them for RSI
 GROUND_RESET_PROFILE = 'ground_box_5mm_pickup_prefix_rise5mm_v1'
 
 

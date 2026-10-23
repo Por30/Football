@@ -1,0 +1,5 @@
+{
+  "pipeline_finite": true,
+  "behavior_accepted_for_formal": false,
+  "failed_assertion": "Both default/loco final-window mean steps must exceed 2x quota-only; observed11.425/9.7 vs8.185/6.55."
+}

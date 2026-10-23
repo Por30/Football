@@ -1,0 +1,34 @@
+{
+  "agent": "/root/wall5_stability_review_20261023",
+  "brief": {
+    "affected_call_path": [
+      "wall5 hybrid初始化来源分配 → reset_scene → on-policy控制步采样；RewardManager is_alive → .75 task+.125 style"
+    ],
+    "critical_interfaces": [
+      "按全局env_id分区、读取实际cfg；default日志使用step前标签；AMP使用真实终止前窗口；checkpoint记录全部行为变更"
+    ],
+    "invariants": [
+      "保持完整三pickup、自碰撞/接地/PD/动作延迟和roll0.5，actor深度本体、critic123和辅助监督保持"
+    ],
+    "smallest_change_locus": [
+      "四个wall5文件：固定四来源、标签时序及cfg/契约；alive1未通过后仅将同一权重调整为3并重复同一短训"
+    ],
+    "mandatory_safeguards": [
+      "四类来源全固定但不限制任务内阶段；每回合参考帧/扰动仍随机，标签不得进入actor/critic",
+      "生存项使用标准is_alive，仅一次dt缩放；失败步为0，纯timeout为1，不增加蹲姿限制",
+      "保留quota-only和alive1失败证据，按相同512/128/seed比较；不降低行为断言，不以总体奖励替代空手指标",
+      "同冻结AMP旧策略混合回报更高；不得把raw task排序或负均值单独当作完整目标偏好倾倒的证据",
+      "alive3通过既定行为断言后不继续增大权重；短期改善不等于学会站走拾箱"
+    ],
+    "minimal_tests": [
+      "bash docs/carrybox/wall5_stability_20261023/diagnose.sh",
+      "bash docs/carrybox/wall5_stability_20261023/validate.sh",
+      "bash docs/carrybox/wall5_stability_20261023/start_and_verify.sh"
+    ],
+    "blockers": [
+      "身份不一致、非有限值或显存不足则停依赖操作",
+      "每条冻结测试失败最多两次原范围修复，保留证据"
+    ]
+  },
+  "note": "Bind previously received read-only expert findings into required machine-readable metadata. Frozen scope and three exact commands unchanged."
+}

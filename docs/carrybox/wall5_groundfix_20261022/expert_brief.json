@@ -1,0 +1,36 @@
+{
+  "affected_call_path": [
+    "wall5 event -> PhysHSI initializer final random q/velocity writes -> FK -> existing foot hull helper -> parent box/platform placement",
+    "wall5 termination config -> existing tipped; checkpoint revision26"
+  ],
+  "critical_interfaces": [
+    "helper uses actual convexHull support in body_link/world ground frames",
+    "support_active uses global ids but support uses local reset rows",
+    "root pose is link origin; velocity is world COM, so correction uses pose-only write",
+    "action manager reset occurs after event and fills delay with final q"
+  ],
+  "invariants": [
+    "keep20/80 hybrid, full three pickups, continuous samples, q noise/clamp, root and joint velocities",
+    "all default/reference initializations use final FK before nonnegative upward shift",
+    "paired reference box and active support shift together; ordinary loco box remains grounded",
+    "partial reset preserves survivors and delay",
+    "roll>.5/pitch>1.1 strict, keep height/speed/timeout and all learning settings"
+  ],
+  "smallest_change_locus": [
+    "mdp/carrybox_physhsi.py initializer; reuse parent.reference_ground_correction without shared edits",
+    "wall5 config registers tipped and run_name",
+    "wall5 checkpoint final overrides and diagnostics"
+  ],
+  "mandatory_safeguards": [
+    "sim.forward refreshes FK without physics stepping; finite correction and existing geometry checks must fail on bad data",
+    "support_active indexed by reset ids; inactive platform remains buried",
+    "check final box/platform after parent ground clamp, not only returned initializer values",
+    "revision26 tracks angle and ground changes; reject old strict restore and start fresh only after smoke",
+    "preserve velocities, partial reset, and source identities; do not infer convergence from launch"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall5_groundfix_20261022/smoke.sh",
+    "bash docs/carrybox/wall5_groundfix_20261022/start_and_verify.sh"
+  ],
+  "blockers": []
+}

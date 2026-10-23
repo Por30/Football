@@ -1,0 +1,26 @@
+[
+  {
+    "env_id": 0,
+    "control_step": 17,
+    "kind": 2,
+    "initial_box_bottom_clearance_m": 0.7141205668449402
+  },
+  {
+    "env_id": 1,
+    "control_step": 8,
+    "kind": 3,
+    "initial_box_bottom_clearance_m": 0.7373347282409668
+  },
+  {
+    "env_id": 2,
+    "control_step": 65,
+    "kind": 2,
+    "initial_box_bottom_clearance_m": 0.7577279806137085
+  },
+  {
+    "env_id": 3,
+    "control_step": 55,
+    "kind": 2,
+    "initial_box_bottom_clearance_m": 0.7219876646995544
+  }
+]

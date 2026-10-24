@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-24T00:17:23.471993+09:00",
+  "pid": 2402395,
+  "run_dir": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/2026-10-24_00-12-57_wall10_24step_fresh_20261024_001253",
+  "stdout_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/train_wall10_24step_fresh_20261024_001253.log",
+  "last_iteration": 15,
+  "num_envs": 4096,
+  "num_steps_per_env": 24,
+  "max_iterations": 20000,
+  "mean_last10_seconds": 4.332,
+  "max_last10_seconds": 4.36,
+  "model_0": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/2026-10-24_00-12-57_wall10_24step_fresh_20261024_001253/model_0.pt",
+  "checkpoint_schema": 2,
+  "checkpoint_rollout_steps": 24,
+  "policy_amp_finite": true,
+  "optimizer_updated": true,
+  "status": "PASS"
+}

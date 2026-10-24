@@ -1,0 +1,53 @@
+{
+  "phase": "candidate100",
+  "num_envs": 4096,
+  "rollout_steps": 100,
+  "epochs": 5,
+  "minibatches": 4,
+  "source": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/2026-10-23_23-25-30_wall10_physhsi_lift_hold_v1/model_0.pt",
+  "creation_seconds": 207.7999267410487,
+  "iterations": [
+    {
+      "iteration": 0,
+      "collection": 11.444444458000362,
+      "learning": 8.693390388041735,
+      "total": 20.137834846042097,
+      "peak_allocated_gb": 17.7488384
+    },
+    {
+      "iteration": 1,
+      "collection": 11.105909879785031,
+      "learning": 7.723700211849064,
+      "total": 18.829610091634095,
+      "peak_allocated_gb": 17.7488384
+    },
+    {
+      "iteration": 2,
+      "collection": 11.044158303644508,
+      "learning": 7.733407631982118,
+      "total": 18.777565935626626,
+      "peak_allocated_gb": 17.7488384
+    },
+    {
+      "iteration": 3,
+      "collection": 11.125094207003713,
+      "learning": 7.686342306435108,
+      "total": 18.81143651343882,
+      "peak_allocated_gb": 17.7488384
+    }
+  ],
+  "strict_same_task_restore": true,
+  "loss": {
+    "value_function": 0.7683193481329718,
+    "surrogate": 0.004115180924241997,
+    "entropy": 41.055313890630394,
+    "amp_loss": 19.964624556146475,
+    "amp_expert_loss": 0.28064395900100775,
+    "amp_policy_loss": 11.746603382958314,
+    "policy_smooth": 0.03579228924530926,
+    "value_smooth": 0.01128662297328125,
+    "ppo_learning_rate": 0.0075937500000000015,
+    "amp_valid_samples": 405504.0
+  },
+  "formal_training": false
+}

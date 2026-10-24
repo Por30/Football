@@ -1,0 +1,42 @@
+[
+  {
+    "robot": 1,
+    "resets": 8,
+    "completed_successes": 0,
+    "ground_nonreset_samples": 902,
+    "ground_bilateral_contact_samples": 0,
+    "max_ground_box_bottom_clearance": 0.002547740936279297,
+    "max_hold_seconds": 0.0,
+    "final_kind": 2
+  },
+  {
+    "robot": 2,
+    "resets": 7,
+    "completed_successes": 0,
+    "ground_nonreset_samples": 595,
+    "ground_bilateral_contact_samples": 0,
+    "max_ground_box_bottom_clearance": 0.002547740936279297,
+    "max_hold_seconds": 0.16,
+    "final_kind": 3
+  },
+  {
+    "robot": 3,
+    "resets": 9,
+    "completed_successes": 0,
+    "ground_nonreset_samples": 964,
+    "ground_bilateral_contact_samples": 0,
+    "max_ground_box_bottom_clearance": 0.002547740936279297,
+    "max_hold_seconds": 0.0,
+    "final_kind": 3
+  },
+  {
+    "robot": 4,
+    "resets": 11,
+    "completed_successes": 0,
+    "ground_nonreset_samples": 967,
+    "ground_bilateral_contact_samples": 0,
+    "max_ground_box_bottom_clearance": 0.002547748386859894,
+    "max_hold_seconds": 0.0,
+    "final_kind": 1
+  }
+]

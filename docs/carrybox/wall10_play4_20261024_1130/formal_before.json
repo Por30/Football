@@ -1,0 +1,5 @@
+{
+  "checked_at": "2026-10-24T11:31:20.478681+09:00",
+  "process": "    PID     ELAPSED STAT COMMAND\n2402395    11:18:27 Rsl  /home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-CarryBox-Walled10-v0 --num_envs 4096 --device cuda:0 --headless --seed 42 agent.num_steps_per_env=24 --num_envs 4096 --max_iterations 20000 --seed 42 --run_name wall10_24step_fresh_20261024_001253\n",
+  "gpu": "10261 MiB, 13809 MiB, 91 %\n"
+}

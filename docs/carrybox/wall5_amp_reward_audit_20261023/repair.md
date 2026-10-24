@@ -1,0 +1,5 @@
+首次CPU检查读取旧rev22 trajectory时，错误假设存在逐步reset字段。旧录像通过recording.json的episodes/end_step保存终止事件；修正为依据真实事件排除reset行，适用于新旧记录，未放宽断言。analyze_attempt1.py保留原代码。CPU命令单独重试通过，原冻结命令未变。
+
+首次仿真已跑完current的1000步并保存数组，但包装元数据时发现IsaacLab全关节索引为slice，而不是可迭代列表。改为同时处理slice与列表；策略、物理、奖励和检查断言未改。attempt1保存首次失败回执、脚本、日志和已产生数组。
+
+完成这两处诊断兼容修复后，重新完整执行原冻结的两条命令，最终receipts.json来自这次完整执行，不是人工合并或将未运行检查标为通过。生产代码未改。

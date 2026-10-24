@@ -1,0 +1,320 @@
+{
+  "status": "PASS",
+  "num_envs": 16,
+  "iterations": "2+1",
+  "rollout_steps": 100,
+  "checkpoint_schema": 2,
+  "contract": {
+    "variant": "walled10",
+    "migration_revision": 1,
+    "source": "PhysHSI_G1_carrybox",
+    "task": "approach_lift_stationary_hold_no_goal_no_putdown",
+    "hold_seconds": 2.0,
+    "actor": "proprio93x6_depth4x27x48",
+    "critic": "proprio93_ends15_lin3_box12",
+    "depth": {
+      "schema": 1,
+      "output": "optical_z_metres",
+      "units": "metres",
+      "normalization": "none",
+      "clip_range_m": [
+        0.1,
+        3.0
+      ],
+      "invalid_depth_m": 3.0,
+      "input_range": [
+        0.1,
+        3.0
+      ],
+      "missing_value": 3.0,
+      "shape": [
+        4,
+        27,
+        48
+      ],
+      "history_order": "oldest_to_newest",
+      "geometry": "robot_ground_wall_support_variable_box"
+    },
+    "actor_proprio_noise": true,
+    "control": "explicit_PD_motor_strength_effort_offset_delay0to20ms_action100_no_target_clip",
+    "reset": "bernoulli80_RSI_conditional_2over3_1over6_1over6_ground_correction5mm",
+    "reset_history": "repeat_first_current_frame",
+    "observations": "no_goal_no_phase_no_success_flag_actor_no_privileged",
+    "box_size_scale": [
+      [
+        0.7,
+        1.3
+      ],
+      [
+        0.7,
+        1.3
+      ],
+      [
+        0.6,
+        1.4
+      ]
+    ],
+    "box_density": [
+      10.0,
+      100.0
+    ],
+    "rigid_body_randomization": {
+      "link_mass": [
+        0.8,
+        1.2
+      ],
+      "recompute_inertia": true,
+      "torso_com_xyz": [
+        -0.1,
+        0.1
+      ],
+      "robot_friction": [
+        0.1,
+        1.5
+      ],
+      "robot_restitution": [
+        0.0,
+        1.0
+      ],
+      "kp_kd_motor_strength": [
+        0.9,
+        1.1
+      ],
+      "effort_offset_limit_fraction": [
+        -0.05,
+        0.05
+      ]
+    },
+    "support_size": [
+      0.4,
+      0.4,
+      0.02
+    ],
+    "ground_friction": 0.9,
+    "success_thresholds": {
+      "box_bottom_min": 0.1,
+      "box_center_min": 0.7,
+      "bilateral_force_min": 1.0,
+      "box_upright_min": 0.8,
+      "robot_upright_min": 0.95,
+      "head_min": 1.05,
+      "root_xy_speed_max": 0.15,
+      "root_yaw_speed_max": 0.3,
+      "box_speed_max": 0.15,
+      "box_xy_drift_max": 0.35
+    },
+    "box_regular_spawn": "front_0.7to2m_yaw45deg_ground",
+    "rewards": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "torque_limits": -0.03,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.2
+    },
+    "torque_penalty": "applied_div_nominal_kp_squared",
+    "disturbance": "local_torso_uniform_xyz50N_every8_policy_steps",
+    "physics_dt": 0.005,
+    "decimation": 4,
+    "episode_s": 20.0,
+    "dataset_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8"
+  },
+  "shapes": {
+    "proprio": [
+      16,
+      558
+    ],
+    "perception": [
+      16,
+      4,
+      27,
+      48
+    ],
+    "critic_state": [
+      16,
+      123
+    ],
+    "box_pose_target": [
+      16,
+      9
+    ],
+    "amp": [
+      16,
+      600
+    ]
+  },
+  "geometry": {
+    "box_sizes": [
+      [
+        0.24000000953674316,
+        0.27000001072883606,
+        0.32499998807907104
+      ],
+      [
+        0.33000001311302185,
+        0.30000001192092896,
+        0.32499998807907104
+      ],
+      [
+        0.21000000834465027,
+        0.21000000834465027,
+        0.25
+      ],
+      [
+        0.39000001549720764,
+        0.33000001311302185,
+        0.15000000596046448
+      ],
+      [
+        0.39000001549720764,
+        0.39000001549720764,
+        0.22499999403953552
+      ],
+      [
+        0.24000000953674316,
+        0.21000000834465027,
+        0.17499999701976776
+      ],
+      [
+        0.30000001192092896,
+        0.36000001430511475,
+        0.20000000298023224
+      ],
+      [
+        0.27000001072883606,
+        0.27000001072883606,
+        0.22499999403953552
+      ],
+      [
+        0.21000000834465027,
+        0.21000000834465027,
+        0.3499999940395355
+      ],
+      [
+        0.33000001311302185,
+        0.30000001192092896,
+        0.17499999701976776
+      ],
+      [
+        0.21000000834465027,
+        0.24000000953674316,
+        0.17499999701976776
+      ],
+      [
+        0.39000001549720764,
+        0.33000001311302185,
+        0.2750000059604645
+      ],
+      [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.22499999403953552
+      ],
+      [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.32499998807907104
+      ],
+      [
+        0.39000001549720764,
+        0.36000001430511475,
+        0.2750000059604645
+      ],
+      [
+        0.36000001430511475,
+        0.21000000834465027,
+        0.20000000298023224
+      ]
+    ],
+    "density": [
+      96.3375015258789,
+      81.42771911621094,
+      63.42216873168945,
+      48.646400451660156,
+      66.47042083740234,
+      84.85169982910156,
+      27.942739486694336,
+      16.773927688598633,
+      82.80774688720703,
+      40.80821228027344,
+      95.17700958251953,
+      63.05168151855469,
+      37.6137809753418,
+      73.63961029052734,
+      23.026887893676758,
+      39.5027961730957
+    ],
+    "per_env_depth_error_m": [
+      0.00011706352233886719,
+      8.428096771240234e-05,
+      4.6253204345703125e-05,
+      7.331371307373047e-05,
+      5.9723854064941406e-05,
+      7.069110870361328e-05,
+      9.381771087646484e-05,
+      7.939338684082031e-05,
+      8.881092071533203e-05,
+      7.236003875732422e-05,
+      0.0001150369644165039,
+      0.0001004934310913086,
+      5.936622619628906e-05,
+      0.00014665722846984863,
+      7.915496826171875e-05,
+      8.225440979003906e-05
+    ]
+  },
+  "losses": [
+    {
+      "value_function": 2.543836985332797,
+      "surrogate": -0.05276722135492649,
+      "entropy": 41.18505815640844,
+      "amp_loss": 2874.877201704546,
+      "amp_expert_loss": 963.9430682943321,
+      "amp_policy_loss": 1560.4063687102966,
+      "policy_smooth": 0.07485515409422042,
+      "value_smooth": 0.003919150965462316,
+      "ppo_learning_rate": 1e-05,
+      "amp_valid_samples": 1584.0
+    },
+    {
+      "value_function": 1.981063107769899,
+      "surrogate": -0.0495332179788613,
+      "entropy": 41.19228140898425,
+      "amp_loss": 1026.6848780468258,
+      "amp_expert_loss": 173.47248482656,
+      "amp_policy_loss": 610.1739301585188,
+      "policy_smooth": 0.07917088324937858,
+      "value_smooth": 0.008745940856640273,
+      "ppo_learning_rate": 3.3750000000000014e-05,
+      "amp_valid_samples": 1584.0
+    },
+    {
+      "value_function": 1.464977869180718,
+      "surrogate": -0.06516003393029532,
+      "entropy": 41.2039135094845,
+      "amp_loss": 613.8583924572879,
+      "amp_expert_loss": 60.250043512594814,
+      "amp_policy_loss": 396.0986148949826,
+      "policy_smooth": 0.10222290990629582,
+      "value_smooth": 0.017700617039820763,
+      "ppo_learning_rate": 2.2500000000000008e-05,
+      "amp_valid_samples": 1584.0
+    }
+  ],
+  "reset_counts": [
+    48,
+    98,
+    17,
+    25
+  ],
+  "old_task_defaults_unchanged": true,
+  "partial_reset": true,
+  "torque_limits": true,
+  "actor_export_privilege_boundary": true,
+  "resume": true,
+  "convergence_evaluated": false
+}

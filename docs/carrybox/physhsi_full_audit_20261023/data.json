@@ -1,0 +1,876 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-23T23:52:39.148500+09:00",
+  "torch_version": "2.7.0+cu128",
+  "source_clips": [
+    {
+      "group": "pickUp",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/pickUp/pickup1.pt",
+      "frames": 192,
+      "weight": 4.0,
+      "sha256": "6a44d35afc4912781505615576e7a5ba141ffe3c756db652968c5bb0af31d17a"
+    },
+    {
+      "group": "pickUp",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/pickUp/pickup2.pt",
+      "frames": 178,
+      "weight": 4.0,
+      "sha256": "429cb67521975946fcf930fb5a430bbae9c7495e6d4db1ba2d4b330cdfbf023d"
+    },
+    {
+      "group": "pickUp",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/pickUp/pickup3.pt",
+      "frames": 129,
+      "weight": 4.0,
+      "sha256": "cd54f21376d77ea7d6cccb662b5ea2ae53b68ca7a61528742e40ef0c2cdf30f5"
+    },
+    {
+      "group": "putDown",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/putDown/putdown1.pt",
+      "frames": 141,
+      "weight": 5.0,
+      "sha256": "a740984fa8ccc6b7cc43d2055a5e5f2416dc994df9887712c5d7f80369723479"
+    },
+    {
+      "group": "putDown",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/putDown/putdown2.pt",
+      "frames": 238,
+      "weight": 5.0,
+      "sha256": "70390d0a4da3ace685dc7c2b7548080e08f0b55539c8a99439ceee870454d9e7"
+    },
+    {
+      "group": "carryWith",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/carryWith/carrywith1.pt",
+      "frames": 256,
+      "weight": 5.0,
+      "sha256": "da7e7cb38bcc2324a9d6aeac347dfb94d567f624a4d0c8cb86f22c860bffafb9"
+    },
+    {
+      "group": "carryWith",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/carryWith/carrywith2.pt",
+      "frames": 194,
+      "weight": 2.0,
+      "sha256": "a35d464857092be005533adbfbe5b4e77ae637f8616210ddeb342f7fdd886ff0"
+    },
+    {
+      "group": "carryWith",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/carryWith/carrywith3.pt",
+      "frames": 323,
+      "weight": 5.0,
+      "sha256": "1f0868733cee5eafeb85f72fd2975c521f8d6d085f7961541c1f55f505c55d29"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B1_-_stand_to_walk_stageii.pt",
+      "frames": 342,
+      "weight": 1.0,
+      "sha256": "b5183955fe3766bc30901e66c650f3601daf4fd2969125acc5e73e2ba93064bd"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B2_-_walk_to_stand_stageii.pt",
+      "frames": 340,
+      "weight": 1.0,
+      "sha256": "a341d6821635bbbc9cda0ec0711034511e9ddb267be3c9206f8aaf539cb21fec"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B2_-_walk_to_stand_t2_stageii.pt",
+      "frames": 293,
+      "weight": 1.0,
+      "sha256": "78fea9d0b50e521da7e373e7202d5d5c2f625273ef095ae5371249d5a35b762e"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B3_-_walk1_stageii.pt",
+      "frames": 456,
+      "weight": 1.0,
+      "sha256": "02cbd97382a70f4e6ac33c03939a98ce723528326b5ea9046802d65f38b039b9"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B9_-_walk_turn_left_(90)_stageii.pt",
+      "frames": 214,
+      "weight": 1.0,
+      "sha256": "200d9e22dbff9245d10749173896fd0bb822149491d96fc0d3c7c29d94727bd3"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B10_-_walk_turn_left_(45)_stageii.pt",
+      "frames": 253,
+      "weight": 1.0,
+      "sha256": "dfdf2fe9bf0014327477bed39cd08f5526b6e4e4092613ae463d15fa47524fcb"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B11_-_walk_turn_left_(135)_stageii.pt",
+      "frames": 289,
+      "weight": 1.0,
+      "sha256": "f399edac6517b511d277aed64026d1169eb724281f9e386a27d4a162f6021374"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B12_-_walk_turn_right_(90)_stageii.pt",
+      "frames": 263,
+      "weight": 1.0,
+      "sha256": "d643da4f4971ab3d78ba272d14a1761ef80e54cb429070bf3a1cc92b85366a33"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B13_-_walk_turn_right_(45)_stageii.pt",
+      "frames": 256,
+      "weight": 1.0,
+      "sha256": "9aa45b671abcd29d5d092c6caf0b38367e861b41c8950b98a4a2b2761c9b34fa"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B14_-_walk_turn_right_(135)_stageii.pt",
+      "frames": 321,
+      "weight": 1.0,
+      "sha256": "1ca14d346efac52f5f0ebcd9bc52cd1e6eb6a67a73c37a65e78024abec696868"
+    },
+    {
+      "group": "loco",
+      "file": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B15_-_walk_turn_around_(same_direction)_stageii.pt",
+      "frames": 329,
+      "weight": 1.0,
+      "sha256": "bbf1bf4b9a6abc7db5a05fc166a6e11f454ecb14ba7371d4aca2476c45fb5cca"
+    }
+  ],
+  "source_total_frames": 5007,
+  "source_sampling": {
+    "pickUp": 0.26666666666666666,
+    "putDown": 0.2222222222222222,
+    "carryWith": 0.26666666666666666,
+    "loco": 0.24444444444444444
+  },
+  "current_clips": [
+    {
+      "file": "hold/hold_box_01.pt",
+      "frames": 300,
+      "sha256": "ac0e873274b3425925b218ccbd682e59590210363754c39bc78092231be273e8",
+      "group": "carryWith",
+      "source_file": "carryWith/carrywith1.pt",
+      "identical_source": null
+    },
+    {
+      "file": "locomotion/walk_turn_left_045.pt",
+      "frames": 253,
+      "sha256": "dfdf2fe9bf0014327477bed39cd08f5526b6e4e4092613ae463d15fa47524fcb",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B10_-_walk_turn_left_(45)_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B10_-_walk_turn_left_(45)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_left_135.pt",
+      "frames": 289,
+      "sha256": "f399edac6517b511d277aed64026d1169eb724281f9e386a27d4a162f6021374",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B11_-_walk_turn_left_(135)_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B11_-_walk_turn_left_(135)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_right_090.pt",
+      "frames": 263,
+      "sha256": "d643da4f4971ab3d78ba272d14a1761ef80e54cb429070bf3a1cc92b85366a33",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B12_-_walk_turn_right_(90)_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B12_-_walk_turn_right_(90)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_right_045.pt",
+      "frames": 256,
+      "sha256": "9aa45b671abcd29d5d092c6caf0b38367e861b41c8950b98a4a2b2761c9b34fa",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B13_-_walk_turn_right_(45)_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B13_-_walk_turn_right_(45)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_right_135.pt",
+      "frames": 321,
+      "sha256": "1ca14d346efac52f5f0ebcd9bc52cd1e6eb6a67a73c37a65e78024abec696868",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B14_-_walk_turn_right_(135)_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B14_-_walk_turn_right_(135)_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_around_01.pt",
+      "frames": 329,
+      "sha256": "bbf1bf4b9a6abc7db5a05fc166a6e11f454ecb14ba7371d4aca2476c45fb5cca",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B15_-_walk_turn_around_(same_direction)_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B15_-_walk_turn_around_(same_direction)_stageii.pt"
+    },
+    {
+      "file": "locomotion/stand_to_walk_01.pt",
+      "frames": 342,
+      "sha256": "b5183955fe3766bc30901e66c650f3601daf4fd2969125acc5e73e2ba93064bd",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B1_-_stand_to_walk_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B1_-_stand_to_walk_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_to_stand_01.pt",
+      "frames": 340,
+      "sha256": "a341d6821635bbbc9cda0ec0711034511e9ddb267be3c9206f8aaf539cb21fec",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B2_-_walk_to_stand_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B2_-_walk_to_stand_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_to_stand_02.pt",
+      "frames": 293,
+      "sha256": "78fea9d0b50e521da7e373e7202d5d5c2f625273ef095ae5371249d5a35b762e",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B2_-_walk_to_stand_t2_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B2_-_walk_to_stand_t2_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_forward_01.pt",
+      "frames": 456,
+      "sha256": "02cbd97382a70f4e6ac33c03939a98ce723528326b5ea9046802d65f38b039b9",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B3_-_walk1_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B3_-_walk1_stageii.pt"
+    },
+    {
+      "file": "locomotion/walk_turn_left_090.pt",
+      "frames": 214,
+      "sha256": "200d9e22dbff9245d10749173896fd0bb822149491d96fc0d3c7c29d94727bd3",
+      "group": "loco_direction",
+      "source_file": "loco_direction/B9_-_walk_turn_left_(90)_stageii.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/loco_direction/B9_-_walk_turn_left_(90)_stageii.pt"
+    },
+    {
+      "file": "pick_up/pick_up_01.pt",
+      "frames": 192,
+      "sha256": "6a44d35afc4912781505615576e7a5ba141ffe3c756db652968c5bb0af31d17a",
+      "group": "pickUp",
+      "source_file": "pickUp/pickup1.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/pickUp/pickup1.pt"
+    },
+    {
+      "file": "pick_up/pick_up_02.pt",
+      "frames": 178,
+      "sha256": "429cb67521975946fcf930fb5a430bbae9c7495e6d4db1ba2d4b330cdfbf023d",
+      "group": "pickUp",
+      "source_file": "pickUp/pickup2.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/pickUp/pickup2.pt"
+    },
+    {
+      "file": "pick_up/pick_up_03.pt",
+      "frames": 129,
+      "sha256": "cd54f21376d77ea7d6cccb662b5ea2ae53b68ca7a61528742e40ef0c2cdf30f5",
+      "group": "pickUp",
+      "source_file": "pickUp/pickup3.pt",
+      "identical_source": "/home/cao/PhysHSI/legged_gym/resources/dataset/dataset_carrybox/pickUp/pickup3.pt"
+    }
+  ],
+  "current_sampling": {
+    "loco_direction": 0.4,
+    "pickUp": 0.4,
+    "carryWith": 0.2
+  },
+  "hold_static_checks": {
+    "base_height": true,
+    "base_position": true,
+    "base_quat": true,
+    "joint_position": true,
+    "link_position": true,
+    "box_pos_local": true
+  },
+  "endpoint_names": [
+    "left_palm_link",
+    "right_palm_link",
+    "left_ankle_pitch_link",
+    "right_ankle_pitch_link",
+    "mid360_link"
+  ],
+  "kinematics": {
+    "hold/hold_box_01.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.0015542258605318272,
+        0.001554234902119915,
+        2.29988819946239e-08,
+        1.7847526750456907e-08,
+        0.0015542418217981146
+      ],
+      "endpoint_max_error_m": [
+        0.001646405347621693,
+        0.001646430917827327,
+        5.3601527208741864e-08,
+        5.469145217407633e-08,
+        0.0016464140595630816
+      ],
+      "source_height_minus_wall5_height_mean_m": 1.862645149230957e-09
+    },
+    "locomotion/walk_turn_left_045.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.0028813558868061176,
+        0.0028813538546398434,
+        7.923645158823058e-08,
+        8.04815312625135e-08,
+        0.0028813592679820216
+      ],
+      "endpoint_max_error_m": [
+        0.0037626718704195177,
+        0.003762630241242327,
+        2.3584752794146551e-07,
+        2.0676548107539987e-07,
+        0.0037626804790196026
+      ],
+      "source_height_minus_wall5_height_mean_m": -1.862645149230957e-09
+    },
+    "locomotion/walk_turn_left_135.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.0025966507101257094,
+        0.0025966644459510823,
+        5.531892783030677e-08,
+        5.5401027928870524e-08,
+        0.002596658551363568
+      ],
+      "endpoint_max_error_m": [
+        0.0033676017771871922,
+        0.003367661805754128,
+        1.9919063693854803e-07,
+        1.736861784542275e-07,
+        0.0033676508400123095
+      ],
+      "source_height_minus_wall5_height_mean_m": 0.0
+    },
+    "locomotion/walk_turn_right_090.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.0029239651667412386,
+        0.0029239640623151164,
+        5.4562725075945826e-08,
+        4.0802246346226414e-08,
+        0.0029239657849706533
+      ],
+      "endpoint_max_error_m": [
+        0.0038112236015673297,
+        0.0038112146491295212,
+        1.951857552255045e-07,
+        1.2897565009138663e-07,
+        0.0038113027347687987
+      ],
+      "source_height_minus_wall5_height_mean_m": -1.862645149230957e-09
+    },
+    "locomotion/walk_turn_right_045.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.0030024214781729226,
+        0.003002409971637449,
+        6.674811473562302e-08,
+        6.158524950853418e-08,
+        0.003002405019877145
+      ],
+      "endpoint_max_error_m": [
+        0.003727163562575234,
+        0.0037272072287575235,
+        1.6766564483372992e-07,
+        1.7586529171796232e-07,
+        0.0037272212732539457
+      ],
+      "source_height_minus_wall5_height_mean_m": 7.450580596923828e-09
+    },
+    "locomotion/walk_turn_right_135.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.0027617665367883665,
+        0.0027617645023647924,
+        4.906731743768899e-08,
+        5.889495679036456e-08,
+        0.0027617736429306977
+      ],
+      "endpoint_max_error_m": [
+        0.0035624162697032342,
+        0.0035623778209133293,
+        1.183061851538443e-07,
+        2.0844054969426514e-07,
+        0.0035624755874521337
+      ],
+      "source_height_minus_wall5_height_mean_m": 0.0
+    },
+    "locomotion/walk_turn_around_01.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.00266346038997143,
+        0.0026634741708298714,
+        4.173780018737889e-08,
+        5.3192164161994036e-08,
+        0.0026634729554183664
+      ],
+      "endpoint_max_error_m": [
+        0.003810097490959819,
+        0.0038101513955623137,
+        2.0926356395552687e-07,
+        1.7304531834194396e-07,
+        0.0038101366173538347
+      ],
+      "source_height_minus_wall5_height_mean_m": 0.0
+    },
+    "locomotion/stand_to_walk_01.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.002658404836866217,
+        0.0026584096900150156,
+        5.469382016516261e-08,
+        5.827994407134846e-08,
+        0.00265840987700258
+      ],
+      "endpoint_max_error_m": [
+        0.0035143097843796695,
+        0.003514331531187076,
+        1.3483629076109004e-07,
+        1.9325260537779767e-07,
+        0.0035143320623062485
+      ],
+      "source_height_minus_wall5_height_mean_m": 0.0
+    },
+    "locomotion/walk_to_stand_01.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.002417861326452588,
+        0.0024178618513546,
+        4.7393452381786255e-08,
+        4.239764945864281e-08,
+        0.0024178659519133038
+      ],
+      "endpoint_max_error_m": [
+        0.00368800187225101,
+        0.003687968606163569,
+        2.0748035185612103e-07,
+        9.87404274786295e-08,
+        0.003687990662730316
+      ],
+      "source_height_minus_wall5_height_mean_m": -1.862645149230957e-09
+    },
+    "locomotion/walk_to_stand_02.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.002593109374121386,
+        0.002593118800406291,
+        5.2391366623213616e-08,
+        5.288239324587064e-08,
+        0.0025931143254139246
+      ],
+      "endpoint_max_error_m": [
+        0.003628484334403792,
+        0.0036284448358284305,
+        2.0573286873905901e-07,
+        2.3273417017109984e-07,
+        0.003628458902667777
+      ],
+      "source_height_minus_wall5_height_mean_m": -1.862645149230957e-09
+    },
+    "locomotion/walk_forward_01.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.002793346565892756,
+        0.002793359190202398,
+        7.450167396068856e-08,
+        6.723580858627462e-08,
+        0.002793351065078789
+      ],
+      "endpoint_max_error_m": [
+        0.0035322668724518643,
+        0.003532292172892654,
+        2.164362388968967e-07,
+        1.8839532579614948e-07,
+        0.003532344461087606
+      ],
+      "source_height_minus_wall5_height_mean_m": -9.313225746154785e-09
+    },
+    "locomotion/walk_turn_left_090.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        0.002858649206466729,
+        0.002858643930596971,
+        6.427845554869236e-08,
+        5.735900134631344e-08,
+        0.0028586510688964994
+      ],
+      "endpoint_max_error_m": [
+        0.0036559851294247635,
+        0.0036559547195134227,
+        2.12770547966332e-07,
+        1.3158827431421647e-07,
+        0.0036559912977238824
+      ],
+      "source_height_minus_wall5_height_mean_m": -3.725290298461914e-09
+    },
+    "pick_up/pick_up_01.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        3.0991378976863766e-08,
+        3.149850795288987e-08,
+        2.975084937536626e-08,
+        2.5833300088144376e-08,
+        3.11079096352232e-08
+      ],
+      "endpoint_max_error_m": [
+        6.829391438399056e-08,
+        6.347034833780554e-08,
+        5.977994743089826e-08,
+        5.642660237930892e-08,
+        7.947629630954273e-08
+      ],
+      "source_height_minus_wall5_height_mean_m": 1.862645149230957e-09
+    },
+    "pick_up/pick_up_02.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        3.9381605937464565e-08,
+        3.91774740840128e-08,
+        2.7563371730822104e-08,
+        2.864734108886754e-08,
+        3.466198369981878e-08
+      ],
+      "endpoint_max_error_m": [
+        9.100159274465968e-08,
+        7.747312951381417e-08,
+        6.839848973535818e-08,
+        6.12141861351843e-08,
+        7.481043946440468e-08
+      ],
+      "source_height_minus_wall5_height_mean_m": -1.862645149230957e-09
+    },
+    "pick_up/pick_up_03.pt": {
+      "frames": 32,
+      "endpoint_mean_error_m": [
+        4.57943042891695e-08,
+        4.9967156929309086e-08,
+        2.789563104410131e-08,
+        2.5780008801327353e-08,
+        3.9147168633661914e-08
+      ],
+      "endpoint_max_error_m": [
+        1.4344541026926609e-07,
+        8.937894755882496e-08,
+        5.4877433850673235e-08,
+        5.334488654164436e-08,
+        8.638458797987924e-08
+      ],
+      "source_height_minus_wall5_height_mean_m": -4.6566128730773926e-09
+    }
+  },
+  "checkpoints": [
+    {
+      "path": "/home/cao/PhysHSI/legged_gym/resources/ckpt/carrybox.pt",
+      "sha256": "4fd1b50b2c41c8b7b39ca0a976f7c8446c61aedf4b180024437a74f1f5ed7829",
+      "iteration": 65000,
+      "keys": [
+        "model_state_dict",
+        "amp_state_dict",
+        "optimizer_state_dict",
+        "iter",
+        "infos"
+      ],
+      "parameter_shapes": {
+        "std": [
+          29
+        ],
+        "actor.0.weight": [
+          512,
+          738
+        ],
+        "actor.0.bias": [
+          512
+        ],
+        "actor.2.weight": [
+          256,
+          512
+        ],
+        "actor.2.bias": [
+          256
+        ],
+        "actor.4.weight": [
+          256,
+          256
+        ],
+        "actor.4.bias": [
+          256
+        ],
+        "actor.6.weight": [
+          29,
+          256
+        ],
+        "actor.6.bias": [
+          29
+        ],
+        "critic.0.weight": [
+          512,
+          126
+        ],
+        "critic.0.bias": [
+          512
+        ],
+        "critic.2.weight": [
+          256,
+          512
+        ],
+        "critic.2.bias": [
+          256
+        ],
+        "critic.4.weight": [
+          256,
+          256
+        ],
+        "critic.4.bias": [
+          256
+        ],
+        "critic.6.weight": [
+          1,
+          256
+        ],
+        "critic.6.bias": [
+          1
+        ]
+      },
+      "optimizer_groups": [
+        {
+          "name": "actor_critic",
+          "lr": 5.062500000000002e-05,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "weight_decay": 0,
+          "amsgrad": false,
+          "maximize": false,
+          "foreach": null,
+          "capturable": false,
+          "differentiable": false,
+          "fused": null
+        },
+        {
+          "weight_decay": 0.001,
+          "name": "amp_trunk",
+          "lr": 5.062500000000002e-05,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "amsgrad": false,
+          "maximize": false,
+          "foreach": null,
+          "capturable": false,
+          "differentiable": false,
+          "fused": null
+        },
+        {
+          "weight_decay": 0.1,
+          "name": "amp_head",
+          "lr": 5.062500000000002e-05,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "amsgrad": false,
+          "maximize": false,
+          "foreach": null,
+          "capturable": false,
+          "differentiable": false,
+          "fused": null
+        }
+      ]
+    },
+    {
+      "path": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_17-35-18_wall5_v28_clean_camera_fresh_20261023_173513/model_5600.pt",
+      "sha256": "b29e2e86d0dbd8c3f66447339d7d2c7b79654b7b8a31cff8ca642b33049d2611",
+      "iteration": 5600,
+      "keys": [
+        "model_state_dict",
+        "optimizer_state_dict",
+        "iter",
+        "infos",
+        "carrybox_schema",
+        "pose_aux_coef",
+        "torch_rng_state",
+        "environment_contract",
+        "amp",
+        "cuda_rng_state"
+      ],
+      "parameter_shapes": {
+        "log_std": [
+          29
+        ],
+        "perception_encoder.conv.0.weight": [
+          16,
+          4,
+          3,
+          3
+        ],
+        "perception_encoder.conv.0.bias": [
+          16
+        ],
+        "perception_encoder.conv.2.weight": [
+          32,
+          16,
+          3,
+          3
+        ],
+        "perception_encoder.conv.2.bias": [
+          32
+        ],
+        "perception_encoder.conv.4.weight": [
+          64,
+          32,
+          3,
+          3
+        ],
+        "perception_encoder.conv.4.bias": [
+          64
+        ],
+        "perception_encoder.head.1.weight": [
+          256,
+          384
+        ],
+        "perception_encoder.head.1.bias": [
+          256
+        ],
+        "perception_encoder.head.3.weight": [
+          128,
+          256
+        ],
+        "perception_encoder.head.3.bias": [
+          128
+        ],
+        "actor.0.weight": [
+          512,
+          500
+        ],
+        "actor.0.bias": [
+          512
+        ],
+        "actor.2.weight": [
+          256,
+          512
+        ],
+        "actor.2.bias": [
+          256
+        ],
+        "actor.4.weight": [
+          256,
+          256
+        ],
+        "actor.4.bias": [
+          256
+        ],
+        "actor.6.weight": [
+          29,
+          256
+        ],
+        "actor.6.bias": [
+          29
+        ],
+        "critic.0.weight": [
+          512,
+          123
+        ],
+        "critic.0.bias": [
+          512
+        ],
+        "critic.2.weight": [
+          256,
+          512
+        ],
+        "critic.2.bias": [
+          256
+        ],
+        "critic.4.weight": [
+          256,
+          256
+        ],
+        "critic.4.bias": [
+          256
+        ],
+        "critic.6.weight": [
+          1,
+          256
+        ],
+        "critic.6.bias": [
+          1
+        ],
+        "pose_head.0.weight": [
+          128,
+          128
+        ],
+        "pose_head.0.bias": [
+          128
+        ],
+        "pose_head.2.weight": [
+          9,
+          128
+        ],
+        "pose_head.2.bias": [
+          9
+        ]
+      },
+      "optimizer_groups": [
+        {
+          "lr": 0.00011390625000000006,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "weight_decay": 0,
+          "amsgrad": false,
+          "maximize": false,
+          "foreach": null,
+          "capturable": false,
+          "differentiable": false,
+          "fused": null,
+          "decoupled_weight_decay": false
+        }
+      ]
+    }
+  ],
+  "forward_shapes": {
+    "actor": [
+      2,
+      29
+    ],
+    "critic": [
+      2,
+      1
+    ]
+  },
+  "box_grid": {
+    "source_x": [
+      0.699999988079071,
+      0.800000011920929,
+      0.8999999761581421,
+      1.0,
+      1.100000023841858,
+      1.2000000476837158,
+      1.2999999523162842,
+      1.399999976158142
+    ],
+    "source_z": [
+      0.6000000238418579,
+      0.699999988079071,
+      0.800000011920929,
+      0.8999999761581421,
+      1.0,
+      1.100000023841858,
+      1.2000000476837158,
+      1.2999999523162842,
+      1.399999976158142
+    ],
+    "source_count": 576,
+    "wall10_count": 441
+  },
+  "limitations": [
+    "No physics rollout; FK uses up to32 uniformly spaced frames per clip",
+    "Source pretrained checkpoint lacks a full environment/AMP recipe; current source defaults are not its proven training recipe"
+  ]
+}

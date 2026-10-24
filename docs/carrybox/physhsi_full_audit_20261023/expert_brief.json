@@ -1,0 +1,38 @@
+{
+  "reviewer": "/root/physhsi_controls_audit_20261023",
+  "role": "Read-only controls/physics/reset expert; findings integrated in README, no code changes",
+  "brief": {
+    "affected_call_path": [
+      "PhysHSI G1 carrybox config/env -> motionlib -> explicit PD/PhysX -> post-step reward/reset -> HIMPPO/AMP",
+      "wall5 config -> PhysHSI reset/delay helper -> implicit actuator -> inherited X2/grasp rewards -> independent PPO/AMP",
+      "Independent wall10 config -> explicit PD -> source-style regularization/joint PPO/AMP; inspect as separate variant"
+    ],
+    "critical_interfaces": [
+      "29 named joints; 5 ms physics/20 ms policy; source xyzw and Lab wxyz; link-origin positions versus COM velocities",
+      "60D AMP order/frame; actor depth/proprio only; privileged critic/pose/AMP training-only",
+      "Default/RSI reference selection, final joint pose, foot clearance, paired box/platform, terminal data before reset"
+    ],
+    "invariants": [
+      "Keep original files/weights, checkpoint schemas and unrelated football changes",
+      "Do not equate nominal Kp/Kd with implicit/explicit control equivalence",
+      "Do not count held-box RSI as a successful ground pickup; separate effective terms from inactive declarations"
+    ],
+    "smallest_change_locus": [
+      "Read-only audit artifacts and project index entries; no production change"
+    ],
+    "mandatory_safeguards": [
+      "全部CPU只读；测试仅写本任务docs",
+      "保留既有wall10未提交实现和其他工作区改动",
+      "配置声明与实际调用区分，数据/模型身份和单位/坐标系逐项记录"
+    ],
+    "minimal_tests": [
+      "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/physhsi_full_audit_20261023/check_sources.py",
+      "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/physhsi_full_audit_20261023/check_data.py"
+    ],
+    "blockers": [
+      "源码身份在审计期间变化则重新核验相关结论",
+      "冻结检查失败最多两次原范围修复并保留回执",
+      "无法读取来源时明确待核验，不补造值"
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+CPU确认恢复后比较推理输出时未启用inference_mode，触发Inference tensors cannot be saved for backward。仿真已完成两轮更新并构建恢复runner，但finally app.close掩盖异常；在同一推理比较处添加inference_mode，并显式打印异常。生产reward/优化断言未放宽。

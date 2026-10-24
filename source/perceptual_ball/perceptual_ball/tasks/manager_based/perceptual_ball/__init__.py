@@ -155,3 +155,23 @@ gym.register(
         "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_wall5_env_cfg:CarryBoxWalled5PPORunnerCfg",
     },
 )
+
+gym.register(
+    id="Template-Perceptual-Ball-CarryBox-Walled10-v0",
+    entry_point=f"{__name__}.mdp.carrybox_wall10:Wall10CarryBoxEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.carrybox_wall10_env_cfg:CarryBoxWalled10EnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_wall10_env_cfg:CarryBoxWalled10PPORunnerCfg",
+    },
+)
+
+gym.register(
+    id="Template-Perceptual-Ball-CarryBox-Walled11-v0",
+    entry_point=f"{__name__}.mdp.carrybox_wall11:Wall11CarryBoxEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.carrybox_wall11_env_cfg:CarryBoxWalled11EnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_wall11_env_cfg:CarryBoxWalled11PPORunnerCfg",
+    },
+)

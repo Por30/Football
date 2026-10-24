@@ -1,0 +1,21 @@
+{
+  "baseline100": {
+    "collection": 11.91621799604036,
+    "learning": 40.89127354044467,
+    "total": 52.80749153648503
+  },
+  "candidate100": {
+    "collection": 10.858820859032372,
+    "learning": 7.633637260024746,
+    "total": 18.49245811905712
+  },
+  "candidate24": {
+    "collection": 2.6019425756918886,
+    "learning": 1.807144740441193,
+    "total": 4.409087316133082
+  },
+  "speedup": 2.8556231516925856,
+  "time_reduction": 0.6498137370096331,
+  "default_rollout_steps": 100,
+  "formal_training_started": false
+}

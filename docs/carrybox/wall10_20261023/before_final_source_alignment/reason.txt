@@ -1,0 +1,1 @@
+初次完整PASS后最后源对照发现应采用源ground friction0.9、原支撑板0.4x0.4x0.02、link mass重算惯量，以及reset首步last_dof_vel=0；补齐这些源细节并扩充checkpoint契约后再次原样验证。

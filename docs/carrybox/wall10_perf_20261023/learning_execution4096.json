@@ -1,0 +1,47 @@
+{
+  "num_envs": 4096,
+  "steps": 24,
+  "epochs": 5,
+  "minibatches": 4,
+  "iterations": [
+    {
+      "phase": "baseline",
+      "seconds": 8.390306344255805,
+      "peak_allocated_gb": 3.061104128,
+      "losses": {
+        "value_function": 0.03749094793836228,
+        "surrogate": -0.10410118029280757,
+        "entropy": 41.295165061951074,
+        "amp_loss": 1509.8238565569338,
+        "amp_expert_loss": 1308.6657225489619,
+        "amp_policy_loss": 0.42866388441762215,
+        "policy_smooth": 0.0,
+        "value_smooth": 0.0,
+        "ppo_learning_rate": 0.0010000000000000002,
+        "amp_valid_samples": 94208.0
+      }
+    },
+    {
+      "phase": "candidate",
+      "seconds": 2.07778066303581,
+      "peak_allocated_gb": 4.416159744,
+      "losses": {
+        "value_function": 0.037489584643069805,
+        "surrogate": -0.1041160537415872,
+        "entropy": 41.29542799410615,
+        "amp_loss": 1509.831241425224,
+        "amp_expert_loss": 1308.6754935969475,
+        "amp_policy_loss": 0.428653860602872,
+        "policy_smooth": 0.0,
+        "value_smooth": 0.0,
+        "ppo_learning_rate": 0.0010000000000000002,
+        "amp_valid_samples": 94208.0
+      }
+    }
+  ],
+  "gpu_rng_equal": true,
+  "parameter_max_difference": {
+    "policy": 0.006372272968292236,
+    "discriminator": 0.0022893459536135197
+  }
+}

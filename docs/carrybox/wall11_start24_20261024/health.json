@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-24T12:39:09.719645+09:00",
+  "pid": 2723259,
+  "run_dir": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled11/2026-10-24_12-34-49_wall11_24step_fresh_20261024_123445",
+  "stdout_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled11/train_wall11_24step_fresh_20261024_123445.log",
+  "last_iteration": 14,
+  "num_envs": 4096,
+  "num_steps_per_env": 24,
+  "max_iterations": 20000,
+  "mean_last10_seconds": 4.394,
+  "max_last10_seconds": 4.43,
+  "model_0": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled11/2026-10-24_12-34-49_wall11_24step_fresh_20261024_123445/model_0.pt",
+  "checkpoint_schema": 2,
+  "checkpoint_rollout_steps": 24,
+  "variant": "walled11",
+  "old_training_stopped": true,
+  "fresh_start": true,
+  "depth_noise": {
+    "gaussian_std": 0.02,
+    "edge_threshold": 0.15,
+    "edge_probability": 0.05,
+    "hole_probability": 0.02,
+    "stereo_near": 0.008,
+    "stereo_far": 0.03
+  },
+  "obstacle_count": 3,
+  "experiment_name": "g1_carrybox_depth/walled11",
+  "policy_amp_finite": true,
+  "optimizer_updated": true,
+  "status": "PASS"
+}

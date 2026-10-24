@@ -1,0 +1,29 @@
+{
+  "affected_call_path": [
+    "Wall5 task geometry→RewardManager(weight*dt)→PPO _process_amp; parent PPO _update_amp performs optimizer.step"
+  ],
+  "critical_interfaces": [
+    "travel XY .8→.6 and reach 3D .98→.9 create a handoff valley; inherited held smoothing/standup do not require bilateral contact",
+    "AMP style clips to zero at D<=-1; input normalization/clamp and .7m box-z cap remain"
+  ],
+  "invariants": [
+    "Mixed=.75*task_raw+.125*style; task dt once, AMP no dt; terminal windows before reset; normalization frozen for rollout"
+  ],
+  "smallest_change_locus": [
+    "Read-only audit scripts and evidence only"
+  ],
+  "mandatory_safeguards": [
+    "正式训练和已有产物保持",
+    "区分AMP接入、实际更新、奖励贡献和行为有效性",
+    "统一初态、相同课程、均值动作和冻结AMP；旧模型仅转移权重",
+    "排除reset后污染，核对终止AMP和dt/权重",
+    "多因素改变不能直接指定唯一原因"
+  ],
+  "minimal_tests": [
+    "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/wall5_amp_reward_audit_20261023/analyze.py",
+    "bash docs/carrybox/wall5_amp_reward_audit_20261023/probe.sh"
+  ],
+  "blockers": [
+    "初态、契约或有限值不符停止对应配对归因"
+  ]
+}

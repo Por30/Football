@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/physhsi_full_audit_20261023/check_sources.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "4751c50eb999e5c26a351f128739bb1fadddea725ae368c2c8bf5f49cc1cd285",
+      "stdout_sha256": "1c7772b08bee2573aa854e055b93e47f9e93ba44ac0045dd827ce584b8389b98",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/physhsi_full_audit_20261023/check_data.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "2414bef680c515f8c84d53653119c2cff8c0dcf958eae4acdf95e06e2d4fe167",
+      "stdout_sha256": "1243d01d346f9541f6874cee7c0f3bb441c5ef5edb8daffb66fb6ba3bd171ae9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

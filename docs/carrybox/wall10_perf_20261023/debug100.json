@@ -1,0 +1,32 @@
+{
+  "phase": "debug100",
+  "num_envs": 16,
+  "rollout_steps": 100,
+  "epochs": 5,
+  "minibatches": 4,
+  "source": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/2026-10-23_23-25-30_wall10_physhsi_lift_hold_v1/model_0.pt",
+  "creation_seconds": 4.808279584161937,
+  "iterations": [
+    {
+      "iteration": 0,
+      "collection": 3.438876559957862,
+      "learning": 0.2828132123686373,
+      "total": 3.7216897723264992,
+      "peak_allocated_gb": 0.547765248
+    }
+  ],
+  "strict_same_task_restore": true,
+  "loss": {
+    "value_function": 2.0332268655300143,
+    "surrogate": -0.08299281528452412,
+    "entropy": 41.1156644821167,
+    "amp_loss": 208.85229110717773,
+    "amp_expert_loss": 69.16453800201417,
+    "amp_policy_loss": 84.82024230957032,
+    "policy_smooth": 0.0752070838585496,
+    "value_smooth": 0.006671329960227013,
+    "ppo_learning_rate": 1e-05,
+    "amp_valid_samples": 1584.0
+  },
+  "formal_training": false
+}

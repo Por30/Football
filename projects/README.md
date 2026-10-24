@@ -1,5 +1,29 @@
 # 项目看板
 
+2026-10-24 23:30 JST：[wall11最新model9500四机器人录像](../docs/carrybox/wall11_play4_20261024_2326/README.md)。wall11 model_9500四机器人20秒同步回放完成，1080p/25fps、seed42均值动作，保留深度噪声、墙柱、物理扰动和全部reset。3个loco与1个默认地面箱起点均出现拾箱并站立持箱，四机均到20秒正常超时，无提前失败终止；严格保持最长0.90/1.40/0.20/0.00秒，均未达连续2秒成功。 视频完整解码通过；正式训练PID2723259持续运行，核验到iteration9553。单次录像非总体成功率。
+
+2026-10-24 12:40 JST：[停止wall10并启动wall11正式训练](../docs/carrybox/wall11_start24_20261024/README.md)。按用户指令SIGINT停止wall10 PID2402395，最后日志11147轮、最新model11000及历史工件保留。新wall11 PID2723259，4096环境×24步、seed42、20000轮、5×4更新，从零启动；核验至iteration14，近10轮平均4.394s、最慢4.430s。首模型schema2/walled11 revision1/rollout24、深度噪声与三柱墙契约正确，policy/AMP有限且优化器更新。正式训练进行中，未完成长训或独立评估。
+
+2026-10-24 12:27 JST：[新增wall11：带噪深度与墙柱干扰](../docs/carrybox/wall11_20261024/README.md)。继承wall10拾箱原地保持2秒与非对称AC：actor558+4×27×48、critic123、AMP600；默认4096×24、5×4更新。加入米制深度高斯/距离噪声、边缘丢点/空洞，以及每回合重置的3个实体圆柱和随机墙，保留初始操作空间。38项CPU及16环境2＋1轮更新/严格恢复/终止历史/实际遮挡/导出通过。仅实现与短测完成，未启动wall11正式训练、未测4096耗时/成功率；wall10 PID2402395保持运行。
+
+2026-10-24 11:56：[wall10 model10000四机器人录像](../docs/carrybox/wall10_play4_20261024_1130/README.md)：4环境20秒、1080p/25fps，均从地面箱起点出现拾箱。1号严格保持成功，最长2.86秒；其余未达严格成功。3号早期倾倒后重置再拾箱，1/2/4号20秒超时；保留完整过程。视频完整解码通过，正式训练继续；单次录像非总体成功率。
+
+2026-10-24 01:35：[wall10最新model1000四机器人录像](../docs/carrybox/wall10_play4_20261024_0124/README.md)：4环境20秒、1080p/25fps，完整保留随机reset与失败。reset次数8/7/9/11，地面起点双手接触0，未观察到从地面拾箱；末段抱箱来自参考初始化，严格保持最长0.16秒。视频与完整解码检查通过，正式训练继续；单次录像不代表总体成功率。
+
+2026-10-24 00:17：[wall10按24步启动正式训练](../docs/carrybox/wall10_start24_20261024/README.md)：用户指定24步fresh，4096环境、20000轮、seed42、5×4保持。PID2402395核验至iteration15，近10轮平均4.332s、最慢4.360s；model_0 schema2/rollout24、policy与AMP有限、优化器有更新。后台训练进行中；未作独立成功率评估。
+
+2026-10-24：[wall5与PhysHSI完整对照及重构边界](../docs/carrybox/physhsi_full_audit_20261023/README.md)：完成wall5 rev28对本地PhysHSI G1 carrybox/resume全链路只读审计：47个文件身份、1719个展开参数叶项、19/15段数据及14段字节同源、URDF/USD质量、网络CPU前向与全部有效奖励/AMP/PPO/reset/控制比较。源actor使用箱子/goal状态而当前使用深度；显式/隐式PD、力矩定义、100/24步rollout、时序平滑、数据采样与任务成功语义存在实质差异。同步独立wall10现状与性能证据，不将差异当作已证实失稳根因。未修改生产或操作训练；重构尚未实施。
+
+2026-10-24：[wall10性能优化](../docs/carrybox/wall10_perf_20261023/README.md)：4096×100完整短测从52.81s降到18.49s/轮，学习从40.89s降到7.63s；另测4096×24为4.41s/轮。保留100步默认、5×4、逻辑256采样、奖励和深度/控制语义；GPU计算合批、日志归约、Warp箱体相交及外力写入优化。34项CPU、16环境更新/恢复/导出和4096完整短测通过，旧wall10 checkpoint可严格恢复。本次未启动正式长训，未评估收敛。
+
+2026-10-23 23:25：[wall5版本与进程复核](../docs/carrybox/wall5_rev17_comparison_20261023/README.md)：配方仍为rev28；原PID2266428已不存在，日志最后5739轮、最新model5600。未发现正式train.py进程；退出原因未确认，本次未操作训练。
+
+2026-10-23：[新增FindBox wall10：PhysHSI拾箱原地保持](../docs/carrybox/wall10_20261023/README.md)。独立Walled10任务保留源PPO100步/5×4、联合Adam/无归一化AMP、时间平滑、显式PD及随机化；actor为6帧本体＋4帧深度、critic123，流程止于抬箱原地保持2秒。29项CPU及16环境2＋1轮更新/严格恢复/导出通过，随机箱实际网格深度对照通过。实现与短测完成；未启动wall10正式训练、未评估收敛，未操作wall5正式进程。
+
+2026-10-23：[wall5 rev17录像与当前rev28对照](../docs/carrybox/wall5_rev17_comparison_20261023/README.md)：只读确认指定2026-10-20录像为rev17 model2800，当前为rev28 fresh；核对checkpoint、run参数及8份历史源码hash。奖励稳定项/近箱逻辑、RSI与动作延迟、碰撞、深度单位/噪声、critic/辅助监督、专家片段不同；PPO、AMP混合与特征、PD和力矩惩罚不变。未修改生产或重启，未作因果消融。
+
+2026-10-23：[wall5 AMP与奖励衔接排查](../docs/carrybox/wall5_amp_reward_audit_20261023/README.md)：rev22对照只读诊断：AMP实际更新/混合已核验；当前空手接近停滞、膝目标饱和和奖励衔接问题见证据。未改参数或重启，未将单项认定为唯一训练根因。
+
 2026-10-23：[rev28 model4800四机器人录像](../docs/carrybox/wall5_play4_rev28_20261023_2223/README.md)：rev28 model_4800，4机器人同步20秒，1080p/25fps、高位镜头。固定来源为默认/loco/loco/hold，reset次数[1, 1, 1, 1]；保留全部失败回合。 正式训练继续；具体表现见录像记录，未作总体成功率评估。
 
 2026-10-23：[rev28 model1200四机器人录像](../docs/carrybox/wall5_play4_rev28_20261023/README.md)：rev28 model_1200，4机器人同步20秒，1080p/25fps、高位镜头。固定来源为默认/loco/loco/hold，reset次数[1, 1, 1, 1]；保留全部失败回合。 正式训练继续；具体表现见录像记录，未作总体成功率评估。
@@ -198,6 +222,7 @@
 | CB-019 | 搬箱子 | wall3/wall4共用修复、仅障碍不同 | 实现与短测完成 | [revision7与4096环境正式命令](../docs/carrybox/wall_parity_20261015/README.md)；41项CPU、两任务更新恢复导出通过；未启动新版正式训练、未验证收敛 |
 | CB-020 | 搬箱子 | G1站立reset/相机/构型复核与正式重启 | 实现/验收/启动完成 | [revision8接地适配](../docs/carrybox/g1_reset_20261015/README.md)，旧策略倾倒与脚底穿地分别取证；实机光心标定及独立收敛评估待做 |
 | CB-021 | 搬箱子 | wall5 AMP阶段A对照任务 | 实现/短测完成 | [50项CPU、4环境3＋1轮更新恢复及导出通过](../docs/carrybox/wall5_20261016/README.md)；保留wall4，wall5未正式启动、未验证收敛或4096速度 |
+| CB-022 | 搬箱子 | wall10 PhysHSI迁移：深度非对称AC、抬箱原地保持 | 实现/短测完成 | [29项CPU、16环境2＋1轮、变尺寸箱深度/恢复/导出通过](../docs/carrybox/wall10_20261023/README.md)；正式训练与独立评估待做 |
 | CB-004 | 搬箱子 | 独立拾箱成功率评估 | 待开始 | 使用双手接触+离地+持续保持的任务成功判据 |
 | CB-008 | findbox / football | 深度安装与遮挡管线核对 | 完成 | [FindBox三变体RTX遮挡通过；Football解析深度无场景遮挡；实机标定待提供](../docs/carrybox/depth_audit/README.md) |
 | CB-006 | 搬箱子 | G1 FindBox walled3/walled4迁移 | 完成 | [19项CPU、两变体4环境20＋2轮、wall4 128环境50＋2轮及真实碰撞/遮挡通过](../docs/carrybox/wall4_repair/README.md) |

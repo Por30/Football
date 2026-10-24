@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/wall5_rev17_comparison_20261023/check.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "bcc0a5f7c5b1d9adeeefe9925ba7f31234cfbb0ba28ffb9c54e3aefea7e8c2a3",
+      "stdout_sha256": "8d91277bd08ca0d006f36aa49cda3f603dc34c98e4e901082fa807540ff237c7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

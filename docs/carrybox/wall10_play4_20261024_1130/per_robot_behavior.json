@@ -1,0 +1,218 @@
+[
+  {
+    "robot": 1,
+    "resets": 1,
+    "episodes": [
+      {
+        "env_id": 0,
+        "end_step": 1000,
+        "skill": 0,
+        "kind": 1,
+        "steps": 1000,
+        "tipped": false,
+        "causes": {
+          "time_out": true,
+          "invalid": false,
+          "tipped": false,
+          "fell_pelvis": false,
+          "fell_head": false,
+          "fell_hip": false,
+          "box_speed": false
+        },
+        "fell": false,
+        "fell_pelvis": false,
+        "fell_head": false,
+        "fell_hip": false,
+        "box_speed": false,
+        "invalid": false,
+        "timeout": true,
+        "roll": -0.0023453235626220703,
+        "pitch": -0.18036723136901855,
+        "success": true,
+        "from_ground": true,
+        "box_bottom_clearance": 0.6564273238182068,
+        "hold_steps": 56
+      }
+    ],
+    "ground_samples": 999,
+    "ground_bilateral_contacts": 813,
+    "ground_any_contact": 825,
+    "max_ground_clearance": 0.7318938970565796,
+    "max_hold_seconds": 2.86,
+    "success_seen": true,
+    "first_distance": 0.8363973484020513,
+    "min_hand_box_distance": 0.024633284658193588,
+    "final_episode": {
+      "env_id": 0,
+      "kind": 0,
+      "skill": 0,
+      "steps": 0,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.004999995231628418,
+      "hold_steps": 0
+    }
+  },
+  {
+    "robot": 2,
+    "resets": 1,
+    "episodes": [
+      {
+        "env_id": 1,
+        "end_step": 1000,
+        "skill": 0,
+        "kind": 1,
+        "steps": 1000,
+        "tipped": false,
+        "causes": {
+          "time_out": true,
+          "invalid": false,
+          "tipped": false,
+          "fell_pelvis": false,
+          "fell_head": false,
+          "fell_hip": false,
+          "box_speed": false
+        },
+        "fell": false,
+        "fell_pelvis": false,
+        "fell_head": false,
+        "fell_hip": false,
+        "box_speed": false,
+        "invalid": false,
+        "timeout": true,
+        "roll": -0.01558685302734375,
+        "pitch": -0.18129968643188477,
+        "success": false,
+        "from_ground": true,
+        "box_bottom_clearance": 0.5586645603179932,
+        "hold_steps": 0
+      }
+    ],
+    "ground_samples": 999,
+    "ground_bilateral_contacts": 837,
+    "ground_any_contact": 844,
+    "max_ground_clearance": 0.6597086191177368,
+    "max_hold_seconds": 0.0,
+    "success_seen": false,
+    "first_distance": 1.8461788976744729,
+    "min_hand_box_distance": 0.031644824892282486,
+    "final_episode": {
+      "env_id": 1,
+      "kind": 1,
+      "skill": 0,
+      "steps": 0,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.004999995231628418,
+      "hold_steps": 0
+    }
+  },
+  {
+    "robot": 3,
+    "resets": 1,
+    "episodes": [
+      {
+        "env_id": 2,
+        "end_step": 64,
+        "skill": 0,
+        "kind": 1,
+        "steps": 64,
+        "tipped": true,
+        "causes": {
+          "time_out": false,
+          "invalid": false,
+          "tipped": true,
+          "fell_pelvis": false,
+          "fell_head": false,
+          "fell_hip": false,
+          "box_speed": false
+        },
+        "fell": false,
+        "fell_pelvis": false,
+        "fell_head": false,
+        "fell_hip": false,
+        "box_speed": false,
+        "invalid": false,
+        "timeout": false,
+        "roll": -0.5587327480316162,
+        "pitch": -0.23204755783081055,
+        "success": false,
+        "from_ground": true,
+        "box_bottom_clearance": 5.662441253662109e-07,
+        "hold_steps": 0
+      }
+    ],
+    "ground_samples": 999,
+    "ground_bilateral_contacts": 715,
+    "ground_any_contact": 720,
+    "max_ground_clearance": 1.0323235988616943,
+    "max_hold_seconds": 0.0,
+    "success_seen": false,
+    "first_distance": 1.0715185704099848,
+    "min_hand_box_distance": 0.05842391029000282,
+    "final_episode": {
+      "env_id": 2,
+      "kind": 1,
+      "skill": 0,
+      "steps": 936,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.9573520421981812,
+      "hold_steps": 0
+    }
+  },
+  {
+    "robot": 4,
+    "resets": 1,
+    "episodes": [
+      {
+        "env_id": 3,
+        "end_step": 1000,
+        "skill": 0,
+        "kind": 1,
+        "steps": 1000,
+        "tipped": false,
+        "causes": {
+          "time_out": true,
+          "invalid": false,
+          "tipped": false,
+          "fell_pelvis": false,
+          "fell_head": false,
+          "fell_hip": false,
+          "box_speed": false
+        },
+        "fell": false,
+        "fell_pelvis": false,
+        "fell_head": false,
+        "fell_hip": false,
+        "box_speed": false,
+        "invalid": false,
+        "timeout": true,
+        "roll": 0.002704143524169922,
+        "pitch": -0.10021448135375977,
+        "success": false,
+        "from_ground": true,
+        "box_bottom_clearance": 0.6033456325531006,
+        "hold_steps": 0
+      }
+    ],
+    "ground_samples": 999,
+    "ground_bilateral_contacts": 33,
+    "ground_any_contact": 564,
+    "max_ground_clearance": 0.8191053867340088,
+    "max_hold_seconds": 0.0,
+    "success_seen": false,
+    "first_distance": 0.8395042199862691,
+    "min_hand_box_distance": 0.010539745911955833,
+    "final_episode": {
+      "env_id": 3,
+      "kind": 1,
+      "skill": 0,
+      "steps": 0,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.005000002682209015,
+      "hold_steps": 0
+    }
+  }
+]

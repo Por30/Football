@@ -1,0 +1,148 @@
+{
+  "initial_kinds": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "reset_counts": [
+    8,
+    7,
+    9,
+    11
+  ],
+  "groups": {
+    "default": {
+      "completed_episodes": 7,
+      "mean_completed_seconds": 1.9485714285714286,
+      "max_completed_seconds": 2.98,
+      "completed_successes": 0,
+      "termination_counts": {
+        "time_out": 0,
+        "invalid": 0,
+        "tipped": 1,
+        "fell_pelvis": 0,
+        "fell_head": 4,
+        "fell_hip": 2,
+        "box_speed": 0
+      },
+      "nonreset_samples": 675,
+      "bilateral_contact_samples": 0,
+      "any_hand_contact_samples": 18,
+      "success_samples": 0,
+      "max_box_bottom_clearance_m": 0.002547748386859894,
+      "min_hand_center_box_distance_m": 0.2350289672613144
+    },
+    "loco": {
+      "completed_episodes": 24,
+      "mean_completed_seconds": 2.255,
+      "max_completed_seconds": 4.48,
+      "completed_successes": 0,
+      "termination_counts": {
+        "time_out": 0,
+        "invalid": 0,
+        "tipped": 4,
+        "fell_pelvis": 0,
+        "fell_head": 14,
+        "fell_hip": 5,
+        "box_speed": 1
+      },
+      "nonreset_samples": 2753,
+      "bilateral_contact_samples": 0,
+      "any_hand_contact_samples": 13,
+      "success_samples": 0,
+      "max_box_bottom_clearance_m": 0.002547748386859894,
+      "min_hand_center_box_distance_m": 0.19474773108959198
+    },
+    "pickup": {
+      "completed_episodes": 1,
+      "mean_completed_seconds": 1.3,
+      "max_completed_seconds": 1.3,
+      "completed_successes": 0,
+      "termination_counts": {
+        "time_out": 0,
+        "invalid": 0,
+        "tipped": 1,
+        "fell_pelvis": 0,
+        "fell_head": 0,
+        "fell_hip": 0,
+        "box_speed": 0
+      },
+      "nonreset_samples": 90,
+      "bilateral_contact_samples": 12,
+      "any_hand_contact_samples": 17,
+      "success_samples": 0,
+      "max_box_bottom_clearance_m": 0.7126333713531494,
+      "min_hand_center_box_distance_m": 0.07129745185375214
+    },
+    "hold": {
+      "completed_episodes": 3,
+      "mean_completed_seconds": 1.7866666666666666,
+      "max_completed_seconds": 3.02,
+      "completed_successes": 0,
+      "termination_counts": {
+        "time_out": 0,
+        "invalid": 0,
+        "tipped": 0,
+        "fell_pelvis": 0,
+        "fell_head": 2,
+        "fell_hip": 0,
+        "box_speed": 1
+      },
+      "nonreset_samples": 447,
+      "bilateral_contact_samples": 397,
+      "any_hand_contact_samples": 428,
+      "success_samples": 0,
+      "max_box_bottom_clearance_m": 0.757612943649292,
+      "min_hand_center_box_distance_m": 0.004064885899424553
+    }
+  },
+  "final_censored": [
+    {
+      "env_id": 0,
+      "kind": 2,
+      "skill": 1,
+      "steps": 26,
+      "success": false,
+      "from_ground": false,
+      "box_bottom_clearance": 0.05026040971279144,
+      "hold_steps": 0
+    },
+    {
+      "env_id": 1,
+      "kind": 3,
+      "skill": 2,
+      "steps": 155,
+      "success": false,
+      "from_ground": false,
+      "box_bottom_clearance": 0.628989577293396,
+      "hold_steps": 0
+    },
+    {
+      "env_id": 2,
+      "kind": 3,
+      "skill": 2,
+      "steps": 27,
+      "success": false,
+      "from_ground": false,
+      "box_bottom_clearance": 0.757612943649292,
+      "hold_steps": 0
+    },
+    {
+      "env_id": 3,
+      "kind": 1,
+      "skill": 0,
+      "steps": 71,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 2.3096799850463867e-07,
+      "hold_steps": 0
+    }
+  ],
+  "limitations": [
+    "One seed, four environments, 20 seconds; not a success-rate evaluation.",
+    "Reset rows excluded from contact/height samples; those terminal frames are not included.",
+    "Pickup/hold can start with the box lifted; do not count them as ground pickup.",
+    "Termination causes may overlap; durations exclude unfinished final episodes."
+  ]
+}

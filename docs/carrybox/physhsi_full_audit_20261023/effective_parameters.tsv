@@ -1,0 +1,1720 @@
+implementation	path	value
+source_default	env.amp.amp_coef	0.25
+source_default	env.amp.num_obs	600
+source_default	env.amp.num_one_step_obs	60
+source_default	env.amp.ratio_random_range	[0.95, 1.05]
+source_default	env.amp.use_normalizer	false
+source_default	env.amp.window_length	10
+source_default	env.asset.angular_damping	0.01
+source_default	env.asset.ankle_joints	["left_ankle_pitch_joint", "right_ankle_pitch_joint", "left_wrist_roll_joint", "right_wrist_roll_joint"]
+source_default	env.asset.armature	0.01
+source_default	env.asset.box.ang_noise_scale	0.08726646259971647
+source_default	env.asset.box.base_size	[0.3, 0.3, 0.25]
+source_default	env.asset.box.box_termination	false
+source_default	env.asset.box.density_default	50.0
+source_default	env.asset.box.density_range	[10.0, 100.0]
+source_default	env.asset.box.far_pos_offset	0.2
+source_default	env.asset.box.friction_range	[0.5, 1.2]
+source_default	env.asset.box.hybrid_init_prob	0.8
+source_default	env.asset.box.min_tar_dist	0.5
+source_default	env.asset.box.platform_friction_range	[0.5, 1.2]
+source_default	env.asset.box.pos_noise_scale	0.05
+source_default	env.asset.box.random_density	true
+source_default	env.asset.box.random_props	false
+source_default	env.asset.box.random_size	true
+source_default	env.asset.box.reset_mode	"hybrid"
+source_default	env.asset.box.restitution_range	[0.0, 0.2]
+source_default	env.asset.box.scale_range_x	[0.7, 1.3]
+source_default	env.asset.box.scale_range_y	[0.7, 1.3]
+source_default	env.asset.box.scale_range_z	[0.6, 1.4]
+source_default	env.asset.box.scale_sample_interval	0.1
+source_default	env.asset.box.skill	["loco", "pickUp", "carryWith", "putDown"]
+source_default	env.asset.box.skill_init_prob	[0.8, 0.2, 0.2, 0.0]
+source_default	env.asset.box.thresh_tag	[0.7, 2.0]
+source_default	env.asset.box.use_random	true
+source_default	env.asset.camera.facing_angle	[0.3420201433256688, 0.6427876096865394]
+source_default	env.asset.camera.hfov_rad	[1.4835298641951802, 1.5707963267948966]
+source_default	env.asset.camera.vfov_rad	[0.9599310885968813, 1.0471975511965976]
+source_default	env.asset.camera_name	"d455_link"
+source_default	env.asset.collapse_fixed_joints	false
+source_default	env.asset.default_dof_drive_mode	3
+source_default	env.asset.density	0.001
+source_default	env.asset.disable_gravity	false
+source_default	env.asset.file	"{LEGGED_GYM_ROOT_DIR}/resources/robots/g1/urdf/g1_29dof.urdf"
+source_default	env.asset.fix_base_link	false
+source_default	env.asset.flip_visual_attachments	false
+source_default	env.asset.foot_name	"ankle_pitch_link"
+source_default	env.asset.hand_colli_name	"rubber_hand"
+source_default	env.asset.hand_pos_name	"palm_link"
+source_default	env.asset.head_name	"mid360_link"
+source_default	env.asset.hip_yaw_names	["left_hip_yaw_link", "right_hip_yaw_link"]
+source_default	env.asset.imu_link	"imu_link"
+source_default	env.asset.keyframe_name	"keyframe"
+source_default	env.asset.knee_joints	["left_knee_joint", "right_knee_joint"]
+source_default	env.asset.knee_names	["left_knee_link", "right_knee_link"]
+source_default	env.asset.left_foot_name	"left_foot"
+source_default	env.asset.linear_damping	0.01
+source_default	env.asset.max_angular_velocity	1000.0
+source_default	env.asset.max_linear_velocity	1000.0
+source_default	env.asset.name	"g1"
+source_default	env.asset.penalize_contacts_on	["hip", "knee", "torso", "shoulder", "pelvis"]
+source_default	env.asset.replace_cylinder_with_capsule	true
+source_default	env.asset.right_foot_name	"right_foot"
+source_default	env.asset.self_collisions	0
+source_default	env.asset.terminate_after_contacts_on	[]
+source_default	env.asset.thickness	0.01
+source_default	env.asset.upper_body_link	"torso_link"
+source_default	env.asset.waist_joints	["waist_yaw_joint"]
+source_default	env.commands.curriculum	false
+source_default	env.commands.heading_command	true
+source_default	env.commands.heading_to_ang_vel	true
+source_default	env.commands.max_curriculum	1.0
+source_default	env.commands.num_commands	4
+source_default	env.commands.ranges.ang_vel_yaw	[-0.5, 0.5]
+source_default	env.commands.ranges.heading	[-3.14, 3.14]
+source_default	env.commands.ranges.lin_vel_x	[0.0, 0.8]
+source_default	env.commands.ranges.lin_vel_y	[-0.0, 0.0]
+source_default	env.commands.resampling_time	10.0
+source_default	env.control.action_scale	0.25
+source_default	env.control.control_type	"P"
+source_default	env.control.curriculum_joints	["waist_yaw_joint", "left_shoulder_roll_joint", "left_shoulder_yaw_joint", "left_shoulder_pitch_joint", "left_elbow_joint", "left_wrist_roll_joint", "right_shoulder_roll_joint", "right_shoulder_yaw_joint", "right_shoulder_pitch_joint", "right_elbow_joint", "right_wrist_roll_joint"]
+source_default	env.control.damping.hip_yaw	2
+source_default	env.control.damping.hip_roll	2
+source_default	env.control.damping.hip_pitch	2
+source_default	env.control.damping.knee	4
+source_default	env.control.damping.ankle	1
+source_default	env.control.damping.waist_yaw	4
+source_default	env.control.damping.waist_roll	4
+source_default	env.control.damping.waist_pitch	4
+source_default	env.control.damping.shoulder	3
+source_default	env.control.damping.elbow	1
+source_default	env.control.damping.wrist	0.5
+source_default	env.control.decimation	4
+source_default	env.control.hip_reduction	1.0
+source_default	env.control.left_arm_joints	["left_shoulder_pitch_joint", "left_shoulder_roll_joint", "left_shoulder_yaw_joint", "left_elbow_joint", "left_wrist_roll_joint"]
+source_default	env.control.left_hip_joints	["left_hip_yaw_joint", "left_hip_roll_joint", "left_hip_pitch_joint"]
+source_default	env.control.left_leg_joints	["left_hip_yaw_joint", "left_hip_roll_joint", "left_hip_pitch_joint", "left_knee_joint", "left_ankle_pitch_joint", "left_ankle_roll_joint"]
+source_default	env.control.right_arm_joints	["right_shoulder_pitch_joint", "right_shoulder_roll_joint", "right_shoulder_yaw_joint", "right_elbow_joint", "right_wrist_roll_joint"]
+source_default	env.control.right_hip_joints	["right_hip_yaw_joint", "right_hip_roll_joint", "right_hip_pitch_joint"]
+source_default	env.control.right_leg_joints	["right_hip_yaw_joint", "right_hip_roll_joint", "right_hip_pitch_joint", "right_knee_joint", "right_ankle_pitch_joint", "right_ankle_roll_joint"]
+source_default	env.control.stiffness.hip_yaw	150
+source_default	env.control.stiffness.hip_roll	150
+source_default	env.control.stiffness.hip_pitch	150
+source_default	env.control.stiffness.knee	300
+source_default	env.control.stiffness.ankle	40
+source_default	env.control.stiffness.waist_yaw	300
+source_default	env.control.stiffness.waist_roll	300
+source_default	env.control.stiffness.waist_pitch	300
+source_default	env.control.stiffness.shoulder	200
+source_default	env.control.stiffness.elbow	100
+source_default	env.control.stiffness.wrist	20
+source_default	env.control.upper_body_link	"pelvis"
+source_default	env.dataset.frame_rate	60
+source_default	env.dataset.joint_mapping_file	"{LEGGED_GYM_ROOT_DIR}/resources/config/joint_id.txt"
+source_default	env.dataset.min_time	0.1
+source_default	env.dataset.motion_file	"{LEGGED_GYM_ROOT_DIR}/resources/config/carrybox.yaml"
+source_default	env.domain_rand.actuation_offset_range	[-0.05, 0.05]
+source_default	env.domain_rand.com_displacement_range	[-0.1, 0.1]
+source_default	env.domain_rand.delay	true
+source_default	env.domain_rand.disturbance	true
+source_default	env.domain_rand.disturbance_interval	8
+source_default	env.domain_rand.disturbance_range	[-50, 50]
+source_default	env.domain_rand.friction_range	[0.1, 1.5]
+source_default	env.domain_rand.initial_joint_pos_offset	[-0.1, 0.1]
+source_default	env.domain_rand.initial_joint_pos_scale	[1.0, 1.0]
+source_default	env.domain_rand.kd_range	[0.9, 1.1]
+source_default	env.domain_rand.kp_range	[0.9, 1.1]
+source_default	env.domain_rand.link_mass_range	[0.8, 1.2]
+source_default	env.domain_rand.max_delay_timesteps	5
+source_default	env.domain_rand.max_push_vel_xy	0.1
+source_default	env.domain_rand.motor_strength_range	[0.9, 1.1]
+source_default	env.domain_rand.payload_mass_range	[-2, 5]
+source_default	env.domain_rand.push_interval_s	10
+source_default	env.domain_rand.push_robots	false
+source_default	env.domain_rand.randomize_actuation_offset	true
+source_default	env.domain_rand.randomize_com_displacement	true
+source_default	env.domain_rand.randomize_friction	true
+source_default	env.domain_rand.randomize_initial_joint_pos	true
+source_default	env.domain_rand.randomize_kd	true
+source_default	env.domain_rand.randomize_kp	true
+source_default	env.domain_rand.randomize_link_mass	true
+source_default	env.domain_rand.randomize_motor_strength	true
+source_default	env.domain_rand.randomize_payload_mass	true
+source_default	env.domain_rand.randomize_restitution	true
+source_default	env.domain_rand.restitution_range	[0.0, 1.0]
+source_default	env.domain_rand.use_random	true
+source_default	env.env.action_curriculum	false
+source_default	env.env.env_spacing	10.0
+source_default	env.env.episode_length_s	20
+source_default	env.env.num_actions	29
+source_default	env.env.num_actor_history	6
+source_default	env.env.num_actor_obs	738
+source_default	env.env.num_dofs	29
+source_default	env.env.num_envs	4096
+source_default	env.env.num_privileged_obs	126
+source_default	env.env.num_proprio_obs	108
+source_default	env.env.num_task_obs	15
+source_default	env.env.send_timeouts	true
+source_default	env.env.test	false
+source_default	env.init_state.ang_vel	[0.0, 0.0, 0.0]
+source_default	env.init_state.default_joint_angles.left_hip_pitch_joint	-0.1
+source_default	env.init_state.default_joint_angles.left_hip_roll_joint	0.0
+source_default	env.init_state.default_joint_angles.left_hip_yaw_joint	0.0
+source_default	env.init_state.default_joint_angles.left_knee_joint	0.3
+source_default	env.init_state.default_joint_angles.left_ankle_pitch_joint	-0.2
+source_default	env.init_state.default_joint_angles.left_ankle_roll_joint	0.0
+source_default	env.init_state.default_joint_angles.right_hip_pitch_joint	-0.1
+source_default	env.init_state.default_joint_angles.right_hip_roll_joint	0.0
+source_default	env.init_state.default_joint_angles.right_hip_yaw_joint	0.0
+source_default	env.init_state.default_joint_angles.right_knee_joint	0.3
+source_default	env.init_state.default_joint_angles.right_ankle_pitch_joint	-0.2
+source_default	env.init_state.default_joint_angles.right_ankle_roll_joint	0.0
+source_default	env.init_state.default_joint_angles.waist_yaw_joint	0.0
+source_default	env.init_state.default_joint_angles.waist_roll_joint	0.0
+source_default	env.init_state.default_joint_angles.waist_pitch_joint	0.0
+source_default	env.init_state.default_joint_angles.left_shoulder_pitch_joint	0.0
+source_default	env.init_state.default_joint_angles.left_shoulder_roll_joint	0.1
+source_default	env.init_state.default_joint_angles.left_shoulder_yaw_joint	0.0
+source_default	env.init_state.default_joint_angles.left_elbow_joint	1.2
+source_default	env.init_state.default_joint_angles.left_wrist_roll_joint	0.0
+source_default	env.init_state.default_joint_angles.left_wrist_pitch_joint	0.0
+source_default	env.init_state.default_joint_angles.left_wrist_yaw_joint	0.0
+source_default	env.init_state.default_joint_angles.right_shoulder_pitch_joint	0.0
+source_default	env.init_state.default_joint_angles.right_shoulder_roll_joint	-0.1
+source_default	env.init_state.default_joint_angles.right_shoulder_yaw_joint	0.0
+source_default	env.init_state.default_joint_angles.right_elbow_joint	1.2
+source_default	env.init_state.default_joint_angles.right_wrist_roll_joint	0.0
+source_default	env.init_state.default_joint_angles.right_wrist_pitch_joint	0.0
+source_default	env.init_state.default_joint_angles.right_wrist_yaw_joint	0.0
+source_default	env.init_state.lin_vel	[0.0, 0.0, 0.0]
+source_default	env.init_state.pos	[2.3, 0.0, 0.8]
+source_default	env.init_state.rot	[0.0, 0.0, 1.0, 0.0]
+source_default	env.noise.add_noise	true
+source_default	env.noise.noise_level	1.0
+source_default	env.noise.noise_scales.ang_vel	0.3
+source_default	env.noise.noise_scales.dof_pos	0.02
+source_default	env.noise.noise_scales.dof_vel	2.0
+source_default	env.noise.noise_scales.end_effector	0.05
+source_default	env.noise.noise_scales.gravity	0.05
+source_default	env.normalization.clip_actions	100.0
+source_default	env.normalization.clip_observations	100.0
+source_default	env.normalization.obs_scales.ang_vel	0.25
+source_default	env.normalization.obs_scales.dof_pos	1.0
+source_default	env.normalization.obs_scales.dof_vel	0.05
+source_default	env.normalization.obs_scales.lin_vel	2.0
+source_default	env.rewards.base_height	0.0
+source_default	env.rewards.base_height_target	0.75
+source_default	env.rewards.box_height	2.0
+source_default	env.rewards.clearance_height_target	-0.66
+source_default	env.rewards.hand_contact	0.0
+source_default	env.rewards.hand_free	0.5
+source_default	env.rewards.hand_pos	0.7
+source_default	env.rewards.head_height	0.5
+source_default	env.rewards.head_height_target	1.15
+source_default	env.rewards.least_feet_distance	0.18
+source_default	env.rewards.least_feet_distance_lateral	0.18
+source_default	env.rewards.least_knee_distance_lateral	0.18
+source_default	env.rewards.max_contact_force	350.0
+source_default	env.rewards.object2goal_pos	1.0
+source_default	env.rewards.only_positive_rewards	false
+source_default	env.rewards.put_box	1.0
+source_default	env.rewards.relocation_heading	0.5
+source_default	env.rewards.relocation_heading_vel	0.0
+source_default	env.rewards.robot2goal_pos	0.0
+source_default	env.rewards.robot2goal_vel	1.0
+source_default	env.rewards.robot2object_pos	0.0
+source_default	env.rewards.robot2object_vel	1.0
+source_default	env.rewards.scales.action_rate	-0.03
+source_default	env.rewards.scales.carryup_task	1.0
+source_default	env.rewards.scales.dof_acc	-1e-07
+source_default	env.rewards.scales.dof_pos_limits	-5.0
+source_default	env.rewards.scales.dof_vel	-0.0002
+source_default	env.rewards.scales.dof_vel_limits	-0.001
+source_default	env.rewards.scales.relocation_task	1.0
+source_default	env.rewards.scales.standup_task	0.2
+source_default	env.rewards.scales.torque_limits	-0.03
+source_default	env.rewards.scales.torques	-0.0001
+source_default	env.rewards.scales.walk_task	1.0
+source_default	env.rewards.soft_dof_pos_limit	0.9
+source_default	env.rewards.soft_dof_vel_limit	0.8
+source_default	env.rewards.soft_torque_limit	0.95
+source_default	env.rewards.stand_still	1.0
+source_default	env.rewards.start_heading	0.5
+source_default	env.rewards.target_box_height	0.72
+source_default	env.rewards.target_speed_carry	0.85
+source_default	env.rewards.target_speed_loco	0.85
+source_default	env.rewards.thresh_object2goal	0.05
+source_default	env.rewards.thresh_object2start	0.5
+source_default	env.rewards.thresh_robot2goal	0.65
+source_default	env.rewards.thresh_robot2object	0.7
+source_default	env.rewards.tracking_sigma	0.25
+source_default	env.sim.dt	0.005
+source_default	env.sim.gravity	[0.0, 0.0, -9.81]
+source_default	env.sim.physx.bounce_threshold_velocity	0.5
+source_default	env.sim.physx.contact_collection	2
+source_default	env.sim.physx.contact_offset	0.01
+source_default	env.sim.physx.default_buffer_size_multiplier	5
+source_default	env.sim.physx.max_depenetration_velocity	1.0
+source_default	env.sim.physx.max_gpu_contact_pairs	16777216
+source_default	env.sim.physx.num_position_iterations	8
+source_default	env.sim.physx.num_threads	10
+source_default	env.sim.physx.num_velocity_iterations	0
+source_default	env.sim.physx.rest_offset	0.0
+source_default	env.sim.physx.solver_type	1
+source_default	env.sim.substeps	1
+source_default	env.sim.up_axis	1
+source_default	env.terrain.border_size	25
+source_default	env.terrain.curriculum	true
+source_default	env.terrain.dynamic_friction	0.9
+source_default	env.terrain.hf2mesh_method	"fast"
+source_default	env.terrain.horizontal_scale	0.1
+source_default	env.terrain.max_error	0.1
+source_default	env.terrain.max_error_camera	2
+source_default	env.terrain.max_init_terrain_level	10
+source_default	env.terrain.measure_heights	false
+source_default	env.terrain.measured_points_x	[-0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+source_default	env.terrain.measured_points_y	[-0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+source_default	env.terrain.mesh_type	"plane"
+source_default	env.terrain.num_cols	40
+source_default	env.terrain.num_rows	40
+source_default	env.terrain.restitution	0.0
+source_default	env.terrain.selected	false
+source_default	env.terrain.slope_treshold	0.75
+source_default	env.terrain.static_friction	0.9
+source_default	env.terrain.terrain_kwargs	null
+source_default	env.terrain.terrain_length	8.0
+source_default	env.terrain.terrain_proportions	[0.1, 0.1, 0.35, 0.25, 0.2]
+source_default	env.terrain.terrain_width	8.0
+source_default	env.terrain.vertical_scale	0.005
+source_default	env.viewer.lookat	[11.0, 3, 2.0]
+source_default	env.viewer.pos	[10, -5, 4]
+source_default	env.viewer.ref_env	0
+source_default	agent.algorithm.clip_param	0.2
+source_default	agent.algorithm.desired_kl	0.01
+source_default	agent.algorithm.entropy_coef	0.01
+source_default	agent.algorithm.gamma	0.99
+source_default	agent.algorithm.lam	0.95
+source_default	agent.algorithm.learning_rate	0.001
+source_default	agent.algorithm.max_grad_norm	1.0
+source_default	agent.algorithm.num_learning_epochs	5
+source_default	agent.algorithm.num_mini_batches	4
+source_default	agent.algorithm.schedule	"adaptive"
+source_default	agent.algorithm.use_clipped_value_loss	true
+source_default	agent.algorithm.value_loss_coef	1.0
+source_default	agent.amp.amp_coef	0.25
+source_default	agent.amp.num_obs	600
+source_default	agent.amp.num_one_step_obs	60
+source_default	agent.amp.ratio_random_range	[0.95, 1.05]
+source_default	agent.amp.use_normalizer	false
+source_default	agent.amp.window_length	10
+source_default	agent.policy.activation	"elu"
+source_default	agent.policy.actor_hidden_dims	[512, 256, 256]
+source_default	agent.policy.critic_hidden_dims	[512, 256, 256]
+source_default	agent.policy.init_noise_std	1.0
+source_default	agent.runner.algorithm_class_name	"HIMPPO"
+source_default	agent.runner.checkpoint	-1
+source_default	agent.runner.experiment_name	"amp_carrybox"
+source_default	agent.runner.load_run	-1
+source_default	agent.runner.logger	"tensorboard"
+source_default	agent.runner.max_iterations	20000
+source_default	agent.runner.num_steps_per_env	100
+source_default	agent.runner.policy_class_name	"ActorCritic"
+source_default	agent.runner.resume	false
+source_default	agent.runner.resume_path	null
+source_default	agent.runner.run_name	"carrybox_coef0.25"
+source_default	agent.runner.save_interval	500
+source_default	agent.runner.use_muon_optim	false
+source_default	agent.runner.wandb_entity	"YOUR_ENTITY_NAME"
+source_default	agent.runner.wandb_project	"amp_carrybox"
+source_default	agent.runner_class_name	"HIMOnPolicyRunner"
+source_default	agent.seed	1
+source_resume	env.amp.amp_coef	0.3
+source_resume	env.amp.num_obs	600
+source_resume	env.amp.num_one_step_obs	60
+source_resume	env.amp.ratio_random_range	[0.95, 1.05]
+source_resume	env.amp.use_normalizer	false
+source_resume	env.amp.window_length	10
+source_resume	env.asset.angular_damping	0.01
+source_resume	env.asset.ankle_joints	["left_ankle_pitch_joint", "right_ankle_pitch_joint", "left_wrist_roll_joint", "right_wrist_roll_joint"]
+source_resume	env.asset.armature	0.01
+source_resume	env.asset.box.ang_noise_scale	0.08726646259971647
+source_resume	env.asset.box.base_size	[0.3, 0.3, 0.25]
+source_resume	env.asset.box.box_termination	true
+source_resume	env.asset.box.density_default	50.0
+source_resume	env.asset.box.density_range	[10.0, 100.0]
+source_resume	env.asset.box.far_pos_offset	0.2
+source_resume	env.asset.box.friction_range	[0.5, 1.2]
+source_resume	env.asset.box.hybrid_init_prob	0.8
+source_resume	env.asset.box.min_tar_dist	0.5
+source_resume	env.asset.box.platform_friction_range	[0.5, 1.2]
+source_resume	env.asset.box.pos_noise_scale	0.05
+source_resume	env.asset.box.random_density	true
+source_resume	env.asset.box.random_props	false
+source_resume	env.asset.box.random_size	true
+source_resume	env.asset.box.reset_mode	"hybrid"
+source_resume	env.asset.box.restitution_range	[0.0, 0.2]
+source_resume	env.asset.box.scale_range_x	[0.7, 1.3]
+source_resume	env.asset.box.scale_range_y	[0.7, 1.3]
+source_resume	env.asset.box.scale_range_z	[0.6, 1.4]
+source_resume	env.asset.box.scale_sample_interval	0.1
+source_resume	env.asset.box.skill	["loco", "pickUp", "carryWith", "putDown"]
+source_resume	env.asset.box.skill_init_prob	[0.8, 0.2, 0.2, 0.0]
+source_resume	env.asset.box.thresh_tag	[0.7, 2.0]
+source_resume	env.asset.box.use_random	true
+source_resume	env.asset.camera.facing_angle	[0.3420201433256688, 0.6427876096865394]
+source_resume	env.asset.camera.hfov_rad	[1.4835298641951802, 1.5707963267948966]
+source_resume	env.asset.camera.vfov_rad	[0.9599310885968813, 1.0471975511965976]
+source_resume	env.asset.camera_name	"d455_link"
+source_resume	env.asset.collapse_fixed_joints	false
+source_resume	env.asset.default_dof_drive_mode	3
+source_resume	env.asset.density	0.001
+source_resume	env.asset.disable_gravity	false
+source_resume	env.asset.file	"{LEGGED_GYM_ROOT_DIR}/resources/robots/g1/urdf/g1_29dof.urdf"
+source_resume	env.asset.fix_base_link	false
+source_resume	env.asset.flip_visual_attachments	false
+source_resume	env.asset.foot_name	"ankle_pitch_link"
+source_resume	env.asset.hand_colli_name	"rubber_hand"
+source_resume	env.asset.hand_pos_name	"palm_link"
+source_resume	env.asset.head_name	"mid360_link"
+source_resume	env.asset.hip_yaw_names	["left_hip_yaw_link", "right_hip_yaw_link"]
+source_resume	env.asset.imu_link	"imu_link"
+source_resume	env.asset.keyframe_name	"keyframe"
+source_resume	env.asset.knee_joints	["left_knee_joint", "right_knee_joint"]
+source_resume	env.asset.knee_names	["left_knee_link", "right_knee_link"]
+source_resume	env.asset.left_foot_name	"left_foot"
+source_resume	env.asset.linear_damping	0.01
+source_resume	env.asset.max_angular_velocity	1000.0
+source_resume	env.asset.max_linear_velocity	1000.0
+source_resume	env.asset.name	"g1"
+source_resume	env.asset.penalize_contacts_on	["hip", "knee", "torso", "shoulder", "pelvis"]
+source_resume	env.asset.replace_cylinder_with_capsule	true
+source_resume	env.asset.right_foot_name	"right_foot"
+source_resume	env.asset.self_collisions	0
+source_resume	env.asset.terminate_after_contacts_on	[]
+source_resume	env.asset.thickness	0.01
+source_resume	env.asset.upper_body_link	"torso_link"
+source_resume	env.asset.waist_joints	["waist_yaw_joint"]
+source_resume	env.commands.curriculum	false
+source_resume	env.commands.heading_command	true
+source_resume	env.commands.heading_to_ang_vel	true
+source_resume	env.commands.max_curriculum	1.0
+source_resume	env.commands.num_commands	4
+source_resume	env.commands.ranges.ang_vel_yaw	[-0.5, 0.5]
+source_resume	env.commands.ranges.heading	[-3.14, 3.14]
+source_resume	env.commands.ranges.lin_vel_x	[0.0, 0.8]
+source_resume	env.commands.ranges.lin_vel_y	[-0.0, 0.0]
+source_resume	env.commands.resampling_time	10.0
+source_resume	env.control.action_scale	0.25
+source_resume	env.control.control_type	"P"
+source_resume	env.control.curriculum_joints	["waist_yaw_joint", "left_shoulder_roll_joint", "left_shoulder_yaw_joint", "left_shoulder_pitch_joint", "left_elbow_joint", "left_wrist_roll_joint", "right_shoulder_roll_joint", "right_shoulder_yaw_joint", "right_shoulder_pitch_joint", "right_elbow_joint", "right_wrist_roll_joint"]
+source_resume	env.control.damping.hip_yaw	2
+source_resume	env.control.damping.hip_roll	2
+source_resume	env.control.damping.hip_pitch	2
+source_resume	env.control.damping.knee	4
+source_resume	env.control.damping.ankle	1
+source_resume	env.control.damping.waist_yaw	4
+source_resume	env.control.damping.waist_roll	4
+source_resume	env.control.damping.waist_pitch	4
+source_resume	env.control.damping.shoulder	3
+source_resume	env.control.damping.elbow	1
+source_resume	env.control.damping.wrist	0.5
+source_resume	env.control.decimation	4
+source_resume	env.control.hip_reduction	1.0
+source_resume	env.control.left_arm_joints	["left_shoulder_pitch_joint", "left_shoulder_roll_joint", "left_shoulder_yaw_joint", "left_elbow_joint", "left_wrist_roll_joint"]
+source_resume	env.control.left_hip_joints	["left_hip_yaw_joint", "left_hip_roll_joint", "left_hip_pitch_joint"]
+source_resume	env.control.left_leg_joints	["left_hip_yaw_joint", "left_hip_roll_joint", "left_hip_pitch_joint", "left_knee_joint", "left_ankle_pitch_joint", "left_ankle_roll_joint"]
+source_resume	env.control.right_arm_joints	["right_shoulder_pitch_joint", "right_shoulder_roll_joint", "right_shoulder_yaw_joint", "right_elbow_joint", "right_wrist_roll_joint"]
+source_resume	env.control.right_hip_joints	["right_hip_yaw_joint", "right_hip_roll_joint", "right_hip_pitch_joint"]
+source_resume	env.control.right_leg_joints	["right_hip_yaw_joint", "right_hip_roll_joint", "right_hip_pitch_joint", "right_knee_joint", "right_ankle_pitch_joint", "right_ankle_roll_joint"]
+source_resume	env.control.stiffness.hip_yaw	150
+source_resume	env.control.stiffness.hip_roll	150
+source_resume	env.control.stiffness.hip_pitch	150
+source_resume	env.control.stiffness.knee	300
+source_resume	env.control.stiffness.ankle	40
+source_resume	env.control.stiffness.waist_yaw	300
+source_resume	env.control.stiffness.waist_roll	300
+source_resume	env.control.stiffness.waist_pitch	300
+source_resume	env.control.stiffness.shoulder	200
+source_resume	env.control.stiffness.elbow	100
+source_resume	env.control.stiffness.wrist	20
+source_resume	env.control.upper_body_link	"pelvis"
+source_resume	env.dataset.frame_rate	60
+source_resume	env.dataset.joint_mapping_file	"{LEGGED_GYM_ROOT_DIR}/resources/config/joint_id.txt"
+source_resume	env.dataset.min_time	0.1
+source_resume	env.dataset.motion_file	"{LEGGED_GYM_ROOT_DIR}/resources/config/carrybox.yaml"
+source_resume	env.domain_rand.actuation_offset_range	[-0.05, 0.05]
+source_resume	env.domain_rand.com_displacement_range	[-0.1, 0.1]
+source_resume	env.domain_rand.delay	true
+source_resume	env.domain_rand.disturbance	true
+source_resume	env.domain_rand.disturbance_interval	8
+source_resume	env.domain_rand.disturbance_range	[-50, 50]
+source_resume	env.domain_rand.friction_range	[0.1, 1.5]
+source_resume	env.domain_rand.initial_joint_pos_offset	[-0.1, 0.1]
+source_resume	env.domain_rand.initial_joint_pos_scale	[1.0, 1.0]
+source_resume	env.domain_rand.kd_range	[0.9, 1.1]
+source_resume	env.domain_rand.kp_range	[0.9, 1.1]
+source_resume	env.domain_rand.link_mass_range	[0.8, 1.2]
+source_resume	env.domain_rand.max_delay_timesteps	5
+source_resume	env.domain_rand.max_push_vel_xy	0.1
+source_resume	env.domain_rand.motor_strength_range	[0.9, 1.1]
+source_resume	env.domain_rand.payload_mass_range	[-2, 5]
+source_resume	env.domain_rand.push_interval_s	10
+source_resume	env.domain_rand.push_robots	false
+source_resume	env.domain_rand.randomize_actuation_offset	true
+source_resume	env.domain_rand.randomize_com_displacement	true
+source_resume	env.domain_rand.randomize_friction	true
+source_resume	env.domain_rand.randomize_initial_joint_pos	true
+source_resume	env.domain_rand.randomize_kd	true
+source_resume	env.domain_rand.randomize_kp	true
+source_resume	env.domain_rand.randomize_link_mass	true
+source_resume	env.domain_rand.randomize_motor_strength	true
+source_resume	env.domain_rand.randomize_payload_mass	true
+source_resume	env.domain_rand.randomize_restitution	true
+source_resume	env.domain_rand.restitution_range	[0.0, 1.0]
+source_resume	env.domain_rand.use_random	true
+source_resume	env.env.action_curriculum	false
+source_resume	env.env.env_spacing	10.0
+source_resume	env.env.episode_length_s	20
+source_resume	env.env.num_actions	29
+source_resume	env.env.num_actor_history	6
+source_resume	env.env.num_actor_obs	738
+source_resume	env.env.num_dofs	29
+source_resume	env.env.num_envs	4096
+source_resume	env.env.num_privileged_obs	126
+source_resume	env.env.num_proprio_obs	108
+source_resume	env.env.num_task_obs	15
+source_resume	env.env.send_timeouts	true
+source_resume	env.env.test	false
+source_resume	env.init_state.ang_vel	[0.0, 0.0, 0.0]
+source_resume	env.init_state.default_joint_angles.left_hip_pitch_joint	-0.1
+source_resume	env.init_state.default_joint_angles.left_hip_roll_joint	0.0
+source_resume	env.init_state.default_joint_angles.left_hip_yaw_joint	0.0
+source_resume	env.init_state.default_joint_angles.left_knee_joint	0.3
+source_resume	env.init_state.default_joint_angles.left_ankle_pitch_joint	-0.2
+source_resume	env.init_state.default_joint_angles.left_ankle_roll_joint	0.0
+source_resume	env.init_state.default_joint_angles.right_hip_pitch_joint	-0.1
+source_resume	env.init_state.default_joint_angles.right_hip_roll_joint	0.0
+source_resume	env.init_state.default_joint_angles.right_hip_yaw_joint	0.0
+source_resume	env.init_state.default_joint_angles.right_knee_joint	0.3
+source_resume	env.init_state.default_joint_angles.right_ankle_pitch_joint	-0.2
+source_resume	env.init_state.default_joint_angles.right_ankle_roll_joint	0.0
+source_resume	env.init_state.default_joint_angles.waist_yaw_joint	0.0
+source_resume	env.init_state.default_joint_angles.waist_roll_joint	0.0
+source_resume	env.init_state.default_joint_angles.waist_pitch_joint	0.0
+source_resume	env.init_state.default_joint_angles.left_shoulder_pitch_joint	0.0
+source_resume	env.init_state.default_joint_angles.left_shoulder_roll_joint	0.1
+source_resume	env.init_state.default_joint_angles.left_shoulder_yaw_joint	0.0
+source_resume	env.init_state.default_joint_angles.left_elbow_joint	1.2
+source_resume	env.init_state.default_joint_angles.left_wrist_roll_joint	0.0
+source_resume	env.init_state.default_joint_angles.left_wrist_pitch_joint	0.0
+source_resume	env.init_state.default_joint_angles.left_wrist_yaw_joint	0.0
+source_resume	env.init_state.default_joint_angles.right_shoulder_pitch_joint	0.0
+source_resume	env.init_state.default_joint_angles.right_shoulder_roll_joint	-0.1
+source_resume	env.init_state.default_joint_angles.right_shoulder_yaw_joint	0.0
+source_resume	env.init_state.default_joint_angles.right_elbow_joint	1.2
+source_resume	env.init_state.default_joint_angles.right_wrist_roll_joint	0.0
+source_resume	env.init_state.default_joint_angles.right_wrist_pitch_joint	0.0
+source_resume	env.init_state.default_joint_angles.right_wrist_yaw_joint	0.0
+source_resume	env.init_state.lin_vel	[0.0, 0.0, 0.0]
+source_resume	env.init_state.pos	[2.3, 0.0, 0.8]
+source_resume	env.init_state.rot	[0.0, 0.0, 1.0, 0.0]
+source_resume	env.noise.add_noise	true
+source_resume	env.noise.noise_level	1.0
+source_resume	env.noise.noise_scales.ang_vel	0.3
+source_resume	env.noise.noise_scales.dof_pos	0.02
+source_resume	env.noise.noise_scales.dof_vel	2.0
+source_resume	env.noise.noise_scales.end_effector	0.05
+source_resume	env.noise.noise_scales.gravity	0.05
+source_resume	env.normalization.clip_actions	100.0
+source_resume	env.normalization.clip_observations	100.0
+source_resume	env.normalization.obs_scales.ang_vel	0.25
+source_resume	env.normalization.obs_scales.dof_pos	1.0
+source_resume	env.normalization.obs_scales.dof_vel	0.05
+source_resume	env.normalization.obs_scales.lin_vel	2.0
+source_resume	env.rewards.base_height	0.0
+source_resume	env.rewards.base_height_target	0.75
+source_resume	env.rewards.box_height	2.0
+source_resume	env.rewards.clearance_height_target	-0.66
+source_resume	env.rewards.hand_contact	0.0
+source_resume	env.rewards.hand_free	0.5
+source_resume	env.rewards.hand_pos	0.7
+source_resume	env.rewards.head_height	0.5
+source_resume	env.rewards.head_height_target	1.15
+source_resume	env.rewards.least_feet_distance	0.18
+source_resume	env.rewards.least_feet_distance_lateral	0.18
+source_resume	env.rewards.least_knee_distance_lateral	0.18
+source_resume	env.rewards.max_contact_force	350.0
+source_resume	env.rewards.object2goal_pos	1.0
+source_resume	env.rewards.only_positive_rewards	false
+source_resume	env.rewards.put_box	1.0
+source_resume	env.rewards.relocation_heading	0.5
+source_resume	env.rewards.relocation_heading_vel	0.0
+source_resume	env.rewards.robot2goal_pos	0.0
+source_resume	env.rewards.robot2goal_vel	1.0
+source_resume	env.rewards.robot2object_pos	0.0
+source_resume	env.rewards.robot2object_vel	1.0
+source_resume	env.rewards.scales.action_rate	-0.03
+source_resume	env.rewards.scales.carryup_task	1.0
+source_resume	env.rewards.scales.dof_acc	-1e-07
+source_resume	env.rewards.scales.dof_pos_limits	-5.0
+source_resume	env.rewards.scales.dof_vel	-0.0002
+source_resume	env.rewards.scales.dof_vel_limits	-0.001
+source_resume	env.rewards.scales.relocation_task	1.0
+source_resume	env.rewards.scales.standup_task	0.2
+source_resume	env.rewards.scales.torque_limits	-0.03
+source_resume	env.rewards.scales.torques	-0.0001
+source_resume	env.rewards.scales.walk_task	1.0
+source_resume	env.rewards.soft_dof_pos_limit	0.9
+source_resume	env.rewards.soft_dof_vel_limit	0.8
+source_resume	env.rewards.soft_torque_limit	0.95
+source_resume	env.rewards.stand_still	1.0
+source_resume	env.rewards.start_heading	0.5
+source_resume	env.rewards.target_box_height	0.72
+source_resume	env.rewards.target_speed_carry	0.85
+source_resume	env.rewards.target_speed_loco	0.85
+source_resume	env.rewards.thresh_object2goal	0.05
+source_resume	env.rewards.thresh_object2start	0.5
+source_resume	env.rewards.thresh_robot2goal	0.65
+source_resume	env.rewards.thresh_robot2object	0.7
+source_resume	env.rewards.tracking_sigma	0.25
+source_resume	env.sim.dt	0.005
+source_resume	env.sim.gravity	[0.0, 0.0, -9.81]
+source_resume	env.sim.physx.bounce_threshold_velocity	0.5
+source_resume	env.sim.physx.contact_collection	2
+source_resume	env.sim.physx.contact_offset	0.01
+source_resume	env.sim.physx.default_buffer_size_multiplier	5
+source_resume	env.sim.physx.max_depenetration_velocity	1.0
+source_resume	env.sim.physx.max_gpu_contact_pairs	16777216
+source_resume	env.sim.physx.num_position_iterations	8
+source_resume	env.sim.physx.num_threads	10
+source_resume	env.sim.physx.num_velocity_iterations	0
+source_resume	env.sim.physx.rest_offset	0.0
+source_resume	env.sim.physx.solver_type	1
+source_resume	env.sim.substeps	1
+source_resume	env.sim.up_axis	1
+source_resume	env.terrain.border_size	25
+source_resume	env.terrain.curriculum	true
+source_resume	env.terrain.dynamic_friction	0.9
+source_resume	env.terrain.hf2mesh_method	"fast"
+source_resume	env.terrain.horizontal_scale	0.1
+source_resume	env.terrain.max_error	0.1
+source_resume	env.terrain.max_error_camera	2
+source_resume	env.terrain.max_init_terrain_level	10
+source_resume	env.terrain.measure_heights	false
+source_resume	env.terrain.measured_points_x	[-0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+source_resume	env.terrain.measured_points_y	[-0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
+source_resume	env.terrain.mesh_type	"plane"
+source_resume	env.terrain.num_cols	40
+source_resume	env.terrain.num_rows	40
+source_resume	env.terrain.restitution	0.0
+source_resume	env.terrain.selected	false
+source_resume	env.terrain.slope_treshold	0.75
+source_resume	env.terrain.static_friction	0.9
+source_resume	env.terrain.terrain_kwargs	null
+source_resume	env.terrain.terrain_length	8.0
+source_resume	env.terrain.terrain_proportions	[0.1, 0.1, 0.35, 0.25, 0.2]
+source_resume	env.terrain.terrain_width	8.0
+source_resume	env.terrain.vertical_scale	0.005
+source_resume	env.viewer.lookat	[11.0, 3, 2.0]
+source_resume	env.viewer.pos	[10, -5, 4]
+source_resume	env.viewer.ref_env	0
+source_resume	agent.algorithm.clip_param	0.2
+source_resume	agent.algorithm.desired_kl	0.01
+source_resume	agent.algorithm.entropy_coef	0.01
+source_resume	agent.algorithm.gamma	0.99
+source_resume	agent.algorithm.lam	0.95
+source_resume	agent.algorithm.learning_rate	0.001
+source_resume	agent.algorithm.max_grad_norm	1.0
+source_resume	agent.algorithm.num_learning_epochs	5
+source_resume	agent.algorithm.num_mini_batches	4
+source_resume	agent.algorithm.schedule	"adaptive"
+source_resume	agent.algorithm.use_clipped_value_loss	true
+source_resume	agent.algorithm.value_loss_coef	1.0
+source_resume	agent.amp.amp_coef	0.3
+source_resume	agent.amp.num_obs	600
+source_resume	agent.amp.num_one_step_obs	60
+source_resume	agent.amp.ratio_random_range	[0.95, 1.05]
+source_resume	agent.amp.use_normalizer	false
+source_resume	agent.amp.window_length	10
+source_resume	agent.policy.activation	"elu"
+source_resume	agent.policy.actor_hidden_dims	[512, 256, 256]
+source_resume	agent.policy.critic_hidden_dims	[512, 256, 256]
+source_resume	agent.policy.init_noise_std	1.0
+source_resume	agent.runner.algorithm_class_name	"HIMPPO"
+source_resume	agent.runner.checkpoint	-1
+source_resume	agent.runner.experiment_name	"amp_carrybox"
+source_resume	agent.runner.load_run	-1
+source_resume	agent.runner.logger	"tensorboard"
+source_resume	agent.runner.max_iterations	50000
+source_resume	agent.runner.num_steps_per_env	100
+source_resume	agent.runner.policy_class_name	"ActorCritic"
+source_resume	agent.runner.resume	true
+source_resume	agent.runner.resume_path	null
+source_resume	agent.runner.run_name	"carrybox_resume_coef0.3"
+source_resume	agent.runner.save_interval	500
+source_resume	agent.runner.use_muon_optim	false
+source_resume	agent.runner.wandb_entity	"YOUR_ENTITY_NAME"
+source_resume	agent.runner.wandb_project	"amp_carrybox"
+source_resume	agent.runner_class_name	"HIMOnPolicyRunner"
+source_resume	agent.seed	1
+wall5	env.viewer.eye	["2.5", "2.5", "2.0"]
+wall5	env.viewer.lookat	["0.7", "0.0", "0.5"]
+wall5	env.viewer.cam_prim_path	"/OmniverseKit_Persp"
+wall5	env.viewer.resolution	["1280", "720"]
+wall5	env.viewer.origin_type	"world"
+wall5	env.viewer.env_index	"0"
+wall5	env.viewer.asset_name	"null"
+wall5	env.viewer.body_name	"null"
+wall5	env.sim.physics_prim_path	"/physicsScene"
+wall5	env.sim.device	"cuda:0"
+wall5	env.sim.dt	"0.005"
+wall5	env.sim.render_interval	"4"
+wall5	env.sim.gravity	["0.0", "0.0", "-9.81"]
+wall5	env.sim.enable_scene_query_support	"false"
+wall5	env.sim.use_fabric	"true"
+wall5	env.sim.physx.solver_type	"1"
+wall5	env.sim.physx.min_position_iteration_count	"1"
+wall5	env.sim.physx.max_position_iteration_count	"255"
+wall5	env.sim.physx.min_velocity_iteration_count	"0"
+wall5	env.sim.physx.max_velocity_iteration_count	"255"
+wall5	env.sim.physx.enable_ccd	"false"
+wall5	env.sim.physx.enable_stabilization	"false"
+wall5	env.sim.physx.enable_enhanced_determinism	"false"
+wall5	env.sim.physx.bounce_threshold_velocity	"0.5"
+wall5	env.sim.physx.friction_offset_threshold	"0.04"
+wall5	env.sim.physx.friction_correlation_distance	"0.025"
+wall5	env.sim.physx.gpu_max_rigid_contact_count	"8388608"
+wall5	env.sim.physx.gpu_max_rigid_patch_count	"163840"
+wall5	env.sim.physx.gpu_found_lost_pairs_capacity	"2097152"
+wall5	env.sim.physx.gpu_found_lost_aggregate_pairs_capacity	"33554432"
+wall5	env.sim.physx.gpu_total_aggregate_pairs_capacity	"2097152"
+wall5	env.sim.physx.gpu_collision_stack_size	"67108864"
+wall5	env.sim.physx.gpu_heap_capacity	"67108864"
+wall5	env.sim.physx.gpu_temp_buffer_capacity	"16777216"
+wall5	env.sim.physx.gpu_max_num_partitions	"8"
+wall5	env.sim.physx.gpu_max_soft_body_contacts	"1048576"
+wall5	env.sim.physx.gpu_max_particle_contacts	"1048576"
+wall5	env.sim.physx.solve_articulation_contact_last	"false"
+wall5	env.sim.physics_material.func	"isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material"
+wall5	env.sim.physics_material.static_friction	"1.0"
+wall5	env.sim.physics_material.dynamic_friction	"1.0"
+wall5	env.sim.physics_material.restitution	"0.0"
+wall5	env.sim.physics_material.friction_combine_mode	"multiply"
+wall5	env.sim.physics_material.restitution_combine_mode	"average"
+wall5	env.sim.physics_material.compliant_contact_stiffness	"0.0"
+wall5	env.sim.physics_material.compliant_contact_damping	"0.0"
+wall5	env.sim.render.enable_translucency	"null"
+wall5	env.sim.render.enable_reflections	"null"
+wall5	env.sim.render.enable_global_illumination	"null"
+wall5	env.sim.render.antialiasing_mode	"Off"
+wall5	env.sim.render.enable_dlssg	"null"
+wall5	env.sim.render.enable_dl_denoiser	"false"
+wall5	env.sim.render.dlss_mode	"null"
+wall5	env.sim.render.enable_direct_lighting	"false"
+wall5	env.sim.render.samples_per_pixel	"null"
+wall5	env.sim.render.enable_shadows	"false"
+wall5	env.sim.render.enable_ambient_occlusion	"null"
+wall5	env.sim.render.carb_settings	"null"
+wall5	env.sim.render.rendering_mode	"performance"
+wall5	env.sim.create_stage_in_memory	"false"
+wall5	env.ui_window_class_type	"isaaclab.envs.ui.manager_based_rl_env_window:ManagerBasedRLEnvWindow"
+wall5	env.seed	"42"
+wall5	env.decimation	"4"
+wall5	env.scene.num_envs	"4096"
+wall5	env.scene.env_spacing	"13.0"
+wall5	env.scene.lazy_sensor_update	"true"
+wall5	env.scene.replicate_physics	"false"
+wall5	env.scene.filter_collisions	"true"
+wall5	env.scene.clone_in_fabric	"false"
+wall5	env.scene.robot.class_type	"isaaclab.assets.articulation.articulation:Articulation"
+wall5	env.scene.robot.prim_path	"/World/envs/env_.*/Robot"
+wall5	env.scene.robot.spawn.func	"perceptual_ball.carrybox_physhsi:spawn_physhsi_robot"
+wall5	env.scene.robot.spawn.visible	"true"
+wall5	env.scene.robot.spawn.semantic_tags	"null"
+wall5	env.scene.robot.spawn.copy_from_source	"true"
+wall5	env.scene.robot.spawn.mass_props	"null"
+wall5	env.scene.robot.spawn.deformable_props	"null"
+wall5	env.scene.robot.spawn.rigid_props.rigid_body_enabled	"null"
+wall5	env.scene.robot.spawn.rigid_props.kinematic_enabled	"null"
+wall5	env.scene.robot.spawn.rigid_props.disable_gravity	"false"
+wall5	env.scene.robot.spawn.rigid_props.linear_damping	"0.0"
+wall5	env.scene.robot.spawn.rigid_props.angular_damping	"0.0"
+wall5	env.scene.robot.spawn.rigid_props.max_linear_velocity	"1000.0"
+wall5	env.scene.robot.spawn.rigid_props.max_angular_velocity	"1000.0"
+wall5	env.scene.robot.spawn.rigid_props.max_depenetration_velocity	"1.0"
+wall5	env.scene.robot.spawn.rigid_props.max_contact_impulse	"null"
+wall5	env.scene.robot.spawn.rigid_props.enable_gyroscopic_forces	"null"
+wall5	env.scene.robot.spawn.rigid_props.retain_accelerations	"false"
+wall5	env.scene.robot.spawn.rigid_props.solver_position_iteration_count	"null"
+wall5	env.scene.robot.spawn.rigid_props.solver_velocity_iteration_count	"null"
+wall5	env.scene.robot.spawn.rigid_props.sleep_threshold	"null"
+wall5	env.scene.robot.spawn.rigid_props.stabilization_threshold	"null"
+wall5	env.scene.robot.spawn.collision_props	"null"
+wall5	env.scene.robot.spawn.activate_contact_sensors	"true"
+wall5	env.scene.robot.spawn.scale	"null"
+wall5	env.scene.robot.spawn.articulation_props.articulation_enabled	"null"
+wall5	env.scene.robot.spawn.articulation_props.enabled_self_collisions	"true"
+wall5	env.scene.robot.spawn.articulation_props.solver_position_iteration_count	"8"
+wall5	env.scene.robot.spawn.articulation_props.solver_velocity_iteration_count	"4"
+wall5	env.scene.robot.spawn.articulation_props.sleep_threshold	"null"
+wall5	env.scene.robot.spawn.articulation_props.stabilization_threshold	"null"
+wall5	env.scene.robot.spawn.articulation_props.fix_root_link	"null"
+wall5	env.scene.robot.spawn.fixed_tendons_props	"null"
+wall5	env.scene.robot.spawn.spatial_tendons_props	"null"
+wall5	env.scene.robot.spawn.joint_drive_props	"null"
+wall5	env.scene.robot.spawn.visual_material_path	"material"
+wall5	env.scene.robot.spawn.visual_material	"null"
+wall5	env.scene.robot.spawn.usd_path	"/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/g1_29dof.usd"
+wall5	env.scene.robot.spawn.variants	"null"
+wall5	env.scene.robot.init_state.pos	["0.0", "0.0", "0.8"]
+wall5	env.scene.robot.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.robot.init_state.lin_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.robot.init_state.ang_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.robot.init_state.joint_pos..*_hip_pitch_joint	"-0.1"
+wall5	env.scene.robot.init_state.joint_pos..*_hip_roll_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos..*_hip_yaw_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos..*_knee_joint	"0.3"
+wall5	env.scene.robot.init_state.joint_pos..*_ankle_pitch_joint	"-0.2"
+wall5	env.scene.robot.init_state.joint_pos..*_ankle_roll_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos.waist_yaw_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos.waist_roll_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos.waist_pitch_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos.left_shoulder_pitch_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos.left_shoulder_roll_joint	"0.1"
+wall5	env.scene.robot.init_state.joint_pos.right_shoulder_pitch_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos.right_shoulder_roll_joint	"-0.1"
+wall5	env.scene.robot.init_state.joint_pos..*_shoulder_yaw_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos..*_elbow_joint	"1.2"
+wall5	env.scene.robot.init_state.joint_pos..*_wrist_roll_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos..*_wrist_pitch_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_pos..*_wrist_yaw_joint	"0.0"
+wall5	env.scene.robot.init_state.joint_vel..*	"0.0"
+wall5	env.scene.robot.collision_group	"0"
+wall5	env.scene.robot.debug_vis	"false"
+wall5	env.scene.robot.articulation_root_prim_path	"null"
+wall5	env.scene.robot.soft_joint_pos_limit_factor	"0.9"
+wall5	env.scene.robot.actuators.legs.class_type	"isaaclab.actuators.actuator_pd:ImplicitActuator"
+wall5	env.scene.robot.actuators.legs.joint_names_expr	[".*_hip_yaw_joint", ".*_hip_roll_joint", ".*_hip_pitch_joint", ".*_knee_joint"]
+wall5	env.scene.robot.actuators.legs.effort_limit	"null"
+wall5	env.scene.robot.actuators.legs.velocity_limit	"null"
+wall5	env.scene.robot.actuators.legs.effort_limit_sim	"null"
+wall5	env.scene.robot.actuators.legs.velocity_limit_sim	"null"
+wall5	env.scene.robot.actuators.legs.stiffness..*_hip_yaw_joint	"150.0"
+wall5	env.scene.robot.actuators.legs.stiffness..*_hip_roll_joint	"150.0"
+wall5	env.scene.robot.actuators.legs.stiffness..*_hip_pitch_joint	"150.0"
+wall5	env.scene.robot.actuators.legs.stiffness..*_knee_joint	"300.0"
+wall5	env.scene.robot.actuators.legs.damping..*_hip_yaw_joint	"2.0"
+wall5	env.scene.robot.actuators.legs.damping..*_hip_roll_joint	"2.0"
+wall5	env.scene.robot.actuators.legs.damping..*_hip_pitch_joint	"2.0"
+wall5	env.scene.robot.actuators.legs.damping..*_knee_joint	"4.0"
+wall5	env.scene.robot.actuators.legs.armature	"0.01"
+wall5	env.scene.robot.actuators.legs.friction	"null"
+wall5	env.scene.robot.actuators.legs.dynamic_friction	"null"
+wall5	env.scene.robot.actuators.legs.viscous_friction	"null"
+wall5	env.scene.robot.actuators.feet.class_type	"isaaclab.actuators.actuator_pd:ImplicitActuator"
+wall5	env.scene.robot.actuators.feet.joint_names_expr	[".*_ankle_pitch_joint", ".*_ankle_roll_joint"]
+wall5	env.scene.robot.actuators.feet.effort_limit	"null"
+wall5	env.scene.robot.actuators.feet.velocity_limit	"null"
+wall5	env.scene.robot.actuators.feet.effort_limit_sim	"null"
+wall5	env.scene.robot.actuators.feet.velocity_limit_sim	"null"
+wall5	env.scene.robot.actuators.feet.stiffness	"40.0"
+wall5	env.scene.robot.actuators.feet.damping	"1.0"
+wall5	env.scene.robot.actuators.feet.armature	"0.01"
+wall5	env.scene.robot.actuators.feet.friction	"null"
+wall5	env.scene.robot.actuators.feet.dynamic_friction	"null"
+wall5	env.scene.robot.actuators.feet.viscous_friction	"null"
+wall5	env.scene.robot.actuators.waist.class_type	"isaaclab.actuators.actuator_pd:ImplicitActuator"
+wall5	env.scene.robot.actuators.waist.joint_names_expr	["waist_yaw_joint", "waist_roll_joint", "waist_pitch_joint"]
+wall5	env.scene.robot.actuators.waist.effort_limit	"null"
+wall5	env.scene.robot.actuators.waist.velocity_limit	"null"
+wall5	env.scene.robot.actuators.waist.effort_limit_sim	"null"
+wall5	env.scene.robot.actuators.waist.velocity_limit_sim	"null"
+wall5	env.scene.robot.actuators.waist.stiffness	"300.0"
+wall5	env.scene.robot.actuators.waist.damping	"4.0"
+wall5	env.scene.robot.actuators.waist.armature	"0.01"
+wall5	env.scene.robot.actuators.waist.friction	"null"
+wall5	env.scene.robot.actuators.waist.dynamic_friction	"null"
+wall5	env.scene.robot.actuators.waist.viscous_friction	"null"
+wall5	env.scene.robot.actuators.arms.class_type	"isaaclab.actuators.actuator_pd:ImplicitActuator"
+wall5	env.scene.robot.actuators.arms.joint_names_expr	[".*_shoulder_pitch_joint", ".*_shoulder_roll_joint", ".*_shoulder_yaw_joint", ".*_elbow_joint"]
+wall5	env.scene.robot.actuators.arms.effort_limit	"null"
+wall5	env.scene.robot.actuators.arms.velocity_limit	"null"
+wall5	env.scene.robot.actuators.arms.effort_limit_sim	"null"
+wall5	env.scene.robot.actuators.arms.velocity_limit_sim	"null"
+wall5	env.scene.robot.actuators.arms.stiffness..*_shoulder_.*	"200.0"
+wall5	env.scene.robot.actuators.arms.stiffness..*_elbow_joint	"100.0"
+wall5	env.scene.robot.actuators.arms.damping..*_shoulder_.*	"3.0"
+wall5	env.scene.robot.actuators.arms.damping..*_elbow_joint	"1.0"
+wall5	env.scene.robot.actuators.arms.armature	"0.01"
+wall5	env.scene.robot.actuators.arms.friction	"null"
+wall5	env.scene.robot.actuators.arms.dynamic_friction	"null"
+wall5	env.scene.robot.actuators.arms.viscous_friction	"null"
+wall5	env.scene.robot.actuators.wrists.class_type	"isaaclab.actuators.actuator_pd:ImplicitActuator"
+wall5	env.scene.robot.actuators.wrists.joint_names_expr	[".*_wrist_roll_joint", ".*_wrist_pitch_joint", ".*_wrist_yaw_joint"]
+wall5	env.scene.robot.actuators.wrists.effort_limit	"null"
+wall5	env.scene.robot.actuators.wrists.velocity_limit	"null"
+wall5	env.scene.robot.actuators.wrists.effort_limit_sim	"null"
+wall5	env.scene.robot.actuators.wrists.velocity_limit_sim	"null"
+wall5	env.scene.robot.actuators.wrists.stiffness	"20.0"
+wall5	env.scene.robot.actuators.wrists.damping	"0.5"
+wall5	env.scene.robot.actuators.wrists.armature	"0.01"
+wall5	env.scene.robot.actuators.wrists.friction	"null"
+wall5	env.scene.robot.actuators.wrists.dynamic_friction	"null"
+wall5	env.scene.robot.actuators.wrists.viscous_friction	"null"
+wall5	env.scene.robot.actuator_value_resolution_debug_print	"false"
+wall5	env.scene.box.class_type	"isaaclab.assets.rigid_object.rigid_object:RigidObject"
+wall5	env.scene.box.prim_path	"/World/envs/env_.*/Box"
+wall5	env.scene.box.spawn.func	"isaaclab.sim.spawners.shapes.shapes:spawn_cuboid"
+wall5	env.scene.box.spawn.visible	"true"
+wall5	env.scene.box.spawn.semantic_tags	"null"
+wall5	env.scene.box.spawn.copy_from_source	"true"
+wall5	env.scene.box.spawn.mass_props.mass	"0.8"
+wall5	env.scene.box.spawn.mass_props.density	"null"
+wall5	env.scene.box.spawn.rigid_props.rigid_body_enabled	"null"
+wall5	env.scene.box.spawn.rigid_props.kinematic_enabled	"null"
+wall5	env.scene.box.spawn.rigid_props.disable_gravity	"null"
+wall5	env.scene.box.spawn.rigid_props.linear_damping	"null"
+wall5	env.scene.box.spawn.rigid_props.angular_damping	"null"
+wall5	env.scene.box.spawn.rigid_props.max_linear_velocity	"null"
+wall5	env.scene.box.spawn.rigid_props.max_angular_velocity	"null"
+wall5	env.scene.box.spawn.rigid_props.max_depenetration_velocity	"1.0"
+wall5	env.scene.box.spawn.rigid_props.max_contact_impulse	"null"
+wall5	env.scene.box.spawn.rigid_props.enable_gyroscopic_forces	"null"
+wall5	env.scene.box.spawn.rigid_props.retain_accelerations	"null"
+wall5	env.scene.box.spawn.rigid_props.solver_position_iteration_count	"null"
+wall5	env.scene.box.spawn.rigid_props.solver_velocity_iteration_count	"null"
+wall5	env.scene.box.spawn.rigid_props.sleep_threshold	"null"
+wall5	env.scene.box.spawn.rigid_props.stabilization_threshold	"null"
+wall5	env.scene.box.spawn.collision_props.collision_enabled	"null"
+wall5	env.scene.box.spawn.collision_props.contact_offset	"null"
+wall5	env.scene.box.spawn.collision_props.rest_offset	"null"
+wall5	env.scene.box.spawn.collision_props.torsional_patch_radius	"null"
+wall5	env.scene.box.spawn.collision_props.min_torsional_patch_radius	"null"
+wall5	env.scene.box.spawn.activate_contact_sensors	"true"
+wall5	env.scene.box.spawn.visual_material_path	"material"
+wall5	env.scene.box.spawn.visual_material.func	"isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface"
+wall5	env.scene.box.spawn.visual_material.diffuse_color	["0.55", "0.35", "0.15"]
+wall5	env.scene.box.spawn.visual_material.emissive_color	["0.0", "0.0", "0.0"]
+wall5	env.scene.box.spawn.visual_material.roughness	"0.5"
+wall5	env.scene.box.spawn.visual_material.metallic	"0.0"
+wall5	env.scene.box.spawn.visual_material.opacity	"1.0"
+wall5	env.scene.box.spawn.physics_material_path	"material"
+wall5	env.scene.box.spawn.physics_material.func	"isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material"
+wall5	env.scene.box.spawn.physics_material.static_friction	"1.0"
+wall5	env.scene.box.spawn.physics_material.dynamic_friction	"0.8"
+wall5	env.scene.box.spawn.physics_material.restitution	"0.0"
+wall5	env.scene.box.spawn.physics_material.friction_combine_mode	"average"
+wall5	env.scene.box.spawn.physics_material.restitution_combine_mode	"average"
+wall5	env.scene.box.spawn.physics_material.compliant_contact_stiffness	"0.0"
+wall5	env.scene.box.spawn.physics_material.compliant_contact_damping	"0.0"
+wall5	env.scene.box.spawn.size	["0.3", "0.3", "0.25"]
+wall5	env.scene.box.init_state.pos	["0.85", "0.0", "0.13"]
+wall5	env.scene.box.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.box.init_state.lin_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.box.init_state.ang_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.box.collision_group	"0"
+wall5	env.scene.box.debug_vis	"false"
+wall5	env.scene.ground.class_type	"null"
+wall5	env.scene.ground.prim_path	"/World/ground"
+wall5	env.scene.ground.spawn.func	"isaaclab.sim.spawners.from_files.from_files:spawn_ground_plane"
+wall5	env.scene.ground.spawn.visible	"true"
+wall5	env.scene.ground.spawn.semantic_tags	"null"
+wall5	env.scene.ground.spawn.copy_from_source	"true"
+wall5	env.scene.ground.spawn.usd_path	"http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Environments/Grid/default_environment.usd"
+wall5	env.scene.ground.spawn.color	["0.0", "0.0", "0.0"]
+wall5	env.scene.ground.spawn.size	["2000.0", "2000.0"]
+wall5	env.scene.ground.spawn.physics_material.func	"isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material"
+wall5	env.scene.ground.spawn.physics_material.static_friction	"1.0"
+wall5	env.scene.ground.spawn.physics_material.dynamic_friction	"1.0"
+wall5	env.scene.ground.spawn.physics_material.restitution	"0.0"
+wall5	env.scene.ground.spawn.physics_material.friction_combine_mode	"multiply"
+wall5	env.scene.ground.spawn.physics_material.restitution_combine_mode	"average"
+wall5	env.scene.ground.spawn.physics_material.compliant_contact_stiffness	"0.0"
+wall5	env.scene.ground.spawn.physics_material.compliant_contact_damping	"0.0"
+wall5	env.scene.ground.init_state.pos	["0.0", "0.0", "0.0"]
+wall5	env.scene.ground.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.ground.collision_group	"0"
+wall5	env.scene.ground.debug_vis	"false"
+wall5	env.scene.depth_camera.class_type	"perceptual_ball.carrybox_warp_camera:WarpDepthCamera"
+wall5	env.scene.depth_camera.prim_path	"/World/envs/env_.*/Robot/torso_link"
+wall5	env.scene.depth_camera.update_period	"0.02"
+wall5	env.scene.depth_camera.history_length	"0"
+wall5	env.scene.depth_camera.debug_vis	"false"
+wall5	env.scene.depth_camera.width	"48"
+wall5	env.scene.depth_camera.height	"27"
+wall5	env.scene.depth_camera.near	"0.1"
+wall5	env.scene.depth_camera.far	"3.0"
+wall5	env.scene.depth_camera.focal_length	"18.0"
+wall5	env.scene.depth_camera.horizontal_aperture	"35.475779292977215"
+wall5	env.scene.depth_camera.vertical_aperture	"19.955125852299684"
+wall5	env.scene.depth_camera.object_names	["Box", "Wall", "Cylinder0", "Cylinder1", "Cylinder2", "Platform"]
+wall5	env.scene.depth_camera.output_mesh_hits	"true"
+wall5	env.scene.depth_camera.intrinsics	"null"
+wall5	env.scene.depth_camera.offset.pos	["0.0576235", "0.01753", "0.42987"]
+wall5	env.scene.depth_camera.offset.rot	["0.91495", "0.0", "0.40355", "0.0"]
+wall5	env.scene.depth_camera.offset.convention	"world"
+wall5	env.scene.left_box_contact.class_type	"isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor"
+wall5	env.scene.left_box_contact.prim_path	"/World/envs/env_.*/Robot/left_rubber_hand"
+wall5	env.scene.left_box_contact.update_period	"0.0"
+wall5	env.scene.left_box_contact.history_length	"0"
+wall5	env.scene.left_box_contact.debug_vis	"false"
+wall5	env.scene.left_box_contact.track_pose	"false"
+wall5	env.scene.left_box_contact.track_contact_points	"false"
+wall5	env.scene.left_box_contact.max_contact_data_count_per_prim	"4"
+wall5	env.scene.left_box_contact.track_air_time	"false"
+wall5	env.scene.left_box_contact.force_threshold	"1.0"
+wall5	env.scene.left_box_contact.filter_prim_paths_expr	["/World/envs/env_.*/Box"]
+wall5	env.scene.left_box_contact.visualizer_cfg.prim_path	"/Visuals/ContactSensor"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.func	"isaaclab.sim.spawners.shapes.shapes:spawn_sphere"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.visible	"true"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.semantic_tags	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.copy_from_source	"true"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.mass_props	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.rigid_props	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.collision_props	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.activate_contact_sensors	"false"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.visual_material_path	"material"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.visual_material.func	"isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.visual_material.diffuse_color	["1.0", "0.0", "0.0"]
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.visual_material.emissive_color	["0.0", "0.0", "0.0"]
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.visual_material.roughness	"0.5"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.visual_material.metallic	"0.0"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.visual_material.opacity	"1.0"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.physics_material_path	"material"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.physics_material	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.contact.radius	"0.02"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.func	"isaaclab.sim.spawners.shapes.shapes:spawn_sphere"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.visible	"false"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.semantic_tags	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.copy_from_source	"true"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.mass_props	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.rigid_props	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.collision_props	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.activate_contact_sensors	"false"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.visual_material_path	"material"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.visual_material.func	"isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.visual_material.diffuse_color	["0.0", "1.0", "0.0"]
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.visual_material.emissive_color	["0.0", "0.0", "0.0"]
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.visual_material.roughness	"0.5"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.visual_material.metallic	"0.0"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.visual_material.opacity	"1.0"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.physics_material_path	"material"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.physics_material	"null"
+wall5	env.scene.left_box_contact.visualizer_cfg.markers.no_contact.radius	"0.02"
+wall5	env.scene.right_box_contact.class_type	"isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor"
+wall5	env.scene.right_box_contact.prim_path	"/World/envs/env_.*/Robot/right_rubber_hand"
+wall5	env.scene.right_box_contact.update_period	"0.0"
+wall5	env.scene.right_box_contact.history_length	"0"
+wall5	env.scene.right_box_contact.debug_vis	"false"
+wall5	env.scene.right_box_contact.track_pose	"false"
+wall5	env.scene.right_box_contact.track_contact_points	"false"
+wall5	env.scene.right_box_contact.max_contact_data_count_per_prim	"4"
+wall5	env.scene.right_box_contact.track_air_time	"false"
+wall5	env.scene.right_box_contact.force_threshold	"1.0"
+wall5	env.scene.right_box_contact.filter_prim_paths_expr	["/World/envs/env_.*/Box"]
+wall5	env.scene.right_box_contact.visualizer_cfg.prim_path	"/Visuals/ContactSensor"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.func	"isaaclab.sim.spawners.shapes.shapes:spawn_sphere"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.visible	"true"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.semantic_tags	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.copy_from_source	"true"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.mass_props	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.rigid_props	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.collision_props	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.activate_contact_sensors	"false"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.visual_material_path	"material"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.visual_material.func	"isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.visual_material.diffuse_color	["1.0", "0.0", "0.0"]
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.visual_material.emissive_color	["0.0", "0.0", "0.0"]
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.visual_material.roughness	"0.5"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.visual_material.metallic	"0.0"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.visual_material.opacity	"1.0"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.physics_material_path	"material"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.physics_material	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.contact.radius	"0.02"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.func	"isaaclab.sim.spawners.shapes.shapes:spawn_sphere"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.visible	"false"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.semantic_tags	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.copy_from_source	"true"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.mass_props	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.rigid_props	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.collision_props	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.activate_contact_sensors	"false"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.visual_material_path	"material"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.visual_material.func	"isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.visual_material.diffuse_color	["0.0", "1.0", "0.0"]
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.visual_material.emissive_color	["0.0", "0.0", "0.0"]
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.visual_material.roughness	"0.5"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.visual_material.metallic	"0.0"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.visual_material.opacity	"1.0"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.physics_material_path	"material"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.physics_material	"null"
+wall5	env.scene.right_box_contact.visualizer_cfg.markers.no_contact.radius	"0.02"
+wall5	env.scene.light.class_type	"null"
+wall5	env.scene.light.prim_path	"/World/Light"
+wall5	env.scene.light.spawn.func	"isaaclab.sim.spawners.lights.lights:spawn_light"
+wall5	env.scene.light.spawn.visible	"true"
+wall5	env.scene.light.spawn.semantic_tags	"null"
+wall5	env.scene.light.spawn.copy_from_source	"true"
+wall5	env.scene.light.spawn.prim_type	"DomeLight"
+wall5	env.scene.light.spawn.color	["1.0", "1.0", "1.0"]
+wall5	env.scene.light.spawn.enable_color_temperature	"false"
+wall5	env.scene.light.spawn.color_temperature	"6500.0"
+wall5	env.scene.light.spawn.normalize	"false"
+wall5	env.scene.light.spawn.exposure	"0.0"
+wall5	env.scene.light.spawn.intensity	"500.0"
+wall5	env.scene.light.spawn.texture_file	"null"
+wall5	env.scene.light.spawn.texture_format	"automatic"
+wall5	env.scene.light.spawn.visible_in_primary_ray	"true"
+wall5	env.scene.light.init_state.pos	["0.0", "0.0", "0.0"]
+wall5	env.scene.light.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.light.collision_group	"0"
+wall5	env.scene.light.debug_vis	"false"
+wall5	env.scene.body_contacts.class_type	"isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor"
+wall5	env.scene.body_contacts.prim_path	"/World/envs/env_.*/Robot/.*"
+wall5	env.scene.body_contacts.update_period	"0.0"
+wall5	env.scene.body_contacts.history_length	"1"
+wall5	env.scene.body_contacts.debug_vis	"false"
+wall5	env.scene.body_contacts.track_pose	"false"
+wall5	env.scene.body_contacts.track_contact_points	"false"
+wall5	env.scene.body_contacts.max_contact_data_count_per_prim	"4"
+wall5	env.scene.body_contacts.track_air_time	"false"
+wall5	env.scene.body_contacts.force_threshold	"1.0"
+wall5	env.scene.body_contacts.filter_prim_paths_expr	[]
+wall5	env.scene.body_contacts.visualizer_cfg.prim_path	"/Visuals/ContactSensor"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.func	"isaaclab.sim.spawners.shapes.shapes:spawn_sphere"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.visible	"true"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.semantic_tags	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.copy_from_source	"true"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.mass_props	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.rigid_props	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.collision_props	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.activate_contact_sensors	"false"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.visual_material_path	"material"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.visual_material.func	"isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.visual_material.diffuse_color	["1.0", "0.0", "0.0"]
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.visual_material.emissive_color	["0.0", "0.0", "0.0"]
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.visual_material.roughness	"0.5"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.visual_material.metallic	"0.0"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.visual_material.opacity	"1.0"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.physics_material_path	"material"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.physics_material	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.contact.radius	"0.02"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.func	"isaaclab.sim.spawners.shapes.shapes:spawn_sphere"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.visible	"false"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.semantic_tags	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.copy_from_source	"true"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.mass_props	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.rigid_props	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.collision_props	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.activate_contact_sensors	"false"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.visual_material_path	"material"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.visual_material.func	"isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.visual_material.diffuse_color	["0.0", "1.0", "0.0"]
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.visual_material.emissive_color	["0.0", "0.0", "0.0"]
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.visual_material.roughness	"0.5"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.visual_material.metallic	"0.0"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.visual_material.opacity	"1.0"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.physics_material_path	"material"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.physics_material	"null"
+wall5	env.scene.body_contacts.visualizer_cfg.markers.no_contact.radius	"0.02"
+wall5	env.scene.wall.class_type	"isaaclab.assets.rigid_object.rigid_object:RigidObject"
+wall5	env.scene.wall.prim_path	"/World/envs/env_.*/Wall"
+wall5	env.scene.wall.spawn.func	"perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle"
+wall5	env.scene.wall.spawn.visible	"true"
+wall5	env.scene.wall.spawn.semantic_tags	"null"
+wall5	env.scene.wall.spawn.copy_from_source	"true"
+wall5	env.scene.wall.spawn.mass_props	"null"
+wall5	env.scene.wall.spawn.rigid_props.rigid_body_enabled	"null"
+wall5	env.scene.wall.spawn.rigid_props.kinematic_enabled	"false"
+wall5	env.scene.wall.spawn.rigid_props.disable_gravity	"true"
+wall5	env.scene.wall.spawn.rigid_props.linear_damping	"null"
+wall5	env.scene.wall.spawn.rigid_props.angular_damping	"null"
+wall5	env.scene.wall.spawn.rigid_props.max_linear_velocity	"null"
+wall5	env.scene.wall.spawn.rigid_props.max_angular_velocity	"null"
+wall5	env.scene.wall.spawn.rigid_props.max_depenetration_velocity	"null"
+wall5	env.scene.wall.spawn.rigid_props.max_contact_impulse	"null"
+wall5	env.scene.wall.spawn.rigid_props.enable_gyroscopic_forces	"null"
+wall5	env.scene.wall.spawn.rigid_props.retain_accelerations	"null"
+wall5	env.scene.wall.spawn.rigid_props.solver_position_iteration_count	"null"
+wall5	env.scene.wall.spawn.rigid_props.solver_velocity_iteration_count	"null"
+wall5	env.scene.wall.spawn.rigid_props.sleep_threshold	"null"
+wall5	env.scene.wall.spawn.rigid_props.stabilization_threshold	"null"
+wall5	env.scene.wall.spawn.collision_props.collision_enabled	"null"
+wall5	env.scene.wall.spawn.collision_props.contact_offset	"null"
+wall5	env.scene.wall.spawn.collision_props.rest_offset	"null"
+wall5	env.scene.wall.spawn.collision_props.torsional_patch_radius	"null"
+wall5	env.scene.wall.spawn.collision_props.min_torsional_patch_radius	"null"
+wall5	env.scene.wall.spawn.activate_contact_sensors	"false"
+wall5	env.scene.wall.spawn.visual_material_path	"material"
+wall5	env.scene.wall.spawn.visual_material.func	"isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface"
+wall5	env.scene.wall.spawn.visual_material.diffuse_color	["0.35", "0.4", "0.45"]
+wall5	env.scene.wall.spawn.visual_material.emissive_color	["0.0", "0.0", "0.0"]
+wall5	env.scene.wall.spawn.visual_material.roughness	"0.5"
+wall5	env.scene.wall.spawn.visual_material.metallic	"0.0"
+wall5	env.scene.wall.spawn.visual_material.opacity	"1.0"
+wall5	env.scene.wall.spawn.physics_material_path	"material"
+wall5	env.scene.wall.spawn.physics_material	"null"
+wall5	env.scene.wall.spawn.size	["0.2", "8.0", "3.0"]
+wall5	env.scene.wall.init_state.pos	["0.0", "0.0", "-5.0"]
+wall5	env.scene.wall.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.wall.init_state.lin_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.wall.init_state.ang_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.wall.collision_group	"0"
+wall5	env.scene.wall.debug_vis	"false"
+wall5	env.scene.cylinder0.class_type	"isaaclab.assets.rigid_object.rigid_object:RigidObject"
+wall5	env.scene.cylinder0.prim_path	"/World/envs/env_.*/Cylinder0"
+wall5	env.scene.cylinder0.spawn.func	"perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle"
+wall5	env.scene.cylinder0.spawn.visible	"true"
+wall5	env.scene.cylinder0.spawn.semantic_tags	"null"
+wall5	env.scene.cylinder0.spawn.copy_from_source	"true"
+wall5	env.scene.cylinder0.spawn.mass_props	"null"
+wall5	env.scene.cylinder0.spawn.deformable_props	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.rigid_body_enabled	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.kinematic_enabled	"false"
+wall5	env.scene.cylinder0.spawn.rigid_props.disable_gravity	"true"
+wall5	env.scene.cylinder0.spawn.rigid_props.linear_damping	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.angular_damping	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.max_linear_velocity	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.max_angular_velocity	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.max_depenetration_velocity	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.max_contact_impulse	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.enable_gyroscopic_forces	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.retain_accelerations	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.solver_position_iteration_count	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.solver_velocity_iteration_count	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.sleep_threshold	"null"
+wall5	env.scene.cylinder0.spawn.rigid_props.stabilization_threshold	"null"
+wall5	env.scene.cylinder0.spawn.collision_props.collision_enabled	"null"
+wall5	env.scene.cylinder0.spawn.collision_props.contact_offset	"null"
+wall5	env.scene.cylinder0.spawn.collision_props.rest_offset	"null"
+wall5	env.scene.cylinder0.spawn.collision_props.torsional_patch_radius	"null"
+wall5	env.scene.cylinder0.spawn.collision_props.min_torsional_patch_radius	"null"
+wall5	env.scene.cylinder0.spawn.activate_contact_sensors	"false"
+wall5	env.scene.cylinder0.spawn.visual_material_path	"material"
+wall5	env.scene.cylinder0.spawn.visual_material	"null"
+wall5	env.scene.cylinder0.spawn.physics_material_path	"material"
+wall5	env.scene.cylinder0.spawn.physics_material	"null"
+wall5	env.scene.cylinder0.spawn.radius	"0.15"
+wall5	env.scene.cylinder0.spawn.height	"1.8"
+wall5	env.scene.cylinder0.spawn.axis	"Z"
+wall5	env.scene.cylinder0.init_state.pos	["0.0", "0.0", "-5.0"]
+wall5	env.scene.cylinder0.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder0.init_state.lin_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder0.init_state.ang_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder0.collision_group	"0"
+wall5	env.scene.cylinder0.debug_vis	"false"
+wall5	env.scene.cylinder1.class_type	"isaaclab.assets.rigid_object.rigid_object:RigidObject"
+wall5	env.scene.cylinder1.prim_path	"/World/envs/env_.*/Cylinder1"
+wall5	env.scene.cylinder1.spawn.func	"perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle"
+wall5	env.scene.cylinder1.spawn.visible	"true"
+wall5	env.scene.cylinder1.spawn.semantic_tags	"null"
+wall5	env.scene.cylinder1.spawn.copy_from_source	"true"
+wall5	env.scene.cylinder1.spawn.mass_props	"null"
+wall5	env.scene.cylinder1.spawn.deformable_props	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.rigid_body_enabled	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.kinematic_enabled	"false"
+wall5	env.scene.cylinder1.spawn.rigid_props.disable_gravity	"true"
+wall5	env.scene.cylinder1.spawn.rigid_props.linear_damping	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.angular_damping	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.max_linear_velocity	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.max_angular_velocity	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.max_depenetration_velocity	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.max_contact_impulse	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.enable_gyroscopic_forces	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.retain_accelerations	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.solver_position_iteration_count	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.solver_velocity_iteration_count	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.sleep_threshold	"null"
+wall5	env.scene.cylinder1.spawn.rigid_props.stabilization_threshold	"null"
+wall5	env.scene.cylinder1.spawn.collision_props.collision_enabled	"null"
+wall5	env.scene.cylinder1.spawn.collision_props.contact_offset	"null"
+wall5	env.scene.cylinder1.spawn.collision_props.rest_offset	"null"
+wall5	env.scene.cylinder1.spawn.collision_props.torsional_patch_radius	"null"
+wall5	env.scene.cylinder1.spawn.collision_props.min_torsional_patch_radius	"null"
+wall5	env.scene.cylinder1.spawn.activate_contact_sensors	"false"
+wall5	env.scene.cylinder1.spawn.visual_material_path	"material"
+wall5	env.scene.cylinder1.spawn.visual_material	"null"
+wall5	env.scene.cylinder1.spawn.physics_material_path	"material"
+wall5	env.scene.cylinder1.spawn.physics_material	"null"
+wall5	env.scene.cylinder1.spawn.radius	"0.15"
+wall5	env.scene.cylinder1.spawn.height	"1.8"
+wall5	env.scene.cylinder1.spawn.axis	"Z"
+wall5	env.scene.cylinder1.init_state.pos	["0.0", "0.0", "-5.0"]
+wall5	env.scene.cylinder1.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder1.init_state.lin_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder1.init_state.ang_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder1.collision_group	"0"
+wall5	env.scene.cylinder1.debug_vis	"false"
+wall5	env.scene.cylinder2.class_type	"isaaclab.assets.rigid_object.rigid_object:RigidObject"
+wall5	env.scene.cylinder2.prim_path	"/World/envs/env_.*/Cylinder2"
+wall5	env.scene.cylinder2.spawn.func	"perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle"
+wall5	env.scene.cylinder2.spawn.visible	"true"
+wall5	env.scene.cylinder2.spawn.semantic_tags	"null"
+wall5	env.scene.cylinder2.spawn.copy_from_source	"true"
+wall5	env.scene.cylinder2.spawn.mass_props	"null"
+wall5	env.scene.cylinder2.spawn.deformable_props	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.rigid_body_enabled	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.kinematic_enabled	"false"
+wall5	env.scene.cylinder2.spawn.rigid_props.disable_gravity	"true"
+wall5	env.scene.cylinder2.spawn.rigid_props.linear_damping	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.angular_damping	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.max_linear_velocity	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.max_angular_velocity	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.max_depenetration_velocity	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.max_contact_impulse	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.enable_gyroscopic_forces	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.retain_accelerations	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.solver_position_iteration_count	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.solver_velocity_iteration_count	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.sleep_threshold	"null"
+wall5	env.scene.cylinder2.spawn.rigid_props.stabilization_threshold	"null"
+wall5	env.scene.cylinder2.spawn.collision_props.collision_enabled	"null"
+wall5	env.scene.cylinder2.spawn.collision_props.contact_offset	"null"
+wall5	env.scene.cylinder2.spawn.collision_props.rest_offset	"null"
+wall5	env.scene.cylinder2.spawn.collision_props.torsional_patch_radius	"null"
+wall5	env.scene.cylinder2.spawn.collision_props.min_torsional_patch_radius	"null"
+wall5	env.scene.cylinder2.spawn.activate_contact_sensors	"false"
+wall5	env.scene.cylinder2.spawn.visual_material_path	"material"
+wall5	env.scene.cylinder2.spawn.visual_material	"null"
+wall5	env.scene.cylinder2.spawn.physics_material_path	"material"
+wall5	env.scene.cylinder2.spawn.physics_material	"null"
+wall5	env.scene.cylinder2.spawn.radius	"0.15"
+wall5	env.scene.cylinder2.spawn.height	"1.8"
+wall5	env.scene.cylinder2.spawn.axis	"Z"
+wall5	env.scene.cylinder2.init_state.pos	["0.0", "0.0", "-5.0"]
+wall5	env.scene.cylinder2.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder2.init_state.lin_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder2.init_state.ang_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.cylinder2.collision_group	"0"
+wall5	env.scene.cylinder2.debug_vis	"false"
+wall5	env.scene.platform.class_type	"isaaclab.assets.rigid_object.rigid_object:RigidObject"
+wall5	env.scene.platform.prim_path	"/World/envs/env_.*/Platform"
+wall5	env.scene.platform.spawn.func	"perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle"
+wall5	env.scene.platform.spawn.visible	"true"
+wall5	env.scene.platform.spawn.semantic_tags	"null"
+wall5	env.scene.platform.spawn.copy_from_source	"true"
+wall5	env.scene.platform.spawn.mass_props	"null"
+wall5	env.scene.platform.spawn.rigid_props.rigid_body_enabled	"null"
+wall5	env.scene.platform.spawn.rigid_props.kinematic_enabled	"false"
+wall5	env.scene.platform.spawn.rigid_props.disable_gravity	"true"
+wall5	env.scene.platform.spawn.rigid_props.linear_damping	"null"
+wall5	env.scene.platform.spawn.rigid_props.angular_damping	"null"
+wall5	env.scene.platform.spawn.rigid_props.max_linear_velocity	"null"
+wall5	env.scene.platform.spawn.rigid_props.max_angular_velocity	"null"
+wall5	env.scene.platform.spawn.rigid_props.max_depenetration_velocity	"null"
+wall5	env.scene.platform.spawn.rigid_props.max_contact_impulse	"null"
+wall5	env.scene.platform.spawn.rigid_props.enable_gyroscopic_forces	"null"
+wall5	env.scene.platform.spawn.rigid_props.retain_accelerations	"null"
+wall5	env.scene.platform.spawn.rigid_props.solver_position_iteration_count	"null"
+wall5	env.scene.platform.spawn.rigid_props.solver_velocity_iteration_count	"null"
+wall5	env.scene.platform.spawn.rigid_props.sleep_threshold	"null"
+wall5	env.scene.platform.spawn.rigid_props.stabilization_threshold	"null"
+wall5	env.scene.platform.spawn.collision_props.collision_enabled	"null"
+wall5	env.scene.platform.spawn.collision_props.contact_offset	"null"
+wall5	env.scene.platform.spawn.collision_props.rest_offset	"null"
+wall5	env.scene.platform.spawn.collision_props.torsional_patch_radius	"null"
+wall5	env.scene.platform.spawn.collision_props.min_torsional_patch_radius	"null"
+wall5	env.scene.platform.spawn.activate_contact_sensors	"false"
+wall5	env.scene.platform.spawn.visual_material_path	"material"
+wall5	env.scene.platform.spawn.visual_material	"null"
+wall5	env.scene.platform.spawn.physics_material_path	"material"
+wall5	env.scene.platform.spawn.physics_material	"null"
+wall5	env.scene.platform.spawn.size	["0.5", "0.5", "0.8"]
+wall5	env.scene.platform.init_state.pos	["0.0", "0.0", "-5.0"]
+wall5	env.scene.platform.init_state.rot	["1.0", "0.0", "0.0", "0.0"]
+wall5	env.scene.platform.init_state.lin_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.platform.init_state.ang_vel	["0.0", "0.0", "0.0"]
+wall5	env.scene.platform.collision_group	"0"
+wall5	env.scene.platform.debug_vis	"false"
+wall5	env.recorders.dataset_file_handler_class_type	"isaaclab.utils.datasets.hdf5_dataset_file_handler:HDF5DatasetFileHandler"
+wall5	env.recorders.dataset_export_dir_path	"/tmp/isaaclab/logs"
+wall5	env.recorders.dataset_filename	"dataset"
+wall5	env.recorders.dataset_export_mode._value_	"1"
+wall5	env.recorders.dataset_export_mode._name_	"EXPORT_ALL"
+wall5	env.recorders.export_in_record_pre_reset	"true"
+wall5	env.observations.proprio.concatenate_terms	"true"
+wall5	env.observations.proprio.concatenate_dim	"-1"
+wall5	env.observations.proprio.enable_corruption	"false"
+wall5	env.observations.proprio.history_length	"null"
+wall5	env.observations.proprio.flatten_history_dim	"true"
+wall5	env.observations.proprio.state.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox:proprioception"
+wall5	env.observations.proprio.state.modifiers	"null"
+wall5	env.observations.proprio.state.noise	"null"
+wall5	env.observations.proprio.state.clip	"null"
+wall5	env.observations.proprio.state.scale	"null"
+wall5	env.observations.proprio.state.history_length	"4"
+wall5	env.observations.proprio.state.flatten_history_dim	"true"
+wall5	env.observations.perception.concatenate_terms	"true"
+wall5	env.observations.perception.concatenate_dim	"-1"
+wall5	env.observations.perception.enable_corruption	"false"
+wall5	env.observations.perception.history_length	"null"
+wall5	env.observations.perception.flatten_history_dim	"true"
+wall5	env.observations.perception.image.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:depth_image"
+wall5	env.observations.perception.image.modifiers	"null"
+wall5	env.observations.perception.image.noise	"null"
+wall5	env.observations.perception.image.clip	"null"
+wall5	env.observations.perception.image.scale	"null"
+wall5	env.observations.perception.image.history_length	"4"
+wall5	env.observations.perception.image.flatten_history_dim	"false"
+wall5	env.observations.box_pose_target.concatenate_terms	"true"
+wall5	env.observations.box_pose_target.concatenate_dim	"-1"
+wall5	env.observations.box_pose_target.enable_corruption	"false"
+wall5	env.observations.box_pose_target.history_length	"null"
+wall5	env.observations.box_pose_target.flatten_history_dim	"true"
+wall5	env.observations.box_pose_target.pose.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:box_pose_target"
+wall5	env.observations.box_pose_target.pose.modifiers	"null"
+wall5	env.observations.box_pose_target.pose.noise	"null"
+wall5	env.observations.box_pose_target.pose.clip	"null"
+wall5	env.observations.box_pose_target.pose.scale	"null"
+wall5	env.observations.box_pose_target.pose.history_length	"0"
+wall5	env.observations.box_pose_target.pose.flatten_history_dim	"true"
+wall5	env.observations.amp.concatenate_terms	"true"
+wall5	env.observations.amp.concatenate_dim	"-1"
+wall5	env.observations.amp.enable_corruption	"false"
+wall5	env.observations.amp.history_length	"null"
+wall5	env.observations.amp.flatten_history_dim	"true"
+wall5	env.observations.amp.motion.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:amp_frame"
+wall5	env.observations.amp.motion.modifiers	"null"
+wall5	env.observations.amp.motion.noise	"null"
+wall5	env.observations.amp.motion.clip	"null"
+wall5	env.observations.amp.motion.scale	"null"
+wall5	env.observations.amp.motion.history_length	"10"
+wall5	env.observations.amp.motion.flatten_history_dim	"true"
+wall5	env.observations.critic_state.concatenate_terms	"true"
+wall5	env.observations.critic_state.concatenate_dim	"-1"
+wall5	env.observations.critic_state.enable_corruption	"false"
+wall5	env.observations.critic_state.history_length	"null"
+wall5	env.observations.critic_state.flatten_history_dim	"true"
+wall5	env.observations.critic_state.state.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:critic_state"
+wall5	env.observations.critic_state.state.modifiers	"null"
+wall5	env.observations.critic_state.state.noise	"null"
+wall5	env.observations.critic_state.state.clip	"null"
+wall5	env.observations.critic_state.state.scale	"null"
+wall5	env.observations.critic_state.state.history_length	"0"
+wall5	env.observations.critic_state.state.flatten_history_dim	"true"
+wall5	env.observations.action_bounds.concatenate_terms	"true"
+wall5	env.observations.action_bounds.concatenate_dim	"-1"
+wall5	env.observations.action_bounds.enable_corruption	"false"
+wall5	env.observations.action_bounds.history_length	"null"
+wall5	env.observations.action_bounds.flatten_history_dim	"true"
+wall5	env.observations.action_bounds.bounds.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:action_bounds"
+wall5	env.observations.action_bounds.bounds.modifiers	"null"
+wall5	env.observations.action_bounds.bounds.noise	"null"
+wall5	env.observations.action_bounds.bounds.clip	"null"
+wall5	env.observations.action_bounds.bounds.scale	"null"
+wall5	env.observations.action_bounds.bounds.history_length	"0"
+wall5	env.observations.action_bounds.bounds.flatten_history_dim	"true"
+wall5	env.actions.joint_pos.class_type	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:PhysHSIJointPositionAction"
+wall5	env.actions.joint_pos.asset_name	"robot"
+wall5	env.actions.joint_pos.debug_vis	"false"
+wall5	env.actions.joint_pos.clip	"null"
+wall5	env.actions.joint_pos.joint_names	[".*"]
+wall5	env.actions.joint_pos.scale	"0.25"
+wall5	env.actions.joint_pos.offset	"0.0"
+wall5	env.actions.joint_pos.preserve_order	"false"
+wall5	env.actions.joint_pos.use_default_offset	"true"
+wall5	env.events.reset_robot_root.func	"isaaclab.envs.mdp.events:reset_root_state_uniform"
+wall5	env.events.reset_robot_root.params.pose_range.x	["-0.5", "0.5"]
+wall5	env.events.reset_robot_root.params.pose_range.y	["-0.5", "0.5"]
+wall5	env.events.reset_robot_root.params.pose_range.yaw	["-3.14", "3.14"]
+wall5	env.events.reset_robot_root.params.velocity_range.x	["-0.5", "0.5"]
+wall5	env.events.reset_robot_root.params.velocity_range.y	["-0.5", "0.5"]
+wall5	env.events.reset_robot_root.params.velocity_range.z	["-0.5", "0.5"]
+wall5	env.events.reset_robot_root.params.velocity_range.roll	["-0.5", "0.5"]
+wall5	env.events.reset_robot_root.params.velocity_range.pitch	["-0.5", "0.5"]
+wall5	env.events.reset_robot_root.params.velocity_range.yaw	["-0.5", "0.5"]
+wall5	env.events.reset_robot_root.params.asset_cfg.name	"robot"
+wall5	env.events.reset_robot_root.params.asset_cfg.joint_names	"null"
+wall5	env.events.reset_robot_root.params.asset_cfg.joint_ids	["null", "null", "null"]
+wall5	env.events.reset_robot_root.params.asset_cfg.fixed_tendon_names	"null"
+wall5	env.events.reset_robot_root.params.asset_cfg.fixed_tendon_ids	["null", "null", "null"]
+wall5	env.events.reset_robot_root.params.asset_cfg.body_names	"null"
+wall5	env.events.reset_robot_root.params.asset_cfg.body_ids	["null", "null", "null"]
+wall5	env.events.reset_robot_root.params.asset_cfg.object_collection_names	"null"
+wall5	env.events.reset_robot_root.params.asset_cfg.object_collection_ids	["null", "null", "null"]
+wall5	env.events.reset_robot_root.params.asset_cfg.preserve_order	"false"
+wall5	env.events.reset_robot_root.mode	"reset"
+wall5	env.events.reset_robot_root.interval_range_s	"null"
+wall5	env.events.reset_robot_root.is_global_time	"false"
+wall5	env.events.reset_robot_root.min_step_count_between_reset	"0"
+wall5	env.events.reset_robot_joints.func	"isaaclab.envs.mdp.events:reset_joints_by_offset"
+wall5	env.events.reset_robot_joints.params.position_range	["0.0", "0.0"]
+wall5	env.events.reset_robot_joints.params.velocity_range	["0.0", "0.0"]
+wall5	env.events.reset_robot_joints.mode	"reset"
+wall5	env.events.reset_robot_joints.interval_range_s	"null"
+wall5	env.events.reset_robot_joints.is_global_time	"false"
+wall5	env.events.reset_robot_joints.min_step_count_between_reset	"0"
+wall5	env.events.reset_box.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:reset_scene"
+wall5	env.events.reset_box.mode	"reset"
+wall5	env.events.reset_box.interval_range_s	"null"
+wall5	env.events.reset_box.is_global_time	"false"
+wall5	env.events.reset_box.min_step_count_between_reset	"0"
+wall5	env.events.box_material.func	"isaaclab.envs.mdp.events:randomize_rigid_body_material"
+wall5	env.events.box_material.params.asset_cfg.name	"box"
+wall5	env.events.box_material.params.asset_cfg.joint_names	"null"
+wall5	env.events.box_material.params.asset_cfg.joint_ids	["null", "null", "null"]
+wall5	env.events.box_material.params.asset_cfg.fixed_tendon_names	"null"
+wall5	env.events.box_material.params.asset_cfg.fixed_tendon_ids	["null", "null", "null"]
+wall5	env.events.box_material.params.asset_cfg.body_names	"null"
+wall5	env.events.box_material.params.asset_cfg.body_ids	["null", "null", "null"]
+wall5	env.events.box_material.params.asset_cfg.object_collection_names	"null"
+wall5	env.events.box_material.params.asset_cfg.object_collection_ids	["null", "null", "null"]
+wall5	env.events.box_material.params.asset_cfg.preserve_order	"false"
+wall5	env.events.box_material.params.static_friction_range	["0.3", "2.0"]
+wall5	env.events.box_material.params.dynamic_friction_range	["0.4", "1.5"]
+wall5	env.events.box_material.params.restitution_range	["0.0", "0.2"]
+wall5	env.events.box_material.params.num_buckets	"64"
+wall5	env.events.box_material.mode	"startup"
+wall5	env.events.box_material.interval_range_s	"null"
+wall5	env.events.box_material.is_global_time	"false"
+wall5	env.events.box_material.min_step_count_between_reset	"0"
+wall5	env.events.box_mass.func	"isaaclab.envs.mdp.events:randomize_rigid_body_mass"
+wall5	env.events.box_mass.params.asset_cfg.name	"box"
+wall5	env.events.box_mass.params.asset_cfg.joint_names	"null"
+wall5	env.events.box_mass.params.asset_cfg.joint_ids	["null", "null", "null"]
+wall5	env.events.box_mass.params.asset_cfg.fixed_tendon_names	"null"
+wall5	env.events.box_mass.params.asset_cfg.fixed_tendon_ids	["null", "null", "null"]
+wall5	env.events.box_mass.params.asset_cfg.body_names	"null"
+wall5	env.events.box_mass.params.asset_cfg.body_ids	["null", "null", "null"]
+wall5	env.events.box_mass.params.asset_cfg.object_collection_names	"null"
+wall5	env.events.box_mass.params.asset_cfg.object_collection_ids	["null", "null", "null"]
+wall5	env.events.box_mass.params.asset_cfg.preserve_order	"false"
+wall5	env.events.box_mass.params.mass_distribution_params	["0.1", "1.5"]
+wall5	env.events.box_mass.params.operation	"scale"
+wall5	env.events.box_mass.params.recompute_inertia	"true"
+wall5	env.events.box_mass.mode	"reset"
+wall5	env.events.box_mass.interval_range_s	"null"
+wall5	env.events.box_mass.is_global_time	"false"
+wall5	env.events.box_mass.min_step_count_between_reset	"0"
+wall5	env.events.default_joint_pos.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:randomize_default_joint_pos"
+wall5	env.events.default_joint_pos.params.magnitude	"0.0"
+wall5	env.events.default_joint_pos.mode	"startup"
+wall5	env.events.default_joint_pos.interval_range_s	"null"
+wall5	env.events.default_joint_pos.is_global_time	"false"
+wall5	env.events.default_joint_pos.min_step_count_between_reset	"0"
+wall5	env.events.torso_com.func	"isaaclab.envs.mdp.events:randomize_rigid_body_com"
+wall5	env.events.torso_com.params.asset_cfg.name	"robot"
+wall5	env.events.torso_com.params.asset_cfg.joint_names	"null"
+wall5	env.events.torso_com.params.asset_cfg.joint_ids	["null", "null", "null"]
+wall5	env.events.torso_com.params.asset_cfg.fixed_tendon_names	"null"
+wall5	env.events.torso_com.params.asset_cfg.fixed_tendon_ids	["null", "null", "null"]
+wall5	env.events.torso_com.params.asset_cfg.body_names	["torso_link"]
+wall5	env.events.torso_com.params.asset_cfg.body_ids	["null", "null", "null"]
+wall5	env.events.torso_com.params.asset_cfg.object_collection_names	"null"
+wall5	env.events.torso_com.params.asset_cfg.object_collection_ids	["null", "null", "null"]
+wall5	env.events.torso_com.params.asset_cfg.preserve_order	"false"
+wall5	env.events.torso_com.params.com_range.x	["-0.025", "0.025"]
+wall5	env.events.torso_com.params.com_range.y	["-0.05", "0.05"]
+wall5	env.events.torso_com.params.com_range.z	["-0.05", "0.05"]
+wall5	env.events.torso_com.mode	"startup"
+wall5	env.events.torso_com.interval_range_s	"null"
+wall5	env.events.torso_com.is_global_time	"false"
+wall5	env.events.torso_com.min_step_count_between_reset	"0"
+wall5	env.events.push_robot.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:push_velocity_increment"
+wall5	env.events.push_robot.params.velocity_range.x	["-0.5", "0.5"]
+wall5	env.events.push_robot.params.velocity_range.y	["-0.5", "0.5"]
+wall5	env.events.push_robot.params.velocity_range.z	["-0.2", "0.2"]
+wall5	env.events.push_robot.params.velocity_range.roll	["-0.52", "0.52"]
+wall5	env.events.push_robot.params.velocity_range.pitch	["-0.52", "0.52"]
+wall5	env.events.push_robot.params.velocity_range.yaw	["-0.78", "0.78"]
+wall5	env.events.push_robot.mode	"interval"
+wall5	env.events.push_robot.interval_range_s	["1.0", "3.0"]
+wall5	env.events.push_robot.is_global_time	"false"
+wall5	env.events.push_robot.min_step_count_between_reset	"0"
+wall5	env.rerender_on_reset	"true"
+wall5	env.wait_for_textures	"true"
+wall5	env.xr	"null"
+wall5	env.export_io_descriptors	"false"
+wall5	env.log_dir	"/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_17-35-18_wall5_v28_clean_camera_fresh_20261023_173513"
+wall5	env.is_finite_horizon	"false"
+wall5	env.episode_length_s	"20.0"
+wall5	env.rewards.dof_acc.func	"isaaclab.envs.mdp.rewards:joint_acc_l2"
+wall5	env.rewards.dof_acc.weight	"-1.0e-07"
+wall5	env.rewards.action_rate.func	"isaaclab.envs.mdp.rewards:action_rate_l2"
+wall5	env.rewards.action_rate.weight	"-0.03"
+wall5	env.rewards.torques.func	"isaaclab.envs.mdp.rewards:joint_torques_l2"
+wall5	env.rewards.torques.weight	"-0.0001"
+wall5	env.rewards.dof_vel.func	"isaaclab.envs.mdp.rewards:joint_vel_l2"
+wall5	env.rewards.dof_vel.weight	"-0.0002"
+wall5	env.rewards.dof_pos_limits.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:reference_joint_pos_limits"
+wall5	env.rewards.dof_pos_limits.weight	"-5.0"
+wall5	env.rewards.dof_vel_limits.func	"isaaclab.envs.mdp.rewards:joint_vel_limits"
+wall5	env.rewards.dof_vel_limits.params.soft_ratio	"1.0"
+wall5	env.rewards.dof_vel_limits.weight	"-0.001"
+wall5	env.rewards.undesired_contacts	"null"
+wall5	env.rewards.walk_task.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:walk_task"
+wall5	env.rewards.walk_task.weight	"1.0"
+wall5	env.rewards.carryup_task.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward"
+wall5	env.rewards.carryup_task.params.name	"carryup_task"
+wall5	env.rewards.carryup_task.weight	"1.0"
+wall5	env.rewards.standup_task.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_x2_rewards:task_reward"
+wall5	env.rewards.standup_task.params.name	"standup_task"
+wall5	env.rewards.standup_task.weight	"0.4"
+wall5	env.rewards.slow_pickup.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward"
+wall5	env.rewards.slow_pickup.params.name	"slow_pickup"
+wall5	env.rewards.slow_pickup.weight	"-0.0005"
+wall5	env.rewards.stable_grasp.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward"
+wall5	env.rewards.stable_grasp.params.name	"stable_grasp"
+wall5	env.rewards.stable_grasp.weight	"0.2"
+wall5	env.rewards.arm_speed_pickup.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward"
+wall5	env.rewards.arm_speed_pickup.params.name	"arm_speed_pickup"
+wall5	env.rewards.arm_speed_pickup.weight	"-0.02"
+wall5	env.rewards.arm_acc_pickup.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward"
+wall5	env.rewards.arm_acc_pickup.params.name	"arm_acc_pickup"
+wall5	env.rewards.arm_acc_pickup.weight	"-2.0e-05"
+wall5	env.rewards.grip_force_cap.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_x2_rewards:task_reward"
+wall5	env.rewards.grip_force_cap.params.name	"grip_force_cap"
+wall5	env.rewards.grip_force_cap.weight	"-0.02"
+wall5	env.rewards.held_hand_speed.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:held_joint_excess"
+wall5	env.rewards.held_hand_speed.params.acceleration	"false"
+wall5	env.rewards.held_hand_speed.params.threshold	"1.0"
+wall5	env.rewards.held_hand_speed.weight	"-0.02"
+wall5	env.rewards.held_hand_acc.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:held_joint_excess"
+wall5	env.rewards.held_hand_acc.params.acceleration	"true"
+wall5	env.rewards.held_hand_acc.params.threshold	"20.0"
+wall5	env.rewards.held_hand_acc.weight	"-2.0e-05"
+wall5	env.rewards.waist_yaw_penalty.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:waist_yaw"
+wall5	env.rewards.waist_yaw_penalty.weight	"-0.5"
+wall5	env.rewards.search_turn.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:search_turn"
+wall5	env.rewards.search_turn.weight	"0.5"
+wall5	env.rewards.early_failure	"null"
+wall5	env.rewards.alive.func	"isaaclab.envs.mdp.rewards:is_alive"
+wall5	env.rewards.alive.weight	"3.0"
+wall5	env.terminations.time_out.func	"isaaclab.envs.mdp.terminations:time_out"
+wall5	env.terminations.time_out.time_out	"true"
+wall5	env.terminations.invalid.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox:invalid_state"
+wall5	env.terminations.invalid.time_out	"false"
+wall5	env.terminations.success	"null"
+wall5	env.terminations.fell	"null"
+wall5	env.terminations.tipped.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:tipped"
+wall5	env.terminations.tipped.time_out	"false"
+wall5	env.terminations.fell_pelvis.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:fallen_pelvis"
+wall5	env.terminations.fell_pelvis.time_out	"false"
+wall5	env.terminations.fell_head.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:fallen_head"
+wall5	env.terminations.fell_head.time_out	"false"
+wall5	env.terminations.fell_hip.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:fallen_hip"
+wall5	env.terminations.fell_hip.time_out	"false"
+wall5	env.terminations.box_speed.func	"perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:box_speed"
+wall5	env.terminations.box_speed.time_out	"false"
+wall5	env.curriculum	"null"
+wall5	env.commands	"null"
+wall5	env.walled_variant	"walled5"
+wall5	env.depth_backend	"warp"
+wall5	env.reference_init	"true"
+wall5	env.reset_skill_probabilities	["0.6666666666666666", "0.16666666666666666", "0.16666666666666666"]
+wall5	env.search_prob	"0.02"
+wall5	env.obstacle_cylinder_count	"3"
+wall5	env.push_warmup_iterations	"5000"
+wall5	env.push_ramp_iterations	"10000"
+wall5	env.depth_noise_std_m	"0.0"
+wall5	env.depth_edge_threshold_m	"0.15"
+wall5	env.depth_edge_probability	"0.0"
+wall5	env.depth_hole_probability	"0.0"
+wall5	env.depth_stereo_near_m	"0.0"
+wall5	env.depth_stereo_far_m	"0.0"
+wall5	env.depth_max_delay_steps	"0"
+wall5	env.depth_delay_probability	"0.0"
+wall5	env.depth_freeze_probability	"0.0"
+wall5	env.depth_freeze_max_steps	"1"
+wall5	env.camera_position_error_m	"0.0"
+wall5	env.camera_rotation_error_deg	"0.0"
+wall5	env.pose_visibility_supervision	"true"
+wall5	env.depth_in_metres	"true"
+wall5	env.reference_link_velocity	"true"
+wall5	env.task_box_distance_3d	"true"
+wall5	env.reward_geometry.profile	"g1_grasp_geometry_v23"
+wall5	env.reward_geometry.body_frame	"pelvis"
+wall5	env.reward_geometry.near_distance	"0.9"
+wall5	env.reward_geometry.carryup_box	"0.7438444985656549"
+wall5	env.reward_geometry.success_box	"0.6957789064440506"
+wall5	env.reward_geometry.held_box	"0.6356969162920453"
+wall5	env.reward_geometry.crouch_box	"0.6717461103832484"
+wall5	env.reward_geometry.slow_pickup_box	"0.6356969162920453"
+wall5	env.reward_geometry.stand_pelvis	"0.7627523159232374"
+wall5	env.reward_geometry.stand_gate_low	"0.5778426635782101"
+wall5	env.reward_geometry.stand_gate_span	"0.18490965234502724"
+wall5	env.reward_geometry.crouch_pelvis	"0.6934111962938522"
+wall5	env.reward_geometry.fallen_pelvis	"0.23113706543128407"
+wall5	env.reward_geometry.stand_head	"0.9322679460906296"
+wall5	env.reward_geometry.success_head	"0.877428655144122"
+wall5	env.reward_geometry.fallen_head	"0.438714327572061"
+wall5	env.reward_geometry.carryup_height_exp	"2.4965884056188097"
+wall5	env.reward_geometry.stand_pelvis_exp	"6.9222995325934535"
+wall5	env.reward_geometry.stand_head_exp	"7.294040333055647"
+wall5	env.grasp_geometry.profile	"bilateral_surface_contact_clearance_v23"
+wall5	env.grasp_geometry.stance_target_m	"0.52"
+wall5	env.grasp_geometry.stance_width_m	"0.12"
+wall5	env.grasp_geometry.travel_end_m	"0.6"
+wall5	env.grasp_geometry.travel_blend_m	"0.2"
+wall5	env.grasp_geometry.crowding_start_m	"0.4"
+wall5	env.grasp_geometry.crowding_width_m	"0.15"
+wall5	env.grasp_geometry.reach_gate_3d_m	"0.9"
+wall5	env.grasp_geometry.reach_gate_fade_m	"0.08"
+wall5	env.grasp_geometry.palm_surface_tolerance_m	"0.04"
+wall5	env.grasp_geometry.reach_scale_m	"0.18"
+wall5	env.grasp_geometry.contact_threshold_n	"1.0"
+wall5	env.grasp_geometry.contact_saturation_n	"5.0"
+wall5	env.grasp_geometry.lift_start_m	"0.01"
+wall5	env.grasp_geometry.lift_span_m	"0.24"
+wall5	env.grasp_geometry.stance_weight	"0.2"
+wall5	env.grasp_geometry.crowding_weight	"0.5"
+wall5	env.grasp_geometry.reach_weight	"1.5"
+wall5	env.grasp_geometry.contact_weight	"0.5"
+wall5	env.grasp_geometry.bilateral_weight	"1.5"
+wall5	env.grasp_geometry.lift_weight	"2.5"
+wall5	env.height_termination_terms	["fell_pelvis", "fell_head", "fell_hip"]
+wall5	env.robot_reset_profile	"physhsi_physical_reset_fixed_four_way_quota_v27"
+wall5	env.ground_box_reset	"false"
+wall5	env.held_box_reference_reset	"true"
+wall5	env.reference_motion_dataset	"/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox"
+wall5	env.reset_reference_probability	"0.8"
+wall5	env.ground_pickup_reset_frame_range	["0", "32"]
+wall5	agent.seed	"42"
+wall5	agent.device	"cuda:0"
+wall5	agent.num_steps_per_env	"24"
+wall5	agent.max_iterations	"40000"
+wall5	agent.empirical_normalization	"null"
+wall5	agent.obs_groups.policy	["proprio", "perception"]
+wall5	agent.obs_groups.critic	["critic_state"]
+wall5	agent.clip_actions	"9.0"
+wall5	agent.save_interval	"200"
+wall5	agent.experiment_name	"g1_carrybox_depth/walled5"
+wall5	agent.run_name	"wall5_v28_clean_camera_fresh_20261023_173513"
+wall5	agent.logger	"tensorboard"
+wall5	agent.neptune_project	"isaaclab"
+wall5	agent.wandb_project	"isaaclab"
+wall5	agent.resume	"false"
+wall5	agent.load_run	".*"
+wall5	agent.load_checkpoint	"model_.*.pt"
+wall5	agent.class_name	"CarryBoxWall5OnPolicyRunner"
+wall5	agent.policy.class_name	"CarryBoxWall5ActorCritic"
+wall5	agent.policy.init_noise_std	"1.0"
+wall5	agent.policy.noise_std_type	"log"
+wall5	agent.policy.actor_obs_normalization	"false"
+wall5	agent.policy.critic_obs_normalization	"false"
+wall5	agent.policy.actor_hidden_dims	["512", "256", "256"]
+wall5	agent.policy.critic_hidden_dims	["512", "256", "256"]
+wall5	agent.policy.activation	"elu"
+wall5	agent.algorithm.class_name	"CarryBoxWall5PPO"
+wall5	agent.algorithm.num_learning_epochs	"5"
+wall5	agent.algorithm.num_mini_batches	"4"
+wall5	agent.algorithm.learning_rate	"0.0003"
+wall5	agent.algorithm.schedule	"adaptive"
+wall5	agent.algorithm.gamma	"0.99"
+wall5	agent.algorithm.lam	"0.95"
+wall5	agent.algorithm.entropy_coef	"0.01"
+wall5	agent.algorithm.desired_kl	"0.01"
+wall5	agent.algorithm.max_grad_norm	"1.0"
+wall5	agent.algorithm.value_loss_coef	"1.0"
+wall5	agent.algorithm.use_clipped_value_loss	"true"
+wall5	agent.algorithm.clip_param	"0.2"
+wall5	agent.algorithm.normalize_advantage_per_mini_batch	"false"
+wall5	agent.algorithm.rnd_cfg	"null"
+wall5	agent.algorithm.symmetry_cfg	"null"
+wall5	agent.algorithm.pose_aux_coef	"1.0"
+wall5	agent.algorithm.amp_coef	"0.25"
+wall5	agent.algorithm.amp_reward_scale	"0.5"
+wall5	agent.algorithm.amp_lr	"5.0e-05"
+wall5	agent.algorithm.amp_data_dir	"/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox"
+wall5	agent.algorithm.action_bound_coef	"0.01"
+wall5	agent.algorithm.max_action_std	"1.0"

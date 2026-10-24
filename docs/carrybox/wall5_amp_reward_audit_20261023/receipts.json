@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "/home/cao/ENTER/envs/ball/bin/python docs/carrybox/wall5_amp_reward_audit_20261023/analyze.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "7da2975aff13cc827f1357215ac2d1ff70ef14ed448bd6ef75ab650504a0fcf8",
+      "stdout_sha256": "241ad122d9c27bbe46ffafc3cba76e20d883b69063592037d1a9eff687c517ea",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash docs/carrybox/wall5_amp_reward_audit_20261023/probe.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "8058a06480dfd233e2b0bc9653137eedfbc29e458eb548e17f582523b781d72a",
+      "stdout_sha256": "5c11e1f77f9e311419cb9fbb2a94caffec59c864e99f6f20da2fba96fb278686",
+      "stderr_sha256": "a090fe76f1c04dd8ca0468ba8d43656517a08e193b1165def23f1f7d3995a74c",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

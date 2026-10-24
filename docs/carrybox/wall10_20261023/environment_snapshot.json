@@ -1,0 +1,8 @@
+{
+  "initial_existing_training_pid": 2266428,
+  "initial_gpu_used_mib": 14675,
+  "task_started_or_stopped_formal_training": false,
+  "final_observation": "Original PID no longer present at 23:22 JST; no stop/restart operation by this task; exit reason not investigated.",
+  "final_ps_stdout": "    PID                  STARTED COMMAND\n",
+  "final_ps_exit_code": 1
+}

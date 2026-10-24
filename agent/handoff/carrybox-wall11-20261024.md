@@ -1,0 +1,14 @@
+---
+task_id: "carrybox-wall11-20261024"
+language: "zh-CN"
+axes: ["L", "P", "E"]
+risk_tier: "T2"
+status: "DONE"
+changed_files: ["agent/handoff/carrybox-wall11-20261024.md", "agent/plan/carrybox-wall11-20261024.md", "agent/report/carrybox-wall11-20261024.md", "agent/task/carrybox-wall11-20261024.md", "docs/carrybox/wall11_20261024/README.md", "docs/carrybox/wall11_20261024/checks.py", "docs/carrybox/wall11_20261024/cpu.log", "docs/carrybox/wall11_20261024/exported/manifest.json", "docs/carrybox/wall11_20261024/exported/policy.onnx", "docs/carrybox/wall11_20261024/exported/policy.pt", "docs/carrybox/wall11_20261024/incompatible_model.pt", "docs/carrybox/wall11_20261024/receipts.json", "docs/carrybox/wall11_20261024/receipts_attempt1.json", "docs/carrybox/wall11_20261024/smoke.json", "docs/carrybox/wall11_20261024/smoke.log", "docs/carrybox/wall11_20261024/smoke.py", "docs/carrybox/wall11_20261024/smoke_attempt1.log", "docs/carrybox/wall11_20261024/smoke_model.pt", "docs/carrybox/wall11_20261024/validate_cpu.sh", "docs/carrybox/wall11_20261024/validate_sim.sh", "projects/README.md", "projects/findbox/README.md", "scripts/rsl_rl/play_carrybox_walled.sh", "scripts/rsl_rl/train_carrybox_walled.sh", "source/perceptual_ball/perceptual_ball/carrybox_wall11.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/__init__.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall11_env_cfg.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall11.py", "tests/test_carrybox_wall11.py"]
+task_contract_sha256: "2cde6035fc76c85a1baeaa6036d5a511b6784275a5c7b5fd5aa442c755ae2eac"
+tests: [{"command": "bash docs/carrybox/wall11_20261024/validate_cpu.sh", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "eb30385ef092089a81a52cc80cf24e28285a3b057b4d2cf4f7c63135891fae97", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "runner": "run_engineering_tests.py"}, {"command": "bash docs/carrybox/wall11_20261024/validate_sim.sh", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "194d605444fc50a5835a2eff4b28e37e395890c8c12e1d08878abf622e9033f2", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "runner": "run_engineering_tests.py"}]
+artifact: "HANDOFF"
+resume_command: null
+---
+
+稳定任务为Template-Perceptual-Ball-CarryBox-Walled11-v0，独立环境契约walled11/revision1，复用wall10 runner与学习器。默认4096×24/5×4，产物目录g1_carrybox_depth/walled11；本次验证模型仅docs下。没有待恢复工作，不启动正式长训；用户后续若要求训练，先只读核对GPU/现有wall10进程再执行。严格resume拒绝wall10契约。全部冻结测试PASS，首次测试脚本修复及训练/观测详细说明见docs/carrybox/wall11_20261024/README.md。

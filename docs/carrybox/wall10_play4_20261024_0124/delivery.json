@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "video": "/home/cao/perceptual_ball/outputs/carrybox/wall10_play4_20261024_0124/wall10_model_1000_4robots_20s_preview.mp4",
+  "original": "/home/cao/perceptual_ball/outputs/carrybox/wall10_play4_20261024_0124/wall10_model_1000_4robots_20s.mp4",
+  "encode_command": [
+    "/home/cao/ENTER/envs/ball/lib/python3.10/site-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2",
+    "-nostdin",
+    "-n",
+    "-v",
+    "error",
+    "-i",
+    "/home/cao/perceptual_ball/outputs/carrybox/wall10_play4_20261024_0124/wall10_model_1000_4robots_20s.mp4",
+    "-c:v",
+    "libx264",
+    "-preset",
+    "fast",
+    "-crf",
+    "24",
+    "-maxrate",
+    "8M",
+    "-bufsize",
+    "16M",
+    "-pix_fmt",
+    "yuv420p",
+    "-threads",
+    "2",
+    "-movflags",
+    "+faststart",
+    "/home/cao/perceptual_ball/outputs/carrybox/wall10_play4_20261024_0124/wall10_model_1000_4robots_20s_preview.mp4"
+  ],
+  "frames": 500,
+  "fps": 25.0,
+  "duration": 20.0,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "full_decode": true,
+  "bytes": 20821727,
+  "sha256": "23860e86092bc15f71327db61a06e8bf795fe54875299a0058405431e2d2fb4f",
+  "timeline": "All 500 frames retained; no trimming, retiming or frame interpolation."
+}

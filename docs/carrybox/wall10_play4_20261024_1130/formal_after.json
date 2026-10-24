@@ -1,0 +1,6 @@
+{
+  "checked_at": "2026-10-24T11:56:17.872993+09:00",
+  "process": "    PID     ELAPSED STAT COMMAND\n2402395    11:43:25 Rsl  /home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-CarryBox-Walled10-v0 --num_envs 4096 --device cuda:0 --headless --seed 42 agent.num_steps_per_env=24 --num_envs 4096 --max_iterations 20000 --seed 42 --run_name wall10_24step_fresh_20261024_001253\n",
+  "last_iteration": 10588,
+  "training_process_modified": false
+}

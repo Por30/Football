@@ -87,6 +87,7 @@ import perceptual_ball.tasks  # noqa: F401
 from perceptual_ball.rsl_rl_extensions import BallRegressionOnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.carrybox import CarryBoxOnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.carrybox_wall5 import CarryBoxWall5OnPolicyRunner
+from perceptual_ball.rsl_rl_extensions.carrybox_wall10 import CarryBoxWall10OnPolicyRunner
 
 
 @hydra_task_config(args_cli.task, args_cli.agent)
@@ -156,6 +157,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         runner = CarryBoxOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     elif agent_cfg.class_name == "CarryBoxWall5OnPolicyRunner":
         runner = CarryBoxWall5OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
+    elif agent_cfg.class_name == "CarryBoxWall10OnPolicyRunner":
+        runner = CarryBoxWall10OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     elif agent_cfg.class_name == "BallRegressionOnPolicyRunner":
         runner = BallRegressionOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     else:

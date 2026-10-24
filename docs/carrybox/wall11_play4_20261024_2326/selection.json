@@ -1,0 +1,20 @@
+{
+  "selected_at": "2026-10-24T23:26:26.876969+09:00",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled11/2026-10-24_12-34-49_wall11_24step_fresh_20261024_123445/model_9500.pt",
+  "checkpoint_iteration": 9500,
+  "checkpoint_sha256": "45579db3c5d1af10c65b162469478d95f9347c5ce31146c34a0a65cc63fc28d3",
+  "video": "/home/cao/perceptual_ball/outputs/carrybox/wall11_play4_20261024_2326/wall11_model_9500_4robots_20s.mp4",
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/carrybox_wall10.py": "766dbfdbe0dd723eb1f87ea4418c7129c4e5d5ac0ccc14812e8c20728f29e506",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py": "8e88c20dcc26f80733d76d8e824019c128da9182954c5faff984d55196cf0bb5",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall10_env_cfg.py": "613052334f3ed3db49d18f5ab5eaf4fee65a8043a878b46b436e388e6e624ddb",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py": "4bc1e3743031af2a9e407da78fa1e237080dcc3b0f6967aaa9316606429c6791",
+    "source/perceptual_ball/perceptual_ball/carrybox_wall11.py": "d795a6aeae35c36edf5096f69638fc29a4f3d778fb0bafe0675b2563960a89ee",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall11_env_cfg.py": "d64e245732aa3e558818dd256fd24fc72d49028e9f05f6d15fba627b8be2cb4a",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall11.py": "eea73b5f54a8236386ac2d8567befe53965bc2dfe6e25857f800a864d51f93a3"
+  },
+  "selection_rule": "highest completed checkpoint in active 24-step formal run at selection time",
+  "training_pid": 2723259,
+  "checkpoint_schema": 2,
+  "rollout_steps": 24
+}

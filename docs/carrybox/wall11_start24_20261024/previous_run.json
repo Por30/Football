@@ -1,0 +1,17 @@
+{
+  "stopped_at_request": "2026-10-24T12:34:28.825303+09:00",
+  "pid": 2402395,
+  "command": "/home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-CarryBox-Walled10-v0 --num_envs 4096 --device cuda:0 --headless --seed 42 agent.num_steps_per_env=24 --num_envs 4096 --max_iterations 20000 --seed 42 --run_name wall10_24step_fresh_20261024_001253 ",
+  "stdout_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/train_wall10_24step_fresh_20261024_001253.log",
+  "run_dir": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/2026-10-24_00-12-57_wall10_24step_fresh_20261024_001253",
+  "latest_checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/2026-10-24_00-12-57_wall10_24step_fresh_20261024_001253/model_11000.pt",
+  "checkpoint_size_bytes": 17064299,
+  "checkpoint_sha256": "c7c9018ea3e1c45be22257fb79909760c83faa33c114f6060b6fbe2532e93000",
+  "signals": [
+    "SIGINT"
+  ],
+  "stopped": true,
+  "checked_at": "2026-10-24T12:34:29.838918+09:00",
+  "last_logged_iteration": 11147,
+  "checkpoint_preserved": true
+}

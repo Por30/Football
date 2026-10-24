@@ -1,0 +1,33 @@
+{
+  "num_envs": 4096,
+  "rollout_steps": 24,
+  "epochs": 5,
+  "minibatches": 4,
+  "iterations": [
+    {
+      "iteration": 0,
+      "collection": 2.4802371566183865,
+      "learning": 2.4049081332050264,
+      "total": 4.885145289823413
+    },
+    {
+      "iteration": 1,
+      "collection": 2.6048674467019737,
+      "learning": 1.7862806040793657,
+      "total": 4.391148050781339
+    },
+    {
+      "iteration": 2,
+      "collection": 2.6100672921165824,
+      "learning": 1.8161034490913153,
+      "total": 4.426170741207898
+    },
+    {
+      "iteration": 3,
+      "collection": 2.59089298825711,
+      "learning": 1.8190501681528986,
+      "total": 4.409943156410009
+    }
+  ],
+  "default_changed": false
+}

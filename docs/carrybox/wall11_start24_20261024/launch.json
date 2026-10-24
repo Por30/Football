@@ -1,0 +1,14 @@
+{
+  "started_at": "2026-10-24T12:34:45.263515+09:00",
+  "pid": 2723259,
+  "run_name": "wall11_24step_fresh_20261024_123445",
+  "stdout_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled11/train_wall11_24step_fresh_20261024_123445.log",
+  "command": "CARRYBOX_VARIANT=11 bash scripts/rsl_rl/train_carrybox_walled.sh agent.num_steps_per_env=24 --num_envs 4096 --max_iterations 20000 --seed 42 --run_name wall11_24step_fresh_20261024_123445",
+  "task": "Template-Perceptual-Ball-CarryBox-Walled11-v0",
+  "num_envs": 4096,
+  "num_steps_per_env": 24,
+  "max_iterations": 20000,
+  "seed": 42,
+  "resume": false,
+  "free_gpu_mib_before_launch": 23160
+}

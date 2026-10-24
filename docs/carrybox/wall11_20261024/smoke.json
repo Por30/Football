@@ -1,0 +1,401 @@
+{
+  "status": "PASS",
+  "num_envs": 16,
+  "iterations": "2+1",
+  "rollout_steps": 24,
+  "checkpoint_schema": 2,
+  "contract": {
+    "variant": "walled11",
+    "migration_revision": 1,
+    "source": "PhysHSI_G1_carrybox",
+    "task": "approach_lift_stationary_hold_no_goal_no_putdown",
+    "hold_seconds": 2.0,
+    "actor": "proprio93x6_depth4x27x48",
+    "critic": "proprio93_ends15_lin3_box12",
+    "depth": {
+      "schema": 1,
+      "output": "optical_z_metres",
+      "units": "metres",
+      "normalization": "none",
+      "clip_range_m": [
+        0.1,
+        3.0
+      ],
+      "invalid_depth_m": 3.0,
+      "input_range": [
+        0.1,
+        3.0
+      ],
+      "missing_value": 3.0,
+      "shape": [
+        4,
+        27,
+        48
+      ],
+      "history_order": "oldest_to_newest",
+      "geometry": "robot_ground_wall_3cylinders_support_variable_box",
+      "noise": {
+        "gaussian_std": 0.02,
+        "edge_threshold": 0.15,
+        "edge_probability": 0.05,
+        "hole_probability": 0.02,
+        "stereo_near": 0.008,
+        "stereo_far": 0.03
+      },
+      "capture": "once_per_control_step_per_env_reset_invalidated"
+    },
+    "actor_proprio_noise": true,
+    "control": "explicit_PD_motor_strength_effort_offset_delay0to20ms_action100_no_target_clip",
+    "reset": "bernoulli80_RSI_conditional_2over3_1over6_1over6_ground_correction5mm",
+    "reset_history": "repeat_first_current_frame",
+    "observations": "no_goal_no_phase_no_success_flag_actor_no_privileged",
+    "box_size_scale": [
+      [
+        0.7,
+        1.3
+      ],
+      [
+        0.7,
+        1.3
+      ],
+      [
+        0.6,
+        1.4
+      ]
+    ],
+    "box_density": [
+      10.0,
+      100.0
+    ],
+    "rigid_body_randomization": {
+      "link_mass": [
+        0.8,
+        1.2
+      ],
+      "recompute_inertia": true,
+      "torso_com_xyz": [
+        -0.1,
+        0.1
+      ],
+      "robot_friction": [
+        0.1,
+        1.5
+      ],
+      "robot_restitution": [
+        0.0,
+        1.0
+      ],
+      "kp_kd_motor_strength": [
+        0.9,
+        1.1
+      ],
+      "effort_offset_limit_fraction": [
+        -0.05,
+        0.05
+      ]
+    },
+    "support_size": [
+      0.4,
+      0.4,
+      0.02
+    ],
+    "ground_friction": 0.9,
+    "success_thresholds": {
+      "box_bottom_min": 0.1,
+      "box_center_min": 0.7,
+      "bilateral_force_min": 1.0,
+      "box_upright_min": 0.8,
+      "robot_upright_min": 0.95,
+      "head_min": 1.05,
+      "root_xy_speed_max": 0.15,
+      "root_yaw_speed_max": 0.3,
+      "box_speed_max": 0.15,
+      "box_xy_drift_max": 0.35
+    },
+    "box_regular_spawn": "front_0.7to2m_yaw45deg_ground",
+    "rewards": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "torque_limits": -0.03,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.2
+    },
+    "torque_penalty": "applied_div_nominal_kp_squared",
+    "disturbance": "local_torso_uniform_xyz50N_every8_policy_steps",
+    "physics_dt": 0.005,
+    "decimation": 4,
+    "episode_s": 20.0,
+    "dataset_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8",
+    "parent": "walled10_revision1",
+    "obstacles": {
+      "layout": "protected_workspace_ring_v1",
+      "cylinder_count": 3,
+      "cylinder_radius_m": 0.15,
+      "cylinder_height_m": 1.8,
+      "wall_size_m": [
+        0.2,
+        8.0,
+        3.0
+      ],
+      "robot_link_margin_m": 0.5,
+      "box_support_margin_m": 0.1,
+      "ring_margin_m": 0.35,
+      "ring_min_radius_m": 1.35,
+      "ring_jitter_m": [
+        0.0,
+        0.35
+      ],
+      "wall_radial_gap_m": [
+        0.45,
+        0.8
+      ],
+      "physics": "six_locked_axes_dynamic_tensor_teleport_zero_velocity",
+      "resample": "every_episode_reset",
+      "collision": true,
+      "depth_occlusion": true
+    }
+  },
+  "shapes": {
+    "proprio": [
+      16,
+      558
+    ],
+    "perception": [
+      16,
+      4,
+      27,
+      48
+    ],
+    "critic_state": [
+      16,
+      123
+    ],
+    "box_pose_target": [
+      16,
+      9
+    ],
+    "amp": [
+      16,
+      600
+    ]
+  },
+  "geometry": {
+    "box_sizes": [
+      [
+        0.24000000953674316,
+        0.27000001072883606,
+        0.32499998807907104
+      ],
+      [
+        0.33000001311302185,
+        0.30000001192092896,
+        0.32499998807907104
+      ],
+      [
+        0.21000000834465027,
+        0.21000000834465027,
+        0.25
+      ],
+      [
+        0.39000001549720764,
+        0.33000001311302185,
+        0.15000000596046448
+      ],
+      [
+        0.39000001549720764,
+        0.39000001549720764,
+        0.22499999403953552
+      ],
+      [
+        0.24000000953674316,
+        0.21000000834465027,
+        0.17499999701976776
+      ],
+      [
+        0.30000001192092896,
+        0.36000001430511475,
+        0.20000000298023224
+      ],
+      [
+        0.27000001072883606,
+        0.27000001072883606,
+        0.22499999403953552
+      ],
+      [
+        0.21000000834465027,
+        0.21000000834465027,
+        0.3499999940395355
+      ],
+      [
+        0.33000001311302185,
+        0.30000001192092896,
+        0.17499999701976776
+      ],
+      [
+        0.21000000834465027,
+        0.24000000953674316,
+        0.17499999701976776
+      ],
+      [
+        0.39000001549720764,
+        0.33000001311302185,
+        0.2750000059604645
+      ],
+      [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.22499999403953552
+      ],
+      [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.32499998807907104
+      ],
+      [
+        0.39000001549720764,
+        0.36000001430511475,
+        0.2750000059604645
+      ],
+      [
+        0.36000001430511475,
+        0.21000000834465027,
+        0.20000000298023224
+      ]
+    ],
+    "density": [
+      96.3375015258789,
+      81.42771911621094,
+      63.42216873168945,
+      48.646400451660156,
+      66.47042083740234,
+      84.85169982910156,
+      27.942739486694336,
+      16.773927688598633,
+      82.80774688720703,
+      40.80821228027344,
+      95.17700958251953,
+      63.05168151855469,
+      37.6137809753418,
+      73.63961029052734,
+      23.026887893676758,
+      39.5027961730957
+    ],
+    "per_env_depth_error_m": [
+      2.384185791015625e-07,
+      2.384185791015625e-07,
+      5.960464477539063e-08,
+      2.384185791015625e-07,
+      2.384185791015625e-07,
+      2.384185791015625e-07,
+      2.384185791015625e-07,
+      3.5762786865234375e-07,
+      2.384185791015625e-07,
+      2.384185791015625e-07,
+      2.384185791015625e-07,
+      5.960464477539063e-08,
+      5.960464477539063e-08,
+      2.384185791015625e-07,
+      2.384185791015625e-07,
+      4.76837158203125e-07
+    ]
+  },
+  "obstacles": {
+    "robot_collision_count": 28,
+    "max_collision_radius_m": 0.34015077369978713,
+    "depth_changed_pixels": {
+      "cylinder0": [
+        150,
+        134,
+        50,
+        168,
+        110,
+        132,
+        145,
+        133,
+        139,
+        187,
+        163,
+        29,
+        12,
+        162,
+        145,
+        158
+      ],
+      "wall": [
+        651,
+        593,
+        436,
+        743,
+        480,
+        570,
+        640,
+        591,
+        619,
+        823,
+        739,
+        398,
+        99,
+        694,
+        653,
+        733
+      ]
+    },
+    "reset_clearance": true,
+    "physical_locked_colliders": true
+  },
+  "losses": [
+    {
+      "value_function": 1.8536372005939485,
+      "surrogate": -0.025022693350911143,
+      "entropy": 41.1514217376709,
+      "amp_loss": 2388.893505859375,
+      "amp_expert_loss": 929.858087348938,
+      "amp_policy_loss": 1114.8821105957031,
+      "policy_smooth": 0.08942310921847821,
+      "value_smooth": 0.007361415712512098,
+      "ppo_learning_rate": 1e-05,
+      "amp_valid_samples": 368.0
+    },
+    {
+      "value_function": 1.441334491968155,
+      "surrogate": -0.03324145395308733,
+      "entropy": 41.15919876098633,
+      "amp_loss": 948.3614257812501,
+      "amp_expert_loss": 177.77073082923891,
+      "amp_policy_loss": 527.3265762329102,
+      "policy_smooth": 0.07963512800633908,
+      "value_smooth": 0.00727525781840086,
+      "ppo_learning_rate": 2.2500000000000008e-05,
+      "amp_valid_samples": 368.0
+    },
+    {
+      "value_function": 1.1484259754419328,
+      "surrogate": -0.043179490417242054,
+      "entropy": 41.167635917663574,
+      "amp_loss": 533.4899887084961,
+      "amp_expert_loss": 94.61748142242432,
+      "amp_policy_loss": 269.38366775512696,
+      "policy_smooth": 0.09444601126015187,
+      "value_smooth": 0.014464067667722702,
+      "ppo_learning_rate": 1.5000000000000005e-05,
+      "amp_valid_samples": 368.0
+    }
+  ],
+  "reset_counts": [
+    13,
+    57,
+    14,
+    11
+  ],
+  "old_task_defaults_unchanged": true,
+  "partial_reset": true,
+  "torque_limits": true,
+  "actor_export_privilege_boundary": true,
+  "resume": true,
+  "convergence_evaluated": false
+}

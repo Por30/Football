@@ -1,0 +1,108 @@
+         10655490 function calls (9569156 primitive calls) in 53.598 seconds
+
+   Ordered by: cumulative time
+   List reduced from 733 to 100 due to restriction <100>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    3.834    3.834   41.512   41.512 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py:71(update)
+    15840    0.039    0.000   18.153    0.001 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/autograd/graph.py:815(_engine_run_backward)
+    15840   18.104    0.001   18.104    0.001 {method 'run_backward' of 'torch._C._EngineBase' objects}
+     7920    0.028    0.000   17.430    0.002 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/_tensor.py:592(backward)
+     7920    0.040    0.000   17.400    0.002 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/autograd/__init__.py:243(backward)
+      100    0.002    0.000   11.835    0.118 /home/cao/IsaacLab/source/isaaclab_rl/isaaclab_rl/rsl_rl/vecenv_wrapper.py:152(step)
+      100    0.000    0.000   11.826    0.118 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/gymnasium/wrappers/common.py:389(step)
+      100    0.000    0.000   11.826    0.118 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/gymnasium/core.py:323(step)
+      100    0.009    0.000   11.825    0.118 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:313(step)
+      100    0.004    0.000   11.809    0.118 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox.py:124(step)
+      100    0.010    0.000   11.803    0.118 /home/cao/IsaacLab/source/isaaclab/isaaclab/envs/manager_based_rl_env.py:154(step)
+621368/95541    0.304    0.000    8.206    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/module.py:1747(_wrapped_call_impl)
+621368/95541    0.447    0.000    8.151    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/module.py:1755(_call_impl)
+      400    0.004    0.000    6.468    0.016 /home/cao/IsaacLab/source/isaaclab/isaaclab/sim/simulation_context.py:507(step)
+      400    0.001    0.000    6.450    0.016 /home/cao/isaacsim/exts/isaacsim.core.api/isaacsim/core/api/simulation_context/simulation_context.py:625(step)
+      400    6.416    0.016    6.434    0.016 /home/cao/isaacsim/exts/isaacsim.core.api/isaacsim/core/api/physics_context/physics_context.py:559(_step)
+     8020    0.011    0.000    4.953    0.001 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py:72(act)
+    55740    0.149    0.000    4.801    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/container.py:238(forward)
+     8020    0.058    0.000    4.218    0.001 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py:68(update_distribution)
+    15940    0.058    0.000    4.067    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py:11(_features)
+     7920    0.263    0.000    3.789    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/amp.py:60(compute_loss)
+    15940    0.033    0.000    3.642    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/modules.py:71(forward)
+   230984    0.217    0.000    3.572    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/linear.py:124(forward)
+   230984    3.253    0.000    3.253    0.000 {built-in method torch._C._nn.linear}
+     7920    0.260    0.000    2.944    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_wall10.py:61(sample_expert_amp_obs)
+      100    0.022    0.000    2.929    0.029 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:337(_reset_idx)
+    31881    0.078    0.000    2.792    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/rsl_rl/networks/mlp.py:106(forward)
+     7920    0.015    0.000    2.377    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py:76(act_inference)
+     7920    0.115    0.000    2.140    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/amp.py:47(compute_grad_pen)
+     7920    1.236    0.000    1.903    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_wall10.py:48(windows)
+   135141    0.125    0.000    1.741    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/tensordict/base.py:543(__getitem__)
+    23860    0.046    0.000    1.737    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py:24(forward)
+    47820    0.059    0.000    1.737    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/conv.py:553(forward)
+    47820    0.042    0.000    1.653    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/conv.py:536(_conv_forward)
+    47820    1.611    0.000    1.611    0.000 {built-in method torch.conv2d}
+      600    0.614    0.001    1.583    0.003 /home/cao/IsaacLab/source/isaaclab/isaaclab/sensors/sensor_base.py:353(_update_outdated_buffers)
+      400    0.001    0.000    1.544    0.004 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py:64(data)
+    15941    0.023    0.000    1.540    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py:25(evaluate)
+      300    0.002    0.000    1.518    0.005 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:247(depth_image)
+      100    0.007    0.000    1.410    0.014 /home/cao/IsaacLab/source/isaaclab/isaaclab/envs/manager_based_rl_env.py:349(_reset_idx)
+      300    0.001    0.000    1.307    0.004 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:334(terminal_frame)
+      100    0.004    0.000    1.274    0.013 /home/cao/IsaacLab/source/isaaclab/isaaclab/managers/event_manager.py:150(apply)
+      100    0.051    0.001    1.270    0.013 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:157(reset_scene)
+    15940    0.117    0.000    1.222    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/tensordict/_td.py:1594(_index_tensordict)
+     7920    0.066    0.000    1.161    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/autograd/__init__.py:364(grad)
+      100    0.498    0.005    1.077    0.011 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_physhsi.py:37(initialize_reference)
+   159403    0.070    0.000    1.046    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/activation.py:560(forward)
+   159403    0.078    0.000    0.976    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/functional.py:1796(elu)
+      100    0.026    0.000    0.973    0.010 /home/cao/IsaacLab/source/isaaclab/isaaclab/managers/reward_manager.py:128(compute)
+     8020    0.024    0.000    0.929    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/rsl_rl/modules/actor_critic.py:143(get_actions_log_prob)
+      300    0.001    0.000    0.928    0.003 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:283(task_reward)
+      300    0.040    0.000    0.927    0.003 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:251(reward_terms)
+      200    0.084    0.000    0.885    0.004 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:105(_update_buffers_impl)
+   159403    0.879    0.000    0.879    0.000 {built-in method torch._C._nn.elu}
+     8020    0.037    0.000    0.873    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/distributions/normal.py:54(__init__)
+      800    0.009    0.000    0.851    0.001 /home/cao/IsaacLab/source/isaaclab/isaaclab/managers/observation_manager.py:339(compute_group)
+     8020    0.347    0.000    0.839    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/distributions/normal.py:81(log_prob)
+      700    0.002    0.000    0.769    0.001 /home/cao/IsaacLab/source/isaaclab/isaaclab/assets/articulation/articulation_data.py:831(root_link_lin_vel_w)
+     1200    0.019    0.000    0.767    0.001 /home/cao/IsaacLab/source/isaaclab/isaaclab/assets/articulation/articulation_data.py:462(root_link_vel_w)
+      100    0.000    0.000    0.747    0.007 /home/cao/IsaacLab/source/isaaclab/isaaclab/assets/articulation/articulation_data.py:960(body_com_pos_b)
+      100    0.003    0.000    0.746    0.007 /home/cao/IsaacLab/source/isaaclab/isaaclab/assets/articulation/articulation_data.py:687(body_com_pose_b)
+      100    0.001    0.000    0.729    0.007 /home/cao/IsaacLab/source/isaaclab/isaaclab/managers/observation_manager.py:312(compute)
+     8020    0.079    0.000    0.723    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/distributions/normal.py:71(sample)
+     8020    0.442    0.000    0.721    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/distributions/distribution.py:42(__init__)
+      100    0.682    0.007    0.682    0.007 /home/cao/isaacsim/extsPhysics/omni.physics.tensors/omni/physics/tensors/impl/api.py:2123(get_coms)
+     8300    0.672    0.000    0.674    0.000 /home/cao/isaacsim/extsPhysics/omni.physics.tensors/omni/physics/tensors/impl/api.py:2834(get_transforms)
+    79700    0.605    0.000    0.605    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/tensordict/utils.py:515(_get_item)
+     8020    0.576    0.000    0.576    0.000 {built-in method torch.normal}
+    48300    0.033    0.000    0.440    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/_tensor.py:33(wrapped)
+    72081    0.424    0.000    0.424    0.000 {method 'mean' of 'torch._C.TensorBase' objects}
+    18770    0.413    0.000    0.413    0.000 {built-in method torch.isfinite}
+     7480    0.231    0.000    0.413    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_physhsi.py:42(interpolate)
+    50116    0.398    0.000    0.398    0.000 {method 'sum' of 'torch._C.TensorBase' objects}
+      200    0.010    0.000    0.350    0.002 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py:155(_update_buffers_impl)
+    47720    0.023    0.000    0.344    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/activation.py:132(forward)
+     7920    0.331    0.000    0.331    0.000 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py:94(<listcomp>)
+    47720    0.024    0.000    0.321    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/functional.py:1693(relu)
+     8020    0.320    0.000    0.320    0.000 {built-in method torch.multinomial}
+      400    0.002    0.000    0.313    0.001 /home/cao/IsaacLab/source/isaaclab/isaaclab/scene/interactive_scene.py:463(write_data_to_sim)
+      400    0.002    0.000    0.311    0.001 /home/cao/IsaacLab/source/isaaclab/isaaclab/assets/articulation/articulation.py:184(write_data_to_sim)
+    39900    0.294    0.000    0.294    0.000 {method 'pow' of 'torch._C.TensorBase' objects}
+    47720    0.291    0.000    0.291    0.000 {built-in method torch.relu}
+     8020    0.189    0.000    0.290    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/distributions/distribution.py:275(_validate_sample)
+    15940    0.097    0.000    0.286    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/tensordict/utils.py:1802(_getitem_batch_size)
+      400    0.105    0.000    0.278    0.001 /home/cao/IsaacLab/source/isaaclab/isaaclab/assets/articulation/articulation.py:1838(_apply_actuator_model)
+    55940    0.278    0.000    0.278    0.000 {method 'square' of 'torch._C.TensorBase' objects}
+    20240    0.248    0.000    0.248    0.000 {built-in method torch.cat}
+    15840    0.124    0.000    0.246    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/autograd/__init__.py:89(_make_grads)
+      200    0.003    0.000    0.240    0.001 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py:158(<listcomp>)
+   119201    0.057    0.000    0.238    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/tensordict/base.py:6566(_get_tuple_maybe_non_tensor)
+    15940    0.025    0.000    0.223    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/pooling.py:212(forward)
+      100    0.015    0.000    0.210    0.002 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox.py:36(box_pose_target)
+   693049    0.207    0.000    0.207    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/modules/module.py:1927(__getattr__)
+    15940    0.017    0.000    0.198    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/_jit_internal.py:612(fn)
+      300    0.055    0.000    0.196    0.001 /home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py:238(amp_frame)
+    15940    0.013    0.000    0.181    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/nn/functional.py:807(_max_pool2d)
+    15840    0.122    0.000    0.176    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/functional.py:80(broadcast_shapes)
+      100    0.001    0.000    0.173    0.002 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/rsl_rl/algorithms/ppo.py:129(act)
+    15940    0.166    0.000    0.166    0.000 {built-in method torch.max_pool2d}
+     7920    0.013    0.000    0.164    0.000 /home/cao/ENTER/envs/ball/lib/python3.10/site-packages/rsl_rl/modules/actor_critic.py:98(entropy)
+
+

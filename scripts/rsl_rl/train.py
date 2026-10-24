@@ -108,6 +108,7 @@ import perceptual_ball.tasks  # noqa: F401
 from perceptual_ball.rsl_rl_extensions import BallRegressionOnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.carrybox import CarryBoxOnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.carrybox_wall5 import CarryBoxWall5OnPolicyRunner
+from perceptual_ball.rsl_rl_extensions.carrybox_wall10 import CarryBoxWall10OnPolicyRunner
 
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
@@ -203,6 +204,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         runner = CarryBoxOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     elif agent_cfg.class_name == "CarryBoxWall5OnPolicyRunner":
         runner = CarryBoxWall5OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
+    elif agent_cfg.class_name == "CarryBoxWall10OnPolicyRunner":
+        runner = CarryBoxWall10OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     elif agent_cfg.class_name == "BallRegressionOnPolicyRunner":
         runner = BallRegressionOnPolicyRunner(env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device)
     else:

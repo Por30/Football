@@ -1,0 +1,27 @@
+{
+  "affected_call_path": [
+    "wall10 Gym -> train/play -> independent config/MDP/runner -> PPO+AMP"
+  ],
+  "critical_interfaces": [
+    "PPO100,5x4,1e-3 adaptive; shared Adam AC+AMP; no Normalizer; smooth policy1/9 value1/90; AMP60x10; explicit PD and motor effort limits"
+  ],
+  "invariants": [
+    "actor depth/proprio only, critic123 independent and goal removed",
+    "PhysHSI torque/Kp penalty, source reset and randomized PD"
+  ],
+  "smallest_change_locus": [
+    "four new wall10 modules and additive registration/dispatch"
+  ],
+  "mandatory_safeguards": [
+    "actor和导出不得读取特权状态",
+    "不改既有任务的配置与checkpoint身份",
+    "partial reset历史和terminal AMP保持正确",
+    "有限值、物理力矩限幅、失败终止保持",
+    "不操作现有正式训练"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall10_20261023/validate_cpu.sh",
+    "bash docs/carrybox/wall10_20261023/validate_sim.sh"
+  ],
+  "blockers": []
+}

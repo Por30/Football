@@ -1,0 +1,448 @@
+{
+  "status": "PASS",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled10/2026-10-24_00-12-57_wall10_24step_fresh_20261024_001253/model_10000.pt",
+  "checkpoint_sha256": "d989c5301ba66f4178af9798ce62c95a727334ac07d5976341b328e31ddd1842",
+  "checkpoint_iteration": 10000,
+  "environment_contract": {
+    "variant": "walled10",
+    "migration_revision": 1,
+    "source": "PhysHSI_G1_carrybox",
+    "task": "approach_lift_stationary_hold_no_goal_no_putdown",
+    "hold_seconds": 2.0,
+    "actor": "proprio93x6_depth4x27x48",
+    "critic": "proprio93_ends15_lin3_box12",
+    "depth": {
+      "schema": 1,
+      "output": "optical_z_metres",
+      "units": "metres",
+      "normalization": "none",
+      "clip_range_m": [
+        0.1,
+        3.0
+      ],
+      "invalid_depth_m": 3.0,
+      "input_range": [
+        0.1,
+        3.0
+      ],
+      "missing_value": 3.0,
+      "shape": [
+        4,
+        27,
+        48
+      ],
+      "history_order": "oldest_to_newest",
+      "geometry": "robot_ground_wall_support_variable_box"
+    },
+    "actor_proprio_noise": true,
+    "control": "explicit_PD_motor_strength_effort_offset_delay0to20ms_action100_no_target_clip",
+    "reset": "bernoulli80_RSI_conditional_2over3_1over6_1over6_ground_correction5mm",
+    "reset_history": "repeat_first_current_frame",
+    "observations": "no_goal_no_phase_no_success_flag_actor_no_privileged",
+    "box_size_scale": [
+      [
+        0.7,
+        1.3
+      ],
+      [
+        0.7,
+        1.3
+      ],
+      [
+        0.6,
+        1.4
+      ]
+    ],
+    "box_density": [
+      10.0,
+      100.0
+    ],
+    "rigid_body_randomization": {
+      "link_mass": [
+        0.8,
+        1.2
+      ],
+      "recompute_inertia": true,
+      "torso_com_xyz": [
+        -0.1,
+        0.1
+      ],
+      "robot_friction": [
+        0.1,
+        1.5
+      ],
+      "robot_restitution": [
+        0.0,
+        1.0
+      ],
+      "kp_kd_motor_strength": [
+        0.9,
+        1.1
+      ],
+      "effort_offset_limit_fraction": [
+        -0.05,
+        0.05
+      ]
+    },
+    "support_size": [
+      0.4,
+      0.4,
+      0.02
+    ],
+    "ground_friction": 0.9,
+    "success_thresholds": {
+      "box_bottom_min": 0.1,
+      "box_center_min": 0.7,
+      "bilateral_force_min": 1.0,
+      "box_upright_min": 0.8,
+      "robot_upright_min": 0.95,
+      "head_min": 1.05,
+      "root_xy_speed_max": 0.15,
+      "root_yaw_speed_max": 0.3,
+      "box_speed_max": 0.15,
+      "box_xy_drift_max": 0.35
+    },
+    "box_regular_spawn": "front_0.7to2m_yaw45deg_ground",
+    "rewards": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "torque_limits": -0.03,
+      "walk_task": 1.0,
+      "carryup_task": 1.0,
+      "standup_task": 0.2
+    },
+    "torque_penalty": "applied_div_nominal_kp_squared",
+    "disturbance": "local_torso_uniform_xyz50N_every8_policy_steps",
+    "physics_dt": 0.005,
+    "decimation": 4,
+    "episode_s": 20.0,
+    "dataset_sha256": "59ade1b9cbff54e5f62c34028923428efa7b76a21f1866aeab2954799f8d3ee8"
+  },
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/carrybox_wall10.py": "766dbfdbe0dd723eb1f87ea4418c7129c4e5d5ac0ccc14812e8c20728f29e506",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py": "8e88c20dcc26f80733d76d8e824019c128da9182954c5faff984d55196cf0bb5",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall10_env_cfg.py": "613052334f3ed3db49d18f5ab5eaf4fee65a8043a878b46b436e388e6e624ddb",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py": "4bc1e3743031af2a9e407da78fa1e237080dcc3b0f6967aaa9316606429c6791"
+  },
+  "strict_load": true,
+  "weights_unchanged": true,
+  "num_envs": 4,
+  "seed": 42,
+  "policy_mode": "deterministic_mean",
+  "steps": 1000,
+  "control_hz": 50,
+  "fps": 25,
+  "frames": 500,
+  "duration_seconds": 20,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "video": "/home/cao/perceptual_ball/outputs/carrybox/wall10_play4_20261024_1130/wall10_model_10000_4robots_20s.mp4",
+  "initial_skills": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "initial_kinds": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "reset_sampling": "unmodified_wall10_random_hybrid",
+  "initial_states": {
+    "robot": [
+      [
+        5.0,
+        -5.0,
+        0.7990958094596863
+      ],
+      [
+        5.0,
+        5.0,
+        0.7733407616615295
+      ],
+      [
+        -5.0,
+        -5.0,
+        0.7858143448829651
+      ],
+      [
+        -5.0,
+        5.0,
+        0.7496103048324585
+      ]
+    ],
+    "box": [
+      [
+        5.836278915405273,
+        -4.985925197601318,
+        0.16749998927116394
+      ],
+      [
+        6.846077919006348,
+        5.019309043884277,
+        0.16749998927116394
+      ],
+      [
+        -4.046281814575195,
+        -4.511559963226318,
+        0.12999999523162842
+      ],
+      [
+        -4.1612043380737305,
+        4.965515613555908,
+        0.08000000566244125
+      ]
+    ],
+    "from_ground": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "box_bottom_clearance": [
+      0.004999995231628418,
+      0.004999995231628418,
+      0.004999995231628418,
+      0.005000002682209015
+    ],
+    "box_sizes": [
+      [
+        0.24000000953674316,
+        0.27000001072883606,
+        0.32499998807907104
+      ],
+      [
+        0.33000001311302185,
+        0.30000001192092896,
+        0.32499998807907104
+      ],
+      [
+        0.21000000834465027,
+        0.21000000834465027,
+        0.25
+      ],
+      [
+        0.39000001549720764,
+        0.33000001311302185,
+        0.15000000596046448
+      ]
+    ]
+  },
+  "episodes": [
+    {
+      "env_id": 2,
+      "end_step": 64,
+      "skill": 0,
+      "kind": 1,
+      "steps": 64,
+      "tipped": true,
+      "causes": {
+        "time_out": false,
+        "invalid": false,
+        "tipped": true,
+        "fell_pelvis": false,
+        "fell_head": false,
+        "fell_hip": false,
+        "box_speed": false
+      },
+      "fell": false,
+      "fell_pelvis": false,
+      "fell_head": false,
+      "fell_hip": false,
+      "box_speed": false,
+      "invalid": false,
+      "timeout": false,
+      "roll": -0.5587327480316162,
+      "pitch": -0.23204755783081055,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 5.662441253662109e-07,
+      "hold_steps": 0
+    },
+    {
+      "env_id": 0,
+      "end_step": 1000,
+      "skill": 0,
+      "kind": 1,
+      "steps": 1000,
+      "tipped": false,
+      "causes": {
+        "time_out": true,
+        "invalid": false,
+        "tipped": false,
+        "fell_pelvis": false,
+        "fell_head": false,
+        "fell_hip": false,
+        "box_speed": false
+      },
+      "fell": false,
+      "fell_pelvis": false,
+      "fell_head": false,
+      "fell_hip": false,
+      "box_speed": false,
+      "invalid": false,
+      "timeout": true,
+      "roll": -0.0023453235626220703,
+      "pitch": -0.18036723136901855,
+      "success": true,
+      "from_ground": true,
+      "box_bottom_clearance": 0.6564273238182068,
+      "hold_steps": 56
+    },
+    {
+      "env_id": 1,
+      "end_step": 1000,
+      "skill": 0,
+      "kind": 1,
+      "steps": 1000,
+      "tipped": false,
+      "causes": {
+        "time_out": true,
+        "invalid": false,
+        "tipped": false,
+        "fell_pelvis": false,
+        "fell_head": false,
+        "fell_hip": false,
+        "box_speed": false
+      },
+      "fell": false,
+      "fell_pelvis": false,
+      "fell_head": false,
+      "fell_hip": false,
+      "box_speed": false,
+      "invalid": false,
+      "timeout": true,
+      "roll": -0.01558685302734375,
+      "pitch": -0.18129968643188477,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.5586645603179932,
+      "hold_steps": 0
+    },
+    {
+      "env_id": 3,
+      "end_step": 1000,
+      "skill": 0,
+      "kind": 1,
+      "steps": 1000,
+      "tipped": false,
+      "causes": {
+        "time_out": true,
+        "invalid": false,
+        "tipped": false,
+        "fell_pelvis": false,
+        "fell_head": false,
+        "fell_hip": false,
+        "box_speed": false
+      },
+      "fell": false,
+      "fell_pelvis": false,
+      "fell_head": false,
+      "fell_hip": false,
+      "box_speed": false,
+      "invalid": false,
+      "timeout": true,
+      "roll": 0.002704143524169922,
+      "pitch": -0.10021448135375977,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.6033456325531006,
+      "hold_steps": 0
+    }
+  ],
+  "reset_counts": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "final_censored": [
+    {
+      "env_id": 0,
+      "kind": 0,
+      "skill": 0,
+      "steps": 0,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.004999995231628418,
+      "hold_steps": 0
+    },
+    {
+      "env_id": 1,
+      "kind": 1,
+      "skill": 0,
+      "steps": 0,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.004999995231628418,
+      "hold_steps": 0
+    },
+    {
+      "env_id": 2,
+      "kind": 1,
+      "skill": 0,
+      "steps": 936,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.9573520421981812,
+      "hold_steps": 0
+    },
+    {
+      "env_id": 3,
+      "kind": 1,
+      "skill": 0,
+      "steps": 0,
+      "success": false,
+      "from_ground": true,
+      "box_bottom_clearance": 0.005000002682209015,
+      "hold_steps": 0
+    }
+  ],
+  "disturbance": "local_torso_uniform_xyz50N_every8_policy_steps",
+  "env_origins": [
+    [
+      5.0,
+      -5.0,
+      0.0
+    ],
+    [
+      5.0,
+      5.0,
+      0.0
+    ],
+    [
+      -5.0,
+      -5.0,
+      0.0
+    ],
+    [
+      -5.0,
+      5.0,
+      0.0
+    ]
+  ],
+  "spectator_cameras": [
+    "/World/RecordingCamera_0",
+    "/World/RecordingCamera_1",
+    "/World/RecordingCamera_2",
+    "/World/RecordingCamera_3"
+  ],
+  "camera_base_height_m": 5.8,
+  "previous_camera_base_height_m": 5.8,
+  "spectator_focal_length_mm": 20.0,
+  "spectator_direct_lighting": true,
+  "synchronized_physics_steps": true,
+  "rendering_advances_physics": false,
+  "video_note": "2x2 synchronized views; unmodified random source selection; current episode kind labeled; all resets retained; actor depth unchanged",
+  "actor_depth_units": "metres",
+  "depth_display_mapping": "uint8(255*(1-depth_m/3))_display_only",
+  "training_process_modified": false
+}

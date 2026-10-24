@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-24T23:30:15.425180+09:00",
+  "pid": 2723259,
+  "proc_start_ticks": "352995644",
+  "process": "    PID     ELAPSED COMMAND\n2723259    10:55:30 /home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-CarryBox-Walled11-v0 --num_envs 4096 --device cuda:0 --headless --seed 42 agent.num_steps_per_env=24 --num_envs 4096 --max_iterations 20000 --seed 42 --run_name wall11_24step_fresh_20261024_123445\n",
+  "gpu": "13461 MiB, 10609 MiB, 86 %\n",
+  "last_iteration": "9553",
+  "same_training_process_continues": true
+}

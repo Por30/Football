@@ -1,0 +1,4792 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-23T23:52:38.118403+09:00",
+  "source_default": {
+    "env": {
+      "amp": {
+        "amp_coef": 0.25,
+        "num_obs": 600,
+        "num_one_step_obs": 60,
+        "ratio_random_range": [
+          0.95,
+          1.05
+        ],
+        "use_normalizer": false,
+        "window_length": 10
+      },
+      "asset": {
+        "angular_damping": 0.01,
+        "ankle_joints": [
+          "left_ankle_pitch_joint",
+          "right_ankle_pitch_joint",
+          "left_wrist_roll_joint",
+          "right_wrist_roll_joint"
+        ],
+        "armature": 0.01,
+        "box": {
+          "ang_noise_scale": 0.08726646259971647,
+          "base_size": [
+            0.3,
+            0.3,
+            0.25
+          ],
+          "box_termination": false,
+          "density_default": 50.0,
+          "density_range": [
+            10.0,
+            100.0
+          ],
+          "far_pos_offset": 0.2,
+          "friction_range": [
+            0.5,
+            1.2
+          ],
+          "hybrid_init_prob": 0.8,
+          "min_tar_dist": 0.5,
+          "platform_friction_range": [
+            0.5,
+            1.2
+          ],
+          "pos_noise_scale": 0.05,
+          "random_density": true,
+          "random_props": false,
+          "random_size": true,
+          "reset_mode": "hybrid",
+          "restitution_range": [
+            0.0,
+            0.2
+          ],
+          "scale_range_x": [
+            0.7,
+            1.3
+          ],
+          "scale_range_y": [
+            0.7,
+            1.3
+          ],
+          "scale_range_z": [
+            0.6,
+            1.4
+          ],
+          "scale_sample_interval": 0.1,
+          "skill": [
+            "loco",
+            "pickUp",
+            "carryWith",
+            "putDown"
+          ],
+          "skill_init_prob": [
+            0.8,
+            0.2,
+            0.2,
+            0.0
+          ],
+          "thresh_tag": [
+            0.7,
+            2.0
+          ],
+          "use_random": true
+        },
+        "camera": {
+          "facing_angle": [
+            0.3420201433256688,
+            0.6427876096865394
+          ],
+          "hfov_rad": [
+            1.4835298641951802,
+            1.5707963267948966
+          ],
+          "vfov_rad": [
+            0.9599310885968813,
+            1.0471975511965976
+          ]
+        },
+        "camera_name": "d455_link",
+        "chair": {},
+        "collapse_fixed_joints": false,
+        "default_dof_drive_mode": 3,
+        "density": 0.001,
+        "disable_gravity": false,
+        "file": "{LEGGED_GYM_ROOT_DIR}/resources/robots/g1/urdf/g1_29dof.urdf",
+        "fix_base_link": false,
+        "flip_visual_attachments": false,
+        "foot_name": "ankle_pitch_link",
+        "hand_colli_name": "rubber_hand",
+        "hand_pos_name": "palm_link",
+        "head_name": "mid360_link",
+        "hip_yaw_names": [
+          "left_hip_yaw_link",
+          "right_hip_yaw_link"
+        ],
+        "imu_link": "imu_link",
+        "keyframe_name": "keyframe",
+        "knee_joints": [
+          "left_knee_joint",
+          "right_knee_joint"
+        ],
+        "knee_names": [
+          "left_knee_link",
+          "right_knee_link"
+        ],
+        "left_foot_name": "left_foot",
+        "linear_damping": 0.01,
+        "max_angular_velocity": 1000.0,
+        "max_linear_velocity": 1000.0,
+        "name": "g1",
+        "penalize_contacts_on": [
+          "hip",
+          "knee",
+          "torso",
+          "shoulder",
+          "pelvis"
+        ],
+        "replace_cylinder_with_capsule": true,
+        "right_foot_name": "right_foot",
+        "self_collisions": 0,
+        "terminate_after_contacts_on": [],
+        "thickness": 0.01,
+        "upper_body_link": "torso_link",
+        "waist_joints": [
+          "waist_yaw_joint"
+        ]
+      },
+      "commands": {
+        "curriculum": false,
+        "heading_command": true,
+        "heading_to_ang_vel": true,
+        "max_curriculum": 1.0,
+        "num_commands": 4,
+        "ranges": {
+          "ang_vel_yaw": [
+            -0.5,
+            0.5
+          ],
+          "heading": [
+            -3.14,
+            3.14
+          ],
+          "lin_vel_x": [
+            0.0,
+            0.8
+          ],
+          "lin_vel_y": [
+            -0.0,
+            0.0
+          ]
+        },
+        "resampling_time": 10.0
+      },
+      "control": {
+        "action_scale": 0.25,
+        "control_type": "P",
+        "curriculum_joints": [
+          "waist_yaw_joint",
+          "left_shoulder_roll_joint",
+          "left_shoulder_yaw_joint",
+          "left_shoulder_pitch_joint",
+          "left_elbow_joint",
+          "left_wrist_roll_joint",
+          "right_shoulder_roll_joint",
+          "right_shoulder_yaw_joint",
+          "right_shoulder_pitch_joint",
+          "right_elbow_joint",
+          "right_wrist_roll_joint"
+        ],
+        "damping": {
+          "hip_yaw": 2,
+          "hip_roll": 2,
+          "hip_pitch": 2,
+          "knee": 4,
+          "ankle": 1,
+          "waist_yaw": 4,
+          "waist_roll": 4,
+          "waist_pitch": 4,
+          "shoulder": 3,
+          "elbow": 1,
+          "wrist": 0.5
+        },
+        "decimation": 4,
+        "hip_reduction": 1.0,
+        "left_arm_joints": [
+          "left_shoulder_pitch_joint",
+          "left_shoulder_roll_joint",
+          "left_shoulder_yaw_joint",
+          "left_elbow_joint",
+          "left_wrist_roll_joint"
+        ],
+        "left_hip_joints": [
+          "left_hip_yaw_joint",
+          "left_hip_roll_joint",
+          "left_hip_pitch_joint"
+        ],
+        "left_leg_joints": [
+          "left_hip_yaw_joint",
+          "left_hip_roll_joint",
+          "left_hip_pitch_joint",
+          "left_knee_joint",
+          "left_ankle_pitch_joint",
+          "left_ankle_roll_joint"
+        ],
+        "right_arm_joints": [
+          "right_shoulder_pitch_joint",
+          "right_shoulder_roll_joint",
+          "right_shoulder_yaw_joint",
+          "right_elbow_joint",
+          "right_wrist_roll_joint"
+        ],
+        "right_hip_joints": [
+          "right_hip_yaw_joint",
+          "right_hip_roll_joint",
+          "right_hip_pitch_joint"
+        ],
+        "right_leg_joints": [
+          "right_hip_yaw_joint",
+          "right_hip_roll_joint",
+          "right_hip_pitch_joint",
+          "right_knee_joint",
+          "right_ankle_pitch_joint",
+          "right_ankle_roll_joint"
+        ],
+        "stiffness": {
+          "hip_yaw": 150,
+          "hip_roll": 150,
+          "hip_pitch": 150,
+          "knee": 300,
+          "ankle": 40,
+          "waist_yaw": 300,
+          "waist_roll": 300,
+          "waist_pitch": 300,
+          "shoulder": 200,
+          "elbow": 100,
+          "wrist": 20
+        },
+        "upper_body_link": "pelvis"
+      },
+      "dataset": {
+        "frame_rate": 60,
+        "joint_mapping_file": "{LEGGED_GYM_ROOT_DIR}/resources/config/joint_id.txt",
+        "min_time": 0.1,
+        "motion_file": "{LEGGED_GYM_ROOT_DIR}/resources/config/carrybox.yaml"
+      },
+      "domain_rand": {
+        "actuation_offset_range": [
+          -0.05,
+          0.05
+        ],
+        "com_displacement_range": [
+          -0.1,
+          0.1
+        ],
+        "delay": true,
+        "disturbance": true,
+        "disturbance_interval": 8,
+        "disturbance_range": [
+          -50,
+          50
+        ],
+        "friction_range": [
+          0.1,
+          1.5
+        ],
+        "initial_joint_pos_offset": [
+          -0.1,
+          0.1
+        ],
+        "initial_joint_pos_scale": [
+          1.0,
+          1.0
+        ],
+        "kd_range": [
+          0.9,
+          1.1
+        ],
+        "kp_range": [
+          0.9,
+          1.1
+        ],
+        "link_mass_range": [
+          0.8,
+          1.2
+        ],
+        "max_delay_timesteps": 5,
+        "max_push_vel_xy": 0.1,
+        "motor_strength_range": [
+          0.9,
+          1.1
+        ],
+        "payload_mass_range": [
+          -2,
+          5
+        ],
+        "push_interval_s": 10,
+        "push_robots": false,
+        "randomize_actuation_offset": true,
+        "randomize_com_displacement": true,
+        "randomize_friction": true,
+        "randomize_initial_joint_pos": true,
+        "randomize_kd": true,
+        "randomize_kp": true,
+        "randomize_link_mass": true,
+        "randomize_motor_strength": true,
+        "randomize_payload_mass": true,
+        "randomize_restitution": true,
+        "restitution_range": [
+          0.0,
+          1.0
+        ],
+        "use_random": true
+      },
+      "env": {
+        "action_curriculum": false,
+        "env_spacing": 10.0,
+        "episode_length_s": 20,
+        "num_actions": 29,
+        "num_actor_history": 6,
+        "num_actor_obs": 738,
+        "num_dofs": 29,
+        "num_envs": 4096,
+        "num_privileged_obs": 126,
+        "num_proprio_obs": 108,
+        "num_task_obs": 15,
+        "send_timeouts": true,
+        "test": false
+      },
+      "init_state": {
+        "ang_vel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "default_joint_angles": {
+          "left_hip_pitch_joint": -0.1,
+          "left_hip_roll_joint": 0.0,
+          "left_hip_yaw_joint": 0.0,
+          "left_knee_joint": 0.3,
+          "left_ankle_pitch_joint": -0.2,
+          "left_ankle_roll_joint": 0.0,
+          "right_hip_pitch_joint": -0.1,
+          "right_hip_roll_joint": 0.0,
+          "right_hip_yaw_joint": 0.0,
+          "right_knee_joint": 0.3,
+          "right_ankle_pitch_joint": -0.2,
+          "right_ankle_roll_joint": 0.0,
+          "waist_yaw_joint": 0.0,
+          "waist_roll_joint": 0.0,
+          "waist_pitch_joint": 0.0,
+          "left_shoulder_pitch_joint": 0.0,
+          "left_shoulder_roll_joint": 0.1,
+          "left_shoulder_yaw_joint": 0.0,
+          "left_elbow_joint": 1.2,
+          "left_wrist_roll_joint": 0.0,
+          "left_wrist_pitch_joint": 0.0,
+          "left_wrist_yaw_joint": 0.0,
+          "right_shoulder_pitch_joint": 0.0,
+          "right_shoulder_roll_joint": -0.1,
+          "right_shoulder_yaw_joint": 0.0,
+          "right_elbow_joint": 1.2,
+          "right_wrist_roll_joint": 0.0,
+          "right_wrist_pitch_joint": 0.0,
+          "right_wrist_yaw_joint": 0.0
+        },
+        "lin_vel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pos": [
+          2.3,
+          0.0,
+          0.8
+        ],
+        "rot": [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "noise": {
+        "add_noise": true,
+        "noise_level": 1.0,
+        "noise_scales": {
+          "ang_vel": 0.3,
+          "dof_pos": 0.02,
+          "dof_vel": 2.0,
+          "end_effector": 0.05,
+          "gravity": 0.05
+        }
+      },
+      "normalization": {
+        "clip_actions": 100.0,
+        "clip_observations": 100.0,
+        "obs_scales": {
+          "ang_vel": 0.25,
+          "dof_pos": 1.0,
+          "dof_vel": 0.05,
+          "lin_vel": 2.0
+        }
+      },
+      "rewards": {
+        "base_height": 0.0,
+        "base_height_target": 0.75,
+        "box_height": 2.0,
+        "clearance_height_target": -0.66,
+        "hand_contact": 0.0,
+        "hand_free": 0.5,
+        "hand_pos": 0.7,
+        "head_height": 0.5,
+        "head_height_target": 1.15,
+        "least_feet_distance": 0.18,
+        "least_feet_distance_lateral": 0.18,
+        "least_knee_distance_lateral": 0.18,
+        "max_contact_force": 350.0,
+        "object2goal_pos": 1.0,
+        "only_positive_rewards": false,
+        "put_box": 1.0,
+        "relocation_heading": 0.5,
+        "relocation_heading_vel": 0.0,
+        "robot2goal_pos": 0.0,
+        "robot2goal_vel": 1.0,
+        "robot2object_pos": 0.0,
+        "robot2object_vel": 1.0,
+        "scales": {
+          "action_rate": -0.03,
+          "carryup_task": 1.0,
+          "dof_acc": -1e-07,
+          "dof_pos_limits": -5.0,
+          "dof_vel": -0.0002,
+          "dof_vel_limits": -0.001,
+          "relocation_task": 1.0,
+          "standup_task": 0.2,
+          "torque_limits": -0.03,
+          "torques": -0.0001,
+          "walk_task": 1.0
+        },
+        "soft_dof_pos_limit": 0.9,
+        "soft_dof_vel_limit": 0.8,
+        "soft_torque_limit": 0.95,
+        "stand_still": 1.0,
+        "start_heading": 0.5,
+        "target_box_height": 0.72,
+        "target_speed_carry": 0.85,
+        "target_speed_loco": 0.85,
+        "thresh_object2goal": 0.05,
+        "thresh_object2start": 0.5,
+        "thresh_robot2goal": 0.65,
+        "thresh_robot2object": 0.7,
+        "tracking_sigma": 0.25
+      },
+      "sim": {
+        "dt": 0.005,
+        "gravity": [
+          0.0,
+          0.0,
+          -9.81
+        ],
+        "physx": {
+          "bounce_threshold_velocity": 0.5,
+          "contact_collection": 2,
+          "contact_offset": 0.01,
+          "default_buffer_size_multiplier": 5,
+          "max_depenetration_velocity": 1.0,
+          "max_gpu_contact_pairs": 16777216,
+          "num_position_iterations": 8,
+          "num_threads": 10,
+          "num_velocity_iterations": 0,
+          "rest_offset": 0.0,
+          "solver_type": 1
+        },
+        "substeps": 1,
+        "up_axis": 1
+      },
+      "terrain": {
+        "border_size": 25,
+        "curriculum": true,
+        "dynamic_friction": 0.9,
+        "hf2mesh_method": "fast",
+        "horizontal_scale": 0.1,
+        "max_error": 0.1,
+        "max_error_camera": 2,
+        "max_init_terrain_level": 10,
+        "measure_heights": false,
+        "measured_points_x": [
+          -0.8,
+          -0.7,
+          -0.6,
+          -0.5,
+          -0.4,
+          -0.3,
+          -0.2,
+          -0.1,
+          0.0,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8
+        ],
+        "measured_points_y": [
+          -0.5,
+          -0.4,
+          -0.3,
+          -0.2,
+          -0.1,
+          0.0,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5
+        ],
+        "mesh_type": "plane",
+        "num_cols": 40,
+        "num_rows": 40,
+        "restitution": 0.0,
+        "selected": false,
+        "slope_treshold": 0.75,
+        "static_friction": 0.9,
+        "terrain_kwargs": null,
+        "terrain_length": 8.0,
+        "terrain_proportions": [
+          0.1,
+          0.1,
+          0.35,
+          0.25,
+          0.2
+        ],
+        "terrain_width": 8.0,
+        "vertical_scale": 0.005
+      },
+      "viewer": {
+        "lookat": [
+          11.0,
+          3,
+          2.0
+        ],
+        "pos": [
+          10,
+          -5,
+          4
+        ],
+        "ref_env": 0
+      }
+    },
+    "agent": {
+      "algorithm": {
+        "clip_param": 0.2,
+        "desired_kl": 0.01,
+        "entropy_coef": 0.01,
+        "gamma": 0.99,
+        "lam": 0.95,
+        "learning_rate": 0.001,
+        "max_grad_norm": 1.0,
+        "num_learning_epochs": 5,
+        "num_mini_batches": 4,
+        "schedule": "adaptive",
+        "use_clipped_value_loss": true,
+        "value_loss_coef": 1.0
+      },
+      "amp": {
+        "amp_coef": 0.25,
+        "num_obs": 600,
+        "num_one_step_obs": 60,
+        "ratio_random_range": [
+          0.95,
+          1.05
+        ],
+        "use_normalizer": false,
+        "window_length": 10
+      },
+      "policy": {
+        "activation": "elu",
+        "actor_hidden_dims": [
+          512,
+          256,
+          256
+        ],
+        "critic_hidden_dims": [
+          512,
+          256,
+          256
+        ],
+        "init_noise_std": 1.0
+      },
+      "runner": {
+        "algorithm_class_name": "HIMPPO",
+        "checkpoint": -1,
+        "experiment_name": "amp_carrybox",
+        "load_run": -1,
+        "logger": "tensorboard",
+        "max_iterations": 20000,
+        "num_steps_per_env": 100,
+        "policy_class_name": "ActorCritic",
+        "resume": false,
+        "resume_path": null,
+        "run_name": "carrybox_coef0.25",
+        "save_interval": 500,
+        "use_muon_optim": false,
+        "wandb_entity": "YOUR_ENTITY_NAME",
+        "wandb_project": "amp_carrybox"
+      },
+      "runner_class_name": "HIMOnPolicyRunner",
+      "seed": 1
+    }
+  },
+  "source_resume": {
+    "env": {
+      "amp": {
+        "amp_coef": 0.3,
+        "num_obs": 600,
+        "num_one_step_obs": 60,
+        "ratio_random_range": [
+          0.95,
+          1.05
+        ],
+        "use_normalizer": false,
+        "window_length": 10
+      },
+      "asset": {
+        "angular_damping": 0.01,
+        "ankle_joints": [
+          "left_ankle_pitch_joint",
+          "right_ankle_pitch_joint",
+          "left_wrist_roll_joint",
+          "right_wrist_roll_joint"
+        ],
+        "armature": 0.01,
+        "box": {
+          "ang_noise_scale": 0.08726646259971647,
+          "base_size": [
+            0.3,
+            0.3,
+            0.25
+          ],
+          "box_termination": true,
+          "density_default": 50.0,
+          "density_range": [
+            10.0,
+            100.0
+          ],
+          "far_pos_offset": 0.2,
+          "friction_range": [
+            0.5,
+            1.2
+          ],
+          "hybrid_init_prob": 0.8,
+          "min_tar_dist": 0.5,
+          "platform_friction_range": [
+            0.5,
+            1.2
+          ],
+          "pos_noise_scale": 0.05,
+          "random_density": true,
+          "random_props": false,
+          "random_size": true,
+          "reset_mode": "hybrid",
+          "restitution_range": [
+            0.0,
+            0.2
+          ],
+          "scale_range_x": [
+            0.7,
+            1.3
+          ],
+          "scale_range_y": [
+            0.7,
+            1.3
+          ],
+          "scale_range_z": [
+            0.6,
+            1.4
+          ],
+          "scale_sample_interval": 0.1,
+          "skill": [
+            "loco",
+            "pickUp",
+            "carryWith",
+            "putDown"
+          ],
+          "skill_init_prob": [
+            0.8,
+            0.2,
+            0.2,
+            0.0
+          ],
+          "thresh_tag": [
+            0.7,
+            2.0
+          ],
+          "use_random": true
+        },
+        "camera": {
+          "facing_angle": [
+            0.3420201433256688,
+            0.6427876096865394
+          ],
+          "hfov_rad": [
+            1.4835298641951802,
+            1.5707963267948966
+          ],
+          "vfov_rad": [
+            0.9599310885968813,
+            1.0471975511965976
+          ]
+        },
+        "camera_name": "d455_link",
+        "chair": {},
+        "collapse_fixed_joints": false,
+        "default_dof_drive_mode": 3,
+        "density": 0.001,
+        "disable_gravity": false,
+        "file": "{LEGGED_GYM_ROOT_DIR}/resources/robots/g1/urdf/g1_29dof.urdf",
+        "fix_base_link": false,
+        "flip_visual_attachments": false,
+        "foot_name": "ankle_pitch_link",
+        "hand_colli_name": "rubber_hand",
+        "hand_pos_name": "palm_link",
+        "head_name": "mid360_link",
+        "hip_yaw_names": [
+          "left_hip_yaw_link",
+          "right_hip_yaw_link"
+        ],
+        "imu_link": "imu_link",
+        "keyframe_name": "keyframe",
+        "knee_joints": [
+          "left_knee_joint",
+          "right_knee_joint"
+        ],
+        "knee_names": [
+          "left_knee_link",
+          "right_knee_link"
+        ],
+        "left_foot_name": "left_foot",
+        "linear_damping": 0.01,
+        "max_angular_velocity": 1000.0,
+        "max_linear_velocity": 1000.0,
+        "name": "g1",
+        "penalize_contacts_on": [
+          "hip",
+          "knee",
+          "torso",
+          "shoulder",
+          "pelvis"
+        ],
+        "replace_cylinder_with_capsule": true,
+        "right_foot_name": "right_foot",
+        "self_collisions": 0,
+        "terminate_after_contacts_on": [],
+        "thickness": 0.01,
+        "upper_body_link": "torso_link",
+        "waist_joints": [
+          "waist_yaw_joint"
+        ]
+      },
+      "commands": {
+        "curriculum": false,
+        "heading_command": true,
+        "heading_to_ang_vel": true,
+        "max_curriculum": 1.0,
+        "num_commands": 4,
+        "ranges": {
+          "ang_vel_yaw": [
+            -0.5,
+            0.5
+          ],
+          "heading": [
+            -3.14,
+            3.14
+          ],
+          "lin_vel_x": [
+            0.0,
+            0.8
+          ],
+          "lin_vel_y": [
+            -0.0,
+            0.0
+          ]
+        },
+        "resampling_time": 10.0
+      },
+      "control": {
+        "action_scale": 0.25,
+        "control_type": "P",
+        "curriculum_joints": [
+          "waist_yaw_joint",
+          "left_shoulder_roll_joint",
+          "left_shoulder_yaw_joint",
+          "left_shoulder_pitch_joint",
+          "left_elbow_joint",
+          "left_wrist_roll_joint",
+          "right_shoulder_roll_joint",
+          "right_shoulder_yaw_joint",
+          "right_shoulder_pitch_joint",
+          "right_elbow_joint",
+          "right_wrist_roll_joint"
+        ],
+        "damping": {
+          "hip_yaw": 2,
+          "hip_roll": 2,
+          "hip_pitch": 2,
+          "knee": 4,
+          "ankle": 1,
+          "waist_yaw": 4,
+          "waist_roll": 4,
+          "waist_pitch": 4,
+          "shoulder": 3,
+          "elbow": 1,
+          "wrist": 0.5
+        },
+        "decimation": 4,
+        "hip_reduction": 1.0,
+        "left_arm_joints": [
+          "left_shoulder_pitch_joint",
+          "left_shoulder_roll_joint",
+          "left_shoulder_yaw_joint",
+          "left_elbow_joint",
+          "left_wrist_roll_joint"
+        ],
+        "left_hip_joints": [
+          "left_hip_yaw_joint",
+          "left_hip_roll_joint",
+          "left_hip_pitch_joint"
+        ],
+        "left_leg_joints": [
+          "left_hip_yaw_joint",
+          "left_hip_roll_joint",
+          "left_hip_pitch_joint",
+          "left_knee_joint",
+          "left_ankle_pitch_joint",
+          "left_ankle_roll_joint"
+        ],
+        "right_arm_joints": [
+          "right_shoulder_pitch_joint",
+          "right_shoulder_roll_joint",
+          "right_shoulder_yaw_joint",
+          "right_elbow_joint",
+          "right_wrist_roll_joint"
+        ],
+        "right_hip_joints": [
+          "right_hip_yaw_joint",
+          "right_hip_roll_joint",
+          "right_hip_pitch_joint"
+        ],
+        "right_leg_joints": [
+          "right_hip_yaw_joint",
+          "right_hip_roll_joint",
+          "right_hip_pitch_joint",
+          "right_knee_joint",
+          "right_ankle_pitch_joint",
+          "right_ankle_roll_joint"
+        ],
+        "stiffness": {
+          "hip_yaw": 150,
+          "hip_roll": 150,
+          "hip_pitch": 150,
+          "knee": 300,
+          "ankle": 40,
+          "waist_yaw": 300,
+          "waist_roll": 300,
+          "waist_pitch": 300,
+          "shoulder": 200,
+          "elbow": 100,
+          "wrist": 20
+        },
+        "upper_body_link": "pelvis"
+      },
+      "dataset": {
+        "frame_rate": 60,
+        "joint_mapping_file": "{LEGGED_GYM_ROOT_DIR}/resources/config/joint_id.txt",
+        "min_time": 0.1,
+        "motion_file": "{LEGGED_GYM_ROOT_DIR}/resources/config/carrybox.yaml"
+      },
+      "domain_rand": {
+        "actuation_offset_range": [
+          -0.05,
+          0.05
+        ],
+        "com_displacement_range": [
+          -0.1,
+          0.1
+        ],
+        "delay": true,
+        "disturbance": true,
+        "disturbance_interval": 8,
+        "disturbance_range": [
+          -50,
+          50
+        ],
+        "friction_range": [
+          0.1,
+          1.5
+        ],
+        "initial_joint_pos_offset": [
+          -0.1,
+          0.1
+        ],
+        "initial_joint_pos_scale": [
+          1.0,
+          1.0
+        ],
+        "kd_range": [
+          0.9,
+          1.1
+        ],
+        "kp_range": [
+          0.9,
+          1.1
+        ],
+        "link_mass_range": [
+          0.8,
+          1.2
+        ],
+        "max_delay_timesteps": 5,
+        "max_push_vel_xy": 0.1,
+        "motor_strength_range": [
+          0.9,
+          1.1
+        ],
+        "payload_mass_range": [
+          -2,
+          5
+        ],
+        "push_interval_s": 10,
+        "push_robots": false,
+        "randomize_actuation_offset": true,
+        "randomize_com_displacement": true,
+        "randomize_friction": true,
+        "randomize_initial_joint_pos": true,
+        "randomize_kd": true,
+        "randomize_kp": true,
+        "randomize_link_mass": true,
+        "randomize_motor_strength": true,
+        "randomize_payload_mass": true,
+        "randomize_restitution": true,
+        "restitution_range": [
+          0.0,
+          1.0
+        ],
+        "use_random": true
+      },
+      "env": {
+        "action_curriculum": false,
+        "env_spacing": 10.0,
+        "episode_length_s": 20,
+        "num_actions": 29,
+        "num_actor_history": 6,
+        "num_actor_obs": 738,
+        "num_dofs": 29,
+        "num_envs": 4096,
+        "num_privileged_obs": 126,
+        "num_proprio_obs": 108,
+        "num_task_obs": 15,
+        "send_timeouts": true,
+        "test": false
+      },
+      "init_state": {
+        "ang_vel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "default_joint_angles": {
+          "left_hip_pitch_joint": -0.1,
+          "left_hip_roll_joint": 0.0,
+          "left_hip_yaw_joint": 0.0,
+          "left_knee_joint": 0.3,
+          "left_ankle_pitch_joint": -0.2,
+          "left_ankle_roll_joint": 0.0,
+          "right_hip_pitch_joint": -0.1,
+          "right_hip_roll_joint": 0.0,
+          "right_hip_yaw_joint": 0.0,
+          "right_knee_joint": 0.3,
+          "right_ankle_pitch_joint": -0.2,
+          "right_ankle_roll_joint": 0.0,
+          "waist_yaw_joint": 0.0,
+          "waist_roll_joint": 0.0,
+          "waist_pitch_joint": 0.0,
+          "left_shoulder_pitch_joint": 0.0,
+          "left_shoulder_roll_joint": 0.1,
+          "left_shoulder_yaw_joint": 0.0,
+          "left_elbow_joint": 1.2,
+          "left_wrist_roll_joint": 0.0,
+          "left_wrist_pitch_joint": 0.0,
+          "left_wrist_yaw_joint": 0.0,
+          "right_shoulder_pitch_joint": 0.0,
+          "right_shoulder_roll_joint": -0.1,
+          "right_shoulder_yaw_joint": 0.0,
+          "right_elbow_joint": 1.2,
+          "right_wrist_roll_joint": 0.0,
+          "right_wrist_pitch_joint": 0.0,
+          "right_wrist_yaw_joint": 0.0
+        },
+        "lin_vel": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "pos": [
+          2.3,
+          0.0,
+          0.8
+        ],
+        "rot": [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "noise": {
+        "add_noise": true,
+        "noise_level": 1.0,
+        "noise_scales": {
+          "ang_vel": 0.3,
+          "dof_pos": 0.02,
+          "dof_vel": 2.0,
+          "end_effector": 0.05,
+          "gravity": 0.05
+        }
+      },
+      "normalization": {
+        "clip_actions": 100.0,
+        "clip_observations": 100.0,
+        "obs_scales": {
+          "ang_vel": 0.25,
+          "dof_pos": 1.0,
+          "dof_vel": 0.05,
+          "lin_vel": 2.0
+        }
+      },
+      "rewards": {
+        "base_height": 0.0,
+        "base_height_target": 0.75,
+        "box_height": 2.0,
+        "clearance_height_target": -0.66,
+        "hand_contact": 0.0,
+        "hand_free": 0.5,
+        "hand_pos": 0.7,
+        "head_height": 0.5,
+        "head_height_target": 1.15,
+        "least_feet_distance": 0.18,
+        "least_feet_distance_lateral": 0.18,
+        "least_knee_distance_lateral": 0.18,
+        "max_contact_force": 350.0,
+        "object2goal_pos": 1.0,
+        "only_positive_rewards": false,
+        "put_box": 1.0,
+        "relocation_heading": 0.5,
+        "relocation_heading_vel": 0.0,
+        "robot2goal_pos": 0.0,
+        "robot2goal_vel": 1.0,
+        "robot2object_pos": 0.0,
+        "robot2object_vel": 1.0,
+        "scales": {
+          "action_rate": -0.03,
+          "carryup_task": 1.0,
+          "dof_acc": -1e-07,
+          "dof_pos_limits": -5.0,
+          "dof_vel": -0.0002,
+          "dof_vel_limits": -0.001,
+          "relocation_task": 1.0,
+          "standup_task": 0.2,
+          "torque_limits": -0.03,
+          "torques": -0.0001,
+          "walk_task": 1.0
+        },
+        "soft_dof_pos_limit": 0.9,
+        "soft_dof_vel_limit": 0.8,
+        "soft_torque_limit": 0.95,
+        "stand_still": 1.0,
+        "start_heading": 0.5,
+        "target_box_height": 0.72,
+        "target_speed_carry": 0.85,
+        "target_speed_loco": 0.85,
+        "thresh_object2goal": 0.05,
+        "thresh_object2start": 0.5,
+        "thresh_robot2goal": 0.65,
+        "thresh_robot2object": 0.7,
+        "tracking_sigma": 0.25
+      },
+      "sim": {
+        "dt": 0.005,
+        "gravity": [
+          0.0,
+          0.0,
+          -9.81
+        ],
+        "physx": {
+          "bounce_threshold_velocity": 0.5,
+          "contact_collection": 2,
+          "contact_offset": 0.01,
+          "default_buffer_size_multiplier": 5,
+          "max_depenetration_velocity": 1.0,
+          "max_gpu_contact_pairs": 16777216,
+          "num_position_iterations": 8,
+          "num_threads": 10,
+          "num_velocity_iterations": 0,
+          "rest_offset": 0.0,
+          "solver_type": 1
+        },
+        "substeps": 1,
+        "up_axis": 1
+      },
+      "terrain": {
+        "border_size": 25,
+        "curriculum": true,
+        "dynamic_friction": 0.9,
+        "hf2mesh_method": "fast",
+        "horizontal_scale": 0.1,
+        "max_error": 0.1,
+        "max_error_camera": 2,
+        "max_init_terrain_level": 10,
+        "measure_heights": false,
+        "measured_points_x": [
+          -0.8,
+          -0.7,
+          -0.6,
+          -0.5,
+          -0.4,
+          -0.3,
+          -0.2,
+          -0.1,
+          0.0,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.8
+        ],
+        "measured_points_y": [
+          -0.5,
+          -0.4,
+          -0.3,
+          -0.2,
+          -0.1,
+          0.0,
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5
+        ],
+        "mesh_type": "plane",
+        "num_cols": 40,
+        "num_rows": 40,
+        "restitution": 0.0,
+        "selected": false,
+        "slope_treshold": 0.75,
+        "static_friction": 0.9,
+        "terrain_kwargs": null,
+        "terrain_length": 8.0,
+        "terrain_proportions": [
+          0.1,
+          0.1,
+          0.35,
+          0.25,
+          0.2
+        ],
+        "terrain_width": 8.0,
+        "vertical_scale": 0.005
+      },
+      "viewer": {
+        "lookat": [
+          11.0,
+          3,
+          2.0
+        ],
+        "pos": [
+          10,
+          -5,
+          4
+        ],
+        "ref_env": 0
+      }
+    },
+    "agent": {
+      "algorithm": {
+        "clip_param": 0.2,
+        "desired_kl": 0.01,
+        "entropy_coef": 0.01,
+        "gamma": 0.99,
+        "lam": 0.95,
+        "learning_rate": 0.001,
+        "max_grad_norm": 1.0,
+        "num_learning_epochs": 5,
+        "num_mini_batches": 4,
+        "schedule": "adaptive",
+        "use_clipped_value_loss": true,
+        "value_loss_coef": 1.0
+      },
+      "amp": {
+        "amp_coef": 0.3,
+        "num_obs": 600,
+        "num_one_step_obs": 60,
+        "ratio_random_range": [
+          0.95,
+          1.05
+        ],
+        "use_normalizer": false,
+        "window_length": 10
+      },
+      "policy": {
+        "activation": "elu",
+        "actor_hidden_dims": [
+          512,
+          256,
+          256
+        ],
+        "critic_hidden_dims": [
+          512,
+          256,
+          256
+        ],
+        "init_noise_std": 1.0
+      },
+      "runner": {
+        "algorithm_class_name": "HIMPPO",
+        "checkpoint": -1,
+        "experiment_name": "amp_carrybox",
+        "load_run": -1,
+        "logger": "tensorboard",
+        "max_iterations": 50000,
+        "num_steps_per_env": 100,
+        "policy_class_name": "ActorCritic",
+        "resume": true,
+        "resume_path": null,
+        "run_name": "carrybox_resume_coef0.3",
+        "save_interval": 500,
+        "use_muon_optim": false,
+        "wandb_entity": "YOUR_ENTITY_NAME",
+        "wandb_project": "amp_carrybox"
+      },
+      "runner_class_name": "HIMOnPolicyRunner",
+      "seed": 1
+    }
+  },
+  "current_run": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_17-35-18_wall5_v28_clean_camera_fresh_20261023_173513",
+  "wall5": {
+    "env": {
+      "viewer": {
+        "eye": [
+          "2.5",
+          "2.5",
+          "2.0"
+        ],
+        "lookat": [
+          "0.7",
+          "0.0",
+          "0.5"
+        ],
+        "cam_prim_path": "/OmniverseKit_Persp",
+        "resolution": [
+          "1280",
+          "720"
+        ],
+        "origin_type": "world",
+        "env_index": "0",
+        "asset_name": "null",
+        "body_name": "null"
+      },
+      "sim": {
+        "physics_prim_path": "/physicsScene",
+        "device": "cuda:0",
+        "dt": "0.005",
+        "render_interval": "4",
+        "gravity": [
+          "0.0",
+          "0.0",
+          "-9.81"
+        ],
+        "enable_scene_query_support": "false",
+        "use_fabric": "true",
+        "physx": {
+          "solver_type": "1",
+          "min_position_iteration_count": "1",
+          "max_position_iteration_count": "255",
+          "min_velocity_iteration_count": "0",
+          "max_velocity_iteration_count": "255",
+          "enable_ccd": "false",
+          "enable_stabilization": "false",
+          "enable_enhanced_determinism": "false",
+          "bounce_threshold_velocity": "0.5",
+          "friction_offset_threshold": "0.04",
+          "friction_correlation_distance": "0.025",
+          "gpu_max_rigid_contact_count": "8388608",
+          "gpu_max_rigid_patch_count": "163840",
+          "gpu_found_lost_pairs_capacity": "2097152",
+          "gpu_found_lost_aggregate_pairs_capacity": "33554432",
+          "gpu_total_aggregate_pairs_capacity": "2097152",
+          "gpu_collision_stack_size": "67108864",
+          "gpu_heap_capacity": "67108864",
+          "gpu_temp_buffer_capacity": "16777216",
+          "gpu_max_num_partitions": "8",
+          "gpu_max_soft_body_contacts": "1048576",
+          "gpu_max_particle_contacts": "1048576",
+          "solve_articulation_contact_last": "false"
+        },
+        "physics_material": {
+          "func": "isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material",
+          "static_friction": "1.0",
+          "dynamic_friction": "1.0",
+          "restitution": "0.0",
+          "friction_combine_mode": "multiply",
+          "restitution_combine_mode": "average",
+          "compliant_contact_stiffness": "0.0",
+          "compliant_contact_damping": "0.0"
+        },
+        "render": {
+          "enable_translucency": "null",
+          "enable_reflections": "null",
+          "enable_global_illumination": "null",
+          "antialiasing_mode": "Off",
+          "enable_dlssg": "null",
+          "enable_dl_denoiser": "false",
+          "dlss_mode": "null",
+          "enable_direct_lighting": "false",
+          "samples_per_pixel": "null",
+          "enable_shadows": "false",
+          "enable_ambient_occlusion": "null",
+          "carb_settings": "null",
+          "rendering_mode": "performance"
+        },
+        "create_stage_in_memory": "false"
+      },
+      "ui_window_class_type": "isaaclab.envs.ui.manager_based_rl_env_window:ManagerBasedRLEnvWindow",
+      "seed": "42",
+      "decimation": "4",
+      "scene": {
+        "num_envs": "4096",
+        "env_spacing": "13.0",
+        "lazy_sensor_update": "true",
+        "replicate_physics": "false",
+        "filter_collisions": "true",
+        "clone_in_fabric": "false",
+        "robot": {
+          "class_type": "isaaclab.assets.articulation.articulation:Articulation",
+          "prim_path": "/World/envs/env_.*/Robot",
+          "spawn": {
+            "func": "perceptual_ball.carrybox_physhsi:spawn_physhsi_robot",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "mass_props": "null",
+            "deformable_props": "null",
+            "rigid_props": {
+              "rigid_body_enabled": "null",
+              "kinematic_enabled": "null",
+              "disable_gravity": "false",
+              "linear_damping": "0.0",
+              "angular_damping": "0.0",
+              "max_linear_velocity": "1000.0",
+              "max_angular_velocity": "1000.0",
+              "max_depenetration_velocity": "1.0",
+              "max_contact_impulse": "null",
+              "enable_gyroscopic_forces": "null",
+              "retain_accelerations": "false",
+              "solver_position_iteration_count": "null",
+              "solver_velocity_iteration_count": "null",
+              "sleep_threshold": "null",
+              "stabilization_threshold": "null"
+            },
+            "collision_props": "null",
+            "activate_contact_sensors": "true",
+            "scale": "null",
+            "articulation_props": {
+              "articulation_enabled": "null",
+              "enabled_self_collisions": "true",
+              "solver_position_iteration_count": "8",
+              "solver_velocity_iteration_count": "4",
+              "sleep_threshold": "null",
+              "stabilization_threshold": "null",
+              "fix_root_link": "null"
+            },
+            "fixed_tendons_props": "null",
+            "spatial_tendons_props": "null",
+            "joint_drive_props": "null",
+            "visual_material_path": "material",
+            "visual_material": "null",
+            "usd_path": "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/g1_29dof.usd",
+            "variants": "null"
+          },
+          "init_state": {
+            "pos": [
+              "0.0",
+              "0.0",
+              "0.8"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "lin_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "ang_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "joint_pos": {
+              ".*_hip_pitch_joint": "-0.1",
+              ".*_hip_roll_joint": "0.0",
+              ".*_hip_yaw_joint": "0.0",
+              ".*_knee_joint": "0.3",
+              ".*_ankle_pitch_joint": "-0.2",
+              ".*_ankle_roll_joint": "0.0",
+              "waist_yaw_joint": "0.0",
+              "waist_roll_joint": "0.0",
+              "waist_pitch_joint": "0.0",
+              "left_shoulder_pitch_joint": "0.0",
+              "left_shoulder_roll_joint": "0.1",
+              "right_shoulder_pitch_joint": "0.0",
+              "right_shoulder_roll_joint": "-0.1",
+              ".*_shoulder_yaw_joint": "0.0",
+              ".*_elbow_joint": "1.2",
+              ".*_wrist_roll_joint": "0.0",
+              ".*_wrist_pitch_joint": "0.0",
+              ".*_wrist_yaw_joint": "0.0"
+            },
+            "joint_vel": {
+              ".*": "0.0"
+            }
+          },
+          "collision_group": "0",
+          "debug_vis": "false",
+          "articulation_root_prim_path": "null",
+          "soft_joint_pos_limit_factor": "0.9",
+          "actuators": {
+            "legs": {
+              "class_type": "isaaclab.actuators.actuator_pd:ImplicitActuator",
+              "joint_names_expr": [
+                ".*_hip_yaw_joint",
+                ".*_hip_roll_joint",
+                ".*_hip_pitch_joint",
+                ".*_knee_joint"
+              ],
+              "effort_limit": "null",
+              "velocity_limit": "null",
+              "effort_limit_sim": "null",
+              "velocity_limit_sim": "null",
+              "stiffness": {
+                ".*_hip_yaw_joint": "150.0",
+                ".*_hip_roll_joint": "150.0",
+                ".*_hip_pitch_joint": "150.0",
+                ".*_knee_joint": "300.0"
+              },
+              "damping": {
+                ".*_hip_yaw_joint": "2.0",
+                ".*_hip_roll_joint": "2.0",
+                ".*_hip_pitch_joint": "2.0",
+                ".*_knee_joint": "4.0"
+              },
+              "armature": "0.01",
+              "friction": "null",
+              "dynamic_friction": "null",
+              "viscous_friction": "null"
+            },
+            "feet": {
+              "class_type": "isaaclab.actuators.actuator_pd:ImplicitActuator",
+              "joint_names_expr": [
+                ".*_ankle_pitch_joint",
+                ".*_ankle_roll_joint"
+              ],
+              "effort_limit": "null",
+              "velocity_limit": "null",
+              "effort_limit_sim": "null",
+              "velocity_limit_sim": "null",
+              "stiffness": "40.0",
+              "damping": "1.0",
+              "armature": "0.01",
+              "friction": "null",
+              "dynamic_friction": "null",
+              "viscous_friction": "null"
+            },
+            "waist": {
+              "class_type": "isaaclab.actuators.actuator_pd:ImplicitActuator",
+              "joint_names_expr": [
+                "waist_yaw_joint",
+                "waist_roll_joint",
+                "waist_pitch_joint"
+              ],
+              "effort_limit": "null",
+              "velocity_limit": "null",
+              "effort_limit_sim": "null",
+              "velocity_limit_sim": "null",
+              "stiffness": "300.0",
+              "damping": "4.0",
+              "armature": "0.01",
+              "friction": "null",
+              "dynamic_friction": "null",
+              "viscous_friction": "null"
+            },
+            "arms": {
+              "class_type": "isaaclab.actuators.actuator_pd:ImplicitActuator",
+              "joint_names_expr": [
+                ".*_shoulder_pitch_joint",
+                ".*_shoulder_roll_joint",
+                ".*_shoulder_yaw_joint",
+                ".*_elbow_joint"
+              ],
+              "effort_limit": "null",
+              "velocity_limit": "null",
+              "effort_limit_sim": "null",
+              "velocity_limit_sim": "null",
+              "stiffness": {
+                ".*_shoulder_.*": "200.0",
+                ".*_elbow_joint": "100.0"
+              },
+              "damping": {
+                ".*_shoulder_.*": "3.0",
+                ".*_elbow_joint": "1.0"
+              },
+              "armature": "0.01",
+              "friction": "null",
+              "dynamic_friction": "null",
+              "viscous_friction": "null"
+            },
+            "wrists": {
+              "class_type": "isaaclab.actuators.actuator_pd:ImplicitActuator",
+              "joint_names_expr": [
+                ".*_wrist_roll_joint",
+                ".*_wrist_pitch_joint",
+                ".*_wrist_yaw_joint"
+              ],
+              "effort_limit": "null",
+              "velocity_limit": "null",
+              "effort_limit_sim": "null",
+              "velocity_limit_sim": "null",
+              "stiffness": "20.0",
+              "damping": "0.5",
+              "armature": "0.01",
+              "friction": "null",
+              "dynamic_friction": "null",
+              "viscous_friction": "null"
+            }
+          },
+          "actuator_value_resolution_debug_print": "false"
+        },
+        "box": {
+          "class_type": "isaaclab.assets.rigid_object.rigid_object:RigidObject",
+          "prim_path": "/World/envs/env_.*/Box",
+          "spawn": {
+            "func": "isaaclab.sim.spawners.shapes.shapes:spawn_cuboid",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "mass_props": {
+              "mass": "0.8",
+              "density": "null"
+            },
+            "rigid_props": {
+              "rigid_body_enabled": "null",
+              "kinematic_enabled": "null",
+              "disable_gravity": "null",
+              "linear_damping": "null",
+              "angular_damping": "null",
+              "max_linear_velocity": "null",
+              "max_angular_velocity": "null",
+              "max_depenetration_velocity": "1.0",
+              "max_contact_impulse": "null",
+              "enable_gyroscopic_forces": "null",
+              "retain_accelerations": "null",
+              "solver_position_iteration_count": "null",
+              "solver_velocity_iteration_count": "null",
+              "sleep_threshold": "null",
+              "stabilization_threshold": "null"
+            },
+            "collision_props": {
+              "collision_enabled": "null",
+              "contact_offset": "null",
+              "rest_offset": "null",
+              "torsional_patch_radius": "null",
+              "min_torsional_patch_radius": "null"
+            },
+            "activate_contact_sensors": "true",
+            "visual_material_path": "material",
+            "visual_material": {
+              "func": "isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface",
+              "diffuse_color": [
+                "0.55",
+                "0.35",
+                "0.15"
+              ],
+              "emissive_color": [
+                "0.0",
+                "0.0",
+                "0.0"
+              ],
+              "roughness": "0.5",
+              "metallic": "0.0",
+              "opacity": "1.0"
+            },
+            "physics_material_path": "material",
+            "physics_material": {
+              "func": "isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material",
+              "static_friction": "1.0",
+              "dynamic_friction": "0.8",
+              "restitution": "0.0",
+              "friction_combine_mode": "average",
+              "restitution_combine_mode": "average",
+              "compliant_contact_stiffness": "0.0",
+              "compliant_contact_damping": "0.0"
+            },
+            "size": [
+              "0.3",
+              "0.3",
+              "0.25"
+            ]
+          },
+          "init_state": {
+            "pos": [
+              "0.85",
+              "0.0",
+              "0.13"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "lin_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "ang_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ]
+          },
+          "collision_group": "0",
+          "debug_vis": "false"
+        },
+        "ground": {
+          "class_type": "null",
+          "prim_path": "/World/ground",
+          "spawn": {
+            "func": "isaaclab.sim.spawners.from_files.from_files:spawn_ground_plane",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "usd_path": "http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/4.5/Isaac/Environments/Grid/default_environment.usd",
+            "color": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "size": [
+              "2000.0",
+              "2000.0"
+            ],
+            "physics_material": {
+              "func": "isaaclab.sim.spawners.materials.physics_materials:spawn_rigid_body_material",
+              "static_friction": "1.0",
+              "dynamic_friction": "1.0",
+              "restitution": "0.0",
+              "friction_combine_mode": "multiply",
+              "restitution_combine_mode": "average",
+              "compliant_contact_stiffness": "0.0",
+              "compliant_contact_damping": "0.0"
+            }
+          },
+          "init_state": {
+            "pos": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ]
+          },
+          "collision_group": "0",
+          "debug_vis": "false"
+        },
+        "depth_camera": {
+          "class_type": "perceptual_ball.carrybox_warp_camera:WarpDepthCamera",
+          "prim_path": "/World/envs/env_.*/Robot/torso_link",
+          "update_period": "0.02",
+          "history_length": "0",
+          "debug_vis": "false",
+          "width": "48",
+          "height": "27",
+          "near": "0.1",
+          "far": "3.0",
+          "focal_length": "18.0",
+          "horizontal_aperture": "35.475779292977215",
+          "vertical_aperture": "19.955125852299684",
+          "object_names": [
+            "Box",
+            "Wall",
+            "Cylinder0",
+            "Cylinder1",
+            "Cylinder2",
+            "Platform"
+          ],
+          "output_mesh_hits": "true",
+          "intrinsics": "null",
+          "offset": {
+            "pos": [
+              "0.0576235",
+              "0.01753",
+              "0.42987"
+            ],
+            "rot": [
+              "0.91495",
+              "0.0",
+              "0.40355",
+              "0.0"
+            ],
+            "convention": "world"
+          }
+        },
+        "left_box_contact": {
+          "class_type": "isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor",
+          "prim_path": "/World/envs/env_.*/Robot/left_rubber_hand",
+          "update_period": "0.0",
+          "history_length": "0",
+          "debug_vis": "false",
+          "track_pose": "false",
+          "track_contact_points": "false",
+          "max_contact_data_count_per_prim": "4",
+          "track_air_time": "false",
+          "force_threshold": "1.0",
+          "filter_prim_paths_expr": [
+            "/World/envs/env_.*/Box"
+          ],
+          "visualizer_cfg": {
+            "prim_path": "/Visuals/ContactSensor",
+            "markers": {
+              "contact": {
+                "func": "isaaclab.sim.spawners.shapes.shapes:spawn_sphere",
+                "visible": "true",
+                "semantic_tags": "null",
+                "copy_from_source": "true",
+                "mass_props": "null",
+                "rigid_props": "null",
+                "collision_props": "null",
+                "activate_contact_sensors": "false",
+                "visual_material_path": "material",
+                "visual_material": {
+                  "func": "isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface",
+                  "diffuse_color": [
+                    "1.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "emissive_color": [
+                    "0.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "roughness": "0.5",
+                  "metallic": "0.0",
+                  "opacity": "1.0"
+                },
+                "physics_material_path": "material",
+                "physics_material": "null",
+                "radius": "0.02"
+              },
+              "no_contact": {
+                "func": "isaaclab.sim.spawners.shapes.shapes:spawn_sphere",
+                "visible": "false",
+                "semantic_tags": "null",
+                "copy_from_source": "true",
+                "mass_props": "null",
+                "rigid_props": "null",
+                "collision_props": "null",
+                "activate_contact_sensors": "false",
+                "visual_material_path": "material",
+                "visual_material": {
+                  "func": "isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface",
+                  "diffuse_color": [
+                    "0.0",
+                    "1.0",
+                    "0.0"
+                  ],
+                  "emissive_color": [
+                    "0.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "roughness": "0.5",
+                  "metallic": "0.0",
+                  "opacity": "1.0"
+                },
+                "physics_material_path": "material",
+                "physics_material": "null",
+                "radius": "0.02"
+              }
+            }
+          }
+        },
+        "right_box_contact": {
+          "class_type": "isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor",
+          "prim_path": "/World/envs/env_.*/Robot/right_rubber_hand",
+          "update_period": "0.0",
+          "history_length": "0",
+          "debug_vis": "false",
+          "track_pose": "false",
+          "track_contact_points": "false",
+          "max_contact_data_count_per_prim": "4",
+          "track_air_time": "false",
+          "force_threshold": "1.0",
+          "filter_prim_paths_expr": [
+            "/World/envs/env_.*/Box"
+          ],
+          "visualizer_cfg": {
+            "prim_path": "/Visuals/ContactSensor",
+            "markers": {
+              "contact": {
+                "func": "isaaclab.sim.spawners.shapes.shapes:spawn_sphere",
+                "visible": "true",
+                "semantic_tags": "null",
+                "copy_from_source": "true",
+                "mass_props": "null",
+                "rigid_props": "null",
+                "collision_props": "null",
+                "activate_contact_sensors": "false",
+                "visual_material_path": "material",
+                "visual_material": {
+                  "func": "isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface",
+                  "diffuse_color": [
+                    "1.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "emissive_color": [
+                    "0.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "roughness": "0.5",
+                  "metallic": "0.0",
+                  "opacity": "1.0"
+                },
+                "physics_material_path": "material",
+                "physics_material": "null",
+                "radius": "0.02"
+              },
+              "no_contact": {
+                "func": "isaaclab.sim.spawners.shapes.shapes:spawn_sphere",
+                "visible": "false",
+                "semantic_tags": "null",
+                "copy_from_source": "true",
+                "mass_props": "null",
+                "rigid_props": "null",
+                "collision_props": "null",
+                "activate_contact_sensors": "false",
+                "visual_material_path": "material",
+                "visual_material": {
+                  "func": "isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface",
+                  "diffuse_color": [
+                    "0.0",
+                    "1.0",
+                    "0.0"
+                  ],
+                  "emissive_color": [
+                    "0.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "roughness": "0.5",
+                  "metallic": "0.0",
+                  "opacity": "1.0"
+                },
+                "physics_material_path": "material",
+                "physics_material": "null",
+                "radius": "0.02"
+              }
+            }
+          }
+        },
+        "light": {
+          "class_type": "null",
+          "prim_path": "/World/Light",
+          "spawn": {
+            "func": "isaaclab.sim.spawners.lights.lights:spawn_light",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "prim_type": "DomeLight",
+            "color": [
+              "1.0",
+              "1.0",
+              "1.0"
+            ],
+            "enable_color_temperature": "false",
+            "color_temperature": "6500.0",
+            "normalize": "false",
+            "exposure": "0.0",
+            "intensity": "500.0",
+            "texture_file": "null",
+            "texture_format": "automatic",
+            "visible_in_primary_ray": "true"
+          },
+          "init_state": {
+            "pos": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ]
+          },
+          "collision_group": "0",
+          "debug_vis": "false"
+        },
+        "body_contacts": {
+          "class_type": "isaaclab.sensors.contact_sensor.contact_sensor:ContactSensor",
+          "prim_path": "/World/envs/env_.*/Robot/.*",
+          "update_period": "0.0",
+          "history_length": "1",
+          "debug_vis": "false",
+          "track_pose": "false",
+          "track_contact_points": "false",
+          "max_contact_data_count_per_prim": "4",
+          "track_air_time": "false",
+          "force_threshold": "1.0",
+          "filter_prim_paths_expr": [],
+          "visualizer_cfg": {
+            "prim_path": "/Visuals/ContactSensor",
+            "markers": {
+              "contact": {
+                "func": "isaaclab.sim.spawners.shapes.shapes:spawn_sphere",
+                "visible": "true",
+                "semantic_tags": "null",
+                "copy_from_source": "true",
+                "mass_props": "null",
+                "rigid_props": "null",
+                "collision_props": "null",
+                "activate_contact_sensors": "false",
+                "visual_material_path": "material",
+                "visual_material": {
+                  "func": "isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface",
+                  "diffuse_color": [
+                    "1.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "emissive_color": [
+                    "0.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "roughness": "0.5",
+                  "metallic": "0.0",
+                  "opacity": "1.0"
+                },
+                "physics_material_path": "material",
+                "physics_material": "null",
+                "radius": "0.02"
+              },
+              "no_contact": {
+                "func": "isaaclab.sim.spawners.shapes.shapes:spawn_sphere",
+                "visible": "false",
+                "semantic_tags": "null",
+                "copy_from_source": "true",
+                "mass_props": "null",
+                "rigid_props": "null",
+                "collision_props": "null",
+                "activate_contact_sensors": "false",
+                "visual_material_path": "material",
+                "visual_material": {
+                  "func": "isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface",
+                  "diffuse_color": [
+                    "0.0",
+                    "1.0",
+                    "0.0"
+                  ],
+                  "emissive_color": [
+                    "0.0",
+                    "0.0",
+                    "0.0"
+                  ],
+                  "roughness": "0.5",
+                  "metallic": "0.0",
+                  "opacity": "1.0"
+                },
+                "physics_material_path": "material",
+                "physics_material": "null",
+                "radius": "0.02"
+              }
+            }
+          }
+        },
+        "wall": {
+          "class_type": "isaaclab.assets.rigid_object.rigid_object:RigidObject",
+          "prim_path": "/World/envs/env_.*/Wall",
+          "spawn": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "mass_props": "null",
+            "rigid_props": {
+              "rigid_body_enabled": "null",
+              "kinematic_enabled": "false",
+              "disable_gravity": "true",
+              "linear_damping": "null",
+              "angular_damping": "null",
+              "max_linear_velocity": "null",
+              "max_angular_velocity": "null",
+              "max_depenetration_velocity": "null",
+              "max_contact_impulse": "null",
+              "enable_gyroscopic_forces": "null",
+              "retain_accelerations": "null",
+              "solver_position_iteration_count": "null",
+              "solver_velocity_iteration_count": "null",
+              "sleep_threshold": "null",
+              "stabilization_threshold": "null"
+            },
+            "collision_props": {
+              "collision_enabled": "null",
+              "contact_offset": "null",
+              "rest_offset": "null",
+              "torsional_patch_radius": "null",
+              "min_torsional_patch_radius": "null"
+            },
+            "activate_contact_sensors": "false",
+            "visual_material_path": "material",
+            "visual_material": {
+              "func": "isaaclab.sim.spawners.materials.visual_materials:spawn_preview_surface",
+              "diffuse_color": [
+                "0.35",
+                "0.4",
+                "0.45"
+              ],
+              "emissive_color": [
+                "0.0",
+                "0.0",
+                "0.0"
+              ],
+              "roughness": "0.5",
+              "metallic": "0.0",
+              "opacity": "1.0"
+            },
+            "physics_material_path": "material",
+            "physics_material": "null",
+            "size": [
+              "0.2",
+              "8.0",
+              "3.0"
+            ]
+          },
+          "init_state": {
+            "pos": [
+              "0.0",
+              "0.0",
+              "-5.0"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "lin_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "ang_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ]
+          },
+          "collision_group": "0",
+          "debug_vis": "false"
+        },
+        "cylinder0": {
+          "class_type": "isaaclab.assets.rigid_object.rigid_object:RigidObject",
+          "prim_path": "/World/envs/env_.*/Cylinder0",
+          "spawn": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "mass_props": "null",
+            "deformable_props": "null",
+            "rigid_props": {
+              "rigid_body_enabled": "null",
+              "kinematic_enabled": "false",
+              "disable_gravity": "true",
+              "linear_damping": "null",
+              "angular_damping": "null",
+              "max_linear_velocity": "null",
+              "max_angular_velocity": "null",
+              "max_depenetration_velocity": "null",
+              "max_contact_impulse": "null",
+              "enable_gyroscopic_forces": "null",
+              "retain_accelerations": "null",
+              "solver_position_iteration_count": "null",
+              "solver_velocity_iteration_count": "null",
+              "sleep_threshold": "null",
+              "stabilization_threshold": "null"
+            },
+            "collision_props": {
+              "collision_enabled": "null",
+              "contact_offset": "null",
+              "rest_offset": "null",
+              "torsional_patch_radius": "null",
+              "min_torsional_patch_radius": "null"
+            },
+            "activate_contact_sensors": "false",
+            "visual_material_path": "material",
+            "visual_material": "null",
+            "physics_material_path": "material",
+            "physics_material": "null",
+            "radius": "0.15",
+            "height": "1.8",
+            "axis": "Z"
+          },
+          "init_state": {
+            "pos": [
+              "0.0",
+              "0.0",
+              "-5.0"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "lin_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "ang_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ]
+          },
+          "collision_group": "0",
+          "debug_vis": "false"
+        },
+        "cylinder1": {
+          "class_type": "isaaclab.assets.rigid_object.rigid_object:RigidObject",
+          "prim_path": "/World/envs/env_.*/Cylinder1",
+          "spawn": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "mass_props": "null",
+            "deformable_props": "null",
+            "rigid_props": {
+              "rigid_body_enabled": "null",
+              "kinematic_enabled": "false",
+              "disable_gravity": "true",
+              "linear_damping": "null",
+              "angular_damping": "null",
+              "max_linear_velocity": "null",
+              "max_angular_velocity": "null",
+              "max_depenetration_velocity": "null",
+              "max_contact_impulse": "null",
+              "enable_gyroscopic_forces": "null",
+              "retain_accelerations": "null",
+              "solver_position_iteration_count": "null",
+              "solver_velocity_iteration_count": "null",
+              "sleep_threshold": "null",
+              "stabilization_threshold": "null"
+            },
+            "collision_props": {
+              "collision_enabled": "null",
+              "contact_offset": "null",
+              "rest_offset": "null",
+              "torsional_patch_radius": "null",
+              "min_torsional_patch_radius": "null"
+            },
+            "activate_contact_sensors": "false",
+            "visual_material_path": "material",
+            "visual_material": "null",
+            "physics_material_path": "material",
+            "physics_material": "null",
+            "radius": "0.15",
+            "height": "1.8",
+            "axis": "Z"
+          },
+          "init_state": {
+            "pos": [
+              "0.0",
+              "0.0",
+              "-5.0"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "lin_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "ang_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ]
+          },
+          "collision_group": "0",
+          "debug_vis": "false"
+        },
+        "cylinder2": {
+          "class_type": "isaaclab.assets.rigid_object.rigid_object:RigidObject",
+          "prim_path": "/World/envs/env_.*/Cylinder2",
+          "spawn": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "mass_props": "null",
+            "deformable_props": "null",
+            "rigid_props": {
+              "rigid_body_enabled": "null",
+              "kinematic_enabled": "false",
+              "disable_gravity": "true",
+              "linear_damping": "null",
+              "angular_damping": "null",
+              "max_linear_velocity": "null",
+              "max_angular_velocity": "null",
+              "max_depenetration_velocity": "null",
+              "max_contact_impulse": "null",
+              "enable_gyroscopic_forces": "null",
+              "retain_accelerations": "null",
+              "solver_position_iteration_count": "null",
+              "solver_velocity_iteration_count": "null",
+              "sleep_threshold": "null",
+              "stabilization_threshold": "null"
+            },
+            "collision_props": {
+              "collision_enabled": "null",
+              "contact_offset": "null",
+              "rest_offset": "null",
+              "torsional_patch_radius": "null",
+              "min_torsional_patch_radius": "null"
+            },
+            "activate_contact_sensors": "false",
+            "visual_material_path": "material",
+            "visual_material": "null",
+            "physics_material_path": "material",
+            "physics_material": "null",
+            "radius": "0.15",
+            "height": "1.8",
+            "axis": "Z"
+          },
+          "init_state": {
+            "pos": [
+              "0.0",
+              "0.0",
+              "-5.0"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "lin_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "ang_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ]
+          },
+          "collision_group": "0",
+          "debug_vis": "false"
+        },
+        "platform": {
+          "class_type": "isaaclab.assets.rigid_object.rigid_object:RigidObject",
+          "prim_path": "/World/envs/env_.*/Platform",
+          "spawn": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.carrybox_walled_env_cfg:spawn_locked_obstacle",
+            "visible": "true",
+            "semantic_tags": "null",
+            "copy_from_source": "true",
+            "mass_props": "null",
+            "rigid_props": {
+              "rigid_body_enabled": "null",
+              "kinematic_enabled": "false",
+              "disable_gravity": "true",
+              "linear_damping": "null",
+              "angular_damping": "null",
+              "max_linear_velocity": "null",
+              "max_angular_velocity": "null",
+              "max_depenetration_velocity": "null",
+              "max_contact_impulse": "null",
+              "enable_gyroscopic_forces": "null",
+              "retain_accelerations": "null",
+              "solver_position_iteration_count": "null",
+              "solver_velocity_iteration_count": "null",
+              "sleep_threshold": "null",
+              "stabilization_threshold": "null"
+            },
+            "collision_props": {
+              "collision_enabled": "null",
+              "contact_offset": "null",
+              "rest_offset": "null",
+              "torsional_patch_radius": "null",
+              "min_torsional_patch_radius": "null"
+            },
+            "activate_contact_sensors": "false",
+            "visual_material_path": "material",
+            "visual_material": "null",
+            "physics_material_path": "material",
+            "physics_material": "null",
+            "size": [
+              "0.5",
+              "0.5",
+              "0.8"
+            ]
+          },
+          "init_state": {
+            "pos": [
+              "0.0",
+              "0.0",
+              "-5.0"
+            ],
+            "rot": [
+              "1.0",
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "lin_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ],
+            "ang_vel": [
+              "0.0",
+              "0.0",
+              "0.0"
+            ]
+          },
+          "collision_group": "0",
+          "debug_vis": "false"
+        }
+      },
+      "recorders": {
+        "dataset_file_handler_class_type": "isaaclab.utils.datasets.hdf5_dataset_file_handler:HDF5DatasetFileHandler",
+        "dataset_export_dir_path": "/tmp/isaaclab/logs",
+        "dataset_filename": "dataset",
+        "dataset_export_mode": {
+          "_value_": "1",
+          "_name_": "EXPORT_ALL"
+        },
+        "export_in_record_pre_reset": "true"
+      },
+      "observations": {
+        "proprio": {
+          "concatenate_terms": "true",
+          "concatenate_dim": "-1",
+          "enable_corruption": "false",
+          "history_length": "null",
+          "flatten_history_dim": "true",
+          "state": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox:proprioception",
+            "params": {},
+            "modifiers": "null",
+            "noise": "null",
+            "clip": "null",
+            "scale": "null",
+            "history_length": "4",
+            "flatten_history_dim": "true"
+          }
+        },
+        "perception": {
+          "concatenate_terms": "true",
+          "concatenate_dim": "-1",
+          "enable_corruption": "false",
+          "history_length": "null",
+          "flatten_history_dim": "true",
+          "image": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:depth_image",
+            "params": {},
+            "modifiers": "null",
+            "noise": "null",
+            "clip": "null",
+            "scale": "null",
+            "history_length": "4",
+            "flatten_history_dim": "false"
+          }
+        },
+        "box_pose_target": {
+          "concatenate_terms": "true",
+          "concatenate_dim": "-1",
+          "enable_corruption": "false",
+          "history_length": "null",
+          "flatten_history_dim": "true",
+          "pose": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:box_pose_target",
+            "params": {},
+            "modifiers": "null",
+            "noise": "null",
+            "clip": "null",
+            "scale": "null",
+            "history_length": "0",
+            "flatten_history_dim": "true"
+          }
+        },
+        "amp": {
+          "concatenate_terms": "true",
+          "concatenate_dim": "-1",
+          "enable_corruption": "false",
+          "history_length": "null",
+          "flatten_history_dim": "true",
+          "motion": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:amp_frame",
+            "params": {},
+            "modifiers": "null",
+            "noise": "null",
+            "clip": "null",
+            "scale": "null",
+            "history_length": "10",
+            "flatten_history_dim": "true"
+          }
+        },
+        "critic_state": {
+          "concatenate_terms": "true",
+          "concatenate_dim": "-1",
+          "enable_corruption": "false",
+          "history_length": "null",
+          "flatten_history_dim": "true",
+          "state": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:critic_state",
+            "params": {},
+            "modifiers": "null",
+            "noise": "null",
+            "clip": "null",
+            "scale": "null",
+            "history_length": "0",
+            "flatten_history_dim": "true"
+          }
+        },
+        "action_bounds": {
+          "concatenate_terms": "true",
+          "concatenate_dim": "-1",
+          "enable_corruption": "false",
+          "history_length": "null",
+          "flatten_history_dim": "true",
+          "bounds": {
+            "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:action_bounds",
+            "params": {},
+            "modifiers": "null",
+            "noise": "null",
+            "clip": "null",
+            "scale": "null",
+            "history_length": "0",
+            "flatten_history_dim": "true"
+          }
+        }
+      },
+      "actions": {
+        "joint_pos": {
+          "class_type": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:PhysHSIJointPositionAction",
+          "asset_name": "robot",
+          "debug_vis": "false",
+          "clip": "null",
+          "joint_names": [
+            ".*"
+          ],
+          "scale": "0.25",
+          "offset": "0.0",
+          "preserve_order": "false",
+          "use_default_offset": "true"
+        }
+      },
+      "events": {
+        "reset_robot_root": {
+          "func": "isaaclab.envs.mdp.events:reset_root_state_uniform",
+          "params": {
+            "pose_range": {
+              "x": [
+                "-0.5",
+                "0.5"
+              ],
+              "y": [
+                "-0.5",
+                "0.5"
+              ],
+              "yaw": [
+                "-3.14",
+                "3.14"
+              ]
+            },
+            "velocity_range": {
+              "x": [
+                "-0.5",
+                "0.5"
+              ],
+              "y": [
+                "-0.5",
+                "0.5"
+              ],
+              "z": [
+                "-0.5",
+                "0.5"
+              ],
+              "roll": [
+                "-0.5",
+                "0.5"
+              ],
+              "pitch": [
+                "-0.5",
+                "0.5"
+              ],
+              "yaw": [
+                "-0.5",
+                "0.5"
+              ]
+            },
+            "asset_cfg": {
+              "name": "robot",
+              "joint_names": "null",
+              "joint_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "fixed_tendon_names": "null",
+              "fixed_tendon_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "body_names": "null",
+              "body_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "object_collection_names": "null",
+              "object_collection_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "preserve_order": "false"
+            }
+          },
+          "mode": "reset",
+          "interval_range_s": "null",
+          "is_global_time": "false",
+          "min_step_count_between_reset": "0"
+        },
+        "reset_robot_joints": {
+          "func": "isaaclab.envs.mdp.events:reset_joints_by_offset",
+          "params": {
+            "position_range": [
+              "0.0",
+              "0.0"
+            ],
+            "velocity_range": [
+              "0.0",
+              "0.0"
+            ]
+          },
+          "mode": "reset",
+          "interval_range_s": "null",
+          "is_global_time": "false",
+          "min_step_count_between_reset": "0"
+        },
+        "reset_box": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:reset_scene",
+          "params": {},
+          "mode": "reset",
+          "interval_range_s": "null",
+          "is_global_time": "false",
+          "min_step_count_between_reset": "0"
+        },
+        "box_material": {
+          "func": "isaaclab.envs.mdp.events:randomize_rigid_body_material",
+          "params": {
+            "asset_cfg": {
+              "name": "box",
+              "joint_names": "null",
+              "joint_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "fixed_tendon_names": "null",
+              "fixed_tendon_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "body_names": "null",
+              "body_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "object_collection_names": "null",
+              "object_collection_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "preserve_order": "false"
+            },
+            "static_friction_range": [
+              "0.3",
+              "2.0"
+            ],
+            "dynamic_friction_range": [
+              "0.4",
+              "1.5"
+            ],
+            "restitution_range": [
+              "0.0",
+              "0.2"
+            ],
+            "num_buckets": "64"
+          },
+          "mode": "startup",
+          "interval_range_s": "null",
+          "is_global_time": "false",
+          "min_step_count_between_reset": "0"
+        },
+        "box_mass": {
+          "func": "isaaclab.envs.mdp.events:randomize_rigid_body_mass",
+          "params": {
+            "asset_cfg": {
+              "name": "box",
+              "joint_names": "null",
+              "joint_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "fixed_tendon_names": "null",
+              "fixed_tendon_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "body_names": "null",
+              "body_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "object_collection_names": "null",
+              "object_collection_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "preserve_order": "false"
+            },
+            "mass_distribution_params": [
+              "0.1",
+              "1.5"
+            ],
+            "operation": "scale",
+            "recompute_inertia": "true"
+          },
+          "mode": "reset",
+          "interval_range_s": "null",
+          "is_global_time": "false",
+          "min_step_count_between_reset": "0"
+        },
+        "default_joint_pos": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:randomize_default_joint_pos",
+          "params": {
+            "magnitude": "0.0"
+          },
+          "mode": "startup",
+          "interval_range_s": "null",
+          "is_global_time": "false",
+          "min_step_count_between_reset": "0"
+        },
+        "torso_com": {
+          "func": "isaaclab.envs.mdp.events:randomize_rigid_body_com",
+          "params": {
+            "asset_cfg": {
+              "name": "robot",
+              "joint_names": "null",
+              "joint_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "fixed_tendon_names": "null",
+              "fixed_tendon_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "body_names": [
+                "torso_link"
+              ],
+              "body_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "object_collection_names": "null",
+              "object_collection_ids": [
+                "null",
+                "null",
+                "null"
+              ],
+              "preserve_order": "false"
+            },
+            "com_range": {
+              "x": [
+                "-0.025",
+                "0.025"
+              ],
+              "y": [
+                "-0.05",
+                "0.05"
+              ],
+              "z": [
+                "-0.05",
+                "0.05"
+              ]
+            }
+          },
+          "mode": "startup",
+          "interval_range_s": "null",
+          "is_global_time": "false",
+          "min_step_count_between_reset": "0"
+        },
+        "push_robot": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:push_velocity_increment",
+          "params": {
+            "velocity_range": {
+              "x": [
+                "-0.5",
+                "0.5"
+              ],
+              "y": [
+                "-0.5",
+                "0.5"
+              ],
+              "z": [
+                "-0.2",
+                "0.2"
+              ],
+              "roll": [
+                "-0.52",
+                "0.52"
+              ],
+              "pitch": [
+                "-0.52",
+                "0.52"
+              ],
+              "yaw": [
+                "-0.78",
+                "0.78"
+              ]
+            }
+          },
+          "mode": "interval",
+          "interval_range_s": [
+            "1.0",
+            "3.0"
+          ],
+          "is_global_time": "false",
+          "min_step_count_between_reset": "0"
+        }
+      },
+      "rerender_on_reset": "true",
+      "wait_for_textures": "true",
+      "xr": "null",
+      "teleop_devices": {
+        "devices": {}
+      },
+      "export_io_descriptors": "false",
+      "log_dir": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled5/2026-10-23_17-35-18_wall5_v28_clean_camera_fresh_20261023_173513",
+      "is_finite_horizon": "false",
+      "episode_length_s": "20.0",
+      "rewards": {
+        "dof_acc": {
+          "func": "isaaclab.envs.mdp.rewards:joint_acc_l2",
+          "params": {},
+          "weight": "-1.0e-07"
+        },
+        "action_rate": {
+          "func": "isaaclab.envs.mdp.rewards:action_rate_l2",
+          "params": {},
+          "weight": "-0.03"
+        },
+        "torques": {
+          "func": "isaaclab.envs.mdp.rewards:joint_torques_l2",
+          "params": {},
+          "weight": "-0.0001"
+        },
+        "dof_vel": {
+          "func": "isaaclab.envs.mdp.rewards:joint_vel_l2",
+          "params": {},
+          "weight": "-0.0002"
+        },
+        "dof_pos_limits": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:reference_joint_pos_limits",
+          "params": {},
+          "weight": "-5.0"
+        },
+        "dof_vel_limits": {
+          "func": "isaaclab.envs.mdp.rewards:joint_vel_limits",
+          "params": {
+            "soft_ratio": "1.0"
+          },
+          "weight": "-0.001"
+        },
+        "undesired_contacts": "null",
+        "walk_task": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:walk_task",
+          "params": {},
+          "weight": "1.0"
+        },
+        "carryup_task": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward",
+          "params": {
+            "name": "carryup_task"
+          },
+          "weight": "1.0"
+        },
+        "standup_task": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_x2_rewards:task_reward",
+          "params": {
+            "name": "standup_task"
+          },
+          "weight": "0.4"
+        },
+        "slow_pickup": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward",
+          "params": {
+            "name": "slow_pickup"
+          },
+          "weight": "-0.0005"
+        },
+        "stable_grasp": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward",
+          "params": {
+            "name": "stable_grasp"
+          },
+          "weight": "0.2"
+        },
+        "arm_speed_pickup": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward",
+          "params": {
+            "name": "arm_speed_pickup"
+          },
+          "weight": "-0.02"
+        },
+        "arm_acc_pickup": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:grasp_task_reward",
+          "params": {
+            "name": "arm_acc_pickup"
+          },
+          "weight": "-2.0e-05"
+        },
+        "grip_force_cap": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_x2_rewards:task_reward",
+          "params": {
+            "name": "grip_force_cap"
+          },
+          "weight": "-0.02"
+        },
+        "held_hand_speed": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:held_joint_excess",
+          "params": {
+            "acceleration": "false",
+            "threshold": "1.0"
+          },
+          "weight": "-0.02"
+        },
+        "held_hand_acc": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:held_joint_excess",
+          "params": {
+            "acceleration": "true",
+            "threshold": "20.0"
+          },
+          "weight": "-2.0e-05"
+        },
+        "waist_yaw_penalty": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:waist_yaw",
+          "params": {},
+          "weight": "-0.5"
+        },
+        "search_turn": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_walled:search_turn",
+          "params": {},
+          "weight": "0.5"
+        },
+        "early_failure": "null",
+        "alive": {
+          "func": "isaaclab.envs.mdp.rewards:is_alive",
+          "params": {},
+          "weight": "3.0"
+        }
+      },
+      "terminations": {
+        "time_out": {
+          "func": "isaaclab.envs.mdp.terminations:time_out",
+          "params": {},
+          "time_out": "true"
+        },
+        "invalid": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox:invalid_state",
+          "params": {},
+          "time_out": "false"
+        },
+        "success": "null",
+        "fell": "null",
+        "tipped": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_wall5:tipped",
+          "params": {},
+          "time_out": "false"
+        },
+        "fell_pelvis": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:fallen_pelvis",
+          "params": {},
+          "time_out": "false"
+        },
+        "fell_head": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:fallen_head",
+          "params": {},
+          "time_out": "false"
+        },
+        "fell_hip": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:fallen_hip",
+          "params": {},
+          "time_out": "false"
+        },
+        "box_speed": {
+          "func": "perceptual_ball.tasks.manager_based.perceptual_ball.mdp.carrybox_physhsi:box_speed",
+          "params": {},
+          "time_out": "false"
+        }
+      },
+      "curriculum": "null",
+      "commands": "null",
+      "walled_variant": "walled5",
+      "depth_backend": "warp",
+      "reference_init": "true",
+      "reset_skill_probabilities": [
+        "0.6666666666666666",
+        "0.16666666666666666",
+        "0.16666666666666666"
+      ],
+      "search_prob": "0.02",
+      "obstacle_cylinder_count": "3",
+      "push_warmup_iterations": "5000",
+      "push_ramp_iterations": "10000",
+      "depth_noise_std_m": "0.0",
+      "depth_edge_threshold_m": "0.15",
+      "depth_edge_probability": "0.0",
+      "depth_hole_probability": "0.0",
+      "depth_stereo_near_m": "0.0",
+      "depth_stereo_far_m": "0.0",
+      "depth_max_delay_steps": "0",
+      "depth_delay_probability": "0.0",
+      "depth_freeze_probability": "0.0",
+      "depth_freeze_max_steps": "1",
+      "camera_position_error_m": "0.0",
+      "camera_rotation_error_deg": "0.0",
+      "pose_visibility_supervision": "true",
+      "depth_in_metres": "true",
+      "reference_link_velocity": "true",
+      "task_box_distance_3d": "true",
+      "reward_geometry": {
+        "profile": "g1_grasp_geometry_v23",
+        "body_frame": "pelvis",
+        "near_distance": "0.9",
+        "carryup_box": "0.7438444985656549",
+        "success_box": "0.6957789064440506",
+        "held_box": "0.6356969162920453",
+        "crouch_box": "0.6717461103832484",
+        "slow_pickup_box": "0.6356969162920453",
+        "stand_pelvis": "0.7627523159232374",
+        "stand_gate_low": "0.5778426635782101",
+        "stand_gate_span": "0.18490965234502724",
+        "crouch_pelvis": "0.6934111962938522",
+        "fallen_pelvis": "0.23113706543128407",
+        "stand_head": "0.9322679460906296",
+        "success_head": "0.877428655144122",
+        "fallen_head": "0.438714327572061",
+        "carryup_height_exp": "2.4965884056188097",
+        "stand_pelvis_exp": "6.9222995325934535",
+        "stand_head_exp": "7.294040333055647"
+      },
+      "grasp_geometry": {
+        "profile": "bilateral_surface_contact_clearance_v23",
+        "stance_target_m": "0.52",
+        "stance_width_m": "0.12",
+        "travel_end_m": "0.6",
+        "travel_blend_m": "0.2",
+        "crowding_start_m": "0.4",
+        "crowding_width_m": "0.15",
+        "reach_gate_3d_m": "0.9",
+        "reach_gate_fade_m": "0.08",
+        "palm_surface_tolerance_m": "0.04",
+        "reach_scale_m": "0.18",
+        "contact_threshold_n": "1.0",
+        "contact_saturation_n": "5.0",
+        "lift_start_m": "0.01",
+        "lift_span_m": "0.24",
+        "stance_weight": "0.2",
+        "crowding_weight": "0.5",
+        "reach_weight": "1.5",
+        "contact_weight": "0.5",
+        "bilateral_weight": "1.5",
+        "lift_weight": "2.5"
+      },
+      "height_termination_terms": [
+        "fell_pelvis",
+        "fell_head",
+        "fell_hip"
+      ],
+      "robot_reset_profile": "physhsi_physical_reset_fixed_four_way_quota_v27",
+      "ground_box_reset": "false",
+      "held_box_reference_reset": "true",
+      "reference_motion_dataset": "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox",
+      "reset_reference_probability": "0.8",
+      "ground_pickup_reset_frame_range": [
+        "0",
+        "32"
+      ]
+    },
+    "agent": {
+      "seed": "42",
+      "device": "cuda:0",
+      "num_steps_per_env": "24",
+      "max_iterations": "40000",
+      "empirical_normalization": "null",
+      "obs_groups": {
+        "policy": [
+          "proprio",
+          "perception"
+        ],
+        "critic": [
+          "critic_state"
+        ]
+      },
+      "clip_actions": "9.0",
+      "save_interval": "200",
+      "experiment_name": "g1_carrybox_depth/walled5",
+      "run_name": "wall5_v28_clean_camera_fresh_20261023_173513",
+      "logger": "tensorboard",
+      "neptune_project": "isaaclab",
+      "wandb_project": "isaaclab",
+      "resume": "false",
+      "load_run": ".*",
+      "load_checkpoint": "model_.*.pt",
+      "class_name": "CarryBoxWall5OnPolicyRunner",
+      "policy": {
+        "class_name": "CarryBoxWall5ActorCritic",
+        "init_noise_std": "1.0",
+        "noise_std_type": "log",
+        "actor_obs_normalization": "false",
+        "critic_obs_normalization": "false",
+        "actor_hidden_dims": [
+          "512",
+          "256",
+          "256"
+        ],
+        "critic_hidden_dims": [
+          "512",
+          "256",
+          "256"
+        ],
+        "activation": "elu"
+      },
+      "algorithm": {
+        "class_name": "CarryBoxWall5PPO",
+        "num_learning_epochs": "5",
+        "num_mini_batches": "4",
+        "learning_rate": "0.0003",
+        "schedule": "adaptive",
+        "gamma": "0.99",
+        "lam": "0.95",
+        "entropy_coef": "0.01",
+        "desired_kl": "0.01",
+        "max_grad_norm": "1.0",
+        "value_loss_coef": "1.0",
+        "use_clipped_value_loss": "true",
+        "clip_param": "0.2",
+        "normalize_advantage_per_mini_batch": "false",
+        "rnd_cfg": "null",
+        "symmetry_cfg": "null",
+        "pose_aux_coef": "1.0",
+        "amp_coef": "0.25",
+        "amp_reward_scale": "0.5",
+        "amp_lr": "5.0e-05",
+        "amp_data_dir": "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/motions/findbox",
+        "action_bound_coef": "0.01",
+        "max_action_std": "1.0"
+      }
+    }
+  },
+  "source_symbols": {
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/__init__.py": {},
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/base/legged_robot_config.py": {
+      "LeggedRobotCfg": 34,
+      "LeggedRobotCfgPPO": 334,
+      "env": 35,
+      "terrain": 52,
+      "commands": 81,
+      "init_state": 94,
+      "control": 103,
+      "asset": 145,
+      "domain_rand": 189,
+      "rewards": 234,
+      "normalization": 290,
+      "noise": 300,
+      "viewer": 311,
+      "sim": 316,
+      "policy": 337,
+      "algorithm": 343,
+      "runner": 358,
+      "ranges": 88,
+      "box": 182,
+      "chair": 184,
+      "camera": 186,
+      "scales": 235,
+      "obs_scales": 291,
+      "noise_scales": 303,
+      "physx": 321
+    },
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox.py": {
+      "LeggedRobot": 53,
+      "__init__": 54,
+      "step": 94,
+      "play_dataset_step": 121,
+      "_refresh_sim_tensors": 151,
+      "compute_amp_observations": 157,
+      "post_physics_step": 189,
+      "check_termination": 284,
+      "reset_idx": 310,
+      "update_command_curriculum": 377,
+      "update_action_curriculum": 392,
+      "compute_reward": 411,
+      "compute_task_observations": 438,
+      "compute_observations": 480,
+      "compute_termination_observations": 512,
+      "create_sim": 530,
+      "create_cameras": 554,
+      "post_process_camera_tensor": 571,
+      "set_camera": 582,
+      "_process_rigid_shape_props": 590,
+      "refresh_actor_rigid_shape_props": 622,
+      "_process_dof_props": 641,
+      "_process_rigid_body_props": 672,
+      "refresh_actor_rigid_body_props": 690,
+      "_post_physics_step_callback": 712,
+      "_resample_commands": 721,
+      "_compute_torques": 737,
+      "_reset_actors": 770,
+      "_reset_default": 780,
+      "_reset_ref_state_init": 797,
+      "_reset_hybrid_state_init": 830,
+      "_reset_boxes": 843,
+      "_reset_task": 903,
+      "_reset_env_tensors": 968,
+      "_push_robots": 984,
+      "_disturbance_robots": 995,
+      "_get_noise_scale_vec": 1002,
+      "_can_see_tag": 1030,
+      "_init_buffers": 1054,
+      "_prepare_reward_function": 1236,
+      "_create_ground_plane": 1261,
+      "_create_heightfield": 1271,
+      "_create_trimesh": 1290,
+      "_load_platform_asset": 1306,
+      "_create_platforms": 1318,
+      "_load_box_asset": 1342,
+      "_create_box": 1397,
+      "_create_envs": 1423,
+      "_get_env_origins": 1636,
+      "_parse_cfg": 1661,
+      "_get_base_heights": 1673,
+      "_draw_debug_vis": 1677,
+      "_reward_tracking_lin_vel": 1701,
+      "_reward_tracking_ang_vel": 1706,
+      "_reward_tracking_yaw": 1711,
+      "_reward_lin_vel_z": 1715,
+      "_reward_ang_vel_xy": 1719,
+      "_reward_orientation": 1723,
+      "_reward_dof_acc": 1727,
+      "_reward_joint_power": 1731,
+      "_reward_base_height": 1735,
+      "_reward_base_height_wrt_feet": 1740,
+      "_reward_feet_clearance": 1747,
+      "_reward_action_rate": 1760,
+      "_reward_smoothness": 1764,
+      "_reward_torques": 1768,
+      "_reward_dof_vel": 1772,
+      "_reward_collision": 1776,
+      "_reward_termination": 1780,
+      "_reward_success_termination": 1784,
+      "_reward_dof_pos_limits": 1788,
+      "_reward_dof_vel_limits": 1794,
+      "_reward_torque_limits": 1799,
+      "_reward_feet_air_time": 1803,
+      "_reward_feet_stumble": 1810,
+      "_reward_stand_still": 1814,
+      "_reward_feet_contact_forces": 1818,
+      "_reward_delta_torques": 1822,
+      "_reward_no_fly": 1825,
+      "_reward_joint_tracking_error": 1832,
+      "_reward_joint_deviation": 1835,
+      "_reward_feet_edge": 1838,
+      "_reward_arm_joint_deviation": 1848,
+      "_reward_leg_joint_deviation": 1851,
+      "_reward_leg_power_symmetry": 1854,
+      "_reward_arm_power_symmetry": 1860,
+      "_reward_feet_distance_lateral": 1892,
+      "_reward_feet_ground_parallel": 1875,
+      "_reward_feet_parallel": 1880,
+      "_reward_knee_distance_lateral": 1884,
+      "_reward_feet_slip": 1901,
+      "_reward_contact_momentum": 1906,
+      "_reward_deviation_all_joint": 1911,
+      "_reward_deviation_arm_joint": 1914,
+      "_reward_deviation_leg_joint": 1917,
+      "_reward_deviation_hip_joint": 1920,
+      "_reward_deviation_waist_joint": 1923,
+      "_reward_deviation_ankle_joint": 1926,
+      "_reward_robot2object_pos": 1929,
+      "_reward_robot2object_vel": 1934,
+      "_reward_hand2object_pos": 1940,
+      "_reward_carry_height": 1951,
+      "_reward_heading": 1959,
+      "_reward_walk_task": 1966,
+      "_reward_carryup_task": 1987,
+      "_reward_relocation_task": 2003,
+      "_reward_standup_task": 2046
+    },
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox_config.py": {
+      "G1Cfg": 4,
+      "G1CfgPPO": 343,
+      "env": 5,
+      "init_state": 23,
+      "control": 64,
+      "terrain": 112,
+      "asset": 115,
+      "domain_rand": 192,
+      "rewards": 237,
+      "normalization": 286,
+      "noise": 295,
+      "dataset": 305,
+      "amp": 311,
+      "viewer": 319,
+      "sim": 324,
+      "algorithm": 344,
+      "runner": 346,
+      "box": 154,
+      "camera": 187,
+      "scales": 238,
+      "obs_scales": 287,
+      "noise_scales": 298,
+      "physx": 330
+    },
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/g1/carrybox_resume_config.py": {
+      "G1Cfg": 4,
+      "G1CfgPPO": 343,
+      "env": 5,
+      "init_state": 23,
+      "control": 64,
+      "terrain": 112,
+      "asset": 115,
+      "domain_rand": 192,
+      "rewards": 237,
+      "normalization": 286,
+      "noise": 295,
+      "dataset": 305,
+      "amp": 311,
+      "viewer": 319,
+      "sim": 324,
+      "algorithm": 344,
+      "runner": 346,
+      "box": 154,
+      "camera": 187,
+      "scales": 238,
+      "obs_scales": 287,
+      "noise_scales": 298,
+      "physx": 330
+    },
+    "/home/cao/PhysHSI/legged_gym/legged_gym/envs/motionlib/motionlib_carrybox.py": {
+      "MotionLib": 16,
+      "euler_from_quaternion": 329,
+      "__init__": 17,
+      "load_motions": 28,
+      "process_motions": 94,
+      "sample_motions": 175,
+      "sample_time_rsi": 179,
+      "get_motion_state": 185,
+      "get_obj_motion_state": 212,
+      "get_goal_motion_state": 242,
+      "get_amp_hist_obs": 254,
+      "calc_blend": 291,
+      "get_expert_obs": 297,
+      "blend_motion": 218,
+      "gather_and_interp": 272
+    },
+    "/home/cao/PhysHSI/legged_gym/legged_gym/scripts/play.py": {
+      "play": 22
+    },
+    "/home/cao/PhysHSI/rsl_rl/rsl_rl/algorithms/him_ppo.py": {
+      "HIMPPO": 40,
+      "__init__": 42,
+      "init_storage": 136,
+      "test_mode": 139,
+      "train_mode": 142,
+      "act": 145,
+      "process_env_step": 162,
+      "process_amp_state": 175,
+      "compute_returns": 178,
+      "update": 182
+    },
+    "/home/cao/PhysHSI/rsl_rl/rsl_rl/modules/amp.py": {
+      "AMP": 23,
+      "get_activation": 134,
+      "__init__": 25,
+      "compute_grad_pen": 64,
+      "forward": 94,
+      "compute_loss": 99,
+      "predict_reward": 115,
+      "combine_reward": 124
+    },
+    "/home/cao/PhysHSI/rsl_rl/rsl_rl/modules/actor_critic.py": {
+      "get_activation": 37,
+      "RunningMeanStd": 57,
+      "Normalization": 80,
+      "ActorCritic": 92,
+      "__init__": 94,
+      "update": 65,
+      "__call__": 84,
+      "init_weights": 155,
+      "reset": 160,
+      "forward": 163,
+      "action_mean": 167,
+      "action_std": 171,
+      "entropy": 175,
+      "update_distribution": 178,
+      "act": 182,
+      "get_actions_log_prob": 186,
+      "act_inference": 189,
+      "evaluate": 193
+    },
+    "/home/cao/PhysHSI/rsl_rl/rsl_rl/runners/him_on_policy_runner.py": {
+      "HIMOnPolicyRunner": 49,
+      "__init__": 51,
+      "learn": 103,
+      "log": 206,
+      "save": 296,
+      "load": 305,
+      "get_inference_policy": 317
+    },
+    "/home/cao/PhysHSI/rsl_rl/rsl_rl/storage/him_rollout_storage.py": {
+      "HIMRolloutStorage": 36,
+      "Transition": 37,
+      "__init__": 38,
+      "add_transitions": 92,
+      "clear": 51,
+      "compute_returns": 111,
+      "get_statistics": 137,
+      "mini_batch_generator": 145
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_amp.py": {
+      "pack_frame": 30,
+      "joint_mapping": 35,
+      "resolve_dataset_path": 41,
+      "clip_group": 48,
+      "FindBoxMotionLibrary": 59,
+      "__init__": 60,
+      "sample_expert_amp_obs": 127,
+      "windows": 134,
+      "blend": 149
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_wall5.py": {
+      "grasp_reward_geometry": 13,
+      "grasp_components": 33,
+      "ground_pickup_frame_ids": 72,
+      "pack_task_frame": 100,
+      "Wall5MotionLibrary": 123,
+      "__init__": 124,
+      "windows": 150
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_wall10.py": {
+      "pack_frame": 11,
+      "Wall10MotionLibrary": 16,
+      "lift_hold_mask": 80,
+      "task_rewards": 89,
+      "__init__": 22,
+      "windows": 48,
+      "sample_window_parameters": 63,
+      "sample_expert_amp_obs": 74
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_physhsi.py": {
+      "hybrid_probabilities": 11,
+      "fixed_hybrid": 21,
+      "sample_hybrid": 35,
+      "interpolate": 42,
+      "PhysicalActionDelay": 53,
+      "spawn_physhsi_robot": 73,
+      "__init__": 55,
+      "reset": 61,
+      "advance": 66
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_reward_geometry.py": {
+      "g1_reward_geometry": 29,
+      "reward_geometry": 47
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_walled.py": {
+      "YawCurriculum": 6,
+      "search_reward": 30,
+      "corrupt_depth_m": 37,
+      "PairedDepthBuffer": 62,
+      "__init__": 64,
+      "set_iteration": 12,
+      "degrees": 20,
+      "reset": 74,
+      "update": 79
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_warp_camera.py": {
+      "visual_mesh": 19,
+      "WarpDepthCamera": 63,
+      "WarpDepthCameraCfg": 187,
+      "data": 65,
+      "image_shape": 70,
+      "_initialize_impl": 73,
+      "_parent_poses": 146,
+      "_update_poses": 150,
+      "_update_buffers_impl": 155,
+      "set_mount_poses": 169,
+      "set_world_poses": 174
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/carrybox_raycast.py": {
+      "optical_depth": 6,
+      "optical_depth_with_hits": 36
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof.py": {},
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox.py": {
+      "square_box_symmetries": 16,
+      "box_pose_loss": 25,
+      "CarryBoxActorCritic": 41,
+      "CarryBoxPPO": 86,
+      "CarryBoxOnPolicyRunner": 258,
+      "__init__": 94,
+      "_features": 65,
+      "update_distribution": 68,
+      "act": 72,
+      "act_inference": 76,
+      "evaluate": 79,
+      "predict_box_pose": 82,
+      "init_storage": 112,
+      "_ensure_motion_library": 121,
+      "_process_amp": 132,
+      "process_env_step": 160,
+      "_pose_loss": 176,
+      "_adapt_learning_rate": 179,
+      "_training_outputs": 182,
+      "_policy_regularization": 186,
+      "_project_policy_parameters": 190,
+      "update": 193,
+      "_update_amp": 233,
+      "_construct_algorithm": 259,
+      "environment_contract": 268,
+      "learn": 272,
+      "warm_start": 291,
+      "save": 310,
+      "load": 325,
+      "update_with_iteration": 279
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall5.py": {
+      "CarryBoxWall5ActorCritic": 12,
+      "visible_box_pose_loss": 29,
+      "all_box_pose_loss": 40,
+      "action_mean_bound_loss": 51,
+      "Wall5AMP": 61,
+      "CarryBoxWall5PPO": 112,
+      "CarryBoxWall5OnPolicyRunner": 269,
+      "__init__": 114,
+      "evaluate": 25,
+      "update_statistics": 74,
+      "set_statistics": 93,
+      "normalized": 98,
+      "compute_loss": 101,
+      "init_storage": 146,
+      "_ensure_motion_library": 157,
+      "_training_outputs": 168,
+      "_pose_loss": 180,
+      "_policy_regularization": 183,
+      "_project_policy_parameters": 189,
+      "_adapt_learning_rate": 195,
+      "update": 211,
+      "_update_amp": 225,
+      "_process_amp": 237,
+      "warm_start": 270,
+      "load": 276,
+      "_construct_algorithm": 285
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py": {
+      "CarryBoxWall10ActorCritic": 11,
+      "PhysHSIAMP": 16,
+      "CarryBoxWall10PPO": 29,
+      "CarryBoxWall10OnPolicyRunner": 186,
+      "_features": 12,
+      "__init__": 34,
+      "forward": 25,
+      "_ensure_motion_library": 64,
+      "init_storage": 72,
+      "_sample_update_inputs": 76,
+      "_paired_training_outputs": 93,
+      "update": 102,
+      "_construct_algorithm": 187,
+      "load": 198
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/amp.py": {
+      "AMP": 21,
+      "SkillAMP": 76,
+      "__init__": 93,
+      "forward": 39,
+      "set_statistics": 98,
+      "compute_grad_pen": 47,
+      "compute_loss": 60,
+      "predict_reward": 108,
+      "trunk_parameters": 102,
+      "head_parameters": 105,
+      "compute_skill_loss": 121
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/rsl_rl_extensions/modules.py": {
+      "DepthCNNEncoder": 19,
+      "PerceptionActorCritic": 77,
+      "__init__": 101,
+      "forward": 71,
+      "_actor_features": 197,
+      "update_distribution": 204,
+      "act": 214,
+      "act_inference": 218,
+      "evaluate": 221,
+      "predict_ball_state": 229
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/__init__.py": {},
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_env_cfg.py": {
+      "CarryBoxSceneCfg": 19,
+      "CarryBoxObservationsCfg": 48,
+      "CarryBoxActionsCfg": 84,
+      "CarryBoxEventsCfg": 89,
+      "CarryBoxRewardsCfg": 98,
+      "CarryBoxTerminationsCfg": 111,
+      "CarryBoxEnvCfg": 120,
+      "CarryBoxAlgorithmCfg": 139,
+      "CarryBoxPPORunnerCfg": 148,
+      "ProprioCfg": 50,
+      "DepthCfg": 57,
+      "TargetCfg": 64,
+      "AmpCfg": 71,
+      "__post_init__": 73
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py": {
+      "WalledJointPositionAction": 16,
+      "spawn_walled_robot": 25,
+      "spawn_locked_obstacle": 60,
+      "obstacle": 72,
+      "WalledSceneCfg": 83,
+      "WalledRewardsCfg": 99,
+      "CarryBoxWalled3EnvCfg": 119,
+      "CarryBoxWalled4EnvCfg": 206,
+      "CarryBoxWalled3PPORunnerCfg": 212,
+      "CarryBoxWalled4PPORunnerCfg": 224,
+      "process_actions": 18,
+      "__post_init__": 218
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py": {
+      "spawn_wall5_full_body_robot": 16,
+      "Wall5ObservationsCfg": 29,
+      "CarryBoxWalled5EnvCfg": 51,
+      "CarryBoxWalled5PPORunnerCfg": 122,
+      "CriticCfg": 31,
+      "ActionBoundsCfg": 41,
+      "__post_init__": 43
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall10_env_cfg.py": {
+      "Wall10ObservationsCfg": 21,
+      "Wall10RewardsCfg": 32,
+      "CarryBoxWalled10EnvCfg": 46,
+      "CarryBoxWalled10PPORunnerCfg": 112,
+      "CriticCfg": 23,
+      "__post_init__": 25
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox.py": {
+      "amp_frame": 12,
+      "proprioception": 22,
+      "depth_image": 30,
+      "box_pose_target": 36,
+      "reset_box": 46,
+      "hand_contacts": 64,
+      "lift_geometry": 70,
+      "lift_success": 78,
+      "approach_box": 85,
+      "reach_box": 94,
+      "lift_box": 108,
+      "invalid_state": 113,
+      "CarryBoxEnv": 122,
+      "step": 124,
+      "terminal_frame": 139,
+      "_reset_idx": 142
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_state.py": {
+      "LiftHoldState": 5,
+      "__init__": 6,
+      "reset": 12,
+      "update": 16
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py": {
+      "state": 13,
+      "captured_pair": 37,
+      "depth_image": 66,
+      "box_pose_target": 70,
+      "heading": 74,
+      "task_box_distance": 78,
+      "initialize_reference": 89,
+      "reference_ground_correction": 190,
+      "obstacle_pose": 233,
+      "write_obstacle_pose": 238,
+      "reset_scene": 244,
+      "reset_camera": 329,
+      "held_joint_excess": 348,
+      "waist_yaw": 356,
+      "search_turn": 362,
+      "success_pulse": 376,
+      "failure_event": 384,
+      "tipped": 397,
+      "randomize_default_joint_pos": 402,
+      "push_velocity": 413,
+      "head_height": 428,
+      "reference_joint_pos_limits": 433,
+      "fallen_pelvis": 442,
+      "fallen_head": 448,
+      "fallen": 452,
+      "record_episode_metrics": 457,
+      "WalledCarryBoxEnv": 488,
+      "step": 489,
+      "terminal_frame": 496,
+      "set_training_iteration": 499,
+      "checkpoint_contract": 502,
+      "_reset_idx": 532
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall5.py": {
+      "fixed_skill_ids": 18,
+      "action_bounds": 26,
+      "reset_scene": 34,
+      "locomotion_stability": 40,
+      "walk_task": 55,
+      "grasp_state": 59,
+      "grasp_task_reward": 87,
+      "push_velocity_increment": 101,
+      "critic_state": 119,
+      "amp_frame": 144,
+      "pose_visible": 158,
+      "tipped": 170,
+      "Wall5CarryBoxEnv": 175,
+      "depth_contract": 179,
+      "step": 193,
+      "_reset_idx": 234,
+      "terminal_frame": 252,
+      "checkpoint_contract": 255
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall10.py": {
+      "variable_box_depth": 22,
+      "Wall10Actuator": 64,
+      "Wall10JointPositionAction": 95,
+      "spawn_box": 121,
+      "Wall10DepthCamera": 143,
+      "state": 165,
+      "robot_material": 183,
+      "reset_scene": 195,
+      "proprioception": 242,
+      "body_ids": 256,
+      "critic_state": 263,
+      "amp_frame": 276,
+      "depth_image": 285,
+      "reward_terms": 289,
+      "task_reward": 321,
+      "normalized_torque": 325,
+      "torque_limits": 330,
+      "velocity_limits": 335,
+      "policy_acceleration": 340,
+      "Wall10CarryBoxEnv": 344,
+      "__init__": 345,
+      "reset": 112,
+      "compute": 83,
+      "apply_actions": 101,
+      "_initialize_impl": 145,
+      "_update_buffers_impl": 154,
+      "step": 353,
+      "terminal_frame": 373,
+      "_reset_idx": 376,
+      "depth_contract": 400,
+      "checkpoint_contract": 405
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_physhsi.py": {
+      "PhysHSIJointPositionAction": 10,
+      "initialize_reference": 37,
+      "reset_scene": 125,
+      "fallen_pelvis": 144,
+      "fallen_head": 148,
+      "fallen_hip": 155,
+      "box_speed": 162,
+      "__init__": 11,
+      "process_actions": 16,
+      "apply_actions": 22,
+      "reset": 26
+    },
+    "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_x2_rewards.py": {
+      "reward_terms": 12,
+      "task_reward": 74
+    }
+  },
+  "usd": {
+    "asset": "/home/cao/perceptual_ball/source/perceptual_ball/perceptual_ball/assets/robots/g1_29dof/g1_29dof.usd",
+    "note": "Authored asset only; task spawn/config overrides and runtime defaults are separate",
+    "urdf_mass_sum": 33.34114202000001,
+    "usd_mass_sum": 33.341142419492826,
+    "mass_max_abs_error": 2.0980834936068504e-07,
+    "bodies": {
+      "pelvis": {
+        "path": "/g1_29dof/pelvis",
+        "mass": 3.812999963760376,
+        "attrs": {
+          "physics:centerOfMass": "(0, 0, -0.07605)",
+          "physics:diagonalInertia": "(0.010549003, 0.0093089, 0.007918397)",
+          "physics:mass": "3.812999963760376",
+          "physics:principalAxes": "(0.99999994, 0, -0.00039914803, 0)",
+          "physxArticulation:enabledSelfCollisions": "False",
+          "physxArticulation:solverPositionIterationCount": "32",
+          "physxArticulation:solverVelocityIterationCount": "1"
+        }
+      },
+      "imu_in_pelvis": {
+        "path": "/g1_29dof/imu_in_pelvis",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      },
+      "left_hip_pitch_link": {
+        "path": "/g1_29dof/left_hip_pitch_link",
+        "mass": 1.350000023841858,
+        "attrs": {
+          "physics:centerOfMass": "(0.002741, 0.047791, -0.02606)",
+          "physics:diagonalInertia": "(0.0018151652, 0.0015342169, 0.0011621179)",
+          "physics:mass": "1.350000023841858",
+          "physics:principalAxes": "(0.9548625, 0.29396442, 0.030255565, 0.030122153)"
+        }
+      },
+      "left_hip_roll_link": {
+        "path": "/g1_29dof/left_hip_roll_link",
+        "mass": 1.5199999809265137,
+        "attrs": {
+          "physics:centerOfMass": "(0.029812, -0.001045, -0.087934)",
+          "physics:diagonalInertia": "(0.0025498595, 0.002411692, 0.0014875485)",
+          "physics:mass": "1.5199999809265137",
+          "physics:principalAxes": "(0.9778078, -0.000019716219, 0.20557573, -0.04037929)"
+        }
+      },
+      "left_hip_yaw_link": {
+        "path": "/g1_29dof/left_hip_yaw_link",
+        "mass": 1.7020000219345093,
+        "attrs": {
+          "physics:centerOfMass": "(-0.057709, -0.010981, -0.15078)",
+          "physics:diagonalInertia": "(0.007175749, 0.0077616577, 0.0016013937)",
+          "physics:mass": "1.7020000219345093",
+          "physics:principalAxes": "(0.95585203, -0.04607616, 0.2699745, 0.106478944)"
+        }
+      },
+      "left_knee_link": {
+        "path": "/g1_29dof/left_knee_link",
+        "mass": 1.9320000410079956,
+        "attrs": {
+          "physics:centerOfMass": "(0.005457, 0.003964, -0.12074)",
+          "physics:diagonalInertia": "(0.011277774, 0.011380441, 0.0014645847)",
+          "physics:mass": "1.9320000410079956",
+          "physics:principalAxes": "(0.923118, -0.03436149, -0.011982056, -0.38279116)"
+        }
+      },
+      "left_ankle_pitch_link": {
+        "path": "/g1_29dof/left_ankle_pitch_link",
+        "mass": 0.07400000095367432,
+        "attrs": {
+          "physics:centerOfMass": "(-0.007269, 0, 0.011137)",
+          "physics:diagonalInertia": "(0.0000069194975, 0.0000189, 0.000014080503)",
+          "physics:mass": "0.07400000095367432",
+          "physics:principalAxes": "(0.9722779, 0, -0.23382829, 0)"
+        }
+      },
+      "left_ankle_roll_link": {
+        "path": "/g1_29dof/left_ankle_roll_link",
+        "mass": 0.6079999804496765,
+        "attrs": {
+          "physics:centerOfMass": "(0.026505, 0, -0.016425)",
+          "physics:diagonalInertia": "(0.00021762145, 0.0016160998, 0.0016721787)",
+          "physics:mass": "0.6079999804496765",
+          "physics:principalAxes": "(0.99952835, 0.00077785755, 0.030700134, -0.00009749271)"
+        }
+      },
+      "pelvis_contact_link": {
+        "path": "/g1_29dof/pelvis_contact_link",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      },
+      "pelvis_contour_link": {
+        "path": "/g1_29dof/pelvis_contour_link",
+        "mass": 0.0010000000474974513,
+        "attrs": {
+          "physics:centerOfMass": "(0, 0, 0)",
+          "physics:diagonalInertia": "(1e-7, 1e-7, 1e-7)",
+          "physics:mass": "0.0010000000474974513",
+          "physics:principalAxes": "(1, 0, 0, 0)"
+        }
+      },
+      "right_hip_pitch_link": {
+        "path": "/g1_29dof/right_hip_pitch_link",
+        "mass": 1.350000023841858,
+        "attrs": {
+          "physics:centerOfMass": "(0.002741, -0.047791, -0.02606)",
+          "physics:diagonalInertia": "(0.0018151652, 0.0015342169, 0.0011621179)",
+          "physics:mass": "1.350000023841858",
+          "physics:principalAxes": "(0.9548625, -0.29396442, 0.030255565, -0.030122153)"
+        }
+      },
+      "right_hip_roll_link": {
+        "path": "/g1_29dof/right_hip_roll_link",
+        "mass": 1.5199999809265137,
+        "attrs": {
+          "physics:centerOfMass": "(0.029812, 0.001045, -0.087934)",
+          "physics:diagonalInertia": "(0.0025498595, 0.002411692, 0.0014875485)",
+          "physics:mass": "1.5199999809265137",
+          "physics:principalAxes": "(0.9778078, 0.000019716219, 0.20557573, 0.04037929)"
+        }
+      },
+      "right_hip_yaw_link": {
+        "path": "/g1_29dof/right_hip_yaw_link",
+        "mass": 1.7020000219345093,
+        "attrs": {
+          "physics:centerOfMass": "(-0.057709, 0.010981, -0.15078)",
+          "physics:diagonalInertia": "(0.007175749, 0.0077616577, 0.0016013937)",
+          "physics:mass": "1.7020000219345093",
+          "physics:principalAxes": "(0.95585203, 0.04607616, 0.2699745, -0.106478944)"
+        }
+      },
+      "right_knee_link": {
+        "path": "/g1_29dof/right_knee_link",
+        "mass": 1.9320000410079956,
+        "attrs": {
+          "physics:centerOfMass": "(0.005457, -0.003964, -0.12074)",
+          "physics:diagonalInertia": "(0.01137395, 0.01128433, 0.0014645213)",
+          "physics:mass": "1.9320000410079956",
+          "physics:principalAxes": "(0.92343646, 0.034527507, 0.011633517, -0.38201788)"
+        }
+      },
+      "right_ankle_pitch_link": {
+        "path": "/g1_29dof/right_ankle_pitch_link",
+        "mass": 0.07400000095367432,
+        "attrs": {
+          "physics:centerOfMass": "(-0.007269, 0, 0.011137)",
+          "physics:diagonalInertia": "(0.0000069194975, 0.0000189, 0.000014080503)",
+          "physics:mass": "0.07400000095367432",
+          "physics:principalAxes": "(0.9722779, 0, -0.23382829, 0)"
+        }
+      },
+      "right_ankle_roll_link": {
+        "path": "/g1_29dof/right_ankle_roll_link",
+        "mass": 0.6079999804496765,
+        "attrs": {
+          "physics:centerOfMass": "(0.026505, 0, -0.016425)",
+          "physics:diagonalInertia": "(0.00021762145, 0.0016160998, 0.0016721787)",
+          "physics:mass": "0.6079999804496765",
+          "physics:principalAxes": "(0.99952835, -0.00077785755, 0.030700134, 0.00009749271)"
+        }
+      },
+      "waist_yaw_link": {
+        "path": "/g1_29dof/waist_yaw_link",
+        "mass": 0.21400000154972076,
+        "attrs": {
+          "physics:centerOfMass": "(0.003494, 0.000233, 0.018034)",
+          "physics:diagonalInertia": "(0.00010771442, 0.000102205035, 0.00016353058)",
+          "physics:mass": "0.21400000154972076",
+          "physics:principalAxes": "(0.9456574, -0.016860604, -0.06495886, 0.31816387)"
+        }
+      },
+      "waist_roll_link": {
+        "path": "/g1_29dof/waist_roll_link",
+        "mass": 0.0860000029206276,
+        "attrs": {
+          "physics:centerOfMass": "(0, 0.000023, 0)",
+          "physics:diagonalInertia": "(0.000007079, 0.000006339, 0.000008245)",
+          "physics:mass": "0.0860000029206276",
+          "physics:principalAxes": "(1, 0, 0, 0)"
+        }
+      },
+      "torso_link": {
+        "path": "/g1_29dof/torso_link",
+        "mass": 6.78000020980835,
+        "attrs": {
+          "physics:centerOfMass": "(0.000931, 0.000346, 0.15082)",
+          "physics:diagonalInertia": "(0.059143797, 0.047013927, 0.02555828)",
+          "physics:mass": "6.78000020980835",
+          "physics:principalAxes": "(0.9996499, -0.00044259068, 0.026419315, 0.0014317776)"
+        }
+      },
+      "d435_link": {
+        "path": "/g1_29dof/d435_link",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      },
+      "head_link": {
+        "path": "/g1_29dof/head_link",
+        "mass": 1.0360000133514404,
+        "attrs": {
+          "physics:centerOfMass": "(0.005267, 0.000299, 0.449869)",
+          "physics:diagonalInertia": "(0.0040871077, 0.004185278, 0.0018057885)",
+          "physics:mass": "1.0360000133514404",
+          "physics:principalAxes": "(0.99980706, -0.00061026384, 0.015240591, 0.012383358)"
+        }
+      },
+      "imu_in_torso": {
+        "path": "/g1_29dof/imu_in_torso",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      },
+      "left_shoulder_pitch_link": {
+        "path": "/g1_29dof/left_shoulder_pitch_link",
+        "mass": 0.7179999947547913,
+        "attrs": {
+          "physics:centerOfMass": "(0, 0.035892, -0.011628)",
+          "physics:diagonalInertia": "(0.0004328424, 0.00046586368, 0.0004063939)",
+          "physics:mass": "0.7179999947547913",
+          "physics:principalAxes": "(0.94497895, 0.2399304, -0.22148046, 0.019868286)"
+        }
+      },
+      "left_shoulder_roll_link": {
+        "path": "/g1_29dof/left_shoulder_roll_link",
+        "mass": 0.6430000066757202,
+        "attrs": {
+          "physics:centerOfMass": "(-0.000227, 0.00727, -0.063243)",
+          "physics:diagonalInertia": "(0.0006180114, 0.0006913112, 0.00038897747)",
+          "physics:mass": "0.6430000066757202",
+          "physics:principalAxes": "(0.99975014, -0.00885183, -0.018897789, 0.008023638)"
+        }
+      },
+      "left_shoulder_yaw_link": {
+        "path": "/g1_29dof/left_shoulder_yaw_link",
+        "mass": 0.734000027179718,
+        "attrs": {
+          "physics:centerOfMass": "(0.010773, -0.002949, -0.072009)",
+          "physics:diagonalInertia": "(0.001032166, 0.0010618734, 0.00040066076)",
+          "physics:mass": "0.734000027179718",
+          "physics:principalAxes": "(0.99278677, -0.020144561, -0.116302885, -0.021032615)"
+        }
+      },
+      "left_elbow_link": {
+        "path": "/g1_29dof/left_elbow_link",
+        "mass": 0.6000000238418579,
+        "attrs": {
+          "physics:centerOfMass": "(0.064956, 0.004454, -0.010062)",
+          "physics:diagonalInertia": "(0.00025935346, 0.00044303498, 0.00042161156)",
+          "physics:mass": "0.6000000238418579",
+          "physics:principalAxes": "(0.9774239, 0.04683774, 0.04752936, -0.20047362)"
+        }
+      },
+      "left_wrist_roll_link": {
+        "path": "/g1_29dof/left_wrist_roll_link",
+        "mass": 0.08544497936964035,
+        "attrs": {
+          "physics:centerOfMass": "(0.017139448, 0.00053759094, 4.8864e-7)",
+          "physics:diagonalInertia": "(0.000049664584, 0.00003577985, 0.00005482107)",
+          "physics:mass": "0.08544497936964035",
+          "physics:principalAxes": "(0.9865032, 0.000070609574, 0.0005024695, -0.16374138)"
+        }
+      },
+      "left_wrist_pitch_link": {
+        "path": "/g1_29dof/left_wrist_pitch_link",
+        "mass": 0.48404955863952637,
+        "attrs": {
+          "physics:centerOfMass": "(0.022999898, -0.0011168531, -0.0011165809)",
+          "physics:diagonalInertia": "(0.00016464795, 0.00043035296, 0.00042987312)",
+          "physics:mass": "0.48404955863952637",
+          "physics:principalAxes": "(0.9240113, 0.38094535, 0.030396223, 0.012642258)"
+        }
+      },
+      "left_wrist_yaw_link": {
+        "path": "/g1_29dof/left_wrist_yaw_link",
+        "mass": 0.08457647264003754,
+        "attrs": {
+          "physics:centerOfMass": "(0.022003816, 0.000494851, 0.0005386112)",
+          "physics:diagonalInertia": "(0.00005098067, 0.0000597564, 0.000037568436)",
+          "physics:mass": "0.08457647264003754",
+          "physics:principalAxes": "(0.9832136, 0.009745565, -0.18134142, 0.017643262)"
+        }
+      },
+      "left_rubber_hand": {
+        "path": "/g1_29dof/left_rubber_hand",
+        "mass": 0.17000000178813934,
+        "attrs": {
+          "physics:centerOfMass": "(0.053613108, -0.0029590523, 0.002154131)",
+          "physics:diagonalInertia": "(0.0000939911, 0.00028848607, 0.0002188241)",
+          "physics:mass": "0.17000000178813934",
+          "physics:principalAxes": "(0.9951946, 0.021666259, -0.0075251404, -0.09519296)"
+        }
+      },
+      "left_palm_link": {
+        "path": "/g1_29dof/left_palm_link",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      },
+      "logo_link": {
+        "path": "/g1_29dof/logo_link",
+        "mass": 0.0010000000474974513,
+        "attrs": {
+          "physics:centerOfMass": "(0, 0, 0)",
+          "physics:diagonalInertia": "(1e-7, 1e-7, 1e-7)",
+          "physics:mass": "0.0010000000474974513",
+          "physics:principalAxes": "(1, 0, 0, 0)"
+        }
+      },
+      "mid360_link": {
+        "path": "/g1_29dof/mid360_link",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      },
+      "right_shoulder_pitch_link": {
+        "path": "/g1_29dof/right_shoulder_pitch_link",
+        "mass": 0.7179999947547913,
+        "attrs": {
+          "physics:centerOfMass": "(0, -0.035892, -0.011628)",
+          "physics:diagonalInertia": "(0.0004328424, 0.00046586368, 0.0004063939)",
+          "physics:mass": "0.7179999947547913",
+          "physics:principalAxes": "(0.94497895, -0.2399304, -0.22148046, -0.019868286)"
+        }
+      },
+      "right_shoulder_roll_link": {
+        "path": "/g1_29dof/right_shoulder_roll_link",
+        "mass": 0.6430000066757202,
+        "attrs": {
+          "physics:centerOfMass": "(-0.000227, -0.00727, -0.063243)",
+          "physics:diagonalInertia": "(0.0006180114, 0.0006913112, 0.00038897747)",
+          "physics:mass": "0.6430000066757202",
+          "physics:principalAxes": "(0.99975014, 0.00885183, -0.018897789, -0.008023638)"
+        }
+      },
+      "right_shoulder_yaw_link": {
+        "path": "/g1_29dof/right_shoulder_yaw_link",
+        "mass": 0.734000027179718,
+        "attrs": {
+          "physics:centerOfMass": "(0.010773, 0.002949, -0.072009)",
+          "physics:diagonalInertia": "(0.001032166, 0.0010618734, 0.00040066076)",
+          "physics:mass": "0.734000027179718",
+          "physics:principalAxes": "(0.99278677, 0.020144561, -0.116302885, 0.021032615)"
+        }
+      },
+      "right_elbow_link": {
+        "path": "/g1_29dof/right_elbow_link",
+        "mass": 0.6000000238418579,
+        "attrs": {
+          "physics:centerOfMass": "(0.064956, -0.004454, -0.010062)",
+          "physics:diagonalInertia": "(0.00025935346, 0.00044303498, 0.00042161156)",
+          "physics:mass": "0.6000000238418579",
+          "physics:principalAxes": "(0.9774239, -0.04683774, 0.04752936, 0.20047362)"
+        }
+      },
+      "right_wrist_roll_link": {
+        "path": "/g1_29dof/right_wrist_roll_link",
+        "mass": 0.08544497936964035,
+        "attrs": {
+          "physics:centerOfMass": "(0.017139448, -0.00053759094, 4.8864e-7)",
+          "physics:diagonalInertia": "(0.000049664584, 0.00003577985, 0.00005482107)",
+          "physics:mass": "0.08544497936964035",
+          "physics:principalAxes": "(0.9865032, -0.000070609574, 0.0005024695, 0.16374138)"
+        }
+      },
+      "right_wrist_pitch_link": {
+        "path": "/g1_29dof/right_wrist_pitch_link",
+        "mass": 0.48404955863952637,
+        "attrs": {
+          "physics:centerOfMass": "(0.022999898, 0.0011168531, -0.0011165809)",
+          "physics:diagonalInertia": "(0.00016464795, 0.00043035296, 0.00042987312)",
+          "physics:mass": "0.48404955863952637",
+          "physics:principalAxes": "(0.9240113, -0.38094535, 0.030396223, -0.012642258)"
+        }
+      },
+      "right_wrist_yaw_link": {
+        "path": "/g1_29dof/right_wrist_yaw_link",
+        "mass": 0.08457647264003754,
+        "attrs": {
+          "physics:centerOfMass": "(0.022003816, -0.000494851, 0.0005386112)",
+          "physics:diagonalInertia": "(0.00005098067, 0.0000597564, 0.000037568436)",
+          "physics:mass": "0.08457647264003754",
+          "physics:principalAxes": "(0.9832136, -0.009745565, -0.18134142, -0.017643262)"
+        }
+      },
+      "right_rubber_hand": {
+        "path": "/g1_29dof/right_rubber_hand",
+        "mass": 0.17000000178813934,
+        "attrs": {
+          "physics:centerOfMass": "(0.053613108, 0.0029590523, 0.002154131)",
+          "physics:diagonalInertia": "(0.0000939911, 0.00028848607, 0.0002188241)",
+          "physics:mass": "0.17000000178813934",
+          "physics:principalAxes": "(0.9951946, -0.021666259, -0.0075251404, 0.09519296)"
+        }
+      },
+      "right_palm_link": {
+        "path": "/g1_29dof/right_palm_link",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      },
+      "temp_link": {
+        "path": "/g1_29dof/temp_link",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      },
+      "d455_link": {
+        "path": "/g1_29dof/d455_link",
+        "mass": 0.0,
+        "attrs": {
+          "physics:diagonalInertia": "(0.0001, 0.0001, 0.0001)"
+        }
+      }
+    },
+    "joints": {
+      "left_hip_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.03975188732147217",
+        "physics:localPos0": "(0, 0.064452, -0.1027)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-144.9984130859375",
+        "physics:upperLimit": "165.00038146972656",
+        "physxJoint:maxJointVelocity": "1833.46484375"
+      },
+      "left_hip_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.09942612797021866",
+        "physics:localPos0": "(0, 0.052, -0.030465)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(0.9961787, 0, -0.087338574, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-30.00006675720215",
+        "physics:upperLimit": "170.00228881835938",
+        "physxJoint:maxJointVelocity": "1145.91552734375"
+      },
+      "left_hip_yaw_joint": {
+        "physics:axis": "Z",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.2407630831003189",
+        "physics:localPos0": "(0.025001, 0, -0.12412)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-157.99884033203125",
+        "physics:upperLimit": "157.99884033203125",
+        "physxJoint:maxJointVelocity": "1833.46484375"
+      },
+      "left_knee_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.3681439161300659",
+        "physics:localPos0": "(-0.078273, 0.0021489, -0.17734)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(0.9961787, 0, 0.087338574, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-5.000030517578125",
+        "physics:upperLimit": "165.00038146972656",
+        "physxJoint:maxJointVelocity": "1145.91552734375"
+      },
+      "left_ankle_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.10389885306358337",
+        "physics:localPos0": "(0, -0.000094445, -0.30001)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-50.00030517578125",
+        "physics:upperLimit": "30.00006675720215",
+        "physxJoint:maxJointVelocity": "1718.873291015625"
+      },
+      "left_ankle_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.0036831258330494165",
+        "physics:localPos0": "(0, 0, -0.017558)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-15.000033378601074",
+        "physics:upperLimit": "15.000033378601074",
+        "physxJoint:maxJointVelocity": "1718.873291015625"
+      },
+      "right_hip_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.039751891046762466",
+        "physics:localPos0": "(0, -0.064452, -0.1027)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-144.9984130859375",
+        "physics:upperLimit": "165.00038146972656",
+        "physxJoint:maxJointVelocity": "1833.46484375"
+      },
+      "right_hip_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.09942615777254105",
+        "physics:localPos0": "(0, -0.052, -0.030465)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(0.9961787, 0, -0.087338574, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-170.00228881835938",
+        "physics:upperLimit": "30.00006675720215",
+        "physxJoint:maxJointVelocity": "1145.91552734375"
+      },
+      "right_hip_yaw_joint": {
+        "physics:axis": "Z",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.24076220393180847",
+        "physics:localPos0": "(0.025001, 0, -0.12412)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-157.99884033203125",
+        "physics:upperLimit": "157.99884033203125",
+        "physxJoint:maxJointVelocity": "1833.46484375"
+      },
+      "right_knee_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.3681296706199646",
+        "physics:localPos0": "(-0.078273, -0.0021489, -0.17734)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(0.9961787, 0, 0.087338574, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-5.000030517578125",
+        "physics:upperLimit": "165.00038146972656",
+        "physxJoint:maxJointVelocity": "1145.91552734375"
+      },
+      "right_ankle_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.10389884561300278",
+        "physics:localPos0": "(0, 0.000094445, -0.30001)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-50.00030517578125",
+        "physics:upperLimit": "30.00006675720215",
+        "physxJoint:maxJointVelocity": "1718.873291015625"
+      },
+      "right_ankle_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.0036831258330494165",
+        "physics:localPos0": "(0, 0, -0.017558)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-15.000033378601074",
+        "physics:upperLimit": "15.000033378601074",
+        "physxJoint:maxJointVelocity": "1718.873291015625"
+      },
+      "waist_yaw_joint": {
+        "physics:axis": "Z",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.04432188346982002",
+        "physics:localPos0": "(0, 0, 0)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-150.00035095214844",
+        "physics:upperLimit": "150.00035095214844",
+        "physxJoint:maxJointVelocity": "1833.46484375"
+      },
+      "waist_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.08626943826675415",
+        "physics:localPos0": "(-0.0039635, 0, 0.044)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-29.79380226135254",
+        "physics:upperLimit": "29.79380226135254",
+        "physxJoint:maxJointVelocity": "1718.873291015625"
+      },
+      "waist_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.08440960198640823",
+        "physics:localPos0": "(0, 0, 0)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-35.523380279541016",
+        "physics:upperLimit": "35.523380279541016",
+        "physxJoint:maxJointVelocity": "1718.873291015625"
+      },
+      "left_shoulder_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.21030300855636597",
+        "physics:localPos0": "(0.0039563, 0.10022, 0.24778)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(0.99026406, 0.13920148, 0.000013872204, -0.00009868684)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-176.99810791015625",
+        "physics:upperLimit": "153.0026397705078",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "left_shoulder_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.16071905195713043",
+        "physics:localPos0": "(0, 0.038, -0.013831)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(0.99026823, -0.13917178, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-90.99715423583984",
+        "physics:upperLimit": "129.00143432617188",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "left_shoulder_yaw_joint": {
+        "physics:axis": "Z",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.1462644636631012",
+        "physics:localPos0": "(0, 0.00624, -0.1032)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-150.00035095214844",
+        "physics:upperLimit": "150.00035095214844",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "left_elbow_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.07023579627275467",
+        "physics:localPos0": "(0.015783, 0, -0.080518)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-60.0001335144043",
+        "physics:upperLimit": "120.0002670288086",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "left_wrist_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.04356315732002258",
+        "physics:localPos0": "(0.1, 0.00188791, -0.01)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-112.99999237060547",
+        "physics:upperLimit": "112.99999237060547",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "left_wrist_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.012576874345541",
+        "physics:localPos0": "(0.038, 0, 0)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-92.5",
+        "physics:upperLimit": "92.5",
+        "physxJoint:maxJointVelocity": "1260.507080078125"
+      },
+      "left_wrist_yaw_joint": {
+        "physics:axis": "Z",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.005756095051765442",
+        "physics:localPos0": "(0.046, 0, 0)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-92.5",
+        "physics:upperLimit": "92.5",
+        "physxJoint:maxJointVelocity": "1260.507080078125"
+      },
+      "right_shoulder_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.21031661331653595",
+        "physics:localPos0": "(0.0039563, -0.10021, 0.24778)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(0.99026406, -0.13920148, 0.000013872204, 0.00009868684)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-176.99810791015625",
+        "physics:upperLimit": "153.0026397705078",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "right_shoulder_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.1607372909784317",
+        "physics:localPos0": "(0, -0.038, -0.013831)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(0.99026823, 0.13917178, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-129.00143432617188",
+        "physics:upperLimit": "90.99715423583984",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "right_shoulder_yaw_joint": {
+        "physics:axis": "Z",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.14628462493419647",
+        "physics:localPos0": "(0, -0.00624, -0.1032)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-150.00035095214844",
+        "physics:upperLimit": "150.00035095214844",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "right_elbow_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.07023987919092178",
+        "physics:localPos0": "(0.015783, 0, -0.080518)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-60.0001335144043",
+        "physics:upperLimit": "120.0002670288086",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "right_wrist_roll_joint": {
+        "physics:axis": "X",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.04356437921524048",
+        "physics:localPos0": "(0.1, -0.00188791, -0.01)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-112.99999237060547",
+        "physics:upperLimit": "112.99999237060547",
+        "physxJoint:maxJointVelocity": "2119.94384765625"
+      },
+      "right_wrist_pitch_joint": {
+        "physics:axis": "Y",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.01257695909589529",
+        "physics:localPos0": "(0.038, 0, 0)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-92.5",
+        "physics:upperLimit": "92.5",
+        "physxJoint:maxJointVelocity": "1260.507080078125"
+      },
+      "right_wrist_yaw_joint": {
+        "physics:axis": "Z",
+        "physics:breakForce": "3.4028234663852886e+38",
+        "physics:breakTorque": "3.4028234663852886e+38",
+        "physics:JointEquivalentInertia": "0.005756108555942774",
+        "physics:localPos0": "(0.046, 0, 0)",
+        "physics:localPos1": "(0, 0, 0)",
+        "physics:localRot0": "(1, 0, 0, 0)",
+        "physics:localRot1": "(1, 0, 0, 0)",
+        "physics:lowerLimit": "-92.5",
+        "physics:upperLimit": "92.5",
+        "physxJoint:maxJointVelocity": "1260.507080078125"
+      }
+    },
+    "collisions": [
+      {
+        "path": "/g1_29dof/left_hip_pitch_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_hip_roll_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_hip_yaw_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_knee_link/collisions",
+        "type": "Xform",
+        "attrs": {}
+      },
+      {
+        "path": "/g1_29dof/left_ankle_pitch_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_ankle_roll_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/pelvis_contour_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_hip_pitch_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_hip_roll_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_hip_yaw_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_knee_link/collisions",
+        "type": "Xform",
+        "attrs": {}
+      },
+      {
+        "path": "/g1_29dof/right_ankle_pitch_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_ankle_roll_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/torso_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_shoulder_pitch_link/collisions",
+        "type": "Xform",
+        "attrs": {}
+      },
+      {
+        "path": "/g1_29dof/left_shoulder_roll_link/collisions",
+        "type": "Xform",
+        "attrs": {}
+      },
+      {
+        "path": "/g1_29dof/left_shoulder_yaw_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_elbow_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_wrist_roll_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_wrist_pitch_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/left_rubber_hand/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_shoulder_pitch_link/collisions",
+        "type": "Xform",
+        "attrs": {}
+      },
+      {
+        "path": "/g1_29dof/right_shoulder_roll_link/collisions",
+        "type": "Xform",
+        "attrs": {}
+      },
+      {
+        "path": "/g1_29dof/right_shoulder_yaw_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_elbow_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_wrist_roll_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_wrist_pitch_link/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      },
+      {
+        "path": "/g1_29dof/right_rubber_hand/collisions",
+        "type": "Xform",
+        "attrs": {
+          "physics:approximation": "convexHull"
+        }
+      }
+    ]
+  },
+  "wall10_prior_receipts": {
+    "schema_version": "robotics-engineering-test-receipts.v1",
+    "tests": [
+      {
+        "command": "bash docs/carrybox/wall10_20261023/validate_cpu.sh",
+        "result": "PASS",
+        "exit_code": 0,
+        "executed": true,
+        "receipt_sha256": "a931ebbd6364ccbb057c8e6ea712179c12a8689a3c3b374c4a4e6579caaf8fa5",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runner": "run_engineering_tests.py"
+      },
+      {
+        "command": "bash docs/carrybox/wall10_20261023/validate_sim.sh",
+        "result": "PASS",
+        "exit_code": 0,
+        "executed": true,
+        "receipt_sha256": "2c8b75e6ec733abeb6ecd9f10bde3870cf29c16c52d95388857f293140e52299",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "runner": "run_engineering_tests.py"
+      }
+    ]
+  },
+  "scope": "CPU source/data audit, no new physics or training run"
+}

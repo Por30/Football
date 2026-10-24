@@ -1,0 +1,27 @@
+{
+  "affected_call_path": [
+    "wall10 PPO current/mixed CNN, logical256 AMP draws, full-minibatch Adam; wall10 Warp box depth and one-physics-step force"
+  ],
+  "critical_interfaces": [
+    "4096x100, 5x4 updates; checkpoint cnn_microbatch256 remains logical random block; exact RNG sequence preserved"
+  ],
+  "invariants": [
+    "actor/critic separation, FP32 depth50Hz4x27x48/all occlusion, AMP/smooth coefficients, terminal histories and physical limits unchanged"
+  ],
+  "smallest_change_locus": [
+    "wall10-only learning, tensor window sampler and MDP; no shared CNN, camera or RSI changes"
+  ],
+  "mandatory_safeguards": [
+    "保持actor深度/本体，critic独立，AMP/smooth训练端隔离",
+    "保留4096、100步、5x4默认配方，用户明确选择24步时记录调整",
+    "保留256逻辑随机分组、采样分布与联合Adam更新次数",
+    "改变计算批量时检验输出/梯度/一次Adam和旧checkpoint恢复",
+    "保留物理/相机/partial reset/终止/有限值保护"
+  ],
+  "minimal_tests": [
+    "bash docs/carrybox/wall10_perf_20261023/validate_cpu.sh",
+    "bash docs/carrybox/wall10_perf_20261023/validate_learning.sh",
+    "bash docs/carrybox/wall10_perf_20261023/validate_sim.sh"
+  ],
+  "blockers": []
+}

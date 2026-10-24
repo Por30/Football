@@ -1,5 +1,29 @@
 # 找箱与搬箱子项目 · findbox
 
+2026-10-24 23:30 JST：[wall11最新model9500四机器人录像](../../docs/carrybox/wall11_play4_20261024_2326/README.md)。wall11 model_9500四机器人20秒同步回放完成，1080p/25fps、seed42均值动作，保留深度噪声、墙柱、物理扰动和全部reset。3个loco与1个默认地面箱起点均出现拾箱并站立持箱，四机均到20秒正常超时，无提前失败终止；严格保持最长0.90/1.40/0.20/0.00秒，均未达连续2秒成功。 视频完整解码通过；正式训练PID2723259持续运行，核验到iteration9553。单次录像非总体成功率。
+
+2026-10-24 12:40 JST：[停止wall10并启动wall11正式训练](../../docs/carrybox/wall11_start24_20261024/README.md)。按用户指令SIGINT停止wall10 PID2402395，最后日志11147轮、最新model11000及历史工件保留。新wall11 PID2723259，4096环境×24步、seed42、20000轮、5×4更新，从零启动；核验至iteration14，近10轮平均4.394s、最慢4.430s。首模型schema2/walled11 revision1/rollout24、深度噪声与三柱墙契约正确，policy/AMP有限且优化器更新。正式训练进行中，未完成长训或独立评估。
+
+2026-10-24 12:27 JST：[新增wall11：带噪深度与墙柱干扰](../../docs/carrybox/wall11_20261024/README.md)。继承wall10拾箱原地保持2秒与非对称AC：actor558+4×27×48、critic123、AMP600；默认4096×24、5×4更新。加入米制深度高斯/距离噪声、边缘丢点/空洞，以及每回合重置的3个实体圆柱和随机墙，保留初始操作空间。38项CPU及16环境2＋1轮更新/严格恢复/终止历史/实际遮挡/导出通过。仅实现与短测完成，未启动wall11正式训练、未测4096耗时/成功率；wall10 PID2402395保持运行。
+
+2026-10-24 11:56：[wall10 model10000四机器人录像](../../docs/carrybox/wall10_play4_20261024_1130/README.md)：4环境20秒、1080p/25fps，均从地面箱起点出现拾箱。1号严格保持成功，最长2.86秒；其余未达严格成功。3号早期倾倒后重置再拾箱，1/2/4号20秒超时；保留完整过程。视频完整解码通过，正式训练继续；单次录像非总体成功率。
+
+2026-10-24 01:35：[wall10最新model1000四机器人录像](../../docs/carrybox/wall10_play4_20261024_0124/README.md)：4环境20秒、1080p/25fps，完整保留随机reset与失败。reset次数8/7/9/11，地面起点双手接触0，未观察到从地面拾箱；末段抱箱来自参考初始化，严格保持最长0.16秒。视频与完整解码检查通过，正式训练继续；单次录像不代表总体成功率。
+
+2026-10-24 00:17：[wall10按24步启动正式训练](../../docs/carrybox/wall10_start24_20261024/README.md)：用户指定24步fresh，4096环境、20000轮、seed42、5×4保持。PID2402395核验至iteration15，近10轮平均4.332s、最慢4.360s；model_0 schema2/rollout24、policy与AMP有限、优化器有更新。后台训练进行中；未作独立成功率评估。
+
+2026-10-24：[wall5与PhysHSI完整对照及重构边界](../../docs/carrybox/physhsi_full_audit_20261023/README.md)：完成wall5 rev28对本地PhysHSI G1 carrybox/resume全链路只读审计：47个文件身份、1719个展开参数叶项、19/15段数据及14段字节同源、URDF/USD质量、网络CPU前向与全部有效奖励/AMP/PPO/reset/控制比较。源actor使用箱子/goal状态而当前使用深度；显式/隐式PD、力矩定义、100/24步rollout、时序平滑、数据采样与任务成功语义存在实质差异。同步独立wall10现状与性能证据，不将差异当作已证实失稳根因。未修改生产或操作训练；重构尚未实施。
+
+2026-10-24：[wall10性能优化](../../docs/carrybox/wall10_perf_20261023/README.md)：4096×100完整短测从52.81s降到18.49s/轮，学习从40.89s降到7.63s；另测4096×24为4.41s/轮。保留100步默认、5×4、逻辑256采样、奖励和深度/控制语义；GPU计算合批、日志归约、Warp箱体相交及外力写入优化。34项CPU、16环境更新/恢复/导出和4096完整短测通过，旧wall10 checkpoint可严格恢复。本次未启动正式长训，未评估收敛。
+
+2026-10-23 23:25：[wall5版本与进程复核](../../docs/carrybox/wall5_rev17_comparison_20261023/README.md)：配方仍为rev28；原PID2266428已不存在，日志最后5739轮、最新model5600。未发现正式train.py进程；退出原因未确认，本次未操作训练。
+
+2026-10-23：[新增FindBox wall10：PhysHSI拾箱原地保持](../../docs/carrybox/wall10_20261023/README.md)。独立ID `Template-Perceptual-Ball-CarryBox-Walled10-v0`，保留源PPO100步/5×4、联合Adam/无归一化AMP、时间平滑、显式PD及随机化；actor为93×6本体＋4×27×48米制深度、critic123。接近、抬起后原地保持2秒，无搬运目的地或放下。29项CPU及16环境2＋1轮更新/严格恢复/导出、变尺寸箱深度对照通过。实现与短测完成；未启动wall10正式训练、未评估收敛，未操作wall5正式进程。命令：`CARRYBOX_VARIANT=10 bash scripts/rsl_rl/train_carrybox_walled.sh`（默认原配方4096环境，正式规模性能尚未验收）。
+
+2026-10-23：[wall5 rev17录像与当前rev28对照](../../docs/carrybox/wall5_rev17_comparison_20261023/README.md)：只读确认指定2026-10-20录像为rev17 model2800，当前为rev28 fresh；核对checkpoint、run参数及8份历史源码hash。奖励稳定项/近箱逻辑、RSI与动作延迟、碰撞、深度单位/噪声、critic/辅助监督、专家片段不同；PPO、AMP混合与特征、PD和力矩惩罚不变。未修改生产或重启，未作因果消融。
+
+2026-10-23：[wall5 AMP与奖励衔接排查](../../docs/carrybox/wall5_amp_reward_audit_20261023/README.md)：rev22对照只读诊断：AMP实际更新/混合已核验；当前空手接近停滞、膝目标饱和和奖励衔接问题见证据。未改参数或重启，未将单项认定为唯一训练根因。
+
 2026-10-23：[rev28 model4800四机器人录像](../../docs/carrybox/wall5_play4_rev28_20261023_2223/README.md)：rev28 model_4800，4机器人同步20秒，1080p/25fps、高位镜头。固定来源为默认/loco/loco/hold，reset次数[1, 1, 1, 1]；保留全部失败回合。 正式训练继续；具体表现见录像记录，未作总体成功率评估。
 
 2026-10-23：[rev28 model1200四机器人录像](../../docs/carrybox/wall5_play4_rev28_20261023/README.md)：rev28 model_1200，4机器人同步20秒，1080p/25fps、高位镜头。固定来源为默认/loco/loco/hold，reset次数[1, 1, 1, 1]；保留全部失败回合。 正式训练继续；具体表现见录像记录，未作总体成功率评估。
@@ -202,6 +226,7 @@
 | 深度、标签、奖励和terminal历史 | `tasks/manager_based/perceptual_ball/mdp/carrybox.py` |
 | wall3/wall4继承配置 | `tasks/manager_based/perceptual_ball/carrybox_walled_env_cfg.py` |
 | wall5配置与任务AMP | `tasks/manager_based/perceptual_ball/carrybox_wall5_env_cfg.py`、`mdp/carrybox_wall5.py`、`carrybox_wall5.py`、`rsl_rl_extensions/carrybox_wall5.py` |
+| wall10 PhysHSI拾箱原地保持 | `tasks/manager_based/perceptual_ball/carrybox_wall10_env_cfg.py`、`mdp/carrybox_wall10.py`、`carrybox_wall10.py`、`rsl_rl_extensions/carrybox_wall10.py`；[详细契约与命令](../../docs/carrybox/wall10_20261023/README.md) |
 | wall场景、参考初始化、奖励和深度扰动 | `tasks/manager_based/perceptual_ball/mdp/carrybox_walled.py` |
 | yaw课程、帧/标签配对缓存 | `carrybox_walled.py` |
 | 抬起保持判据 | `tasks/manager_based/perceptual_ball/mdp/carrybox_state.py` |
@@ -209,6 +234,8 @@
 | actor/critic、位姿头、PPO/AMP及checkpoint | `rsl_rl_extensions/carrybox.py` |
 
 CarryBox-v0及wall3/4的actor/critic只读取深度与本体。wall5按用户要求采用非对称AC：actor只读米制深度与本体；revision22的critic为123维独立MLP，包含当前本体93、骨盆线速度3、箱子相对位置3/旋转6/尺寸3、双掌/双踝/mid360相对骨盆位置15。特权信息不进入actor或部署导出。wall5保留训练专用60维任务AMP；位姿辅助监督系数1.0、全部配对帧（含不可见帧），可见性只作诊断，延迟/冻结仍保持深度与标签成对。基线/wall3/4仍用原AMP及原辅助配置。持箱参考不增加搬运目标点或放下阶段。
+
+wall10遵循独立PhysHSI迁移契约：actor本体6帧、深度4帧，critic123的排列/旋转表示/线速度缩放不同于wall5；AMP60维采用源顺序、无Normalizer、与PPO联合Adam更新。按源配方关闭位姿辅助损失，保留本项目15段规范数据并按剩余源片段权重1/4/5采样。不得将wall5 checkpoint直接作为wall10恢复状态。
 
 ## 数据与产物
 

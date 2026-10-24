@@ -10,7 +10,7 @@ checkpoint="$(realpath -- "$1")"
 num_envs="${2:-4}"
 case "$num_envs" in 1|2|3|4) ;; *) echo 'Small-memory replay supports 1 to 4 environments' >&2; exit 2;; esac
 variant="${CARRYBOX_VARIANT:-4}"
-case "$variant" in 3|4|5) ;; *) echo 'CARRYBOX_VARIANT must be 3, 4 or 5' >&2; exit 2;; esac
+case "$variant" in 3|4|5|10|11) ;; *) echo 'CARRYBOX_VARIANT must be 3, 4, 5, 10 or 11' >&2; exit 2;; esac
 cd "$(dirname "$0")/../.."
 source "${ISAAC_SIM_PATH:-/home/cao/isaacsim}/setup_conda_env.sh"
 lab_root="${ISAAC_LAB_PATH:-/home/cao/IsaacLab}"

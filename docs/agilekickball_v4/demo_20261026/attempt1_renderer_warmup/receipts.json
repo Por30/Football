@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/agilekickball_v4/demo_20261026/record_and_check.sh",
+      "result": "FAIL",
+      "exit_code": 1,
+      "executed": true,
+      "receipt_sha256": "83f741d84dec646e6ccb92d18a189a5c92bd3c8086594c25b8141c7448c0dcde",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

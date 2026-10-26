@@ -1,0 +1,17 @@
+---
+task_id: "agilekickball-v4-demo-20261026"
+language: "zh-CN"
+axes: ["L"]
+risk_tier: "T1"
+status: "DONE"
+changed_files: ["agent/handoff/agilekickball-v4-demo-20261026.md", "agent/plan/agilekickball-v4-demo-20261026.md", "agent/report/agilekickball-v4-demo-20261026.md", "agent/task/agilekickball-v4-demo-20261026.md", "docs/agilekickball_v4/demo_20261026/README.md", "docs/agilekickball_v4/demo_20261026/artifact_validation.json", "docs/agilekickball_v4/demo_20261026/attempt1_renderer_warmup/diagnosis.json", "docs/agilekickball_v4/demo_20261026/attempt1_renderer_warmup/receipts.json", "docs/agilekickball_v4/demo_20261026/attempt1_renderer_warmup/record.log", "docs/agilekickball_v4/demo_20261026/attempt1_renderer_warmup/record.py", "docs/agilekickball_v4/demo_20261026/delivery.json", "docs/agilekickball_v4/demo_20261026/formal_after.json", "docs/agilekickball_v4/demo_20261026/formal_before.json", "docs/agilekickball_v4/demo_20261026/receipts.json", "docs/agilekickball_v4/demo_20261026/record.log", "docs/agilekickball_v4/demo_20261026/record.py", "docs/agilekickball_v4/demo_20261026/record_and_check.sh", "docs/agilekickball_v4/demo_20261026/recording.json", "docs/agilekickball_v4/demo_20261026/selection.json", "docs/agilekickball_v4/demo_20261026/trajectory.json", "docs/agilekickball_v4/demo_20261026/verify.log", "docs/agilekickball_v4/demo_20261026/verify.py", "docs/agilekickball_v4/demo_20261026/video_validation.json", "docs/agilekickball_v4/demo_20261026/visual_review.txt", "outputs/football/agilekickball_v4_demo_20261026/agilekickball_v4_model49999_demo_30s_1080p.mp4", "outputs/football/agilekickball_v4_demo_20261026/contact_sheet.jpg", "outputs/football/agilekickball_v4_demo_20261026/frame_0001.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0025.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0050.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0125.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0250.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0375.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0500.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0625.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0749.png", "outputs/football/agilekickball_v4_demo_20261026/frame_0750.png", "outputs/football/agilekickball_v4_demo_20261026/initial_scene.png", "projects/README.md", "projects/football/README.md"]
+task_contract_sha256: "eb9c6aec722a0ec7319442438c9c5889cb71d3559b143e4d99570eac9527f3c2"
+tests: [{"command": "bash docs/agilekickball_v4/demo_20261026/record_and_check.sh", "result": "PASS", "exit_code": 0, "executed": true, "receipt_sha256": "4a26b50b55399e19986ecbab074a2a9e673bba08919474301d98e59ae73bc05f", "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "runner": "run_engineering_tests.py"}]
+artifact: "REPORT"
+---
+
+已交付指定AgileKickball v4 model49999的30秒单机器人MP4：1920×1080、25fps、H.264/yuv420p/faststart、750帧、32075763字节。完整解码通过，检查1秒/10秒原分辨率图与九帧拼图。模型严格加载、所有推理有限、课程保持0.4–6m/s/±0.2m，模型SHA256和权重未变。25次足部击球/回传门命中、24次恢复再发球，零回合重置。单seed展示不等于总体评估。
+
+仅新增隔离录像脚本、视频/证据并更新足球入口与总看板；生产代码、数据与模型不变。原v11训练PID3814037录制前后仍运行。首轮因RGB采集器尚未创建导致空白首帧失败，修正预热顺序后相同冻结命令通过，失败记录保留。
+
+视频：`outputs/football/agilekickball_v4_demo_20261026/agilekickball_v4_model49999_demo_30s_1080p.mp4`。记录与复现命令：`docs/agilekickball_v4/demo_20261026/README.md`。

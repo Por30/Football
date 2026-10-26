@@ -1,0 +1,25 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall13_feedback_20261026/validate_cpu.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "f6e7115a4e4e0242078e603edb0b9a3011956f31646b45506a247f1611215577",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    },
+    {
+      "command": "bash docs/carrybox/wall13_feedback_20261026/validate_sim.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "a2237ea23bf701e79df4dd2f2e312fb5981309c8453f462e464e2bea551fe948",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

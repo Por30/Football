@@ -1,0 +1,22 @@
+---
+task_id: "carrybox-wall13-concat-20261026"
+language: "zh-CN"
+axes: ["P", "L", "A"]
+risk_tier: "T2"
+artifact: "TASK"
+status: "FROZEN"
+original_request: "直接拼接9维，再启动训练（推荐）；承接停止当前kickball并重新启动wall13训练"
+allowed_paths: ["source/perceptual_ball/perceptual_ball/carrybox_wall13.py", "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall13.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall13_env_cfg.py", "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall13.py", "tests/test_carrybox_wall13.py", "docs/carrybox/wall13_concat_20261026", "docs/carrybox/wall13_feedback_20261026/README.md", "docs/carrybox/wall13_20261026/README.md", "projects/README.md", "projects/findbox/README.md", "projects/football/README.md", "logs/rsl_rl/g1_carrybox_depth/walled13", "agent/plan/carrybox-wall13-concat-20261026.md", "agent/task/carrybox-wall13-concat-20261026.md", "agent/report/carrybox-wall13-concat-20261026.md", "agent/handoff/carrybox-wall13-concat-20261026.md"]
+forbidden_scope: ["改动wall11/12或足球代码、共享CNN/AMP/export与train/play、动作数据或训练配方", "覆盖历史模型/日志/回执、停止身份未确认的进程、隐式旧权重迁移"]
+development_modes: ["ML_TRAINING", "MODEL_DEPLOYMENT"]
+steps: ["核对进程资源与继承一个只读P+L+A专家brief", "wall13改695直接拼接并升级revision3，保留旧证据", "执行CPU及16环境更新/恢复/导出，更新说明图", "前两检查通过后核对并停止实际kickball，fresh单次启动正式wall13，至少15轮健康检查", "记录实际耗时、首模型与日志路径，更新项目和四工件"]
+tests: [{"command": "bash docs/carrybox/wall13_concat_20261026/validate_cpu.sh"}, {"command": "bash docs/carrybox/wall13_concat_20261026/validate_sim.sh"}, {"command": "bash docs/carrybox/wall13_concat_20261026/check_training.sh"}]
+stop_conditions: ["两次范围内修复后仍失败", "16环境短测可用显存少于6000MiB或正式启动少于18000MiB", "已有wall13运行或其他未授权GPU训练占用", "kickball身份不明或SIGINT后未退出", "首模型/配置/finite/日志检查失败或需要范围外生产改动"]
+safeguards: ["Actor顺序严格为本体558、CNN128、预测9；逐slice相等，标签/尺寸真值/critic/AMP不进入Actor", "删除参数化fusion，仅Identity兼容现有export接口；state_dict、Adam、export与ONNX均无fusion参数，Actor首层695且在PPO前注册", "预测相机光学xyz米制+raw rot6不detach；PPO/策略平滑更新head/CNN，aux仅head/CNN，critic独立", "current/mixed独立预测并合批一次CNN，aux仅缓存current；复用wall12解冻和追加head一次，Adam三组无重复并精确恢复", "env migration_revision3；visual schema2/output137/actor695/concat_only；环境与AMP契约一致，严格load在改权重前拒绝rev1/rev2/wall12及篡改反馈", "Critic123/AMP600/aux1/尺寸对称/噪声墙柱/奖励/RSI/数据保持；4096x24/5x4/20000/seed42/fresh", "共享旧导出保持，新JIT/ONNX只有flat/depth，pose有效且无fusion参数，动态batch1/16一致", "启动前重新核对cmdline、PID启动时间、GPU资源及已有wall13；仅对验证身份的kickball发SIGINT，无进程不发信号，保留全部日志模型", "CPU和sim均成功后主Agent只启动一次；第三健康检查只读等待唯一launch身份，不自行启动/重启，重跑检查不产生第二进程", "model0验证首轮后Adam20步、policy/AMP/optimizer浮点状态有限、pose共同Adam状态非零、revision3和695；至少15轮持续健康", "报告区分正式已启动与结束；按实际日志记录采样/学习/总耗时；旧revision2说明与图保留并加历史链接，新图说明直接拼接"]
+expert_required: true
+expert_brief: {"affected_call_path": ["depth→CNN128→pose9→concat137→proprio558+Actor695→29", "采样/current+mixed/play/JIT/ONNX相同；独立fresh启动身份"], "critical_interfaces": ["Actor首层695，hidden_dims/activation兼容测试；Identity无训练参数复用export", "wall12 pose解冻追加一次；标签12但预测9；env/AMP/export契约同步"], "invariants": ["严格558/128/9顺序，无特权泄漏或detach；critic123与AMP600独立", "原任务/aux/数据/配方保持"], "smallest_change_locus": ["四个wall13生产文件与既有定向tests；不改共享export/父类", "新目录复制短测并新增只读正式检查、说明与结构图"], "mandatory_safeguards": ["Actor顺序严格为本体558、CNN128、预测9；逐slice相等，标签/尺寸真值/critic/AMP不进入Actor", "删除参数化fusion，仅Identity兼容现有export接口；state_dict、Adam、export与ONNX均无fusion参数，Actor首层695且在PPO前注册", "预测相机光学xyz米制+raw rot6不detach；PPO/策略平滑更新head/CNN，aux仅head/CNN，critic独立", "current/mixed独立预测并合批一次CNN，aux仅缓存current；复用wall12解冻和追加head一次，Adam三组无重复并精确恢复", "env migration_revision3；visual schema2/output137/actor695/concat_only；环境与AMP契约一致，严格load在改权重前拒绝rev1/rev2/wall12及篡改反馈", "Critic123/AMP600/aux1/尺寸对称/噪声墙柱/奖励/RSI/数据保持；4096x24/5x4/20000/seed42/fresh", "共享旧导出保持，新JIT/ONNX只有flat/depth，pose有效且无fusion参数，动态batch1/16一致", "启动前重新核对cmdline、PID启动时间、GPU资源及已有wall13；仅对验证身份的kickball发SIGINT，无进程不发信号，保留全部日志模型", "CPU和sim均成功后主Agent只启动一次；第三健康检查只读等待唯一launch身份，不自行启动/重启，重跑检查不产生第二进程", "model0验证首轮后Adam20步、policy/AMP/optimizer浮点状态有限、pose共同Adam状态非零、revision3和695；至少15轮持续健康", "报告区分正式已启动与结束；按实际日志记录采样/学习/总耗时；旧revision2说明与图保留并加历史链接，新图说明直接拼接"], "minimal_tests": ["bash docs/carrybox/wall13_concat_20261026/validate_cpu.sh", "bash docs/carrybox/wall13_concat_20261026/validate_sim.sh", "bash docs/carrybox/wall13_concat_20261026/check_training.sh"], "blockers": []}
+device_actions: []
+real_device_authorized: false
+---
+
+三条检查按顺序由技能runner执行；前两脚本仅在成功末尾写通过标志，第三脚本只读等待启动身份及训练进度。主Agent据通过标志临近启动复核进程/资源，创建独立run并单次启动；检查脚本不得启动或重启。保留旧revision2源码快照与测试证据。

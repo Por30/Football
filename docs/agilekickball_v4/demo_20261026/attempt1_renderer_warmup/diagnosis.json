@@ -1,0 +1,5 @@
+{
+  "result": "FAIL",
+  "evidence": "No frames or MP4 produced. IsaacLab render() lazily creates its annotator on the first call and explicitly returns a zero image before warmup. Initial warmup called sim.render() before creating that annotator.",
+  "fix": "Call raw.render() once to create the render product, then warm up before checking the image. Log exceptions before closing the simulator."
+}

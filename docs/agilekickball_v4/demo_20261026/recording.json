@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v4/2026-10-12_13-48-41_return_to_sender_20261012_v3init/model_49999.pt",
+  "checkpoint_sha256": "c7a06d2cc6659d95a86676e0c95014ac57107fb53ddbdce945cc9c2a52ab03f0",
+  "checkpoint_iteration": 49999,
+  "task": "Template-Perceptual-Ball-AgileKickball-v4",
+  "seed": 42,
+  "steps": 1500,
+  "fps": 25,
+  "num_envs": 1,
+  "video": "/home/cao/perceptual_ball/outputs/football/agilekickball_v4_demo_20261026/agilekickball_v4_model49999_demo_30s_1080p.mp4",
+  "source_sha256": {
+    "scripts/rsl_rl/play.py": "d1598498383ab0a3bbddd5f7faf161f5449c4242560e7bff152f1d0433bd945d",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/runner.py": "7be4d3cdc235ec35b6951c0c8e55c3fa5a1f4df12b4dd2aa622d901c426ae691",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/state_feedback.py": "cbd23fd61b1ae6ccc018af1d24223a2392d13c328e2ac12c48268363629e107a",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/agilekickball_v4_env_cfg.py": "1352dc62d4ba81f21338a8b4598a37b61698e48751386840c79cfd6cc340ea4e",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/agilekickball_v4.py": "e42751c645bbfd640302fde30ecf1afd01b11adae6031486b4a2824d63d71815"
+  },
+  "strict_load": true,
+  "weights_unchanged": true,
+  "frames": 750,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "duration": 30.0,
+  "control_dt": 0.02,
+  "action_mode": "deterministic_mean",
+  "course": {
+    "speed": [
+      0.4,
+      6.0
+    ],
+    "distance": [
+      1.3,
+      2.0
+    ],
+    "target_half_width": 0.2
+  },
+  "viewer_eye": [
+    3.6,
+    -4.5,
+    2.6
+  ],
+  "viewer_lookat": [
+    0.65,
+    0.0,
+    0.65
+  ],
+  "rendering_advances_physics": false,
+  "initial_counts": {
+    "serves": 2,
+    "recovered_serves": 0,
+    "foot_strike_rounds": 0,
+    "target_hits": 0,
+    "strict_hits": 0,
+    "completed_rounds": 1,
+    "completed_target_hits": 0
+  },
+  "final_counts": {
+    "serves": 26,
+    "recovered_serves": 24,
+    "foot_strike_rounds": 25,
+    "target_hits": 25,
+    "strict_hits": 25,
+    "completed_rounds": 26,
+    "completed_target_hits": 25
+  },
+  "episodes": [],
+  "reset_count": 0,
+  "task_overrides": [],
+  "visual_overrides": [
+    "spectator_camera",
+    "direct_lighting"
+  ],
+  "raw_continuous": true,
+  "finite_inference": true
+}

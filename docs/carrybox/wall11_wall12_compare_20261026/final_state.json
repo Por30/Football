@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-26 16:56 JST",
+  "checkpoint_hashes_unchanged": true,
+  "football": "PID                  STARTED COMMAND\n3814037 Mon Oct 26 12:38:01 2026 /home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-Kickball-v11 --num_envs 4096 --device cuda:0 --headless --max_iterations 20000 --seed 42 --run_name wall11_return5_aux_standing",
+  "gpu": "9512 MiB, 14559 MiB",
+  "formal_training_started": false,
+  "optimizer_updated": false
+}

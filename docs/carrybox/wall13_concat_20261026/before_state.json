@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-26T20:44:50.376848+09:00",
+  "git_status": " M projects/README.md\n M projects/findbox/README.md\n M projects/football/README.md\n M scripts/rsl_rl/play.py\n M scripts/rsl_rl/play_carrybox_walled.sh\n M scripts/rsl_rl/train.py\n M scripts/rsl_rl/train_carrybox_walled.sh\n M source/perceptual_ball/perceptual_ball/rsl_rl_extensions/export.py\n M source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/__init__.py\n?? agent/handoff/agilekickball-v4-demo-20261026.md\n?? agent/handoff/carrybox-wall11-wall12-compare-20261026.md\n?? agent/handoff/carrybox-wall12-pose-eval-20261026.md\n?? agent/handoff/carrybox-wall13-20261026.md\n?? agent/handoff/carrybox-wall13-feedback-20261026.md\n?? agent/plan/agilekickball-v4-demo-20261026.md\n?? agent/plan/carrybox-wall11-wall12-compare-20261026.md\n?? agent/plan/carrybox-wall13-20261026.md\n?? agent/plan/carrybox-wall13-feedback-20261026.md\n?? agent/report/agilekickball-v4-demo-20261026.md\n?? agent/report/carrybox-wall11-wall12-compare-20261026.md\n?? agent/report/carrybox-wall12-pose-eval-20261026.md\n?? agent/report/carrybox-wall13-20261026.md\n?? agent/report/carrybox-wall13-feedback-20261026.md\n?? agent/task/agilekickball-v4-demo-20261026.md\n?? agent/task/carrybox-wall11-wall12-compare-20261026.md\n?? agent/task/carrybox-wall13-20261026.md\n?? agent/task/carrybox-wall13-feedback-20261026.md\n?? docs/agilekickball_v4/demo_20261026/\n?? docs/carrybox/wall11_wall12_compare_20261026/\n?? docs/carrybox/wall12_pose_eval_20261026/README.md\n?? docs/carrybox/wall12_pose_eval_20261026/artifact_validation.json\n?? docs/carrybox/wall12_pose_eval_20261026/final_state.json\n?? docs/carrybox/wall13_20261026/\n?? docs/carrybox/wall13_concat_20261026/\n?? docs/carrybox/wall13_feedback_20261026/\n?? source/perceptual_ball/perceptual_ball/carrybox_wall13.py\n?? source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall13.py\n?? source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall13_env_cfg.py\n?? source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall13.py\n?? tests/test_carrybox_wall13.py\n",
+  "files": {
+    "source/perceptual_ball/perceptual_ball/carrybox_wall13.py": "bcd42fcc35528339094df6bfe8edcfb6d67eff504ae8d3b141e08b55e17db99c",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall13.py": "512d03511eddb19d7a3714976d31e14944d7de39b5dd172da729fc078041657d",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall13_env_cfg.py": "bd0370b280b0fa14438a46801194025816f4a9f351e2fff812d25bbb0b27b661",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall13.py": "8697200e84110512e8a32b63abb998c40619139a6d789be9713741500b9fab58",
+    "tests/test_carrybox_wall13.py": "4448573752779674e7a9dcc1e0cffa9c41aa34bfaadae21a44afd590a69b7f05",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/export.py": "18dfb6b200912a88213f9917c0a2f84d56e7472efd7af583889370f54900452e",
+    "scripts/rsl_rl/train.py": "46e1e40c64b02a68c7884027a5fffaf5f6f13db8b4d97b7545edb66df1f112d2",
+    "scripts/rsl_rl/play.py": "4ccf03db12fd2708c6007a64e8fefca8933f55e86faf619420d88e572b30892c"
+  },
+  "football_run": "logs/rsl_rl/agilekickball_v4/kickballv11/2026-10-26_12-38-06_wall11_return5_aux_standing",
+  "latest_football_checkpoint": "logs/rsl_rl/agilekickball_v4/kickballv11/2026-10-26_12-38-06_wall11_return5_aux_standing/model_7500.pt",
+  "signals_sent": []
+}

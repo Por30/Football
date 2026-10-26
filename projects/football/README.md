@@ -1,5 +1,7 @@
 # 足球项目 · football
 
+2026-10-26 17:06 JST：[v4 model49999 demo录像](../../docs/agilekickball_v4/demo_20261026/README.md)。指定v4最终model49999的单机器人30秒demo已完成：1080p/25fps、H.264 MP4，原0.4–6m/s课程与±0.2m目标门，seed42均值动作。完整750帧解码通过；25次足部击球与回传门命中、24次恢复再发球、零回合重置，保留完整过程。单seed展示不作总体成功率结论；v11训练PID3814037保持运行。
+
 2026-10-25 12:26 JST：[按用户指令停止足球并切换wall12](../../docs/carrybox/wall12_start24_20261025/README.md)。已核对并SIGINT停止Kickball v11 PID3261150，确认退出及显存释放。最后完整日志iteration278；尚未到500轮保存点，最新已保存模型仍为`logs/rsl_rl/agilekickball_v4/kickballv11/2026-10-25_12-06-52_wall11_return5_aux_standing/model_0.pt`，模型和日志全部保留。本次停止由用户明确要求，未完成20000轮训练或独立评估；wall12启动状态见链接。
 
 2026-10-25 12:03 JST：[新增Kickball v11](../../docs/kickball_v11/README.md)。独立任务 `Template-Perceptual-Ball-Kickball-v11` 复用wall11控制/深度噪声/联合PPO＋AMP，移除箱子和墙柱；v4连续回传目标、来球最高5 m/s、全部站姿初始化。Actor558本体＋4×27×48深度，Critic124，增加训练专用球位置/速度辅助头。215项CPU及16环境2＋1轮更新、严格课程恢复、终止帧/标签配对和JIT/ONNX导出通过。实现与短测完成，未正式长训或独立评估。启动入口：`bash scripts/rsl_rl/train_kickball_v11.sh`；正式产物进入 `logs/rsl_rl/agilekickball_v4/kickballv11/`。

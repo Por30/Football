@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-26T20:51:09.759224+09:00",
+  "pid": 3980527,
+  "proc_start_ticks": "373254093",
+  "task": "Template-Perceptual-Ball-CarryBox-Walled13-v0",
+  "command": [
+    "bash",
+    "scripts/rsl_rl/train_carrybox_walled.sh",
+    "agent.num_steps_per_env=24",
+    "--num_envs",
+    "4096",
+    "--max_iterations",
+    "20000",
+    "--seed",
+    "42",
+    "--run_name",
+    "wall13_24step_pose_concat9_fresh_20261026_205109"
+  ],
+  "run_name": "wall13_24step_pose_concat9_fresh_20261026_205109",
+  "stdout_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled13/train_wall13_24step_pose_concat9_fresh_20261026_205109.log",
+  "free_mib_before": 23136,
+  "fresh": true,
+  "migration_revision": 3,
+  "actor_input_dim": 695,
+  "num_envs": 4096,
+  "rollout_steps": 24,
+  "max_iterations": 20000,
+  "seed": 42
+}

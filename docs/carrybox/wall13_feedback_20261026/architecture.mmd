@@ -1,0 +1,20 @@
+flowchart LR
+    D["深度历史<br/>4 × 27 × 48，米"] --> C["共享 CNN"]
+    C --> Z["原始视觉特征 z<br/>128 维"]
+    Z --> H["箱子回归头<br/>128 → 128 → 9"]
+    H --> P["预测位姿 p<br/>位置 xyz 3 + 旋转 6D"]
+    Z --> F["拼接 z 与 p：137 维<br/>Linear 137 → 128 + ELU"]
+    P --> F
+    F --> V["融合视觉特征<br/>128 维"]
+    V --> A["Actor<br/>686 → 512 → 256 → 256 → 29"]
+    Q["本体历史<br/>93 × 6 = 558 维"] --> A
+    A --> U["29 维关节动作"]
+    P --> L["训练专用辅助损失<br/>位置 MSE + 尺寸对称旋转 MSE<br/>系数 1.0"]
+    T["仿真真值：仅训练<br/>位置3 + 旋转6 + 实际尺寸3"] --> L
+    L -. "辅助梯度" .-> H
+    L -. "辅助梯度" .-> C
+    A -. "PPO梯度经融合层、回归头回传；不detach" .-> F
+    classDef deploy fill:#E6F3FF,stroke:#2D6A9F,color:#14334F;
+    classDef training fill:#FFF1DE,stroke:#BF7B23,color:#664318;
+    class D,C,Z,H,P,F,V,Q,A,U deploy;
+    class T,L training;

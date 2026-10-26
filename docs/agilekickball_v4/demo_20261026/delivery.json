@@ -1,0 +1,16 @@
+{
+  "video": "/home/cao/perceptual_ball/outputs/football/agilekickball_v4_demo_20261026/agilekickball_v4_model49999_demo_30s_1080p.mp4",
+  "video_sha256": "ed95bb9e64c61445df0e6667d4a70c909d4dc9154a52e4098beee18d772a5798",
+  "file_bytes": 32075763,
+  "format": "H.264 MP4 / yuv420p / faststart",
+  "duration_seconds": 30,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 25,
+  "continuous": true,
+  "training_process_unchanged": 3814037,
+  "visual_review": "PASS",
+  "full_decode": "PASS"
+}

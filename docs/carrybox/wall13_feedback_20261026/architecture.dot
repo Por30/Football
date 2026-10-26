@@ -1,0 +1,43 @@
+digraph Wall13 {
+  graph [rankdir=LR, bgcolor="white", pad="0.35", nodesep="0.40", ranksep="0.48",
+         fontname="Noto Sans CJK SC", fontsize=22, labelloc="t",
+         label="Wall13 revision 2｜预测箱子位姿融入 128 维深度特征\n训练与部署使用同一条动作前向路径"];
+  node [shape=box, style="rounded,filled", fillcolor="#E6F3FF", color="#2D6A9F",
+        fontname="Noto Sans CJK SC", fontsize=15, fontcolor="#173F61", margin="0.17,0.13", penwidth=1.6];
+  edge [color="#2D6A9F", penwidth=1.7, arrowsize=0.75, fontname="Noto Sans CJK SC", fontsize=12];
+
+  depth [label="深度历史\n4 × 27 × 48\n单位：米"];
+  cnn [label="共享 CNN"];
+  latent [label="原始视觉特征 z\n128 维"];
+  head [label="箱子回归头\n128 → 128 → 9"];
+  pred [label="预测位姿 p：9 维\n相机系位置 xyz：3\n原始旋转 6D：6"];
+  fusion [label="拼接 [z, p]：137 维\nLinear 137 → 128\nELU 激活", fillcolor="#CBEBFF", penwidth=2.4];
+  fused [label="融合视觉特征\n128 维", fillcolor="#CBEBFF", penwidth=2.4];
+  proprio [label="本体历史\n93 × 6 = 558 维"];
+  actor [label="Actor：输入 686 维\n512 → 256 → 256"];
+  actions [label="29 维关节动作"];
+
+  depth -> cnn -> latent;
+  latent -> head -> pred;
+  latent -> fusion [label="z：128", minlen=2];
+  pred -> fusion [label="p：9"];
+  fusion -> fused -> actor -> actions;
+  proprio -> actor [label="558"];
+  {rank=same; depth;proprio;}
+
+  subgraph cluster_supervision {
+    label="仅训练使用：真值不进入 Actor"; fontsize=15; color="#E1B77D";
+    style="rounded,filled"; fillcolor="#FFFAF3";
+    truth [label="仿真真值：12 维\n位置3 + 旋转6 + 实际尺寸3", fillcolor="#FFF1DE", color="#BF7B23", fontcolor="#704611"];
+    loss [label="位置 MSE + 对称旋转 MSE\n辅助系数 = 1.0", fillcolor="#FFF1DE", color="#BF7B23", fontcolor="#704611"];
+    truth -> loss [color="#BF7B23"];
+  }
+  pred -> loss [color="#BF7B23", label="配对当前帧", fontcolor="#98641E"];
+  loss -> head [style=dashed, color="#BF7B23", label="辅助梯度", fontcolor="#98641E", constraint=false];
+  loss -> cnn [style=dashed, color="#BF7B23", constraint=false];
+
+  note [shape=plain, fillcolor="white", fontcolor="#526171", fontsize=13,
+        label="蓝色节点全部保留到部署模型：CNN + 回归头 + 融合层 + Actor\nPPO 梯度通过融合层、回归头回传 CNN；预测不 detach\nCritic 123 维、AMP 600 维仅用于训练，接口保持不变"];
+  {rank=sink; note;}
+  actions -> note [style=invis];
+}

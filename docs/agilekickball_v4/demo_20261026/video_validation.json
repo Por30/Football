@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "frames": 750,
+  "fps": 25.0,
+  "duration": 30.0,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "full_decode": true,
+  "codec": "h264",
+  "min_scene_contrast": 28.475839614868164,
+  "max_frame_change": 2.113100290298462,
+  "video_sha256": "ed95bb9e64c61445df0e6667d4a70c909d4dc9154a52e4098beee18d772a5798",
+  "file_bytes": 32075763
+}

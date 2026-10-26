@@ -89,6 +89,7 @@ from perceptual_ball.rsl_rl_extensions.carrybox import CarryBoxOnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.carrybox_wall5 import CarryBoxWall5OnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.carrybox_wall10 import CarryBoxWall10OnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.carrybox_wall12 import CarryBoxWall12OnPolicyRunner
+from perceptual_ball.rsl_rl_extensions.carrybox_wall13 import CarryBoxWall13OnPolicyRunner
 from perceptual_ball.rsl_rl_extensions.kickball_v11 import KickballV11OnPolicyRunner
 
 
@@ -163,6 +164,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         runner = KickballV11OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     elif agent_cfg.class_name == "CarryBoxWall12OnPolicyRunner":
         runner = CarryBoxWall12OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
+    elif agent_cfg.class_name == "CarryBoxWall13OnPolicyRunner":
+        runner = CarryBoxWall13OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     elif agent_cfg.class_name == "CarryBoxWall10OnPolicyRunner":
         runner = CarryBoxWall10OnPolicyRunner(env, agent_cfg.to_dict(), log_dir=None, device=agent_cfg.device)
     elif agent_cfg.class_name == "BallRegressionOnPolicyRunner":

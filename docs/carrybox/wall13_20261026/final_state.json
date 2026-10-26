@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-10-26T12:50:03+09:00",
+  "existing_football": "PID                  STARTED COMMAND\n3814037 Mon Oct 26 12:38:01 2026 /home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-Kickball-v11 --num_envs 4096 --device cuda:0 --headless --max_iterations 20000 --seed 42 --run_name wall11_return5_aux_standing",
+  "gpu": "14178 MiB, 9892 MiB",
+  "wall13_formal_training_started": false,
+  "dataset_choice": "canonical revision3 stationary hold; identical to wall12, no alternative path supplied"
+}

@@ -1,5 +1,13 @@
 # 找箱与搬箱子项目 · findbox
 
+2026-10-26 20:38 JST：[wall13 revision2：预测位姿融入128维视觉特征](../../docs/carrybox/wall13_feedback_20261026/README.md)。CNN128与相机系预测xyz3/rot6拼成137维，经Linear+ELU融合回128维，Actor仍为558+128；PPO无detach经过回归头，部署保留回归头和融合层，真值仅监督。保持AMP数据、噪声墙柱、任务奖励及4096×24/5×4配方。60项CPU和16环境2＋1轮更新/严格恢复/JIT/ONNX检查通过，新说明图已生成。旧wall13 revision1及wall12模型不能直接续训新结构；未启动正式训练，未评估性能或成功率。
+
+2026-10-26 16:56 JST：[wall11与wall12 aux对比](../../docs/carrybox/wall11_wall12_compare_20261026/README.md)。两组seed42/4096×24/20000轮，AMP数据及其余训练配方相同；末1000轮wall12回报47.20低于wall11的49.65。最终model19999各64环境×2种子首回合，初态/域随机化/actor观测/RNG完全一致；各100地面箱回合，持续持箱≥0.5秒19→30、倾倒6→1，但严格连续稳定2秒成功9→6，累计持箱2.185→2.681秒。局部改善，未证明完整任务成功率提高；单训练seed，不作显著性或普遍因果结论。分析/回放/配对汇总三检查通过，未改生产或训练状态。
+
+2026-10-26 12:49 JST：[wall13：静止持箱AMP数据入口](../../docs/carrybox/wall13_20261026/README.md)。独立ID `Template-Perceptual-Ball-CarryBox-Walled13-v0`，显式指定findbox revision3的11行走/3拾箱/1静止持箱（300帧，20帧后固定姿态）。该数据与wall12正式model19999的manifest/clip哈希及采样配置相同，当前没有数据内容差异；已询问是否另有修改路径。继承wall12的观测、回归、噪声墙柱、RSI、奖励和4096×24/5×4。16环境更新/恢复通过，入口命令 `CARRYBOX_VARIANT=13 bash scripts/rsl_rl/train_carrybox_walled.sh`。未启动正式wall13训练，未评估性能或成功率；后台足球保持运行。
+
+2026-10-26 12:29 JST：[wall12正式训练完成及回归误差诊断](../../docs/carrybox/wall12_pose_eval_20261026/README.md)。当前无后台训练，日志20000轮完整、最终model19999 schema/有限性通过；未发送停止信号或重启。指定模型64环境×1000步、seed12345均值动作：位置平均5.63cm、中位3.60cm、P90 6.92cm、三维RMSE16.08cm；几何可见帧平均4.60cm，持箱3.84cm。对称折叠旋转平均58.10°，姿态回归明显不足；少量不可见帧拉高位置RMSE。64k相关帧诊断非总体任务成功率，未做实机验证；play命令/原始预测真值/训练损失见链接。
+
 2026-10-25 12:37 JST：[wall12正式训练已启动](../../docs/carrybox/wall12_start24_20261025/README.md)。按用户指令停止足球v11 PID3261150后，从零启动4096环境×24步、20000轮、seed42、5×4、aux1.0。首次首轮失败定位为TF32大批矩阵乘法误排尺寸对称候选，已用精确轴索引修复，44项CPU及8192样本CUDA TF32前后向通过，损失定义与训练配方保持。正式PID3269279核验到iteration16，近10轮平均4.471s、最慢4.500s；首model0契约、policy/AMP有限性、pose head Adam动量与辅助日志通过。正式训练进行中，未完成长训或独立评估；失败run和旧模型均保留。
 
 2026-10-25 12:08 JST：[新增wall12：深度回归箱子位姿](../../docs/carrybox/wall12_20261025/README.md)。继承wall11流程、噪声墙柱、actor558＋4×27×48、critic123、AMP600与4096×24/5×4；启用128→128→9训练专用pose head，coef1.0，同步相机系xyz/rot6标签，按实际尺寸处理4/8/24种旋转对称，梯度更新CNN。44项CPU及16环境2＋1轮更新/严格恢复/导出通过，新增监督无额外CNN前向。独立ID `Template-Perceptual-Ball-CarryBox-Walled12-v0`；命令 `CARRYBOX_VARIANT=12 bash scripts/rsl_rl/train_carrybox_walled.sh`。实现与短测完成，未启动wall12正式训练，未评估收敛或4096耗时。

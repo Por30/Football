@@ -196,3 +196,13 @@ gym.register(
         "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_wall12_env_cfg:CarryBoxWalled12PPORunnerCfg",
     },
 )
+
+gym.register(
+    id="Template-Perceptual-Ball-CarryBox-Walled13-v0",
+    entry_point=f"{__name__}.mdp.carrybox_wall13:Wall13CarryBoxEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.carrybox_wall13_env_cfg:CarryBoxWalled13EnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_wall13_env_cfg:CarryBoxWalled13PPORunnerCfg",
+    },
+)

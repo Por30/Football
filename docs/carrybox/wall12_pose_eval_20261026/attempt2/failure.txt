@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/cao/perceptual_ball/docs/carrybox/wall12_pose_eval_20261026/evaluate.py", line 121, in <module>
+    try:main()
+  File "/home/cao/perceptual_ball/docs/carrybox/wall12_pose_eval_20261026/evaluate.py", line 67, in main
+    torch.testing.assert_close(target,expected,atol=2.e-5,rtol=1.e-5)
+  File "/home/cao/ENTER/envs/ball/lib/python3.10/site-packages/torch/testing/_comparison.py", line 1519, in assert_close
+    raise error_metas[0].to_error(msg)
+AssertionError: Tensor-likes are not close!
+
+Mismatched elements: 264 / 768 (34.4%)
+Greatest absolute difference: 0.00036984682083129883 at index (7, 4) (up to 2e-05 allowed)
+Greatest relative difference: 0.029331833124160767 at index (60, 5) (up to 1e-05 allowed)

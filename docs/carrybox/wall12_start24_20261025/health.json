@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-10-25T12:37:22.461462+09:00",
+  "pid": 3269279,
+  "run_dir": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled12/2026-10-25_12-32-53_wall12_24step_pose_aux_fresh_20261025_123249",
+  "stdout_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled12/train_wall12_24step_pose_aux_fresh_20261025_123249.log",
+  "last_iteration": 16,
+  "num_envs": 4096,
+  "num_steps_per_env": 24,
+  "max_iterations": 20000,
+  "seed": 42,
+  "mean_last10_seconds": 4.471,
+  "max_last10_seconds": 4.5,
+  "model_0": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled12/2026-10-25_12-32-53_wall12_24step_pose_aux_fresh_20261025_123249/model_0.pt",
+  "checkpoint_schema": 2,
+  "variant": "walled12",
+  "fresh_start": true,
+  "aux": {
+    "schema": 1,
+    "frame": "camera_optical_xright_ydown_zforward",
+    "units": "metres",
+    "target": "xyz3_rotation_first_two_columns6_physical_size3",
+    "target_dim": 12,
+    "prediction_dim": 9,
+    "symmetry": "right_multiply_size_preserving_proper_signed_permutations",
+    "size_atol_m": 1e-06,
+    "size_rtol": 1e-05,
+    "pairing": "same_capture_latest_noisy_depth_reset_invalidated",
+    "supervision": "all_current_frames_first_Tminus1_no_visibility_or_distance_mask",
+    "loss": "position_mse_plus_min_equivalent_rotation6_mse",
+    "actor_feedback": false
+  },
+  "auxiliary_scalars": {
+    "Loss/pose_position": 0.22290164232254028,
+    "Loss/pose_rotation": 0.1673744171857834,
+    "Loss/pose_aux_weighted": 0.39027607440948486,
+    "Loss/pose_samples": 471040.0
+  },
+  "policy_amp_finite": true,
+  "pose_adam_moments_nonzero": true,
+  "optimizer_step": 20,
+  "status": "PASS"
+}

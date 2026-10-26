@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-25T12:26:20.685495+09:00",
+  "authorization": "停止足球 启动wall12",
+  "pid": 3261150,
+  "cmdline": "/home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-Kickball-v11 --num_envs 4096 --device cuda:0 --headless --max_iterations 20000 --seed 42 --run_name wall11_return5_aux_standing ",
+  "proc_start_ticks": "361467941",
+  "log": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v4/kickballv11/train_20261025_120648.log",
+  "last_logged_iteration": 278,
+  "latest_saved_checkpoint": "/home/cao/perceptual_ball/logs/rsl_rl/agilekickball_v4/kickballv11/2026-10-25_12-06-52_wall11_return5_aux_standing/model_0.pt",
+  "checkpoint_size": 18071059,
+  "checkpoint_sha256": "b9e10d4bf74ef417b2afdf2bec010758435d13b9cb7063f52e10d876cadbe67e",
+  "requested_signal": "SIGINT",
+  "no_checkpoint_save_on_interrupt_hook": true,
+  "stopped_at": "2026-10-25T12:26:37.678764+09:00",
+  "process_exited": true,
+  "free_gpu_mib_after_stop": 23298
+}

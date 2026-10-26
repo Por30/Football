@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-25T11:59:54.164459+09:00",
+  "processes": "",
+  "gpu": "862 MiB, 23208 MiB, 27 %\n",
+  "existing_source_sha256": {
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py": "864fb8c972592474fe6f24df7f5f320ae7b063f320daef5aab40040d16a43b3f",
+    "scripts/rsl_rl/train.py": "65f2394c1e5436555e9161234303e9022aaaadeadd94904f40001155b1bae86f",
+    "scripts/rsl_rl/play.py": "faf4ef1c739717bb9ac0c68c2528573dfba3f201c019a4c0438790079d427a09",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/__init__.py": "b0935eab49822d476d519c087f529f0e6d0f2f77351dee636a67f3dffe71b339"
+  }
+}

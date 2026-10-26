@@ -1,0 +1,15 @@
+{
+  "schema_version": "robotics-engineering-test-receipts.v1",
+  "tests": [
+    {
+      "command": "bash docs/carrybox/wall12_start24_20261025/check.sh",
+      "result": "PASS",
+      "exit_code": 0,
+      "executed": true,
+      "receipt_sha256": "1e53f243e8b81ae36dedcd12a921f3c3769382640b70fa77dcca94454e31e5cb",
+      "stdout_sha256": "f8958499ee0458c7c3ee280d6b70bbc3a8bf2823fd8e2c850d636c25ec094b8d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runner": "run_engineering_tests.py"
+    }
+  ]
+}

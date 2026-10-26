@@ -1,0 +1,311 @@
+{
+  "status": "PASS",
+  "num_envs": 16,
+  "iterations": "2+1",
+  "rollout_steps": 24,
+  "contract": {
+    "variant": "kickballv11",
+    "revision": "wall11_return5_aux_standing_v1",
+    "parent": "wall11_control_learning",
+    "task": "v4_continuous_return_to_sender",
+    "curriculum": {
+      "revision": "wall11_return5_aux_standing_v1",
+      "bootstrap_steps": 240000,
+      "distance_steps": 60000,
+      "window_steps": 6000,
+      "min_serves": 128,
+      "unlock_recovery": 0.8,
+      "unlock_kick_proxy": 0.6,
+      "pause_recovery": 0.5,
+      "extension_steps": 288000,
+      "speed_bounds": [
+        0.4,
+        1.1,
+        2.0,
+        5.0
+      ],
+      "initial_exposure_steps": 60000.0,
+      "return_to_sender": {
+        "initial_half_width_m": 0.6,
+        "final_half_width_m": 0.2,
+        "ramp_steps": 120000,
+        "window_steps": 6000,
+        "min_completed": 128,
+        "advance_hit_rate": 0.6,
+        "advance_recovery": 0.8,
+        "min_forward_speed_m_s": 0.4,
+        "max_height_m": 0.35,
+        "shaping_duration_s": 0.5
+      },
+      "distance_range": [
+        1.3,
+        2.0
+      ],
+      "reset": "standing_only"
+    },
+    "actor": "proprio93x6_depth4x27x48",
+    "critic": "proprio93_ends15_lin3_ball6_source3_normal3_width1",
+    "auxiliary": "root_xyz_and_relative_inertial_velocity_all_frames_no_actor_feedback",
+    "depth": {
+      "schema": 1,
+      "output": "optical_z_metres",
+      "units": "metres",
+      "normalization": "none",
+      "clip_range_m": [
+        0.1,
+        3.0
+      ],
+      "invalid_depth_m": 3.0,
+      "input_range": [
+        0.1,
+        3.0
+      ],
+      "missing_value": 3.0,
+      "shape": [
+        4,
+        27,
+        48
+      ],
+      "history_order": "oldest_to_newest",
+      "geometry": "robot_ground_ball",
+      "noise": {
+        "gaussian_std": 0.02,
+        "edge_threshold": 0.15,
+        "edge_probability": 0.05,
+        "hole_probability": 0.02,
+        "stereo_near": 0.008,
+        "stereo_far": 0.03
+      },
+      "capture": "once_per_step_partial_reset_or_serve_invalidated",
+      "camera": {
+        "parent": "torso_link",
+        "position": [
+          0.0576235,
+          0.01753,
+          0.42987
+        ],
+        "quaternion_wxyz": [
+          0.91495,
+          0.0,
+          0.40355,
+          0.0
+        ],
+        "vertical_fov_deg": 58.0
+      }
+    },
+    "proprio_noise": true,
+    "reset": "standing_zero_velocity_clearance5mm",
+    "actor_privileged": false,
+    "obstacles": false,
+    "amp": {
+      "schema": 1,
+      "feature_schema": "kick_height1_joints29_wrist_anklepitch_head15_lin3_ang3_rot6_zeroobject3_v1",
+      "frame_dim": 60,
+      "fps": 120.00004577636719,
+      "lengths": [
+        498,
+        589
+      ],
+      "joint_names": [
+        "left_hip_pitch_joint",
+        "right_hip_pitch_joint",
+        "waist_yaw_joint",
+        "left_hip_roll_joint",
+        "right_hip_roll_joint",
+        "waist_roll_joint",
+        "left_hip_yaw_joint",
+        "right_hip_yaw_joint",
+        "waist_pitch_joint",
+        "left_knee_joint",
+        "right_knee_joint",
+        "left_shoulder_pitch_joint",
+        "right_shoulder_pitch_joint",
+        "left_ankle_pitch_joint",
+        "right_ankle_pitch_joint",
+        "left_shoulder_roll_joint",
+        "right_shoulder_roll_joint",
+        "left_ankle_roll_joint",
+        "right_ankle_roll_joint",
+        "left_shoulder_yaw_joint",
+        "right_shoulder_yaw_joint",
+        "left_elbow_joint",
+        "right_elbow_joint",
+        "left_wrist_roll_joint",
+        "right_wrist_roll_joint",
+        "left_wrist_pitch_joint",
+        "right_wrist_pitch_joint",
+        "left_wrist_yaw_joint",
+        "right_wrist_yaw_joint"
+      ],
+      "files": {
+        "kick_left.pt": "29906388f4192273b07277464ec01cae17c72ac2e3130382bc9265b1ac45aa78",
+        "kick_right.pt": "175c2e410f48af72322b6702e3bb73259eadcdc876d0e0ad594bd67861b27a64"
+      },
+      "clip_weights": [
+        0.5,
+        0.5
+      ],
+      "time_jitter": [
+        0.95,
+        1.05
+      ],
+      "window_length": 10,
+      "interpolation": "native_features",
+      "normalization": "none",
+      "object_features": "zero_both_sides"
+    },
+    "control": "wall11_explicit_PD_strength_bias_delay0to20ms_action100",
+    "disturbance": "local_torso_xyz50N_every8_policy_steps",
+    "randomization": {
+      "link_mass": [
+        0.8,
+        1.2
+      ],
+      "torso_com": [
+        -0.1,
+        0.1
+      ],
+      "friction": [
+        0.1,
+        1.5
+      ],
+      "restitution": [
+        0.0,
+        1.0
+      ],
+      "kp_kd_motor": [
+        0.9,
+        1.1
+      ],
+      "torque_bias_fraction": [
+        -0.05,
+        0.05
+      ]
+    },
+    "rewards": {
+      "dof_acc": -1e-07,
+      "action_rate": -0.03,
+      "torques": -0.0001,
+      "dof_vel": -0.0002,
+      "dof_pos_limits": -5.0,
+      "dof_vel_limits": -0.001,
+      "torque_limits": -0.03,
+      "kickball_tick": 1.0,
+      "stand_task": 1.0,
+      "face_ball_task": 0.2,
+      "kick_approach_task": 1.2,
+      "kick_return_task": 8.0,
+      "kick_bonus": 300.0,
+      "miss_penalty": -60.0,
+      "return_target_bonus": 150.0
+    },
+    "physics_dt": 0.005,
+    "decimation": 4,
+    "episode_s": 20.0,
+    "ball_radius": 0.11,
+    "ball_mass": 0.43
+  },
+  "shapes": {
+    "proprio": [
+      16,
+      558
+    ],
+    "perception": [
+      16,
+      4,
+      27,
+      48
+    ],
+    "critic_state": [
+      16,
+      124
+    ],
+    "ball_target": [
+      16,
+      6
+    ],
+    "amp": [
+      16,
+      600
+    ]
+  },
+  "losses": [
+    {
+      "value_function": 2.0430845201015475,
+      "surrogate": -0.02815955688711256,
+      "entropy": 41.16231365203858,
+      "amp_loss": 1150.608125305176,
+      "amp_expert_loss": 181.81073017120363,
+      "amp_policy_loss": 687.2659606933594,
+      "policy_smooth": 0.10619713235646487,
+      "value_smooth": 0.010550579032860698,
+      "ppo_learning_rate": 1e-05,
+      "amp_valid_samples": 368.0,
+      "ball_position": 0.175313338637352,
+      "ball_velocity_scaled": 0.018491635099053383,
+      "ball_aux_weighted": 0.19380497373640537
+    },
+    {
+      "value_function": 0.972341400384903,
+      "surrogate": -0.03378577209077776,
+      "entropy": 41.166664886474614,
+      "amp_loss": 427.0539260864258,
+      "amp_expert_loss": 12.56485197544098,
+      "amp_policy_loss": 220.43461189270022,
+      "policy_smooth": 0.0942342445254326,
+      "value_smooth": 0.015294117713347079,
+      "ppo_learning_rate": 1.5000000000000005e-05,
+      "amp_valid_samples": 368.0,
+      "ball_position": 0.1781029850244522,
+      "ball_velocity_scaled": 0.020470283925533295,
+      "ball_aux_weighted": 0.1985732689499855
+    },
+    {
+      "value_function": 1.1598852455615998,
+      "surrogate": -0.04422939490323188,
+      "entropy": 41.16623630523682,
+      "amp_loss": 268.7265174865723,
+      "amp_expert_loss": 10.234096443653108,
+      "amp_policy_loss": 122.001513671875,
+      "policy_smooth": 0.09903380088508129,
+      "value_smooth": 0.017217655293643476,
+      "ppo_learning_rate": 1.5000000000000005e-05,
+      "amp_valid_samples": 368.0,
+      "ball_position": 0.1317107230424881,
+      "ball_velocity_scaled": 0.10817398875951767,
+      "ball_aux_weighted": 0.23988471180200577
+    }
+  ],
+  "ball_depth_changed_pixels": [
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38,
+    38
+  ],
+  "kick_end_effectors": [
+    "left_wrist_roll_link",
+    "right_wrist_roll_link",
+    "left_ankle_pitch_link",
+    "right_ankle_pitch_link",
+    "head_link"
+  ],
+  "standing_only_reset": true,
+  "partial_reset": true,
+  "terminal_pairs": true,
+  "torque_limits": true,
+  "actor_export_privilege_boundary": true,
+  "curriculum_resume": true,
+  "convergence_evaluated": false
+}

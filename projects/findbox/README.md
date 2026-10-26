@@ -1,5 +1,9 @@
 # 找箱与搬箱子项目 · findbox
 
+2026-10-25 12:37 JST：[wall12正式训练已启动](../../docs/carrybox/wall12_start24_20261025/README.md)。按用户指令停止足球v11 PID3261150后，从零启动4096环境×24步、20000轮、seed42、5×4、aux1.0。首次首轮失败定位为TF32大批矩阵乘法误排尺寸对称候选，已用精确轴索引修复，44项CPU及8192样本CUDA TF32前后向通过，损失定义与训练配方保持。正式PID3269279核验到iteration16，近10轮平均4.471s、最慢4.500s；首model0契约、policy/AMP有限性、pose head Adam动量与辅助日志通过。正式训练进行中，未完成长训或独立评估；失败run和旧模型均保留。
+
+2026-10-25 12:08 JST：[新增wall12：深度回归箱子位姿](../../docs/carrybox/wall12_20261025/README.md)。继承wall11流程、噪声墙柱、actor558＋4×27×48、critic123、AMP600与4096×24/5×4；启用128→128→9训练专用pose head，coef1.0，同步相机系xyz/rot6标签，按实际尺寸处理4/8/24种旋转对称，梯度更新CNN。44项CPU及16环境2＋1轮更新/严格恢复/导出通过，新增监督无额外CNN前向。独立ID `Template-Perceptual-Ball-CarryBox-Walled12-v0`；命令 `CARRYBOX_VARIANT=12 bash scripts/rsl_rl/train_carrybox_walled.sh`。实现与短测完成，未启动wall12正式训练，未评估收敛或4096耗时。
+
 2026-10-24 23:30 JST：[wall11最新model9500四机器人录像](../../docs/carrybox/wall11_play4_20261024_2326/README.md)。wall11 model_9500四机器人20秒同步回放完成，1080p/25fps、seed42均值动作，保留深度噪声、墙柱、物理扰动和全部reset。3个loco与1个默认地面箱起点均出现拾箱并站立持箱，四机均到20秒正常超时，无提前失败终止；严格保持最长0.90/1.40/0.20/0.00秒，均未达连续2秒成功。 视频完整解码通过；正式训练PID2723259持续运行，核验到iteration9553。单次录像非总体成功率。
 
 2026-10-24 12:40 JST：[停止wall10并启动wall11正式训练](../../docs/carrybox/wall11_start24_20261024/README.md)。按用户指令SIGINT停止wall10 PID2402395，最后日志11147轮、最新model11000及历史工件保留。新wall11 PID2723259，4096环境×24步、seed42、20000轮、5×4更新，从零启动；核验至iteration14，近10轮平均4.394s、最慢4.430s。首模型schema2/walled11 revision1/rollout24、深度噪声与三柱墙契约正确，policy/AMP有限且优化器更新。正式训练进行中，未完成长训或独立评估。

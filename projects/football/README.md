@@ -1,5 +1,9 @@
 # 足球项目 · football
 
+2026-10-25 12:26 JST：[按用户指令停止足球并切换wall12](../../docs/carrybox/wall12_start24_20261025/README.md)。已核对并SIGINT停止Kickball v11 PID3261150，确认退出及显存释放。最后完整日志iteration278；尚未到500轮保存点，最新已保存模型仍为`logs/rsl_rl/agilekickball_v4/kickballv11/2026-10-25_12-06-52_wall11_return5_aux_standing/model_0.pt`，模型和日志全部保留。本次停止由用户明确要求，未完成20000轮训练或独立评估；wall12启动状态见链接。
+
+2026-10-25 12:03 JST：[新增Kickball v11](../../docs/kickball_v11/README.md)。独立任务 `Template-Perceptual-Ball-Kickball-v11` 复用wall11控制/深度噪声/联合PPO＋AMP，移除箱子和墙柱；v4连续回传目标、来球最高5 m/s、全部站姿初始化。Actor558本体＋4×27×48深度，Critic124，增加训练专用球位置/速度辅助头。215项CPU及16环境2＋1轮更新、严格课程恢复、终止帧/标签配对和JIT/ONNX导出通过。实现与短测完成，未正式长训或独立评估。启动入口：`bash scripts/rsl_rl/train_kickball_v11.sh`；正式产物进入 `logs/rsl_rl/agilekickball_v4/kickballv11/`。
+
 2026-10-17：[v5默认关闭Kp/Kd随机化与深度噪声](../../docs/agilekickball_v5/no_randomization_20261017/README.md)，固定名义增益、输出无噪声场景深度；回传任务、自遮挡、奖励与网络保持。旧带扰动模型需显式恢复原开关。本次仅修改配置及CPU验证，未启动或重启训练。22:35 JST只读复查原PID3429618已退出，无train/play进程；已存在v5正式run `2026-10-17_12-22-23`，下方“未正式训练”属历史快照。
 
 2026-10-16：[与CarryBox交叉核对相机](../../docs/carrybox/camera_crosscheck_20261016/README.md)：v4/v5训练仍为89.16°×58°/50Hz，名义安装匹配G1 rev_1_0；v4仅球体射线距离，v5为含自遮挡的光轴米制。MuJoCo官方参考profile不自动替换训练或v5模型内嵌profile；60Hz官方profile当前不能直接用于50Hz lazy训练。实机内参/光心仍未验证，本次未改生产配置。
@@ -58,6 +62,7 @@ tail -n 100 logs/rsl_rl/agilekickball_v4/train_20261012.log
 
 | 模块 | 路径 |
 |---|---|
+| v11独立环境、任务与学习器 | `tasks/manager_based/perceptual_ball/kickball_v11_env_cfg.py`、`mdp/kickball_v11.py`、`kickball_v11.py`、`rsl_rl_extensions/kickball_v11.py`；[任务与命令](../../docs/kickball_v11/README.md) |
 | v4环境和PPO配置 | `tasks/manager_based/perceptual_ball/agilekickball_v4_env_cfg.py` |
 | v4回传奖励和课程 | `tasks/manager_based/perceptual_ball/mdp/agilekickball_v4.py` |
 | 继承的v3网络/环境 | `agilekickball_v3_env_cfg.py`、`rsl_rl_extensions/state_feedback.py` |
@@ -108,6 +113,7 @@ python -m unittest discover -s tests -p test_state_feedback.py
 
 | 版本 | 角色 | 文档 |
 |---|---|---|
+| Kickball v11 | wall11框架、5 m/s连续回传、球状态辅助监督；实现/短测完成 | [v11说明](../../docs/kickball_v11/README.md) |
 | AgileKickball v5 | 场景深度开发版本，实机标定待核对 | [v5说明](../../docs/agilekickball_v5/README.md) |
 | AgileKickball v4 | 已训练回传基线 | [任务设计](../../docs/agilekickball_v4/README.md) |
 | AgileKickball v3 stable | v4初始化基线 | [v3说明](../../docs/agilekickball_v3/README.md) |

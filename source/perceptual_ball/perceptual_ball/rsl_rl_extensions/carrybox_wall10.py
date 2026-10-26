@@ -27,6 +27,7 @@ class PhysHSIAMP(AMP):
 
 
 class CarryBoxWall10PPO(CarryBoxWall5PPO):
+    supports_auxiliary_objective = False
     # The checkpoint's cnn_microbatch=256 remains the logical random block.
     # Only deterministic tensor work is merged; every original draw is retained.
     cnn_execution_batch_size = 8192
@@ -34,7 +35,7 @@ class CarryBoxWall10PPO(CarryBoxWall5PPO):
     def __init__(self, policy, *args, **kwargs):
         # Deliberately bypass wall5's Normalizer, separate Adam and mean/std penalties.
         CarryBoxPPO.__init__(self, policy, *args, **kwargs)
-        if self.amp is None or self.pose_aux_coef != 0:
+        if self.amp is None or (self.pose_aux_coef != 0 and not self.supports_auxiliary_objective):
             raise ValueError('Wall10 requires AMP and the source zero auxiliary coefficient')
         self.amp = PhysHSIAMP().to(self.device)
         for parameter in policy.pose_head.parameters():
@@ -99,6 +100,9 @@ class CarryBoxWall10PPO(CarryBoxWall5PPO):
         self.policy.distribution = Normal(mean, self.policy.log_std.exp().expand_as(mean))
         return value, mixed_mean, mixed_value
 
+    def _auxiliary_loss(self, observations, indices):
+        return 0.  # Wall10/11 preserve their zero auxiliary objective.
+
     def update(self):
         self._ensure_motion_library()
         storage = self.storage
@@ -152,6 +156,8 @@ class CarryBoxWall10PPO(CarryBoxWall5PPO):
                     amp_loss, expert_loss, policy_loss = self.amp.compute_loss(motion[ids], expert)
                     loss = (surrogate + self.value_loss_coef * value_loss - self.entropy_coef * entropy
                             + policy_smooth / 9 + value_smooth / 90 + amp_loss)
+                    if self.supports_auxiliary_objective:
+                        loss = loss + self._auxiliary_loss(obs, ids)
                     finite_loss &= torch.isfinite(loss.detach())
                     fraction = len(ids) / len(indices)
                     (fraction * loss).backward()

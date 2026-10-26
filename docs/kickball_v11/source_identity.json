@@ -1,0 +1,14 @@
+{
+  "source/perceptual_ball/perceptual_ball/kickball_v11.py": "aa836e763648601824f86e8267e91737b069dab5d335a5d76e08e18756bc9dc1",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/kickball_v11.py": "ff85b9b2ac07bf19c5e2748149fe4400cbe8e77115c66e51a7391c16dd11810b",
+  "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py": "864fb8c972592474fe6f24df7f5f320ae7b063f320daef5aab40040d16a43b3f",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/kickball_v11.py": "d3dbce3876a02d05eb32eacb27745aa067b0855a5bdece0adb1d3879b99fe72e",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/kickball_v11_env_cfg.py": "cef27307e0a524992839abbf93789f95304f2316d39ccc13a3495de0f126cff0",
+  "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/__init__.py": "b4b2f8ff00aa692953147c65a165e3282ce3d91f3bc96044226b0dd7ecd295ab",
+  "scripts/rsl_rl/train.py": "4e38ae7f5059ad165d271095c2134a3bd31c39079833b4f977dfcbea4085fd6b",
+  "scripts/rsl_rl/play.py": "d1598498383ab0a3bbddd5f7faf161f5449c4242560e7bff152f1d0433bd945d",
+  "scripts/rsl_rl/train_kickball_v11.sh": "6ff372a78c7909287dc7699df87919a99d6dea80dbce5b6770f6b2fb24328abd",
+  "scripts/rsl_rl/play_kickball_v11.sh": "6116cb8eb0373c2e48e1b5281bef318dbacdd6bc8adeab06b02af5062541ca9c",
+  "tests/test_kickball_v11.py": "ab48e3564b62eae2754c417c9831b04285ca50ed98411727dc5f5a7fff90f450",
+  "docs/kickball_v11/smoke.py": "0eb0ba33713d1dc619495c5806785c1bd24a2d32915b36829b472c046c7d9ca9"
+}

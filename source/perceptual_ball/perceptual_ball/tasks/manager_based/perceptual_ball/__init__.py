@@ -5,6 +5,17 @@
 
 import gymnasium as gym
 
+# Wall11 control/learning, independent football semantics and checkpoint contract.
+gym.register(
+    id="Template-Perceptual-Ball-Kickball-v11",
+    entry_point=f"{__name__}.mdp.kickball_v11:KickballV11Env",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.kickball_v11_env_cfg:KickballV11EnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.kickball_v11_env_cfg:KickballV11PPORunnerCfg",
+    },
+)
+
 gym.register(
     id="Template-Perceptual-Ball-AgileKickball-v5",
     entry_point=f"{__name__}.mdp.agilekickball_v5:AgileKickballV5Env",
@@ -173,5 +184,15 @@ gym.register(
     kwargs={
         "env_cfg_entry_point": f"{__name__}.carrybox_wall11_env_cfg:CarryBoxWalled11EnvCfg",
         "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_wall11_env_cfg:CarryBoxWalled11PPORunnerCfg",
+    },
+)
+
+gym.register(
+    id="Template-Perceptual-Ball-CarryBox-Walled12-v0",
+    entry_point=f"{__name__}.mdp.carrybox_wall12:Wall12CarryBoxEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.carrybox_wall12_env_cfg:CarryBoxWalled12EnvCfg",
+        "rsl_rl_cfg_entry_point": f"{__name__}.carrybox_wall12_env_cfg:CarryBoxWalled12PPORunnerCfg",
     },
 )

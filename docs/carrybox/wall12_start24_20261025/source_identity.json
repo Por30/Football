@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-25T12:32:49.105026+09:00",
+  "source_sha256": {
+    "source/perceptual_ball/perceptual_ball/carrybox_wall12.py": "5fbfa329d20d6b4758ee208f12771e210c8bf9816463ca700b9510dec1d786a4",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall12.py": "337752d29c837f492890d8acf1f081474ada92c05fba31ac5d2c5987cdba06d9",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/carrybox_wall12_env_cfg.py": "8ca4de05597ffd461487567089770241bde26c3369a6bf0703dbd12f0371c575",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/mdp/carrybox_wall12.py": "a8bfe78dbb78cc3e7f718dadb81449e48cce3fbba8d5d802d038fdbf1beb0326",
+    "source/perceptual_ball/perceptual_ball/tasks/manager_based/perceptual_ball/__init__.py": "b4b2f8ff00aa692953147c65a165e3282ce3d91f3bc96044226b0dd7ecd295ab",
+    "scripts/rsl_rl/train.py": "4e38ae7f5059ad165d271095c2134a3bd31c39079833b4f977dfcbea4085fd6b",
+    "scripts/rsl_rl/play.py": "d1598498383ab0a3bbddd5f7faf161f5449c4242560e7bff152f1d0433bd945d",
+    "scripts/rsl_rl/train_carrybox_walled.sh": "bf7034abb5491b9eb9fde7c8f35e4efd5643a652cf15a0e59feb20f42ebdf911",
+    "scripts/rsl_rl/play_carrybox_walled.sh": "a3738f53303b16189a4dd68f29e375550259ac5733aa6ec1db39195db219d994",
+    "tests/test_carrybox_wall12.py": "2566279bc7f85ba093997c666045173400edf5bb6b6bf2f73b06c64389e8acdc",
+    "source/perceptual_ball/perceptual_ball/rsl_rl_extensions/carrybox_wall10.py": "864fb8c972592474fe6f24df7f5f320ae7b063f320daef5aab40040d16a43b3f"
+  },
+  "changes_since_initial_short_validation": [
+    "source/perceptual_ball/perceptual_ball/carrybox_wall12.py"
+  ],
+  "fix_receipts": "/home/cao/perceptual_ball/docs/carrybox/wall12_start24_20261025/tf32_fix/receipts.json"
+}

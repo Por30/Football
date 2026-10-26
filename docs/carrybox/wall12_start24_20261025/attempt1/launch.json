@@ -1,0 +1,15 @@
+{
+  "started_at": "2026-10-25T12:26:37.678764+09:00",
+  "pid": 3268135,
+  "run_name": "wall12_24step_pose_aux_fresh_20261025_122637",
+  "stdout_log": "/home/cao/perceptual_ball/logs/rsl_rl/g1_carrybox_depth/walled12/train_wall12_24step_pose_aux_fresh_20261025_122637.log",
+  "command": "CARRYBOX_VARIANT=12 bash scripts/rsl_rl/train_carrybox_walled.sh agent.num_steps_per_env=24 --num_envs 4096 --max_iterations 20000 --seed 42 --run_name wall12_24step_pose_aux_fresh_20261025_122637",
+  "task": "Template-Perceptual-Ball-CarryBox-Walled12-v0",
+  "num_envs": 4096,
+  "num_steps_per_env": 24,
+  "max_iterations": 20000,
+  "seed": 42,
+  "resume": false,
+  "free_gpu_mib_before_launch": 23298,
+  "stopped_football_pid": 3261150
+}

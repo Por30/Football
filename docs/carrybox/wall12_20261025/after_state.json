@@ -1,0 +1,6 @@
+{
+  "at": "2026-10-25T12:09:05.076863+09:00",
+  "processes": "3261150 /home/cao/ENTER/envs/ball/bin/python -u scripts/rsl_rl/train.py --task Template-Perceptual-Ball-Kickball-v11 --num_envs 4096 --device cuda:0 --headless --max_iterations 20000 --seed 42 --run_name wall11_return5_aux_standing",
+  "wall12_formal_training_started": false,
+  "gpu": "2878 MiB, 21193 MiB, 32 %\n"
+}
